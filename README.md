@@ -16,7 +16,7 @@ AXNOS Paint（アクノスペイント）は「お絵かき掲示板サイト」
 
 ## 動作サンプル
 
-* [https://axnospaint.github.io/axnospaint-lib/index.html](https://axnospaint.github.io/axnospaint-lib/index.html)  
+* [https://axnospaint.github.io/axnospaint-lib/](https://axnospaint.github.io/axnospaint-lib/)  
 
 ## 対応環境
 * Edge, Safari, Chrome, Firefox, Opera いずれかの最新版  
