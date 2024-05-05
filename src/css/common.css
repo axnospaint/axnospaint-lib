@@ -1,0 +1,79 @@
+/* 共通クラス */
+
+/* 要素非表示 */
+.axpc_NONE {
+    display: none;
+}
+
+/* 要素非表示（レイアウト変更なし） */
+.axpc_HIDDEN {
+    visibility: hidden;
+}
+
+/* テキスト縁取り */
+.axpc_text_border {
+    text-shadow:
+        black 2px 0px, black -2px 0px,
+        black 0px -2px, black 0px 2px,
+        black 2px 2px, black -2px 2px,
+        black 2px -2px, black -2px -2px,
+        black 1px 2px, black -1px 2px,
+        black 1px -2px, black -1px -2px,
+        black 2px 1px, black -2px 1px,
+        black 2px -1px, black -2px -1px;
+    /*
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000,
+        -1px 1px 0 #000, 1px -1px 0 #000,
+        0px 1px 0 #000, 0-1px 0 #000,
+        -1px 0 0 #000, 1px 0 0 #000;
+    */
+}
+
+/* キャンバスの透過メッシュ */
+.axpc_background_mesh {
+    background: rgb(204, 204, 204);
+    background-image: repeating-conic-gradient(from 0deg, transparent 0deg 90deg, #fff 90deg 180deg);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px, 8px 8px, 16px 16px;
+}
+
+/* サブウィンドウ共通 */
+.axpc_subwindow {
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    position: absolute;
+    z-index: 2001;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.axpc_subwindow>div {
+    background-color: #333;
+    color: #fff;
+    border-color: #000;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #aaa;
+    box-shadow: 4px 4px 8px #777;
+    border-radius: 5px;
+    width: 188px;
+    height: auto;
+    padding: 8px;
+}
+
+/* 色作成 補助線設定のカラー選択枠 */
+.axpc_colorRect {
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 1px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #aaa;
+}

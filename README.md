@@ -1,6 +1,6 @@
 # AXNOS Paint
 
-**現在、公開準備中です。**
+2024/5/5 version 2.0.0を正式公開しました。
 
 ## 概要
 AXNOS Paint（アクノスペイント）は「お絵かき掲示板サイト」での利用を想定したペイントツールです。
@@ -17,6 +17,11 @@ AXNOS Paint（アクノスペイント）は「お絵かき掲示板サイト」
 ## 動作サンプル
 
 * [https://axnospaint.github.io/axnospaint-lib/](https://axnospaint.github.io/axnospaint-lib/)  
+
+## 機能マニュアル
+
+* [https://dic.nicovideo.jp/id/5703111](https://dic.nicovideo.jp/id/5703111)  
+AXNOS Paint:ヘルプ - ニコニコ大百科  
 
 ## 対応環境
 * Edge, Safari, Chrome, Firefox, Opera いずれかの最新版  
@@ -88,9 +93,11 @@ https://www.axnospaint.jp/index.html?oekaki_width=600&oekaki_height=400
 ```
 
 ### 下書き機能
+
 以下の方法で、任意の画像を下書きとして読み込み、初期レイヤーにすることが可能です。PNG形式の画像ファイルのみ対応しています。
 
-1. 起動オプション`oekakiURL`に、画像が配置されているURLパス名を指定する。
+1. 起動オプション`oekakiURL`に、画像が配置されているURLパス名を指定する。  
+（※同一生成元ポリシーに違反する場合、セキュリティエラーが発生しますので注意してください）
 
 ```js
 new AXNOSPaint({
@@ -114,7 +121,7 @@ https://www.axnospaint.jp/index.html?oekaki_id=12345
 * 新規キャンバスで開始して、途中で`oekaki_id`が保存されたデータをロードした場合、その時点から上記ルールが再適用される。
 * 途中で新規キャンバス作成または別の画像のロードにより下書きが破棄された場合は、その時点で上記ルールは撤廃される。
 
-画像が読み込めなかった場合、エラーメッセージを表示し、新規キャンバスとして起動します。
+画像が読み込めなかった場合、エラーメッセージを表示し、新規キャンバスとして起動します。  
 
 #### 下書き機能使用時の同一掲示板チェック
 
@@ -185,8 +192,8 @@ new AXNOSPaint({
     // 中略
     expansionTab: {
         name: 'ヘルプ',
-        msg: '説明書を別タブで開きます。',
-        link: 'https://wwww.axnospaint.jp/help/index.html',
+        msg: '説明書（ニコニコ大百科のAXNOS Paint:ヘルプの記事）を別タブで開きます。',
+        link: 'https://dic.nicovideo.jp/id/5703111',
     },
 });
 ```
@@ -237,7 +244,36 @@ AXNOS Paintを展開するdiv要素の前または後（あるいは両方）に
 </body>
 ```
 
+
 ## 開発資料
+
+### ビルド
+
+webpack5を使用し、.pngファイルや.cssファイルを含めた全ファイルを１つの.jsファイルにバンドルします。  
+
+ webpack.config.js ： 開発用webpack設定ファイル。.jsファイル出力用。  
+ webpack.prod.js ： プロダクションビルド用webpack設定ファイル。コメントなどを削除したmin.jsファイル出力用。
+  
+#### プロダクションビルド
+
+通常版とWebデモ版が存在します。Webデモ版にはマスコット機能が追加されます。  
+  
+通常版プロダクションビルド。ファイル名は「axnospaint-lib-2.0.0.min.js」（バージョン番号はpackage.jsonに依存します）。
+```
+ npm run prod
+```
+Webデモ版プロダクションビルド。ファイル名は「axnospaint-lib-demo-2.0.0.min.js」（バージョン番号はpackage.jsonに依存します）。
+```
+ npm run prod-demo
+```
+
+ファイルの出力先は./dist/になります。
+
+### マスコット機能
+
+マスコットキャラがペイントツールの機能について紹介を行う機能が追加されます。  
+拡張機能として./extensions/mascot/の中にデータが配置されています。Webデモ版のビルドを行った場合、.jsファイルにデータが取り込まれ機能が有効になります。
+
 
 ### データ保存
 

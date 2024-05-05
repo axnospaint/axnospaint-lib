@@ -1,0 +1,115 @@
+<!-- ペンツール -->
+<div class="axpc_window_content">
+    <div id="axp_pen_div_content">
+        <!-- ペンツール左側 -->
+        <div id="axp_pen_div_leftSide">
+            <span id="axp_pen_span_penName" class="axpc_MSG" data-msg="@PEN0001">丸ペン</span>
+            <!-- プレビュー領域 -->
+            <div id="axp_pen_div_preview" class="axpc_MSG" data-msg="@PEN0200">
+                <canvas id="axp_pen_canvas_previewPenSize"></canvas>
+                <canvas id="axp_pen_canvas_previewSpuit"></canvas>
+            </div>
+            <!-- スライダー領域 -->
+            <div id="axp_pen_div_slider">
+                <!-- ペンの不透明度 -->
+                <form id="axp_pen_form_alpha" class="axpc_range axpc_text_border"
+                    oninput="result.value=parseInt(volume.value)">
+                    <input type="range" id="axp_pen_range_alpha" name="volume" min="5" max="100" value="100" step="5"
+                        class="axpc_MSG" data-msg="@PEN0002">
+                    <div class="axpc_range_label">不透明度</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- ペンの太さ -->
+                <form id="axp_pen_form_penSize" class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_penSize" name="volume" min="1" max="100" value="1" step="1"
+                        class="axpc_MSG" data-msg="@PEN0003">
+                    <div class="axpc_range_label">太さ</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- バケツの境界補正 -->
+                <form id="axp_pen_form_fillThreshold" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_fillThreshold" name="volume" value="0" step="1" min="0"
+                        max="5" class="axpc_MSG" data-msg="@PEN0004">
+                    <div class="axpc_range_label">塗り残し補正</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- バケツのグラデーション角度 -->
+                <form id="axp_pen_form_fillGradationDeg" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_fillGradationDeg" name="volume" value="0" step="1" min="0"
+                        max="360" class="axpc_MSG" data-msg="@PEN0005">
+                    <div class="axpc_range_label">角度</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- クレヨンの丸み -->
+                <form id="axp_pen_form_radius" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_radius" name="volume" value="50" step="1" min="0" max="50"
+                        class="axpc_MSG" data-msg="@PEN0010">
+                    <div class="axpc_range_label">丸み</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- ぼかし度（オプション） -->
+                <form id="axp_pen_form_blur" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_blur" name="volume" value="0" step="1" min="0" max="5"
+                        class="axpc_MSG" data-msg="@PEN0009">
+                    <div class="axpc_range_label">ぼかし度</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- トーン濃度（オプション） -->
+                <form id="axp_pen_form_toneLevel" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_toneLevel" name="volume" value="16" step="1" min="1" max="16"
+                        class="axpc_MSG" data-msg="@PEN0006">
+                    <div class="axpc_range_label">トーン濃度</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+            </div>
+
+            <div id="axp_pen_div_spuitColorRGBA">
+                <div>赤:<span id="axp_pen_span_spuitColorRed">-</span></div>
+                <div>緑:<span id="axp_pen_span_spuitColorGreen">-</span></div>
+                <div>青:<span id="axp_pen_span_spuitColorBlue">-</span></div>
+                <div>透:<span id="axp_pen_span_spuitColorAlpha">-</span></div>
+            </div>
+
+            <div id="axp_pen_div_selectbox">
+                <select id="axp_pen_select_drawMode" class="axpc_MSG" data-msg="@PEN0007">
+                    <option value="option_normal">手描き</option>
+                    <option value="option_line">直線</option>
+                    <option value="option_rectangle">長方形</option>
+                    <option value="option_circle">円</option>
+                </select>
+                <select id="axp_pen_select_fillMode" class="axpc_MSG axpc_NONE" data-msg="@PEN0008">
+                    <option value="option_all">全ﾚｲﾔｰ判定</option>
+                    <option value="option_layer">現ﾚｲﾔｰ判定</option>
+                </select>
+            </div>
+
+        </div>
+        <!-- ペンツール右側 -->
+        <div id="axp_pen_div_rightSide">
+            <div>
+                <button data-idx="0" id="axp_pen_button_penBase" class="axpc_MSG" data-selected="true"
+                    data-addmsg="[再選択]:ペン種別変更。"></button>
+            </div>
+            <div>
+                <button data-idx="1" id="axp_pen_button_eraserBase" class="axpc_MSG"
+                    data-addmsg="[再選択]:消しゴム種別変更。"></button>
+            </div>
+            <div>
+                <button data-idx="2" id="axp_pen_button_fillBase" class="axpc_MSG"
+                    data-addmsg="[再選択]:バケツ種別変更。"></button>
+            </div>
+            <div>
+                <button data-idx="3" id="axp_pen_button_handBase" class="axpc_MSG"
+                    data-addmsg="[再選択]:ツール種別変更。"></button>
+            </div>
+            <div>
+                <button data-idx="4" id="axp_pen_button_spuitBase" class="axpc_MSG" data-addmsg=""></button>
+            </div>
+        </div>
+    </div>
+</div>

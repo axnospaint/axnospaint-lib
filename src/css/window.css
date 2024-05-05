@@ -1,0 +1,180 @@
+/* ツールウィンドウ共通 */
+
+.axpc_window {
+    width: 180px;
+    height: auto;
+    position: absolute;
+    z-index: 1000;
+    color: #fff;
+    background-color: rgb(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 8px #000a;
+    padding: 2px;
+    border-radius: 8px;
+    /*
+    overflow: hidden;
+    */
+    /* すりガラス効果 */
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    line-height: 14px;
+}
+
+/* パレット編集時のアテンション */
+.axpc_window_attention {
+    background-color: rgb(255, 255, 0, 0.3);
+}
+
+/* ヘッダー部 */
+.axpc_window_header {
+    margin-top: -24px;
+    justify-content: right;
+    font-size: 15px;
+    /* #axp_mainのfont-size指定(必要なし) */
+    display: grid;
+    grid-template-columns: minmax(18px, 30px) minmax(0px, 1fr) 24px;
+    /* minmax(18px, 30px)→img、minmax(0px, 1fr)→文字、24px→▲ */
+    margin: -2px -2px 0;
+    /* ドラッグ範囲のクラスaxpc_windowとのズレを相殺させる */
+    padding: 0;
+    height: 30px;
+}
+
+/* ツール名 文字 */
+.axpc_window_header>div:first-of-type {
+    font-size: 13px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    /* grid位置指定 アイコンがない場合は1/1/2/3; */
+    grid-area: 1/2/2/3;
+}
+
+/* アイコン表示 span */
+.axpc_window_header>span {
+    display: inline-flex;
+    align-items: center;
+    /* imgを中央に */
+    justify-content: center;
+    /* grid位置指定 */
+    grid-area: 1/1/2/2;
+}
+
+/* ドラッグ可能領域 */
+.axpc_window_header_dragZone {
+    cursor: move;
+    height: 30px;
+    grid-area: 1/1/2/3;
+    /* grid位置指定 */
+    margin-left: -2px;
+    /* safari */
+    isolation: isolate;
+}
+
+/* 最小化ボタン */
+.axpc_window_header_minimizeButton {
+    color: #888;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    /* grid-template-columnsの24pxがminimizeの有効な幅、▲を中央に */
+    justify-content: center;
+    /* grid位置指定 */
+    grid-area: 1/3/2/4;
+}
+
+/* 内容部 */
+.axpc_window_content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/* 最小化アイコン表示部 */
+.axpc_window_minimizeIconVertical,
+.axpc_window_minimizeIconHorizontal {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    z-index: 4000;
+    cursor: pointer;
+    border: 2px solid #333;
+    border-radius: 5px;
+    box-shadow: 0 0 2px #000;
+    padding: 2px;
+    background-color: #ccc;
+}
+
+/*最小化アイコンツールチップ*/
+.axpc_window_minimizeIconVertical::before,
+.axpc_window_minimizeIconVertical::after,
+.axpc_window_minimizeIconHorizontal::before,
+.axpc_window_minimizeIconHorizontal::after {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.1s;
+}
+
+.axpc_window_minimizeIconVertical:hover::before,
+.axpc_window_minimizeIconVertical:hover::after,
+.axpc_window_minimizeIconHorizontal:hover::before,
+.axpc_window_minimizeIconHorizontal:hover::after {
+    opacity: 1;
+}
+
+/*縦並び用吹き出し▲*/
+.axpc_window_minimizeIconVertical::before {
+    content: "";
+    box-sizing: border-box;
+    width: 15px;
+    border: 7.5px solid transparent;
+    border-right-color: #0007;
+    top: 30%;
+    left: 25px;
+}
+
+/*横並び用吹き出し▼*/
+.axpc_window_minimizeIconHorizontal::before {
+    content: "";
+    width: 0px;
+    border: 7.5px solid transparent;
+    border-top-color: #0007;
+    top: -10px;
+    left: 6px;
+}
+
+/*吹き出し中身 共通*/
+.axpc_window_minimizeIconVertical::after,
+.axpc_window_minimizeIconHorizontal::after {
+    content: attr(data-tip);
+    border-radius: 3px;
+    width: max-content;
+    background: #0007;
+    padding: 6px 3px;
+    line-height: 1em;
+}
+
+/*縦並び用吹き出し中身 配置*/
+.axpc_window_minimizeIconVertical::after {
+    left: 40px;
+}
+
+/*横並び用吹き出し中身 配置*/
+.axpc_window_minimizeIconHorizontal::after {
+    left: 0px;
+    top: -37px;
+}
+
+/* 最小化 アニメーション ------------ */
+.axpc_window_minimizeAnime {
+    animation: axpc_window_minimizeAnime forwards ease-in-out;
+    animation-duration: var(--tool-duration, 350ms);
+    pointer-events: none;
+}
+
+@keyframes axpc_window_minimizeAnime {
+    0% {
+        left: var(--tool-left);
+        top: var(--tool-top);
+    }
+}

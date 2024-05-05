@@ -1,0 +1,240 @@
+/* 設定タブ */
+#axp_config_div_content {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* 左側：ナビゲーションメニュー */
+#axp_config_div_nav {
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+    position: sticky;
+    top: 0;
+    background-color: #eee;
+    padding: 10px;
+    /* iPad跳ね返り防止 */
+    overscroll-behavior: none;
+}
+
+/* ナビボタン */
+#axp_config_div_nav button {
+    width: 160px;
+    height: 40px;
+    border-radius: 6px;
+    border: 0;
+    background-color: #eee;
+    color: #111;
+    cursor: pointer;
+    margin: 1px 0;
+    padding-left: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+}
+
+#axp_config_div_nav button.axpc_ACTIVE {
+    background: #E09C35;
+}
+
+/* 本文：外枠 */
+.axpc_config_chapter {
+    width: calc(100% - 200px);
+    height: 100%;
+    padding: 10px;
+    background-color: #eee;
+    overflow-y: scroll;
+}
+
+/* ブラウザの横幅が600px以下の場合 */
+@media (max-width: 600px) {
+    #axp_config_div_nav {
+        /* ナビゲーションメニュー非表示 */
+        display: none;
+    }
+
+    .axpc_config_chapter {
+        width: 100%;
+    }
+}
+
+/* 本文：セクション */
+.axpc_config_section {
+    margin-bottom: 50px;
+    color: #111;
+}
+
+/* 本文：セクション見出し */
+.axpc_config_sectionHeader {
+    background: #ddf;
+    margin-top: 8px;
+    padding: 8px 8px;
+    font-weight: bolder;
+}
+
+/* 設定用共通グループ（クラスが設定されていると、自動的にaxpc_config_div_headerをもつdiv要素を作成） */
+.axpc_config_group {
+    padding: 16px;
+    border: 2px #ddd solid;
+}
+
+/* 設定用共通見出し */
+.axpc_config_groupHeader {
+    background: #ddd;
+    margin-top: 8px;
+    padding: 4px 16px;
+}
+
+/* キャンバス履歴テーブル */
+#axp_config_ul_canvasSizeHistory {
+    margin-top: 8px;
+    width: 200px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    list-style-type: none;
+    border: 1px solid #aaa;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+#axp_config_ul_canvasSizeHistory>li {
+    padding: 2px 10px;
+    height: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#axp_config_ul_canvasSizeHistory>li:nth-child(even) {
+    background: #ddd;
+}
+
+/* 注意：evenより優先度高 */
+#axp_config_ul_canvasSizeHistory>li[data-selected="true"] {
+    background: #f7a312 !important;
+}
+
+#axp_config_table_shortcutKey {
+    border: 4px double #bbb;
+}
+
+#axp_config_table_shortcutKey td {
+    border: 1px solid #999;
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+/* 設定用のカラーパレット表示（モックアップ）*/
+#axp_config_div_paletteScroll {
+    max-width: 228px;
+    max-height: 228px;
+    overflow: auto;
+    background: #ccc;
+}
+
+/* 設定用カラーパレット枠 */
+#axp_config_div_paletteBox {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background: #333;
+    padding: 4px;
+}
+
+/* 設定用カラーパレット単色 */
+.axpc_config_colorRect {
+    height: 20px;
+    width: 20px;
+    margin: 1px;
+    border-radius: 3px;
+}
+
+/* 拡大率 */
+#axp_config_div_scale {
+    width: 200px;
+}
+
+#axp_config_div_scaleButton {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 30px 1fr;
+}
+
+#axp_config_button_addScale {
+    width: 100%;
+}
+
+#axp_config_button_deleteScale,
+#axp_config_button_resetScale {
+    margin-top: 8px;
+    width: 100%;
+}
+
+/* 拡大率テーブル */
+#axp_config_ul_scale {
+    margin-top: 8px;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border: 1px solid #aaa;
+    max-height: 352px;
+    overflow-y: scroll;
+}
+
+#axp_config_ul_scale>li {
+    padding: 2px 10px;
+    height: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#axp_config_ul_scale>li:nth-child(even) {
+    background: #ddd;
+}
+
+#axp_config_ul_scale>li[data-value="100"] {
+    border: 1px solid #333;
+}
+
+/* 注意：evenより優先度高 */
+#axp_config_ul_scale>li[data-selected="true"] {
+    background: #f7a312 !important;
+}
+
+/* カラータグ */
+#axp_config_div_colorTag {
+    width: 300px;
+    display: grid;
+    grid-template-rows: repeat(4, 34px);
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 8px;
+    gap: 4px 10px;
+}
+
+.axpc_config_div_colorTag {
+    border-radius: 5px;
+    border: #222 solid 2px;
+    width: 154px;
+}
+
+.axpc_config_text_colorTag {
+    width: 130px;
+    height: 30px;
+    font-size: 13px;
+    text-align: left;
+    border-radius: 5px;
+    padding-left: 4px;
+}
+
+/* キーカスタマイズ用拡大率セレクトボックス */
+.axpc_config_select_scaleTable {
+    width: 24px;
+}
+
+/* キーカスタマイズ用数値入力 */
+.axpc_config_number_sizeValue,
+.axpc_config_number_scaleValue {
+    width: 60px;
+}

@@ -1,0 +1,9 @@
+<!-- カスタムボタン -->
+<div class="axpc_window_content">
+    <div id="axp_custom_div_buttons">
+        <!-- メッセージテキストはconfig.jsで自動設定 -->
+        <button class="axpc_MSG axpc_custom_button" data-index="1">1</button>
+        <button class="axpc_MSG axpc_custom_button" data-index="2">2</button>
+        <button class="axpc_MSG axpc_custom_button" data-index="3">3</button>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+/* 有／無トグルスイッチ共通 */
+
+.axpc_toggle_switch {
+    position: relative;
+    width: 55px;
+    height: 32px;
+    margin: 0px 0px;
+    border-radius: 50px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #aaa5;
+}
+
+.axpc_toggle_switch input[type=checkbox] {
+    display: none;
+}
+
+.axpc_toggle_switch::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -55px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    -webkit-transition: 0.2s ease-out;
+    transition: 0.2s ease-out;
+    background: rgb(224, 156, 53);
+}
+
+.axpc_toggle_switch::after {
+    content: "無";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 28px;
+    height: 28px;
+    display: block;
+    border-radius: 50px;
+    background: #fff;
+    box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.3);
+    -webkit-transition: 0.2s ease-out;
+    transition: 0.2s ease-out;
+    text-align: center;
+    padding: 9px 0 0;
+    line-height: 1;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    letter-spacing: .5px;
+    box-sizing: border-box;
+}
+
+.axpc_toggle_switch[data-checked="true"]::before {
+    left: 0;
+}
+
+.axpc_toggle_switch[data-checked="true"]::after {
+    content: "有";
+    left: 24px;
+    box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
+    color: #333;
+    padding: 9px 0 0 1px;
+}

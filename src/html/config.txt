@@ -1,0 +1,584 @@
+<!-- 設定タブ -->
+<div id="axp_config_div_menu">
+    <div id="axp_config_div_content">
+        <div id="axp_config_div_nav">
+            <div id="axp_config_div_navButton">
+                <button class="axpc_MSG axpc_ACTIVE" data-msg="@CFG2001">キャンバス</button>
+                <button class="axpc_MSG" data-msg="@CFG2002">ツールウィンドウ</button>
+                <button class="axpc_MSG" data-msg="@CFG2003">ペンツール</button>
+                <button class="axpc_MSG" data-msg="@CFG2004">色作成</button>
+                <button class="axpc_MSG" data-msg="@CFG2005">パレット</button>
+                <button class="axpc_MSG" data-msg="@CFG2006">レイヤー</button>
+                <button class="axpc_MSG" data-msg="@CFG2007">補助ツール</button>
+                <button class="axpc_MSG" data-msg="@CFG2008">カスタムボタン</button>
+                <button class="axpc_MSG" data-msg="@CFG2009">マウス</button>
+                <button class="axpc_MSG" data-msg="@CFG2010">タッチパネル</button>
+                <button class="axpc_MSG" data-msg="@CFG2011">キーボード</button>
+                <button class="axpc_MSG" data-msg="@CFG2012">ショートカット</button>
+                <button class="axpc_MSG" data-msg="@CFG2013">起動時</button>
+                <button class="axpc_MSG" data-msg="@CFG2020" id="axp_config_button_version">バージョン情報</button>
+            </div>
+        </div>
+        <div class="axpc_config_chapter" id="axp_config_div_pageMain">
+            <div class="axpc_config_section" data-title="キャンバス">
+                <div class="axpc_config_group" data-title="キャンバスの初期化">
+                    <u>画像サイズ</u><br>
+                    <div style="display: flex;">
+                        <div class="axpc_number axpc_MSG" data-msg="@CFG0300">
+                            <label>横
+                                <input id="axp_config_number_oekakiWidth" type="number" min="8" max="600" value="317">
+                            </label>×
+                        </div>
+                        <div class="axpc_number axpc_MSG" data-msg="@CFG0301">
+                            <label>縦
+                                <input id="axp_config_number_oekakiHeight" type="number" min="8" max="600"
+                                    value="317">[px]
+                            </label>
+                        </div>
+                    </div>
+                    (※最小8×8 ～ 最大600×600)<br>
+                    [履歴]<br>
+                    <ul id="axp_config_ul_canvasSizeHistory" class="axpc_MSG" data-msg="@CFG0016">
+                    </ul>
+                    <button id="axp_config_button_newCanvas" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0017">新規キャンバス</button>
+                    <br>
+                    <button id="axp_config_button_changeCanvasSize" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0018">画像を保持したままサイズ変更</button>
+                </div>
+                <div class="axpc_config_group" data-title="画像の書き出し">
+                    <button class="axpc_MSG axpc_button axpc_button_width260" data-msg="@CFG0019"
+                        id="axp_config_button_pngDownload">画像をPNG形式でファイルに保存</button>
+                </div>
+                <div class="axpc_config_group" data-title="キャンバス全体のぼかし（アンチエイリアシング）">
+                    <form id="axp_config_form_antialiasing" class="axpc_radio">
+                        <span data-msg="@CFG0020" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0021" data-value="on">あり</span>
+                    </form>
+                </div>
+                <div class="axpc_config_group" data-title="ポインタ座標の表示">
+                    <!-- 左下は最小化アイコン表示用領域 -->
+                    <form id="axp_config_form_displayPosition" class="axpc_radio">
+                        <span data-msg="@CFG0022" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0023" data-value="upperleft">左上</span>
+                        <span data-msg="@CFG0024" data-value="upperright">右上</span>
+                        <span data-msg="@CFG0025" data-value="lowerright">右下</span>
+                    </form>
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="ツールウィンドウ">
+                <div class="axpc_config_group" data-title="ツールウィンドウ位置の自動調整">
+                    <form id="axp_config_form_windowAutoAdjust" class="axpc_radio">
+                        <span data-msg="@CFG0028" data-value="off">なし</span>
+                        <span data-msg="@CFG0029" data-value="on" data-default="y">あり</span>
+                    </form>
+                </div>
+                <div class="axpc_config_group" data-title="位置初期化">
+                    <button id="axp_config_button_resetWindow" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0030">全ウィンドウ位置の初期化</button>
+                </div>
+                <div class="axpc_config_group" data-title="最小化">
+                    <u>アイコン配置</u>
+                    <form id="axp_config_form_minimizeType" class="axpc_radio">
+                        <span data-msg="@CFG0031" data-value="horizontal" data-default="y">横並び</span>
+                        <span data-msg="@CFG0032" data-value="vertical">縦並び</span>
+                    </form>
+                    <div class="axpc_number axpc_MSG" data-msg="@CFG0033">
+                        <label>最小化アニメの所要時間
+                            <input id="axp_config_number_minimizeDuration" class="axpc_SAVE" type="number" min="0"
+                                max="1000" value="350">[ミリ秒]
+                        </label>
+                    </div>
+                    （※最小0～最大1000。0を指定するとアニメ効果を省略します）
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="ペンツール" data-icon="axpc_icon_window_pen">
+                <div class="axpc_config_group" data-title="手ぶれ補正">
+                    <form id="axp_config_form_useStabilizer" class="axpc_radio">
+                        <span data-msg="@CFG0040" data-value="off">なし</span>
+                        <span data-msg="@CFG0041" data-value="on" data-default="y">あり</span>
+                    </form>
+                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_stabilizerValue"
+                        style="margin-top: 8px;" class="axpc_range axpc_SAVE">
+                        補正の強さ
+                        <input type="range" class="axpc_MSG" name="volume" value="2" step="1" min="1" max="10"
+                            data-msg="@CFG0042">
+                        <output name="result" for="volume">2</output>
+                    </form>
+                </div>
+                <div class="axpc_config_group" data-title="スポイト">
+                    <u>使用後ペンに切り替える</u>
+                    <form id="axp_config_form_autoChangeSpuitToPen" class="axpc_radio">
+                        <span data-msg="@CFG0043" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0044" data-value="on">あり</span>
+                    </form>
+                    <br>
+                    <u>長押しスポイト</u>
+                    <form id="axp_config_form_useLongtap" class="axpc_radio">
+                        <span data-msg="@CFG0045" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0046" data-value="on">あり</span>
+                    </form>
+                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_longtapDurationValue"
+                        style="margin-top: 8px;" class="axpc_range axpc_SAVE">
+                        長押し反応時間
+                        <input type="range" class="axpc_MSG" name="volume" value="700" step="100" min="500" max="1500"
+                            data-msg="@CFG0047">
+                        <output name="result" for="volume">700</output>[ミリ秒]
+                    </form>
+                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_longtapStabilizerValue"
+                        style="margin-top: 8px;" class="axpc_range axpc_SAVE">
+                        長押し受付範囲
+                        <input type="range" class="axpc_MSG" name="volume" value="5" step="1" min="0" max="10"
+                            data-msg="@CFG0048">
+                        <output name="result" for="volume">5</output>[px]
+                    </form>
+                    （※長押し操作が反応しない場合、受付範囲を大きくしてください）
+                </div>
+                <div class="axpc_config_group" data-title="レンジスライダー">
+                    <u>ぼかし度</u>
+                    <form id="axp_config_form_blurLevel" class="axpc_radio">
+                        <span data-msg="@CFG0200" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0201" data-value="on">あり</span>
+                    </form>
+                    <br>
+                    <u>トーン濃度</u>
+                    <form id="axp_config_form_ToneLevel" class="axpc_radio">
+                        <span data-msg="@CFG0049" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0050" data-value="on">あり</span>
+                    </form>
+                    <br>
+                    <u>太さと不透明度の表示順序</u>
+                    <form id="axp_config_form_pentoolRangeOrder" class="axpc_radio">
+                        <span data-msg="@CFG0051" data-value="size" data-default="y">太さ->不透明度</span>
+                        <span data-msg="@CFG0052" data-value="alpha">不透明度->太さ</span>
+                    </form>
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="色作成" data-icon="axpc_icon_window_colormaker">
+                <div class="axpc_config_group" data-title="使用する色作成ツール">
+                    <u>混色パレット</u>
+                    <form id="axp_config_form_makeColorTypeMixed" class="axpc_radio">
+                        <span data-msg="@CFG0053" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0054" data-value="on">あり</span>
+                    </form>
+                    <br>
+                    <u>RGBスライダー</u>
+                    <form id="axp_config_form_makeColorTypeRGB" class="axpc_radio">
+                        <span data-msg="@CFG0055" data-value="off">なし</span>
+                        <span data-msg="@CFG0056" data-value="on" data-default="y">あり</span>
+                    </form>
+                    <br>
+                    <u>カラーピッカー</u>
+                    <form id="axp_config_form_makeColorTypePicker" class="axpc_radio">
+                        <span data-msg="@CFG0057" data-value="off">なし</span>
+                        <span data-msg="@CFG0058" data-value="on" data-default="y">あり</span>
+                    </form>
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="パレット" data-icon="axpc_icon_window_palette">
+                <div class="axpc_config_group" data-title="横幅スライダーの使用（編集モード時）">
+                    <form id="axp_config_form_paletteColumnEdit" class="axpc_radio">
+                        <span data-msg="@CFG0061" data-value="off">なし</span>
+                        <span data-msg="@CFG0062" data-value="on" data-default="y">あり</span>
+                    </form>
+                </div>
+                <div class="axpc_config_group" data-title="パレットのレイアウト">
+                    <u>横幅（列の数）</u><br>
+                    <form id="axp_config_form_paletteColumnValue" class="axpc_range axpc_text_border">
+                        <!-- axpc_SAVE 対象外 -->
+                        <input type="range" class="axpc_MSG" name="volume" value="3" step="1" min="1" max="24"
+                            data-msg="@CFG0063">
+                        <div class="axpc_range_label">横幅</div>
+                        <div class="axpc_range_value"><output name="result"></output></div>
+                    </form>
+                    <!-- カラーパレットを表示するためのエリア -->
+                    <div id="axp_config_div_paletteText"></div>
+                    <div id="axp_config_div_paletteScroll">
+                        <div id="axp_config_div_paletteBox"></div>
+                    </div>
+                </div>
+                <div class="axpc_config_group" data-title="パレットのインポート・エクスポート／初期化">
+                    <button id="axp_config_button_saveColor" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0064">パレットファイルに保存</button>
+                    <br>
+                    <button id="axp_config_button_loadColor" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0065">パレットファイルの読込</button>
+                    <br>
+                    <button id="axp_config_button_resetColor" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0066">パレットの初期化</button>
+                    <input type="file" id="axp_config_file_loadColor" accept=".txt" style="display: none;">
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="レイヤー" data-icon="axpc_icon_window_layer">
+                <div class="axpc_config_group" data-title="合成モードの表示">
+                    <form id="axp_config_form_blendModeDisplayType" class="axpc_radio">
+                        <span data-msg="@CFG0120" data-value="none">なし</span>
+                        <span data-msg="@CFG0121" data-value="all">全表示</span>
+                        <span data-msg="@CFG0122" data-value="unusual" data-default="y">通常以外表示</span>
+                    </form>
+                </div>
+                <div class="axpc_config_group" data-title="レイヤー名の登録">
+                    レイヤー名の変更時、文字入力の代わりに登録した名前を使用できます。
+                    <div id="axp_config_div_colorTag" class="axpc_MSG" data-msg="@CFG0123"></div>
+                    <button id="axp_config_button_resetColorTag" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0124">レイヤー名の初期化</button>
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="補助ツール" data-icon="axpc_icon_window_subtool">
+                <div class="axpc_config_group" data-title="アンドゥ／リドゥ可能回数">
+                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_undoMaxValue"
+                        class="axpc_range axpc_SAVE">
+                        回数
+                        <input type="range" class="axpc_MSG" name="volume" value="25" step="1" min="10" max="50"
+                            data-msg="@CFG0067">
+                        <output name="result" for="volume">25</output>
+                    </form>
+                    （※変更した値を有効にするにはAXNOS Paintを再起動する必要があります）
+                </div>
+                <div class="axpc_config_group" data-title="拡大率">
+                    <div id="axp_config_div_scale">
+                        <div id="axp_config_div_scaleButton">
+                            <input id="axp_config_number_scale" type="number" maxlength="3" min="25" max="1600"
+                                value="125" size="5" class="axpc_MSG" data-msg="@CFG0211">
+                            <span>[%]</span>
+                            <button id="axp_config_button_addScale" class="axpc_MSG axpc_button"
+                                data-msg="@CFG0070">追加</button>
+                        </div>
+                        （※最小25～最大1600）
+                        <button id="axp_config_button_deleteScale" class="axpc_MSG axpc_button"
+                            data-msg="@CFG0071">選択した拡大率を削除</button>
+                        <ul id="axp_config_ul_scale" class="axpc_MSG" data-msg="@CFG0212">
+                        </ul>
+                        <button id="axp_config_button_resetScale" class="axpc_MSG axpc_button"
+                            data-msg="@CFG0072">拡大率の初期化</button>
+                    </div>
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="カスタムボタン">
+                <div class="axpc_config_group" data-title="カスタムボタン">
+                    <u>ボタンの表示</u>
+                    <form id="axp_config_form_useCustomButton" class="axpc_radio">
+                        <span data-msg="@CFG0080" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0081" data-value="on">あり</span>
+                    </form>
+                    <br>
+                    <div id="axp_config_div_customButtonFunction">
+                        <u>機能割り当て</u>
+                        <div></div>
+                        （※機能を割り当てたボタンのみ表示されます）
+                    </div>
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="マウス">
+                <div class="axpc_config_group" data-title="マウス右ボタン">
+                    <form id="axp_config_form_mouseRightButton" class="axpc_radio">
+                        <span data-msg="@CFG0082" data-value="none">なし</span>
+                        <span data-msg="@CFG0083" data-value="undo" data-default="y">アンドゥ</span>
+                        <span data-msg="@CFG0084" data-value="spuit">スポイト</span>
+                        <span data-msg="@CFG0085" data-value="hand">ハンド</span>
+                        <span data-msg="@CFG0086" data-value="loupe">拡大率100%</span>
+                        <span data-msg="@CFG0087" data-value="swapcolor">ﾒｲﾝ色切替</span>
+                        <span data-msg="@CFG0088" data-value="swaptrans">透明色切替</span>
+                        <span data-msg="@CFG0400" data-value="transdraw">透明色描画</span>
+                    </form>
+                </div>
+                <div class="axpc_config_group" data-title="マウスホイールボタン">
+                    <form id="axp_config_form_mouseWheelButton" class="axpc_radio">
+                        <span data-msg="@CFG0082" data-value="none">なし</span>
+                        <span data-msg="@CFG0083" data-value="undo">アンドゥ</span>
+                        <span data-msg="@CFG0084" data-value="spuit" data-default="y">スポイト</span>
+                        <span data-msg="@CFG0085" data-value="hand">ハンド</span>
+                        <span data-msg="@CFG0086" data-value="loupe">拡大率100%</span>
+                        <span data-msg="@CFG0087" data-value="swapcolor">ﾒｲﾝ色切替</span>
+                        <span data-msg="@CFG0088" data-value="swaptrans">透明色切替</span>
+                        <span data-msg="@CFG0400" data-value="transdraw">透明色描画</span>
+                    </form>
+                </div>
+                <div class="axpc_config_group" data-title="マウスホイール回転">
+                    <form id="axp_config_form_mouseWheelRotate" class="axpc_radio">
+                        <span data-msg="@CFG0089" data-value="none">なし</span>
+                        <span data-msg="@CFG0090" data-value="loupe" data-default="y">拡大/縮小</span>
+                        <span data-msg="@CFG0091" data-value="scroll">スクロール</span>
+                    </form>
+                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0220">
+                        <label>
+                            <input id="axp_config_checkbox_mouseWheelDirection" class="axpc_SAVE" type="checkbox">回転方向反転
+                        </label>
+                    </div>
+                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0223">
+                        <label>
+                            <input id="axp_config_checkbox_mouseWheelPointerTracking" class="axpc_SAVE" type="checkbox"
+                                checked>ポインタ位置を中心に拡大／縮小
+                        </label>
+                    </div>
+                    <div class="axpc_number axpc_MSG" data-msg="@CFG0221">
+                        <label>スクロール移動量
+                            <input id="axp_config_number_mouseWheelMoveSize" class="axpc_SAVE" type="number" min="1"
+                                max="100" value="30">[px]（※最小1～最大100）
+                        </label>
+                    </div>
+                    <div class="axpc_number axpc_MSG" data-msg="@CFG0222">
+                        <label>連続入力抑止時間
+                            <input id="axp_config_number_mouseWheelSleepTime" class="axpc_SAVE" type="number" min="0"
+                                max="500" value="0">[ミリ秒]
+                        </label>
+                    </div>
+                    （※最小0～最大500。0を指定すると入力抑止を行いません。<br>
+                    　タッチパッドのホイール操作感度が高すぎる場合に設定してください）
+                </div>
+                <div class="axpc_config_group" data-title="タッチパッド">
+                    <u>キャンバスの拡大／縮小</u>（ピンチアウト／ピンチイン）
+                    <form id="axp_config_form_mouseWheelZoom" class="axpc_radio">
+                        <span data-msg="@CFG0097" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0098" data-value="on">あり</span>
+                    </form>
+                    （※「あり」設定時、環境によってマウスホイールと競合する場合があります）
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="タッチパネル">
+                <div class="axpc_config_group" data-title="タッチ操作">
+                    <u>機能割り当て</u>（１本指タッチ）
+                    <form id="axp_config_form_touchDrawType" class="axpc_radio">
+                        <span data-msg="@CFG0092" data-value="none">なし</span>
+                        <span data-msg="@CFG0093" data-value="draw" data-default="y">描画</span>
+                        <span data-msg="@CFG0094" data-value="hand">ハンド</span>
+                    </form>
+                    <br>
+                    <u>キャンバスの移動</u>（２本指スワイプ）
+                    <form id="axp_config_form_touchHand" class="axpc_radio">
+                        <span data-msg="@CFG0095" data-value="off">なし</span>
+                        <span data-msg="@CFG0096" data-value="on" data-default="y">あり</span>
+                    </form>
+                    <br>
+                    <u>キャンバスの拡大／縮小</u>（ピンチ操作）
+                    <form id="axp_config_form_touchZoom" class="axpc_radio">
+                        <span data-msg="@CFG0097" data-value="off">なし</span>
+                        <span data-msg="@CFG0098" data-value="on" data-default="y">あり</span>
+                    </form>
+                </div>
+                <div class="axpc_config_group" data-title="タップ操作">
+                    <u>アンドゥ</u>（２本指タップ）
+                    <form id="axp_config_form_touchUndo" class="axpc_radio">
+                        <span data-msg="@CFG0099" data-value="off">なし</span>
+                        <span data-msg="@CFG0100" data-value="on" data-default="y">あり</span>
+                    </form>
+                    <br>
+                    <u>リドゥ</u>（３本指タップ）
+                    <form id="axp_config_form_touchRedo" class="axpc_radio">
+                        <span data-msg="@CFG0101" data-value="off">なし</span>
+                        <span data-msg="@CFG0102" data-value="on" data-default="y">あり</span>
+                    </form>
+                    <br>
+                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_touchDurationValue"
+                        class="axpc_range axpc_SAVE">
+                        タップ制限時間
+                        <input type="range" class="axpc_MSG" name="volume" value="300" step="100" min="100" max="1000"
+                            data-msg="@CFG0103">
+                        <output name="result" for="volume">300</output>[ミリ秒]
+                    </form>
+                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_touchThresholdValue"
+                        class="axpc_range axpc_SAVE">
+                        タップ受付範囲
+                        <input type="range" class="axpc_MSG" name="volume" value="5" min="0" max="10"
+                            data-msg="@CFG0401">
+                        <output name="result" for="volume">5</output>[px]
+                    </form>
+                    （※タップ操作が反応しない場合、受付範囲を大きくしてください）
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="キーボード">
+                <div class="axpc_config_group" data-title="方向キー">
+                    <u>機能割り当て</u>
+                    <form id="axp_config_form_keyCustomArrow" class="axpc_radio">
+                        <span data-msg="@CFG0104" data-value="none">なし</span>
+                        <span data-msg="@CFG0105" data-value="move" data-default="y">キャンバス移動</span>
+                        <span data-msg="@CFG0106" data-value="size">太さ/不透明度</span>
+                        <span data-msg="@CFG0107" data-value="grid">補助線分割数</span>
+                    </form>
+                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0230">
+                        <label>
+                            <input id="axp_config_checkbox_moveDirection" class="axpc_SAVE" type="checkbox">キャンバス移動の方向反転
+                        </label>
+                    </div>
+                    <div class="axpc_number axpc_MSG" data-msg="@CFG0108">
+                        <label>キャンバス移動の移動量
+                            <input id="axp_config_number_moveSize" class="axpc_SAVE" type="number" min="1" max="100"
+                                value="30">[px]（※最小1～最大100）
+                        </label>
+                    </div>
+                </div>
+                <div class="axpc_config_group" data-title="数字キー">
+                    <u>機能割り当て</u>
+                    <div id="axp_config_div_customKeyFunction" class="axpc_MSG" data-msg="@CFG0231"></div>
+                    <br>
+                    <u>一括設定</u><br>
+                    <button id="axp_config_button_setCustomKeyFunction1"
+                        class="axpc_MSG axpc_button axpc_button_width260" data-msg="@CFG0109">拡大率</button><br>
+                    <button id="axp_config_button_setCustomKeyFunction2"
+                        class="axpc_MSG axpc_button axpc_button_width260" data-msg="@CFG0110">ペンの太さ</button>
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="ショートカット">
+                <div class="axpc_config_group" data-title="ショートカット一覧">
+                    <table id="axp_config_table_shortcutKey">
+                        <thead>
+                            <tr>
+                                <th>キー</th>
+                                <th>機能</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td title="Background tile">[B]</td>
+                                <td>背景タイルプレビュー</td>
+                            </tr>
+                            <tr>
+                                <td>[C]</td>
+                                <td>メインカラー／透明色の切り替え</td>
+                            </tr>
+                            <tr>
+                                <td title="Grid">[G]</td>
+                                <td>補助線の表示切り替え</td>
+                            </tr>
+                            <tr>
+                                <td title="Horizontal flip">[H]または[M]</td>
+                                <td>全レイヤー左右反転</td>
+                            </tr>
+                            <tr>
+                                <td title="Initialize">[I]</td>
+                                <td>ツールウィンドウの位置初期化</td>
+                            </tr>
+                            <tr>
+                                <td title="Kai-ten">[K]</td>
+                                <td>90°回転</td>
+                            </tr>
+                            <tr>
+                                <td title="Load">[L]</td>
+                                <td>ロード</td>
+                            </tr>
+                            <tr>
+                                <td>[Q]</td>
+                                <td>ペンの太さ調整</td>
+                            </tr>
+                            <tr>
+                                <td title="Restore">[R]</td>
+                                <td>自動保存から復元</td>
+                            </tr>
+                            <tr>
+                                <td title="Save">[S]</td>
+                                <td>セーブ</td>
+                            </tr>
+                            <tr>
+                                <td title="Transparent">[T]</td>
+                                <td>背景透過</td>
+                            </tr>
+                            <tr>
+                                <td>[U]</td>
+                                <td>全面塗り潰し</td>
+                            </tr>
+                            <tr>
+                                <td title="Vertical flip">[V]</td>
+                                <td>全レイヤー上下反転</td>
+                            </tr>
+                            <tr>
+                                <td title="eXchange">[X]</td>
+                                <td>メインカラー／サブカラーの切り替え</td>
+                            </tr>
+                            <tr>
+                                <td>[Y]</td>
+                                <td>リドゥ</td>
+                            </tr>
+                            <tr>
+                                <td>[Z]または[BS]</td>
+                                <td>アンドゥ</td>
+                            </tr>
+                            <tr>
+                                <td>[0]</td>
+                                <td>キャンバスの表示サイズの初期化</td>
+                            </tr>
+                            <tr>
+                                <td>[-]</td>
+                                <td>キャンバスの表示サイズ縮小</td>
+                            </tr>
+                            <tr>
+                                <td>[+]または[;]</td>
+                                <td>キャンバスの表示サイズ拡大</td>
+                            </tr>
+                            <tr>
+                                <td>[SPACE]</td>
+                                <td>ハンドツール</td>
+                            </tr>
+                            <tr>
+                                <td>[SHIFT]</td>
+                                <td>直線</td>
+                            </tr>
+                            <tr>
+                                <td>[CTRL]</td>
+                                <td>スポイト</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    ※[1]～[9]は、任意の機能を割り当てることができます。<br>
+                    ※方向キーは、キャンバスの位置移動、ペンの太さ/不透明度、補助線分割数から選択。
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="起動時">
+                <div class="axpc_config_group" data-title="前回の状態の復元">
+                    <u>ツールウィンドウ位置</u>
+                    <form id="axp_config_form_saveLastWindowPosition" class="axpc_radio">
+                        <span data-msg="@CFG0026" data-value="off">なし</span>
+                        <span data-msg="@CFG0027" data-value="on" data-default="y">あり</span>
+                    </form>
+                    <br>
+                    <u>ペンツールの設定値</u>
+                    <form id="axp_config_form_saveLastPenValue" class="axpc_radio">
+                        <span data-msg="@CFG0034" data-value="off">なし</span>
+                        <span data-msg="@CFG0035" data-value="on" data-default="y">あり</span>
+                    </form>
+                    <br>
+                    <u>カラーパレットの色</u>
+                    <form id="axp_config_form_saveLastPalleteColor" class="axpc_radio">
+                        <span data-msg="@CFG0059" data-value="off">なし</span>
+                        <span data-msg="@CFG0060" data-value="on" data-default="y">あり</span>
+                    </form>
+                </div>
+            </div>
+            <div class="axpc_config_section" data-title="バージョン情報" id="axp_config_div_version">
+                <div class="axpc_config_group" data-title="バージョン情報">
+                    <div id="axp_config_div_versionInfo"></div>
+                    © 2022 「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」<br>
+                    <br>
+                    ◆ コミュニティ<br>
+                    <a href="https://com.nicovideo.jp/community/co1128854" target="_blank"
+                        style="text-decoration: none;color:#00f">
+                        https://com.nicovideo.jp/community/co1128854</a>
+                    <br><br>
+                    ◆ github<br>
+                    <a href="https://github.com/axnospaint/axnospaint-lib" target="_blank"
+                        style="text-decoration: none;color:#00f">
+                        https://github.com/axnospaint/axnospaint-lib</a>
+                    <br><br>
+                    ◆ AXNOS Paint:ヘルプ - ニコニコ大百科<br>
+                    <a href="https://dic.nicovideo.jp/id/5703111" target="_blank"
+                        style="text-decoration: none;color:#00f">
+                        https://dic.nicovideo.jp/id/5703111</a>
+                    <br>
+                </div>
+                <div class="axpc_config_group" data-title="デバッグ情報表示">
+                    <details>
+                        <summary><span style="color:#f00"><b>※不具合発生時の動作検証用です。通常時は使用しないでください。</b></span></summary>
+                        <div class="axpc_checkbox axpc_MSG" data-msg="チェックするとデバッグモードを有効になります。">
+                            <label>
+                                <input id="axp_config_checkbox_useDebugMode" class="axpc_SAVE"
+                                    type="checkbox">デバッグ情報を表示する
+                            </label>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div style="height: calc(100vh);"></div>
+            <div class="axpc_config_section" data-title="ページの終端です。">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+/* ボタン共通 */
+.axpc_button {
+    font-family: monospace, sans-serif;
+    cursor: pointer;
+    height: 30px;
+    padding: 0px 0px;
+    text-decoration: none;
+    text-align: center;
+    border-top: 2px solid #777;
+    border-left: 2px solid #777;
+    border-right: 2px solid #333;
+    border-bottom: 2px solid #333;
+    border-radius: 5px;
+    color: #eee;
+    background: #555;
+    font-size: 14px;
+}
+
+.axpc_button:hover {
+    /*
+    background: #888;
+    */
+    border: 2px solid #bbb;
+}
+
+.axpc_button:active {
+    background: linear-gradient(#222, #444);
+    border: 2px solid #333;
+}
+
+.axpc_button[data-selected="true"] {
+    background: #aaa;
+}
+
+.axpc_button:disabled {
+    background: #aaa;
+}
+
+.axpc_button_width260 {
+    margin-top: 4px;
+    width: 260px;
+}

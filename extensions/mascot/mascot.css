@@ -1,0 +1,173 @@
+/* アクペたん */
+
+#axp_mascot {
+    position: absolute;
+    /* ロード画面より低く */
+    z-index: 1999;
+    left: 0;
+    bottom: 0;
+    height: 128px;
+    width: auto;
+    color: #000;
+}
+
+#axp_mascot>div {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+#axp_mascot_ballon {
+    width: auto;
+    max-width: 300px;
+    height: 128px;
+}
+
+#axp_mascot_char {
+    height: 128px;
+    width: 128px;
+    image-rendering: auto;
+    background-size: contain;
+    cursor: grab;
+    background-image: url('./axptan_01_01.png');
+}
+
+_:lang(x)::-moz-placeholder,
+#axp_mascot_char {
+    image-rendering: auto;
+}
+
+#axp_mascot_char.idle {
+    animation: axpanime_wink 6s infinite linear, axpanime_y 4s ease-in infinite alternate;
+}
+
+#axp_mascot_char.puyon {
+    animation: puyon 1.0s linear 0s infinite;
+}
+
+@keyframes puyon {
+    0% {
+        transform: scale(1.0, 1.0) translate(0%, 0%);
+    }
+
+    40% {
+        transform: scale(0.95, 1.2) translate(0%, -10%);
+    }
+
+    50% {
+        transform: scale(1.1, 0.9) translate(0%, 5%);
+    }
+
+    60% {
+        transform: scale(0.95, 1.05) translate(0%, -3%);
+    }
+
+    70% {
+        transform: scale(1.05, 0.95) translate(0%, 3%);
+    }
+
+    80% {
+        transform: scale(1.0, 1.0) translate(0%, 0%);
+    }
+
+    100% {
+        transform: scale(1.0, 1.0) translate(0%, 0%);
+    }
+}
+
+@keyframes axpanime_wink {
+    0% {
+        background-image: url('./axptan_01_01.png');
+    }
+
+    29% {
+        background-image: url('./axptan_01_01.png');
+    }
+
+    30% {
+        background-image: url('./axptan_01_03.png');
+    }
+
+    33% {
+        background-image: url('./axptan_01_02.png');
+    }
+
+    35% {
+        background-image: url('./axptan_01_01.png');
+    }
+
+    100% {
+        background-image: url('./axptan_01_01.png');
+    }
+}
+
+@keyframes axpanime_y {
+    from {
+        transform: translateY(-6px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+#axp_mascot_rotate {
+    animation: axpanime_rotate 12s infinite alternate ease-in-out;
+    transform-origin: left center 0;
+}
+
+@keyframes axpanime_rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    33% {
+        transform: rotate(3deg);
+    }
+
+    66% {
+        transform: rotate(-3deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+/* 吹き出し本体 - 枠線付きの吹き出し */
+.axpc_mascot_balloon {
+    position: relative;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #ca8888;
+    border-radius: 10px;
+    /* 角丸を指定 */
+}
+
+/* 三角アイコン - 枠線付きの吹き出し */
+.axpc_mascot_balloon::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    left: -15px;
+    top: 15px;
+    border-right: 15px solid #ca8888;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+
+.axpc_mascot_balloon::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    left: -12px;
+    top: 15px;
+    border-right: 15px solid #fff;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}

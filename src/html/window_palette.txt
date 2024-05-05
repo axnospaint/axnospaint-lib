@@ -1,0 +1,23 @@
+<!-- パレット -->
+<div class="axpc_window_content">
+    <!-- 列数サブウィンドウ -->
+    <div id="axp_palette_div_column" class="axpc_NONE">
+        <form id="axp_palette_form_column" class="axpc_range axpc_text_border">
+            <input type="range" id="axp_palette_range_column" class="axpc_MSG" name="volume" value="3" step="1" min="1"
+                max="24" data-msg="@PLT0001">
+            <div class="axpc_range_label">横幅</div>
+            <div class="axpc_range_value"><output name="result"></output></div>
+        </form>
+    </div>
+    <div id="axp_palette_div_container">
+        <!-- パレット操作ボタン（更新、登録、削除 -->
+        <div id="axp_palette_div_buttons">
+            <button id="axp_palette_button_edit" class="axpc_MSG axpc_button" data-msg="@PLT0002">編集</button>
+            <button id="axp_palette_button_addColor" class="axpc_MSG axpc_button" data-msg="@PLT0003">登録</button>
+            <button id="axp_palette_button_delete" class="axpc_MSG axpc_button axpc_NONE"
+                data-msg="@PLT0004">削除</button>
+        </div>
+        <!-- カラーパレットを表示するためのエリア -->
+        <div id="axp_palette_div_paletteBox"></div>
+    </div>
+</div>

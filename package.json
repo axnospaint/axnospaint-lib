@@ -1,0 +1,28 @@
+{
+  "name": "axnospaint",
+  "version": "2.0.0",
+  "description": "お絵かき掲示板向けペイントツール",
+  "config": {
+    "date": "[2024/05/05版]"
+  },
+  "scripts": {
+    "dev-server": "webpack-dev-server",
+    "build": "webpack",
+    "prod": "cross-env NODE_ENV=prod webpack --config webpack.prod.js",
+    "prod-demo": "cross-env NODE_ENV=demo webpack --config webpack.prod.js"
+  },
+  "author": "axnospaint",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "css-loader": "^7.1.1",
+    "cssnano": "^7.0.1",
+    "html-webpack-plugin": "^5.5.0",
+    "postcss-loader": "^8.1.1",
+    "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.6",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^5.0.4"
+  }
+}

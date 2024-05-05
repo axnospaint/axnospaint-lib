@@ -1,0 +1,59 @@
+/* ラジオボタン生成・装飾共通 */
+
+.axpc_radio {
+    font-size: 12px;
+}
+
+.axpc_radio input {
+    display: none;
+}
+
+.axpc_radio input[type="radio"]:checked+label {
+    font-weight: bold;
+    color: #000;
+    border: 2px solid #bf9701;
+    background-color: #f7a312;
+}
+
+.axpc_radio label {
+    color: #777;
+    border: 2px solid #ddd;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 0px;
+    width: 100px;
+    border-radius: 0px;
+}
+
+.axpc_radio label:hover {
+    color: #aaa;
+    border: 2px solid #aaa;
+    cursor: pointer;
+}
+
+.axpc_radio button {
+    color: #777;
+    border: 2px solid #000;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 0px;
+    width: 100px;
+    margin: 2px;
+    border-radius: 50px;
+}
+
+.axpc_radio button:hover {
+    color: #aaa;
+    border: 2px solid #aaa;
+    cursor: pointer;
+}
+
+.axpc_radio button:active {
+    color: #000;
+    border: 2px solid #444;
+}
+
+/* ソースデータ。このspan要素をもとにradio要素をjsで生成する */
+.axpc_radio span {
+    display: none;
+}

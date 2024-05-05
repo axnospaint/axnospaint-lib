@@ -1,0 +1,109 @@
+/* アイコン */
+
+.axpc_icon_msg_caution {
+    background-repeat: no-repeat;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../resource/caution.png');
+}
+
+.axpc_icon_msg_information {
+    background-repeat: no-repeat;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../resource/information.png');
+}
+
+.axpc_icon_msg_ng {
+    background-repeat: no-repeat;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../resource/ng.png');
+}
+
+.axpc_icon_msg_color {
+    background-repeat: no-repeat;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../resource/window_colormaker.png');
+}
+
+/* ツールウィンドウ */
+.axpc_icon_window_pen {
+    background: no-repeat;
+    background-image: url('../../resource/window_pen.png');
+    background-position: center;
+}
+
+.axpc_icon_window_layer {
+    background: no-repeat;
+    background-image: url('../../resource/window_layer.png');
+    background-position: center;
+}
+
+.axpc_icon_window_colormaker {
+    background: no-repeat;
+    background-image: url('../../resource/window_colormaker.png');
+    background-position: center;
+}
+
+.axpc_icon_window_palette {
+    background: no-repeat;
+    background-image: url('../../resource/window_palette.png');
+    background-position: center;
+}
+
+.axpc_icon_window_subtool {
+    background: no-repeat;
+    background-image: url('../../resource/window_subtool.png');
+    background-position: center;
+}
+
+/* レイヤー */
+.axpc_icon_eyeON {
+    background: center no-repeat url('../../resource/eye_on.png');
+}
+
+.axpc_icon_eyeOFF {
+    background: #555 center no-repeat url('../../resource/eye_off.png');
+}
+
+.axpc_icon_lockON {
+    background-color: #aa3;
+    background-image: url('../../resource/lock.png');
+}
+
+.axpc_icon_lockOFF {
+    background-color: #555;
+    background-image: url('../../resource/unlock.png');
+}
+
+.axpc_icon_maskON {
+    background: #ff4 center no-repeat url('../../resource/mask_on.png');
+}
+
+.axpc_icon_maskOFF {
+    background: #555 center no-repeat url('../../resource/mask_on.png');
+}
+
+.axpc_icon_flipH {
+    background: center no-repeat url('../../resource/flip_h.png');
+}
+
+.axpc_icon_flipV {
+    background: center no-repeat url('../../resource/flip_v.png');
+}
+
+/* 設定の見出し調整用 */
+.axpc_icon_span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+}

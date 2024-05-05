@@ -1,0 +1,16 @@
+/* チェックボックス共通 */
+.axpc_checkbox {
+    height: 24px;
+}
+
+.axpc_checkbox label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.axpc_checkbox input {
+    height: 24px;
+    width: 24px;
+    margin-right: 4px;
+}

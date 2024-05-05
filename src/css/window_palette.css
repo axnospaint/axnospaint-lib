@@ -1,0 +1,60 @@
+/* パレット */
+
+#axp_palette_div_container {
+    display: flex;
+    flex-direction: column;
+}
+
+#axp_palette_div_buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#axp_palette_div_paletteBox {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: #333;
+}
+
+#axp_palette_button_edit,
+#axp_palette_button_addColor,
+#axp_palette_button_delete {
+    height: 32px;
+    width: 32px;
+}
+
+/* パレット専用の単体色枠 */
+.axpc_palette_colorRect {
+    height: 30px;
+    width: 30px;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 1px;
+    border-width: 6px;
+    border-style: double;
+    border-color: rgba(0, 0, 0, 0);
+    /* BUGFIX:html5版のcss指定打ち消し用に必須 */
+    padding: 0 0;
+}
+
+.axpc_palette_colorRect[data-selected="true"] {
+    border-color: rgb(206, 206, 206);
+}
+
+.axpc_palette_colorRect.axpc_onGRAB {
+    cursor: grabbing;
+    position: absolute;
+    z-index: 1;
+}
+
+/* 列数変更スライダー用枠 */
+#axp_palette_div_column {
+    position: absolute;
+    z-index: 2001;
+    margin-top: -70px;
+    margin-left: -6px;
+}

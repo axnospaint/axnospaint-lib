@@ -1,0 +1,39 @@
+<!-- ペンツールサブメニュー -->
+<div id="axp_penmode" class="axpc_NONE">
+    <div>
+        <span id="axp_penmode_span_modeName"></span>
+        <article data-name="ペン">
+            <!-- ※idをそのままペン種別名として使用するため命名規則例外 -->
+            <button id="axp_penmode_round" class="axpc_MSG axpc_penmode_round" data-idx="0"
+                data-msg="@PEN0100"></button>
+            <button id="axp_penmode_square" class="axpc_MSG axpc_penmode_square" data-idx="0"
+                data-msg="@PEN0101"></button>
+            <button id="axp_penmode_dot" class="axpc_MSG axpc_penmode_dot" data-idx="0" data-msg="@PEN0102"></button>
+            <button id="axp_penmode_fude" class="axpc_MSG axpc_penmode_fude" data-idx="0" data-msg="@PEN0103"></button>
+            <button id="axp_penmode_crayon" class="axpc_MSG axpc_penmode_crayon" data-idx="0"
+                data-msg="@PEN0104"></button>
+            <button id="axp_penmode_brush" class="axpc_MSG axpc_penmode_brush" data-idx="0"
+                data-msg="@PEN0105"></button>
+        </article>
+        <article data-name="消しゴム">
+            <button id="axp_penmode_eraser_round" class="axpc_MSG axpc_penmode_eraser_round" data-idx="1"
+                data-msg="@PEN0110"></button>
+            <button id="axp_penmode_eraser_dot" class="axpc_MSG axpc_penmode_eraser_dot" data-idx="1"
+                data-msg="@PEN0111"></button>
+        </article>
+        <article data-name="バケツ">
+            <button id="axp_penmode_fill" class="axpc_MSG axpc_penmode_fill" data-idx="2" data-msg="@PEN0120"></button>
+            <button id="axp_penmode_fillgradation" class="axpc_MSG axpc_penmode_fillgradation" data-idx="2"
+                data-msg="@PEN0121"></button>
+        </article>
+        <article data-name="ツール">
+            <button id="axp_penmode_hand" class="axpc_MSG axpc_penmode_hand" data-idx="3" data-msg="@PEN0130"></button>
+            <button id="axp_penmode_move" class="axpc_MSG axpc_penmode_move" data-idx="3" data-msg="@PEN0131"></button>
+        </article>
+        <article data-name="スポイト">
+            <button id="axp_penmode_spuit" class="axpc_MSG axpc_penmode_spuit" data-idx="4"
+                data-msg="@PEN0140"></button>
+        </article>
+    </div>
+</div>
+<!--追加用HTMLここまで -->

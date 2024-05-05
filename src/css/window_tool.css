@@ -1,0 +1,167 @@
+/* 補助ツール */
+
+#axp_tool {
+    width: 300px;
+}
+
+#axp_tool_div_content {
+    display: flex;
+}
+
+/* 補助ツール左側 */
+#axp_tool_div_leftSide {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+/* キャンバスサイズ表示ラベル */
+#axp_tool_div_canvasSize {
+    text-align: center;
+}
+
+/* キャンバスサイズ文字 */
+#axp_tool_span_canvasSize {
+    font-size: 13px;
+}
+
+/* サムネイル表示の外枠 */
+#axp_tool_div_minimap_outer {
+    cursor: grab;
+    position: relative;
+    width: 132px;
+    height: 132px;
+    margin-right: 4px;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    border: 6px solid #888;
+}
+
+/* サムネイル表示の内枠 */
+#axp_tool_div_minimap_inner {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #777;
+}
+
+/* キャンバスが画面をはみ出た時に、サムネイルに表示する赤線 */
+#axp_tool_div_minimap_line {
+    position: absolute;
+    border: 2px #f00 solid;
+}
+
+/* 補助ツール右側 */
+#axp_tool_div_rightSide {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 0px 6px;
+    margin-top: 2px;
+    margin-left: 4px;
+}
+
+/* 100% */
+#axp_tool_button_loupeReset {
+    width: 62px;
+    margin: 0 5px 0 1px;
+}
+
+/* 拡大縮小（＋－） */
+#axp_tool_button_loupeUp,
+#axp_tool_button_loupeDown {
+    width: 30px;
+    margin-right: 4px;
+}
+
+/* アンドウ リドゥ 復元 */
+#axp_tool_button_undo,
+#axp_tool_button_redo,
+#axp_tool_button_restore {
+    width: 100%
+}
+
+/* セーブ ロード 左右反転 上下反転 背景透過 補助線の枠 */
+#axp_tool_button_save,
+#axp_tool_button_load,
+#axp_tool_button_flipH,
+#axp_tool_button_flipV,
+#axp_tool_button_transparent,
+#axp_tool_div_gridbutton {
+    width: 70px;
+}
+
+/* 補助線ボタン枠 */
+#axp_tool_div_gridbutton {
+    display: flex;
+}
+
+/* 補助線 */
+#axp_tool_button_grid {
+    width: 50px;
+}
+
+/* 補助線設定（歯車アイコン） */
+#axp_tool_button_gridConfig {
+    isolation: isolate;
+    height: 100%;
+    width: 20px;
+    background-image: url('../../resource/config.png');
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+}
+
+/* 補助線設定UI */
+#axp_tool_div_gridConfig {
+    padding: 4px 0;
+}
+
+#axp_tool_div_gridConfig>div {
+    display: flex;
+    column-gap: 8px;
+}
+
+/* 右側のスライダーコンテナ */
+#axp_tool_div_gridConfig>div>div:nth-of-type(2) {
+    display: flex;
+    padding-top: 4px;
+}
+
+/* 補助線：表示ボタンなど用コンテナ */
+.axpc_tool_div_gridConfigButton {
+    display: flex;
+    border: 2px solid #555;
+    border-radius: 8px;
+    column-gap: 8px;
+    margin-bottom: 2px;
+}
+
+/* 主線などのラベル */
+.axpc_tool_div_gridConfigButton>div:nth-of-type(1) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #666;
+    width: 50px;
+}
+
+/* px指定テキストボックス */
+#axp_tool_number_gridPixel1,
+#axp_tool_number_gridPixel2 {
+    border-radius: 5px;
+    width: 60px;
+    height: 32px;
+    font-family: "Arial Black", Arial, sans-serif;
+    padding-left: 2px;
+}
+
+/* 補助線の色変更サブメニュー */
+/* 不透明度 */
+#axp_gridconfig_range_gridColor {
+    width: 100% !important;
+}

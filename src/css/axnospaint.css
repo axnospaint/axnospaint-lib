@@ -1,0 +1,239 @@
+/* AXNOS Paintメイン */
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  /* iPad */
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  /* Pull-to-Refresh防止 */
+  overscroll-behavior-y: none;
+  /* 注意　HTML5版も影響をうける */
+  overflow: hidden;
+}
+
+#axp_main {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #000;
+  font-size: 15px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: none;
+  flex-grow: 1;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+/* 詳細度0.0.0でツールの要素全体に指定 */
+:where(#axp_main) * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* メインのタブ制御 */
+#axp_main_div_tab {
+  display: flex;
+  align-items: flex-end;
+}
+
+/* 見出し枠 */
+#axp_main_div_tab>div {
+  list-style-type: none;
+  display: flex;
+}
+
+/* 見出し */
+#axp_main_div_tab>div>div {
+  display: block;
+  width: 98px;
+  margin: 0;
+  padding: 2px 0;
+  text-align: center;
+  border-top: 2px solid #000;
+  border-left: 0px solid #000;
+  border-right: 2px solid #000;
+  border-radius: 10px 10px 0 0;
+  background: #333;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* 見出しにカーソルを当てた時 */
+#axp_main_div_tab>div>div:hover {
+  background: #666;
+}
+
+/* 選択されている見出し */
+#axp_main_div_tab>div>div[data-selected="true"] {
+  background: #777;
+}
+
+/* タブ横のテキスト */
+#axp_main_div_headerText {
+  padding: 4px 10px 0;
+  color: #fff;
+  overflow: hidden;
+  white-space: pre;
+  flex-grow: 1;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+
+/* タブ横のテキストクリック時、全文表示 */
+#axp_main_div_headerText:active {
+  overflow: visible;
+  white-space: normal;
+}
+
+/* タブにより切り替わる画面 */
+#axp_main_div_tabContent>article {
+  display: none;
+  flex-grow: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* inputのフォントサイズ指定 */
+#axp_main_div_tabContent input {
+  font-size: 13px;
+}
+
+/* タブ：キャンバス */
+#axp_canvas {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  flex-grow: 1;
+}
+
+/* キャンバス外の灰色部分 */
+#axp_canvas_div_grayBackground {
+  width: 100%;
+  height: 100%;
+  background-color: #777;
+}
+
+/* メインキャンバス */
+#axp_canvas_canvas_main {
+  position: absolute;
+  image-rendering: pixelated;
+}
+
+/* 補助線 */
+#axp_canvas_div_grid {
+  /* イベントを受け取らない（重要） */
+  pointer-events: none;
+  image-rendering: auto;
+  position: absolute;
+  z-index: 999;
+}
+
+/* 座標表示用領域 */
+#axp_canvas_div_pointerPosition {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: #000;
+  z-index: 1000;
+}
+
+/* デバッグ情報 */
+#axp_canvas_div_debugInfo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: monospace;
+  font-size: 1em;
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: #000;
+  z-index: 5000;
+  height: 50%;
+  max-height: 95%;
+  resize: both;
+  overflow: hidden;
+}
+
+#axp_canvas_div_debugInfo>div:nth-of-type(1) {
+  font-family: monospace;
+  color: #fff;
+  font-size: 1em;
+  height: 24px;
+  overflow: hidden;
+}
+
+#axp_canvas_div_debugInfo>div:nth-of-type(2) {
+  font-family: monospace;
+  font-size: 1em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0);
+  min-width: 360px;
+  height: calc(100% - 24px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+/* カーソル位置に表示するペンの太さ表示*/
+#axp_canvas_div_penCursor {
+  pointer-events: none;
+  position: absolute;
+  border: solid 2px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+
+#axp_main_div_tabContent,
+#axp_config,
+#axp_config_div_menu {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* タブ：設定 */
+#axp_config_div_content {
+  flex-grow: 1;
+}
+
+/* タブ：投稿 */
+#axp_post {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+/* フッター領域 */
+#axp_footer {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: #222;
+  color: #ddd;
+  display: flex;
+  min-height: 31px;
+}
+
+#axp_footer_div_message {
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 15px;
+  font-family: sans-serif;
+  padding: 4px;
+}
+
+#axp_footer_div_icon {
+  margin-left: 8px;
+  margin-top: 2px;
+}

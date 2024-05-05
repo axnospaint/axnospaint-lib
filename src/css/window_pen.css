@@ -1,0 +1,217 @@
+/* ペンツール */
+
+/* ペンツール外枠 */
+#axp_pen_div_content {
+    display: flex;
+}
+
+/* ペンツール左側（プレビュー、スライダー）外枠 */
+#axp_pen_div_leftSide {
+    width: 104px;
+    overflow: hidden;
+}
+
+/* ペンの名前 */
+#axp_pen_span_penName {
+    line-height: 1.0;
+}
+
+/* プレビュー領域 */
+#axp_pen_div_preview {
+    position: relative;
+    width: 104px;
+    height: 104px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px #aaa solid;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+/* ペンの太さプレビュー用キャンバス */
+#axp_pen_canvas_previewPenSize {
+    position: absolute;
+    z-index: 2;
+    width: 100px;
+    height: 100px;
+}
+
+/* スポイト用キャンバス */
+#axp_pen_canvas_previewSpuit {
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    image-rendering: pixelated;
+}
+
+/* スポイトのRGBA表示用 */
+#axp_pen_div_spuitColorRGBA {
+    line-height: 1.3em;
+}
+
+/* スライダー領域 */
+#axp_pen_div_slider {
+    margin-top: 8px;
+    display: flex;
+    flex-flow: column;
+}
+
+/* セレクトボックス */
+#axp_pen_div_selectbox {
+    margin-top: 8px;
+}
+
+#axp_pen_select_drawMode,
+#axp_pen_select_fillMode {
+    width: 100px;
+    height: 24px;
+    border-radius: 5px;
+}
+
+/* ペンツール右側（機能ボタン）外枠 */
+#axp_pen_div_rightSide {
+    margin-left: 12px;
+}
+
+/* 各ボタンの枠 */
+#axp_pen_div_rightSide>div {
+    position: relative;
+}
+
+/* ペンツール内のアイコン（メイン＆サブ） */
+#axp_pen_div_rightSide>div>button,
+#axp_penmode button {
+    width: 44px;
+    height: 44px;
+    border-radius: 5px;
+    border: 3px solid #000;
+    box-shadow: 0px 0px 10px #000;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+    background-color: #aaa;
+}
+
+/* ホバーしたアイコンに枠をつける */
+#axp_pen_div_rightSide>div>button:hover,
+#axp_penmode button:hover {
+    background-color: #aaa;
+    border: 3px solid #fff;
+}
+
+/* 選択しているアイコンに色をつける */
+#axp_pen_div_rightSide>div>button[data-selected="true"] {
+    background-color: rgb(238, 172, 96);
+}
+
+/* サブメニューがあることを示す表示効果 */
+#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: -9px;
+    height: 16px;
+    border-width: 8px 7px 8px 0;
+    border-color: transparent #eeac60;
+    border-style: solid;
+    /*
+    transition: all .5s ease-out;
+    */
+}
+
+#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: -8px;
+    height: 0px;
+    border-width: 4px 4px 4px 0;
+    border-color: transparent #000;
+    border-style: solid;
+    /*
+    transition: all .5s ease-out;
+    */
+}
+
+#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {
+    border-color: transparent #533C21;
+    /*
+    transition: all .5s ease-out;
+    */
+}
+
+/* サブメニュー用外枠 */
+#axp_penmode {
+    touch-action: none;
+    position: absolute;
+    z-index: 2001;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* サブメニュー用内枠 */
+#axp_penmode>div {
+    -webkit-user-select: none;
+    user-select: none;
+    font-size: 15px;
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(0, 0, 0, .8);
+    padding-left: 8px;
+}
+
+.axpc_penmode_round {
+    background-image: url('../../resource/pen1.png');
+}
+
+.axpc_penmode_square {
+    background-image: url('../../resource/pen2.png');
+}
+
+.axpc_penmode_dot {
+    background-image: url('../../resource/dot.png');
+}
+
+.axpc_penmode_fude {
+    background-image: url('../../resource/fude.png');
+}
+
+.axpc_penmode_crayon {
+    background-image: url('../../resource/crayon.png');
+}
+
+.axpc_penmode_brush {
+    background-image: url('../../resource/brush.png');
+}
+
+.axpc_penmode_eraser_round {
+    background-image: url('../../resource/eraser.png');
+}
+
+.axpc_penmode_eraser_dot {
+    background-image: url('../../resource/eraser_dot.png');
+}
+
+.axpc_penmode_fill {
+    background-image: url('../../resource/fill.png');
+}
+
+.axpc_penmode_fillgradation {
+    background-image: url('../../resource/fillgradation.png');
+}
+
+.axpc_penmode_hand {
+    background-image: url('../../resource/hand.png');
+}
+
+.axpc_penmode_move {
+    background-image: url('../../resource/move.png');
+}
+
+.axpc_penmode_spuit {
+    background-image: url('../../resource/spuit.png');
+}

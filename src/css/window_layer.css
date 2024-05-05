@@ -1,0 +1,331 @@
+/* レイヤー */
+
+#axp_layer_div_button1 {
+    display: flex;
+}
+
+#axp_layer_div_button2 {
+    display: grid;
+    grid-template-columns: 50px repeat(3, 32px);
+    gap: 0 calc(20px / 3);
+    margin-bottom: 8px;
+}
+
+#axp_layer_button_create {
+    width: 50px;
+    height: 32px;
+}
+
+#axp_layer_button_copy,
+#axp_layer_button_delete,
+#axp_layer_button_clear,
+#axp_layer_button_integrate {
+    width: 32px;
+    height: 32px;
+}
+
+#axp_layer_button_clear {
+    margin-left: 5px;
+}
+
+/* セレクトボックス */
+#axp_layer_select_blendMode {
+    width: 100%;
+    height: 30px;
+    border-radius: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+/* レイヤーボックス */
+#axp_layer_ul_layerBox {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* レイヤー数に応じて可変*/
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 0 0 5px 5px;
+    position: relative;
+}
+
+#axp_layer_ul_layerBox li {
+    -webkit-user-select: none;
+    user-select: none;
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid #000f;
+    border-radius: 5px;
+}
+
+/* レイヤードラッグ制御 */
+#axp_layer_ul_layerBox li.axpc_onGRAB {
+    position: absolute;
+    z-index: 1;
+}
+
+/* ドラッグ中カーソル変化 */
+#axp_layer_ul_layerBox li.axpc_onGRAB * {
+    cursor: grabbing;
+}
+
+#axp_layer_ul_layerBox li:not(:last-child) {
+    margin-bottom: 0px;
+}
+
+/* レイヤーにポインタをあわせたとき */
+#axp_layer_ul_layerBox li:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* レイヤーが選択状態のとき */
+#axp_layer_ul_layerBox li[data-selected="true"] {
+    background: rgba(255, 174, 50, 0.6);
+}
+
+/* レイヤーセル全体 */
+.axpc_layer_div_cell {
+    display: flex;
+    /* 垂直方向：中央揃え */
+    align-items: center;
+    /* 水平方向：左揃え */
+    justify-content: flex-start;
+    height: 42px;
+}
+
+/* レイヤーセルの左側要素 */
+.axpc_layer_div_cellLeftSide {
+    display: flex;
+}
+
+/* 表示切り替えの目のボタン */
+.axpc_layer_div_cellButtonEyeIcon {
+    cursor: pointer;
+    width: 21px;
+    height: 42px;
+    border-radius: 4px 0 0 4px;
+}
+
+.axpc_layer_div_cellButtonEye {
+    border-radius: 4px 0 0 4px;
+}
+
+/* ロックと透明部分保護チェックボックスを格納する要素 */
+.axpc_layer_div_cellButtonContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ロックと透明部分保護チェックボックス */
+.axpc_layer_div_cellButton {
+    cursor: pointer;
+    width: 21px;
+    height: 21px;
+    border: 2px solid #333;
+    border-radius: 2px;
+}
+
+/* サムネイル */
+.axpc_layer_canvas_cellThumbnail {
+    border: solid 1px #000;
+    background: #777;
+}
+
+/* クリッピングマーク */
+.axpc_layer_div_cellCliping {
+    width: 0px;
+    height: 100%;
+}
+
+.axpc_layer_div_cellCliping[data-mode="source-atop"] {
+    width: 8px;
+    height: 100%;
+    background: #000;
+    isolation: isolate;
+    background-image: url('../../resource/clip.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.axpc_layer_div_cellCliping[data-mode="invalid"] {
+    width: 8px;
+    height: 100%;
+    background: #000;
+    isolation: isolate;
+    background-image: url('../../resource/clip_invalid.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+/* レイヤーセルの右側要素 */
+.axpc_layer_div_cellRightSide {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    width: 82px;
+    height: 100%;
+    position: relative;
+}
+
+/* クリッピングマーク表示時の幅調整 */
+.axpc_layer_div_cellRightSide[data-mode="source-atop"] {
+    width: 74px;
+}
+
+/* カラータグ */
+.axpc_layer_div_cellColorTag {
+    width: 8px;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+}
+
+/* 状態テキスト */
+.axpc_layer_span_cellStatus {
+    font-size: 11px;
+    color: #ddd;
+}
+
+/* レイヤー名テキスト */
+.axpc_layer_span_cellName {
+    -webkit-user-select: none;
+    user-select: none;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
+
+/* レイヤードラッグが有効な領域 */
+.axpc_layer_CANDRAG {
+    cursor: grab;
+}
+
+/* レイヤー名変更 */
+#axp_renamelayer_div_textarea {
+    margin-bottom: 8px;
+    background: #555;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+/* レイヤー名変更テキストボックス */
+#axp_renamelayer_text_newLayerName {
+    width: 100%;
+    height: 32px;
+    font-size: 16px;
+    padding: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+}
+
+/* レイヤー名変更決定ボタン */
+#axp_renamelayer_button_confirm {
+    width: 100%;
+}
+
+#axp_renamelayer_button_confirm[data-enabled="false"] {
+    background: #aaa;
+}
+
+#axp_renamelayer_button_confirm:hover[data-enabled="false"] {
+    border-top: 2px solid #777;
+    border-left: 2px solid #777;
+    border-right: 2px solid #333;
+    border-bottom: 2px solid #333;
+}
+
+/* レイヤー単体反転 */
+#axp_renamelayer_button_flipH {
+    width: 32px;
+    height: 32px;
+    background: #555 center no-repeat url('../../resource/flip_h.png');
+}
+
+#axp_renamelayer_button_flipV {
+    width: 32px;
+    height: 32px;
+    background: #555 center no-repeat url('../../resource/flip_v.png');
+}
+
+/* カラータグ用外枠 */
+#axp_renamelayer_div_colorTagContainer {
+    background: #333;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+/* 色リセット */
+#axp_renamelayer_button_colorReset {
+    width: 50%;
+    height: 28px;
+}
+
+/* カラータグ用内枠 */
+#axp_renamelayer_div_colorTag {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+/* カラータグ */
+.axpc_renamelayer_button_colorTag {
+    cursor: pointer;
+    border-radius: 5px;
+    border-top: 2px solid #777;
+    border-left: 2px solid #777;
+    border-right: 2px solid #333;
+    border-bottom: 2px solid #333;
+    font-size: 13px;
+    line-height: 14px;
+    color: #eee;
+    text-align: left;
+    padding-left: 4px;
+    width: 50%;
+    height: 32px;
+
+}
+
+.axpc_renamelayer_button_colorTag:hover {
+    border: 2px solid #bbb;
+}
+
+.axpc_renamelayer_button_colorTag:active {
+    border: 2px solid #333;
+}
+
+/* 閉じるボタン×アイコン */
+.axpc_button_closeContainer {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.axpc_button_close {
+    box-sizing: border-box;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+/* before,after共通 */
+.axpc_button_close::before,
+.axpc_button_close::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 25%;
+    position: absolute;
+    background-color: white;
+    left: 1%;
+    top: 36%;
+    border-radius: 15% 15% 15% 15% / 50% 50% 50% 50%;
+}
+
+.axpc_button_close::before {
+    transform: rotate(135deg);
+}
+
+.axpc_button_close::after {
+    transform: rotate(45deg);
+}

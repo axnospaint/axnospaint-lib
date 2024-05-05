@@ -1,0 +1,159 @@
+<!-- 補助ツール -->
+<div class="axpc_window_content">
+    <!-- 補助ツールメイン -->
+    <div id="axp_tool_div_content">
+        <!-- 補助ツール左側 -->
+        <div id="axp_tool_div_leftSide">
+            <div id="axp_tool_div_canvasSize">
+                <span id="axp_tool_span_canvasSize" class="axpc_MSG" data-msg="@AST0001"></span>
+            </div>
+            <div id="axp_tool_div_minimap_outer" class="axpc_MSG" data-msg="@AST0002">
+                <div id="axp_tool_div_minimap_line" class="axpc_NONE"></div>
+                <div id="axp_tool_div_minimap_inner">
+                    <canvas id="axp_tool_canvas_minimap" class="axpc_background_mesh"></canvas>
+                </div>
+            </div>
+
+            <button id="axp_tool_button_loupeDown" class="axpc_FUNC axpc_MSG axpc_button"
+                data-function="func_loupe_down" data-key="-" data-msg="@AST0003">-</button>
+            <button id="axp_tool_button_loupeReset" class="axpc_FUNC axpc_MSG axpc_button"
+                data-function="func_loupe_reset" data-key="0" data-msg="@AST0004">100%</button>
+            <button id="axp_tool_button_loupeUp" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_loupe_up"
+                data-key="+" data-msg="@AST0005">+</button>
+        </div>
+        <!-- 補助ツール右側 -->
+        <div id="axp_tool_div_rightSide">
+            <button id="axp_tool_button_undo" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_undo"
+                data-key="Z" data-msg="@AST0006">アンドゥ(0)</button>
+            <button id="axp_tool_button_redo" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_redo"
+                data-key="Y" data-msg="@AST0007">リドゥ(0)</button>
+            <button id="axp_tool_button_restore" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_restore"
+                data-key="R" data-msg="@AST0008">自動保存から復元</button>
+
+            <button id="axp_tool_button_save" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_save"
+                data-key="S" data-msg="@AST0009">セーブ</button>
+            <button id="axp_tool_button_load" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_load"
+                data-key="L" data-msg="@AST0010">ロード</button>
+
+            <button id="axp_tool_button_flipH" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_flip_h"
+                data-key="H" data-msg="@AST0011">左右反転</button>
+            <button id="axp_tool_button_flipV" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_flip_v"
+                data-key="V" data-msg="@AST0012">上下反転</button>
+
+            <button id="axp_tool_button_transparent" class="axpc_FUNC axpc_MSG axpc_button"
+                data-function="func_transparent" data-key="T" data-msg="@AST0013">背景透過</button>
+            <div id="axp_tool_div_gridbutton">
+                <button id="axp_tool_button_grid" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_grid"
+                    data-key="G" data-msg="@AST0014">補助線</button>
+                <button id="axp_tool_button_gridConfig" class="axpc_MSG axpc_button" data-msg="@AST0015"></button>
+            </div>
+        </div>
+    </div>
+    <!-- 補助線設定サブメニュー -->
+    <div id="axp_tool_div_gridConfig" class="axpc_NONE">
+        <!-- 主線副線斜め -->
+        <div>
+            <!-- 左側のボタン -->
+            <div>
+                <!-- 主線 -->
+                <div class="axpc_tool_div_gridConfigButton">
+                    <div>
+                        <div>主線</div>
+                    </div>
+                    <div id="axp_tool_checkbox_gridVH" class="axpc_MSG axpc_toggle_switch axp_grid_switch"
+                        data-msg="@AST0103">
+                        <input type="checkbox" name="check" checked />
+                    </div>
+                    <div id="axp_tool_color_gridVH" class="axpc_MSG axpc_colorRect axp_common_inputcolor"
+                        data-msg="@AST0104" style="background-color: #000000" data-colorcode="#00000066"></div>
+                </div>
+                <!-- 副線 -->
+                <div class="axpc_tool_div_gridConfigButton">
+                    <div>
+                        <div>副線</div>
+                    </div>
+                    <div id="axp_tool_checkbox_gridSubDivision" class="axpc_MSG axpc_toggle_switch axp_grid_switch"
+                        data-msg="@AST0105">
+                        <input type="checkbox" name="check" checked />
+                    </div>
+                    <div id="axp_tool_color_gridSubDivision" class="axpc_MSG axpc_colorRect axp_common_inputcolor"
+                        data-msg="@AST0106" style="background-color: #000000" data-colorcode="#00000026"></div>
+                </div>
+                <!-- 斜め -->
+                <div class="axpc_tool_div_gridConfigButton">
+                    <div>
+                        <div>斜め</div>
+                    </div>
+                    <div id="axp_tool_checkbox_gridDiagonal" class="axpc_MSG axpc_toggle_switch axp_grid_switch"
+                        data-msg="@AST0107">
+                        <input type="checkbox" name="check" />
+                    </div>
+                    <div id="axp_tool_color_gridDiagonal" class="axpc_MSG axpc_colorRect axp_common_inputcolor"
+                        data-msg="@AST0108" style="background-color: #ff0000" data-colorcode="#ff000066"></div>
+                </div>
+            </div>
+            <!-- 右側のスライダー -->
+            <div>
+                <!-- 分割数スライダー ※縦横連動のためaxpc_SAVE対象外 -->
+                <div>
+                    <form id="axp_tool_form_gridH" class="axpc_range axpc_text_border"
+                        oninput="result.value=parseInt(volume.value)">
+                        <input type="range" id="axp_tool_range_gridH" name="volume" min="2" max="16" value="6"
+                            class="axpc_MSG" data-msg="@AST0100">
+                        <div class="axpc_range_label">分割数：横</div>
+                        <div class="axpc_range_value"><output name="result">6</output></div>
+                    </form>
+                    <form id="axp_tool_form_gridV" class="axpc_range axpc_text_border"
+                        oninput="result.value=parseInt(volume.value)">
+                        <input type="range" id="axp_tool_range_gridV" name="volume" min="2" max="16" value="6"
+                            class="axpc_MSG" data-msg="@AST0101">
+                        <div class="axpc_range_label">分割数：縦</div>
+                        <div class="axpc_range_value"><output name="result">6</output></div>
+                    </form>
+                    <div class="axpc_checkbox axpc_MSG" data-msg="@AST0102">
+                        <label>
+                            <input id="axp_tool_checkbox_gridVHLink" class="axpc_SAVE" type="checkbox" checked>縦横を連動
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ピクセル単位指定１ -->
+        <div class="axpc_tool_div_gridConfigButton">
+            <div>
+                <div>px(1)</div>
+            </div>
+            <div id="axp_tool_checkbox_gridPixel1" class="axpc_MSG axpc_toggle_switch axp_grid_switch"
+                data-msg="@AST0109">
+                <input type="checkbox" name="check" />
+            </div>
+            <div id="axp_tool_color_gridPixel1" class="axpc_MSG axpc_colorRect axp_common_inputcolor"
+                data-msg="@AST0110" style="background-color: #0000ff" data-colorcode="#0000ff66">
+            </div>
+            <div>
+                <input type="number" id="axp_tool_number_gridPixel1" class="axpc_MSG" data-msg="@AST0111" min="1"
+                    max="100" value="10" maxlength="3">
+                <span>px</span>
+            </div>
+        </div>
+        <!-- ピクセル単位指定２ -->
+        <div class="axpc_tool_div_gridConfigButton">
+            <div>
+                <div>px(2)</div>
+            </div>
+            <div id="axp_tool_checkbox_gridPixel2" class="axpc_MSG axpc_toggle_switch axp_grid_switch"
+                data-msg="@AST0112">
+                <input type="checkbox" name="check" />
+            </div>
+            <div id="axp_tool_color_gridPixel2" class="axpc_MSG axpc_colorRect axp_common_inputcolor"
+                data-msg="@AST0113" style="background-color: #0000ff" data-colorcode="#0000ff26">
+            </div>
+            <div>
+                <input type="number" id="axp_tool_number_gridPixel2" class="axpc_MSG" data-msg="@AST0114" min="1"
+                    max="100" value="1" maxlength="3">
+                <span>px</span>
+            </div>
+        </div>
+    </div>
+</div>

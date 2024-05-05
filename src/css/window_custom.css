@@ -1,0 +1,29 @@
+/* カスタムボタン */
+
+#axp_custom {
+    width: 60px;
+}
+
+/* カスタムボタン共通 */
+.axpc_custom_button {
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 4px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    background: #555;
+    color: #eee;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.axpc_custom_button:hover {
+    border: 2px solid #bbb;
+}
+
+.axpc_custom_button:active {
+    background: linear-gradient(#222, #444);
+    border: 2px solid #333;
+}

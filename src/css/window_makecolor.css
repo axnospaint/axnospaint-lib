@@ -1,0 +1,182 @@
+/* 色作成 */
+
+/* メインカラー等領域全体 */
+#axp_makecolor_div_drawColor {
+    display: grid;
+    align-items: start;
+    /* template-columns メ1 メ2 右下カーブ1 カーブ2 色入替2 サブ サ透間隔 右枠右端 パレ間隔 パレ登録 */
+    grid-template-columns: 62px 3px 5px 5px 20px 34px 3px 4px 5px 25px;
+    grid-template-rows: 26px 5px 5px 29px;
+}
+
+/* L字背景枠1 */
+#axp_makecolor_div_drawColor>div:first-child {
+    grid-area: 2/3/4/5;
+    height: 100%;
+    background: radial-gradient(circle at 100% 100%, #0000 10.3px, rgb(255 255 255 / 30%) 10.3px);
+}
+
+/* L字背景枠2 */
+#axp_makecolor_div_drawColor>div:nth-child(2) {
+    grid-area: 1/1/5/3;
+    width: 65px;
+    height: 65px;
+    background: rgb(255 255 255 / 30%);
+    border-radius: 10px 0 10px 10px;
+}
+
+/* L字背景枠3 */
+#axp_makecolor_div_drawColor>div:nth-child(3) {
+    grid-area: 1/3/2/9;
+    height: 100%;
+    background: rgb(255 255 255 / 30%);
+    border-radius: 0 10px 10px 0;
+}
+
+/* メインカラー */
+#axp_makecolor_div_mainColor {
+    grid-area: 1/1/5/3;
+    isolation: isolate;
+    width: 55px;
+    height: 55px;
+    margin: 5px;
+    position: relative;
+    --axp-mixedcolor: #000;
+}
+
+/* 混色パレット非選択時 */
+#axp_makecolor_div_mainColor::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    background-color: transparent;
+}
+
+
+/* 混色パレット選択時 */
+#axp_makecolor_div_mainColor[data-mixed="true"]::before {
+    content: "";
+    width: 51px;
+    height: 51px;
+    position: absolute;
+    border-radius: 3px;
+    -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
+    clip-path: polygon(100% 0, 0 0, 0 100%);
+    /* 色指定 */
+    background-color: var(--axp-mixedcolor);
+}
+
+/* 混色パレット選択時三角形 */
+#axp_makecolor_div_mainColor[data-mixed="true"]::after {
+    content: "";
+    position: absolute;
+    border: 5px solid transparent;
+    border-top: 6px solid #eee;
+    border-bottom: 0;
+    height: 0;
+    left: 21px;
+    top: -9px;
+    width: 0;
+}
+
+/* サブカラー */
+#axp_makecolor_div_subColor {
+    grid-area: 3/6/5/7;
+    isolation: isolate;
+}
+
+/* 透明色 */
+#axp_makecolor_div_transparent {
+    grid-area: 3/8/5/11;
+    margin: 1px;
+    isolation: isolate;
+}
+
+/* コード入力 */
+#axp_makecolor_text_colorCode {
+    grid-area: 1/2/2/9;
+    margin: 4px 0 0 0;
+    width: 70px;
+}
+
+/* メインカラーとサブカラーを入れ替えボタン */
+#axp_makecolor_button_swapColor {
+    grid-area: 3/4/5/6;
+    isolation: isolate;
+    height: 100%;
+    background-image: url('../../resource/swap.png');
+    background-position: 0% 50%;
+    background-size: 85%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/* パレット登録ボタン */
+#axp_makecolor_button_addColor {
+    grid-area: 1/10/2/11;
+    isolation: isolate;
+    height: 100%;
+    background-image: url('../../resource/window_palette.png');
+    background-position: 0% 50%;
+    background-size: 85%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/* RGBスライダー */
+#axp_makecolor_div_RGBSlider>div {
+    /*赤、緑、青　間　上下マージン*/
+    margin-bottom: 2px;
+}
+
+#axp_makecolor_div_RGBSlider>div>* {
+    /*赤、緑、青　縦配置*/
+    vertical-align: middle;
+}
+
+#axp_makecolor_div_RGBSlider input[type="range"] {
+    /*赤、緑、青　スライダー左右マージン*/
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* RGB数値入力 */
+#axp_makecolor_number_red,
+#axp_makecolor_number_green,
+#axp_makecolor_number_blue {
+    width: 40px;
+    border: 0;
+}
+
+/* 混色パレット枠 */
+#axp_makecolor_div_mixedPalette>div {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: #333;
+    margin-left: 2px;
+    margin-bottom: 4px;
+    gap: 1px;
+    justify-content: center;
+}
+
+/* 混色パレット */
+.axpc_makecolor_mixedColorRect {
+    height: 20px;
+    width: 30px;
+    margin: 1px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* メインカラー／透過色プレビュー選択時 */
+/* 混色パレット選択時 */
+#axp_makecolor_div_mainColor[data-selected="true"],
+#axp_makecolor_div_subColor[data-selected="true"],
+#axp_makecolor_div_transparent[data-selected="true"],
+.axpc_makecolor_mixedColorRect[data-selected="true"] {
+    border-width: 5px;
+    border-style: double;
+    border-color: #f00;
+}
