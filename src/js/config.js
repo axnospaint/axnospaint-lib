@@ -29,6 +29,8 @@ export class ConfigSystem {
         { value: 'func_switch_toggle', name: '選択:ペン／消しゴム切替' },
         { value: 'func_loupe', name: '拡大率' },
         { value: 'func_size', name: 'ペンの太さ' },
+        { value: 'func_size_down', name: 'ペンの太さを１段階下げる' },
+        { value: 'func_size_up', name: 'ペンの太さを１段階上げる' },
         { value: 'func_undo', name: 'アンドゥ' },
         { value: 'func_redo', name: 'リドゥ' },
         { value: 'func_restore', name: '自動保存から復元' },
@@ -47,6 +49,7 @@ export class ConfigSystem {
         { value: 'func_backgroundimage', name: '背景タイルプレビュー' },
         { value: 'func_init_window_positon', name: 'ツールウィンドウの位置初期化' },
         { value: 'func_download', name: '画像をPNG形式でファイルに保存' },
+        { value: 'func_swap_pixelated', name: 'キャンバス全体のぼかしの切り替え' },
     ];
     constructor(axpObj) {
         this.axpObj = axpObj;

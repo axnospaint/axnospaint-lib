@@ -437,6 +437,10 @@
                                 <td>メインカラー／透明色の切り替え</td>
                             </tr>
                             <tr>
+                                <td>[E]</td>
+                                <td>ペンの太さを１段階上げる</td>
+                            </tr>
+                            <tr>
                                 <td title="Grid">[G]</td>
                                 <td>補助線の表示切り替え</td>
                             </tr>
@@ -455,6 +459,10 @@
                             <tr>
                                 <td title="Load">[L]</td>
                                 <td>ロード</td>
+                            </tr>
+                            <tr>
+                                <td title="Pixelated">[P]</td>
+                                <td>キャンバス全体のぼかしの切り替え</td>
                             </tr>
                             <tr>
                                 <td>[Q]</td>
@@ -479,6 +487,10 @@
                             <tr>
                                 <td title="Vertical flip">[V]</td>
                                 <td>全レイヤー上下反転</td>
+                            </tr>
+                            <tr>
+                                <td>[W]</td>
+                                <td>ペンの太さを１段階下げる</td>
                             </tr>
                             <tr>
                                 <td title="eXchange">[X]</td>

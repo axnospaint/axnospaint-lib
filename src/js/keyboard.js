@@ -114,6 +114,9 @@ export class KeyboardSystem {
                 case 'Q':
                     this.axpObj.penSystem.modeChangeSizeOn();
                     break;
+                case 'P':
+                    this.axpObj.TASK['func_swap_pixelated']();
+                    break;
                 case 'I':
                     this.axpObj.TASK['func_init_window_positon']();
                     break;
@@ -137,6 +140,12 @@ export class KeyboardSystem {
                     break;
                 case ';':
                     this.axpObj.TASK['func_loupe_up']();
+                    break;
+                case 'W':
+                    this.axpObj.TASK['func_size_down']();
+                    break;
+                case 'E':
+                    this.axpObj.TASK['func_size_up']();
                     break;
                 // 数字キー（設定でキーカスタマイズ）
                 case '1':
@@ -240,43 +249,10 @@ export class KeyboardSystem {
                         }
                         break;
                     case 'ARROWLEFT':
+                        this.axpObj.TASK['func_size_down']();
+                        break;
                     case 'ARROWRIGHT':
-                        // 太さを変更できないペンを変更したとき
-                        if (size === null) {
-                            // %1の太さは変更できません。
-                            this.axpObj.msg('@CAU0203', name);
-                            return
-                        } else {
-                            size = Number(size);
-                            // 右キーなら太さを上げる、左キーなら下げる
-                            if (inkey === 'ARROWRIGHT') {
-                                if (size >= 200) {
-                                    // %1の太さは200が最大値です。
-                                    this.axpObj.msg('@CAU0204', name);
-                                    return;
-                                }
-                                // 一つ上の大きさのサイズをサーチ
-                                var index = this.axpObj.penSystem.getIndex();
-                                while (range_value[index] === size) {
-                                    index++;
-                                }
-                                size = range_value[index];
-                            } else {
-                                if (size <= 1) {
-                                    // %1の太さは1が最小値です。
-                                    this.axpObj.msg('@CAU0205', name);
-                                    return;
-                                }
-                                // 一つ下の大きさのサイズをサーチ
-                                var index = this.axpObj.penSystem.getIndex();
-                                while (range_value[index] === size) {
-                                    index--;
-                                }
-                                size = range_value[index];
-                            }
-                            // ペンサイズ更新（＋ペンツール表示更新、コンフィグ保存）
-                            this.axpObj.penSystem.setPenSize(size);
-                        }
+                        this.axpObj.TASK['func_size_up']();
                         break;
                 }
                 break;

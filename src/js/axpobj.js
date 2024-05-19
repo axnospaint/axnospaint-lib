@@ -1459,6 +1459,30 @@ export class AXPObj {
             // %1を90°回転しました。
             this.msg('@INF0007', layerName);
         }
+        // ペンの太さを１段階下げる
+        this.TASK['func_size_down'] = () => {
+            this.penSystem.downPenSize();
+        }
+        // ペンの太さを１段階上げる
+        this.TASK['func_size_up'] = () => {
+            this.penSystem.upPenSize();
+        }
+        // キャンバス全体のぼかしの切り替え
+        this.TASK['func_swap_pixelated'] = () => {
+            const radioForm = document.getElementById('axp_config_form_antialiasing');
+            const isTurnON = this.config('axp_config_form_antialiasing') !== 'on';
+            if (isTurnON) {
+                radioForm.elements[1].checked = true;
+            } else {
+                radioForm.elements[0].checked = true;
+            }
+            // 状態変更
+            this.configSystem.set_canvas_antialiasing();
+            // コンフィグ保存
+            this.configSystem.saveConfig(`RADIO_axp_config_form_antialiasing`, isTurnON ? 'on' : 'off');
+            // キャンバス全体のぼかしを切り替えました。(現在の状態:%1)
+            this.msg('@INF0009', isTurnON ? 'あり' : 'なし');
+        }
     }
     // 表示系メソッド
     /**
