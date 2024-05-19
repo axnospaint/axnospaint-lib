@@ -1188,4 +1188,54 @@ export class PenSystem extends ToolWindow {
             document.getElementById('axp_pen_form_penSize').style.order = '0';
         }
     }
+    upPenSize() {
+        let name = this.getName();
+        let size = this.getSize();
+        // 太さを変更できないペンを変更したとき
+        if (size === null) {
+            // %1の太さは変更できません。
+            this.axpObj.msg('@CAU0203', name);
+            return
+        } else {
+            size = Number(size);
+            if (size >= 200) {
+                // %1の太さは200が最大値です。
+                this.axpObj.msg('@CAU0204', name);
+                return;
+            }
+            // 一つ上の大きさのサイズをサーチ
+            var index = this.getIndex();
+            while (range_value[index] === size) {
+                index++;
+            }
+            size = range_value[index];
+            // ペンサイズ更新（＋ペンツール表示更新、コンフィグ保存）
+            this.setPenSize(size);
+        }
+    }
+    downPenSize() {
+        let name = this.getName();
+        let size = this.getSize();
+        // 太さを変更できないペンを変更したとき
+        if (size === null) {
+            // %1の太さは変更できません。
+            this.axpObj.msg('@CAU0203', name);
+            return
+        } else {
+            size = Number(size);
+            if (size <= 1) {
+                // %1の太さは1が最小値です。
+                this.axpObj.msg('@CAU0205', name);
+                return;
+            }
+            // 一つ下の大きさのサイズをサーチ
+            var index = this.getIndex();
+            while (range_value[index] === size) {
+                index--;
+            }
+            size = range_value[index];
+            // ペンサイズ更新（＋ペンツール表示更新、コンフィグ保存）
+            this.setPenSize(size);
+        }
+    }
 }
