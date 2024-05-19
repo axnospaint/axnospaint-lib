@@ -739,6 +739,17 @@ export class AXPObj {
             });
         });
 
+        // Chromeの「メモリセーバー」によるcanvas消去の対応
+        document.addEventListener('visibilitychange', () => {
+            //console.log('document.visibilityState:', document.visibilityState);
+            if (document.visibilityState === 'visible') {
+                // タブが表示されたとき
+                this.layerSystem.updateCanvas();
+                this.colorMakerSystem.colorWheel.redraw();
+                this.penSystem.previewPenSize();
+                this.drawPostCanvas();
+            }
+        });
     }
     /**
      * キャンバス表示更新
@@ -1120,6 +1131,35 @@ export class AXPObj {
     getCanvasSize_Y() {
         return this.y_size;
     }
+    // 投稿タブのキャンバスの描画（ブラウザタブ切り替え時の再描画にも使用する）
+    drawPostCanvas() {
+        let isTrans = this.assistToolSystem.getIsTransparent();
+        if (isTrans) {
+            // 画像
+            this.postSystem.CANVAS.post_ctx.clearRect(0, 0, this.x_size, this.y_size);
+            this.postSystem.CANVAS.post_ctx.drawImage(this.layerSystem.CANVAS.backscreen_trans, 0, 0);
+            // サムネ
+            this.postSystem.CANVAS.thumbnail_ctx.clearRect(0, 0, this.postSystem.CANVAS.thumbnail.width, this.postSystem.CANVAS.thumbnail.height);
+            this.postSystem.CANVAS.thumbnail_ctx.drawImage(
+                this.layerSystem.CANVAS.backscreen_trans,
+                0,
+                0,
+                this.postSystem.CANVAS.thumbnail.width,
+                this.postSystem.CANVAS.thumbnail.height);
+        } else {
+            // 画像
+            this.postSystem.CANVAS.post_ctx.drawImage(this.layerSystem.CANVAS.backscreen_white, 0, 0);
+            // サムネ
+            this.postSystem.CANVAS.thumbnail_ctx.fillStyle = '#ffffff';
+            this.postSystem.CANVAS.thumbnail_ctx.fillRect(0, 0, this.postSystem.CANVAS.thumbnail.width, this.postSystem.CANVAS.thumbnail.height);
+            this.postSystem.CANVAS.thumbnail_ctx.drawImage(
+                this.layerSystem.CANVAS.backscreen_white,
+                0,
+                0,
+                this.postSystem.CANVAS.thumbnail.width,
+                this.postSystem.CANVAS.thumbnail.height);
+        }
+    }
     /**
      * 指定の番号のタブに切り替える
      * @param {String} idx タブの番号 '0':キャンバス,'1':設定,'2':投稿,'3':拡張機能
@@ -1192,31 +1232,8 @@ export class AXPObj {
                 // 投稿タブ内の情報更新
                 let isTrans = this.assistToolSystem.getIsTransparent();
                 document.getElementById('axp_post_span_transparent').textContent = isTrans ? 'する' : 'しない';
-                if (isTrans) {
-                    // 画像
-                    this.postSystem.CANVAS.post_ctx.clearRect(0, 0, this.x_size, this.y_size);
-                    this.postSystem.CANVAS.post_ctx.drawImage(this.layerSystem.CANVAS.backscreen_trans, 0, 0);
-                    // サムネ
-                    this.postSystem.CANVAS.thumbnail_ctx.clearRect(0, 0, this.postSystem.CANVAS.thumbnail.width, this.postSystem.CANVAS.thumbnail.height);
-                    this.postSystem.CANVAS.thumbnail_ctx.drawImage(
-                        this.layerSystem.CANVAS.backscreen_trans,
-                        0,
-                        0,
-                        this.postSystem.CANVAS.thumbnail.width,
-                        this.postSystem.CANVAS.thumbnail.height);
-                } else {
-                    // 画像
-                    this.postSystem.CANVAS.post_ctx.drawImage(this.layerSystem.CANVAS.backscreen_white, 0, 0);
-                    // サムネ
-                    this.postSystem.CANVAS.thumbnail_ctx.fillStyle = '#ffffff';
-                    this.postSystem.CANVAS.thumbnail_ctx.fillRect(0, 0, this.postSystem.CANVAS.thumbnail.width, this.postSystem.CANVAS.thumbnail.height);
-                    this.postSystem.CANVAS.thumbnail_ctx.drawImage(
-                        this.layerSystem.CANVAS.backscreen_white,
-                        0,
-                        0,
-                        this.postSystem.CANVAS.thumbnail.width,
-                        this.postSystem.CANVAS.thumbnail.height);
-                }
+                this.drawPostCanvas();
+
                 // ボタン表示初期化（お絵カキコする！）
                 document.getElementById("axp_post_button_upload").textContent = document.getElementById("axp_post_button_upload").dataset.buttontext;
                 document.getElementById("axp_post_button_upload").disabled = false;
