@@ -1759,8 +1759,6 @@ export class AXPObj {
             this.configSystem.set_canvas_antialiasing();
             // 座標表示
             this.configSystem.set_display_position();
-            // 手ぶれ補正
-            this.configSystem.set_stabilizer_use();
             // 長押しスポイト
             this.configSystem.set_longtap_use();
             // ツールウィンドウ位置初期化

@@ -103,7 +103,7 @@ export class ColorPaletteSystem extends ToolWindow {
                 // 削除ボタン表示
                 UTIL.show('axp_palette_button_delete');
                 // 列数スライダー表示
-                if (this.axpObj.config('axp_config_form_paletteColumnEdit') === 'on') {
+                if (document.getElementById('axp_config_checkbox_paletteColumnEdit').checked) {
                     const elemSlider = document.getElementById('axp_palette_div_column');
                     //elemSlider.style.top = this.window_top + 'px';
                     //elemSlider.style.left = this.window_left + 'px';

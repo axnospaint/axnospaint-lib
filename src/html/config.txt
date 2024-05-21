@@ -94,17 +94,21 @@
             </div>
             <div class="axpc_config_section" data-title="ペンツール" data-icon="axpc_icon_window_pen">
                 <div class="axpc_config_group" data-title="手ぶれ補正">
-                    <form id="axp_config_form_useStabilizer" class="axpc_radio">
-                        <span data-msg="@CFG0040" data-value="off">なし</span>
-                        <span data-msg="@CFG0041" data-value="on" data-default="y">あり</span>
+                    <u>補正の強さ</u>
+                    <form id="axp_config_form_stabilizerValue" oninput="result.value=parseInt(volume.value)"
+                        class="axpc_range axpc_range_width228 axpc_SAVE">
+                        <input type="range" name="volume" value="2" step="1" min="0" max="10" class="axpc_MSG"
+                            data-msg="@CFG0040">
+                        <div class="axpc_range_label axpc_text_border">手ぶれ補正</div>
+                        <div class="axpc_range_value axpc_text_border"><output name="result">2</output></div>
                     </form>
-                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_stabilizerValue"
-                        style="margin-top: 8px;" class="axpc_range axpc_SAVE">
-                        補正の強さ
-                        <input type="range" class="axpc_MSG" name="volume" value="2" step="1" min="1" max="10"
-                            data-msg="@CFG0042">
-                        <output name="result" for="volume">2</output>
-                    </form>
+                    <div style="margin-top: 4px;"></div>
+                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0041">
+                        <label>
+                            <input id="axp_config_checkbox_stabilize" class="axpc_SAVE"
+                                type="checkbox">ペンツールウィンドウ内にレンジスライダーを表示する
+                        </label>
+                    </div>
                 </div>
                 <div class="axpc_config_group" data-title="スポイト">
                     <u>使用後ペンに切り替える</u>
@@ -118,19 +122,20 @@
                         <span data-msg="@CFG0045" data-value="off" data-default="y">なし</span>
                         <span data-msg="@CFG0046" data-value="on">あり</span>
                     </form>
-                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_longtapDurationValue"
-                        style="margin-top: 8px;" class="axpc_range axpc_SAVE">
-                        長押し反応時間
-                        <input type="range" class="axpc_MSG" name="volume" value="700" step="100" min="500" max="1500"
+                    <div style="margin-top: 16px;"></div>
+                    <form id="axp_config_form_longtapDurationValue" oninput="result.value=parseInt(volume.value)"
+                        class="axpc_range axpc_range_width228 axpc_SAVE">
+                        <input type="range" name="volume" value="700" step="100" min="500" max="1500" class="axpc_MSG"
                             data-msg="@CFG0047">
-                        <output name="result" for="volume">700</output>[ミリ秒]
+                        <div class="axpc_range_label axpc_text_border">長押し反応時間</div>
+                        <div class="axpc_range_value axpc_text_border"><output name="result">700</output></div>[ミリ秒]
                     </form>
-                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_longtapStabilizerValue"
-                        style="margin-top: 8px;" class="axpc_range axpc_SAVE">
-                        長押し受付範囲
-                        <input type="range" class="axpc_MSG" name="volume" value="5" step="1" min="0" max="10"
+                    <form id="axp_config_form_longtapStabilizerValue" oninput="result.value=parseInt(volume.value)"
+                        class="axpc_range axpc_range_width228 axpc_SAVE">
+                        <input type="range" name="volume" value="5" step="1" min="0" max="10" class="axpc_MSG"
                             data-msg="@CFG0048">
-                        <output name="result" for="volume">5</output>[px]
+                        <div class="axpc_range_label axpc_text_border">長押し受付範囲</div>
+                        <div class="axpc_range_value axpc_text_border"><output name="result">5</output></div>[px]
                     </form>
                     （※長押し操作が反応しない場合、受付範囲を大きくしてください）
                 </div>
@@ -176,21 +181,23 @@
                 </div>
             </div>
             <div class="axpc_config_section" data-title="パレット" data-icon="axpc_icon_window_palette">
-                <div class="axpc_config_group" data-title="横幅スライダーの使用（編集モード時）">
-                    <form id="axp_config_form_paletteColumnEdit" class="axpc_radio">
-                        <span data-msg="@CFG0061" data-value="off">なし</span>
-                        <span data-msg="@CFG0062" data-value="on" data-default="y">あり</span>
-                    </form>
-                </div>
                 <div class="axpc_config_group" data-title="パレットのレイアウト">
                     <u>横幅（列の数）</u><br>
-                    <form id="axp_config_form_paletteColumnValue" class="axpc_range axpc_text_border">
+                    <form id="axp_config_form_paletteColumnValue" class="axpc_range axpc_range_width228">
                         <!-- axpc_SAVE 対象外 -->
                         <input type="range" class="axpc_MSG" name="volume" value="3" step="1" min="1" max="24"
                             data-msg="@CFG0063">
-                        <div class="axpc_range_label">横幅</div>
-                        <div class="axpc_range_value"><output name="result"></output></div>
+                        <div class="axpc_range_label axpc_text_border">横幅</div>
+                        <div class="axpc_range_value axpc_text_border"><output name="result"></output></div>[列]
                     </form>
+                    <div style="margin-top: 4px;"></div>
+                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0062">
+                        <label>
+                            <input id="axp_config_checkbox_paletteColumnEdit" class="axpc_SAVE" type="checkbox"
+                                checked>パレット編集モード時にレンジスライダーを表示する
+                        </label>
+                    </div>
+                    <div style="margin-top: 8px;"></div>
                     <!-- カラーパレットを表示するためのエリア -->
                     <div id="axp_config_div_paletteText"></div>
                     <div id="axp_config_div_paletteScroll">
@@ -226,12 +233,12 @@
             </div>
             <div class="axpc_config_section" data-title="補助ツール" data-icon="axpc_icon_window_subtool">
                 <div class="axpc_config_group" data-title="アンドゥ／リドゥ可能回数">
-                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_undoMaxValue"
-                        class="axpc_range axpc_SAVE">
-                        回数
-                        <input type="range" class="axpc_MSG" name="volume" value="25" step="1" min="10" max="50"
+                    <form id="axp_config_form_undoMaxValue" oninput="result.value=parseInt(volume.value)"
+                        class="axpc_range axpc_range_width228 axpc_SAVE">
+                        <input type="range" name="volume" value="25" step="1" min="10" max="50" class="axpc_MSG"
                             data-msg="@CFG0067">
-                        <output name="result" for="volume">25</output>
+                        <div class="axpc_range_label axpc_text_border">回数</div>
+                        <div class="axpc_range_value axpc_text_border"><output name="result">25</output></div>[回]
                     </form>
                     （※変更した値を有効にするにはAXNOS Paintを再起動する必要があります）
                 </div>
@@ -368,20 +375,20 @@
                         <span data-msg="@CFG0101" data-value="off">なし</span>
                         <span data-msg="@CFG0102" data-value="on" data-default="y">あり</span>
                     </form>
-                    <br>
-                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_touchDurationValue"
-                        class="axpc_range axpc_SAVE">
-                        タップ制限時間
-                        <input type="range" class="axpc_MSG" name="volume" value="300" step="100" min="100" max="1000"
+                    <div style="margin-top: 16px;"></div>
+                    <form id="axp_config_form_touchDurationValue" oninput="result.value=parseInt(volume.value)"
+                        class="axpc_range axpc_range_width228 axpc_SAVE">
+                        <input type="range" name="volume" value="300" step="100" min="100" max="1000" class="axpc_MSG"
                             data-msg="@CFG0103">
-                        <output name="result" for="volume">300</output>[ミリ秒]
+                        <div class="axpc_range_label axpc_text_border">タップ制限時間</div>
+                        <div class="axpc_range_value axpc_text_border"><output name="result">300</output></div>[ミリ秒]
                     </form>
-                    <form oninput="result.value=parseInt(volume.value)" id="axp_config_form_touchThresholdValue"
-                        class="axpc_range axpc_SAVE">
-                        タップ受付範囲
-                        <input type="range" class="axpc_MSG" name="volume" value="5" min="0" max="10"
+                    <form id="axp_config_form_touchThresholdValue" oninput="result.value=parseInt(volume.value)"
+                        class="axpc_range axpc_range_width228 axpc_SAVE">
+                        <input type="range" name="volume" value="5" step="1" min="0" max="10" class="axpc_MSG"
                             data-msg="@CFG0401">
-                        <output name="result" for="volume">5</output>[px]
+                        <div class="axpc_range_label axpc_text_border">タップ受付範囲</div>
+                        <div class="axpc_range_value axpc_text_border"><output name="result">5</output></div>[px]
                     </form>
                     （※タップ操作が反応しない場合、受付範囲を大きくしてください）
                 </div>
