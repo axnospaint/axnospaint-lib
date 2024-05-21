@@ -66,6 +66,14 @@
                     <div class="axpc_range_label">トーン濃度</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
+                <!-- 手ぶれ補正（オプション） -->
+                <form id="axp_pen_form_stabilizer" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_stabilizer" name="volume" value="2" step="1" min="0" max="10"
+                        class="axpc_MSG" data-msg="@CFG0040">
+                    <div class="axpc_range_label">手ぶれ補正</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
             </div>
 
             <div id="axp_pen_div_spuitColorRGBA">

@@ -555,7 +555,8 @@ export class PenSystem extends ToolWindow {
         //console.log('exec_mode:', exec_mode);
         // 手ぶれ補正
         if (this.penObj[exec_mode].type === 'draw') {
-            if (this.axpObj.config('axp_config_form_useStabilizer') === 'on') {
+            const stabilizer_value = Number(document.getElementById('axp_config_form_stabilizerValue').volume.value);
+            if (stabilizer_value !== 0) {
                 // 手ぶれ補正あり
                 // 前回の位置からの距離によって、入力を間引きする
                 // ２点間の距離の算出（三平方の定理）
@@ -565,7 +566,7 @@ export class PenSystem extends ToolWindow {
                     e.clientX,
                     e.clientY
                 )
-                if (distance < Number(document.getElementById('axp_config_form_stabilizerValue').volume.value)) {
+                if (distance < stabilizer_value) {
                     //console.log('補正', distance);
                     return;
                 }
@@ -833,6 +834,7 @@ export class PenSystem extends ToolWindow {
         if (mode) {
             this.pen_mode = mode;
         }
+        let type = this.getType();
         // 状態に応じてスライダーの表示／非表示を切り替える
         const displaySlider = (id, value, enabled = true) => {
             if (value === null || enabled === false) {
@@ -887,6 +889,13 @@ export class PenSystem extends ToolWindow {
             this.getBlurLevel(),
             this.axpObj.config('axp_config_form_blurLevel') === 'on',
         )
+        // 手ぶれ
+        displaySlider(
+            'axp_pen_form_stabilizer',
+            document.getElementById('axp_config_form_stabilizerValue').volume.value,
+            type === 'draw' && document.getElementById('axp_config_checkbox_stabilize').checked,
+        )
+
 
         // 描画セレクトボックス
         if (this.penObj[this.pen_mode].usePenStyle) {
@@ -894,7 +903,6 @@ export class PenSystem extends ToolWindow {
         } else {
             UTIL.hide('axp_pen_select_drawMode');
         }
-        let type = this.getType();
         // 塗り潰し判定セレクトボックス
         if (type === 'fill') {
             UTIL.show('axp_pen_select_fillMode');

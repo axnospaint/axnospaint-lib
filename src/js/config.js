@@ -434,10 +434,23 @@ export class ConfigSystem {
         document.getElementById('axp_config_form_pentoolRangeOrder').onchange = (e) => {
             this.axpObj.penSystem.changeOrderSlider();
         }
-        // ラジオボタン：手ぶれ補正
-        document.getElementById('axp_config_form_useStabilizer').onchange = (e) => {
-            this.set_stabilizer_use();
+        // チェックボックス：手ぶれ補正　ペンツールウィンドウ内で変更可能にする
+        document.getElementById('axp_config_checkbox_stabilize').onchange = (e) => {
+            this.axpObj.penSystem.changePenMode();
         }
+        // レンジスライダー：手ぶれ補正　連動
+        // 設定タブ側
+        document.getElementById('axp_config_form_stabilizerValue').onchange = (e) => {
+            document.getElementById('axp_pen_form_stabilizer').volume.value = e.target.value;
+            document.getElementById('axp_pen_form_stabilizer').result.value = e.target.value;
+        }
+        // ペンツール側
+        document.getElementById('axp_pen_form_stabilizer').onchange = (e) => {
+            document.getElementById('axp_config_form_stabilizerValue').volume.value = e.target.value;
+            document.getElementById('axp_config_form_stabilizerValue').result.value = e.target.value;
+            this.saveConfig('RANGE_axp_config_form_stabilizerValue', e.target.value);
+        }
+
         // ラジオボタン：長押しスポイト
         document.getElementById('axp_config_form_useLongtap').onchange = (e) => {
             this.set_longtap_use();
@@ -1083,18 +1096,6 @@ export class ConfigSystem {
                 targetElement.style.right = '0';
                 targetElement.style.bottom = '0';
                 break;
-        }
-    }
-    // 手ぶれ補正のスライダ切り替え
-    set_stabilizer_use() {
-        if (this.axpObj.config('axp_config_form_useStabilizer') === 'on') {
-            // 補正の強さレンジスライダー有効
-            document.getElementById('axp_config_form_stabilizerValue').volume.disabled = false;
-            document.getElementById('axp_config_form_stabilizerValue').style.opacity = '1';
-        } else {
-            // 補正の強さレンジスライダー無効
-            document.getElementById('axp_config_form_stabilizerValue').volume.disabled = true;
-            document.getElementById('axp_config_form_stabilizerValue').style.opacity = '0.3';
         }
     }
     // 長押しスポイトのスライダ切り替え
