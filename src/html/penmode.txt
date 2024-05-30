@@ -4,35 +4,39 @@
         <span id="axp_penmode_span_modeName"></span>
         <article data-name="ペン">
             <!-- ※idをそのままペン種別名として使用するため命名規則例外 -->
-            <button id="axp_penmode_round" class="axpc_MSG axpc_penmode_round" data-idx="0"
-                data-msg="@PEN0100"></button>
-            <button id="axp_penmode_square" class="axpc_MSG axpc_penmode_square" data-idx="0"
-                data-msg="@PEN0101"></button>
-            <button id="axp_penmode_dot" class="axpc_MSG axpc_penmode_dot" data-idx="0" data-msg="@PEN0102"></button>
-            <button id="axp_penmode_fude" class="axpc_MSG axpc_penmode_fude" data-idx="0" data-msg="@PEN0103"></button>
-            <button id="axp_penmode_crayon" class="axpc_MSG axpc_penmode_crayon" data-idx="0"
-                data-msg="@PEN0104"></button>
-            <button id="axp_penmode_brush" class="axpc_MSG axpc_penmode_brush" data-idx="0"
-                data-msg="@PEN0105"></button>
+            <button id="axp_penmode_round" class="axpc_FUNC axpc_penmode_round" data-idx="0" data-msg="@PEN0100"
+                data-function="func_switch_axp_penmode_round"></button>
+            <button id="axp_penmode_square" class="axpc_FUNC axpc_penmode_square" data-idx="0" data-msg="@PEN0101"
+                data-function="func_switch_axp_penmode_square"></button>
+            <button id="axp_penmode_dot" class="axpc_FUNC axpc_penmode_dot" data-idx="0" data-msg="@PEN0102"
+                data-function="func_switch_axp_penmode_dot"></button>
+            <button id="axp_penmode_fude" class="axpc_FUNC axpc_penmode_fude" data-idx="0" data-msg="@PEN0103"
+                data-function="func_switch_axp_penmode_fude"></button>
+            <button id="axp_penmode_crayon" class="axpc_FUNC axpc_penmode_crayon" data-idx="0"
+                data-function="func_switch_axp_penmode_crayon" data-msg="@PEN0104"></button>
+            <button id="axp_penmode_brush" class="axpc_FUNC axpc_penmode_brush" data-idx="0"
+                data-function="func_switch_axp_penmode_brush" data-msg="@PEN0105"></button>
         </article>
         <article data-name="消しゴム">
-            <button id="axp_penmode_eraser_round" class="axpc_MSG axpc_penmode_eraser_round" data-idx="1"
-                data-msg="@PEN0110"></button>
-            <button id="axp_penmode_eraser_dot" class="axpc_MSG axpc_penmode_eraser_dot" data-idx="1"
-                data-msg="@PEN0111"></button>
+            <button id="axp_penmode_eraser_round" class="axpc_FUNC axpc_penmode_eraser_round" data-idx="1"
+                data-function="func_switch_axp_penmode_eraser_round" data-msg="@PEN0110"></button>
+            <button id="axp_penmode_eraser_dot" class="axpc_FUNC axpc_penmode_eraser_dot" data-idx="1"
+                data-function="func_switch_axp_penmode_eraser_dot" data-msg="@PEN0111"></button>
         </article>
         <article data-name="バケツ">
-            <button id="axp_penmode_fill" class="axpc_MSG axpc_penmode_fill" data-idx="2" data-msg="@PEN0120"></button>
-            <button id="axp_penmode_fillgradation" class="axpc_MSG axpc_penmode_fillgradation" data-idx="2"
-                data-msg="@PEN0121"></button>
+            <button id="axp_penmode_fill" class="axpc_FUNC axpc_penmode_fill" data-idx="2"
+                data-function="func_switch_axp_penmode_fill" data-msg="@PEN0120"></button>
+            <button id="axp_penmode_fillgradation" class="axpc_FUNC axpc_penmode_fillgradation"
+                data-function="func_switch_axp_penmode_fillgradation" data-idx="2" data-msg="@PEN0121"></button>
         </article>
         <article data-name="ツール">
-            <button id="axp_penmode_hand" class="axpc_MSG axpc_penmode_hand" data-idx="3" data-msg="@PEN0130"></button>
-            <button id="axp_penmode_move" class="axpc_MSG axpc_penmode_move" data-idx="3" data-msg="@PEN0131"></button>
+            <button id="axp_penmode_hand" class="axpc_FUNC axpc_penmode_hand" data-idx="3"
+                data-function="func_switch_axp_penmode_hand" data-msg="@PEN0130"></button>
+            <button id="axp_penmode_move" class="axpc_FUNC axpc_penmode_move" data-idx="3"
+                data-function="func_switch_axp_penmode_move" data-msg="@PEN0131"></button>
         </article>
         <article data-name="スポイト">
-            <button id="axp_penmode_spuit" class="axpc_MSG axpc_penmode_spuit" data-idx="4"
-                data-msg="@PEN0140"></button>
+            <button id="axp_penmode_spuit" class="axpc_penmode_spuit" data-idx="4"></button>
         </article>
     </div>
 </div>

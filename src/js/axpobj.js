@@ -85,13 +85,13 @@ export class AXPObj {
     isSPACE = false; // スペースが押されている
     isCTRL = false; // CTRLが押されている
     isSHIFT = false; // シフトキーが押されている
-    isCHANGE_SIZE_KEY = false; // サイズ変更ｼｮｰﾄｶｯﾄ[Q]が押されている
     isDrawing = false; // 描画中である
     isDrawn = false; // 描画処理が行われた
     isDrawCancel = false; // 描画処理がキャンセルされた
     isLine;
     isRect;
     // ----------------------------------------------------
+    codeCHANGE_SIZE_KEY = null; // ショートカット「ペンの太さ調整」で押されたキー
 
     // 実行環境系
     ENV = {
@@ -229,9 +229,8 @@ export class AXPObj {
         this.initTask();
 
         // イベントリスナ設定（機能ボタン）
-        const function_buttons = document.getElementsByClassName('axpc_FUNC');
+        const function_buttons = document.querySelectorAll('.axpc_FUNC');
         for (const item of function_buttons) {
-            //console.log(item.id, item.dataset.function);
             item.addEventListener('click', (e) => {
                 this.TASK[item.dataset.function]();
             });
@@ -709,22 +708,56 @@ export class AXPObj {
         };
 
         // ボタンにカーソルをあてたときにメッセージを表示
-        const messages = document.getElementsByClassName('axpc_MSG');
+        const messages = document.querySelectorAll('.axpc_MSG');
         for (const item of messages) {
             // 要素に入ったとき
             item.addEventListener('pointerenter', (e) => {
                 let text = e.currentTarget.dataset.msg;
-                if (e.currentTarget.dataset.key) {
-                    // ショートカットキーが定義されている場合、表示テキストに付与する
-                    // text = '[' + e.currentTarget.dataset.key + ']:' + text;
-                }
                 this.msg(text);
             });
-            // 要素から離れた時メッセージをリセット
-            item.addEventListener('pointerleave', (e) => {
-                // サブウィンドウ表示中はメッセージをリセットしないようにする
-                if (!this.isModalOpen) {
-                    //this.msg('');
+        }
+        // ボタンにカーソルをあてたときにメッセージを表示（ショートカット機能専用）
+        const messagesFunction = document.querySelectorAll('.axpc_FUNC');
+        for (const item of messagesFunction) {
+            // 要素に入ったとき
+            item.addEventListener('pointerenter', (e) => {
+                let text = e.currentTarget.dataset.msg;
+                let shortcut = '';
+                if (e.currentTarget.dataset.key) {
+                    // ショートカットキーが定義されている場合、表示テキストに付与する
+                    shortcut = `${e.currentTarget.dataset.key}:`;
+                }
+                let additionalInfo = '';
+                let key;
+                switch (e.currentTarget.dataset.function) {
+                    // ペンツールのボタン専用処理
+                    case 'func_switch_pen':
+                    case 'func_switch_eraser':
+                    case 'func_switch_fill':
+                    case 'func_switch_hand':
+                        // メッセージIDの文章を取得し、先頭の%1を除外する
+                        additionalInfo = Message.getMessage(e.currentTarget.dataset.addmsg).slice(2);
+                        this.msg(text, shortcut, additionalInfo);
+                        break;
+                    // 色作成のサブカラー専用処理
+                    case 'func_switch_subcolor':
+                        key = this.configSystem.getShortcutFunction('func_swap_maincolor');
+                        if (key) {
+                            additionalInfo = `${key}:メイン／サブカラー切替`;
+                        }
+                        this.msg(text, shortcut, additionalInfo);
+                        break;
+                    // 色作成の透明色専用処理
+                    case 'func_switch_transparent':
+                        key = this.configSystem.getShortcutFunction('func_swap_transparent');
+                        if (key) {
+                            additionalInfo = `${key}:メイン／透明色切替`;
+                        }
+                        this.msg(text, shortcut, additionalInfo);
+                        break;
+                    // 通常の機能ボタン
+                    default:
+                        this.msg(text, shortcut);
                 }
             });
         }
@@ -1273,12 +1306,32 @@ export class AXPObj {
         this.refreshCanvas();
     }
     // タスク呼び出し（キーボードショートカット、カスタムボタン）
-    callTask(id, inkey) {
+    callTask(id, inkey, repeat = false, code = null) {
         // キーカスタマイズ情報を記憶している設定メニューの要素の取得
         const elem = document.getElementById(id);
+        if (!elem) {
+            // 要素が存在しないキー（対応していないキー）は無効
+            console.log('無効なキー:', id);
+            return;
+        }
         const selectMain = elem.querySelector('select:nth-of-type(1)');
         const inputSizeValue = elem.querySelector('.axpc_config_number_sizeValue');
         const inputScaleValue = elem.querySelector('.axpc_config_number_scaleValue');
+
+        // リピート判定
+        if (repeat) {
+            if (
+                selectMain.value === 'func_scroll_up' ||
+                selectMain.value === 'func_scroll_down' ||
+                selectMain.value === 'func_scroll_left' ||
+                selectMain.value === 'func_scroll_right'
+            ) {
+                // 上記の機能は、押しっぱなし入力を受け付ける
+            } else {
+                // その他の機能は、押しっぱなし状態のとき、それ以上は処理しない
+                return;
+            }
+        }
 
         // 割り当てられている機能を実行
         switch (selectMain.value) {
@@ -1298,7 +1351,7 @@ export class AXPObj {
             default:
                 console.log('カスタマイズTask呼び出し:', selectMain.value);
                 // その他の機能
-                this.TASK[selectMain.value]();
+                this.TASK[selectMain.value](inkey, code);
                 break;
         }
     }
@@ -1325,24 +1378,93 @@ export class AXPObj {
             this.refreshCanvas();
         }
 
-        // ペン選択
-        this.TASK['func_switch_pen'] = () => {
-            this.penSystem.switchMode('pen');
+        // ペンツール選択
+        const switchPenMain = (id, inkey) => {
+            const element = document.getElementById(id);
+            this.penSystem.switchMainButton(element, inkey);
+            this.msg(
+                element.dataset.msg,
+                element.dataset.key ? `${element.dataset.key}:` : '',
+                // サブボタンのメッセージIDの文章を取得し、先頭の%1を除外する
+                Message.getMessage(element.dataset.addmsg).slice(2),
+            );
         }
-        this.TASK['func_switch_eraser'] = () => {
-            this.penSystem.switchMode('eraser');
+        this.TASK['func_switch_pen'] = (inkey) => {
+            switchPenMain('axp_pen_button_penBase', inkey);
         }
-        this.TASK['func_switch_fill'] = () => {
-            this.penSystem.switchMode('fill');
+        this.TASK['func_switch_eraser'] = (inkey) => {
+            switchPenMain('axp_pen_button_eraserBase', inkey);
         }
-        this.TASK['func_switch_hand'] = () => {
-            this.penSystem.switchMode('hand');
+        this.TASK['func_switch_fill'] = (inkey) => {
+            switchPenMain('axp_pen_button_fillBase', inkey);
         }
-        this.TASK['func_switch_spuit'] = () => {
-            this.penSystem.switchMode('spuit');
+        this.TASK['func_switch_hand'] = (inkey) => {
+            switchPenMain('axp_pen_button_handBase', inkey);
         }
-        this.TASK['func_switch_toggle'] = () => {
-            this.penSystem.switchMode('toggle');
+        this.TASK['func_switch_spuit'] = (inkey) => {
+            switchPenMain('axp_pen_button_spuitBase', inkey);
+        }
+        this.TASK['func_switch_toggle'] = (inkey) => {
+            const isNotPen = document.getElementById('axp_pen_button_penBase').dataset.selected !== 'true';
+            // ペン以外が選択されている時はペンに、ペンが選択されているときは消しゴムに切り替え
+            if (isNotPen) {
+                this.penSystem.switchMainButton(document.getElementById('axp_pen_button_penBase'), inkey);
+            } else {
+                this.penSystem.switchMainButton(document.getElementById('axp_pen_button_eraserBase'), inkey);
+            }
+            let shortcut = '';
+            const key = this.configSystem.getShortcutFunction('func_switch_toggle');
+            if (key) {
+                shortcut = `${key}:`;
+            }
+            // @AXP0010,%1ペン／消しゴム切替(%2)
+            this.msg('@AXP0010', shortcut, isNotPen ? 'ペン' : '消しゴム');
+        }
+
+        // 種別選択
+        const switchPenSub = (id) => {
+            const element = document.getElementById(id);
+            this.penSystem.switchSubButton(element);
+            this.msg(
+                element.dataset.msg,
+                element.dataset.key ? `${element.dataset.key}:` : '',
+            );
+        }
+        this.TASK['func_switch_axp_penmode_round'] = () => {
+            switchPenSub('axp_penmode_round');
+        }
+        this.TASK['func_switch_axp_penmode_square'] = () => {
+            switchPenSub('axp_penmode_square');
+        }
+        this.TASK['func_switch_axp_penmode_dot'] = () => {
+            switchPenSub('axp_penmode_dot');
+        }
+        this.TASK['func_switch_axp_penmode_fude'] = () => {
+            switchPenSub('axp_penmode_fude');
+        }
+        this.TASK['func_switch_axp_penmode_crayon'] = () => {
+            switchPenSub('axp_penmode_crayon');
+        }
+        this.TASK['func_switch_axp_penmode_brush'] = () => {
+            switchPenSub('axp_penmode_brush');
+        }
+        this.TASK['func_switch_axp_penmode_eraser_round'] = () => {
+            switchPenSub('axp_penmode_eraser_round');
+        }
+        this.TASK['func_switch_axp_penmode_eraser_dot'] = () => {
+            switchPenSub('axp_penmode_eraser_dot');
+        }
+        this.TASK['func_switch_axp_penmode_fill'] = () => {
+            switchPenSub('axp_penmode_fill');
+        }
+        this.TASK['func_switch_axp_penmode_fillgradation'] = () => {
+            switchPenSub('axp_penmode_fillgradation');
+        }
+        this.TASK['func_switch_axp_penmode_hand'] = () => {
+            switchPenSub('axp_penmode_hand');
+        }
+        this.TASK['func_switch_axp_penmode_move'] = () => {
+            switchPenSub('axp_penmode_move');
         }
 
         // アンドゥ
@@ -1407,6 +1529,19 @@ export class AXPObj {
             this.layerSystem.downloadImage();
         }
 
+        // メインカラーを選択
+        this.TASK['func_switch_maincolor'] = () => {
+            this.colorMakerSystem.selectMainColor();
+        }
+        // サブカラーを選択
+        this.TASK['func_switch_subcolor'] = () => {
+            this.colorMakerSystem.selectSubColor();
+        }
+        // 透明色を選択
+        this.TASK['func_switch_transparent'] = () => {
+            this.colorMakerSystem.selectTransparent();
+        }
+
         // メインとサブの色をスワップ
         this.TASK['func_swap_maincolor'] = () => {
             this.colorMakerSystem.swap_maincolor();
@@ -1415,6 +1550,27 @@ export class AXPObj {
         // 透明色とメインカラーを切替
         this.TASK['func_swap_transparent'] = () => {
             this.colorMakerSystem.swap_transparent();
+        }
+
+        // レイヤーの新規作成
+        this.TASK['func_layer_create'] = () => {
+            this.layerSystem.buttonCreateLayer()
+        }
+        // レイヤーの統合
+        this.TASK['func_layer_integrate'] = () => {
+            this.layerSystem.buttonIntegrateLayer()
+        }
+        // レイヤーのコピー
+        this.TASK['func_layer_copy'] = () => {
+            this.layerSystem.buttonCopyLayer()
+        }
+        // レイヤーの削除
+        this.TASK['func_layer_delete'] = () => {
+            this.layerSystem.buttonDeleteLayer()
+        }
+        // レイヤーのクリア
+        this.TASK['func_layer_clear'] = () => {
+            this.layerSystem.buttonClearLayer()
         }
 
         // キャンバス全塗り潰し
@@ -1467,6 +1623,15 @@ export class AXPObj {
         this.TASK['func_size_up'] = () => {
             this.penSystem.upPenSize();
         }
+        // ペンの不透明度を１段階下げる
+        this.TASK['func_alpha_down'] = () => {
+            this.penSystem.changePenAlpha('down');
+        }
+        // ペンの不透明度を１段階上げる
+        this.TASK['func_alpha_up'] = () => {
+            this.penSystem.changePenAlpha('up');
+        }
+
         // キャンバス全体のぼかしの切り替え
         this.TASK['func_swap_pixelated'] = () => {
             const radioForm = document.getElementById('axp_config_form_antialiasing');
@@ -1483,6 +1648,111 @@ export class AXPObj {
             // キャンバス全体のぼかしを切り替えました。(現在の状態:%1)
             this.msg('@INF0009', isTurnON ? 'あり' : 'なし');
         }
+
+        const func_scroll = (x, y) => {
+            const move_size = Number(document.getElementById('axp_config_number_moveSize').value);
+            // 方向（設定で反転がチェックされている場合、移動方向を反転させる）
+            const move_vector = document.getElementById('axp_config_checkbox_moveDirection').checked ? -1 : 1;
+            this.moveCanvas(
+                x * move_size * move_vector,
+                y * move_size * move_vector
+            );
+        }
+        // 画面の上スクロール
+        this.TASK['func_scroll_up'] = () => {
+            func_scroll(0, 1);
+        }
+        // 画面の下スクロール
+        this.TASK['func_scroll_down'] = () => {
+            func_scroll(0, -1);
+        }
+        // 画面の左スクロール
+        this.TASK['func_scroll_left'] = () => {
+            func_scroll(1, 0);
+        }
+        // 画面の右スクロール
+        this.TASK['func_scroll_right'] = () => {
+            func_scroll(-1, 0);
+        }
+
+        const func_grid = (inkey) => {
+            // 補助線分割数
+            if (this.assistToolSystem.isGrid) {
+                let div_h = document.getElementById('axp_tool_form_gridH').volume.value;
+                let div_v = document.getElementById('axp_tool_form_gridV').volume.value;
+                switch (inkey) {
+                    // 縦
+                    case 'up_v':
+                        if (div_v < 16) div_v++;
+                        // 連動
+                        if (document.getElementById('axp_tool_checkbox_gridVHLink').checked) {
+                            div_h = div_v;
+                        }
+                        break;
+                    case 'down_v':
+                        if (div_v > 2) div_v--;
+                        // 連動
+                        if (document.getElementById('axp_tool_checkbox_gridVHLink').checked) {
+                            div_h = div_v;
+                        }
+                        break;
+                    // 横
+                    case 'up_h':
+                        if (div_h < 16) div_h++;
+                        // 連動
+                        if (document.getElementById('axp_tool_checkbox_gridVHLink').checked) {
+                            div_v = div_h;
+                        }
+                        break;
+                    case 'down_h':
+                        if (div_h > 2) div_h--;
+                        // 連動
+                        if (document.getElementById('axp_tool_checkbox_gridVHLink').checked) {
+                            div_v = div_h;
+                        }
+                        break;
+                }
+                // スライダー更新
+                document.getElementById('axp_tool_form_gridH').volume.value = div_h;
+                document.getElementById('axp_tool_form_gridH').result.value = div_h;
+                document.getElementById('axp_tool_form_gridV').volume.value = div_v;
+                document.getElementById('axp_tool_form_gridV').result.value = div_v;
+                this.updateGrid();
+                // コンフィグ保存
+                this.configSystem.saveConfig('RANGE_axp_tool_form_gridH', div_h);
+                this.configSystem.saveConfig('RANGE_axp_tool_form_gridV', div_v);
+                // 補助線分割数 横：%1 / 縦：%2
+                this.msg('@AXP0004', div_h, div_v);
+            } else {
+                // 補助線が表示されているときに有効なショートカットです。
+                this.msg('@CAU0206');
+            }
+        }
+        // 分割数:横を増やす
+        this.TASK['func_grid_up_h'] = () => {
+            func_grid('up_h');
+        }
+        // 分割数:横を減らす
+        this.TASK['func_grid_down_h'] = () => {
+            func_grid('down_h');
+        }
+        // 分割数:縦を増やす
+        this.TASK['func_grid_up_v'] = () => {
+            func_grid('up_v');
+        }
+        // 分割数:縦を減らす
+        this.TASK['func_grid_down_v'] = () => {
+            func_grid('down_v');
+        }
+
+        // ペンの太さ調整
+        this.TASK['func_size_change'] = (inkey, code) => {
+            if (!inkey) {
+                throw new Error('内部エラー：引数にキーが指定されていません（キーボード専用機能です）');
+            }
+            this.penSystem.modeChangeSizeOn(inkey, code);
+        }
+
     }
     // 表示系メソッド
     /**
@@ -1755,6 +2025,9 @@ export class AXPObj {
             this.configSystem.createConfigScaleTable(this.currentScaleTable);
             // キーカスタマイズに拡大率テーブルを反映
             this.configSystem.updateKeyCustomizationScaleTable(this.currentScaleTable);
+            // キーカスタマイズの折りたたみ
+            this.configSystem.switchNofuncKeytable();
+            this.configSystem.updateShortcutMessage();
             // キャンバスぼかし
             this.configSystem.set_canvas_antialiasing();
             // 座標表示

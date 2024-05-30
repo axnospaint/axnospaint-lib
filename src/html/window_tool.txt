@@ -14,37 +14,37 @@
                 </div>
             </div>
 
-            <button id="axp_tool_button_loupeDown" class="axpc_FUNC axpc_MSG axpc_button"
-                data-function="func_loupe_down" data-key="-" data-msg="@AST0003">-</button>
-            <button id="axp_tool_button_loupeReset" class="axpc_FUNC axpc_MSG axpc_button"
-                data-function="func_loupe_reset" data-key="0" data-msg="@AST0004">100%</button>
-            <button id="axp_tool_button_loupeUp" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_loupe_up"
-                data-key="+" data-msg="@AST0005">+</button>
+            <button id="axp_tool_button_loupeDown" class="axpc_FUNC axpc_button" data-function="func_loupe_down"
+                data-msg="@AST0003">-</button>
+            <button id="axp_tool_button_loupeReset" class="axpc_FUNC axpc_button" data-function="func_loupe_reset"
+                data-msg="@AST0004">100%</button>
+            <button id="axp_tool_button_loupeUp" class="axpc_FUNC axpc_button" data-function="func_loupe_up"
+                data-msg="@AST0005">+</button>
         </div>
         <!-- 補助ツール右側 -->
         <div id="axp_tool_div_rightSide">
-            <button id="axp_tool_button_undo" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_undo"
-                data-key="Z" data-msg="@AST0006">アンドゥ(0)</button>
-            <button id="axp_tool_button_redo" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_redo"
-                data-key="Y" data-msg="@AST0007">リドゥ(0)</button>
-            <button id="axp_tool_button_restore" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_restore"
-                data-key="R" data-msg="@AST0008">自動保存から復元</button>
+            <button id="axp_tool_button_undo" class="axpc_FUNC axpc_button" data-function="func_undo"
+                data-msg="@AST0006">アンドゥ(0)</button>
+            <button id="axp_tool_button_redo" class="axpc_FUNC axpc_button" data-function="func_redo"
+                data-msg="@AST0007">リドゥ(0)</button>
+            <button id="axp_tool_button_restore" class="axpc_FUNC axpc_button" data-function="func_restore"
+                data-msg="@AST0008">自動保存から復元</button>
 
-            <button id="axp_tool_button_save" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_save"
-                data-key="S" data-msg="@AST0009">セーブ</button>
-            <button id="axp_tool_button_load" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_load"
-                data-key="L" data-msg="@AST0010">ロード</button>
+            <button id="axp_tool_button_save" class="axpc_FUNC axpc_button" data-function="func_save"
+                data-msg="@AST0009">セーブ</button>
+            <button id="axp_tool_button_load" class="axpc_FUNC axpc_button" data-function="func_load"
+                data-msg="@AST0010">ロード</button>
 
-            <button id="axp_tool_button_flipH" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_flip_h"
-                data-key="H" data-msg="@AST0011">左右反転</button>
-            <button id="axp_tool_button_flipV" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_flip_v"
-                data-key="V" data-msg="@AST0012">上下反転</button>
+            <button id="axp_tool_button_flipH" class="axpc_FUNC axpc_button" data-function="func_flip_h"
+                data-msg="@AST0011">左右反転</button>
+            <button id="axp_tool_button_flipV" class="axpc_FUNC axpc_button" data-function="func_flip_v"
+                data-msg="@AST0012">上下反転</button>
 
-            <button id="axp_tool_button_transparent" class="axpc_FUNC axpc_MSG axpc_button"
-                data-function="func_transparent" data-key="T" data-msg="@AST0013">背景透過</button>
+            <button id="axp_tool_button_transparent" class="axpc_FUNC axpc_button" data-function="func_transparent"
+                data-msg="@AST0013">背景透過</button>
             <div id="axp_tool_div_gridbutton">
-                <button id="axp_tool_button_grid" class="axpc_FUNC axpc_MSG axpc_button" data-function="func_grid"
-                    data-key="G" data-msg="@AST0014">補助線</button>
+                <button id="axp_tool_button_grid" class="axpc_FUNC axpc_button" data-function="func_grid"
+                    data-msg="@AST0014">補助線</button>
                 <button id="axp_tool_button_gridConfig" class="axpc_MSG axpc_button" data-msg="@AST0015"></button>
             </div>
         </div>

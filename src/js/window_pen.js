@@ -137,9 +137,8 @@ export class PenSystem extends ToolWindow {
         let elementsButtonSub = document.querySelectorAll('#axp_penmode>div>article>button:first-of-type');
         // メインメニューの初期割り当て（サブボタンの先頭を登録）
         elementsButton.forEach((element, index) => {
-            //console.log(element);
             // ガイドメッセージ（サブボタンのメインボタンのメッセージを結合）
-            element.dataset.msg = elementsButtonSub[index].dataset.msg + element.dataset.addmsg;
+            element.dataset.addmsg = elementsButtonSub[index].dataset.msg;
             // ID情報
             element.dataset.set = elementsButtonSub[index].id;
             // アイコン
@@ -160,36 +159,73 @@ export class PenSystem extends ToolWindow {
         this.CANVAS.draw.height = this.axpObj.y_size;
         this.CANVAS.brush.height = this.axpObj.y_size * this.axpObj.CONST.DRAW_MULTI;
     }
-    // 機能呼び出しからのペンモード変更
-    switchMode(mode) {
+    // ペンツール変更（メインボタン）
+    switchMainButton(element, caller = null) {
         if (!this.isSwitchable()) return;
-        let target;
-        switch (mode) {
-            case 'pen':
-                target = document.getElementById('axp_pen_button_penBase');
-                break;
-            case 'eraser':
-                target = document.getElementById('axp_pen_button_eraserBase');
-                break;
-            case 'fill':
-                target = document.getElementById('axp_pen_button_fillBase');
-                break;
-            case 'hand':
-                target = document.getElementById('axp_pen_button_handBase');
-                break;
-            case 'spuit':
-                target = document.getElementById('axp_pen_button_spuitBase');
-                break;
-            case 'toggle':
-                // ペン以外が選択されている時はペンに、ペンが選択されているときは消しゴムに切り替え
-                if (document.getElementById('axp_pen_button_penBase').dataset.selected !== 'true') {
-                    target = document.getElementById('axp_pen_button_penBase');
-                } else {
-                    target = document.getElementById('axp_pen_button_eraserBase');
+        // メインボタン
+        let target = element;
+        // スポイト以外のボタンが再選択されたらサブメニューオープン（ショートカットで呼び出された場合caller!=null、サブメニューは開かない）
+        if (target.dataset.idx !== '4' &&
+            !caller &&
+            target.dataset.selected === 'true') {
+
+            let targetElements_button = document.querySelectorAll('#axp_pen_div_rightSide>div>button');
+            for (const item of targetElements_button) {
+                if (item !== target) {
+                    item.style.opacity = '0.3';
                 }
-                break;
+            }
+            let idx = Number(target.dataset.idx);
+            let targetElements_article = document.querySelectorAll('#axp_penmode>div>article');
+
+            // 一旦全部非表示
+            for (const item of targetElements_article) {
+                UTIL.hide(item);
+            }
+            // 選択されたdata-idxに対応するサブウィンドウ要素
+            let subwindow = targetElements_article[Number(idx)];
+            // 種別名表示
+            document.getElementById('axp_penmode_span_modeName').textContent = `${subwindow.dataset.name}種別`;
+            // 選択されたメインボタンに対応するサブウィンドウだけ表示
+            UTIL.show(subwindow);
+            // キャンバスタブエリアの位置（左上座標調整用）
+            const canvasRect = document.getElementById('axp_canvas').getBoundingClientRect();
+            // サブボタンメニューの表示座標指定
+            let rect = document.getElementById('axp_pen_div_leftSide').getBoundingClientRect();
+            let elem = document.querySelector('#axp_penmode>div');
+            elem.style.width = (rect.width + 5) + 'px';
+            elem.style.height = (rect.height + 4) + 'px';
+            elem.style.marginLeft = (rect.left - 4 - canvasRect.left) + 'px';
+            elem.style.marginTop = (rect.top - 2 - canvasRect.top) + 'px';
+            // サブウィンドウの表示
+            this.axpObj.isModalOpen = true;
+            // ペンツールの機能選択中です。
+            this.axpObj.msg('@AXP5010');
+            UTIL.show('axp_penmode');
+        } else {
+            this.switchButton(target);
         }
-        this.switchButton(target);
+    }
+    // ペン種別変更（サブボタン）
+    switchSubButton(element) {
+        if (!this.isSwitchable()) return;
+        // 押されたボタン
+        let target = element;
+        // メインボタン（data-idxをキーに対応するメインボタンを特定する）
+        const elementButtonMain = document.querySelector(`#axp_pen_div_rightSide>div>button[data-idx="${target.dataset.idx}"]`);
+        // メインボタンにセットされているサブボタンclassを消去
+        console.log(elementButtonMain);
+        elementButtonMain.classList.remove(this.getClassIcon(elementButtonMain.dataset.set));
+        // メインボタンに押されたサブボタンのid名のclassを付与（これによりメインボタンのアイコンが変更される）
+        elementButtonMain.classList.add(this.getClassIcon(target.id));
+        // メインボタンに選択されたサブボタンのidを格納（これによりメインボタンを押すことで、サブボタンのペンが呼び出される）
+        elementButtonMain.dataset.set = target.id;
+        // メインボタンにメッセージを格納
+        elementButtonMain.dataset.addmsg = target.dataset.msg;
+        let newMode = target.id;
+        console.log('サブ選択:', newMode);
+        // モード変更
+        this.switchButton(elementButtonMain);
     }
     // メインボタンの選択状態切替
     switchButton(elementButton) {
@@ -209,12 +245,12 @@ export class PenSystem extends ToolWindow {
     isSwitchable() {
         // ショートカットによるスポイト、ハンド使用時は、処理しない（状態を上書きしてしまうと元に戻せないため）
         if (this.axpObj.isCTRL) {
-            // [CTRL]キーでスポイトに変化中です。別のペンは選択できません。
+            // [ CTRL ]キーでスポイトに変化中です。別のペンは選択できません。
             this.axpObj.msg('@CAU5000');
             return false;
         }
         if (this.axpObj.isSPACE) {
-            // [SPACE]キーでハンドに変化中です。別のペンは選択できません。
+            // [ SPACE ]キーでハンドに変化中です。別のペンは選択できません。
             this.axpObj.msg('@CAU5001');
             return false;
         }
@@ -231,82 +267,6 @@ export class PenSystem extends ToolWindow {
                 this.axpObj.msg('@AXP5010');
             }
         });
-        // ペンツールのメインボタン
-        const elems_penicon = document.querySelectorAll('#axp_pen_div_rightSide>div>button');
-        for (const item of elems_penicon) {
-            item.addEventListener('click',
-                (e) => {
-                    if (!this.isSwitchable()) return;
-                    let target = e.currentTarget;
-                    // ペンが２度選択されたらサブメニューオープン
-                    if (target.dataset.selected === 'true') {
-                        // サブウィンドウが存在するボタン（スポイト以外）
-                        if (target.dataset.idx !== '4') {
-                            let targetElements_button = document.querySelectorAll('#axp_pen_div_rightSide>div>button');
-                            for (const item of targetElements_button) {
-                                if (item !== target) {
-                                    item.style.opacity = '0.3';
-                                }
-                            }
-                            let idx = Number(target.dataset.idx);
-                            let targetElements_article = document.querySelectorAll('#axp_penmode>div>article');
-
-                            // 一旦全部非表示
-                            for (const item of targetElements_article) {
-                                UTIL.hide(item);
-                            }
-                            // 選択されたdata-idxに対応するサブウィンドウ要素
-                            let subwindow = targetElements_article[Number(idx)];
-                            // 種別名表示
-                            document.getElementById('axp_penmode_span_modeName').textContent = `${subwindow.dataset.name}選択`;
-                            // 選択されたメインボタンに対応するサブウィンドウだけ表示
-                            UTIL.show(subwindow);
-                            // キャンバスタブエリアの位置（左上座標調整用）
-                            const canvasRect = document.getElementById('axp_canvas').getBoundingClientRect();
-                            // サブボタンメニューの表示座標指定
-                            let rect = document.getElementById('axp_pen_div_leftSide').getBoundingClientRect();
-                            let elem = document.querySelector('#axp_penmode>div');
-                            elem.style.width = (rect.width + 5) + 'px';
-                            elem.style.height = (rect.height + 4) + 'px';
-                            elem.style.marginLeft = (rect.left - 4 - canvasRect.left) + 'px';
-                            elem.style.marginTop = (rect.top - 2 - canvasRect.top) + 'px';
-                            // サブウィンドウの表示
-                            this.axpObj.isModalOpen = true;
-                            // ペンツールの機能選択中です。
-                            this.axpObj.msg('@AXP5010');
-                            UTIL.show('axp_penmode');
-                            return;
-                        }
-                    }
-                    this.switchButton(target);
-                }
-            );
-        }
-        const elems_button_main = document.querySelectorAll('#axp_pen_div_rightSide>div>button');
-        // サブボタン
-        // メモ：モーダルウィンドウ表示中でキー無効のため、CTRL、SPACEの考慮は不要
-        const elems_button_sub = document.querySelectorAll('#axp_penmode button');
-        for (const item of elems_button_sub) {
-            //console.log('button:', item);
-            item.addEventListener('click',
-                (e) => {
-                    // 押されたボタン
-                    let target = e.currentTarget;
-                    // メインボタンにセットされているサブボタンclassを消去
-                    elems_button_main[Number(target.dataset.idx)].classList.remove(this.getClassIcon(elems_button_main[Number(target.dataset.idx)].dataset.set));
-                    // メインボタンに押されたサブボタンのid名のclassを付与（これによりメインボタンのアイコンが変更される）
-                    elems_button_main[Number(target.dataset.idx)].classList.add(this.getClassIcon(target.id));
-                    // メインボタンに選択されたサブボタンのidを格納（これによりメインボタンを押すことで、サブボタンのペンが呼び出される）
-                    elems_button_main[Number(target.dataset.idx)].dataset.set = target.id;
-                    // メインボタンにメッセージを格納（サブボタンとメインボタンのメッセージを結合）
-                    elems_button_main[Number(target.dataset.idx)].dataset.msg = target.dataset.msg + elems_button_main[Number(target.dataset.idx)].dataset.addmsg;
-                    let newMode = target.id;
-                    console.log('サブ選択:', newMode);
-                    // モード変更
-                    this.changePenMode(newMode);
-                }
-            );
-        }
 
         // ペンツールのサブウィンドウ
         document.getElementById('axp_penmode').addEventListener('click',
@@ -511,7 +471,7 @@ export class PenSystem extends ToolWindow {
 
     start(x, y, e, mode, option) {
         // ペンの太さ変更モード時、クリックされた初期座標を記憶
-        if (this.axpObj.isCHANGE_SIZE_KEY) {
+        if (this.axpObj.codeCHANGE_SIZE_KEY) {
             this.base_index = this.getIndex();
             this.old_x = e.clientX;
             this.old_y = e.clientY;
@@ -531,7 +491,7 @@ export class PenSystem extends ToolWindow {
     move(x, y, e) {
         let name = this.getName();
         // ペンの太さ変更モード時、初期座標との差異からindexを算出し、ペンの太さを変更する
-        if (this.axpObj.isCHANGE_SIZE_KEY) {
+        if (this.axpObj.codeCHANGE_SIZE_KEY) {
             if (this.base_index !== null) {
                 let difference_x = e.clientX - this.old_x;
                 //console.log('difference_x:', typeof difference_x, difference_x);
@@ -578,7 +538,7 @@ export class PenSystem extends ToolWindow {
 
     }
     end(x, y, e) {
-        if (this.axpObj.isCHANGE_SIZE_KEY) {
+        if (this.axpObj.codeCHANGE_SIZE_KEY) {
             if (this.base_index !== null) {
                 this.base_index = null;
                 if (this.getSize()) {
@@ -768,7 +728,7 @@ export class PenSystem extends ToolWindow {
                 this.axpObj.ELEMENT.view.style.cursor = 'crosshair';
                 // ペンガイド線非表示
                 this.axpObj.ELEMENT.cursor.style.visibility = 'hidden';
-                // [CTRL]: 押している間、ペンがスポイトに変化します。
+                // [ CTRL ]: 押している間、ペンがスポイトに変化します。
                 this.axpObj.msg('@AXP5005');
                 document.getElementById('axp_pen_button_spuitBase').dataset.selected = 'true';
                 break;
@@ -777,7 +737,7 @@ export class PenSystem extends ToolWindow {
                 this.axpObj.ELEMENT.view.style.cursor = 'grab';
                 // ペンガイド線非表示
                 this.axpObj.ELEMENT.cursor.style.visibility = 'hidden';
-                // [SPACE]: 押している間、ペンがハンドに変化します。
+                // [ SPACE ]: 押している間、ペンがハンドに変化します。
                 this.axpObj.msg('@AXP5006');
                 // ハンド以外（移動ツール）が選択されているとき、アイコンをハンドに変化
                 let elementHand = document.getElementById('axp_pen_button_handBase');
@@ -959,7 +919,7 @@ export class PenSystem extends ToolWindow {
         if (this.axpObj.config('axp_config_form_autoChangeSpuitToPen') === 'on') {
             // スポイトが選択されているとき（ctrlの一時的なスポイトではない時）ペンに切り替える
             if (!this.axpObj.isCTRL) {
-                this.switchMode('pen');
+                this.switchMainButton(document.getElementById('axp_pen_button_penBase'), 'spuit');
             }
         }
     }
@@ -1172,20 +1132,24 @@ export class PenSystem extends ToolWindow {
         }
         this.axpObj.layerSystem.updateCanvas();
     }
-    modeChangeSizeOn() {
+    modeChangeSizeOn(inkey, code) {
+        // 既に他のキーにより「ペンの太さ調整」中の場合は無効
+        if (this.axpObj.codeCHANGE_SIZE_KEY) {
+            return;
+        }
         let name = this.getName();
         if (this.getSize() === null) {
             // %1の太さは変更できません。
             this.axpObj.msg('@CAU0203', name);
             return;
         }
-        this.axpObj.isCHANGE_SIZE_KEY = true;
-        // [Q]:押している間、その場でペンの太さスライドバーを操作できます。
-        this.axpObj.msg('@AXP5007');
+        this.axpObj.codeCHANGE_SIZE_KEY = code;
+        // %1押している間、その場でペンの太さレンジスライダーを操作できます。
+        this.axpObj.msg('@AXP5007', `[ ${inkey} ]:`);
     }
     modeChangeSizeOff() {
-        if (this.axpObj.isCHANGE_SIZE_KEY) {
-            this.axpObj.isCHANGE_SIZE_KEY = false;
+        if (this.axpObj.codeCHANGE_SIZE_KEY) {
+            this.axpObj.codeCHANGE_SIZE_KEY = null;
         }
         this.axpObj.msg('');
     }
@@ -1244,6 +1208,44 @@ export class PenSystem extends ToolWindow {
             size = range_value[index];
             // ペンサイズ更新（＋ペンツール表示更新、コンフィグ保存）
             this.setPenSize(size);
+        }
+    }
+    changePenAlpha(type) {
+        let name = this.getName();
+        let alpha = this.getAlpha();
+        // 不透明度を変更できないペンを変更したとき
+        if (alpha === null) {
+            // %1の不透明度は変更できません。
+            this.axpObj.msg('@CAU0200', name);
+            return;
+        } else {
+            alpha = Number(alpha);
+            // 上キーなら不透明度を上げる、下キーなら下げる
+            if (type === 'up') {
+                if (alpha >= 100) {
+                    // %1の不透明度は100が最大値です。
+                    this.axpObj.msg('@CAU0201,', name);
+                    return;
+                }
+                alpha = alpha + 5;
+            } else {
+                if (alpha <= 5) {
+                    // %1の不透明度は5が最小値です。
+                    this.axpObj.msg('@CAU0202', name);
+                    return;
+                }
+                alpha = alpha - 5;
+            }
+            // %1の不透明度：%2
+            this.axpObj.msg('@AXP0003', name, alpha);
+            this.axpObj.penSystem.setAlpha(alpha);
+            // ペンの太さプレビュー
+            this.axpObj.penSystem.previewPenSize();
+            // 変更をレンジスライダーにも反映
+            document.getElementById('axp_pen_form_alpha').result.value = alpha;
+            document.getElementById('axp_pen_range_alpha').value = alpha;
+            // コンフィグオブジェクトをDBに保存
+            this.axpObj.configSystem.saveConfig('P-ALP_' + this.axpObj.penSystem.pen_mode, alpha);
         }
     }
 }

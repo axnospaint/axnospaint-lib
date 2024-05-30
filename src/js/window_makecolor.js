@@ -96,26 +96,6 @@ export class ColorMakerSystem extends ToolWindow {
     }
     //　イベント受付開始
     startEvent() {
-        // ボタン：メインカラー／サブカラー
-        document.getElementById('axp_makecolor_div_mainColor').addEventListener('click', () => {
-            this.selectPalette('main');
-            this.setMainColor(this.maincolor);
-            // %drawingColorName RGB:(%1)
-            this.axpObj.msg('@COL0001', hex2rgb(this.maincolor));
-        });
-        document.getElementById('axp_makecolor_div_subColor').addEventListener('click', () => {
-            this.selectPalette('sub');
-            this.setMainColor(this.subcolor);
-            // %drawingColorName RGB:(%1)
-            this.axpObj.msg('@COL0001', hex2rgb(this.subcolor));
-        });
-        // ボタン：透明色
-        document.getElementById('axp_makecolor_div_transparent').onclick = () => {
-            this.selectPalette('transparent');
-            this.setMainColor(this.maincolor);
-            // 透明色
-            this.axpObj.msg('@COL0002');
-        }
         // ボタン：スワップ
         document.getElementById('axp_makecolor_button_swapColor').addEventListener('click', () => {
             // メインカラーとサブカラーの交換
@@ -179,6 +159,24 @@ export class ColorMakerSystem extends ToolWindow {
         document.getElementById('axp_makecolor_number_blue').onchange = onchangeColorValue;
 
         // イベント登録終了
+    }
+    selectMainColor() {
+        this.selectPalette('main');
+        this.setMainColor(this.maincolor);
+        // %drawingColorName RGB:(%1)
+        this.axpObj.msg('@COL0001', hex2rgb(this.maincolor));
+    }
+    selectSubColor() {
+        this.selectPalette('sub');
+        this.setMainColor(this.subcolor);
+        // %drawingColorName RGB:(%1)
+        this.axpObj.msg('@COL0001', hex2rgb(this.subcolor));
+    }
+    selectTransparent() {
+        this.selectPalette('transparent');
+        this.setMainColor(this.maincolor);
+        // 透明色
+        this.axpObj.msg('@COL0002');
     }
     getMainColor() {
         return this.maincolor;
