@@ -115,14 +115,25 @@
     background: #f7a312 !important;
 }
 
-#axp_config_table_shortcutKey {
-    border: 4px double #bbb;
+/* ショートカットテーブル */
+.axpc_config_table {
+    border: 2px solid #aaa;
+    border-collapse: collapse;
 }
 
-#axp_config_table_shortcutKey td {
-    border: 1px solid #999;
+.axpc_config_table td:nth-child(1) {
+    font-family: 'Consolas', monospace;
+    font-size: 12pt;
+}
+
+.axpc_config_table th {
     padding: 0 8px;
-    cursor: pointer;
+    background-color: #ddf;
+}
+
+.axpc_config_table td {
+    padding: 0 8px;
+    border: 1px solid #aaa;
 }
 
 /* 設定用のカラーパレット表示（モックアップ）*/

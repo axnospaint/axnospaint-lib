@@ -14,7 +14,6 @@
                 <button class="axpc_MSG" data-msg="@CFG2009">マウス</button>
                 <button class="axpc_MSG" data-msg="@CFG2010">タッチパネル</button>
                 <button class="axpc_MSG" data-msg="@CFG2011">キーボード</button>
-                <button class="axpc_MSG" data-msg="@CFG2012">ショートカット</button>
                 <button class="axpc_MSG" data-msg="@CFG2013">起動時</button>
                 <button class="axpc_MSG" data-msg="@CFG2020" id="axp_config_button_version">バージョン情報</button>
             </div>
@@ -262,7 +261,7 @@
                 </div>
             </div>
             <div class="axpc_config_section" data-title="カスタムボタン">
-                <div class="axpc_config_group" data-title="カスタムボタン">
+                <div class="axpc_config_group" data-title="カスタムボタンと機能割り当て">
                     <u>ボタンの表示</u>
                     <form id="axp_config_form_useCustomButton" class="axpc_radio">
                         <span data-msg="@CFG0080" data-value="off" data-default="y">なし</span>
@@ -270,9 +269,17 @@
                     </form>
                     <br>
                     <div id="axp_config_div_customButtonFunction">
-                        <u>機能割り当て</u>
-                        <div></div>
-                        （※機能を割り当てたボタンのみ表示されます）
+                        <table id="axp_config_table_customButton" class="axpc_MSG axpc_config_table"
+                            data-msg="@CFG0112">
+                            <thead>
+                                <tr>
+                                    <th>ボタン</th>
+                                    <th>機能</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -394,40 +401,15 @@
                 </div>
             </div>
             <div class="axpc_config_section" data-title="キーボード">
-                <div class="axpc_config_group" data-title="方向キー">
-                    <u>機能割り当て</u>
-                    <form id="axp_config_form_keyCustomArrow" class="axpc_radio">
-                        <span data-msg="@CFG0104" data-value="none">なし</span>
-                        <span data-msg="@CFG0105" data-value="move" data-default="y">キャンバス移動</span>
-                        <span data-msg="@CFG0106" data-value="size">太さ/不透明度</span>
-                        <span data-msg="@CFG0107" data-value="grid">補助線分割数</span>
-                    </form>
-                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0230">
+                <div class="axpc_config_group" data-title="ショートカットと機能割り当て">
+                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0111">
                         <label>
-                            <input id="axp_config_checkbox_moveDirection" class="axpc_SAVE" type="checkbox">キャンバス移動の方向反転
+                            <input id="axp_config_checkbox_shortcutKeyHiddenNofunc" class="axpc_SAVE"
+                                type="checkbox">割り当て無しのキーを非表示にする
                         </label>
                     </div>
-                    <div class="axpc_number axpc_MSG" data-msg="@CFG0108">
-                        <label>キャンバス移動の移動量
-                            <input id="axp_config_number_moveSize" class="axpc_SAVE" type="number" min="1" max="100"
-                                value="30">[px]（※最小1～最大100）
-                        </label>
-                    </div>
-                </div>
-                <div class="axpc_config_group" data-title="数字キー">
-                    <u>機能割り当て</u>
-                    <div id="axp_config_div_customKeyFunction" class="axpc_MSG" data-msg="@CFG0231"></div>
-                    <br>
-                    <u>一括設定</u><br>
-                    <button id="axp_config_button_setCustomKeyFunction1"
-                        class="axpc_MSG axpc_button axpc_button_width260" data-msg="@CFG0109">拡大率</button><br>
-                    <button id="axp_config_button_setCustomKeyFunction2"
-                        class="axpc_MSG axpc_button axpc_button_width260" data-msg="@CFG0110">ペンの太さ</button>
-                </div>
-            </div>
-            <div class="axpc_config_section" data-title="ショートカット">
-                <div class="axpc_config_group" data-title="ショートカット一覧">
-                    <table id="axp_config_table_shortcutKey">
+                    <div style="margin-top: 8px;"></div>
+                    <table id="axp_config_table_shortcutKey" class="axpc_MSG axpc_config_table" data-msg="@CFG0112">
                         <thead>
                             <tr>
                                 <th>キー</th>
@@ -436,109 +418,43 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td title="Background tile">[B]</td>
-                                <td>背景タイルプレビュー</td>
-                            </tr>
-                            <tr>
-                                <td>[C]</td>
-                                <td>メインカラー／透明色の切り替え</td>
-                            </tr>
-                            <tr>
-                                <td>[E]</td>
-                                <td>ペンの太さを１段階上げる</td>
-                            </tr>
-                            <tr>
-                                <td title="Grid">[G]</td>
-                                <td>補助線の表示切り替え</td>
-                            </tr>
-                            <tr>
-                                <td title="Horizontal flip">[H]または[M]</td>
-                                <td>全レイヤー左右反転</td>
-                            </tr>
-                            <tr>
-                                <td title="Initialize">[I]</td>
-                                <td>ツールウィンドウの位置初期化</td>
-                            </tr>
-                            <tr>
-                                <td title="Kai-ten">[K]</td>
-                                <td>90°回転</td>
-                            </tr>
-                            <tr>
-                                <td title="Load">[L]</td>
-                                <td>ロード</td>
-                            </tr>
-                            <tr>
-                                <td title="Pixelated">[P]</td>
-                                <td>キャンバス全体のぼかしの切り替え</td>
-                            </tr>
-                            <tr>
-                                <td>[Q]</td>
-                                <td>ペンの太さ調整</td>
-                            </tr>
-                            <tr>
-                                <td title="Restore">[R]</td>
-                                <td>自動保存から復元</td>
-                            </tr>
-                            <tr>
-                                <td title="Save">[S]</td>
-                                <td>セーブ</td>
-                            </tr>
-                            <tr>
-                                <td title="Transparent">[T]</td>
-                                <td>背景透過</td>
-                            </tr>
-                            <tr>
-                                <td>[U]</td>
-                                <td>全面塗り潰し</td>
-                            </tr>
-                            <tr>
-                                <td title="Vertical flip">[V]</td>
-                                <td>全レイヤー上下反転</td>
-                            </tr>
-                            <tr>
-                                <td>[W]</td>
-                                <td>ペンの太さを１段階下げる</td>
-                            </tr>
-                            <tr>
-                                <td title="eXchange">[X]</td>
-                                <td>メインカラー／サブカラーの切り替え</td>
-                            </tr>
-                            <tr>
-                                <td>[Y]</td>
-                                <td>リドゥ</td>
-                            </tr>
-                            <tr>
-                                <td>[Z]または[BS]</td>
-                                <td>アンドゥ</td>
-                            </tr>
-                            <tr>
-                                <td>[0]</td>
-                                <td>キャンバスの表示サイズの初期化</td>
-                            </tr>
-                            <tr>
-                                <td>[-]</td>
-                                <td>キャンバスの表示サイズ縮小</td>
-                            </tr>
-                            <tr>
-                                <td>[+]または[;]</td>
-                                <td>キャンバスの表示サイズ拡大</td>
-                            </tr>
-                            <tr>
-                                <td>[SPACE]</td>
+                                <td>[ SPACE ]</td>
                                 <td>ハンドツール</td>
                             </tr>
                             <tr>
-                                <td>[SHIFT]</td>
+                                <td>[ SHIFT ]</td>
                                 <td>直線</td>
                             </tr>
                             <tr>
-                                <td>[CTRL]</td>
+                                <td>[ CTRL ]</td>
                                 <td>スポイト</td>
                             </tr>
                         </tbody>
                     </table>
-                    ※[1]～[9]は、任意の機能を割り当てることができます。<br>
-                    ※方向キーは、キャンバスの位置移動、ペンの太さ/不透明度、補助線分割数から選択。
+                </div>
+                <div class="axpc_config_group" data-title="ショートカットのインポート・エクスポート／初期化">
+                    <button id="axp_config_button_saveShortcut" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0113">ショートカットファイルに保存</button>
+                    <br>
+                    <button id="axp_config_button_loadShortcut" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0114">ショートカットファイルの読込</button>
+                    <br>
+                    <button id="axp_config_button_resetShortcut" class="axpc_MSG axpc_button axpc_button_width260"
+                        data-msg="@CFG0115">ショートカットの初期化</button>
+                    <input type="file" id="axp_config_file_loadShortcut" accept=".txt" style="display: none;">
+                </div>
+                <div class="axpc_config_group" data-title="画面スクロール">
+                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0230">
+                        <label>
+                            <input id="axp_config_checkbox_moveDirection" class="axpc_SAVE" type="checkbox">スクロール方向反転
+                        </label>
+                    </div>
+                    <div class="axpc_number axpc_MSG" data-msg="@CFG0108">
+                        <label>スクロール移動量
+                            <input id="axp_config_number_moveSize" class="axpc_SAVE" type="number" min="1" max="100"
+                                value="30">[px]（※最小1～最大100）
+                        </label>
+                    </div>
                 </div>
             </div>
             <div class="axpc_config_section" data-title="起動時">

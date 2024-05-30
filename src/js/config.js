@@ -7,6 +7,67 @@ import { range_index } from './pendefine/rangeindex.js';
 // css適用
 require('../css/config.css');
 
+// ショートカットキーバインド
+const objButtonFunction = [
+    ['1', '1', 'func_undo'],
+    ['2', '2', 'none'],
+    ['3', '3', 'none'],
+]
+const objKeyFunction = [
+    ['*', 'ASTERISK', 'none'],
+    ['+', 'PLUS', 'func_loupe_up'],
+    [',', 'COMMA', 'none'],
+    ['-', 'MINUS', 'func_loupe_down'],
+    ['.', 'DOT', 'none'],
+    ['/', 'SLASH', 'none'],
+    ['1', '1', 'none'],
+    ['2', '2', 'none'],
+    ['3', '3', 'none'],
+    ['4', '4', 'none'],
+    ['5', '5', 'none'],
+    ['6', '6', 'none'],
+    ['7', '7', 'none'],
+    ['8', '8', 'none'],
+    ['9', '9', 'none'],
+    ['0', '0', 'func_loupe_reset'],
+    [':', 'COLON', 'none'],
+    [';', 'SEMICOLON', 'func_loupe_up'],
+    ['A', 'A', 'none'],
+    ['B', 'B', 'func_backgroundimage'],
+    ['C', 'C', 'func_swap_transparent'],
+    ['D', 'D', 'none'],
+    ['E', 'E', 'func_size_up'],
+    ['F', 'F', 'none'],
+    ['G', 'G', 'func_grid'],
+    ['H', 'H', 'func_flip_h'],
+    ['I', 'I', 'func_init_window_positon'],
+    ['J', 'J', 'none'],
+    ['K', 'K', 'func_rotate'],
+    ['L', 'L', 'func_load'],
+    ['M', 'M', 'func_flip_h'],
+    ['N', 'N', 'none'],
+    ['O', 'O', 'none'],
+    ['P', 'P', 'func_swap_pixelated'],
+    ['Q', 'Q', 'func_size_change'],
+    ['R', 'R', 'func_restore'],
+    ['S', 'S', 'func_save'],
+    ['T', 'T', 'func_transparent'],
+    ['U', 'U', 'func_fill_all'],
+    ['V', 'V', 'func_flip_v'],
+    ['W', 'W', 'func_size_down'],
+    ['X', 'X', 'func_swap_maincolor'],
+    ['Y', 'Y', 'func_redo'],
+    ['Z', 'Z', 'func_undo'],
+    ['Backspace', 'BACKSPACE', 'func_undo'],
+    ['Enter', 'ENTER', 'none'],
+    ['↑', 'ARROWUP', 'func_scroll_up'],
+    ['↓', 'ARROWDOWN', 'func_scroll_down'],
+    ['←', 'ARROWLEFT', 'func_scroll_left'],
+    ['→', 'ARROWRIGHT', 'func_scroll_right'],
+];
+
+const mapFunction = new Map();
+
 // 設定機能制御オブジェクト
 export class ConfigSystem {
     axpObj;
@@ -20,17 +81,64 @@ export class ConfigSystem {
     configCanvasSizeHistory = [];
     // 数字キーのカスタマイズ用セレクトボックスのオプション定義
     optionlist = [
+        { value: 'optgroup', name: '機能無し' },
         { value: 'none', name: '---' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: 'ペンツール選択' },
         { value: 'func_switch_pen', name: '選択:ペン' },
         { value: 'func_switch_eraser', name: '選択:消しゴム' },
         { value: 'func_switch_fill', name: '選択:バケツ' },
         { value: 'func_switch_hand', name: '選択:ツール' },
         { value: 'func_switch_spuit', name: '選択:スポイト' },
         { value: 'func_switch_toggle', name: '選択:ペン／消しゴム切替' },
-        { value: 'func_loupe', name: '拡大率' },
-        { value: 'func_size', name: 'ペンの太さ' },
-        { value: 'func_size_down', name: 'ペンの太さを１段階下げる' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: 'ペン種別' },
+        { value: 'func_switch_axp_penmode_round', name: 'ペン種別:丸ペン' },
+        { value: 'func_switch_axp_penmode_square', name: 'ペン種別:角ペン' },
+        { value: 'func_switch_axp_penmode_dot', name: 'ペン種別:ドットペン' },
+        { value: 'func_switch_axp_penmode_fude', name: 'ペン種別:筆ペン' },
+        { value: 'func_switch_axp_penmode_crayon', name: 'ペン種別:クレヨン' },
+        { value: 'func_switch_axp_penmode_brush', name: 'ペン種別:エアブラシ' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: '消しゴム種別' },
+        { value: 'func_switch_axp_penmode_eraser_round', name: '消しゴム種別:消しゴム' },
+        { value: 'func_switch_axp_penmode_eraser_dot', name: '消しゴム種別:角消しゴム' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: 'バケツ種別' },
+        { value: 'func_switch_axp_penmode_fill', name: 'バケツ種別:バケツ' },
+        { value: 'func_switch_axp_penmode_fillgradation', name: 'バケツ種別:階調バケツ' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: 'ツール種別' },
+        { value: 'func_switch_axp_penmode_hand', name: 'ツール種別:ハンド' },
+        { value: 'func_switch_axp_penmode_move', name: 'ツール種別:移動ツール' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: 'ペンの太さ' },
+        { value: 'func_size', name: 'ペンの太さ（値指定）' },
+        { value: 'func_size_change', name: 'ペンの太さ調整' },
         { value: 'func_size_up', name: 'ペンの太さを１段階上げる' },
+        { value: 'func_size_down', name: 'ペンの太さを１段階下げる' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: 'ペンの不透明度' },
+        { value: 'func_alpha_up', name: 'ペンの不透明度を１段階上げる' },
+        { value: 'func_alpha_down', name: 'ペンの不透明度を１段階下げる' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: '描画色の選択' },
+        { value: 'func_switch_maincolor', name: 'メインカラーを選択' },
+        { value: 'func_switch_subcolor', name: 'サブカラーを選択' },
+        { value: 'func_switch_transparent', name: '透明色を選択' },
+        { value: 'func_swap_maincolor', name: 'メイン／サブカラー切替' },
+        { value: 'func_swap_transparent', name: 'メイン／透過色切替' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: 'レイヤー操作' },
+        { value: 'func_layer_create', name: 'レイヤーの新規作成' },
+        { value: 'func_layer_integrate', name: 'レイヤーの統合' },
+        { value: 'func_layer_copy', name: 'レイヤーのコピー' },
+        { value: 'func_layer_delete', name: 'レイヤーの削除' },
+        { value: 'func_layer_clear', name: 'レイヤーのクリア' },
+        { value: 'func_fill_all', name: '全面塗り潰し' },
+        { value: 'func_rotate', name: '90°回転' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: '補助ツール' },
         { value: 'func_undo', name: 'アンドゥ' },
         { value: 'func_redo', name: 'リドゥ' },
         { value: 'func_restore', name: '自動保存から復元' },
@@ -40,16 +148,31 @@ export class ConfigSystem {
         { value: 'func_flip_v', name: '全レイヤー上下反転' },
         { value: 'func_transparent', name: '背景透過' },
         { value: 'func_grid', name: '補助線' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: '拡大率' },
+        { value: 'func_loupe', name: '拡大率（値指定）' },
         { value: 'func_loupe_down', name: '拡大率を１段階縮小' },
         { value: 'func_loupe_reset', name: '拡大率とキャンバス位置のリセット' },
         { value: 'func_loupe_up', name: '拡大率を１段階拡大' },
-        { value: 'func_swap_transparent', name: 'メイン色と透過色切り替え' },
-        { value: 'func_swap_maincolor', name: 'メイン色とサブ色切り替え' },
-        { value: 'func_fill_all', name: '全面塗り潰し' },
-        { value: 'func_backgroundimage', name: '背景タイルプレビュー' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: '画面スクロール' },
+        { value: 'func_scroll_up', name: '画面を上スクロール' },
+        { value: 'func_scroll_down', name: '画面を下スクロール' },
+        { value: 'func_scroll_left', name: '画面を左スクロール' },
+        { value: 'func_scroll_right', name: '画面を右スクロール' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: '補助線分割数' },
+        { value: 'func_grid_up_h', name: '分割数:横を増やす' },
+        { value: 'func_grid_down_h', name: '分割数:横を減らす' },
+        { value: 'func_grid_up_v', name: '分割数:縦を増やす' },
+        { value: 'func_grid_down_v', name: '分割数:縦を減らす' },
+        { value: '/optgroup' },
+        { value: 'optgroup', name: 'その他' },
         { value: 'func_init_window_positon', name: 'ツールウィンドウの位置初期化' },
+        { value: 'func_swap_pixelated', name: 'キャンバス全体のぼかし切替' },
+        { value: 'func_backgroundimage', name: '背景タイルプレビュー' },
         { value: 'func_download', name: '画像をPNG形式でファイルに保存' },
-        { value: 'func_swap_pixelated', name: 'キャンバス全体のぼかしの切り替え' },
+        { value: '/optgroup' },
     ];
     constructor(axpObj) {
         this.axpObj = axpObj;
@@ -127,35 +250,24 @@ export class ConfigSystem {
                 form.appendChild(newLabel);
             }
         }
-
-        // 数字キーのカスタマイズ用セレクトボックスの生成
-        const elementsDivKey = document.getElementById('axp_config_div_customKeyFunction');
-        // [1]-[9]の生成
-        for (let idx = 1; idx <= 9; idx++) {
-            elementsDivKey.appendChild(this.createKeyConfigHTML('key', idx));
-        }
-        // 数字キーのカスタマイズ用セレクトボックスにデフォルト値を設定
-        this.config_key_defalut();
-
-        // カスタムボタンのカスタマイズ用セレクトボックスの生成
-        const elementsDivCustom = document.querySelector('#axp_config_div_customButtonFunction>div');
-        // [1]-[3]の生成
-        for (let idx = 1; idx <= 3; idx++) {
-            let div = this.createKeyConfigHTML('button', idx);
+        // カスタムボタン用セレクトボックスの生成
+        const elementsTbodyCustom = document.querySelector('#axp_config_table_customButton>tbody');
+        for (let idx = 0; idx < objButtonFunction.length; idx++) {
+            let tr = this.createKeyConfigHTML('button', objButtonFunction[idx]);
             // 連動するカスタムボタンのindexを指定（表示オン／オフ用）
-            div.dataset.linkIndex = idx;
-            elementsDivCustom.appendChild(div);
-
-            // カスタムボタンにデフォルト値を設定
-            const selectMain = div.querySelector('select:nth-of-type(1)');
-            if (idx == 1) {
-                selectMain.value = 'func_undo';
-            } else {
-                selectMain.value = 'none';
-            }
-            this.selectCustom(div.id);
+            tr.dataset.linkIndex = idx + 1;
+            elementsTbodyCustom.appendChild(tr);
+            this.selectCustom(tr.id);
+        }
+        // キーボードショートカット用セレクトボックスの生成
+        const elementsTbody = document.querySelector('#axp_config_table_shortcutKey>tbody');
+        for (let idx = 0; idx < objKeyFunction.length; idx++) {
+            let tr = this.createKeyConfigHTML('key', objKeyFunction[idx]);
+            elementsTbody.appendChild(tr);
+            this.selectCustom(tr.id);
         }
     }
+
     startEvent() {
         // ◆共通 ----------------------------------------------------------------
         // スクロール時のナビボタン連動
@@ -759,54 +871,134 @@ export class ConfigSystem {
         // ◆マウス ----------------------------------------------------------------
 
         // ◆キーボード ----------------------------------------------------------------
-        document.getElementById('axp_config_button_setCustomKeyFunction1').onclick = (e) => {
-            // 確認ダイアログ表示
-            confirmExPromise('[1]～[9]キーに拡大率を割り当てます。\nよろしいですか？\n（※現在の設定は上書きされます）')
-                .then(() => {
-                    // ※OK時の処理
-                    // セレクトボックスにデフォルト値（拡大率）を設定
-                    this.config_key_defalut();
 
-                    // コンフィグオブジェクト更新（初期値のため、該当のconfigデータを消去）
-                    const elements = document.querySelectorAll('#axp_config_div_customKeyFunction>div');
-                    for (const item of elements) {
-                        this.configObj.delete(item.id);
+        // 割り当て無しのキーを非表示にする
+        document.getElementById('axp_config_checkbox_shortcutKeyHiddenNofunc').addEventListener('change', (e) => {
+            this.switchNofuncKeytable();
+        });
+        // ショートカットのファイル保存
+        document.getElementById('axp_config_button_saveShortcut').addEventListener('click', (e) => {
+            // セーブテキスト
+            const saveText = new Array();
+            saveText.push('// @name\tAXNOSPaintSHORTCUT\n');
+            saveText.push(`// @version\t${PACKAGE_VERSION}\n`);
+            // キーコンフィグ要素の取得
+            const elementsTr = document.querySelectorAll('.axpc_config_custom_key');
+            for (const tr of elementsTr) {
+                let text = tr.id.slice('axp_config_custom_key'.length) + ':' + this.getSaveCustomText(tr.id);
+                saveText.push(text + '\n');
+            }
+            const filename = "ap_shortcut" + dispDate(new Date(), 'YYYYMMDD_hhmmss') + ".txt"
+            const blob = new Blob(saveText, { type: 'text/plain' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        });
+        // カラーパレットのファイル読込
+        document.getElementById('axp_config_button_loadShortcut').onclick = (e) => {
+            // ２度同じファイルを選択したとき、onchangeが発火しない不具合を回避するため値を初期化する
+            document.getElementById('axp_config_file_loadShortcut').value = '';
+            // ファイルオープンダイアログを開く
+            document.getElementById('axp_config_file_loadShortcut').click();
+        }
+        //ダイアログでファイルが選択された時
+        document.getElementById('axp_config_file_loadShortcut').onchange = (e) => {
+            const file = e.target.files;
+            // ファイルが選択されていない場合（キャンセル）
+            if (file.length === 0) return;
+            //FileReaderの作成
+            const reader = new FileReader();
+            //テキスト形式で読み込む
+            reader.readAsText(file[0]);
+
+            //読込終了後の処理
+            reader.onload = () => {
+                // 読み込んだテキストを配列に分割
+                const arr = reader.result.split(/\r\n|\n/);
+                const loopend = arr.length - 1;
+                let isErrorFile = false;
+                if (loopend === 0) {
+                    isErrorFile = true;
+                } else {
+                    const dataname = arr[0].split(/\t/)[1];
+                    if (dataname !== 'AXNOSPaintSHORTCUT') {
+                        isErrorFile = true;
+                    }
+                }
+                if (isErrorFile) {
+                    alert('AXNOS Paintのショートカットファイルではありません。');
+                    return;
+                }
+
+                // ヘッダを読み飛ばし、３行目から１行ずつ処理
+                for (let i = 2; i < loopend; i++) {
+                    const data = arr[i].split(':');
+                    const elememtId = 'axp_config_custom_key' + data[0];
+                    const key = 'CFUNC_' + elememtId;
+                    const value = data[1];
+                    if (document.getElementById(elememtId)) {
+                        // 親セレクトボックス要素を取得
+                        const elemSelectParent = document.querySelector(`#${elememtId} select:nth-of-type(1)`);
+                        // valueの値を分解
+                        let valueAry = value.split(',');
+                        // 親セレクトボックスを、コンフィグ値の機能種別に変更
+                        const found = this.optionlist.find(e => e.value === valueAry[0]);
+                        if (typeof found === 'undefined') {
+                            // 対応機能が廃止などの理由で見つからなかった場合、機能なしを強制設定
+                            elemSelectParent.value = 'none';
+                        } else {
+                            // 対応機能を選択
+                            elemSelectParent.value = valueAry[0];
+                        }
+                        // サブオプションの生成と設定
+                        if (valueAry.length > 1) {
+                            // 値指定あり
+                            this.selectCustom(elememtId, valueAry[1]);
+                        } else {
+                            // 値指定なし
+                            this.selectCustom(elememtId, null);
+                        }
+                    } else {
+                        alert("ショートカットファイルの内容に誤りがあるため、読込を中止しました。\n行数:" + (i + 1) + " 内容:" + arr[i]);
+                        return;
+                    }
+                    this.configObj.set(key, value);
+                }
+                // コンフィグオブジェクトをDBに保存
+                this.saveConfig();
+                this.switchNofuncKeytable();
+                this.updateShortcutMessage();
+                alert('ショートカットファイルを正常に読み込みました。');
+            }
+        }
+        // ショートカットの初期化
+        document.getElementById('axp_config_button_resetShortcut').onclick = (e) => {
+            // 確認ダイアログ表示
+            confirmExPromise(`ショートカットを初期状態に戻します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
+                .then(() => {
+                    // キーコンフィグ要素の初期化
+                    for (let i = 0; i < objKeyFunction.length; i++) {
+                        const id = `axp_config_custom_key${objKeyFunction[i][1]}`;
+                        const key = `CFUNC_${id}`;
+                        const value = objKeyFunction[i][2];
+                        const selectMain = document.querySelector(`#${id} select:nth-of-type(1)`);
+                        selectMain.value = value;
+                        this.selectCustom(id);
+                        this.configObj.delete(key);
                     }
                     // コンフィグオブジェクトをDBに保存
                     this.saveConfig();
-                    alert("[1]～[9]キーに拡大率を割り当てました。");
+                    this.switchNofuncKeytable();
+                    this.updateShortcutMessage();
+                    alert('ショートカットを初期化しました。');
                 })
                 .catch(() => {
+                    console.log('NG');
                     // ※Cancel時の処理
                     // 処理なし
                 });
         }
-        document.getElementById('axp_config_button_setCustomKeyFunction2').onclick = (e) => {
-            // 確認ダイアログ表示
-            confirmExPromise('[1]～[9]キーにペンの太さを割り当てます。\nよろしいですか？\n（※現在の設定は上書きされます）')
-                .then(() => {
-                    // ※OK時の処理
-                    // キーコンフィグ要素の取得
-                    const elements = document.querySelectorAll('#axp_config_div_customKeyFunction>div');
-                    let setSize = 1;
-                    for (const item of elements) {
-                        // 機能セレクトボックス
-                        const selectMain = item.querySelector('select:nth-of-type(1)');
-                        selectMain.value = 'func_size';
-                        // 太さの設定
-                        this.selectCustom(item.id, setSize);
-                        // コンフィグオブジェクトをDBに保存
-                        this.saveCustom(item.id);
-                        setSize++;
-                    }
-                    alert("[1]～[9]キーにペンの太さを割り当てました。");
-                })
-                .catch(() => {
-                    // ※Cancel時の処理
-                    // 処理なし
-                });
-        }
-
         // デバッグ情報表示チェックボックス
         document.getElementById('axp_config_checkbox_useDebugMode').onchange = (e) => {
             this.axpObj.debugLog.isDebugMode = e.target.checked;
@@ -814,23 +1006,9 @@ export class ConfigSystem {
     }
 
     // キーコンフィグ用メソッド --------------------------------------------------------
-    // キーコンフィグのデフォルト値設定（拡大率）
-    config_key_defalut() {
-        // キーコンフィグ要素の取得
-        const elements = document.querySelectorAll('#axp_config_div_customKeyFunction>div');
-
-        let set_scale_index = 4;
-        for (const item of elements) {
-            // 機能セレクトボックス
-            const selectMain = item.querySelector('select:nth-of-type(1)');
-            selectMain.value = 'func_loupe';
-            // 拡大率の設定
-            this.selectCustom(item.id, this.axpObj.CONST.SCALE_VALUE[set_scale_index]);
-            set_scale_index++;
-        }
-    }
-    // キーコンフィグが変更されたとき、変更内容に応じたコンフィグ設定のDB保存を行う
-    saveCustom(id) {
+    // キーコンフィグのDB保存用textを取得する
+    getSaveCustomText(id) {
+        let result;
         // 要素の取得
         const elem = document.getElementById(id);
         const selectMain = elem.querySelector('select:nth-of-type(1)');
@@ -847,7 +1025,7 @@ export class ConfigSystem {
                         Number(inputScaleValue.max)
                     );
                 // 機能種別＋選択中の拡大率indexを加えて保存
-                this.saveConfig(`CFUNC_${id}`, selectMain.value + ',' + inputScaleValue.value);
+                result = selectMain.value + ',' + inputScaleValue.value;
                 break;
             case 'func_size':
                 // ペンの太さ
@@ -859,13 +1037,18 @@ export class ConfigSystem {
                         Number(inputSizeValue.max)
                     );
                 // 機能種別＋ペンの太さの数字を加えて保存
-                this.saveConfig(`CFUNC_${id}`, selectMain.value + ',' + inputSizeValue.value);
+                result = selectMain.value + ',' + inputSizeValue.value;
                 break;
             default:
                 // その他
                 // 機能種別のみを保存
-                this.saveConfig(`CFUNC_${id}`, selectMain.value);
+                result = selectMain.value;
         }
+        return result;
+    }
+    // キーコンフィグが変更されたとき、変更内容に応じたコンフィグ設定のDB保存を行う
+    saveCustom(id) {
+        this.saveConfig(`CFUNC_${id}`, this.getSaveCustomText(id));
     }
     // 選択（changeイベント、設定復元時に呼び出し）
     // 指定された値(setvalue)を設定する
@@ -929,26 +1112,103 @@ export class ConfigSystem {
             elementButton.dataset.msg = `カスタムボタン：[ ${found.name} ]`;
         }
     };
+    // 機能なしを非表示
+    switchNofuncKeytable() {
+        const checked = document.getElementById('axp_config_checkbox_shortcutKeyHiddenNofunc').checked;
+        const elementTable = document.getElementById('axp_config_table_shortcutKey');
+        const elementsTr = elementTable.querySelectorAll('.axpc_config_custom_key');
+        for (const tr of elementsTr) {
+            const elementSelectbox = tr.querySelector('select');
+            if (checked && elementSelectbox.value === 'none') {
+                tr.classList.add('axpc_NONE');
+            } else {
+                tr.classList.remove('axpc_NONE');
+            }
+        }
+    }
+    // ガイドメッセージに表示するショートカット表示用データの更新
+    updateShortcutMessage() {
+        // 機能に対応するショートカットキーのMAPを作成
+        mapFunction.clear();
+        const elementsTr = document.querySelectorAll('.axpc_config_custom_key');
+        for (const tr of elementsTr) {
+            const selectMain = tr.querySelector('select:nth-of-type(1)');
+            if (!mapFunction.has(selectMain.value)) {
+                mapFunction.set(selectMain.value, tr.querySelector('td').textContent);
+            }
+        }
+        // ショートカット表示用データの更新
+        const messagesFunction = document.querySelectorAll('.axpc_FUNC');
+        for (const item of messagesFunction) {
+            if (mapFunction.has(item.dataset.function)) {
+                item.dataset.key = mapFunction.get(item.dataset.function);
+            } else {
+                item.dataset.key = '';
+            }
+        }
+    }
+    // 指定した機能IDのショートカットを取得
+    getShortcutFunction(func_id) {
+        let result = null;
+        if (mapFunction.has(func_id)) {
+            result = mapFunction.get(func_id);
+        }
+        return result;
+    }
+    createKeyConfigHTML(id, keybind) {
+        const name = keybind[0];
+        const idx = keybind[1];
+        const func = keybind[2];
 
-    createKeyConfigHTML(id, idx) {
-        const div = document.createElement('div');
-        div.setAttribute('id', `axp_config_custom_${id}${idx}`);
-        const span = document.createElement('span');
-        span.textContent = `[${idx}]:`;
+        const tr = document.createElement('tr');
+        tr.setAttribute('id', `axp_config_custom_${id}${idx}`);
+        // キーボードショートカット用class
+        if (id === 'key') {
+            tr.setAttribute('class', 'axpc_config_custom_key');
+        }
+
+        // キーの名前
+        const td_name = document.createElement('td');
+        td_name.textContent = `[ ${name} ]`;
+
         // 機能セレクトボックス
+        const td_func = document.createElement('td');
+
         const selectMain = document.createElement('select');
         selectMain.setAttribute('id', `axp_config_select_main_${id}${idx}`);
+        let isGroup = false;
+        let optgroup = null;
         // 機能セレクトボックスにoption要素を追加する
         for (const item of this.optionlist) {
-            const option = document.createElement('option');
-            option.value = item.value;
-            option.textContent = item.name;
-            selectMain.appendChild(option);
+            if (item.value === 'optgroup') {
+                optgroup = document.createElement('optgroup');
+                optgroup.setAttribute('label', item.name);
+                isGroup = true;
+            } else if (item.value === '/optgroup') {
+                selectMain.appendChild(optgroup);
+                isGroup = false;
+            } else {
+                // ペンの太さ調整はカスタムボタンでは使用不可とするため、登録をスキップする
+                if (id === 'button' && item.value === 'func_size_change') {
+                    continue;
+                }
+                const option = document.createElement('option');
+                option.value = item.value;
+                option.textContent = item.name;
+                if (isGroup) {
+                    optgroup.appendChild(option);
+                } else {
+                    selectMain.appendChild(option);
+                }
+            }
         }
+        selectMain.value = func;
+
         // 機能セレクトボックスが変更された時
         selectMain.addEventListener('change', (e) => {
-            this.selectCustom(div.id);
-            this.saveCustom(div.id);
+            this.selectCustom(tr.id);
+            this.saveCustom(tr.id);
+            this.updateShortcutMessage();
         })
 
         // 描画サイズテキストエリア
@@ -962,7 +1222,7 @@ export class ConfigSystem {
         inputSizeValue.setAttribute('size', '3');
         // 描画サイズテキストエリアが変更された時
         inputSizeValue.addEventListener('change', (e) => {
-            this.saveCustom(div.id);
+            this.saveCustom(tr.id);
         })
 
         // 拡大率テキストエリア
@@ -976,7 +1236,7 @@ export class ConfigSystem {
         inputScaleValue.setAttribute('size', '4');
         // 拡大率テキストエリアが変更された時
         inputScaleValue.addEventListener('change', (e) => {
-            this.saveCustom(div.id);
+            this.saveCustom(tr.id);
         })
 
         // 拡大率セレクトボックス（この時点では中身のoptionは設定しない）
@@ -986,14 +1246,18 @@ export class ConfigSystem {
         // 拡大率セレクトボックスが変更された時
         selectScale.addEventListener('change', (e) => {
             inputScaleValue.value = e.target.value;
-            this.saveCustom(div.id);
+            this.saveCustom(tr.id);
         })
-        div.appendChild(span);
-        div.appendChild(selectMain);
-        div.appendChild(inputSizeValue);
-        div.appendChild(inputScaleValue);
-        div.appendChild(selectScale);
-        return div;
+
+        td_func.appendChild(selectMain);
+        td_func.appendChild(inputSizeValue);
+        td_func.appendChild(inputScaleValue);
+        td_func.appendChild(selectScale);
+
+        tr.appendChild(td_name);
+        tr.appendChild(td_func);
+
+        return tr;
     }
 
     // --------------------------------------------------------
@@ -1328,7 +1592,7 @@ export class ConfigSystem {
                 case 'CFUNC':
                     if (document.getElementById(elememtId)) {
                         // 親セレクトボックス要素を取得
-                        const elemSelectParent = document.querySelector(`#${elememtId}>select:nth-of-type(1)`);
+                        const elemSelectParent = document.querySelector(`#${elememtId} select:nth-of-type(1)`);
                         // valueの値を分解
                         let valueAry = value.split(',');
                         // 親セレクトボックスを、コンフィグ値の機能種別に変更
