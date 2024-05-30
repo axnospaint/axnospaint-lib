@@ -1,9 +1,9 @@
 {
   "name": "axnospaint",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "お絵かき掲示板向けペイントツール",
   "config": {
-    "date": "[2024/05/05版]"
+    "date": "[2024/05/30版]"
   },
   "scripts": {
     "dev-server": "webpack-dev-server",
