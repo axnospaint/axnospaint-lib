@@ -106,7 +106,8 @@ export class Round extends PenObj {
         switch (this.drawmode) {
             case this.axpObj.CONST.DRAW_FREEHAND:
                 let isStabilizer = false;
-                if (this.axpObj.config('axp_config_form_useStabilizer') === 'on') {
+                const stabilizer_value = Number(document.getElementById('axp_config_form_stabilizerValue').volume.value);
+                if (stabilizer_value !== 0) {
                     if (this.axpObj.isLine || this.isLastDrawing) {
                         // 終点の描画、または直線モードの時は手ぶれ補正しない
                     } else {

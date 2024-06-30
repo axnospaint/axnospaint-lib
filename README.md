@@ -1,6 +1,8 @@
 # AXNOS Paint
 
-2024/5/5 version 2.0.0を正式公開しました。
+## 更新履歴
+* 2024/7/1 version 2.1.0を正式公開しました。
+* 2024/5/5 version 2.0.0を正式公開しました。
 
 ## 概要
 AXNOS Paint（アクノスペイント）は「お絵かき掲示板サイト」での利用を想定したペイントツールです。
@@ -38,16 +40,16 @@ AXNOS Paint:ヘルプ - ニコニコ大百科
 ## 導入
 
 ### ファイル構成
-起動に必要なファイル構成は以下の通りです。
+起動に必要なファイル構成は以下の通りです。（/dist/の中にビルド済min.jsファイルが格納されています）
 ```
 index.html（任意のhtmlファイル）
-axnospaint-lib-2.0.0.min.js
+axnospaint-lib-2.1.0.min.js
 ```
 ### 起動用htmlファイル
 最小構成の例を以下に示します。必要に応じて後述のオプションを指定してください。
 ```html
 <head>
-    <script defer="defer" src="axnospaint-lib-2.0.0.min.js"></script>
+    <script defer="defer" src="axnospaint-lib-2.1.0.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             new AXNOSPaint({
@@ -258,11 +260,11 @@ webpack5を使用し、.pngファイルや.cssファイルを含めた全ファ�
 
 通常版とWebデモ版が存在します。Webデモ版にはマスコット機能が追加されます。  
   
-通常版プロダクションビルド。ファイル名は「axnospaint-lib-2.0.0.min.js」（バージョン番号はpackage.jsonに依存します）。
+通常版プロダクションビルド。ファイル名は「axnospaint-lib-2.x.x.min.js」（バージョン番号はpackage.jsonに依存します）。
 ```
  npm run prod
 ```
-Webデモ版プロダクションビルド。ファイル名は「axnospaint-lib-demo-2.0.0.min.js」（バージョン番号はpackage.jsonに依存します）。
+Webデモ版プロダクションビルド。ファイル名は「axnospaint-lib-demo-2.x.x.min.js」（バージョン番号はpackage.jsonに依存します）。
 ```
  npm run prod-demo
 ```

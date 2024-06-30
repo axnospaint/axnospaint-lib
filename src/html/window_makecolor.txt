@@ -10,11 +10,13 @@
         <div></div>
         <div></div>
         <!-- メインカラー／サブカラー、透明色 -->
-        <div id="axp_makecolor_div_mainColor" class="axpc_MSG axpc_colorRect" data-msg="@MKC0001" data-selected="true">
+        <div id="axp_makecolor_div_mainColor" class="axpc_FUNC axpc_colorRect" data-function="func_switch_maincolor"
+            data-msg="@MKC0001" data-selected="true">
         </div>
-        <div id="axp_makecolor_div_subColor" class="axpc_MSG axpc_colorRect" data-msg="@MKC0002"></div>
-        <div id="axp_makecolor_div_transparent" class="axpc_MSG axpc_colorRect axpc_background_mesh"
-            data-msg="@MKC0003">
+        <div id="axp_makecolor_div_subColor" class="axpc_FUNC axpc_colorRect" data-function="func_switch_subcolor"
+            data-msg="@MKC0002"></div>
+        <div id="axp_makecolor_div_transparent" class="axpc_FUNC axpc_colorRect axpc_background_mesh"
+            data-function="func_switch_transparent" data-msg="@MKC0003">
         </div>
         <!-- カラーコード -->
         <input id="axp_makecolor_text_colorCode" class="axpc_MSG" data-msg="@MKC0004" maxlength="7" value="#000000">

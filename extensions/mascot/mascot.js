@@ -120,7 +120,7 @@ export default class Mascot {
 
         }
         // ボタンにカーソルをあてたときにメッセージを表示
-        const messages = document.querySelectorAll('.axpc_MSG,#axp_palette_div_paletteBox');
+        const messages = document.querySelectorAll('.axpc_MSG,.axpc_FUNC,#axp_palette_div_paletteBox');
         for (const item of messages) {
             // 要素に入ったとき
             item.addEventListener('pointerenter', (e) => {

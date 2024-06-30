@@ -23,13 +23,18 @@
             <div class="axpc_range_label">不透明度</div>
             <div class="axpc_range_value"><output name="result"></output></div>
         </form>
-        <button class="axpc_MSG axpc_button" data-msg="@LAY0003" id="axp_layer_button_clear">ｸﾘｱ</button>
+        <button class="axpc_FUNC axpc_button" data-function="func_layer_clear" data-msg="@LAY0003"
+            id="axp_layer_button_clear">ｸﾘｱ</button>
     </div>
     <div id="axp_layer_div_button2">
-        <button id="axp_layer_button_create" class="axpc_MSG axpc_button" data-msg="@LAY0004">新規</button>
-        <button id="axp_layer_button_integrate" class="axpc_MSG axpc_button" data-msg="@LAY0005">統</button>
-        <button id="axp_layer_button_copy" class="axpc_MSG axpc_button" data-msg="@LAY0006">複</button>
-        <button id="axp_layer_button_delete" class="axpc_MSG axpc_button" data-msg="@LAY0007">削</button>
+        <button id="axp_layer_button_create" class="axpc_FUNC axpc_button" data-function="func_layer_create"
+            data-msg="@LAY0004">新規</button>
+        <button id="axp_layer_button_integrate" class="axpc_FUNC axpc_button" data-function="func_layer_integrate"
+            data-msg="@LAY0005">統</button>
+        <button id="axp_layer_button_copy" class="axpc_FUNC axpc_button" data-function="func_layer_copy"
+            data-msg="@LAY0006">複</button>
+        <button id="axp_layer_button_delete" class="axpc_FUNC axpc_button" data-function="func_layer_delete"
+            data-msg="@LAY0007">削</button>
     </div>
 </div>
 <ul id="axp_layer_ul_layerBox" class="axpc_MSG" data-msg="@LAY0008"></ul>

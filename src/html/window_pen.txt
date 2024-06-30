@@ -66,6 +66,14 @@
                     <div class="axpc_range_label">トーン濃度</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
+                <!-- 手ぶれ補正（オプション） -->
+                <form id="axp_pen_form_stabilizer" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_stabilizer" name="volume" value="2" step="1" min="0" max="10"
+                        class="axpc_MSG" data-msg="@CFG0040">
+                    <div class="axpc_range_label">手ぶれ補正</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
             </div>
 
             <div id="axp_pen_div_spuitColorRGBA">
@@ -92,23 +100,24 @@
         <!-- ペンツール右側 -->
         <div id="axp_pen_div_rightSide">
             <div>
-                <button data-idx="0" id="axp_pen_button_penBase" class="axpc_MSG" data-selected="true"
-                    data-addmsg="[再選択]:ペン種別変更。"></button>
+                <button data-idx="0" id="axp_pen_button_penBase" class="axpc_FUNC" data-function="func_switch_pen"
+                    data-selected="true" data-msg="@PEN0050"></button>
             </div>
             <div>
-                <button data-idx="1" id="axp_pen_button_eraserBase" class="axpc_MSG"
-                    data-addmsg="[再選択]:消しゴム種別変更。"></button>
+                <button data-idx="1" id="axp_pen_button_eraserBase" class="axpc_FUNC" data-function="func_switch_eraser"
+                    data-msg="@PEN0051"></button>
             </div>
             <div>
-                <button data-idx="2" id="axp_pen_button_fillBase" class="axpc_MSG"
-                    data-addmsg="[再選択]:バケツ種別変更。"></button>
+                <button data-idx="2" id="axp_pen_button_fillBase" class="axpc_FUNC" data-function="func_switch_fill"
+                    data-msg="@PEN0052"></button>
             </div>
             <div>
-                <button data-idx="3" id="axp_pen_button_handBase" class="axpc_MSG"
-                    data-addmsg="[再選択]:ツール種別変更。"></button>
+                <button data-idx="3" id="axp_pen_button_handBase" class="axpc_FUNC" data-function="func_switch_hand"
+                    data-msg="@PEN0053"></button>
             </div>
             <div>
-                <button data-idx="4" id="axp_pen_button_spuitBase" class="axpc_MSG" data-addmsg=""></button>
+                <button data-idx="4" id="axp_pen_button_spuitBase" class="axpc_FUNC" data-function="func_switch_spuit"
+                    data-msg="@PEN0054"></button>
             </div>
         </div>
     </div>

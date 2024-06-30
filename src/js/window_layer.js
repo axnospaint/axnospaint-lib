@@ -172,254 +172,6 @@ export class LayerSystem extends ToolWindow {
             this.axpObj.msg('@AXP0003', this.getName(), alpha);
         });
 
-        // ボタン：レイヤー操作（クリア）
-        document.getElementById('axp_layer_button_clear').addEventListener('click', (e) => {
-            // レイヤーがロック状態の場合は削除不可
-            if (this.getLocked()) {
-                // %1がロック状態のため、クリアできません。
-                this.axpObj.msg('@CAU4000', this.getName());
-                return;
-            }
-
-            // 空白のレイヤーの場合は処理を行わない（アンドゥ用履歴を作成しない）
-            if (isBlankImage(this.getImage())) {
-                // %1は空白のレイヤーです。
-                this.axpObj.msg('@CAU4001', this.getName());
-                return;
-            }
-
-            // アンドゥ用記録
-            this.axpObj.undoSystem.setUndo({
-                type: 'layer-clear',
-                layerObj: this.axpObj.layerSystem.layerObj[this.axpObj.layerSystem.getLayerIndex(this.getId())],
-            });
-
-            // クリア
-            this.clear(this.getId());
-            this.updateCanvas();
-            // %1をクリアしました。
-            this.axpObj.msg('@INF4000', this.getName());
-        });
-        // ボタン：レイヤー操作（新規）
-        document.getElementById('axp_layer_button_create').addEventListener('click', (e) => {
-            // レイヤー最大数を超える場合は生成不可
-            if (this.layerObj.length >= this.CONST.LAYER_MAX) {
-                // レイヤーは%1枚までです。
-                this.axpObj.msg('@CAU4002', this.CONST.LAYER_MAX);
-                return;
-            }
-
-            // レイヤー生成
-            var targetId = this.newLayer();
-            // %1を作成しました。
-            this.axpObj.msg('@INF4001', this.getName());
-
-            console.log(this.layerObj, targetId);
-
-            // アンドゥ用記録
-            this.axpObj.undoSystem.setUndo({
-                type: 'layer-create',
-                layerObj: this.layerObj[this.getLayerIndex(targetId)],
-            });
-        });
-        // ボタン：レイヤー操作（複製）
-        document.getElementById('axp_layer_button_copy').addEventListener('click', (e) => {
-            // レイヤー最大数を超える場合は生成不可
-            if (this.layerObj.length >= this.CONST.LAYER_MAX) {
-                // レイヤーは%1枚までです。
-                this.axpObj.msg('@CAU4002', this.CONST.LAYER_MAX);
-                return;
-            }
-
-            // 複製元IDとレイヤー名（メッセージ表示用）を記憶
-            const id_source = this.getId();
-            const name_source = this.getName();
-
-            // 複製元のレイヤー情報を渡してレイヤー生成
-            var id_dest = this.copyLayer(this.layerObj[this.getLayerIndex(id_source)]);
-            var name_dest = this.getName()
-            // imageDataオブジェクトのコピー
-            // this.getImage().data.set(this.layerObj[this.getLayerIndex(id_source)].image.data);
-
-            // 表示更新
-            this.updateCanvas();
-
-            // %1を複製して、%2を作成しました。
-            this.axpObj.msg('@INF4002', name_source, name_dest);
-
-            // アンドゥ用記録
-            this.axpObj.undoSystem.setUndo({
-                type: 'layer-copy',
-                layerObj: this.layerObj[this.getLayerIndex(id_dest)],
-            });
-            console.log(this.layerObj);
-        });
-        // ボタン：レイヤー操作（削除）
-        document.getElementById('axp_layer_button_delete').addEventListener('click', (e) => {
-            // レイヤーがロック状態の場合は削除不可
-            if (this.getLocked()) {
-                // %1がロック状態のため、削除できません。
-                this.axpObj.msg('@CAU4003', this.getName());
-                return;
-            }
-            // レイヤー最大数を超える場合は生成不可
-            if (this.layerObj.length <= 1) {
-                // レイヤーをすべて削除することはできません。
-                this.axpObj.msg('@CAU4004');
-                return;
-            }
-            // アンドゥ用記録
-            const targetId = this.getId();
-            const targetName = this.getName();
-            this.axpObj.undoSystem.setUndo({
-                type: 'layer-delete',
-                //id: targetId,
-                layerObj: this.layerObj[this.getLayerIndex(targetId)],
-            });
-            // レイヤー削除
-            this.deleteLayer(targetId);
-
-            // 表示更新
-            this.updateCanvas();
-            // %1をを削除しました。
-            this.axpObj.msg('@INF4003', targetName);
-            console.log(this.layerObj);
-        });
-        // ボタン：レイヤー操作（統合）
-        document.getElementById('axp_layer_button_integrate').addEventListener('click', (e) => {
-
-            var idx_source = this.getLayerIndex(this.currentLayer.dataset.id); // 統合元idx
-
-            // 最下位チェック
-            if (idx_source >= this.layerObj.length - 1) {
-                // 最下層のレイヤーは統合できません。
-                this.axpObj.msg('@CAU4005');
-                return;
-            }
-            var idx_dest = idx_source + 1;  // 統合先idx
-            var id_dest = this.layerObj[idx_dest].id; //統合先id（処理の最後でレイヤーを選択状態するために保持）
-
-            // レイヤー名の記憶（統合処理後に参照できなくなるため）
-            const source_name = this.getName();
-            const dest_name = this.getName(idx_dest);
-
-            // 書き込み禁止チェック（統合元）
-            if (this.isWriteProtection()) {
-                // %1が%2のため、統合できません。
-                this.axpObj.msg('@CAU4006', source_name, this.getReasonTextForWriteProtection());
-                return;
-            }
-            // 書き込み禁止チェック（統合先）
-            if (this.isWriteProtection(idx_dest)) {
-                // %1が%2のため、統合できません。
-                this.axpObj.msg('@CAU4006', dest_name, this.getReasonTextForWriteProtection(idx_dest));
-                return;
-            }
-
-            //console.log(this.layerObj[idx_source].index, idx_source);
-            //console.log(this.layerObj[idx_dest].index, idx_dest);
-
-            // アンドゥ用記録
-            this.axpObj.undoSystem.setUndo({
-                type: 'layer-integrate',
-                layerObj: this.layerObj[idx_source],
-                layerObj_dest: this.layerObj[idx_dest],
-            });
-
-            // 統合処理
-            let draw = this.axpObj.penSystem.CANVAS.draw;
-            let draw_ctx = this.axpObj.penSystem.CANVAS.draw_ctx;
-
-            draw_ctx.clearRect(0, 0, draw.width, draw.height);
-            draw_ctx.shadowBlur = 0; // 統合時はぼかしを無効にする
-
-            let source_ctx, dest_ctx;
-            // safari
-            if (this.axpObj.ENV.multiCanvas) {
-                source_ctx = this.CANVAS.layer_ctx[idx_dest];
-                dest_ctx = this.CANVAS.layer_ctx[idx_source];
-            } else {
-                source_ctx = this.CANVAS.tmp_ctx;
-                dest_ctx = this.CANVAS.tmp_ctx;
-            }
-
-            // 初期化
-            this.CANVAS.merge_ctx.clearRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
-            draw_ctx.clearRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
-
-            // 下層
-            dest_ctx.putImageData(this.layerObj[idx_dest].image, 0, 0);
-            draw_ctx.globalAlpha = Number(this.layerObj[idx_dest].alpha / 100);
-            draw_ctx.globalCompositeOperation = 'source-over';
-            draw_ctx.drawImage(dest_ctx.canvas, 0, 0);
-
-            if (this.layerObj[idx_dest].masked) {
-                // マスクデータの作成
-                this.CANVAS.clip_ctx.putImageData(this.layerObj[idx_dest].image, 0, 0);
-                const imageData = this.CANVAS.clip_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
-                // 1ピクセルずつ走査してαを255にする
-                for (let i = 0, len = imageData.data.length; i < len; i += 4) {
-                    const alpha = imageData.data[i + 3];
-                    if (alpha > 0) {
-                        imageData.data[i + 3] = 255;
-                    }
-                }
-                // マスクデータ描画
-                this.CANVAS.clip_ctx.putImageData(imageData, 0, 0);
-                this.CANVAS.merge_ctx.globalAlpha = 1;
-                this.CANVAS.merge_ctx.globalCompositeOperation = 'source-over';
-                this.CANVAS.merge_ctx.drawImage(this.CANVAS.clip_ctx.canvas, 0, 0);
-                // 上層の画像をマスクデータで切り抜いて合成
-                source_ctx.putImageData(this.layerObj[idx_source].image, 0, 0);
-                this.CANVAS.merge_ctx.globalAlpha = Number(this.layerObj[idx_source].alpha / 100);
-                this.CANVAS.merge_ctx.globalCompositeOperation = 'source-in';
-                this.CANVAS.merge_ctx.drawImage(source_ctx.canvas, 0, 0);
-
-                // 合成
-                draw_ctx.globalAlpha = 1;
-                draw_ctx.globalCompositeOperation = this.layerObj[idx_source].mode;
-                draw_ctx.drawImage(this.CANVAS.merge_ctx.canvas, 0, 0);
-
-            } else {
-                // 上層
-                source_ctx.putImageData(this.layerObj[idx_source].image, 0, 0);
-                this.CANVAS.merge_ctx.globalAlpha = Number(this.layerObj[idx_source].alpha / 100);
-                this.CANVAS.merge_ctx.globalCompositeOperation = 'source-over';
-                this.CANVAS.merge_ctx.drawImage(source_ctx.canvas, 0, 0);
-
-                // 合成
-                draw_ctx.globalAlpha = 1;
-                if (this.layerObj[idx_source].mode === 'source-atop' && this.layerObj[idx_dest].mode === 'source-atop') {
-                    draw_ctx.globalCompositeOperation = 'source-over';
-                } else {
-                    draw_ctx.globalCompositeOperation = this.layerObj[idx_source].mode;
-                }
-                draw_ctx.drawImage(this.CANVAS.merge_ctx.canvas, 0, 0);
-            }
-
-            this.layerObj[idx_dest].image = draw_ctx.getImageData(0, 0, draw.width, draw.height);
-
-            // 統合後の不透明度は強制的に100%にする
-            this.setAlpha(100, idx_dest);
-
-            // 統合元レイヤー削除
-            this.deleteLayer(this.getId());
-            // 表示更新
-            this.updateCanvas();
-            // 処理完了後、統合先のレイヤーを選択状態にする
-            var elements = document.querySelectorAll('#axp_layer_ul_layerBox>li');
-            for (var i = 0; i < elements.length; i++) {
-                //console.log(elements[i].dataset.id, id_dest);
-                if (Number(elements[i].dataset.id) === Number(id_dest)) {
-                    // レイヤー選択
-                    this.setCurrentLayer(elements[i]);
-                    break;
-                }
-            }
-            // %1と%2を統合しました。
-            this.axpObj.msg('@INF4004', source_name, dest_name);
-            console.log(this.layerObj);
-        });
         // カラータグリストのユーザー設定データがない場合デフォルト値を使用する
         if (this.colorTagList === null) {
             this.resetColorTagList();
@@ -1669,6 +1421,253 @@ export class LayerSystem extends ToolWindow {
         let filename = 'ap' + dispDate(new Date(), 'YYYYMMDD_hhmmss') + '.png';
         link.download = filename;
         link.click();
+    }
+    // レイヤーの新規作成
+    buttonCreateLayer() {
+        // レイヤー最大数を超える場合は生成不可
+        if (this.layerObj.length >= this.CONST.LAYER_MAX) {
+            // レイヤーは%1枚までです。
+            this.axpObj.msg('@CAU4002', this.CONST.LAYER_MAX);
+            return;
+        }
+
+        // レイヤー生成
+        var targetId = this.newLayer();
+        // %1を作成しました。
+        this.axpObj.msg('@INF4001', this.getName());
+
+        console.log(this.layerObj, targetId);
+
+        // アンドゥ用記録
+        this.axpObj.undoSystem.setUndo({
+            type: 'layer-create',
+            layerObj: this.layerObj[this.getLayerIndex(targetId)],
+        });
+    }
+    // レイヤーの統合
+    buttonIntegrateLayer() {
+        var idx_source = this.getLayerIndex(this.currentLayer.dataset.id); // 統合元idx
+
+        // 最下位チェック
+        if (idx_source >= this.layerObj.length - 1) {
+            // 最下層のレイヤーは統合できません。
+            this.axpObj.msg('@CAU4005');
+            return;
+        }
+        var idx_dest = idx_source + 1;  // 統合先idx
+        var id_dest = this.layerObj[idx_dest].id; //統合先id（処理の最後でレイヤーを選択状態するために保持）
+
+        // レイヤー名の記憶（統合処理後に参照できなくなるため）
+        const source_name = this.getName();
+        const dest_name = this.getName(idx_dest);
+
+        // 書き込み禁止チェック（統合元）
+        if (this.isWriteProtection()) {
+            // %1が%2のため、統合できません。
+            this.axpObj.msg('@CAU4006', source_name, this.getReasonTextForWriteProtection());
+            return;
+        }
+        // 書き込み禁止チェック（統合先）
+        if (this.isWriteProtection(idx_dest)) {
+            // %1が%2のため、統合できません。
+            this.axpObj.msg('@CAU4006', dest_name, this.getReasonTextForWriteProtection(idx_dest));
+            return;
+        }
+
+        //console.log(this.layerObj[idx_source].index, idx_source);
+        //console.log(this.layerObj[idx_dest].index, idx_dest);
+
+        // アンドゥ用記録
+        this.axpObj.undoSystem.setUndo({
+            type: 'layer-integrate',
+            layerObj: this.layerObj[idx_source],
+            layerObj_dest: this.layerObj[idx_dest],
+        });
+
+        // 統合処理
+        let draw = this.axpObj.penSystem.CANVAS.draw;
+        let draw_ctx = this.axpObj.penSystem.CANVAS.draw_ctx;
+
+        draw_ctx.clearRect(0, 0, draw.width, draw.height);
+        draw_ctx.shadowBlur = 0; // 統合時はぼかしを無効にする
+
+        let source_ctx, dest_ctx;
+        // safari
+        if (this.axpObj.ENV.multiCanvas) {
+            source_ctx = this.CANVAS.layer_ctx[idx_dest];
+            dest_ctx = this.CANVAS.layer_ctx[idx_source];
+        } else {
+            source_ctx = this.CANVAS.tmp_ctx;
+            dest_ctx = this.CANVAS.tmp_ctx;
+        }
+
+        // 初期化
+        this.CANVAS.merge_ctx.clearRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+        draw_ctx.clearRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+
+        // 下層
+        dest_ctx.putImageData(this.layerObj[idx_dest].image, 0, 0);
+        draw_ctx.globalAlpha = Number(this.layerObj[idx_dest].alpha / 100);
+        draw_ctx.globalCompositeOperation = 'source-over';
+        draw_ctx.drawImage(dest_ctx.canvas, 0, 0);
+
+        if (this.layerObj[idx_dest].masked) {
+            // マスクデータの作成
+            this.CANVAS.clip_ctx.putImageData(this.layerObj[idx_dest].image, 0, 0);
+            const imageData = this.CANVAS.clip_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+            // 1ピクセルずつ走査してαを255にする
+            for (let i = 0, len = imageData.data.length; i < len; i += 4) {
+                const alpha = imageData.data[i + 3];
+                if (alpha > 0) {
+                    imageData.data[i + 3] = 255;
+                }
+            }
+            // マスクデータ描画
+            this.CANVAS.clip_ctx.putImageData(imageData, 0, 0);
+            this.CANVAS.merge_ctx.globalAlpha = 1;
+            this.CANVAS.merge_ctx.globalCompositeOperation = 'source-over';
+            this.CANVAS.merge_ctx.drawImage(this.CANVAS.clip_ctx.canvas, 0, 0);
+            // 上層の画像をマスクデータで切り抜いて合成
+            source_ctx.putImageData(this.layerObj[idx_source].image, 0, 0);
+            this.CANVAS.merge_ctx.globalAlpha = Number(this.layerObj[idx_source].alpha / 100);
+            this.CANVAS.merge_ctx.globalCompositeOperation = 'source-in';
+            this.CANVAS.merge_ctx.drawImage(source_ctx.canvas, 0, 0);
+
+            // 合成
+            draw_ctx.globalAlpha = 1;
+            draw_ctx.globalCompositeOperation = this.layerObj[idx_source].mode;
+            draw_ctx.drawImage(this.CANVAS.merge_ctx.canvas, 0, 0);
+
+        } else {
+            // 上層
+            source_ctx.putImageData(this.layerObj[idx_source].image, 0, 0);
+            this.CANVAS.merge_ctx.globalAlpha = Number(this.layerObj[idx_source].alpha / 100);
+            this.CANVAS.merge_ctx.globalCompositeOperation = 'source-over';
+            this.CANVAS.merge_ctx.drawImage(source_ctx.canvas, 0, 0);
+
+            // 合成
+            draw_ctx.globalAlpha = 1;
+            if (this.layerObj[idx_source].mode === 'source-atop' && this.layerObj[idx_dest].mode === 'source-atop') {
+                draw_ctx.globalCompositeOperation = 'source-over';
+            } else {
+                draw_ctx.globalCompositeOperation = this.layerObj[idx_source].mode;
+            }
+            draw_ctx.drawImage(this.CANVAS.merge_ctx.canvas, 0, 0);
+        }
+
+        this.layerObj[idx_dest].image = draw_ctx.getImageData(0, 0, draw.width, draw.height);
+
+        // 統合後の不透明度は強制的に100%にする
+        this.setAlpha(100, idx_dest);
+
+        // 統合元レイヤー削除
+        this.deleteLayer(this.getId());
+        // 表示更新
+        this.updateCanvas();
+        // 処理完了後、統合先のレイヤーを選択状態にする
+        var elements = document.querySelectorAll('#axp_layer_ul_layerBox>li');
+        for (var i = 0; i < elements.length; i++) {
+            //console.log(elements[i].dataset.id, id_dest);
+            if (Number(elements[i].dataset.id) === Number(id_dest)) {
+                // レイヤー選択
+                this.setCurrentLayer(elements[i]);
+                break;
+            }
+        }
+        // %1と%2を統合しました。
+        this.axpObj.msg('@INF4004', source_name, dest_name);
+        console.log(this.layerObj);
+    }
+    // レイヤーのコピー
+    buttonCopyLayer() {
+        // レイヤー最大数を超える場合は生成不可
+        if (this.layerObj.length >= this.CONST.LAYER_MAX) {
+            // レイヤーは%1枚までです。
+            this.axpObj.msg('@CAU4002', this.CONST.LAYER_MAX);
+            return;
+        }
+
+        // 複製元IDとレイヤー名（メッセージ表示用）を記憶
+        const id_source = this.getId();
+        const name_source = this.getName();
+
+        // 複製元のレイヤー情報を渡してレイヤー生成
+        var id_dest = this.copyLayer(this.layerObj[this.getLayerIndex(id_source)]);
+        var name_dest = this.getName()
+        // imageDataオブジェクトのコピー
+        // this.getImage().data.set(this.layerObj[this.getLayerIndex(id_source)].image.data);
+
+        // 表示更新
+        this.updateCanvas();
+
+        // %1を複製して、%2を作成しました。
+        this.axpObj.msg('@INF4002', name_source, name_dest);
+
+        // アンドゥ用記録
+        this.axpObj.undoSystem.setUndo({
+            type: 'layer-copy',
+            layerObj: this.layerObj[this.getLayerIndex(id_dest)],
+        });
+        console.log(this.layerObj);
+    }
+    // レイヤーの削除
+    buttonDeleteLayer() {
+        // レイヤーがロック状態の場合は削除不可
+        if (this.getLocked()) {
+            // %1がロック状態のため、削除できません。
+            this.axpObj.msg('@CAU4003', this.getName());
+            return;
+        }
+        // レイヤー最大数を超える場合は生成不可
+        if (this.layerObj.length <= 1) {
+            // レイヤーをすべて削除することはできません。
+            this.axpObj.msg('@CAU4004');
+            return;
+        }
+        // アンドゥ用記録
+        const targetId = this.getId();
+        const targetName = this.getName();
+        this.axpObj.undoSystem.setUndo({
+            type: 'layer-delete',
+            //id: targetId,
+            layerObj: this.layerObj[this.getLayerIndex(targetId)],
+        });
+        // レイヤー削除
+        this.deleteLayer(targetId);
+
+        // 表示更新
+        this.updateCanvas();
+        // %1をを削除しました。
+        this.axpObj.msg('@INF4003', targetName);
+        console.log(this.layerObj);
+    }
+    // レイヤーのクリア
+    buttonClearLayer() {
+        // レイヤーがロック状態の場合は削除不可
+        if (this.getLocked()) {
+            // %1がロック状態のため、クリアできません。
+            this.axpObj.msg('@CAU4000', this.getName());
+            return;
+        }
+
+        // 空白のレイヤーの場合は処理を行わない（アンドゥ用履歴を作成しない）
+        if (isBlankImage(this.getImage())) {
+            // %1は空白のレイヤーです。
+            this.axpObj.msg('@CAU4001', this.getName());
+            return;
+        }
+
+        // アンドゥ用記録
+        this.axpObj.undoSystem.setUndo({
+            type: 'layer-clear',
+            layerObj: this.axpObj.layerSystem.layerObj[this.axpObj.layerSystem.getLayerIndex(this.getId())],
+        });
+
+        // クリア
+        this.clear(this.getId());
+        this.updateCanvas();
+        // %1をクリアしました。
+        this.axpObj.msg('@INF4000', this.getName());
     }
 }
 // レイヤードラッグ用関数定義
