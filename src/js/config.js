@@ -595,11 +595,9 @@ export class ConfigSystem {
             // 列数
             colortext.push(
                 'column,' + this.axpObj.colorPaletteSystem.currentPalette.column + '\n');
-            let length = this.axpObj.colorPaletteSystem.getPaletteLength();
-            for (let i = 0; i < length; i++) {
-                // パレットオブジェクトの中身をテキストに書き出す
-                colortext.push(
-                    this.axpObj.colorPaletteSystem.getColor(i) + '\n');
+            // パレット配列の中身（#付きカラーコード）を１色ずつテキストに書き出す
+            for (const color of this.axpObj.colorPaletteSystem.currentPalette.palette) {
+                colortext.push(color + '\n');
             }
             var filename = "ap_color" + dispDate(new Date(), 'YYYYMMDD_hhmmss') + ".txt"
             var blob = new Blob(colortext, { type: 'text/plain' });
