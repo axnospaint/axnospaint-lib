@@ -269,13 +269,10 @@ export class ColorPaletteSystem extends ToolWindow {
         }, { signal: controller.signal });
     }
 
-    getColor(index) {
-        if (index) {
-            return this.currentPalette.palette[index];
-        } else {
-            // 引数指定なしの場合、現在選択中のパレット
-            return this.elementCurrentPalette.dataset.color;
-        }
+    getColor() {
+        // 現在選択中のパレットを返却
+        // #13 バグ修正に伴い、引数指定は廃止
+        return this.elementCurrentPalette.dataset.color;
     }
     setColor(colorCode) {
         // 編集モードでなければ処理しない
@@ -452,14 +449,6 @@ export class ColorPaletteSystem extends ToolWindow {
 
         return newButton;
     }
-    // システム連携用
-    getPaletteLength() {
-        return this.currentPalette.palette.length;
-    }
-    getPalette() {
-        return this.currentPalette.palette;
-    }
-
 }
 
 // カラーパレットのドラッグ＆ドロップ制御
