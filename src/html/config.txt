@@ -483,11 +483,6 @@
                     <div id="axp_config_div_versionInfo"></div>
                     © 2022 「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」<br>
                     <br>
-                    ◆ コミュニティ<br>
-                    <a href="https://com.nicovideo.jp/community/co1128854" target="_blank"
-                        style="text-decoration: none;color:#00f">
-                        https://com.nicovideo.jp/community/co1128854</a>
-                    <br><br>
                     ◆ github<br>
                     <a href="https://github.com/axnospaint/axnospaint-lib" target="_blank"
                         style="text-decoration: none;color:#00f">
