@@ -226,17 +226,17 @@ export class DragWindow {
 
             return { x: new_x, y: new_y };
         }
-        window.addEventListener('pointermove', (e) => {
+		const onPointerMove=(e)=>{
+			
             let pos = calcPosition(e.pageX, e.pageY);
             //マウスが動いた場所に要素を動かす
             objSystem.setPosition(
                 pos.x,
                 pos.y
             );
-        }, { signal: controller.signal });
-
+		};
+		const onPointerUp = (e) => {
         // ドロップ
-        window.addEventListener('pointerup', (e) => {
             let pos = calcPosition(e.pageX, e.pageY);
             //マウスが動いた場所に要素を動かす
             objSystem.setPosition(
@@ -248,9 +248,13 @@ export class DragWindow {
             this.axpObj.configSystem.saveConfig('WDPOS_' + objSystem.windowElement.id, savedata);
             // イベントリスナー解除
             controller.abort();
-        }, { signal: controller.signal });
-    }
-    /**
+			window.removeEventListener('pointermove', onPointerMove);
+			window.removeEventListener('pointerup', onPointerUp);
+		};
+        window.addEventListener('pointermove',onPointerMove,{ signal: controller.signal });
+        window.addEventListener('pointerup',onPointerUp,{ signal: controller.signal });
+	}
+		/**
      * 指定idと一致したツールウィンドウ要素をサーチし、見つかった場合、初期座標を更新する
      * @param {*} id ツールウィンドウ要素のID
      * @param {*} x left座標
