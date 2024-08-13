@@ -6,11 +6,12 @@
 "use strict";
 
 import { AXPObj } from './js/axpobj.js';
+import { getUserLanguage, getDictionaryJSON } from './js/lang.js';
 import { createCustomAlert } from './js/alert.js';
 import { getBrowserType } from './js/etc.js';
+
 // htmlデータ
 import htmldata from './html/main.txt';
-
 // css適用
 require('./css/axnospaint.css');
 require('./css/common.css');
@@ -29,120 +30,134 @@ export default class {
     axpObj;
     constructor(option) {
         console.log('version:', PACKAGE_VERSION, PACKAGE_DATE);
-        this.axpObj = new AXPObj();
+        (async () => {
+            // 言語情報と辞書の取得
+            //const userLanguage = getUserLanguage();
+            const userLanguage = 'en';
+            let additionalDictionaryJSON = null;
+            // 日本語以外なら追加辞書を取得
+            if (userLanguage !== 'ja') {
+                additionalDictionaryJSON = await getDictionaryJSON(userLanguage);
+            }
 
-        // 起動オプションチェック
-        if (typeof option.bodyId === 'undefined') {
-            alert('ERROR:起動オプションbodyIdが指定されていません');
-            return;
-        }
-        this.axpObj.paintBodyElement = document.getElementById(option.bodyId);
-        if (this.axpObj.paintBodyElement === null) {
-            alert('ERROR:起動オプションbodyIdの指定が正しくありません');
-            return;
-        }
-        // スタイル設定
-        this.axpObj.paintBodyElement.style.display = 'flex';
-        this.axpObj.paintBodyElement.style.flexGrow = '1';
-        this.axpObj.paintBodyElement.style.flexDirection = 'column';
-        this.axpObj.paintBodyElement.style.overflow = 'hidden';
+            // ツール基幹インスタンス作成
+            this.axpObj = new AXPObj(userLanguage, additionalDictionaryJSON);
 
-        // 投稿用プログラムの定義
-        this.axpObj.FUNCTION.post = option.post || null;
-        // 同一掲示板チェックの有効化
-        this.axpObj.checkSameBBS = option.checkSameBBS || false;
-        // お絵カキコデータ（基にしてお絵カキコする用）が存在するURL
-        this.axpObj.oekakiURL = option.oekakiURL || null;
-        // お絵カキコデータ読込タイムアウト時間
-        this.axpObj.oekakiTimeout = isNaN(option.oekakiTimeout) ? 15000 : option.oekakiTimeout;
-        // お絵カキコサイズ
-        this.axpObj.option_height = option.height || null;
-        this.axpObj.option_width = option.width || null;
+            // 言語情報表示
+            console.log('userLanguage:', userLanguage, ' / Dictionary:', this.axpObj._('@LANGUAGE'));
 
-        // 投稿制限
-        this.axpObj.restrictPost = option.restrictPost || false;
+            // 起動オプションチェック
+            if (typeof option.bodyId === 'undefined') {
+                alert('ERROR:起動オプションbodyIdが指定されていません');
+                return;
+            }
+            this.axpObj.paintBodyElement = document.getElementById(option.bodyId);
+            if (this.axpObj.paintBodyElement === null) {
+                alert('ERROR:起動オプションbodyIdの指定が正しくありません');
+                return;
+            }
+            // スタイル設定
+            this.axpObj.paintBodyElement.style.display = 'flex';
+            this.axpObj.paintBodyElement.style.flexGrow = '1';
+            this.axpObj.paintBodyElement.style.flexDirection = 'column';
+            this.axpObj.paintBodyElement.style.overflow = 'hidden';
 
-        // 拡張機能タブ
-        this.axpObj.expansionTab = option.expansionTab || null;
+            // 投稿用プログラムの定義
+            this.axpObj.FUNCTION.post = option.post || null;
+            // 同一掲示板チェックの有効化
+            this.axpObj.checkSameBBS = option.checkSameBBS || false;
+            // お絵カキコデータ（基にしてお絵カキコする用）が存在するURL
+            this.axpObj.oekakiURL = option.oekakiURL || null;
+            // お絵カキコデータ読込タイムアウト時間
+            this.axpObj.oekakiTimeout = isNaN(option.oekakiTimeout) ? 15000 : option.oekakiTimeout;
+            // お絵カキコサイズ
+            this.axpObj.option_height = option.height || null;
+            this.axpObj.option_width = option.width || null;
 
-        // htmlを生成
-        this.axpObj.paintBodyElement.insertAdjacentHTML('afterbegin', htmldata);
+            // 投稿制限
+            this.axpObj.restrictPost = option.restrictPost || false;
 
-        let targetElements_tab = document.querySelectorAll('#axp_main_div_tab > div > div');
-        // 投稿制限ありなら投稿タブは非表示
-        if (this.axpObj.restrictPost) {
-            targetElements_tab[2].style.display = 'none';
-        }
+            // 拡張機能タブ
+            this.axpObj.expansionTab = option.expansionTab || null;
 
-        // 拡張機能タブ生成
-        if (this.axpObj.expansionTab !== null) {
-            // タブの名前
-            if (this.axpObj.expansionTab.name) {
-                if (this.axpObj.expansionTab.link) {
-                    // リンク生成
-                    const anchor = document.createElement('a');
-                    anchor.setAttribute('href', this.axpObj.expansionTab.link);
-                    anchor.setAttribute('target', '_blank');
-                    anchor.setAttribute('style', 'text-decoration: none;color:#fff');
-                    const div = document.createElement('div');
-                    div.textContent = this.axpObj.expansionTab.name;
-                    anchor.appendChild(div);
-                    targetElements_tab[3].appendChild(anchor);
-                } else {
-                    // 関数呼び出し
-                    targetElements_tab[3].textContent = this.axpObj.expansionTab.name;
+            // htmlを生成
+            this.axpObj.paintBodyElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(htmldata));
+
+            let targetElements_tab = document.querySelectorAll('#axp_main_div_tab > div > div');
+            // 投稿制限ありなら投稿タブは非表示
+            if (this.axpObj.restrictPost) {
+                targetElements_tab[2].style.display = 'none';
+            }
+
+            // 拡張機能タブ生成
+            if (this.axpObj.expansionTab !== null) {
+                // タブの名前
+                if (this.axpObj.expansionTab.name) {
+                    if (this.axpObj.expansionTab.link) {
+                        // リンク生成
+                        const anchor = document.createElement('a');
+                        anchor.setAttribute('href', this.axpObj.expansionTab.link);
+                        anchor.setAttribute('target', '_blank');
+                        anchor.setAttribute('style', 'text-decoration: none;color:#fff');
+                        const div = document.createElement('div');
+                        div.textContent = this.axpObj.expansionTab.name;
+                        anchor.appendChild(div);
+                        targetElements_tab[3].appendChild(anchor);
+                    } else {
+                        // 関数呼び出し
+                        targetElements_tab[3].textContent = this.axpObj.expansionTab.name;
+                    }
+
                 }
-
-            }
-            // タブのヘルプ
-            if (this.axpObj.expansionTab.msg) {
-                targetElements_tab[3].dataset.msg = this.axpObj.expansionTab.msg;
-            }
-        } else {
-            // 定義がない場合、拡張機能タブを非表示
-            targetElements_tab[3].style.display = 'none';
-        }
-
-        // タブ横のテキスト表示エリア
-        // 文字列か判定
-        const isString = (value) => {
-            if (typeof value === "string" || value instanceof String) {
-                return true;
+                // タブのヘルプ
+                if (this.axpObj.expansionTab.msg) {
+                    targetElements_tab[3].dataset.msg = this.axpObj.expansionTab.msg;
+                }
             } else {
-                return false;
+                // 定義がない場合、拡張機能タブを非表示
+                targetElements_tab[3].style.display = 'none';
             }
-        }
-        let text;
-        if (isString(option.headerText)) {
-            // 最大1024文字まで）
-            if (option.headerText.length > 1024) {
-                text = option.headerText.slice(0, 1024);
+
+            // タブ横のテキスト表示エリア
+            // 文字列か判定
+            const isString = (value) => {
+                if (typeof value === "string" || value instanceof String) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            let text;
+            if (isString(option.headerText)) {
+                // 最大1024文字まで）
+                if (option.headerText.length > 1024) {
+                    text = option.headerText.slice(0, 1024);
+                } else {
+                    text = option.headerText;
+                }
             } else {
-                text = option.headerText;
+                text = '';
             }
-        } else {
-            text = '';
-        }
-        document.getElementById('axp_main_div_headerText').textContent = text;
+            document.getElementById('axp_main_div_headerText').textContent = text;
 
-        // 標準アラートのオーバーライド
-        if (document.getElementById) {
-            window.alert = function (txt) {
-                createCustomAlert(txt);
+            // 標準アラートのオーバーライド
+            if (document.getElementById) {
+                window.alert = function (txt) {
+                    createCustomAlert(txt);
+                }
             }
-        }
-        // ブラウザ
-        this.axpObj.browser = getBrowserType();
-        console.log('Browser:', this.axpObj.browser);
-        if (this.axpObj.browser === 'Safari') {
-            // safariの場合、キャンバス描画時の不具合回避用の処理を行う必要があるため、フラグを立てておく
-            this.axpObj.ENV.multiCanvas = true;
-        }
-        // 本体起動
-        this.axpObj.exec();
-        // ロード中マスクの解除
-        document.getElementById('axp_main').style.display = 'flex';
-
+            // ブラウザ
+            this.axpObj.browser = getBrowserType();
+            console.log('Browser:', this.axpObj.browser);
+            if (this.axpObj.browser === 'Safari') {
+                // safariの場合、キャンバス描画時の不具合回避用の処理を行う必要があるため、フラグを立てておく
+                this.axpObj.ENV.multiCanvas = true;
+            }
+            // 本体起動
+            this.axpObj.exec();
+            // ロード中マスクの解除
+            document.getElementById('axp_main').style.display = 'flex';
+        })();
     }
     // バージョン
     version() {

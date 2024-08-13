@@ -19,6 +19,9 @@ import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange } from './etc.j
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
 
+// 辞書データ（日本語のみデフォルトでバンドルする）
+import dictionaryJSON_ja from '../text/ja.json';
+
 // 拡張機能インポート
 import * as extensions from '@extensions';
 
@@ -177,7 +180,13 @@ export class AXPObj {
     // デバッグモード（デバッグ用）
     debugLog = null;
 
-    constructor() {
+    // 使用する言語と追加辞書
+    lang;
+    additionalDictionaryJSON;
+
+    constructor(lang, additionalDictionaryJSON) {
+        this.lang = lang;
+        this.additionalDictionaryJSON = additionalDictionaryJSON;
 
         // ツールウィンドウシステム
         this.toolWindow.push(this.layerSystem = new LayerSystem(this));
@@ -193,6 +202,37 @@ export class AXPObj {
         this.configSystem = new ConfigSystem(this);
         this.saveSystem = new SaveSystem(this);
         this.postSystem = new PostSystem(this);
+    }
+    // 単語の辞書変換
+    _(preTranslationText) {
+        let result;
+        // 追加辞書が使える場合は優先して使う
+        if (this.additionalDictionaryJSON) {
+            if (preTranslationText in this.additionalDictionaryJSON) {
+                return this.additionalDictionaryJSON[preTranslationText];
+            }
+        }
+        // 日本語辞書
+        if (preTranslationText in dictionaryJSON_ja) {
+            return dictionaryJSON_ja[preTranslationText];
+        }
+        // 見つからなければ原文を返却
+        return preTranslationText;
+    }
+    // htmlの辞書変換
+    translateHTML(preTranslationHTML) {
+        // ${で始まり、}で終わる文字列を検索して、置換する
+        const resultHTML = preTranslationHTML.replace(/\$\{.*?\}/g, match => {
+            // トークン部分だけを抜き出す
+            // （例） ${_("@CANVAS")} => @CANVAS
+            const token = match.slice(5, -3);
+            // トークンを辞書変換
+            const transWords = this._(token);
+            // 変換チェック用
+            // console.log(token, '=>', transWords);
+            return transWords;
+        });
+        return resultHTML;
     }
     // 起動時に１回だけ必要な処理
     init() {
