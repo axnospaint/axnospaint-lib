@@ -1,6 +1,7 @@
 # AXNOS Paint
 
 ## 更新履歴
+* 2024/8/3 version 2.2.0[2024/08/03版]を公開しました。
 * 2024/7/1 version 2.1.1[2024/07/01版]を公開しました。（※ビルド日付とバージョン番号の更新修正）
 * 2024/7/1 version 2.1.0[2024/05/30版]を公開しました。
 * 2024/5/5 version 2.0.0[2024/05/05版]を正式公開しました。
@@ -44,13 +45,13 @@ AXNOS Paint:ヘルプ - ニコニコ大百科
 起動に必要なファイル構成は以下の通りです。（/dist/の中にビルド済min.jsファイルが格納されています）
 ```
 index.html（任意のhtmlファイル）
-axnospaint-lib-2.1.1.min.js
+axnospaint-lib-2.2.0.min.js
 ```
 ### 起動用htmlファイル
 最小構成の例を以下に示します。必要に応じて後述のオプションを指定してください。
 ```html
 <head>
-    <script defer="defer" src="axnospaint-lib-2.1.1.min.js"></script>
+    <script defer="defer" src="axnospaint-lib-2.2.0.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             new AXNOSPaint({
