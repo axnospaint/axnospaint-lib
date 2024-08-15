@@ -1,27 +1,6 @@
-// @description ブラウザの使用言語を識別し、対応する追加辞書JSONをカレントパスからロードする
+// @description 指定されたパスから追加辞書JSONをロードする
 
-export function getUserLanguage() {
-    const languages = navigator.languages || [navigator.language || navigator.userLanguage];
-    // 最上位の言語を取得
-    const primaryLanguage = languages[0];
-    // 言語情報の変換
-    let result;
-    if (primaryLanguage.startsWith('ja')) {
-        // 先頭がjaから始まる言語は、日本語（デフォルト）
-        result = 'ja';
-    } else if (primaryLanguage.startsWith('en')) {
-        // 先頭がenから始まる言語は、en共通
-        result = 'en';
-    } else {
-        // その他の言語
-        result = primaryLanguage;
-    }
-    return result;
-}
-
-export async function getDictionaryJSON(language) {
-    // ロードするファイル
-    const loadFileName = `${language}.json`;
+export async function getDictionaryJSON(dictionaryURL) {
     // 辞書ファイル存在確認
     async function checkFileExists(url) {
         try {
@@ -43,13 +22,15 @@ export async function getDictionaryJSON(language) {
             return false;
         }
     }
-    if (await checkFileExists(loadFileName)) {
-        const loadedJSON = await loadJSON(loadFileName)
+    if (await checkFileExists(dictionaryURL)) {
+        const loadedJSON = await loadJSON(dictionaryURL)
         if (loadedJSON) {
             // 読込成功
             return loadedJSON;
+        } else {
+            return 'SYNTAX_ERROR';
         }
+    } else {
+        return 'NOT_FOUND';
     }
-    // 失敗時はnullを返却
-    return null;
 }

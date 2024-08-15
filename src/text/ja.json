@@ -28,7 +28,7 @@
     "@HAND": "ハンド",
     "@MOVE_TOOL": "移動ツール",
     "@SIZE": "太さ",
-    "@FILL_CORRECTION": "塗り残し補正",
+    "@GROW_FILL_AREA": "塗り残し補正",
     "@ANGLE": "角度",
     "@ROUNDNESS": "丸み",
     "@BLUR": "ぼかし度",

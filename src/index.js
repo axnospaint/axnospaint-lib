@@ -6,7 +6,7 @@
 "use strict";
 
 import { AXPObj } from './js/axpobj.js';
-import { getUserLanguage, getDictionaryJSON } from './js/lang.js';
+import { getDictionaryJSON } from './js/lang.js';
 import { createCustomAlert } from './js/alert.js';
 import { getBrowserType } from './js/etc.js';
 
@@ -31,20 +31,24 @@ export default class {
     constructor(option) {
         console.log('version:', PACKAGE_VERSION, PACKAGE_DATE);
         (async () => {
-            // 言語情報と辞書の取得
-            //const userLanguage = getUserLanguage();
-            const userLanguage = 'en';
+            // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
-            // 日本語以外なら追加辞書を取得
-            if (userLanguage !== 'ja') {
-                additionalDictionaryJSON = await getDictionaryJSON(userLanguage);
+            if (typeof option.dictionary !== 'undefined') {
+                let result = await getDictionaryJSON(option.dictionary);
+                if (result === 'NOT_FOUND') {
+                    alert(`ERROR:起動オプションdictionaryで指定されたファイル\n[ ${option.dictionary} ] が見つかりません。\n通常辞書で起動します。`);
+                } else if (result === 'SYNTAX_ERROR') {
+                    alert(`ERROR:起動オプションdictionaryで指定されたファイル\n[ ${option.dictionary} ] に問題があります。\n通常辞書で起動します。`);
+                } else {
+                    additionalDictionaryJSON = result;
+                }
             }
 
             // ツール基幹インスタンス作成
-            this.axpObj = new AXPObj(userLanguage, additionalDictionaryJSON);
+            this.axpObj = new AXPObj(additionalDictionaryJSON);
 
-            // 言語情報表示
-            console.log('userLanguage:', userLanguage, ' / Dictionary:', this.axpObj._('@LANGUAGE'));
+            // 使用辞書情報表示
+            console.log('Dictionary:', this.axpObj._('@LANGUAGE'));
 
             // 起動オプションチェック
             if (typeof option.bodyId === 'undefined') {

@@ -180,12 +180,10 @@ export class AXPObj {
     // デバッグモード（デバッグ用）
     debugLog = null;
 
-    // 使用する言語と追加辞書
-    lang;
+    // 使用する追加辞書
     additionalDictionaryJSON;
 
-    constructor(lang, additionalDictionaryJSON) {
-        this.lang = lang;
+    constructor(additionalDictionaryJSON) {
         this.additionalDictionaryJSON = additionalDictionaryJSON;
 
         // ツールウィンドウシステム
@@ -205,7 +203,6 @@ export class AXPObj {
     }
     // 単語の辞書変換
     _(preTranslationText) {
-        let result;
         // 追加辞書が使える場合は優先して使う
         if (this.additionalDictionaryJSON) {
             if (preTranslationText in this.additionalDictionaryJSON) {
