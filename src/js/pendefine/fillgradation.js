@@ -8,7 +8,7 @@ export class Fillgradation extends Fill {
     constructor(option) {
         super(option);
         // 値（Fillからの差分）
-        this.name = this.axpObj._('@GRADATION_FILL');
+        this.name = this.axpObj._('@PENNAME.GRADATION_FILL');
         this.toneLevel = null;
         this.gradation = 0;
         // 制御

@@ -96,7 +96,7 @@ export class LayerSystem extends ToolWindow {
         this.createHTML(
             'axp_layer',
             'LAY',
-            this.axpObj._('@LAYER'),
+            this.axpObj._('@WINDOW.LAYER'),
             'axpc_icon_window_layer',
             htmldata
         );
@@ -361,7 +361,7 @@ export class LayerSystem extends ToolWindow {
             }
             return resultName;
         }
-        return checkDuplicateLayerName(this.axpObj._('@LAYER'));
+        return checkDuplicateLayerName(this.axpObj._('@LAYER.NEWLAYER_TEMPLATE'));
     }
     // 重複したレイヤー名を書き換え（カラータグ用） 引数depthは指定不要
     replaceDuplicateLayerName(name, depth = 1) {

@@ -71,7 +71,7 @@ export class ColorPaletteSystem extends ToolWindow {
         this.createHTML(
             'axp_palette',
             'PLT',
-            this.axpObj._('@SWATCHES'),
+            this.axpObj._('@WINDOW.SWATCHES'),
             'axpc_icon_window_palette',
             htmldata
         );

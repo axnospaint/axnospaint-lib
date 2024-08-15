@@ -1,6 +1,6 @@
 {
     "@LANGUAGE": "fr",
-    "@CANVAS": "Toile",
-    "@SETTINGS": "paramètres",
-    "@POST": "poste"
+    "@TAB.CANVAS": "Toile",
+    "@TAB.SETTINGS": "paramètres",
+    "@TAB.POST": "poste"
 }

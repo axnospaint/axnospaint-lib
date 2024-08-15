@@ -7,7 +7,7 @@ export class Crayon extends Dot {
     constructor(option) {
         super(option);
         // 値（Roundからの差分）
-        this.name = this.axpObj._('@CRAYON');
+        this.name = this.axpObj._('@PENNAME.CRAYON');
         this.size = 15;
         this.toneLevel = null;
         this.radius = 50;

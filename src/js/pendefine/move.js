@@ -9,7 +9,7 @@ export class Move extends PenObj {
         this.axpObj = option.axpObj;
         this.CANVAS = option.CANVAS;
         // 値（PenObjからの差分）
-        this.name = this.axpObj._('@MOVE_TOOL');
+        this.name = this.axpObj._('@PENNAME.MOVE_TOOL');
         this.type = 'move';
         this.cursor = 'move';
         // 制御

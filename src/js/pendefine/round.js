@@ -11,7 +11,7 @@ export class Round extends PenObj {
         this.axpObj = option.axpObj;
         this.CANVAS = option.CANVAS;
         // 値（PenObjからの差分）
-        this.name = this.axpObj._('@ROUND');
+        this.name = this.axpObj._('@PENNAME.ROUND');
         this.type = 'draw';
         this.size = 1;
         this.index = range_index(this.size);
