@@ -484,12 +484,12 @@
                     © 2022 「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」<br>
                     <br>
                     ◆ github<br>
-                    <a href="https://github.com/axnospaint/axnospaint-lib" target="_blank"
+                    <a href="https://github.com/axnospaint/axnospaint-lib" target="_blank" rel="noopener"
                         style="text-decoration: none;color:#00f">
                         https://github.com/axnospaint/axnospaint-lib</a>
                     <br><br>
                     ◆ AXNOS Paint:ヘルプ - ニコニコ大百科<br>
-                    <a href="https://dic.nicovideo.jp/id/5703111" target="_blank"
+                    <a href="https://dic.nicovideo.jp/id/5703111" target="_blank" rel="noopener"
                         style="text-decoration: none;color:#00f">
                         https://dic.nicovideo.jp/id/5703111</a>
                     <br>
