@@ -20,7 +20,7 @@
             <tr>
                 <td title="">基にしたお絵カキコ</td>
                 <td><span id="axp_post_span_referenceOekakiType"></span>
-                    <a href="" id="axp_post_a_referenceOekakiId" target="_blank"></a>
+                    <a href="" id="axp_post_a_referenceOekakiId" target="_blank" rel="noopener"></a>
                 </td>
             </tr>
             <tr>
