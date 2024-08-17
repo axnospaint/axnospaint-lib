@@ -53,6 +53,8 @@ export default class {
         this.axpObj.checkSameBBS = option.checkSameBBS || false;
         // お絵カキコデータ（基にしてお絵カキコする用）が存在するURL
         this.axpObj.oekakiURL = option.oekakiURL || null;
+        // 下書き機能画像ファイル名
+        this.axpObj.draftImageFile = option.draftImageFile || null;
         // お絵カキコデータ読込タイムアウト時間
         this.axpObj.oekakiTimeout = isNaN(option.oekakiTimeout) ? 15000 : option.oekakiTimeout;
         // お絵カキコサイズ
