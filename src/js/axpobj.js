@@ -115,6 +115,8 @@ export class AXPObj {
     // お絵カキコのpng画像が存在するurl
     oekakiURL;
     oekakiTimeout;
+    // 下書き機能画像ファイル名
+    draftImageFile;
     // 基にしてお絵カキコ用Image
     oekaki_base;
 
@@ -1903,12 +1905,29 @@ export class AXPObj {
                 this.y_size = this.CONST.CANVAS_Y_DEFAULT;
             }
 
+            // 下書き機能を使用する場合の判定
             let isDraftLoaded = false;
-            // 基にしてお絵カキコする場合の判定
-            if (this.oekaki_id) {
-                let imageload_src = this.oekakiURL + this.oekaki_id + '.png';
+            let imageload_src = null;
+            let imageload_filename = null;
+            // 読み込み画像ファイル名の決定
+            if (this.draftImageFile !== null) {
+                // 起動オプション指定時（優先）
+                imageload_src = this.draftImageFile;
+                // URLパラメータ指定があっても無効にする
+                this.oekaki_id = null;
+            } else if (this.oekakiURL !== null && this.oekaki_id !== null) {
+                // URLパラメータ指定時
+                imageload_src = this.oekakiURL + this.oekaki_id + '.png';
+            } else {
+                // 起動オプションoekakiURLが指定されていない場合は、URLパラメータ無効
+                this.oekaki_id = null;
+            }
+            // 画像読み込み
+            if (imageload_src !== null) {
+                // パスを除いたファイル名だけを取り出す
+                imageload_filename = imageload_src.match(".+/(.+?)([?#;].*)?$")[1];
                 // テキスト表示（※初期化前なので、this.msg()はまだ使用できない）
-                document.getElementById('axp_footer_div_message').textContent = `[${this.oekaki_id}.png]を読み込みしています...`;
+                document.getElementById('axp_footer_div_message').textContent = `[${imageload_filename}]を読み込みしています...`;
                 // 基にしてお絵カキコする画像のロード
                 await loadImageWithTimeout(imageload_src, this.oekakiTimeout)
                     .then(image => {
@@ -1923,16 +1942,19 @@ export class AXPObj {
                         // キャンバス情報更新
                         this.x_size = this.oekaki_base.naturalWidth;
                         this.y_size = this.oekaki_base.naturalHeight;
-                        this.oekaki_bbs_pageno = this.post_bbs_pageno;
-                        this.oekaki_bbs_title = this.post_bbs_title;
-                        console.log('基にしてお絵カキコ:', this.x_size, this.y_size, this.oekaki_id);
+                        // URLパラメータ指定時のみ、情報保存
+                        if (this.oekaki_id !== null) {
+                            this.oekaki_bbs_pageno = this.post_bbs_pageno;
+                            this.oekaki_bbs_title = this.post_bbs_title;
+                            console.log('基にしてお絵カキコ:', this.x_size, this.y_size, this.oekaki_id);
+                        }
                         // 下書きロード済
                         isDraftLoaded = true;
                     })
                     .catch(error => {
                         // 画像読み込みエラー
                         console.error(error);
-                        alert(`「基にしてお絵カキコする」画像の読み込みに失敗しました。\n新規キャンバスを作成します。\n${error}`);
+                        alert(`下書き画像の読み込みに失敗しました。\n新規キャンバスを作成します。\n${error}`);
                         // テキスト表示クリア
                         document.getElementById('axp_footer_div_message').textContent = '';
                         this.oekaki_id = null;
@@ -2048,7 +2070,7 @@ export class AXPObj {
                 // レイヤー更新
                 this.layerSystem.write(this.layerSystem.CANVAS.tmp_ctx.getImageData(0, 0, this.x_size, this.y_size));
                 //　[%1.png]を読み込みました。(画像サイズ 横:%2 × 縦:%3)
-                this.msg('@INF0050', this.oekaki_id, this.x_size, this.y_size);
+                this.msg('@INF0050', imageload_filename, this.x_size, this.y_size);
             }
 
             // キャンバス更新
