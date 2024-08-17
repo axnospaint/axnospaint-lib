@@ -1918,6 +1918,9 @@ export class AXPObj {
             } else if (this.oekakiURL !== null && this.oekaki_id !== null) {
                 // URLパラメータ指定時
                 imageload_src = this.oekakiURL + this.oekaki_id + '.png';
+            } else {
+                // 起動オプションoekakiURLが指定されていない場合は、URLパラメータ無効
+                this.oekaki_id = null;
             }
             // 画像読み込み
             if (imageload_src !== null) {
