@@ -184,7 +184,7 @@ export class ConfigSystem {
         let targetElement = document.getElementById('axp_config');
         targetElement.insertAdjacentHTML('afterbegin', htmldata);
         // バージョン情報の表示
-        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${PACKAGE_VERSION} ${PACKAGE_DATE}`
+        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${PACKAGE_VERSION} (${PACKAGE_DATE})`
     }
     // HTML展開
     deployHTML() {

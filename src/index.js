@@ -28,7 +28,8 @@ require('./css/alert.css');
 export default class {
     axpObj;
     constructor(option) {
-        console.log('version:', PACKAGE_VERSION, PACKAGE_DATE);
+        console.log('version:', PACKAGE_VERSION);
+        console.log('build:', PACKAGE_DATE);
         this.axpObj = new AXPObj();
 
         // 起動オプションチェック
@@ -149,7 +150,7 @@ export default class {
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${PACKAGE_VERSION} ${PACKAGE_DATE}`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${PACKAGE_VERSION} (${PACKAGE_DATE})`;
     }
     // 画面の表示／非表示
     on() {
@@ -161,7 +162,7 @@ export default class {
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${PACKAGE_VERSION} ${PACKAGE_DATE}`;
+        return `version ${PACKAGE_VERSION} (${PACKAGE_DATE})`;
     }
 }
 
