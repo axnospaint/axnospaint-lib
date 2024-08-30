@@ -94,6 +94,7 @@ export class PostSystem {
                 strMessage: message,
                 strWatchList: (document.getElementById('axp_post_checkbox_watchList').checked) ? 't' : '',
                 oekaki_id: this.axpObj.oekaki_id,
+                draftImageFile: this.axpObj.draftImageFile,
                 strEncodeImg: strEncodeImg,
             };
 
