@@ -15,7 +15,7 @@ import { ConfigSystem } from './config.js';
 import { PostSystem } from './post.js';
 import { SaveSystem } from './saveload.js';
 import { KeyboardSystem } from './keyboard.js';
-import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange, getFileNameFromURL } from './etc.js';
+import { UTIL, loadImageWithTimeout, calcDistance, inRange, adjustInRange, getFileNameFromURL } from './etc.js';
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
 
@@ -26,6 +26,10 @@ export class AXPObj {
     // AXNOS Paint全体で使用する定数。（システム単位で完全に独立している定数は、システム毎に定義する）
     CONST = {
         APP_TITLE: 'AXNOS Paint',
+        MIN_SYSTEM_WIDTH: 8,
+        MIN_SYSTEM_HEIGHT: 8,
+        MAX_SYSTEM_WIDTH: 1000,
+        MAX_SYSTEM_HEIGHT: 1000,
         CANVAS_X_MAX: 600,
         CANVAS_Y_MAX: 600,
         CANVAS_X_MIN: 8,
@@ -126,6 +130,12 @@ export class AXPObj {
     oekaki_bbs_pageno = null; // 基にするお絵カキコの掲示板のページ番号（ロード制限の判定に使用）
     oekaki_bbs_title = null; // 基にするお絵カキコの掲示板のページタイトル（ロード制限時のエラーメッセージ用）
 
+    // 許容するキャンバスサイズ
+    minWidth;
+    minHeight;
+    maxWidth;
+    maxHeight;
+
     // 現在のキャンバスサイズ
     x_size;
     y_size;
@@ -195,6 +205,13 @@ export class AXPObj {
         this.configSystem = new ConfigSystem(this);
         this.saveSystem = new SaveSystem(this);
         this.postSystem = new PostSystem(this);
+
+        // デフォルト値設定
+        this.minWidth = this.CONST.CANVAS_X_MIN;
+        this.minHeight = this.CONST.CANVAS_Y_MIN;
+        this.maxWidth = this.CONST.CANVAS_X_MAX;
+        this.maxHeight = this.CONST.CANVAS_Y_MAX;
+
     }
     // 起動時に１回だけ必要な処理
     init() {
@@ -1134,30 +1151,24 @@ export class AXPObj {
         let y = Number(y_size);
         if (isNaN(x)) {
             x = this.CONST.CANVAS_X_DEFAULT;
-        } else {
-            if (x < this.CONST.CANVAS_X_MIN) x = this.CONST.CANVAS_X_MIN;
-            if (x > this.CONST.CANVAS_X_MAX) x = this.CONST.CANVAS_X_MAX;
         }
+        x = adjustInRange(x, this.minWidth, this.maxWidth);
         if (isNaN(y)) {
             y = this.CONST.CANVAS_Y_DEFAULT;
-        } else {
-            if (y < this.CONST.CANVAS_Y_MIN) y = this.CONST.CANVAS_Y_MIN;
-            if (y > this.CONST.CANVAS_Y_MAX) y = this.CONST.CANVAS_Y_MAX;
         }
+        y = adjustInRange(y, this.minHeight, this.maxHeight);
         this.x_size = x;
         this.y_size = y;
         console.log(`キャンバスサイズ更新:${x} x ${y}`);
     }
     checkCanvasSize_x(x_size) {
         let x = Number(x_size);
-        if (x < this.CONST.CANVAS_X_MIN) x = this.CONST.CANVAS_X_MIN;
-        if (x > this.CONST.CANVAS_X_MAX) x = this.CONST.CANVAS_X_MAX;
+        x = adjustInRange(x, this.minWidth, this.maxWidth);
         return x;
     }
     checkCanvasSize_y(y_size) {
         let y = Number(y_size);
-        if (y < this.CONST.CANVAS_Y_MIN) y = this.CONST.CANVAS_Y_MIN;
-        if (y > this.CONST.CANVAS_Y_MAX) y = this.CONST.CANVAS_Y_MAX;
+        y = adjustInRange(y, this.minHeight, this.maxHeight);
         return y;
     }
     getCanvasSize_X() {
@@ -1896,6 +1907,7 @@ export class AXPObj {
             if (this.option_width) {
                 this.x_size = Number(this.option_width);
             } else {
+                // ※この後に範囲チェックでサイズ修整を行うため、最大最小が変更されていた場合も一旦デフォルト値を設定しておく
                 this.x_size = this.CONST.CANVAS_X_DEFAULT;
             }
             if (this.option_height) {
