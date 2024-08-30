@@ -249,3 +249,9 @@
 .axpc_config_number_scaleValue {
     width: 60px;
 }
+
+/* バージョン情報 */
+#axp_config_div_versionInfo {
+    -webkit-user-select: all;
+    user-select: all;
+}

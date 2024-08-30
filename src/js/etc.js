@@ -61,6 +61,11 @@ export function getBrowserType() {
     return type;
 }
 
+// ファイルパスからファイル名部分だけ切り抜いて返却する
+export function getFileNameFromURL(url) {
+    return url.match(".+/(.+?)([?#;].*)?$")[1];
+}
+
 /**
  * ２点間の距離
  * @param {*} x1 

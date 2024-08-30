@@ -19,9 +19,7 @@
         <tbody>
             <tr>
                 <td title="">基にしたお絵カキコ</td>
-                <td><span id="axp_post_span_referenceOekakiType"></span>
-                    <a href="" id="axp_post_a_referenceOekakiId" target="_blank"></a>
-                </td>
+                <td><span id="axp_post_span_referenceOekakiId"></span></td>
             </tr>
             <tr>
                 <td title="">お絵カキコのサイズ</td>

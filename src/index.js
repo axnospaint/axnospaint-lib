@@ -8,8 +8,7 @@
 import { AXPObj } from './js/axpobj.js';
 import { getDictionaryJSON } from './js/lang.js';
 import { createCustomAlert } from './js/alert.js';
-import { getBrowserType } from './js/etc.js';
-
+import { getBrowserType, inRange } from './js/etc.js';
 // htmlデータ
 import htmldata from './html/main.txt';
 // css適用
@@ -29,7 +28,8 @@ require('./css/alert.css');
 export default class {
     axpObj;
     constructor(option) {
-        console.log('version:', PACKAGE_VERSION, PACKAGE_DATE);
+        console.log('version:', PACKAGE_VERSION);
+        console.log('build:', PACKAGE_DATE);
         (async () => {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
@@ -72,8 +72,57 @@ export default class {
             this.axpObj.checkSameBBS = option.checkSameBBS || false;
             // お絵カキコデータ（基にしてお絵カキコする用）が存在するURL
             this.axpObj.oekakiURL = option.oekakiURL || null;
+            // 下書き機能画像ファイル名
+            this.axpObj.draftImageFile = option.draftImageFile || null;
             // お絵カキコデータ読込タイムアウト時間
             this.axpObj.oekakiTimeout = isNaN(option.oekakiTimeout) ? 15000 : option.oekakiTimeout;
+
+            // 許容するキャンバスサイズ
+            // 　起動オプション指定がある場合、コンストラクタで設定済みのデフォルト値を上書き
+            if (typeof option.minWidth === 'number') {
+                if (inRange(option.minWidth, this.axpObj.CONST.MIN_SYSTEM_WIDTH, this.axpObj.CONST.MAX_SYSTEM_WIDTH)) {
+                    this.axpObj.minWidth = option.minWidth;
+                } else {
+                    alert(`ERROR:\n起動オプションminWidthの指定が正しくありません。\n有効範囲は${this.axpObj.CONST.MIN_SYSTEM_WIDTH}～${this.axpObj.CONST.MAX_SYSTEM_WIDTH}です。`);
+                    return;
+                }
+            }
+            if (typeof option.minHeight === 'number') {
+                if (inRange(option.minHeight, this.axpObj.CONST.MIN_SYSTEM_HEIGHT, this.axpObj.CONST.MAX_SYSTEM_HEIGHT)) {
+                    this.axpObj.minHeight = option.minHeight;
+                } else {
+                    alert(`ERROR:\n起動オプションminHeightの指定が正しくありません。\n有効範囲は${this.axpObj.CONST.MIN_SYSTEM_HEIGHT}～${this.axpObj.CONST.MAX_SYSTEM_HEIGHT}です。`);
+                    return;
+                }
+            }
+            if (typeof option.maxWidth === 'number') {
+                if (inRange(option.maxWidth, this.axpObj.CONST.MIN_SYSTEM_WIDTH, this.axpObj.CONST.MAX_SYSTEM_WIDTH)) {
+                    this.axpObj.maxWidth = option.maxWidth;
+                } else {
+                    alert(`ERROR:\n起動オプションmaxWidthの指定が正しくありません。\n有効範囲は${this.axpObj.CONST.MIN_SYSTEM_WIDTH}～${this.axpObj.CONST.MAX_SYSTEM_WIDTH}です。`);
+                    return;
+                }
+            }
+            if (typeof option.maxHeight === 'number') {
+                if (inRange(option.maxHeight, this.axpObj.CONST.MIN_SYSTEM_HEIGHT, this.axpObj.CONST.MAX_SYSTEM_HEIGHT)) {
+                    this.axpObj.maxHeight = option.maxHeight;
+                } else {
+                    alert(`ERROR:\n起動オプションmaxHeightの指定が正しくありません。\n有効範囲は${this.axpObj.CONST.MIN_SYSTEM_HEIGHT}～${this.axpObj.CONST.MAX_SYSTEM_HEIGHT}です。`);
+                    return;
+                }
+            }
+            // 　論理チェック
+            console.log(
+                this.axpObj.minWidth,
+                this.axpObj.minHeight,
+                this.axpObj.maxWidth,
+                this.axpObj.maxHeight
+            );
+            if (this.axpObj.minWidth > this.axpObj.maxWidth || this.axpObj.minHeight > this.axpObj.maxHeight) {
+                alert(`ERROR:\n起動オプションminWidth,minHeight,maxWidth,maxHeightの指定の組み合わせが正しくありません。`);
+                return;
+            }
+
             // お絵カキコサイズ
             this.axpObj.option_height = option.height || null;
             this.axpObj.option_width = option.width || null;
@@ -102,6 +151,7 @@ export default class {
                         const anchor = document.createElement('a');
                         anchor.setAttribute('href', this.axpObj.expansionTab.link);
                         anchor.setAttribute('target', '_blank');
+                        anchor.setAttribute('rel', 'noopener');
                         anchor.setAttribute('style', 'text-decoration: none;color:#fff');
                         const div = document.createElement('div');
                         div.textContent = this.axpObj.expansionTab.name;
@@ -165,7 +215,7 @@ export default class {
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${PACKAGE_VERSION} ${PACKAGE_DATE}`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${PACKAGE_VERSION} (${PACKAGE_DATE})`;
     }
     // 画面の表示／非表示
     on() {
@@ -177,7 +227,7 @@ export default class {
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${PACKAGE_VERSION} ${PACKAGE_DATE}`;
+        return `version ${PACKAGE_VERSION} (${PACKAGE_DATE})`;
     }
 }
 
