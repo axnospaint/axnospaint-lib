@@ -1,6 +1,6 @@
 // @description セーブ／ロード／自動保存から復元処理　indexedDB処理系
 
-import { UTIL, getFileNameFromURL } from './etc.js';
+import { UTIL, inRange, getFileNameFromURL } from './etc.js';
 
 // 自動保存の間隔
 const AUTOSAVE_INTERVAL = 10;
@@ -269,6 +269,16 @@ export class SaveSystem {
                                 this.axpObj.msg('@CAU0301', save_id.substr(5));
                                 return;
                             }
+                            // 画像サイズが許容範囲かチェック
+                            if (
+                                !inRange(data.x_max, this.axpObj.minWidth, this.axpObj.maxWidth)
+                                ||
+                                !inRange(data.y_max, this.axpObj.minHeight, this.axpObj.maxHeight)
+                            ) {
+                                alert(`データの画像サイズ(横:${data.x_max} 縦:${data.y_max}) が許容値を超えています。\nこのデータをロードすることはできません。`);
+                                return;
+                            }
+
                             // 同一掲示板のみロード可能とする設定の場合、チェックを行う
                             if (this.restore_oekaki_id(data)) {
                                 this.restoreData(data);

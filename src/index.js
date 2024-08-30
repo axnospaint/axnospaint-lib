@@ -7,7 +7,7 @@
 
 import { AXPObj } from './js/axpobj.js';
 import { createCustomAlert } from './js/alert.js';
-import { getBrowserType } from './js/etc.js';
+import { getBrowserType, inRange } from './js/etc.js';
 // htmlデータ
 import htmldata from './html/main.txt';
 
@@ -58,6 +58,53 @@ export default class {
         this.axpObj.draftImageFile = option.draftImageFile || null;
         // お絵カキコデータ読込タイムアウト時間
         this.axpObj.oekakiTimeout = isNaN(option.oekakiTimeout) ? 15000 : option.oekakiTimeout;
+
+        // 許容するキャンバスサイズ
+        // 　起動オプション指定がある場合、コンストラクタで設定済みのデフォルト値を上書き
+        if (typeof option.minWidth === 'number') {
+            if (inRange(option.minWidth, this.axpObj.CONST.MIN_SYSTEM_WIDTH, this.axpObj.CONST.MAX_SYSTEM_WIDTH)) {
+                this.axpObj.minWidth = option.minWidth;
+            } else {
+                alert(`ERROR:\n起動オプションminWidthの指定が正しくありません。\n有効範囲は${this.axpObj.CONST.MIN_SYSTEM_WIDTH}～${this.axpObj.CONST.MAX_SYSTEM_WIDTH}です。`);
+                return;
+            }
+        }
+        if (typeof option.minHeight === 'number') {
+            if (inRange(option.minHeight, this.axpObj.CONST.MIN_SYSTEM_HEIGHT, this.axpObj.CONST.MAX_SYSTEM_HEIGHT)) {
+                this.axpObj.minHeight = option.minHeight;
+            } else {
+                alert(`ERROR:\n起動オプションminHeightの指定が正しくありません。\n有効範囲は${this.axpObj.CONST.MIN_SYSTEM_HEIGHT}～${this.axpObj.CONST.MAX_SYSTEM_HEIGHT}です。`);
+                return;
+            }
+        }
+        if (typeof option.maxWidth === 'number') {
+            if (inRange(option.maxWidth, this.axpObj.CONST.MIN_SYSTEM_WIDTH, this.axpObj.CONST.MAX_SYSTEM_WIDTH)) {
+                this.axpObj.maxWidth = option.maxWidth;
+            } else {
+                alert(`ERROR:\n起動オプションmaxWidthの指定が正しくありません。\n有効範囲は${this.axpObj.CONST.MIN_SYSTEM_WIDTH}～${this.axpObj.CONST.MAX_SYSTEM_WIDTH}です。`);
+                return;
+            }
+        }
+        if (typeof option.maxHeight === 'number') {
+            if (inRange(option.maxHeight, this.axpObj.CONST.MIN_SYSTEM_HEIGHT, this.axpObj.CONST.MAX_SYSTEM_HEIGHT)) {
+                this.axpObj.maxHeight = option.maxHeight;
+            } else {
+                alert(`ERROR:\n起動オプションmaxHeightの指定が正しくありません。\n有効範囲は${this.axpObj.CONST.MIN_SYSTEM_HEIGHT}～${this.axpObj.CONST.MAX_SYSTEM_HEIGHT}です。`);
+                return;
+            }
+        }
+        // 　論理チェック
+        console.log(
+            this.axpObj.minWidth,
+            this.axpObj.minHeight,
+            this.axpObj.maxWidth,
+            this.axpObj.maxHeight
+        );
+        if (this.axpObj.minWidth > this.axpObj.maxWidth || this.axpObj.minHeight > this.axpObj.maxHeight) {
+            alert(`ERROR:\n起動オプションminWidth,minHeight,maxWidth,maxHeightの指定の組み合わせが正しくありません。`);
+            return;
+        }
+
         // お絵カキコサイズ
         this.axpObj.option_height = option.height || null;
         this.axpObj.option_width = option.width || null;

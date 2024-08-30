@@ -383,26 +383,34 @@ export class ConfigSystem {
         };
 
         // ◆キャンバス ----------------------------------------------------------------
-        document.getElementById('axp_config_number_oekakiWidth').value = this.axpObj.x_size;
-        document.getElementById('axp_config_number_oekakiHeight').value = this.axpObj.y_size;
+
+        document.getElementById('axp_config_span_canvasSizeLimit').textContent =
+            `(※最小${this.axpObj.minWidth}×${this.axpObj.minHeight} ～ 最大${this.axpObj.maxWidth}×${this.axpObj.maxHeight})`;
+
+        const inputWidth = document.getElementById('axp_config_number_oekakiWidth');
+        inputWidth.min = this.axpObj.minWidth;
+        inputWidth.max = this.axpObj.maxWidth;
+        inputWidth.value = this.axpObj.x_size;
+
+        const inputHeight = document.getElementById('axp_config_number_oekakiHeight');
+        inputHeight.min = this.axpObj.minHeight;
+        inputHeight.max = this.axpObj.maxHeight;
+        inputHeight.value = this.axpObj.y_size;
+
         // テキストボックス：お絵カキコのサイズ数値変更
-        document.getElementById('axp_config_number_oekakiWidth').onchange = (e) => {
+        inputWidth.onchange = (e) => {
             // キャンバスサイズの範囲チェック
-            let x = this.axpObj.checkCanvasSize_x(document.getElementById('axp_config_number_oekakiWidth').value);
-            document.getElementById('axp_config_number_oekakiWidth').value = x;
+            inputWidth.value = this.axpObj.checkCanvasSize_x(inputWidth.value);
         }
-        document.getElementById('axp_config_number_oekakiHeight').onchange = (e) => {
+        inputHeight.onchange = (e) => {
             // キャンバスサイズの範囲チェック
-            let y = this.axpObj.checkCanvasSize_y(document.getElementById('axp_config_number_oekakiHeight').value);
-            document.getElementById('axp_config_number_oekakiHeight').value = y;
+            inputHeight.value = this.axpObj.checkCanvasSize_y(inputHeight.value);
         }
         // ボタン：新規キャンバス
         document.getElementById('axp_config_button_newCanvas').onclick = (e) => {
             // キャンバスサイズの範囲チェック
-            let x = this.axpObj.checkCanvasSize_x(document.getElementById('axp_config_number_oekakiWidth').value);
-            let y = this.axpObj.checkCanvasSize_y(document.getElementById('axp_config_number_oekakiHeight').value);
-            document.getElementById('axp_config_number_oekakiWidth').value = x;
-            document.getElementById('axp_config_number_oekakiHeight').value = y;
+            let x = inputWidth.value = this.axpObj.checkCanvasSize_x(inputWidth.value);
+            let y = inputHeight.value = this.axpObj.checkCanvasSize_y(inputHeight.value);
 
             // 確認ダイアログ表示
             confirmExPromise(`現在の描画内容を破棄して新規キャンバス（${x}×${y}）を作成します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
@@ -445,10 +453,8 @@ export class ConfigSystem {
             }
 
             // キャンバスサイズの範囲チェック
-            let x = this.axpObj.checkCanvasSize_x(document.getElementById('axp_config_number_oekakiWidth').value);
-            let y = this.axpObj.checkCanvasSize_y(document.getElementById('axp_config_number_oekakiHeight').value);
-            document.getElementById('axp_config_number_oekakiWidth').value = x;
-            document.getElementById('axp_config_number_oekakiHeight').value = y;
+            let x = inputWidth.value = this.axpObj.checkCanvasSize_x(inputWidth.value);
+            let y = inputHeight.value = this.axpObj.checkCanvasSize_y(inputHeight.value);
 
             // 確認ダイアログ表示
             confirmExPromise(`キャンバスサイズを${x}×${y}に変更します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
