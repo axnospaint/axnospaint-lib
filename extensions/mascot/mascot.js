@@ -204,8 +204,6 @@ export default class Mascot {
             this.baseX = e.pageX;
             this.baseY = e.pageY;
             //console.log('down', e.pageX, e.pageY);
-            // イベントリスナー解除用
-            const controller = new AbortController();
             // ドラッグ中
             const calcPosition = (x, y) => {
                 //ドラッグ範囲制限
@@ -224,7 +222,7 @@ export default class Mascot {
                 if (new_y >= limit_height) new_y = limit_height;
                 return { x: new_x, y: new_y };
             }
-            window.addEventListener('pointermove', (e) => {
+            const onPointerMove = (e) => {
                 e.stopPropagation();
                 let pos = calcPosition(e.pageX, e.pageY);
                 //マウスが動いた場所に要素を動かす
@@ -232,10 +230,9 @@ export default class Mascot {
                     pos.x,
                     pos.y
                 );
-            }, { signal: controller.signal });
-
+            }
             // ドロップ
-            window.addEventListener('pointerup', (e) => {
+            const onPointerUp = (e) => {
                 e.stopPropagation();
                 let pos = calcPosition(e.pageX, e.pageY);
                 //マウスが動いた場所に要素を動かす
@@ -244,8 +241,11 @@ export default class Mascot {
                     pos.y
                 );
                 // イベントリスナー解除
-                controller.abort();
-            }, { signal: controller.signal });
+                window.removeEventListener('pointermove', onPointerMove);
+                window.removeEventListener('pointerup', onPointerUp);
+            }
+            window.addEventListener('pointermove', onPointerMove);
+            window.addEventListener('pointerup', onPointerUp);
         });
     }
     //
