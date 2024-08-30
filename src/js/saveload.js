@@ -1,6 +1,6 @@
 // @description セーブ／ロード／自動保存から復元処理　indexedDB処理系
 
-import { UTIL } from './etc.js';
+import { UTIL, getFileNameFromURL } from './etc.js';
 
 // 自動保存の間隔
 const AUTOSAVE_INTERVAL = 10;
@@ -26,7 +26,8 @@ export class SaveSystem {
     autosave_counter;
     CONST = {
         // AXNOS Paintセーブデータ書式のバージョン（他システムから参照される）※indexedDBのバージョンとは別物
-        DATA_VERSION: 2,
+        DATA_VERSION: 3,
+        // ver.3 draftImageFile追加
     }
     constructor(axpObj) {
         this.axpObj = axpObj;
@@ -74,6 +75,7 @@ export class SaveSystem {
                 //layer: this.axpObj.layerSystem.layerObj.reverse(),
                 layer: this.axpObj.layerSystem.layerObj,
                 oekaki_id: this.axpObj.oekaki_id,
+                draftImageFile: this.axpObj.draftImageFile,
                 oekaki_bbs_pageno: this.axpObj.oekaki_bbs_pageno,
                 oekaki_bbs_title: this.axpObj.oekaki_bbs_title,
                 transparent: this.axpObj.assistToolSystem.getIsTransparent()
@@ -166,8 +168,12 @@ export class SaveSystem {
             stringTime = stringTime.replace(/mm/, ("0" + value.created.getMinutes()).slice(-2));
             stringTime = stringTime.replace(/ss/, ("0" + value.created.getSeconds()).slice(-2));
             newDivTime.textContent = stringTime;
-            // 基にしたoekaki_id
-            if (value.oekaki_id !== undefined) {
+            // 基にしたoekaki_id(draftImageFile優先)
+            if (value.draftImageFile !== undefined) {
+                if (value.draftImageFile !== null) {
+                    newDivRefId.textContent = '[基]' + getFileNameFromURL(value.draftImageFile);
+                }
+            } else if (value.oekaki_id !== undefined) {
                 if (value.oekaki_id !== null) {
                     newDivRefId.textContent = '[基]' + value.oekaki_id;
                 }
@@ -208,6 +214,7 @@ export class SaveSystem {
                         counter: this.axpObj.layerSystem.layer_counter,
                         layer: this.axpObj.layerSystem.layerObj,
                         oekaki_id: this.axpObj.oekaki_id,
+                        draftImageFile: this.axpObj.draftImageFile,
                         oekaki_bbs_pageno: this.axpObj.oekaki_bbs_pageno,
                         oekaki_bbs_title: this.axpObj.oekaki_bbs_title,
                         transparent: this.axpObj.assistToolSystem.getIsTransparent()
@@ -312,8 +319,8 @@ export class SaveSystem {
     // 「基にしてお絵カキコ」情報のチェックと復元
     restore_oekaki_id(readdata) {
         //console.log(readdata.oekaki_id);
-        if (readdata.oekaki_id !== undefined && readdata.oekaki_id !== null) {
-            // 「基にしてお絵カキコ」画像の場合
+        if (readdata.draftImageFile !== undefined && readdata.draftImageFile !== null) {
+            // 「draftImageFile」画像の場合
             console.log('同一掲示板チェック:', readdata.oekaki_bbs_pageno, this.axpObj.post_bbs_pageno);
             // 同一掲示板チェックが有効
             if (this.axpObj.checkSameBBS) {
@@ -321,13 +328,29 @@ export class SaveSystem {
                     return false;
                 }
             }
-            // 「基にしてお絵カキコ」情報の復元
-            this.axpObj.oekaki_id = readdata.oekaki_id;
+            // 下書き情報の復元
+            this.axpObj.oekaki_id = null;
+            this.axpObj.draftImageFile = readdata.draftImageFile;
+            this.axpObj.oekaki_bbs_pageno = readdata.oekaki_bbs_pageno;
+            this.axpObj.oekaki_bbs_title = readdata.oekaki_bbs_title;
+        } else if (readdata.oekaki_id !== undefined && readdata.oekaki_id !== null) {
+            // 「oekaki_id」画像の場合
+            console.log('同一掲示板チェック:', readdata.oekaki_bbs_pageno, this.axpObj.post_bbs_pageno);
+            // 同一掲示板チェックが有効
+            if (this.axpObj.checkSameBBS) {
+                if (readdata.oekaki_bbs_pageno !== this.axpObj.post_bbs_pageno) {
+                    return false;
+                }
+            }
+            // 下書き情報の復元
+            this.axpObj.oekaki_id = readdata.oekaki_id
+            this.axpObj.draftImageFile = null;
             this.axpObj.oekaki_bbs_pageno = readdata.oekaki_bbs_pageno;
             this.axpObj.oekaki_bbs_title = readdata.oekaki_bbs_title;
         } else {
             // 「基にしてお絵カキコ」情報のリセット
             this.axpObj.oekaki_id = null;
+            this.axpObj.draftImageFile = null;
             this.axpObj.oekaki_bbs_pageno = null;
             this.axpObj.oekaki_bbs_title = null;
         }

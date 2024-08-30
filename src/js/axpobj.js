@@ -15,7 +15,7 @@ import { ConfigSystem } from './config.js';
 import { PostSystem } from './post.js';
 import { SaveSystem } from './saveload.js';
 import { KeyboardSystem } from './keyboard.js';
-import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange } from './etc.js';
+import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange, getFileNameFromURL } from './etc.js';
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
 
@@ -1274,16 +1274,15 @@ export class AXPObj {
                 document.getElementById("axp_post_button_upload").disabled = false;
 
                 // 基にしてお絵カキコ
-                let elemRef = document.getElementById('axp_post_span_referenceOekakiType');
-                let elemRefId = document.getElementById('axp_post_a_referenceOekakiId');
-                if (this.oekaki_id !== null) {
-                    elemRef.textContent = 'もとの絵あるよ';
-                    elemRefId.textContent = this.oekaki_id + '.png';
-                    elemRefId.href = this.oekakiURL + this.oekaki_id + '.png';
+                let elemRefId = document.getElementById('axp_post_span_referenceOekakiId');
+
+                console.log(this.oekaki_id, this.draftImageFile);
+                if (this.draftImageFile !== null) {
+                    elemRefId.textContent = `もとの絵あるよ:${getFileNameFromURL(this.draftImageFile)}`;
+                } else if (this.oekaki_id !== null) {
+                    elemRefId.textContent = `もとの絵あるよ:${this.oekaki_id}.png`;
                 } else {
-                    elemRef.textContent = 'なし（いちから描いた）';
-                    elemRefId.textContent = '';
-                    elemRefId.href = '';
+                    elemRefId.textContent = 'いちから描いた';
                 }
                 break;
         }
@@ -1925,7 +1924,7 @@ export class AXPObj {
             // 画像読み込み
             if (imageload_src !== null) {
                 // パスを除いたファイル名だけを取り出す
-                imageload_filename = imageload_src.match(".+/(.+?)([?#;].*)?$")[1];
+                imageload_filename = getFileNameFromURL(imageload_src);
                 // テキスト表示（※初期化前なので、this.msg()はまだ使用できない）
                 document.getElementById('axp_footer_div_message').textContent = `[${imageload_filename}]を読み込みしています...`;
                 // 基にしてお絵カキコする画像のロード
@@ -1942,12 +1941,10 @@ export class AXPObj {
                         // キャンバス情報更新
                         this.x_size = this.oekaki_base.naturalWidth;
                         this.y_size = this.oekaki_base.naturalHeight;
-                        // URLパラメータ指定時のみ、情報保存
-                        if (this.oekaki_id !== null) {
-                            this.oekaki_bbs_pageno = this.post_bbs_pageno;
-                            this.oekaki_bbs_title = this.post_bbs_title;
-                            console.log('基にしてお絵カキコ:', this.x_size, this.y_size, this.oekaki_id);
-                        }
+                        // 下書き情報保存
+                        this.oekaki_bbs_pageno = this.post_bbs_pageno;
+                        this.oekaki_bbs_title = this.post_bbs_title;
+                        console.log('下書き画像:', this.x_size, this.y_size, this.oekaki_id, this.draftImageFile);
                         // 下書きロード済
                         isDraftLoaded = true;
                     })
@@ -1958,6 +1955,7 @@ export class AXPObj {
                         // テキスト表示クリア
                         document.getElementById('axp_footer_div_message').textContent = '';
                         this.oekaki_id = null;
+                        this.draftImageFile = null;
                     });
             } else {
                 // 新規描画（通常時）

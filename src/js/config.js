@@ -424,6 +424,7 @@ export class ConfigSystem {
 
                     // 「基にしてお絵カキコ」情報のリセット
                     this.axpObj.oekaki_id = null;
+                    this.axpObj.draftImageFile = null;
                     this.axpObj.oekaki_bbs_pageno = null;
                     this.axpObj.oekaki_bbs_title = null;
 
@@ -438,8 +439,8 @@ export class ConfigSystem {
         document.getElementById('axp_config_button_changeCanvasSize').onpointerdown = (e) => {
 
             // 基にしてお絵カキコ使用時は、仕様として変更不可とする。
-            if (this.axpObj.oekaki_id !== null) {
-                alert('「基にしてお絵カキコ」したキャンバスのサイズ変更はできません。');
+            if (this.axpObj.oekaki_id !== null || this.axpObj.draftImageFile !== null) {
+                alert('下書き機能を利用したキャンバスは、サイズの変更ができません。');
                 return;
             }
 
