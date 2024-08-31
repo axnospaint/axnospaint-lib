@@ -62,8 +62,13 @@ export function getBrowserType() {
 }
 
 // ファイルパスからファイル名部分だけ切り抜いて返却する
-export function getFileNameFromURL(url) {
-    return url.match(".+/(.+?)([?#;].*)?$")[1];
+export function getFileNameFromURL(input) {
+    const baseUrl = window.location.href; // 現在のページのURL
+    const absoluteUrl = new URL(input, baseUrl).href;
+    // ファイル名抽出（例として、最後のスラッシュ以降の部分を取得）
+    const fileName = absoluteUrl.split('/').pop();
+    //console.log(input, fileName);
+    return fileName;
 }
 
 /**
