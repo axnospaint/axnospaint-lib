@@ -71,15 +71,7 @@
 /* お絵カキコの情報テーブル */
 #axp_post_table_information {
     border: 0px solid #bbb;
-}
-
-#axp_post_table_information td {
-    border: 1px solid #999;
-    padding: 0 8px;
-}
-
-#axp_post_table_information td:nth-of-type(odd) {
-    background: #ddd;
+    padding: 4px;
 }
 
 /* --- 投稿情報入力部 --- */

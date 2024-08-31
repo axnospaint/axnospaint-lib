@@ -34,13 +34,16 @@ export default class {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
             if (typeof option.dictionary !== 'undefined') {
-                let result = await getDictionaryJSON(option.dictionary);
-                if (result === 'NOT_FOUND') {
-                    alert(`ERROR:起動オプションdictionaryで指定されたファイル\n[ ${option.dictionary} ] が見つかりません。\n通常辞書で起動します。`);
-                } else if (result === 'SYNTAX_ERROR') {
-                    alert(`ERROR:起動オプションdictionaryで指定されたファイル\n[ ${option.dictionary} ] に問題があります。\n通常辞書で起動します。`);
-                } else {
-                    additionalDictionaryJSON = result;
+                // 辞書オプションにnull以外の値が指定されている場合、そのファイルのfetchを試みる。
+                if (option.dictionary !== null) {
+                    let result = await getDictionaryJSON(option.dictionary);
+                    if (result === 'NOT_FOUND') {
+                        alert(`ERROR:起動オプションdictionaryで指定されたファイル\n[ ${option.dictionary} ] が見つかりません。\n通常辞書で起動します。`);
+                    } else if (result === 'SYNTAX_ERROR') {
+                        alert(`ERROR:起動オプションdictionaryで指定されたファイル\n[ ${option.dictionary} ] に問題があります。\n通常辞書で起動します。`);
+                    } else {
+                        additionalDictionaryJSON = result;
+                    }
                 }
             }
 

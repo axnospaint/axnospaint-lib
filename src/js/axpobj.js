@@ -1314,11 +1314,11 @@ export class AXPObj {
                 this.isCanvasOpen = false;
                 // 投稿タブ内の情報更新
                 let isTrans = this.assistToolSystem.getIsTransparent();
-                document.getElementById('axp_post_span_transparent').textContent = isTrans ? 'する' : 'しない';
+                document.getElementById('axp_post_span_transparent').textContent = isTrans ? this._('@COMMON.BG_TRANSPARENT') : this._('@COMMON.BG_WHITE');
                 this.drawPostCanvas();
 
                 // ボタン表示初期化（お絵カキコする！）
-                document.getElementById("axp_post_button_upload").textContent = document.getElementById("axp_post_button_upload").dataset.buttontext;
+                document.getElementById("axp_post_button_upload").textContent = this._('@POST.BUTTON_SUBMIT');
                 document.getElementById("axp_post_button_upload").disabled = false;
 
                 // 基にしてお絵カキコ
@@ -1326,11 +1326,11 @@ export class AXPObj {
 
                 console.log(this.oekaki_id, this.draftImageFile);
                 if (this.draftImageFile !== null) {
-                    elemRefId.textContent = `もとの絵あるよ:${getFileNameFromURL(this.draftImageFile)}`;
+                    elemRefId.textContent = `${this._('@COMMON.DRAW_BASED')}:${getFileNameFromURL(this.draftImageFile)}`;
                 } else if (this.oekaki_id !== null) {
-                    elemRefId.textContent = `もとの絵あるよ:${this.oekaki_id}.png`;
+                    elemRefId.textContent = `${this._('@COMMON.DRAW_BASED')}:${this.oekaki_id}.png`;
                 } else {
-                    elemRefId.textContent = 'いちから描いた';
+                    elemRefId.textContent = `${this._('@COMMON.DRAW_NEW')}`;
                 }
                 break;
         }

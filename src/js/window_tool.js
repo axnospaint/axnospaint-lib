@@ -72,7 +72,7 @@ export class AssistToolSystem extends ToolWindow {
     resetCanvas() {
         // キャンバスサイズ表示
         document.getElementById('axp_tool_span_canvasSize').textContent =
-            `${this.axpObj._('@MISC.WIDTH')}${this.axpObj.x_size} ${this.axpObj._('@MISC.HEIGHT')}${this.axpObj.y_size}`;
+            `${this.axpObj._('@COMMON.WIDTH')}:${this.axpObj.x_size} ${this.axpObj._('@COMMON.HEIGHT')}:${this.axpObj.y_size}`;
 
         // 投稿キャンバス サムネイル
         let x = Number(this.axpObj.x_size);
