@@ -169,15 +169,18 @@ export class SaveSystem {
             stringTime = stringTime.replace(/ss/, ("0" + value.created.getSeconds()).slice(-2));
             newDivTime.textContent = stringTime;
             // 基にしたoekaki_id(draftImageFile優先)
-            if (value.draftImageFile !== undefined) {
-                if (value.draftImageFile !== null) {
-                    newDivRefId.textContent = '[基]' + getFileNameFromURL(value.draftImageFile);
-                }
-            } else if (value.oekaki_id !== undefined) {
+            let refIdText = '';
+            if (value.oekaki_id !== undefined) {
                 if (value.oekaki_id !== null) {
-                    newDivRefId.textContent = '[基]' + value.oekaki_id;
+                    refIdText = '[基]' + value.oekaki_id;
                 }
             }
+            if (value.draftImageFile !== undefined) {
+                if (value.draftImageFile !== null) {
+                    refIdText = '[基]' + getFileNameFromURL(value.draftImageFile);
+                }
+            }
+            newDivRefId.textContent = refIdText;
             newDiv.appendChild(newDivDate);
             newDiv.appendChild(newDivTime);
             newDiv.appendChild(newDivRefId);
