@@ -10,7 +10,7 @@ export class Fill extends PenObj {
         this.axpObj = option.axpObj;
         this.CANVAS = option.CANVAS;
         // 値（PenObjからの差分）
-        this.name = 'バケツ';
+        this.name = this.axpObj._('@PENNAME.FILL');
         this.type = 'fill';
         this.alpha = 100;
         this.threshold = 2;

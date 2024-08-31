@@ -7,7 +7,7 @@ export class Eraser extends Round {
     constructor(option) {
         super(option);
         // 値（Roundからの差分）
-        this.name = '消しゴム';
+        this.name = this.axpObj._('@PENNAME.ERASER');
         this.type = 'eraser';
         this.size = 5;
         this.toneLevel = null;

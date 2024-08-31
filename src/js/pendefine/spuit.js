@@ -10,7 +10,7 @@ export class Spuit extends PenObj {
         this.axpObj = option.axpObj;
         this.CANVAS = option.CANVAS;
         // 値（PenObjからの差分）
-        this.name = 'スポイト';
+        this.name = this.axpObj._('@PENNAME.EYEDROPPER');
         this.type = 'spuit';
         this.cursor = 'crosshair';
         // 制御

@@ -8,7 +8,7 @@ export class Dot extends Round {
     constructor(option) {
         super(option);
         // 値（Roundからの差分）
-        this.name = 'ドットペン';
+        this.name = this.axpObj._('@PENNAME.DOT');
         this.toneLevel = null;
         // 制御
         // 描画

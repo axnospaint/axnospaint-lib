@@ -7,7 +7,7 @@ export class Square extends Round {
     constructor(option) {
         super(option);
         // 値（Roundからの差分）
-        this.name = '角ペン';
+        this.name = this.axpObj._('@PENNAME.SQUARE');
         this.size = 8;
         // 制御
         // 描画

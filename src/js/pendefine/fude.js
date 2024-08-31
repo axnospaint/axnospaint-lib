@@ -8,7 +8,7 @@ export class Fude extends Round {
     constructor(option) {
         super(option);
         // 値（PenObjからの差分）
-        this.name = '筆ペン';
+        this.name = this.axpObj._('@PENNAME.CALLIGRAPHY');
         this.size = 5;
         this.toneLevel = null;
         // 制御

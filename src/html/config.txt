@@ -3,19 +3,20 @@
     <div id="axp_config_div_content">
         <div id="axp_config_div_nav">
             <div id="axp_config_div_navButton">
-                <button class="axpc_MSG axpc_ACTIVE" data-msg="@CFG2001">キャンバス</button>
-                <button class="axpc_MSG" data-msg="@CFG2002">ツールウィンドウ</button>
-                <button class="axpc_MSG" data-msg="@CFG2003">ペンツール</button>
-                <button class="axpc_MSG" data-msg="@CFG2004">色作成</button>
-                <button class="axpc_MSG" data-msg="@CFG2005">パレット</button>
-                <button class="axpc_MSG" data-msg="@CFG2006">レイヤー</button>
-                <button class="axpc_MSG" data-msg="@CFG2007">補助ツール</button>
-                <button class="axpc_MSG" data-msg="@CFG2008">カスタムボタン</button>
-                <button class="axpc_MSG" data-msg="@CFG2009">マウス</button>
-                <button class="axpc_MSG" data-msg="@CFG2010">タッチパネル</button>
-                <button class="axpc_MSG" data-msg="@CFG2011">キーボード</button>
-                <button class="axpc_MSG" data-msg="@CFG2013">起動時</button>
-                <button class="axpc_MSG" data-msg="@CFG2020" id="axp_config_button_version">バージョン情報</button>
+                <button class="axpc_MSG axpc_ACTIVE" data-msg="@CFG2001">${_("@SETTINGS.MENU_CANVAS")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2002">${_("@SETTINGS.MENU_TOOL_WINDOWS")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2003">${_("@SETTINGS.MENU_PEN_TOOL")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2004">${_("@SETTINGS.MENU_COLOR")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2005">${_("@SETTINGS.MENU_SWATCHES")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2006">${_("@SETTINGS.MENU_LAYER")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2007">${_("@SETTINGS.MENU_MISC")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2008">${_("@SETTINGS.MENU_CUSTOM_BUTTONS")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2009">${_("@SETTINGS.MENU_MOUSE")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2010">${_("@SETTINGS.MENU_TOUCH_PANEL")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2011">${_("@SETTINGS.MENU_KEYBOARD")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2013">${_("@SETTINGS.MENU_STARTUP")}</button>
+                <button class="axpc_MSG" data-msg="@CFG2020"
+                    id="axp_config_button_version">${_("@SETTINGS.MENU_VER_INFO")}</button>
             </div>
         </div>
         <div class="axpc_config_chapter" id="axp_config_div_pageMain">

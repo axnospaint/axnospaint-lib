@@ -57,8 +57,8 @@ export class UndoSystem {
     }
     // ボタン回数表示
     dispCount() {
-        this.undoButtonElement.textContent = "アンドゥ" + "(" + this.undoObj.length + ")"
-        this.redoButtonElement.textContent = "リドゥ" + "(" + this.redoObj.length + ")"
+        this.undoButtonElement.textContent = `${this.axpObj._('@MISC.BUTTON_UNDO')}(${this.undoObj.length})`;
+        this.redoButtonElement.textContent = `${this.axpObj._('@MISC.BUTTON_REDO')}(${this.redoObj.length})`;
     }
     setUndoButtonElement(targetElement) {
         this.undoButtonElement = targetElement;

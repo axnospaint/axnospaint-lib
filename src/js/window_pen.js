@@ -85,12 +85,12 @@ export class PenSystem extends ToolWindow {
         this.createHTML(
             'axp_pen',
             'PEN',
-            'ペンツール',
+            this.axpObj._('@WINDOW.PEN_TOOL'),
             'axpc_icon_window_pen',
             html_pen
         );
         // ペン種別選択サブメニューのHTMLを展開
-        document.getElementById('axp_canvas').insertAdjacentHTML('beforeend', html_pen_subwindow);
+        document.getElementById('axp_canvas').insertAdjacentHTML('beforeend', this.axpObj.translateHTML(html_pen_subwindow));
 
         this.window_width = 180;
         // 初期座標設定
@@ -185,7 +185,7 @@ export class PenSystem extends ToolWindow {
             // 選択されたdata-idxに対応するサブウィンドウ要素
             let subwindow = targetElements_article[Number(idx)];
             // 種別名表示
-            document.getElementById('axp_penmode_span_modeName').textContent = `${subwindow.dataset.name}種別`;
+            document.getElementById('axp_penmode_span_modeName').textContent = `${subwindow.dataset.name}${this.axpObj._('@PEN.TYPE')}`;
             // 選択されたメインボタンに対応するサブウィンドウだけ表示
             UTIL.show(subwindow);
             // キャンバスタブエリアの位置（左上座標調整用）

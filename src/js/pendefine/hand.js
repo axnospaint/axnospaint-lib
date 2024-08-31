@@ -9,7 +9,7 @@ export class Hand extends PenObj {
         this.axpObj = option.axpObj;
         this.CANVAS = option.CANVAS;
         // 値（PenObjからの差分）
-        this.name = 'ハンド';
+        this.name = this.axpObj._('@PENNAME.HAND');
         this.type = 'hand';
         this.cursor = 'grab';
         // 制御

@@ -25,7 +25,7 @@ export class PostSystem {
     init() {
         // HTML
         let targetElement = document.getElementById('axp_post');
-        targetElement.insertAdjacentHTML('afterbegin', htmldata);
+        targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(htmldata));
         // CANVAS
         this.CANVAS.post = document.getElementById('axp_post_canvas_postingImage');
         this.CANVAS.post_ctx = this.CANVAS.post.getContext('2d');
@@ -59,7 +59,7 @@ export class PostSystem {
         this.CANVAS.thumbnail_ctx.clearRect(0, 0, thumbnail_x, thumbnail_y);
 
         // キャンバスサイズの表示
-        document.getElementById('axp_post_span_imageSize').textContent = `横:${x} 縦:${y}`;
+        document.getElementById('axp_post_span_imageSize').textContent = `${this.axpObj._('@COMMON.WIDTH')}:${x} ${this.axpObj._('@COMMON.HEIGHT')}:${y}`;
     }
     startEvent() {
         document.getElementById('axp_post_text_title').oninput = (e) => {
@@ -72,12 +72,12 @@ export class PostSystem {
             // 本文が一文字以上入力されていなければ処理を中断してメッセージを表示する
             let message = document.getElementById('axp_post_textarea_message').value.trim();
             if (message.length < 1) {
-                document.getElementById('axp_post_span_message').textContent = '※本文を入力してください';
+                document.getElementById('axp_post_span_message').textContent = `${this.axpObj._('@POST.INFO_REQUIRED')} ( ${this.axpObj._('@POST.MESSAGE')} )`;
                 return;
             }
 
             // ボタン表示変更（投稿中）
-            document.getElementById("axp_post_button_upload").textContent = '投稿中です………';
+            document.getElementById("axp_post_button_upload").textContent = this.axpObj._('@POST.BUTTON_POSTING');
             document.getElementById("axp_post_button_upload").disabled = true;
 
             // 長さのチェックはユーザー側が任意で行う仕様とする（AXNOS Paint側では行わない）
@@ -110,7 +110,7 @@ export class PostSystem {
                     console.log('error:', error);
                 } finally {
                     // ボタン表示変更（初期化）
-                    document.getElementById("axp_post_button_upload").textContent = document.getElementById("axp_post_button_upload").dataset.buttontext;
+                    document.getElementById("axp_post_button_upload").textContent = this.axpObj._('@POST.BUTTON_SUBMIT');
                     document.getElementById("axp_post_button_upload").disabled = false;
                 }
             })();

@@ -23,7 +23,7 @@ export class CustomButtonSystem extends ToolWindow {
         this.createHTML(
             'axp_custom',
             'CSM',
-            'ｶｽﾀﾑ',
+            this.axpObj._('@WINDOW.CUSTOM_BUTTONS'),
             null,
             htmldata,
             false
