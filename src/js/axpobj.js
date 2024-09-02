@@ -110,7 +110,11 @@ export class AXPObj {
     // 使用ブラウザ
     browser;
 
+    // 起動オプションで指定される変数
     checkSameBBS;
+    restrictDraftCanvasResizing;
+    restrictPost;
+    expansionTab;
     option_height;
     option_width;
 

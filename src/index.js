@@ -130,6 +130,9 @@ export default class {
             this.axpObj.option_height = option.height || null;
             this.axpObj.option_width = option.width || null;
 
+            // 下書き機能使用時のキャンバスサイズ変更制限
+            this.axpObj.restrictDraftCanvasResizing = option.restrictDraftCanvasResizing || false;
+
             // 投稿制限
             this.axpObj.restrictPost = option.restrictPost || false;
 
