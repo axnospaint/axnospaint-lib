@@ -136,6 +136,144 @@ export default class {
             // 拡張機能タブ
             this.axpObj.expansionTab = option.expansionTab || null;
 
+            // 投稿フォームカスタマイズ
+            let isErrorDetected = false;
+            let errorMessage = null;
+            // 判定関数
+            const isBoolean = (value) => typeof value === 'boolean';
+            const isRangeLength = (value) => typeof value === 'number' && inRange(value, 1, 1024);
+            const checkOptionValue = (value, condition, message) => {
+                // 正しい値が指定されているか判定
+                if (condition(value)) {
+                    return true;
+                } else {
+                    isErrorDetected = true;
+                    errorMessage = `ERROR:\n起動オプションの指定が正しくありません。\nキー: ${message}\n値: ${value}`;
+                    return false;
+                }
+            }
+            if (typeof option.postForm !== 'undefined') {
+                // 投稿フォーム
+                if ('input' in option.postForm && !isErrorDetected) {
+                    if ('isDisplay' in option.postForm.input && !isErrorDetected) {
+                        if (checkOptionValue(
+                            option.postForm.input.isDisplay,
+                            isBoolean,
+                            'postForm.input.isDisplay')) {
+                            this.axpObj.postForm.input.isDisplay = option.postForm.input.isDisplay;
+                        }
+                    }
+                    // 投稿者名
+                    if ('strName' in option.postForm.input && !isErrorDetected) {
+                        if ('isDisplay' in option.postForm.input.strName && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strName.isDisplay,
+                                isBoolean,
+                                'postForm.input.strName.isDisplay')) {
+                                this.axpObj.postForm.input.strName.isDisplay = option.postForm.input.strName.isDisplay;
+                            }
+                        }
+                        if ('isInputRequired' in option.postForm.input.strName && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strName.isInputRequired,
+                                isBoolean,
+                                'postForm.input.strName.isInputRequired')) {
+                                this.axpObj.postForm.input.strName.isInputRequired = option.postForm.input.strName.isInputRequired;
+                            }
+                        }
+                        if ('maxLength' in option.postForm.input.strName && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strName.maxLength,
+                                isRangeLength,
+                                'postForm.input.strName.maxLength')) {
+                                this.axpObj.postForm.input.strName.maxLength = option.postForm.input.strName.maxLength;
+                            }
+                        }
+                    }
+                    // タイトル
+                    if ('strTitle' in option.postForm.input && !isErrorDetected) {
+                        if ('isDisplay' in option.postForm.input.strTitle && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strTitle.isDisplay,
+                                isBoolean,
+                                'postForm.input.strTitle.isDisplay')) {
+                                this.axpObj.postForm.input.strTitle.isDisplay = option.postForm.input.strTitle.isDisplay;
+                            }
+                        }
+                        if ('isInputRequired' in option.postForm.input.strTitle && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strTitle.isInputRequired,
+                                isBoolean,
+                                'postForm.input.strTitle.input.isInputRequired')) {
+                                this.axpObj.postForm.input.strTitle.isInputRequired = option.postForm.input.strTitle.isInputRequired;
+                            }
+                        }
+                        if ('maxLength' in option.postForm.input.strTitle && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strTitle.maxLength,
+                                isRangeLength,
+                                'postForm.input.strTitle.maxLength')) {
+                                this.axpObj.postForm.input.strTitle.maxLength = option.postForm.input.strTitle.maxLength;
+                            }
+                        }
+                    }
+                    // 本文
+                    if ('strMessage' in option.postForm.input && !isErrorDetected) {
+                        if ('isDisplay' in option.postForm.input.strMessage && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strMessage.isDisplay,
+                                isBoolean,
+                                'postForm.input.strMessage.isDisplay')) {
+                                this.axpObj.postForm.input.strMessage.isDisplay = option.postForm.input.strMessage.isDisplay;
+                            }
+                        }
+                        if ('isInputRequired' in option.postForm.input.strMessage && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strMessage.isInputRequired,
+                                isBoolean,
+                                'postForm.input.strMessage.isInputRequired')) {
+                                this.axpObj.postForm.input.strMessage.isInputRequired = option.postForm.input.strMessage.isInputRequired;
+                            }
+                        }
+                        if ('maxLength' in option.postForm.input.strMessage && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strMessage.maxLength,
+                                isRangeLength,
+                                'postForm.input.strMessage.maxLength')) {
+                                this.axpObj.postForm.input.strMessage.maxLength = option.postForm.input.strMessage.maxLength;
+                            }
+                        }
+                    }
+                    // ウォッチリスト登録
+                    if ('strWatchList' in option.postForm.input && !isErrorDetected) {
+                        if ('isDisplay' in option.postForm.input.strWatchList && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strWatchList.isDisplay,
+                                isBoolean,
+                                'postForm.input.strWatchList.isDisplay')) {
+                                this.axpObj.postForm.input.strWatchList.isDisplay = option.postForm.input.strWatchList.isDisplay;
+                            }
+                        }
+                    }
+                }
+                // 注意事項
+                if ('notice' in option.postForm && !isErrorDetected) {
+                    if ('isDisplay' in option.postForm.notice && !isErrorDetected) {
+                        if (checkOptionValue(
+                            option.postForm.notice.isDisplay,
+                            isBoolean,
+                            'postForm.notice.isDisplay')) {
+                            this.axpObj.postForm.notice.isDisplay = option.postForm.notice.isDisplay;
+                        }
+                    }
+                }
+            }
+            // 起動オプションに誤りがある場合はエラーメッセージを表示して強制終了
+            if (isErrorDetected) {
+                alert(errorMessage);
+                return;
+            }
+
             // htmlを生成
             this.axpObj.paintBodyElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(htmldata));
 

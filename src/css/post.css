@@ -76,6 +76,11 @@
 
 /* --- 投稿情報入力部 --- */
 
+/* 投稿画像とサムネイル領域 */
+#axp_post_div_input {
+    margin-top: 8px;
+}
+
 /* 本文を入力してくださいを表示するメッセージ領域 */
 #axp_post_span_message {
     color: #d00;
@@ -113,4 +118,14 @@
     max-height: 200px;
     height: 100px;
     padding: 4px;
+}
+
+/* 注意事項 */
+#axp_post_div_notice {
+    margin-top: 8px;
+}
+
+/* 投稿ボタン */
+#axp_post_div_button {
+    margin-top: 8px;
 }
