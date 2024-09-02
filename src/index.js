@@ -1,5 +1,5 @@
-/*!
- * AXNOS Paint version 2.2.0
+/*
+ * AXNOS Paint
  * (c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」
  * Licensed under MPL 2.0
  */

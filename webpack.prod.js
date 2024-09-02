@@ -11,6 +11,8 @@ const webpack = require('webpack');
 const environment = process.env.NODE_ENV || 'prod';
 const version = `${require('./package.json').version}`;
 const filename = (environment === 'prod') ? `axnospaint-lib-${version}.min.js` : `axnospaint-lib-${environment}-${version}.min.js`;
+// ビルド日時
+const buildDate = new Date().toISOString();
 
 module.exports = {
     mode: "production",
@@ -74,9 +76,17 @@ module.exports = {
             //favicon: "./src/favicon.ico",
         }),
         new webpack.DefinePlugin({
-            PACKAGE_VERSION: `"${require('./package.json').version}"`,
-            PACKAGE_DATE: `"${new Date().toISOString()}"`,
+            PACKAGE_VERSION: `"${version}"`,
+            PACKAGE_DATE: `"${buildDate}"`,
         }),
+        // ビルドファイルの先頭にコメントを挿入
+        new webpack.BannerPlugin(
+            `AXNOS Paint version ${version} (${buildDate})\n(c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」\nLicensed under MPL 2.0`,
+            {
+                raw: false,
+                entryOnly: true
+            }
+        ),
     ],
 
     devServer: {
