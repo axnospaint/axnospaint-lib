@@ -195,6 +195,41 @@ export class AXPObj {
     // 使用する追加辞書
     additionalDictionaryJSON;
 
+    // 投稿フォームカスタマイズ（デフォルト値）
+    postForm = {
+        // 投稿フォーム
+        input: {
+            isDisplay: true,
+            // 投稿者名
+            strName: {
+                isDisplay: true,
+                isInputRequired: false,
+                maxLength: 32,
+            },
+            // タイトル
+            strTitle: {
+                isDisplay: true,
+                isInputRequired: false,
+                maxLength: 32,
+            },
+            // 本文
+            strMessage: {
+                isDisplay: true,
+                isInputRequired: false,
+                maxLength: 1024,
+            },
+            // ウォッチリスト登録
+            strWatchList: {
+                isDisplay: true,
+            },
+        },
+        // 注意事項
+        notice: {
+            isDisplay: true,
+            // 文章はユーザー辞書を使用して書き換えが可能 
+        },
+    }
+
     constructor(additionalDictionaryJSON) {
         this.additionalDictionaryJSON = additionalDictionaryJSON;
 
