@@ -24,27 +24,27 @@
         <!-- 補助ツール右側 -->
         <div id="axp_tool_div_rightSide">
             <button id="axp_tool_button_undo" class="axpc_FUNC axpc_button" data-function="func_undo"
-                data-msg="@AST0006">アンドゥ(0)</button>
+                data-msg="@AST0006">${_("@MISC.BUTTON_UNDO")}(0)</button>
             <button id="axp_tool_button_redo" class="axpc_FUNC axpc_button" data-function="func_redo"
-                data-msg="@AST0007">リドゥ(0)</button>
+                data-msg="@AST0007">${_("@MISC.BUTTON_REDO")}(0)</button>
             <button id="axp_tool_button_restore" class="axpc_FUNC axpc_button" data-function="func_restore"
-                data-msg="@AST0008">自動保存から復元</button>
+                data-msg="@AST0008">${_("@MISC.BUTTON_RESTORE_AUTOSAVE")}</button>
 
             <button id="axp_tool_button_save" class="axpc_FUNC axpc_button" data-function="func_save"
-                data-msg="@AST0009">セーブ</button>
+                data-msg="@AST0009">${_("@MISC.BUTTON_SAVE")}</button>
             <button id="axp_tool_button_load" class="axpc_FUNC axpc_button" data-function="func_load"
-                data-msg="@AST0010">ロード</button>
+                data-msg="@AST0010">${_("@MISC.BUTTON_LOAD")}</button>
 
             <button id="axp_tool_button_flipH" class="axpc_FUNC axpc_button" data-function="func_flip_h"
-                data-msg="@AST0011">左右反転</button>
+                data-msg="@AST0011">${_("@MISC.BUTTON_FLIP_H")}</button>
             <button id="axp_tool_button_flipV" class="axpc_FUNC axpc_button" data-function="func_flip_v"
-                data-msg="@AST0012">上下反転</button>
+                data-msg="@AST0012">${_("@MISC.BUTTON_FLIP_V")}</button>
 
             <button id="axp_tool_button_transparent" class="axpc_FUNC axpc_button" data-function="func_transparent"
-                data-msg="@AST0013">背景透過</button>
+                data-msg="@AST0013">${_("@MISC.BUTTON_BG_ALPHA")}</button>
             <div id="axp_tool_div_gridbutton">
                 <button id="axp_tool_button_grid" class="axpc_FUNC axpc_button" data-function="func_grid"
-                    data-msg="@AST0014">補助線</button>
+                    data-msg="@AST0014">${_("@MISC.BUTTON_GRID")}</button>
                 <button id="axp_tool_button_gridConfig" class="axpc_MSG axpc_button" data-msg="@AST0015"></button>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <!-- 主線 -->
                 <div class="axpc_tool_div_gridConfigButton">
                     <div>
-                        <div>主線</div>
+                        <div>${_("@GRID.MAIN")}</div>
                     </div>
                     <div id="axp_tool_checkbox_gridVH" class="axpc_MSG axpc_toggle_switch axp_grid_switch"
                         data-msg="@AST0103">
@@ -70,7 +70,7 @@
                 <!-- 副線 -->
                 <div class="axpc_tool_div_gridConfigButton">
                     <div>
-                        <div>副線</div>
+                        <div>${_("@GRID.SUB")}</div>
                     </div>
                     <div id="axp_tool_checkbox_gridSubDivision" class="axpc_MSG axpc_toggle_switch axp_grid_switch"
                         data-msg="@AST0105">
@@ -82,7 +82,7 @@
                 <!-- 斜め -->
                 <div class="axpc_tool_div_gridConfigButton">
                     <div>
-                        <div>斜め</div>
+                        <div>${_("@GRID.DIAG")}</div>
                     </div>
                     <div id="axp_tool_checkbox_gridDiagonal" class="axpc_MSG axpc_toggle_switch axp_grid_switch"
                         data-msg="@AST0107">
@@ -100,19 +100,20 @@
                         oninput="result.value=parseInt(volume.value)">
                         <input type="range" id="axp_tool_range_gridH" name="volume" min="2" max="16" value="6"
                             class="axpc_MSG" data-msg="@AST0100">
-                        <div class="axpc_range_label">分割数：横</div>
+                        <div class="axpc_range_label">${_("@GRID.DIVISIONS_H")}</div>
                         <div class="axpc_range_value"><output name="result">6</output></div>
                     </form>
                     <form id="axp_tool_form_gridV" class="axpc_range axpc_text_border"
                         oninput="result.value=parseInt(volume.value)">
                         <input type="range" id="axp_tool_range_gridV" name="volume" min="2" max="16" value="6"
                             class="axpc_MSG" data-msg="@AST0101">
-                        <div class="axpc_range_label">分割数：縦</div>
+                        <div class="axpc_range_label">${_("@GRID.DIVISIONS_V")}</div>
                         <div class="axpc_range_value"><output name="result">6</output></div>
                     </form>
                     <div class="axpc_checkbox axpc_MSG" data-msg="@AST0102">
                         <label>
-                            <input id="axp_tool_checkbox_gridVHLink" class="axpc_SAVE" type="checkbox" checked>縦横を連動
+                            <input id="axp_tool_checkbox_gridVHLink" class="axpc_SAVE" type="checkbox"
+                                checked>${_("@GRID.CONSTRAIN")}
                         </label>
                     </div>
                 </div>

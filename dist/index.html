@@ -9,18 +9,90 @@
         */
         document.addEventListener("DOMContentLoaded", function () {
             var axp = new AXNOSPaint({
+                // AXNOS Paintの画面を展開するdiv要素のid属性（指定必須）
                 bodyId: 'axnospaint_body',
-                checkSameBBS: true,
+                // キャンバスの最小サイズ（横）。単位はピクセル。最小8～最大1000。
+                minWidth: 8,
+                // キャンバスの最小サイズ（縦）。単位はピクセル。最小8～最大1000。
+                minHeight: 8,
+                // キャンバスの最大サイズ（横）。単位はピクセル。最小8～最大1000。
+                maxWidth: 600,
+                // キャンバスの最大サイズ（縦）。単位はピクセル。最小8～最大1000。
+                maxHeight: 600,
+                // キャンバスの初期サイズ（横）。単位はピクセル。
+                width: 317,
+                // キャンバスの初期サイズ（縦）。単位はピクセル。
+                height: 317,
+                // 下書き機能(1)で使用する画像が配置されているURLパス名。URLパラメータ`oekaki_id`と組み合わせて使用する。
                 oekakiURL: './',
+                // 下書き機能(2)で読み込む画像ファイル名。
+                draftImageFile: null,
+                // 下書き機能(1)(2)の画像読込タイムアウト時間。単位はミリ秒。
+                oekakiTimeout: 15000,
+                // 自動保存からの復元またはロード機能を使用する際、同一の掲示板の画像であるかをチェックします。
+                checkSameBBS: true,
+                // 下書き機能(1)または(2)の使用時に、キャンバスサイズの変更ができないように制限します。 
+                restrictDraftCanvasResizing: false,
+                // 投稿タブを開けないようにします。
+                restrictPost: false,
+                // ヘッダーのテキスト表示領域に表示する文字列。
                 headerText: HEADER_TEXT,
+                // ユーザーが任意で追加することができる拡張タブ定義。
                 expansionTab: {
                     name: 'ヘルプ',
                     msg: '説明書（ニコニコ大百科のAXNOS Paint:ヘルプの記事）を別タブで開きます。',
                     link: 'https://dic.nicovideo.jp/id/5703111',
                 },
-                post: function (postObj) {
-                    // ここに投稿用プログラムを記述
-                    alert('サンプルのため、投稿機能は動作しません。');
+                // ユーザー辞書JSONファイル。
+                //dictionary: './en.json',
+
+                // 投稿処理で呼び出すユーザー関数定義。
+                post: axnospaint_post,
+                // 投稿用フォームのユーザーカスタマイズ定義。
+                postForm: {
+                    // 投稿フォーム
+                    input: {
+                        isDisplay: true,
+                        // 投稿者名
+                        strName: {
+                            isDisplay: true,
+                            isInputRequired: false,
+                            maxLength: 32,
+                        },
+                        // タイトル
+                        strTitle: {
+                            isDisplay: true,
+                            isInputRequired: false,
+                            maxLength: 32,
+                        },
+                        // 本文
+                        strMessage: {
+                            isDisplay: true,
+                            isInputRequired: false,
+                            maxLength: 1024,
+                        },
+                        // ウォッチリスト登録
+                        strWatchList: {
+                            isDisplay: true,
+                        },
+                    },
+                    // 注意事項
+                    notice: {
+                        isDisplay: true,
+                        // 文章はユーザー辞書を使用して書き換えが可能
+                    },
                 },
             });
-        });</script></head><body><div id="axnospaint_body"></div><script defer="defer" src="axnospaint-lib-2.2.0.min.js"></script></body></html>
+        });
+        // 投稿処理
+        function axnospaint_post(postObj) {
+            return new Promise(resolve => {
+                // ここに投稿用プログラムを記述
+                console.log(postObj);
+
+                alert('サンプルのため、投稿機能は動作しません。');
+
+                // resolve()で待機状態が終了し、再び投稿ボタンが押せるようになる（二重送信防止用）
+                resolve();
+            });
+        }</script></head><body><div id="axnospaint_body"></div><script defer="defer" src="axnospaint-lib-2.2.0.min.js"></script></body></html>

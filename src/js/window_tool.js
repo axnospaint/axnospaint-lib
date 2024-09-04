@@ -42,7 +42,7 @@ export class AssistToolSystem extends ToolWindow {
         this.createHTML(
             'axp_tool',
             'AST',
-            '補助ツール',
+            this.axpObj._('@WINDOW.MISC'),
             'axpc_icon_window_subtool',
             htmldata,
         );
@@ -71,7 +71,8 @@ export class AssistToolSystem extends ToolWindow {
     }
     resetCanvas() {
         // キャンバスサイズ表示
-        document.getElementById('axp_tool_span_canvasSize').textContent = "横:" + this.axpObj.x_size + " 縦:" + this.axpObj.y_size;
+        document.getElementById('axp_tool_span_canvasSize').textContent =
+            `${this.axpObj._('@COMMON.WIDTH')}:${this.axpObj.x_size} ${this.axpObj._('@COMMON.HEIGHT')}:${this.axpObj.y_size}`;
 
         // 投稿キャンバス サムネイル
         let x = Number(this.axpObj.x_size);

@@ -3,7 +3,7 @@
 #axp_mascot {
     position: absolute;
     /* ロード画面より低く */
-    z-index: 1999;
+    z-index: 3000;
     left: 0;
     bottom: 0;
     height: 128px;

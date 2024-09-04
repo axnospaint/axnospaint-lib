@@ -1,10 +1,14 @@
 <!-- 投稿タブ -->
 <div id="axp_post_div_content">
-    <u>投稿するお絵カキコ</u><br>
+    <u>${_("@POST.POSTPICTURE")}</u><br>
+    <div id="axp_post_table_information">
+        <span id="axp_post_span_imageSize"></span> / ${_("@MISC.BUTTON_BG_ALPHA")}:<span
+            id="axp_post_span_transparent"></span> / <span id="axp_post_span_referenceOekakiId"></span>
+    </div>
     <div id="axp_post_div_postingImage">
         <canvas id="axp_post_canvas_postingImage" class="axpc_background_mesh"></canvas>
         <div id="axp_post_div_thumbnall_h1">
-            ｻﾑﾈｲﾙ
+            ${_("@POST.THUMBNAIL")}
             <div id="axp_post_div_thumbnall_h2">
                 <div id="axp_post_div_thumbnall_h3">
                     <canvas id="axp_post_canvas_thumbnail" class="axpc_background_mesh"></canvas>
@@ -14,68 +18,50 @@
             </div>
         </div>
     </div>
-
-    <table id="axp_post_table_information">
-        <tbody>
-            <tr>
-                <td title="">基にしたお絵カキコ</td>
-                <td><span id="axp_post_span_referenceOekakiType"></span>
-                    <a href="" id="axp_post_a_referenceOekakiId" target="_blank"></a>
-                </td>
-            </tr>
-            <tr>
-                <td title="">お絵カキコのサイズ</td>
-                <td><span id="axp_post_span_imageSize"></span></td>
-            </tr>
-
-            <tr>
-                <td title="補助ツールの背景透過のオン/オフ状態が反映されます">背景の透過</td>
-                <td><span id="axp_post_span_transparent"></span></td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <u>投稿情報の入力</u><br>
-    <div>
+    <div id="axp_post_div_input">
+        <u>${_("@POST.INPUT")}</u><br>
         <span id="axp_post_span_message"></span>
         <table id="axp_post_table_postForm">
-            <tr>
-                <td class="axpc_post_postFormTd">投稿者名</td>
+            <tr id="axp_post_tr_name">
+                <td class="axpc_post_postFormTd">${_("@POST.NAME")}</td>
                 <td>
-                    <input id="axp_post_text_name" type="text" maxlength="32" size="40" value="" />
+                    <input id="axp_post_text_name" type="text" size="40" />
                 </td>
             </tr>
-            <tr>
-                <td class="axpc_post_postFormTd">タイトル</td>
+            <tr id="axp_post_tr_title">
+                <td class="axpc_post_postFormTd">${_("@POST.TITLE")}</td>
                 <td>
-                    <input id="axp_post_text_title" type="text" maxlength="32" size="40" value="" />
+                    <input id="axp_post_text_title" type="text" size="40" />
                 </td>
             </tr>
-            <tr>
-                <td class="axpc_post_postFormTd">本文(必須)</td>
+            <tr id="axp_post_tr_message">
+                <td class="axpc_post_postFormTd">${_("@POST.MESSAGE")}</td>
                 <td>
-                    <textarea id="axp_post_textarea_message" required minlength="1" maxlength="1024"></textarea>
+                    <textarea id="axp_post_textarea_message"></textarea>
                 </td>
             </tr>
-            <tr>
+            <tr id="axp_post_tr_watchlist">
                 <td></td>
                 <td>
                     <label>
                         <input id="axp_post_checkbox_watchList" type="checkbox" />
-                        ウォッチリストに登録
+                        ${_("@POST.WATCHLIST")}
                     </label>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <button id="axp_post_button_upload" class="axpc_MSG axpc_button axpc_button_width260"
-                        data-msg="@POS0001" data-buttontext="お絵カキコする！"></button>
                 </td>
             </tr>
         </table>
     </div>
-    <div style="margin-top: 30px;" class="axpc_NONE">
-        <button id="axp_post_button_debug" class="axpc_button" style="width: 180px;">投稿テスト</button><br>
-        <textarea id="axp_post_textarea_debug"></textarea>
+    <div id="axp_post_div_notice">
+        <u>${_("@POST.NOTICE")}</u>
+        <div>
+            <div>${_("@POST.NOTICE1")}</div>
+            <div>${_("@POST.NOTICE2")}</div>
+            <div>${_("@POST.NOTICE3")}</div>
+            <div>${_("@POST.NOTICE4")}</div>
+        </div>
+    </div>
+    <div id="axp_post_div_button">
+        <button id="axp_post_button_upload" class="axpc_MSG axpc_button axpc_button_width260"
+            data-msg="@POS0001"></button>
     </div>
 </div>

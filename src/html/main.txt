@@ -3,9 +3,9 @@
 	<!-- 切り替えタブ -->
 	<div id="axp_main_div_tab">
 		<div>
-			<div data-idx="0" class="axpc_MSG" data-msg="@BAS0001">キャンバス</div>
-			<div data-idx="1" class="axpc_MSG" data-msg="@BAS0002">設定</div>
-			<div data-idx="2" class="axpc_MSG" data-msg="@BAS0003">投稿</div>
+			<div data-idx="0" class="axpc_MSG" data-msg="@BAS0001">${_("@TAB.CANVAS")}</div>
+			<div data-idx="1" class="axpc_MSG" data-msg="@BAS0002">${_("@TAB.SETTINGS")}</div>
+			<div data-idx="2" class="axpc_MSG" data-msg="@BAS0003">${_("@TAB.POST")}</div>
 			<div data-idx="3" class="axpc_MSG" data-msg="@BAS0004"></div>
 		</div>
 		<div id="axp_main_div_headerText" class="axpc_MSG" data-msg="@BAS0005"></div>
@@ -61,7 +61,7 @@
 					<div>
 						<span id="axp_saveload_span_message"></span>
 						<div id="axp_saveload_div_insertHTML"></div>
-						<button id="axp_saveload_button_close" class="axpc_button">閉じる</button>
+						<button id="axp_saveload_button_close" class="axpc_button">${_("@COMMON.BUTTON_CLOSE")}</button>
 					</div>
 				</div>
 
@@ -69,7 +69,7 @@
 				<div id="axp_renamelayer" class="axpc_subwindow axpc_NONE">
 					<div>
 						<div class="axpc_button_closeContainer">
-							<span>レイヤー情報</span>
+							<span>${_("@LAYER.LAYERS_INFO")}</span>
 							<button id="axp_renamelayer_button_close" class="axpc_MSG axpc_button axpc_button_close"
 								data-msg="@LAY0100"></button>
 						</div>
@@ -78,7 +78,8 @@
 							<input id="axp_renamelayer_text_newLayerName" type="text" size="15" maxlength="10"
 								autocomplete="off" class="axpc_MSG" data-msg="@LAY0101" placeholder="空白にはできません">
 							<!-- 状態によりMSG変化 -->
-							<button id="axp_renamelayer_button_confirm" class="axpc_button">決定</button>
+							<button id="axp_renamelayer_button_confirm"
+								class="axpc_button">${_("@LAYER.BUTTON_RENAME_OK")}</button>
 						</div>
 
 						<div id="axp_renamelayer_div_buttonarea">
@@ -89,9 +90,9 @@
 						</div>
 
 						<div id="axp_renamelayer_div_colorTagContainer">
-							<span>登録名</span>
+							<span>${_("@LAYER.PRESET_NAME")}</span>
 							<button id="axp_renamelayer_button_colorReset" class="axpc_MSG axpc_button"
-								data-msg="@LAY0102">色解除</button>
+								data-msg="@LAY0102">${_("@LAYER.BUTTON_CLEAR_COLOR")}</button>
 						</div>
 						<div id="axp_renamelayer_div_colorTag"></div>
 					</div>
@@ -101,7 +102,7 @@
 				<div id="axp_gridconfig" class="axpc_subwindow axpc_NONE">
 					<div>
 						<div class="axpc_button_closeContainer">
-							<span>補助線の色</span>
+							<span>${_("@GRID.LINE_COLOR")}</span>
 							<button id="axp_gridconfig_button_confirm" class="axpc_MSG axpc_button axpc_button_close"
 								data-msg="@AST0122"></button>
 						</div>
@@ -110,7 +111,7 @@
 							oninput="result.value=parseInt(volume.value)">
 							<input type="range" id="axp_gridconfig_range_gridColor" name="volume" min="5" max="100"
 								step="5" value="100" class="axpc_MSG" data-msg="@AST0121">
-							<div class="axpc_range_label">不透明度</div>
+							<div class="axpc_range_label">${_("@COMMON.OPACITY")}</div>
 							<div class="axpc_range_value"><output name="result">100</output></div>
 						</form>
 					</div>

@@ -8,7 +8,7 @@ export class EraserDot extends Dot {
     constructor(option) {
         super(option);
         // 値（Dotからの差分）
-        this.name = '角消しゴム';
+        this.name = this.axpObj._('@PENNAME.SQUARE_ERASER');
         this.type = 'eraser';
         this.size = 5;
         this.blurLevel = null;

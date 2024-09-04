@@ -7,7 +7,7 @@ export class Brush extends Round {
     constructor(option) {
         super(option);
         // 値（Roundからの差分）
-        this.name = 'エアブラシ';
+        this.name = this.axpObj._('@PENNAME.AIRBRUSH');
         this.size = 100;
         this.alpha = 30;
         this.toneLevel = null;

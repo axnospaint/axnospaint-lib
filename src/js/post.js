@@ -1,5 +1,6 @@
 // @description 投稿処理
 
+import { UTIL } from './etc.js';
 import htmldata from '../html/post.txt';
 // css適用
 require('../css/post.css');
@@ -25,7 +26,7 @@ export class PostSystem {
     init() {
         // HTML
         let targetElement = document.getElementById('axp_post');
-        targetElement.insertAdjacentHTML('afterbegin', htmldata);
+        targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(htmldata));
         // CANVAS
         this.CANVAS.post = document.getElementById('axp_post_canvas_postingImage');
         this.CANVAS.post_ctx = this.CANVAS.post.getContext('2d');
@@ -59,9 +60,49 @@ export class PostSystem {
         this.CANVAS.thumbnail_ctx.clearRect(0, 0, thumbnail_x, thumbnail_y);
 
         // キャンバスサイズの表示
-        document.getElementById('axp_post_span_imageSize').textContent = `横:${x} 縦:${y}`;
+        document.getElementById('axp_post_span_imageSize').textContent = `${this.axpObj._('@COMMON.WIDTH')}:${x} ${this.axpObj._('@COMMON.HEIGHT')}:${y}`;
     }
     startEvent() {
+        // 投稿フォームのカスタマイズ
+        // 投稿フォーム
+        if (!this.axpObj.postForm.input.isDisplay) {
+            UTIL.hide('axp_post_div_input');
+            // 入力必須の無効化
+            this.axpObj.postForm.input.strName.isInputRequired = false;
+            this.axpObj.postForm.input.strTitle.isInputRequired = false;
+            this.axpObj.postForm.input.strMessage.isInputRequired = false;
+        } else {
+            // 投稿者名
+            if (!this.axpObj.postForm.input.strName.isDisplay) {
+                UTIL.hide('axp_post_tr_name');
+                this.axpObj.postForm.input.strName.isInputRequired = false;
+            } else {
+                document.getElementById('axp_post_text_name').maxLength = this.axpObj.postForm.input.strName.maxLength;
+            }
+            // タイトル
+            if (!this.axpObj.postForm.input.strTitle.isDisplay) {
+                UTIL.hide('axp_post_tr_title');
+                this.axpObj.postForm.input.strTitle.isInputRequired = false;
+            } else {
+                document.getElementById('axp_post_text_title').maxLength = this.axpObj.postForm.input.strTitle.maxLength;
+            }
+            // 本文
+            if (!this.axpObj.postForm.input.strMessage.isDisplay) {
+                UTIL.hide('axp_post_tr_message');
+                this.axpObj.postForm.input.strMessage.isInputRequired = false;
+            } else {
+                document.getElementById('axp_post_textarea_message').maxLength = this.axpObj.postForm.input.strMessage.maxLength;
+            }
+            // ウォッチリスト登録
+            if (!this.axpObj.postForm.input.strWatchList.isDisplay) {
+                UTIL.hide('axp_post_tr_watchlist');
+            }
+        }
+        // 注意事項
+        if (!this.axpObj.postForm.notice.isDisplay) {
+            UTIL.hide('axp_post_div_notice');
+        }
+
         document.getElementById('axp_post_text_title').oninput = (e) => {
             let text = e.target.value;
             document.getElementById('axp_post_div_thumbnailTitle').textContent = text;
@@ -69,15 +110,31 @@ export class PostSystem {
         // ボタン：お絵カキコする！
         document.getElementById("axp_post_button_upload").onclick = (e) => {
 
-            // 本文が一文字以上入力されていなければ処理を中断してメッセージを表示する
-            let message = document.getElementById('axp_post_textarea_message').value.trim();
-            if (message.length < 1) {
-                document.getElementById('axp_post_span_message').textContent = '※本文を入力してください';
-                return;
+            // 入力必須項目のチェック（起動オプションで必須項目に指定されている場合、一文字以上入力されていなければ処理を中断してメッセージを表示する）
+            // 投稿者名
+            if (this.axpObj.postForm.input.strName.isInputRequired) {
+                if (document.getElementById('axp_post_text_name').value.trim().length < 1) {
+                    document.getElementById('axp_post_span_message').textContent = `${this.axpObj._('@POST.INFO_REQUIRED')} ( ${this.axpObj._('@POST.NAME')} )`;
+                    return;
+                }
+            }
+            // タイトル
+            if (this.axpObj.postForm.input.strTitle.isInputRequired) {
+                if (document.getElementById('axp_post_text_title').value.trim().length < 1) {
+                    document.getElementById('axp_post_span_message').textContent = `${this.axpObj._('@POST.INFO_REQUIRED')} ( ${this.axpObj._('@POST.TITLE')} )`;
+                    return;
+                }
+            }
+            // 本文
+            if (this.axpObj.postForm.input.strMessage.isInputRequired) {
+                if (document.getElementById('axp_post_textarea_message').value.trim().length < 1) {
+                    document.getElementById('axp_post_span_message').textContent = `${this.axpObj._('@POST.INFO_REQUIRED')} ( ${this.axpObj._('@POST.MESSAGE')} )`;
+                    return;
+                }
             }
 
             // ボタン表示変更（投稿中）
-            document.getElementById("axp_post_button_upload").textContent = '投稿中です………';
+            document.getElementById("axp_post_button_upload").textContent = this.axpObj._('@POST.BUTTON_POSTING');
             document.getElementById("axp_post_button_upload").disabled = true;
 
             // 長さのチェックはユーザー側が任意で行う仕様とする（AXNOS Paint側では行わない）
@@ -91,9 +148,10 @@ export class PostSystem {
             let objPostData = {
                 strName: document.getElementById('axp_post_text_name').value.trim(),
                 strTitle: document.getElementById('axp_post_text_title').value.trim(),
-                strMessage: message,
+                strMessage: document.getElementById('axp_post_textarea_message').value.trim(),
                 strWatchList: (document.getElementById('axp_post_checkbox_watchList').checked) ? 't' : '',
                 oekaki_id: this.axpObj.oekaki_id,
+                draftImageFile: this.axpObj.draftImageFile,
                 strEncodeImg: strEncodeImg,
             };
 
@@ -109,7 +167,7 @@ export class PostSystem {
                     console.log('error:', error);
                 } finally {
                     // ボタン表示変更（初期化）
-                    document.getElementById("axp_post_button_upload").textContent = document.getElementById("axp_post_button_upload").dataset.buttontext;
+                    document.getElementById("axp_post_button_upload").textContent = this.axpObj._('@POST.BUTTON_SUBMIT');
                     document.getElementById("axp_post_button_upload").disabled = false;
                 }
             })();
