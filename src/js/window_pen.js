@@ -513,8 +513,10 @@ export class PenSystem extends ToolWindow {
             this.penObj[exec_mode].drawCursor(e);
         }
         //console.log('exec_mode:', exec_mode);
-        // 手ぶれ補正
-        if (this.penObj[exec_mode].type === 'draw') {
+        // ペンと消しゴムの場合、手ぶれ補正を判定（描画開始を判定するため、ピンチズームにも影響する）
+        if (this.penObj[exec_mode].type === 'draw' ||
+            this.penObj[exec_mode].type === 'eraser'
+        ) {
             const stabilizer_value = Number(document.getElementById('axp_config_form_stabilizerValue').volume.value);
             if (stabilizer_value !== 0) {
                 // 手ぶれ補正あり
