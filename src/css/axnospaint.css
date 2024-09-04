@@ -126,6 +126,7 @@ body {
 #axp_canvas_canvas_main {
   position: absolute;
   image-rendering: pixelated;
+  z-index: 100;
 }
 
 /* 補助線 */
@@ -134,7 +135,7 @@ body {
   pointer-events: none;
   image-rendering: auto;
   position: absolute;
-  z-index: 999;
+  z-index: 600;
 }
 
 /* 座標表示用領域 */
@@ -148,7 +149,7 @@ body {
   color: #fff;
   background: rgba(0, 0, 0, 0.7);
   box-shadow: #000;
-  z-index: 1000;
+  z-index: 800;
 }
 
 /* デバッグ情報 */
@@ -160,7 +161,7 @@ body {
   font-size: 1em;
   background: rgba(0, 0, 0, 0.7);
   box-shadow: #000;
-  z-index: 5000;
+  z-index: 900;
   height: 50%;
   max-height: 95%;
   resize: both;
@@ -191,7 +192,7 @@ body {
   pointer-events: none;
   position: absolute;
   border: solid 2px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
+  z-index: 700;
 }
 
 

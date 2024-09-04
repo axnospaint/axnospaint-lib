@@ -54,7 +54,7 @@
 /* 列数変更スライダー用枠 */
 #axp_palette_div_column {
     position: absolute;
-    z-index: 2001;
+    z-index: 2000;
     margin-top: -70px;
     margin-left: -6px;
 }
