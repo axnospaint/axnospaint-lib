@@ -10,7 +10,7 @@ export class Fill extends PenObj {
         this.axpObj = option.axpObj;
         this.CANVAS = option.CANVAS;
         // 値（PenObjからの差分）
-        this.name = 'バケツ';
+        this.name = this.axpObj._('@PENNAME.FILL');
         this.type = 'fill';
         this.alpha = 100;
         this.threshold = 2;
@@ -199,6 +199,7 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
     }
 
     var loop_count = 0;
+    const LOOP_LIMIT = this.axpObj.CONST.MAX_SYSTEM_WIDTH * this.axpObj.CONST.MAX_SYSTEM_HEIGHT * 4;
 
     // すべての塗り潰し処理が完了するまで繰り返す
     while (pxlArr.length) {
@@ -260,12 +261,13 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
         }
 
         loop_count++;
-        if (loop_count > 3000000) {
+
+        if (loop_count > LOOP_LIMIT) {
             // 無現ループ回避（バグ検知用）
             alert('ERROR:塗り潰し中に異常が発生したため、処理を中断しました。');
             break;
         }
     }
-    //console.log('塗り潰し完了 loop_count:',loop_count);
+    //console.log('塗り潰し完了 loop_count:', loop_count, 'LOOP_LIMIT:', LOOP_LIMIT);
 }
 

@@ -71,7 +71,7 @@ export class ColorPaletteSystem extends ToolWindow {
         this.createHTML(
             'axp_palette',
             'PLT',
-            'パレット',
+            this.axpObj._('@WINDOW.SWATCHES'),
             'axpc_icon_window_palette',
             htmldata
         );
@@ -226,10 +226,8 @@ export class ColorPaletteSystem extends ToolWindow {
         ps_data.cloneName = palette_sorting.insertClone(target, palette_sorting.index(target));
         // クラス名axpc_onGRABを付与することで、CSSで指定してあるposition: absolute;が有効となる→自由にドラッグができる
         target.classList.add('axpc_onGRAB');
-        // イベントリスナー解除用
-        const controller = new AbortController();
         // ドラッグ中
-        window.addEventListener('pointermove', (e) => {
+        const onPointerMove = (e) => {
             const target = ps_data.target;
             const pageX = e.pageX;
             const pageY = e.pageY;
@@ -238,9 +236,9 @@ export class ColorPaletteSystem extends ToolWindow {
             target.style.left = `${targetPosL}px`;
             target.style.top = `${targetPosT}px`;
             palette_sorting.swap(target);
-        }, { signal: controller.signal });
+        }
         // ドロップ
-        window.addEventListener('pointerup', (e) => {
+        const onPointerUp = (e) => {
             const target = ps_data.target;
             const cloneSelector = `.${ps_data.cloneName}`;
             const clone = document.querySelector(cloneSelector);
@@ -248,7 +246,8 @@ export class ColorPaletteSystem extends ToolWindow {
             clone.remove();
             target.classList.remove('axpc_onGRAB');
             // イベントリスナー解除
-            controller.abort();
+            window.removeEventListener('pointermove', onPointerMove);
+            window.removeEventListener('pointerup', onPointerUp);
 
             // 操作終了時のインデックス
             ps_data.idx_dest = palette_sorting.index(target);
@@ -266,7 +265,9 @@ export class ColorPaletteSystem extends ToolWindow {
                 // DBへ保存
                 this.axpObj.saveSystem.save_palette(this.currentPalette.palette);
             }
-        }, { signal: controller.signal });
+        }
+        window.addEventListener('pointermove', onPointerMove);
+        window.addEventListener('pointerup', onPointerUp);
     }
 
     getColor() {

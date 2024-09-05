@@ -68,7 +68,7 @@ export class ToolWindow {
         this.axpObj.ELEMENT.base.appendChild(divWindow);
 
         // 枠内にHTMLデータを展開
-        divWindow.insertAdjacentHTML('beforeend', html);
+        divWindow.insertAdjacentHTML('beforeend', this.axpObj.translateHTML(html));
         this.windowElement = document.getElementById(id);
         this.name = name;
 

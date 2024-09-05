@@ -85,12 +85,12 @@ export class PenSystem extends ToolWindow {
         this.createHTML(
             'axp_pen',
             'PEN',
-            'ペンツール',
+            this.axpObj._('@WINDOW.PEN_TOOL'),
             'axpc_icon_window_pen',
             html_pen
         );
         // ペン種別選択サブメニューのHTMLを展開
-        document.getElementById('axp_canvas').insertAdjacentHTML('beforeend', html_pen_subwindow);
+        document.getElementById('axp_canvas').insertAdjacentHTML('beforeend', this.axpObj.translateHTML(html_pen_subwindow));
 
         this.window_width = 180;
         // 初期座標設定
@@ -185,7 +185,7 @@ export class PenSystem extends ToolWindow {
             // 選択されたdata-idxに対応するサブウィンドウ要素
             let subwindow = targetElements_article[Number(idx)];
             // 種別名表示
-            document.getElementById('axp_penmode_span_modeName').textContent = `${subwindow.dataset.name}種別`;
+            document.getElementById('axp_penmode_span_modeName').textContent = `${subwindow.dataset.name}${this.axpObj._('@PEN.TYPE')}`;
             // 選択されたメインボタンに対応するサブウィンドウだけ表示
             UTIL.show(subwindow);
             // キャンバスタブエリアの位置（左上座標調整用）
@@ -513,8 +513,10 @@ export class PenSystem extends ToolWindow {
             this.penObj[exec_mode].drawCursor(e);
         }
         //console.log('exec_mode:', exec_mode);
-        // 手ぶれ補正
-        if (this.penObj[exec_mode].type === 'draw') {
+        // ペンと消しゴムの場合、手ぶれ補正を判定（描画開始を判定するため、ピンチズームにも影響する）
+        if (this.penObj[exec_mode].type === 'draw' ||
+            this.penObj[exec_mode].type === 'eraser'
+        ) {
             const stabilizer_value = Number(document.getElementById('axp_config_form_stabilizerValue').volume.value);
             if (stabilizer_value !== 0) {
                 // 手ぶれ補正あり

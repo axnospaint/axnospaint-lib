@@ -204,9 +204,6 @@ export class DragWindow {
         drag_x = e.pageX - elem.offsetLeft;
         drag_y = e.pageY - elem.offsetTop;
 
-        // イベントリスナー解除用
-        const controller = new AbortController();
-
         // ドラッグ中
 
         const calcPosition = (x, y) => {
@@ -226,17 +223,17 @@ export class DragWindow {
 
             return { x: new_x, y: new_y };
         }
-        window.addEventListener('pointermove', (e) => {
+        const onPointerMove = (e) => {
+
             let pos = calcPosition(e.pageX, e.pageY);
             //マウスが動いた場所に要素を動かす
             objSystem.setPosition(
                 pos.x,
                 pos.y
             );
-        }, { signal: controller.signal });
-
-        // ドロップ
-        window.addEventListener('pointerup', (e) => {
+        };
+        const onPointerUp = (e) => {
+            // ドロップ
             let pos = calcPosition(e.pageX, e.pageY);
             //マウスが動いた場所に要素を動かす
             objSystem.setPosition(
@@ -247,8 +244,11 @@ export class DragWindow {
             let savedata = pos.x + ',' + pos.y;
             this.axpObj.configSystem.saveConfig('WDPOS_' + objSystem.windowElement.id, savedata);
             // イベントリスナー解除
-            controller.abort();
-        }, { signal: controller.signal });
+            window.removeEventListener('pointermove', onPointerMove);
+            window.removeEventListener('pointerup', onPointerUp);
+        };
+        window.addEventListener('pointermove', onPointerMove);
+        window.addEventListener('pointerup', onPointerUp);
     }
     /**
      * 指定idと一致したツールウィンドウ要素をサーチし、見つかった場合、初期座標を更新する

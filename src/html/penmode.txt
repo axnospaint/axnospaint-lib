@@ -2,7 +2,7 @@
 <div id="axp_penmode" class="axpc_NONE">
     <div>
         <span id="axp_penmode_span_modeName"></span>
-        <article data-name="ペン">
+        <article data-name="${_('@PENGROUP.PEN')}">
             <!-- ※idをそのままペン種別名として使用するため命名規則例外 -->
             <button id="axp_penmode_round" class="axpc_FUNC axpc_penmode_round" data-idx="0" data-msg="@PEN0100"
                 data-function="func_switch_axp_penmode_round"></button>
@@ -17,25 +17,25 @@
             <button id="axp_penmode_brush" class="axpc_FUNC axpc_penmode_brush" data-idx="0"
                 data-function="func_switch_axp_penmode_brush" data-msg="@PEN0105"></button>
         </article>
-        <article data-name="消しゴム">
+        <article data-name="${_('@PENGROUP.ERASER')}">
             <button id="axp_penmode_eraser_round" class="axpc_FUNC axpc_penmode_eraser_round" data-idx="1"
                 data-function="func_switch_axp_penmode_eraser_round" data-msg="@PEN0110"></button>
             <button id="axp_penmode_eraser_dot" class="axpc_FUNC axpc_penmode_eraser_dot" data-idx="1"
                 data-function="func_switch_axp_penmode_eraser_dot" data-msg="@PEN0111"></button>
         </article>
-        <article data-name="バケツ">
+        <article data-name="${_('@PENGROUP.FILL')}">
             <button id="axp_penmode_fill" class="axpc_FUNC axpc_penmode_fill" data-idx="2"
                 data-function="func_switch_axp_penmode_fill" data-msg="@PEN0120"></button>
             <button id="axp_penmode_fillgradation" class="axpc_FUNC axpc_penmode_fillgradation"
                 data-function="func_switch_axp_penmode_fillgradation" data-idx="2" data-msg="@PEN0121"></button>
         </article>
-        <article data-name="ツール">
+        <article data-name="${_('@PENGROUP.TOOL')}">
             <button id="axp_penmode_hand" class="axpc_FUNC axpc_penmode_hand" data-idx="3"
                 data-function="func_switch_axp_penmode_hand" data-msg="@PEN0130"></button>
             <button id="axp_penmode_move" class="axpc_FUNC axpc_penmode_move" data-idx="3"
                 data-function="func_switch_axp_penmode_move" data-msg="@PEN0131"></button>
         </article>
-        <article data-name="スポイト">
+        <article data-name="${_('@PENGROUP.EYEDROPPER')}">
             <button id="axp_penmode_spuit" class="axpc_penmode_spuit" data-idx="4"></button>
         </article>
     </div>

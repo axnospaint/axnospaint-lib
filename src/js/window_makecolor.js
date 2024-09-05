@@ -37,7 +37,7 @@ export class ColorMakerSystem extends ToolWindow {
         this.createHTML(
             'axp_makecolor',
             'MKC',
-            '色作成',
+            this.axpObj._('@WINDOW.COLOR'),
             'axpc_icon_window_colormaker',
             htmldata
         );

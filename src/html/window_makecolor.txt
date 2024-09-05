@@ -28,19 +28,19 @@
     <!-- RGBスライダー -->
     <div id="axp_makecolor_div_RGBSlider">
         <div class="axpc_range">
-            <span>赤</span><input id="axp_makecolor_range_red" class="axpc_MSG range_color" type="range" min="0"
-                max="255" value="0" data-msg="@MKC0007"><input id="axp_makecolor_number_red" class="axpc_MSG"
-                type="number" min="0" max="255" value="0" maxlength="3" data-msg="@MKC0008">
+            <span>${_("@COMMON.RED")}</span><input id="axp_makecolor_range_red" class="axpc_MSG range_color"
+                type="range" min="0" max="255" value="0" data-msg="@MKC0007"><input id="axp_makecolor_number_red"
+                class="axpc_MSG" type="number" min="0" max="255" value="0" maxlength="3" data-msg="@MKC0008">
         </div>
         <div class="axpc_range">
-            <span>緑</span><input id="axp_makecolor_range_green" class="axpc_MSG range_color" type="range" min="0"
-                max="255" value="0" data-msg="@MKC0009"><input id="axp_makecolor_number_green" class="axpc_MSG"
-                type="number" min="0" max="255" value="0" maxlength="3" data-msg="@MKC0010">
+            <span>${_("@COMMON.GREEN")}</span><input id="axp_makecolor_range_green" class="axpc_MSG range_color"
+                type="range" min="0" max="255" value="0" data-msg="@MKC0009"><input id="axp_makecolor_number_green"
+                class="axpc_MSG" type="number" min="0" max="255" value="0" maxlength="3" data-msg="@MKC0010">
         </div>
         <div class="axpc_range">
-            <span>青</span><input id="axp_makecolor_range_blue" class="axpc_MSG range_color" type="range" min="0"
-                max="255" value="0" data-msg="@MKC0011"><input id="axp_makecolor_number_blue" class="axpc_MSG"
-                type="number" min="0" max="255" value="0" maxlength="3" data-msg="@MKC0012">
+            <span>${_("@COMMON.BLUE")}</span><input id="axp_makecolor_range_blue" class="axpc_MSG range_color"
+                type="range" min="0" max="255" value="0" data-msg="@MKC0011"><input id="axp_makecolor_number_blue"
+                class="axpc_MSG" type="number" min="0" max="255" value="0" maxlength="3" data-msg="@MKC0012">
         </div>
     </div>
     <!-- カラーピッカー -->

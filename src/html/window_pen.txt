@@ -3,7 +3,7 @@
     <div id="axp_pen_div_content">
         <!-- ペンツール左側 -->
         <div id="axp_pen_div_leftSide">
-            <span id="axp_pen_span_penName" class="axpc_MSG" data-msg="@PEN0001">丸ペン</span>
+            <span id="axp_pen_span_penName" class="axpc_MSG" data-msg="@PEN0001"></span>
             <!-- プレビュー領域 -->
             <div id="axp_pen_div_preview" class="axpc_MSG" data-msg="@PEN0200">
                 <canvas id="axp_pen_canvas_previewPenSize"></canvas>
@@ -16,14 +16,14 @@
                     oninput="result.value=parseInt(volume.value)">
                     <input type="range" id="axp_pen_range_alpha" name="volume" min="5" max="100" value="100" step="5"
                         class="axpc_MSG" data-msg="@PEN0002">
-                    <div class="axpc_range_label">不透明度</div>
+                    <div class="axpc_range_label">${_("@COMMON.OPACITY")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
                 <!-- ペンの太さ -->
                 <form id="axp_pen_form_penSize" class="axpc_range axpc_text_border">
                     <input type="range" id="axp_pen_range_penSize" name="volume" min="1" max="100" value="1" step="1"
                         class="axpc_MSG" data-msg="@PEN0003">
-                    <div class="axpc_range_label">太さ</div>
+                    <div class="axpc_range_label">${_("@PEN.SIZE")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
                 <!-- バケツの境界補正 -->
@@ -31,7 +31,7 @@
                     class="axpc_range axpc_text_border">
                     <input type="range" id="axp_pen_range_fillThreshold" name="volume" value="0" step="1" min="0"
                         max="5" class="axpc_MSG" data-msg="@PEN0004">
-                    <div class="axpc_range_label">塗り残し補正</div>
+                    <div class="axpc_range_label">${_("@PEN.GROW_FILL_AREA")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
                 <!-- バケツのグラデーション角度 -->
@@ -39,7 +39,7 @@
                     class="axpc_range axpc_text_border">
                     <input type="range" id="axp_pen_range_fillGradationDeg" name="volume" value="0" step="1" min="0"
                         max="360" class="axpc_MSG" data-msg="@PEN0005">
-                    <div class="axpc_range_label">角度</div>
+                    <div class="axpc_range_label">${_("@PEN.ANGLE")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
                 <!-- クレヨンの丸み -->
@@ -47,7 +47,7 @@
                     class="axpc_range axpc_text_border">
                     <input type="range" id="axp_pen_range_radius" name="volume" value="50" step="1" min="0" max="50"
                         class="axpc_MSG" data-msg="@PEN0010">
-                    <div class="axpc_range_label">丸み</div>
+                    <div class="axpc_range_label">${_("@PEN.ROUNDNESS")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
                 <!-- ぼかし度（オプション） -->
@@ -55,7 +55,7 @@
                     class="axpc_range axpc_text_border">
                     <input type="range" id="axp_pen_range_blur" name="volume" value="0" step="1" min="0" max="5"
                         class="axpc_MSG" data-msg="@PEN0009">
-                    <div class="axpc_range_label">ぼかし度</div>
+                    <div class="axpc_range_label">${_("@PEN.BLUR")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
                 <!-- トーン濃度（オプション） -->
@@ -63,7 +63,7 @@
                     class="axpc_range axpc_text_border">
                     <input type="range" id="axp_pen_range_toneLevel" name="volume" value="16" step="1" min="1" max="16"
                         class="axpc_MSG" data-msg="@PEN0006">
-                    <div class="axpc_range_label">トーン濃度</div>
+                    <div class="axpc_range_label">${_("@PEN.TONE_DENSITY")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
                 <!-- 手ぶれ補正（オプション） -->
@@ -71,28 +71,28 @@
                     class="axpc_range axpc_text_border">
                     <input type="range" id="axp_pen_range_stabilizer" name="volume" value="2" step="1" min="0" max="10"
                         class="axpc_MSG" data-msg="@CFG0040">
-                    <div class="axpc_range_label">手ぶれ補正</div>
+                    <div class="axpc_range_label">${_("@PEN.STABILIZER")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
             </div>
 
             <div id="axp_pen_div_spuitColorRGBA">
-                <div>赤:<span id="axp_pen_span_spuitColorRed">-</span></div>
-                <div>緑:<span id="axp_pen_span_spuitColorGreen">-</span></div>
-                <div>青:<span id="axp_pen_span_spuitColorBlue">-</span></div>
-                <div>透:<span id="axp_pen_span_spuitColorAlpha">-</span></div>
+                <div>${_("@COMMON.RED")}:<span id="axp_pen_span_spuitColorRed">-</span></div>
+                <div>${_("@COMMON.GREEN")}:<span id="axp_pen_span_spuitColorGreen">-</span></div>
+                <div>${_("@COMMON.BLUE")}:<span id="axp_pen_span_spuitColorBlue">-</span></div>
+                <div>${_("@COMMON.ALPHA")}:<span id="axp_pen_span_spuitColorAlpha">-</span></div>
             </div>
 
             <div id="axp_pen_div_selectbox">
                 <select id="axp_pen_select_drawMode" class="axpc_MSG" data-msg="@PEN0007">
-                    <option value="option_normal">手描き</option>
-                    <option value="option_line">直線</option>
-                    <option value="option_rectangle">長方形</option>
-                    <option value="option_circle">円</option>
+                    <option value="option_normal">${_("@PEN.OPTION_FREE_HAND")}</option>
+                    <option value="option_line">${_("@PEN.OPTION_STRAIGHT")}</option>
+                    <option value="option_rectangle">${_("@PEN.OPTION_RECT")}</option>
+                    <option value="option_circle">${_("@PEN.OPTION_CIRCLE")}</option>
                 </select>
                 <select id="axp_pen_select_fillMode" class="axpc_MSG axpc_NONE" data-msg="@PEN0008">
-                    <option value="option_all">全ﾚｲﾔｰ判定</option>
-                    <option value="option_layer">現ﾚｲﾔｰ判定</option>
+                    <option value="option_all">${_("@PEN.OPTION_FILL_SAMPLE_ALL")}</option>
+                    <option value="option_layer">${_("@PEN.OPTION_FILL_SAMPLE_CURRENT")}</option>
                 </select>
             </div>
 

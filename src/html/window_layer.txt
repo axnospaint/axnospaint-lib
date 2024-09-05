@@ -1,40 +1,40 @@
 <!-- レイヤー -->
 <div class="axpc_window_content">
     <select id="axp_layer_select_blendMode" class="axpc_MSG" data-msg="@LAY0001">
-        <option value="source-over">通常</option>
-        <option value="source-atop">クリッピング</option>
-        <option value="multiply">乗算</option>
-        <option value="screen">スクリーン</option>
-        <option value="overlay">オーバーレイ</option>
-        <option value="darken">比較（暗）</option>
-        <option value="lighten">比較（明）</option>
-        <option value="color-dodge">覆い焼き</option>
-        <option value="color-burn">焼き込み</option>
-        <option value="hard-light">ハードライト</option>
-        <option value="soft-light">ソフトライト</option>
-        <option value="difference">差の絶対値</option>
-        <option value="exclusion">除外</option>
+        <option value="source-over">${_("@LAYER.OPTION_NORMAL")}</option>
+        <option value="source-atop">${_("@LAYER.OPTION_CLIPING")}</option>
+        <option value="multiply">${_("@LAYER.OPTION_MULTIPLY")}</option>
+        <option value="screen">${_("@LAYER.OPTION_SCREEN")}</option>
+        <option value="overlay">${_("@LAYER.OPTION_OVERLAY")}</option>
+        <option value="darken">${_("@LAYER.OPTION_DARKEN")}</option>
+        <option value="lighten">${_("@LAYER.OPTION_LIGHTEN")}</option>
+        <option value="color-dodge">${_("@LAYER.OPTION_DODGE")}</option>
+        <option value="color-burn">${_("@LAYER.OPTION_BURN")}</option>
+        <option value="hard-light">${_("@LAYER.OPTION_HARD_LIGHT")}</option>
+        <option value="soft-light">${_("@LAYER.OPTION_SOFT_LIGHT")}</option>
+        <option value="difference">${_("@LAYER.OPTION_DIFFERENCE")}</option>
+        <option value="exclusion">${_("@LAYER.OPTION_EXCLUSION")}</option>
     </select>
     <div id="axp_layer_div_button1">
         <form id="axp_layer_form_alpha" oninput="result.value=parseInt(volume.value)"
             class="axpc_range axpc_text_border">
             <input type="range" id="axp_layer_range_alpha" name="volume" value="100" min="0" max="100" step="5"
                 class="axpc_MSG" data-msg="@LAY0002">
-            <div class="axpc_range_label">不透明度</div>
+            <div class="axpc_range_label">${_("@COMMON.OPACITY")}</div>
             <div class="axpc_range_value"><output name="result"></output></div>
         </form>
         <button class="axpc_FUNC axpc_button" data-function="func_layer_clear" data-msg="@LAY0003"
-            id="axp_layer_button_clear">ｸﾘｱ</button>
+            id="axp_layer_button_clear">${_("@LAYER.BUTTON_CLEAR")}</button>
     </div>
     <div id="axp_layer_div_button2">
         <button id="axp_layer_button_create" class="axpc_FUNC axpc_button" data-function="func_layer_create"
-            data-msg="@LAY0004">新規</button>
+            data-msg="@LAY0004">${_("@LAYER.BUTTON_NEW")}</button>
         <button id="axp_layer_button_integrate" class="axpc_FUNC axpc_button" data-function="func_layer_integrate"
-            data-msg="@LAY0005">統</button>
+            data-msg="@LAY0005">${_("@LAYER.BUTTON_MERGE")}</button>
         <button id="axp_layer_button_copy" class="axpc_FUNC axpc_button" data-function="func_layer_copy"
-            data-msg="@LAY0006">複</button>
+            data-msg="@LAY0006">${_("@LAYER.BUTTON_COPY")}</button>
         <button id="axp_layer_button_delete" class="axpc_FUNC axpc_button" data-function="func_layer_delete"
-            data-msg="@LAY0007">削</button>
+            data-msg="@LAY0007">${_("@LAYER.BUTTON_DEL")}</button>
     </div>
 </div>
 <ul id="axp_layer_ul_layerBox" class="axpc_MSG" data-msg="@LAY0008"></ul>

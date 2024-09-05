@@ -15,9 +15,12 @@ import { ConfigSystem } from './config.js';
 import { PostSystem } from './post.js';
 import { SaveSystem } from './saveload.js';
 import { KeyboardSystem } from './keyboard.js';
-import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange } from './etc.js';
+import { UTIL, loadImageWithTimeout, calcDistance, inRange, adjustInRange, getFileNameFromURL } from './etc.js';
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
+
+// 辞書データ（日本語のみデフォルトでバンドルする）
+import dictionaryJSON_ja from '../text/ja.json';
 
 // 拡張機能インポート
 import * as extensions from '@extensions';
@@ -26,6 +29,10 @@ export class AXPObj {
     // AXNOS Paint全体で使用する定数。（システム単位で完全に独立している定数は、システム毎に定義する）
     CONST = {
         APP_TITLE: 'AXNOS Paint',
+        MIN_SYSTEM_WIDTH: 8,
+        MIN_SYSTEM_HEIGHT: 8,
+        MAX_SYSTEM_WIDTH: 1000,
+        MAX_SYSTEM_HEIGHT: 1000,
         CANVAS_X_MAX: 600,
         CANVAS_Y_MAX: 600,
         CANVAS_X_MIN: 8,
@@ -103,7 +110,11 @@ export class AXPObj {
     // 使用ブラウザ
     browser;
 
+    // 起動オプションで指定される変数
     checkSameBBS;
+    restrictDraftCanvasResizing;
+    restrictPost;
+    expansionTab;
     option_height;
     option_width;
 
@@ -115,6 +126,8 @@ export class AXPObj {
     // お絵カキコのpng画像が存在するurl
     oekakiURL;
     oekakiTimeout;
+    // 下書き機能画像ファイル名
+    draftImageFile;
     // 基にしてお絵カキコ用Image
     oekaki_base;
 
@@ -123,6 +136,12 @@ export class AXPObj {
     // セーブデータの刻印となる情報
     oekaki_bbs_pageno = null; // 基にするお絵カキコの掲示板のページ番号（ロード制限の判定に使用）
     oekaki_bbs_title = null; // 基にするお絵カキコの掲示板のページタイトル（ロード制限時のエラーメッセージ用）
+
+    // 許容するキャンバスサイズ
+    minWidth;
+    minHeight;
+    maxWidth;
+    maxHeight;
 
     // 現在のキャンバスサイズ
     x_size;
@@ -177,7 +196,46 @@ export class AXPObj {
     // デバッグモード（デバッグ用）
     debugLog = null;
 
-    constructor() {
+    // 使用する追加辞書
+    additionalDictionaryJSON;
+
+    // 投稿フォームカスタマイズ（デフォルト値）
+    postForm = {
+        // 投稿フォーム
+        input: {
+            isDisplay: true,
+            // 投稿者名
+            strName: {
+                isDisplay: true,
+                isInputRequired: false,
+                maxLength: 32,
+            },
+            // タイトル
+            strTitle: {
+                isDisplay: true,
+                isInputRequired: false,
+                maxLength: 32,
+            },
+            // 本文
+            strMessage: {
+                isDisplay: true,
+                isInputRequired: false,
+                maxLength: 1024,
+            },
+            // ウォッチリスト登録
+            strWatchList: {
+                isDisplay: true,
+            },
+        },
+        // 注意事項
+        notice: {
+            isDisplay: true,
+            // 文章はユーザー辞書を使用して書き換えが可能 
+        },
+    }
+
+    constructor(additionalDictionaryJSON) {
+        this.additionalDictionaryJSON = additionalDictionaryJSON;
 
         // ツールウィンドウシステム
         this.toolWindow.push(this.layerSystem = new LayerSystem(this));
@@ -193,6 +251,43 @@ export class AXPObj {
         this.configSystem = new ConfigSystem(this);
         this.saveSystem = new SaveSystem(this);
         this.postSystem = new PostSystem(this);
+
+        // デフォルト値設定
+        this.minWidth = this.CONST.CANVAS_X_MIN;
+        this.minHeight = this.CONST.CANVAS_Y_MIN;
+        this.maxWidth = this.CONST.CANVAS_X_MAX;
+        this.maxHeight = this.CONST.CANVAS_Y_MAX;
+
+    }
+    // 単語の辞書変換
+    _(preTranslationText) {
+        // 追加辞書が使える場合は優先して使う
+        if (this.additionalDictionaryJSON) {
+            if (preTranslationText in this.additionalDictionaryJSON) {
+                return this.additionalDictionaryJSON[preTranslationText];
+            }
+        }
+        // 日本語辞書
+        if (preTranslationText in dictionaryJSON_ja) {
+            return dictionaryJSON_ja[preTranslationText];
+        }
+        // 見つからなければ原文を返却
+        return preTranslationText;
+    }
+    // htmlの辞書変換
+    translateHTML(preTranslationHTML) {
+        // ${で始まり、}で終わる文字列を検索して、置換する
+        const resultHTML = preTranslationHTML.replace(/\$\{.*?\}/g, match => {
+            // トークン部分だけを抜き出す
+            // （例） ${_("@CANVAS")} => @CANVAS
+            const token = match.slice(5, -3);
+            // トークンを辞書変換
+            const transWords = this._(token);
+            // 変換チェック用
+            // console.log(token, '=>', transWords);
+            return transWords;
+        });
+        return resultHTML;
     }
     // 起動時に１回だけ必要な処理
     init() {
@@ -1132,30 +1227,24 @@ export class AXPObj {
         let y = Number(y_size);
         if (isNaN(x)) {
             x = this.CONST.CANVAS_X_DEFAULT;
-        } else {
-            if (x < this.CONST.CANVAS_X_MIN) x = this.CONST.CANVAS_X_MIN;
-            if (x > this.CONST.CANVAS_X_MAX) x = this.CONST.CANVAS_X_MAX;
         }
+        x = adjustInRange(x, this.minWidth, this.maxWidth);
         if (isNaN(y)) {
             y = this.CONST.CANVAS_Y_DEFAULT;
-        } else {
-            if (y < this.CONST.CANVAS_Y_MIN) y = this.CONST.CANVAS_Y_MIN;
-            if (y > this.CONST.CANVAS_Y_MAX) y = this.CONST.CANVAS_Y_MAX;
         }
+        y = adjustInRange(y, this.minHeight, this.maxHeight);
         this.x_size = x;
         this.y_size = y;
         console.log(`キャンバスサイズ更新:${x} x ${y}`);
     }
     checkCanvasSize_x(x_size) {
         let x = Number(x_size);
-        if (x < this.CONST.CANVAS_X_MIN) x = this.CONST.CANVAS_X_MIN;
-        if (x > this.CONST.CANVAS_X_MAX) x = this.CONST.CANVAS_X_MAX;
+        x = adjustInRange(x, this.minWidth, this.maxWidth);
         return x;
     }
     checkCanvasSize_y(y_size) {
         let y = Number(y_size);
-        if (y < this.CONST.CANVAS_Y_MIN) y = this.CONST.CANVAS_Y_MIN;
-        if (y > this.CONST.CANVAS_Y_MAX) y = this.CONST.CANVAS_Y_MAX;
+        y = adjustInRange(y, this.minHeight, this.maxHeight);
         return y;
     }
     getCanvasSize_X() {
@@ -1264,24 +1353,23 @@ export class AXPObj {
                 this.isCanvasOpen = false;
                 // 投稿タブ内の情報更新
                 let isTrans = this.assistToolSystem.getIsTransparent();
-                document.getElementById('axp_post_span_transparent').textContent = isTrans ? 'する' : 'しない';
+                document.getElementById('axp_post_span_transparent').textContent = isTrans ? this._('@COMMON.BG_TRANSPARENT') : this._('@COMMON.BG_WHITE');
                 this.drawPostCanvas();
 
                 // ボタン表示初期化（お絵カキコする！）
-                document.getElementById("axp_post_button_upload").textContent = document.getElementById("axp_post_button_upload").dataset.buttontext;
+                document.getElementById("axp_post_button_upload").textContent = this._('@POST.BUTTON_SUBMIT');
                 document.getElementById("axp_post_button_upload").disabled = false;
 
                 // 基にしてお絵カキコ
-                let elemRef = document.getElementById('axp_post_span_referenceOekakiType');
-                let elemRefId = document.getElementById('axp_post_a_referenceOekakiId');
-                if (this.oekaki_id !== null) {
-                    elemRef.textContent = 'もとの絵あるよ';
-                    elemRefId.textContent = this.oekaki_id + '.png';
-                    elemRefId.href = this.oekakiURL + this.oekaki_id + '.png';
+                let elemRefId = document.getElementById('axp_post_span_referenceOekakiId');
+
+                console.log(this.oekaki_id, this.draftImageFile);
+                if (this.draftImageFile !== null) {
+                    elemRefId.textContent = `${this._('@COMMON.DRAW_BASED')}:${getFileNameFromURL(this.draftImageFile)}`;
+                } else if (this.oekaki_id !== null) {
+                    elemRefId.textContent = `${this._('@COMMON.DRAW_BASED')}:${this.oekaki_id}.png`;
                 } else {
-                    elemRef.textContent = 'なし（いちから描いた）';
-                    elemRefId.textContent = '';
-                    elemRefId.href = '';
+                    elemRefId.textContent = `${this._('@COMMON.DRAW_NEW')}`;
                 }
                 break;
         }
@@ -1895,6 +1983,7 @@ export class AXPObj {
             if (this.option_width) {
                 this.x_size = Number(this.option_width);
             } else {
+                // ※この後に範囲チェックでサイズ修整を行うため、最大最小が変更されていた場合も一旦デフォルト値を設定しておく
                 this.x_size = this.CONST.CANVAS_X_DEFAULT;
             }
             if (this.option_height) {
@@ -1903,12 +1992,29 @@ export class AXPObj {
                 this.y_size = this.CONST.CANVAS_Y_DEFAULT;
             }
 
+            // 下書き機能を使用する場合の判定
             let isDraftLoaded = false;
-            // 基にしてお絵カキコする場合の判定
-            if (this.oekaki_id) {
-                let imageload_src = this.oekakiURL + this.oekaki_id + '.png';
+            let imageload_src = null;
+            let imageload_filename = null;
+            // 読み込み画像ファイル名の決定
+            if (this.draftImageFile !== null) {
+                // 起動オプション指定時（優先）
+                imageload_src = this.draftImageFile;
+                // URLパラメータ指定があっても無効にする
+                this.oekaki_id = null;
+            } else if (this.oekakiURL !== null && this.oekaki_id !== null) {
+                // URLパラメータ指定時
+                imageload_src = this.oekakiURL + this.oekaki_id + '.png';
+            } else {
+                // 起動オプションoekakiURLが指定されていない場合は、URLパラメータ無効
+                this.oekaki_id = null;
+            }
+            // 画像読み込み
+            if (imageload_src !== null) {
+                // パスを除いたファイル名だけを取り出す
+                imageload_filename = getFileNameFromURL(imageload_src);
                 // テキスト表示（※初期化前なので、this.msg()はまだ使用できない）
-                document.getElementById('axp_footer_div_message').textContent = `[${this.oekaki_id}.png]を読み込みしています...`;
+                document.getElementById('axp_footer_div_message').textContent = `[${imageload_filename}]を読み込みしています...`;
                 // 基にしてお絵カキコする画像のロード
                 await loadImageWithTimeout(imageload_src, this.oekakiTimeout)
                     .then(image => {
@@ -1923,19 +2029,21 @@ export class AXPObj {
                         // キャンバス情報更新
                         this.x_size = this.oekaki_base.naturalWidth;
                         this.y_size = this.oekaki_base.naturalHeight;
+                        // 下書き情報保存
                         this.oekaki_bbs_pageno = this.post_bbs_pageno;
                         this.oekaki_bbs_title = this.post_bbs_title;
-                        console.log('基にしてお絵カキコ:', this.x_size, this.y_size, this.oekaki_id);
+                        console.log('下書き画像:', this.x_size, this.y_size, this.oekaki_id, this.draftImageFile);
                         // 下書きロード済
                         isDraftLoaded = true;
                     })
                     .catch(error => {
                         // 画像読み込みエラー
                         console.error(error);
-                        alert(`「基にしてお絵カキコする」画像の読み込みに失敗しました。\n新規キャンバスを作成します。\n${error}`);
+                        alert(`下書き画像の読み込みに失敗しました。\n新規キャンバスを作成します。\n${error}`);
                         // テキスト表示クリア
                         document.getElementById('axp_footer_div_message').textContent = '';
                         this.oekaki_id = null;
+                        this.draftImageFile = null;
                     });
             } else {
                 // 新規描画（通常時）
@@ -2048,7 +2156,7 @@ export class AXPObj {
                 // レイヤー更新
                 this.layerSystem.write(this.layerSystem.CANVAS.tmp_ctx.getImageData(0, 0, this.x_size, this.y_size));
                 //　[%1.png]を読み込みました。(画像サイズ 横:%2 × 縦:%3)
-                this.msg('@INF0050', this.oekaki_id, this.x_size, this.y_size);
+                this.msg('@INF0050', imageload_filename, this.x_size, this.y_size);
             }
 
             // キャンバス更新
