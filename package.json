@@ -1,6 +1,6 @@
 {
   "name": "axnospaint",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "お絵かき掲示板向けペイントツール",
   "scripts": {
     "dev-server": "webpack-dev-server",
