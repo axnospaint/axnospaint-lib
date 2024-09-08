@@ -23,6 +23,7 @@
 #axp_post_canvas_postingImage {
     height: fit-content;
     border: 1px solid #aaa;
+	max-width: 100%;
 }
 
 /* サムネイル外枠 */

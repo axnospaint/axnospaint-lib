@@ -485,12 +485,12 @@
                     <br>
                     ◆ github<br>
                     <a href="https://github.com/axnospaint/axnospaint-lib" target="_blank" rel="noopener"
-                        style="text-decoration: none;color:#00f">
+                        style="text-decoration: none;color:#00f;overflow-wrap: break-word;">
                         https://github.com/axnospaint/axnospaint-lib</a>
                     <br><br>
                     ◆ AXNOS Paint:ヘルプ - ニコニコ大百科<br>
                     <a href="https://dic.nicovideo.jp/id/5703111" target="_blank" rel="noopener"
-                        style="text-decoration: none;color:#00f">
+                        style="text-decoration: none;color:#00f;overflow-wrap: break-word;">
                         https://dic.nicovideo.jp/id/5703111</a>
                     <br>
                 </div>
