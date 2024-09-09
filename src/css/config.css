@@ -81,7 +81,7 @@
 }
 /* 外部リンク部分のはみ出し回避 */
 .axpc_config_group a {
-	overflow-wrap: anywhere;
+    overflow-wrap: anywhere;
 }
 
 /* 設定用共通見出し */
