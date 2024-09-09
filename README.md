@@ -1,13 +1,10 @@
 # AXNOS Paint
 
-## 更新履歴
-* 2024/8/3 version 2.2.0[2024/08/03版]を公開しました。
-* 2024/7/1 version 2.1.1[2024/07/01版]を公開しました。（※ビルド日付とバージョン番号の更新修正）
-* 2024/7/1 version 2.1.0[2024/05/30版]を公開しました。
-* 2024/5/5 version 2.0.0[2024/05/05版]を正式公開しました。
+* 2024/9/6 [version 2.3.0 (2024-09-04T19:18:37.222Z)](https://github.com/axnospaint/axnospaint-lib/releases)を公開しました。  
+* 更新履歴は[Releases](https://github.com/axnospaint/axnospaint-lib/releases)をご覧ください。
 
 ## 概要
-AXNOS Paint（アクノスペイント）は「お絵かき掲示板サイト」での利用を想定したペイントツールです。
+AXNOS Paint（アクノスペイント）は「お絵かき掲示板サイト」での利用を想定したペイントツールです。画像掲示板サービス運営者向けに設計しておりますが、ローカル環境で使用することも可能です。
 
 - JavaScript(Vanilla JS)ライブラリとして提供しています。
 - 機能を基本的なものに限定し、知識や熟練を必要としないお絵かき環境を提供します。
@@ -18,18 +15,21 @@ AXNOS Paint（アクノスペイント）は「お絵かき掲示板サイト」
 - 投稿用のインターフェースとして、タイトルと本文を入力するフォームを備えています。
 - 投稿処理（サーバーとの通信部分）はライブラリに含まれません。ユーザーが独自に組み込む必要があります。
 
+## 動作環境
+* Edge, Safari, Chrome, Firefox, Opera いずれかの最新版。
+* スマートフォンでの利用はサポート対象外とします。
+
 ## 動作サンプル
 
+![Sample Image](docs/pic/ss00.jpg)
+
 * [https://axnospaint.github.io/axnospaint-lib/](https://axnospaint.github.io/axnospaint-lib/)  
+ こちらのページで動作確認できます。（画像の投稿はできません）
 
 ## 機能マニュアル
 
 * [https://dic.nicovideo.jp/id/5703111](https://dic.nicovideo.jp/id/5703111)  
-AXNOS Paint:ヘルプ - ニコニコ大百科  
-
-## 対応環境
-* Edge, Safari, Chrome, Firefox, Opera いずれかの最新版  
-スマートフォンでの利用はサポート対象外とします。
+AXNOS Paint:ヘルプ - ニコニコ大百科（外部サイト）
 
 ## 使用ライブラリ
 
@@ -42,16 +42,16 @@ AXNOS Paint:ヘルプ - ニコニコ大百科
 ## 導入
 
 ### ファイル構成
-起動に必要なファイル構成は以下の通りです。（/dist/の中にビルド済min.jsファイルが格納されています）
+[Releases](https://github.com/axnospaint/axnospaint-lib/)から最新版をダウンロードし、`/dist/`内の以下のファイルをサーバーに配置してください。
 ```
-index.html（任意のhtmlファイル）
-axnospaint-lib-2.2.0.min.js
+index.html（起動用htmlファイル）
+axnospaint-lib-2.x.x.min.js（ビルド済jsファイル。バージョンによってxの数値は変動します）
 ```
 ### 起動用htmlファイル
-最小構成の例を以下に示します。必要に応じて後述のオプションを指定してください。
+最小構成の例を以下に示します。提供するサービスに合わせて後述のオプションを指定してください。
 ```html
 <head>
-    <script defer="defer" src="axnospaint-lib-2.2.0.min.js"></script>
+    <script defer="defer" src="axnospaint-lib-2.x.x.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             new AXNOSPaint({
@@ -68,6 +68,7 @@ axnospaint-lib-2.2.0.min.js
 ### 起動オプション
 
 AXNOS Paintのインスタンス作成時に以下のオプションを指定することができます。
+`bodyId`以外の項目は省略が可能です。省略した場合、初期値が適用されます。
 
 | オプション名 | 内容 | 初期値 |
 | ---- | ---- | ---- |
@@ -99,7 +100,7 @@ AXNOS Paintは起動時に以下のURLパラメータを受け取ります。
 
 | パラメータ名  | 内容 |
 | ------------- | ---- |
-| oekaki_id     | `${oekaki_id}.png`を下書きとして読み込みます。起動オプションの`oekakiURL`で画像のパスが指定されている必要があります。  |
+| oekaki_id     | `oekaki_id`.png を下書きとして読み込みます。起動オプションの`oekakiURL`で画像のパスが指定されている必要があります。  |
 | oekaki_width  | 起動オプションのwidthと同様。同時に指定した場合はURLパラメータの値が優先。   |
 | oekaki_height | 起動オプションのheightと同様。同時に指定した場合はURLパラメータの値が優先。   |
 
@@ -363,18 +364,22 @@ webpack5を使用し、.pngファイルや.cssファイルを含めた全ファ�
   
 #### プロダクションビルド
 
-通常版とWebデモ版が存在します。Webデモ版にはマスコット機能が追加されます。  
+通常版とWebデモ版が存在します。
   
-通常版プロダクションビルド。ファイル名は「axnospaint-lib-2.x.x.min.js」（バージョン番号はpackage.jsonに依存します）。
+通常版プロダクションビルド
 ```
  npm run prod
 ```
-Webデモ版プロダクションビルド。ファイル名は「axnospaint-lib-demo-2.x.x.min.js」（バージョン番号はpackage.jsonに依存します）。
+* ファイルの出力先は`/dist`
+* ファイル名は`index.html`,`axnospaint-lib-2.x.x.min.js`（バージョン番号はpackage.jsonに依存します）
+
+Webデモ版プロダクションビルド
 ```
  npm run prod-demo
 ```
-
-ファイルの出力先は./dist/になります。
+* ファイルの出力先は`/docs/latest`
+* ファイル名は`index.html`,`axnospaint-lib-demo-2.x.x.min.js`（バージョン番号はpackage.jsonに依存します）
+* Webデモ版にはマスコット機能が追加されます。
 
 ### マスコット機能
 
@@ -468,3 +473,8 @@ axpc_所属名_任意の識別名
 | 4000    | ウィンドウの最小化アイコン |
 | 5000    | セーブ／ロード画面 |
 | 10000   | アラート（`alert()`で表示されるポップアップ） |
+
+## Copyright / License
+
+(c) 2022 「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」  
+Licensed under MPL 2.0

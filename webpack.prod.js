@@ -11,6 +11,7 @@ const webpack = require('webpack');
 const environment = process.env.NODE_ENV || 'prod';
 const version = `${require('./package.json').version}`;
 const filename = (environment === 'prod') ? `axnospaint-lib-${version}.min.js` : `axnospaint-lib-${environment}-${version}.min.js`;
+const outputPath = (environment === 'demo') ? 'docs/latest' : 'dist';
 // ビルド日時
 const buildDate = new Date().toISOString();
 
@@ -100,6 +101,7 @@ module.exports = {
     },
     // 出力ファイル
     output: {
+        path: path.resolve(__dirname, outputPath),
         filename: `${filename}`,
         library: {
             name: 'AXNOSPaint',
