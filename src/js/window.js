@@ -7,6 +7,8 @@ export class ToolWindow {
     windowElement = null;
     // 最小化時アイコンのdiv要素
     taskIconElement = null;
+    // 最小化状態
+    isMinimized = false;
     // ツールウィンドウ名
     name;
     // ツールウィンドウのid
