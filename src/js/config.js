@@ -1576,6 +1576,20 @@ export class ConfigSystem {
                         }
                     }
                     break
+                // ツールウィンドウ最小化
+                case 'WDMIN':
+                    // 初期化する設定の場合、復元を行わない
+                    if (this.axpObj.config('axp_config_form_saveLastWindowPosition') === 'off') {
+                        // スキップしたことを記憶
+                        isSkiped = true;
+                    } else {
+                        // 復元処理
+                        if (!this.axpObj.dragWindow.minimizeById(elememtId, value)) {
+                            // 最小化の設定に失敗（無効なID）した場合、データを無効とする
+                            isAvailable = false;
+                        }
+                    }
+                    break;
                 // ペンツールの各種値
                 case 'P-SIZ':
                 case 'P-ALP':

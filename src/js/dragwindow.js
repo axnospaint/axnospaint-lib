@@ -67,6 +67,40 @@ export class DragWindow {
         //console.log('length:', this.taskObjects.length);
         //console.log('array:', this.taskObjects);
         this.updateIconPosition();
+        // 最小化状態保存
+        this.axpObj.configSystem.saveConfig('WDMIN_' + objSystem.windowElement.id, false);
+    }
+    // ウィンドウの最小化処理
+    minimize(objSystem) {
+        objSystem.isMinimized = true;
+        // ツールウィンドウ消去
+        objSystem.windowElement.style.display = 'none';
+        // タスクアイコン表示
+        objSystem.taskIconElement.style.display = '';
+        this.taskObjects.push(objSystem);
+        this.setup_iconPositon(objSystem.taskIconElement, this.taskObjects.length - 1);
+    }
+    // 指定IDに対応する、ウィンドウの最小化処理
+    minimizeById(id, value) {
+        // 登録済みウィンドウオブジェクトからIDが一致するオブジェクトを検索
+        const getSystem = (id) => {
+            for (const item of this.windowSystems) {
+                if (item.id === id) {
+                    return item;
+                }
+            }
+            return null;
+        }
+        const objSystem = getSystem(id);
+        if (objSystem) {
+            if (value === true) {
+                this.minimize(objSystem);
+            }
+            // 正常終了
+            return true;
+        }
+        // 異常終了（対応IDなし）
+        return false;
     }
     updateIconPosition() {
         // アイコンを詰める
@@ -185,13 +219,10 @@ export class DragWindow {
                 objSystem.taskIconElement.style.setProperty('--tool-duration', duration + 'ms');
                 objSystem.taskIconElement.classList.add('axpc_window_minimizeAnime');
             }
-            // ツールウィンドウ消去
-            objSystem.windowElement.style.display = 'none';
-            // タスクアイコン表示
-            objSystem.taskIconElement.style.display = '';
-
-            this.taskObjects.push(objSystem);
-            this.setup_iconPositon(objSystem.taskIconElement, this.taskObjects.length - 1);
+            // 最小化処理実行
+            this.minimize(objSystem);
+            // 最小化状態保存
+            this.axpObj.configSystem.saveConfig('WDMIN_' + objSystem.windowElement.id, true);
             return;
         }
 
