@@ -48,8 +48,8 @@
     overflow-y: scroll;
 }
 
-/* ブラウザの横幅が600px以下の場合 */
-@media (max-width: 600px) {
+/* ブラウザの横幅が599px以下の場合 */
+@media (max-width: 599px) {
     #axp_config_div_nav {
         /* ナビゲーションメニュー非表示 */
         display: none;

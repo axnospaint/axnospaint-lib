@@ -296,7 +296,7 @@ export default class {
                         anchor.setAttribute('href', this.axpObj.expansionTab.link);
                         anchor.setAttribute('target', '_blank');
                         anchor.setAttribute('rel', 'noopener');
-                        anchor.setAttribute('style', 'text-decoration: none;color:#fff');
+                        anchor.setAttribute('style', 'width:100%;text-decoration:none;color:#fff');
                         const div = document.createElement('div');
                         div.textContent = this.axpObj.expansionTab.name;
                         anchor.appendChild(div);

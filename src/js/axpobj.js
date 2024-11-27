@@ -859,7 +859,7 @@ export class AXPObj {
 
         // メインのタブ制御
         this.selectTab('0');
-        const elementsTab = document.querySelectorAll('#axp_main_div_tab > div > div');
+        const elementsTab = document.querySelectorAll('#axp_main_div_tab_menu > div');
         elementsTab.forEach((element) => {
             element.addEventListener('click', (e) => {
                 //console.log(e.currentTarget.dataset.idx);
@@ -1287,6 +1287,12 @@ export class AXPObj {
      * @param {String} idx タブの番号 '0':キャンバス,'1':設定,'2':投稿,'3':拡張機能
      */
     selectTab(idx) {
+        // ハンバーガーメニューを開いている場合、メニューを閉じる
+        const elemHamburger = document.getElementById('axp_main_checkbox_hamburger');
+        if (elemHamburger.checked) {
+            elemHamburger.checked = false;
+        }
+
         // 起動オプションで登録されている拡張機能
         if (idx == '3') {
             // link設定の時は処理しない
@@ -1316,7 +1322,7 @@ export class AXPObj {
         }
 
         // 全タブの選択状態解除
-        var targetElements_tab = document.querySelectorAll('#axp_main_div_tab > div > div');
+        var targetElements_tab = document.querySelectorAll('#axp_main_div_tab_menu > div');
         targetElements_tab.forEach(element => {
             if (element.dataset.idx === idx) {
                 // idxで指定されたタブを選択状態
@@ -1378,7 +1384,7 @@ export class AXPObj {
     // 選択されているタブのindexを取得
     get selectedTab() {
         let result = null;
-        const targetElements_tab = document.querySelectorAll('#axp_main_div_tab > div > div');
+        const targetElements_tab = document.querySelectorAll('#axp_main_div_tab_menu > div');
         for (let element of targetElements_tab) {
             if (element.dataset.selected === 'true') {
                 result = element.dataset.idx;

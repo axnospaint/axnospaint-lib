@@ -107,3 +107,41 @@
     width: 28px;
     height: 28px;
 }
+
+/* ハンバーガーメニュー */
+.axpc_icon_humburger,
+.axpc_icon_humburger::before,
+.axpc_icon_humburger::after {
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
+}
+
+.axpc_icon_humburger::before {
+    content: '';
+    margin-top: -8px;
+}
+
+.axpc_icon_humburger::after {
+    content: '';
+    margin-top: 8px;
+}
+
+/* ハンバーガーメニュー ボタン変化 */
+#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger::before {
+    margin-top: 0px;
+    transform: rotate(45deg);
+}
+
+#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger {
+    background: rgba(255, 255, 255, 0);
+}
+
+#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger::after {
+    margin-top: 0px;
+    transform: rotate(-45deg);
+}
