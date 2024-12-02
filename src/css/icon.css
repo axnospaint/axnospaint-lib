@@ -33,32 +33,44 @@
 }
 
 /* ツールウィンドウ */
+.axpc_icon_window_all_down {
+    background-repeat: no-repeat;
+    background-image: url('../../resource/window_all_down.png');
+    background-position: center;
+}
+
+.axpc_icon_window_all_up {
+    background-repeat: no-repeat;
+    background-image: url('../../resource/window_all_up.png');
+    background-position: center;
+}
+
 .axpc_icon_window_pen {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_pen.png');
     background-position: center;
 }
 
 .axpc_icon_window_layer {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_layer.png');
     background-position: center;
 }
 
 .axpc_icon_window_colormaker {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_colormaker.png');
     background-position: center;
 }
 
 .axpc_icon_window_palette {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_palette.png');
     background-position: center;
 }
 
 .axpc_icon_window_subtool {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_subtool.png');
     background-position: center;
 }

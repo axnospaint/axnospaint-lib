@@ -176,6 +176,22 @@ export default class Mascot {
             }
         });
 
+        // 表示ウィンドウ専用処理（要素が動的生成のため、リスナー設定ができないため）
+        document.getElementById('axp_launcher_div_buttons').addEventListener('pointermove', (e) => {
+            let element = e.target;
+            let targetClass = null;
+            if (element.classList.contains('axpc_launcher_allButton')) {
+                targetClass = 'axpc_launcher_allButton';
+            }
+            if (element.classList.contains('axpc_launcher_personalButton')) {
+                targetClass = 'axpc_launcher_personalButton';
+            }
+            if (targetClass) {
+                this.talk(talkById.get(targetClass));
+                this.clearTimer();
+            }
+        });
+
         this.element.addEventListener('pointerenter', () => {
             // ペンの太さカーソル非表示
             this.axpObj.ELEMENT.cursor.style.visibility = 'hidden';

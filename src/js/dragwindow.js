@@ -7,8 +7,6 @@ var drag_y;
 export class DragWindow {
     axpObj;
     windowSystems = [];
-    windowElements = [];
-    taskObjects = [];
     zIndex_max = 1000;
     constructor(axpObj) {
         this.axpObj = axpObj;
@@ -16,7 +14,6 @@ export class DragWindow {
     add(objSystem) {
         this.windowSystems.push(objSystem);
         let element = objSystem.windowElement;
-        this.windowElements.push(element);
         // z-index（ウィンドウの表示優先順位）割り当て
         this.zIndex_max++;
         element.style.zIndex = this.zIndex_max;
@@ -25,130 +22,70 @@ export class DragWindow {
         element.addEventListener('pointerleave', (e) => { this.leave(e) });
         element.addEventListener('pointerup', (e) => { this.up(e) });
         element.addEventListener('pointerdown', (e) => { this.down(e, objSystem) });
-        element.addEventListener('animationend', (e) => { this.animeend(e) });
-
-        let elementTaskIcon = objSystem.taskIconElement;
-        //console.log(elementTaskIcon);
-        elementTaskIcon.addEventListener('pointerenter', (e) => { this.enter_icon(e, objSystem) });
-        elementTaskIcon.addEventListener('pointerdown', (e) => { this.down_icon(e, objSystem) });
-        elementTaskIcon.addEventListener('pointerleave', (e) => { this.leave(e) });
-        elementTaskIcon.addEventListener('animationend', (e) => { this.animeend(e) });
     }
-    enter_icon(e, objSystem) {
-        // ペンの太さカーソル非表示
-        this.axpObj.ELEMENT.cursor.style.visibility = 'hidden';
-        // 最小化した%1ウィンドウを元の位置に戻します。
-        this.axpObj.msg('@AXP0002', objSystem.name);
-    }
-    down_icon(e, objSystem) {
-        // キャンバスへのイベント伝播停止
-        e.stopPropagation();
-        this.updateZIndex(objSystem.windowElement);
-        objSystem.taskIconElement.style.display = 'none';
-        objSystem.windowElement.style.display = '';
-
-        let left_px = objSystem.taskIconElement.style.left;
-        let top_px = objSystem.taskIconElement.style.top;
-        let duration = document.getElementById('axp_config_number_minimizeDuration').value;
-        // 間隔が0または非数の場合、アニメ処理しない
-        if (duration === 0 || isNaN(duration)) {
-            //console.log('アニメ省略',duration);
-        } else {
-            objSystem.windowElement.style.setProperty('--tool-left', left_px);
-            objSystem.windowElement.style.setProperty('--tool-top', top_px);
-            objSystem.windowElement.style.setProperty('--tool-duration', duration + 'ms');
-            //console.log('アニメ開始');
-            objSystem.windowElement.classList.add('axpc_window_minimizeAnime');
-        }
-
-        // 選択されたウィンドウを管理配列から削除
-        let index = this.taskObjects.indexOf(objSystem);
-        this.taskObjects.splice(index, 1)
-        //console.log('length:', this.taskObjects.length);
-        //console.log('array:', this.taskObjects);
-        this.updateIconPosition();
-        // 最小化状態保存
-        this.axpObj.configSystem.saveConfig('WDMIN_' + objSystem.windowElement.id, false);
-    }
-    // ウィンドウの最小化処理
-    minimize(objSystem) {
-        objSystem.isMinimized = true;
-        // ツールウィンドウ消去
-        objSystem.windowElement.style.display = 'none';
-        // タスクアイコン表示
-        objSystem.taskIconElement.style.display = '';
-        this.taskObjects.push(objSystem);
-        this.setup_iconPositon(objSystem.taskIconElement, this.taskObjects.length - 1);
-    }
-    // 指定IDに対応する、ウィンドウの最小化処理
-    minimizeById(id, value) {
-        // 登録済みウィンドウオブジェクトからIDが一致するオブジェクトを検索
-        const getSystem = (id) => {
-            for (const item of this.windowSystems) {
-                if (item.id === id) {
-                    return item;
-                }
+    // 登録済みウィンドウオブジェクトからIDが一致するオブジェクトを検索
+    getSystem(id) {
+        for (const item of this.windowSystems) {
+            if (item.id === id) {
+                return item;
             }
-            return null;
         }
-        const objSystem = getSystem(id);
+        return null;
+    }
+    unminimize(id) {
+        const objSystem = this.getSystem(id);
         if (objSystem) {
-            if (value === true) {
-                this.minimize(objSystem);
+            // ツールウィンドウ表示
+            objSystem.unminimize();
+        }
+    }
+    minimize(id) {
+        const objSystem = this.getSystem(id);
+        if (objSystem) {
+            // ツールウィンドウ消去
+            objSystem.minimize();
+        }
+    }
+    // 非表示クラスの全体付与／解除
+    changeAllWindowHiddenClass(isHidden) {
+        for (const item of this.windowSystems) {
+            if (item.isCanMinimize) {
+                isHidden ? item.hidden() : item.visible();
             }
-            // 正常終了
+        }
+    }
+    allVisible() {
+        this.changeAllWindowHiddenClass(false);
+    }
+    allHidden() {
+        this.changeAllWindowHiddenClass(true);
+    }
+    // 再起動時の復元用
+    restoreMinimize(id) {
+        // 全体ボタン
+        if (id === 'axp_all') {
+            // ツールウィンドウ消去
+            this.allHidden();
+            // ランチャーのボタンに反映
+            this.axpObj.launcher.minimizeButton(id);
+            // 成功
             return true;
         }
-        // 異常終了（対応IDなし）
-        return false;
-    }
-    updateIconPosition() {
-        // アイコンを詰める
-        this.taskObjects.forEach((element, index) => {
-            this.setup_iconPositon(element.taskIconElement, index);
-        });
-    }
-    // アイコン位置の設定
-    setup_iconPositon(element, index) {
-        let left, top;
-        if (this.axpObj.config('axp_config_form_minimizeType') === 'horizontal') {
-            // 横並び
-            left = 8 + index * 32;
-            top = 40;
+        const objSystem = this.getSystem(id);
+        if (objSystem) {
+            // ツールウィンドウ消去
+            this.minimize(id);
+            // ランチャーのボタンに反映
+            this.axpObj.launcher.minimizeButton(id);
+            // 成功
+            return true;
         } else {
-            // 縦並び
-            left = 8;
-            top = 40 + index * 32;
-        }
-        element.style.left = left + 'px';
-        element.style.top = `calc(100% - ${top}px)`;
-    }
-    // アイコン最小化タイプ設定
-    setMinimizeType() {
-        // ツールチップの表示位置判定用クラスを付与
-        const type = this.axpObj.config('axp_config_form_minimizeType');
-        for (const item of this.windowSystems) {
-            switch (type) {
-                case 'horizontal':
-                    item.taskIconElement.classList.add('axpc_window_minimizeIconHorizontal');
-                    item.taskIconElement.classList.remove('axpc_window_minimizeIconVertical');
-                    break;
-                case 'vertical':
-                    item.taskIconElement.classList.remove('axpc_window_minimizeIconHorizontal');
-                    item.taskIconElement.classList.add('axpc_window_minimizeIconVertical');
-                    break;
-            }
-        }
-        // ここで画面を更新しても、キャンバスタブ非表示のため、位置が算出できない。キャンバスタブに切り替えたタイミングで更新
-    }
-    // デバッグ用ツールウィンドウ一覧表示
-    disp() {
-        for (const item of this.windowElements) {
-            console.log(item.id, item.style.zIndex);
+            // 失敗
+            return false;
         }
     }
     //エンター時
-    enter(e, objSystem) {
+    enter(e) {
         if (this.axpObj.isDrawing) {
             // 描画中にツールウィンドウに被った場合は、ツールウィンドウを半透明化
             e.currentTarget.style.opacity = '0.25';
@@ -167,11 +104,6 @@ export class DragWindow {
         e.currentTarget.style.opacity = '1';
     }
     //
-    animeend(e) {
-        console.log('アニメ終了', e.currentTarget);
-        e.currentTarget.classList.remove('axpc_window_minimizeAnime');
-    }
-    //
     updateZIndex(elem) {
         //最後に操作したウィンドウが最前面になるように重なるようにz-indexの値を再設定
         if (elem.style.zIndex === this.zIndex_max) {
@@ -179,15 +111,15 @@ export class DragWindow {
         } else {
             // 操作したウィンドウの現在のz_indexを保持しておく
             let zIndex_target = elem.style.zIndex;
-            for (const item of this.windowElements) {
-                if (item === elem) {
+            for (const item of this.windowSystems) {
+                if (item.windowElement === elem) {
                     // 操作したウィンドウは最前面
-                    item.style.zIndex = this.zIndex_max;
+                    item.windowElement.style.zIndex = this.zIndex_max;
                 } else {
                     // その他のウィンドウ
-                    if (item.style.zIndex > zIndex_target) {
+                    if (item.windowElement.style.zIndex > zIndex_target) {
                         // 現在値より高い場合は１つ下げる
-                        item.style.zIndex--;
+                        item.windowElement.style.zIndex--;
                     }
                 }
             }
@@ -207,21 +139,10 @@ export class DragWindow {
 
         //最小化ボタンが押された場合
         if (e.target.classList.contains('axpc_window_header_minimizeButton')) {
-            let left = e.currentTarget.offsetLeft;
-            let top = e.currentTarget.offsetTop;
-            let duration = document.getElementById('axp_config_number_minimizeDuration').value;
-            // 間隔が0または非数の場合、アニメ処理しない
-            if (duration === 0 || isNaN(duration)) {
-                //console.log('アニメ省略',duration);
-            } else {
-                objSystem.taskIconElement.style.setProperty('--tool-left', left + 'px');
-                objSystem.taskIconElement.style.setProperty('--tool-top', top + 'px');
-                objSystem.taskIconElement.style.setProperty('--tool-duration', duration + 'ms');
-                objSystem.taskIconElement.classList.add('axpc_window_minimizeAnime');
-            }
-            // 最小化処理実行
-            this.minimize(objSystem);
-            // 最小化状態保存
+            this.minimize(objSystem.windowElement.id);
+            // ランチャーのボタンに反映
+            this.axpObj.launcher.minimizeButton(objSystem.windowElement.id);
+            // 状態保存
             this.axpObj.configSystem.saveConfig('WDMIN_' + objSystem.windowElement.id, true);
             return;
         }

@@ -5,10 +5,10 @@ export class ToolWindow {
     axpObj;
     // 自身が管理するツールウィンドウのdiv要素
     windowElement = null;
-    // 最小化時アイコンのdiv要素
-    taskIconElement = null;
-    // 最小化状態
-    isMinimized = false;
+    // ランチャーボタン要素
+    launcherButtonElement = null;
+    // 最小化対象ウィンドウ
+    isCanMinimize = false;
     // ツールウィンドウ名
     name;
     // ツールウィンドウのid
@@ -26,6 +26,7 @@ export class ToolWindow {
     createHTML(id, type, name, icon, html, minimize = true) {
         this.id = id;
         this.type = type;
+        this.isCanMinimize = minimize;
         //console.log('createHTML', name);
         // ツールウィンドウの枠div（共通部）を生成
         let divWindow = document.createElement('div');
@@ -44,20 +45,32 @@ export class ToolWindow {
             spanIcon.setAttribute('class', icon);
             divHeader.appendChild(spanIcon);
         } else {
-            // カスタムボタンウィンドウのみ、アイコン無し
+            // アイコン無し（ランチャーウィンドウ、カスタムウィンドウ）
             divTitle.style.gridArea = '1/1/2/3';
             divTitle.style.marginLeft = '8px';
-
-            //divWindow.style.backgroundColor = 'rgb(0, 0, 0, 0)';
         }
         divHeader.appendChild(divTitle);
         // 最小化可能なウィンドウの場合、最小化ボタンを生成する
         if (minimize) {
-            let divMinimize = document.createElement('div');
-            divMinimize.setAttribute('class', 'axpc_MSG axpc_window_header_minimizeButton');
-            divMinimize.textContent = '▼';
-            divMinimize.dataset.msg = 'ツールウィンドウを最小化します。';
-            divHeader.appendChild(divMinimize);
+            const buttonMinimize = document.createElement('button');
+            buttonMinimize.setAttribute('class', 'axpc_MSG axpc_window_header_minimizeButton');
+            buttonMinimize.dataset.msg = `${name}ウィンドウを閉じます。`;
+            divHeader.appendChild(buttonMinimize);
+
+            // ランチャーボタンの生成と追加
+            const newButton = document.createElement('button');
+            // class追加
+            newButton.classList.add('axpc_MSG', 'axpc_launcher_personalButton');
+            newButton.dataset.id = id;
+            newButton.dataset.msg = `${name}ウィンドウを開閉します。`;
+
+            // アイコン用div
+            const newDiv = document.createElement('div');
+            newDiv.classList.add(icon);
+            newButton.appendChild(newDiv);
+
+            document.getElementById('axp_launcher_div_personalButtonsEntry').appendChild(newButton);
+            this.launcherButtonElement = newButton;
         }
 
         let divDragzone = document.createElement('div');
@@ -75,19 +88,6 @@ export class ToolWindow {
         this.name = name;
 
         //console.log('>', this.windowElement, this.name);
-        // タスクバーアイコンの生成
-        let newDiv = document.createElement('div');
-
-        newDiv.setAttribute('class', 'axpc_window_minimizeIconHorizontal');
-        newDiv.setAttribute('style', 'display:none');
-        // data-tip属性にレイヤー名設定（hover時のtip表示用）
-        newDiv.dataset.tip = name;
-        // アイコン用class追加
-        newDiv.classList.add(icon);
-
-        this.axpObj.ELEMENT.base.appendChild(newDiv);
-
-        this.taskIconElement = newDiv;
     }
     /**
      * ツールウィンドウの座標を設定する
@@ -118,5 +118,21 @@ export class ToolWindow {
     resetPosition() {
         let pos = this.getDefaultPosition();
         this.setPosition(pos.left, pos.top);
+    }
+    minimize() {
+        // ツールウィンドウ消去
+        this.windowElement.classList.add('axpc_window_minimize');
+    }
+    unminimize() {
+        // ツールウィンドウ表示
+        this.windowElement.classList.remove('axpc_window_minimize');
+    }
+    hidden() {
+        // ツールウィンドウ消去
+        this.windowElement.classList.add('axpc_window_hidden');
+    }
+    visible() {
+        // ツールウィンドウ表示
+        this.windowElement.classList.remove('axpc_window_hidden');
     }
 }
