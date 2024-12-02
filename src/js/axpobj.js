@@ -10,6 +10,7 @@ import { ColorPaletteSystem } from './window_palette.js';
 import { ColorMakerSystem } from './window_makecolor.js';
 import { AssistToolSystem } from './window_tool.js';
 import { CustomButtonSystem } from './window_custom.js';
+import { Launcher } from './window_launcher.js';
 import { UndoSystem } from './undo.js';
 import { ConfigSystem } from './config.js';
 import { PostSystem } from './post.js';
@@ -102,7 +103,12 @@ export class AXPObj {
 
     // 実行環境系
     ENV = {
+        // ブラウザがsafari系か
         multiCanvas: false,
+        // 画面幅が狭いデバイスか
+        isMobileWidth: false,
+        // 初回起動か
+        isFirstLaunch: false,
     }
 
     // AXNOS Paint親要素ID
@@ -238,11 +244,17 @@ export class AXPObj {
         this.additionalDictionaryJSON = additionalDictionaryJSON;
 
         // ツールウィンドウシステム
-        this.toolWindow.push(this.layerSystem = new LayerSystem(this));
-        this.toolWindow.push(this.colorPaletteSystem = new ColorPaletteSystem(this));
-        this.toolWindow.push(this.colorMakerSystem = new ColorMakerSystem(this));
+        // 重要：ランチャーを最初に作成する必要あり
+        this.toolWindow.push(this.launcher = new Launcher(this));
+
+        // 重要：生成順がランチャーのボタンの順番になる
         this.toolWindow.push(this.penSystem = new PenSystem(this));
+        this.toolWindow.push(this.colorMakerSystem = new ColorMakerSystem(this));
+        this.toolWindow.push(this.colorPaletteSystem = new ColorPaletteSystem(this));
+        this.toolWindow.push(this.layerSystem = new LayerSystem(this));
         this.toolWindow.push(this.assistToolSystem = new AssistToolSystem(this));
+
+        // カスタムボタンは別枠
         this.toolWindow.push(this.customButtonSystem = new CustomButtonSystem(this));
 
         // サブシステム
@@ -1343,10 +1355,6 @@ export class AXPObj {
             // キャンバス
             case '0':
                 this.isCanvasOpen = true;
-                // 最小化アイコンの位置更新
-                this.dragWindow.updateIconPosition();
-                // 最小化アイコンアニメ停止
-                this.stopIconAnime();
                 break;
             // 設定
             case '1':
@@ -2090,6 +2098,9 @@ export class AXPObj {
                     result = await this.saveSystem.load_config();
                     if (result) {
                         this.configSystem.restoreConfig(result);
+                    } else {
+                        // ユーザー設定データが存在しない場合、初回起動と判定する
+                        this.ENV.isFirstLaunch = true;
                     }
                 } catch (error) {
                     console.log(error);
@@ -2150,10 +2161,18 @@ export class AXPObj {
             this.configSystem.set_longtap_use();
             // ツールウィンドウ位置初期化
             this.dragWindow.initPosition();
-            // 最小化アイコン配置
-            this.dragWindow.setMinimizeType();
             // ユーザー設定が復元された後のペンツールの再描画
             this.penSystem.changePenMode();
+            // 初回起動かつモバイル端末の場合、単一ウィンドウモードを強制設定
+            if (this.ENV.isFirstLaunch && this.ENV.isMobileWidth) {
+                document.getElementById('axp_config_checkbox_singleWindowMode').checked = true;
+                this.configSystem.saveConfig('CHECK_axp_config_checkbox_singleWindowMode', true);
+                alert('* 初回起動設定 *\n画面幅が600px未満のため、単一ウィンドウモードに設定しました。[設定]-[ツールウィンドウ]で変更が可能です。');
+            }
+            if (document.getElementById('axp_config_checkbox_singleWindowMode').checked) {
+                // 単一ウィンドウモード、復元時
+                this.launcher.setSingleWindowMode(true, true);
+            }
 
             // 下書き読込
             if (isDraftLoaded) {
@@ -2184,12 +2203,6 @@ export class AXPObj {
                 this.exTool.startEvent();
             }
         })();
-    }
-    stopIconAnime() {
-        for (const element of this.toolWindow) {
-            element.taskIconElement.classList.remove('axpc_window_minimizeAnime');
-            element.windowElement.classList.remove('axpc_window_minimizeAnime');
-        };
     }
     config(id) {
         let element = document.getElementById(id);

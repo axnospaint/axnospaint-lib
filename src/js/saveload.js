@@ -442,7 +442,7 @@ export class SaveSystem {
         } else {
             // 復元データなし
             // console.log('ユーザー設定データなし');
-            return;
+            return null;
         }
     }
     // カラーパレットの保存

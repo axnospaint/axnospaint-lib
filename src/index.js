@@ -115,12 +115,12 @@ export default class {
                 }
             }
             // 　論理チェック
-            console.log(
-                this.axpObj.minWidth,
-                this.axpObj.minHeight,
-                this.axpObj.maxWidth,
-                this.axpObj.maxHeight
-            );
+            // console.log(
+            //     this.axpObj.minWidth,
+            //     this.axpObj.minHeight,
+            //     this.axpObj.maxWidth,
+            //     this.axpObj.maxHeight
+            // );
             if (this.axpObj.minWidth > this.axpObj.maxWidth || this.axpObj.minHeight > this.axpObj.maxHeight) {
                 alert(`ERROR:\n起動オプションminWidth,minHeight,maxWidth,maxHeightの指定の組み合わせが正しくありません。`);
                 return;
@@ -350,6 +350,12 @@ export default class {
             if (this.axpObj.browser === 'Safari') {
                 // safariの場合、キャンバス描画時の不具合回避用の処理を行う必要があるため、フラグを立てておく
                 this.axpObj.ENV.multiCanvas = true;
+            }
+            // 画面幅
+            // console.log('innerWidth:', window.innerWidth + 'px');
+            if (window.innerWidth < 600) {
+                // デバイスの画面幅が600未満の場合の特別処理用
+                this.axpObj.ENV.isMobileWidth = true;
             }
             // 本体起動
             this.axpObj.exec();
