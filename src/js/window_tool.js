@@ -334,13 +334,30 @@ export class AssistToolSystem extends ToolWindow {
         // 背景を切り替えました。（現在の状態:%1）
         this.axpObj.msg('@INF1005', msgtext);
         this.axpObj.layerSystem.updateCanvas();
+
+        // 投稿フォーム連動
+        let input_transparent = document.querySelectorAll("input[name=transparent]");
+        for (let element of input_transparent) {
+            if (element.value === 'transparent') {
+                element.checked = this.isTransparent;
+            } else {
+                element.checked = !this.isTransparent;
+            }
+        }
     }
     getIsTransparent() {
         return this.isTransparent;
     }
     setIsTransparent(flag) {
         this.isTransparent = flag;
+        // 補助ツールのボタン
         document.getElementById('axp_tool_button_transparent').dataset.selected = this.isTransparent ? 'true' : 'false';
+        // 投稿画面のラジオボタン
+        if (flag) {
+            document.getElementById('axp_post_radio_bgTransparent').checked = true;
+        } else {
+            document.getElementById('axp_post_radio_bgWhite').checked = true;
+        }
     }
     // サムネイル：キャンバス表示範囲線
     mapguide() {

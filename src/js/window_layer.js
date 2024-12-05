@@ -88,8 +88,8 @@ export class LayerSystem extends ToolWindow {
     // 初期ウィンドウ位置
     getDefaultPosition() {
         return {
-            left: 10,
-            top: 340,
+            left: 0,
+            top: 400,
         }
     }
     init() {

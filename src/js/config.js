@@ -537,9 +537,13 @@ export class ConfigSystem {
             // 全ツールウィンドウのcss（left,top）を更新
             this.axpObj.dragWindow.changeAutoAdjustPosition();
         };
-        // 最小化アイコン配置
-        document.getElementById('axp_config_form_minimizeType').onchange = (e) => {
-            this.axpObj.dragWindow.setMinimizeType();
+        // アイコンサイズ
+        document.getElementById('axp_config_form_minimizeButtonType').onchange = (e) => {
+            this.axpObj.launcher.setButtonSize(e.target.value);
+        };
+        // 単一ウィンドウモード
+        document.getElementById('axp_config_checkbox_singleWindowMode').onchange = (e) => {
+            this.axpObj.launcher.setSingleWindowMode(e.target.checked);
         };
 
         // ◆ペンツール ----------------------------------------------------------------
@@ -1404,6 +1408,10 @@ export class ConfigSystem {
         // DBに保存
         this.axpObj.saveSystem.save_config(this.configObj);
     }
+    // ユーザー設定から指定したkeyに対応するvalueを返却
+    getConfig(key) {
+        return this.configObj.get(key);
+    }
     // ユーザー設定の復元
     restoreConfig(map) {
         // 共通処理
@@ -1576,6 +1584,20 @@ export class ConfigSystem {
                         }
                     }
                     break
+                // ツールウィンドウ最小化
+                case 'WDMIN':
+                    // 初期化する設定の場合、復元を行わない
+                    if (this.axpObj.config('axp_config_form_saveLastWindowPosition') === 'off') {
+                        // スキップしたことを記憶
+                        isSkiped = true;
+                    } else {
+                        // 復元処理
+                        if (!this.axpObj.dragWindow.restoreMinimize(elememtId)) {
+                            // 最小化の設定に失敗（無効なID）した場合、データを無効とする
+                            isAvailable = false;
+                        }
+                    }
+                    break;
                 // ペンツールの各種値
                 case 'P-SIZ':
                 case 'P-ALP':
