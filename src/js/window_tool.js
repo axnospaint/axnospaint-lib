@@ -336,7 +336,7 @@ export class AssistToolSystem extends ToolWindow {
         this.axpObj.layerSystem.updateCanvas();
 
         // 投稿フォーム連動
-        let input_transparent = document.querySelectorAll("input[name=transparent]");
+        let input_transparent = document.querySelectorAll("input[name=axp_post_radio_bg]");
         for (let element of input_transparent) {
             if (element.value === 'transparent') {
                 element.checked = this.isTransparent;
