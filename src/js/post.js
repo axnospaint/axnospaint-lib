@@ -74,33 +74,70 @@ export class PostSystem {
         } else {
             // 投稿者名
             if (!this.axpObj.postForm.input.strName.isDisplay) {
-                UTIL.hide('axp_post_tr_name');
+                UTIL.hide(document.querySelector('.axpc_post_name_property'));
+                UTIL.hide('axp_post_text_name');
                 this.axpObj.postForm.input.strName.isInputRequired = false;
             } else {
+                // 最大文字数設定
                 document.getElementById('axp_post_text_name').maxLength = this.axpObj.postForm.input.strName.maxLength;
+                // プレースホルダー設定
+                document.getElementById('axp_post_text_name').placeholder = this.axpObj.postForm.input.strName.placeholder;
+                // 必須の文字表示
+                if (this.axpObj.postForm.input.strName.isInputRequired) {
+                    UTIL.show(document.querySelector('.axpc_post_name_required'));
+                }
             }
             // タイトル
             if (!this.axpObj.postForm.input.strTitle.isDisplay) {
-                UTIL.hide('axp_post_tr_title');
+                UTIL.hide(document.querySelector('.axpc_post_title_property'));
+                UTIL.hide('axp_post_text_title');
                 this.axpObj.postForm.input.strTitle.isInputRequired = false;
             } else {
+                // 最大文字数設定
                 document.getElementById('axp_post_text_title').maxLength = this.axpObj.postForm.input.strTitle.maxLength;
+                // プレースホルダー設定
+                document.getElementById('axp_post_text_title').placeholder = this.axpObj.postForm.input.strTitle.placeholder;
+                // 必須の文字表示
+                if (this.axpObj.postForm.input.strTitle.isInputRequired) {
+                    UTIL.show(document.querySelector('.axpc_post_title_required'));
+                }
             }
             // 本文
             if (!this.axpObj.postForm.input.strMessage.isDisplay) {
-                UTIL.hide('axp_post_tr_message');
+                UTIL.hide(document.querySelector('.axpc_post_message_property'));
+                UTIL.hide('axp_post_textarea_message');
                 this.axpObj.postForm.input.strMessage.isInputRequired = false;
             } else {
+                // 最大文字数設定
                 document.getElementById('axp_post_textarea_message').maxLength = this.axpObj.postForm.input.strMessage.maxLength;
+                // プレースホルダー設定
+                document.getElementById('axp_post_textarea_message').placeholder = this.axpObj.postForm.input.strMessage.placeholder;
+                // 必須の文字表示
+                if (this.axpObj.postForm.input.strMessage.isInputRequired) {
+                    UTIL.show(document.querySelector('.axpc_post_message_required'));
+                }
             }
             // ウォッチリスト登録
             if (!this.axpObj.postForm.input.strWatchList.isDisplay) {
-                UTIL.hide('axp_post_tr_watchlist');
+                UTIL.hide(document.querySelector('.axpc_post_watchList'));
             }
         }
         // 注意事項
         if (!this.axpObj.postForm.notice.isDisplay) {
             UTIL.hide('axp_post_div_notice');
+        }
+
+        // 透過
+        let input_transparent = document.querySelectorAll("input[name=axp_post_radio_bg]");
+        for (let element of input_transparent) {
+            element.onchange = () => {
+                this.axpObj.assistToolSystem.transparent();
+                this.axpObj.drawPostCanvas();
+            }
+        }
+        document.getElementById('axp_post_text_title').oninput = (e) => {
+            let text = e.target.value;
+            document.getElementById('axp_post_div_thumbnailTitle').textContent = text;
         }
 
         document.getElementById('axp_post_text_title').oninput = (e) => {
@@ -134,7 +171,8 @@ export class PostSystem {
             }
 
             // ボタン表示変更（投稿中）
-            document.getElementById("axp_post_button_upload").textContent = this.axpObj._('@POST.BUTTON_POSTING');
+            UTIL.hide('axp_post_button_upload_label');
+            UTIL.show('axp_post_button_upload_loading');
             document.getElementById("axp_post_button_upload").disabled = true;
 
             // 長さのチェックはユーザー側が任意で行う仕様とする（AXNOS Paint側では行わない）
@@ -167,10 +205,14 @@ export class PostSystem {
                     console.log('error:', error);
                 } finally {
                     // ボタン表示変更（初期化）
-                    document.getElementById("axp_post_button_upload").textContent = this.axpObj._('@POST.BUTTON_SUBMIT');
+                    UTIL.show('axp_post_button_upload_label');
+                    UTIL.hide('axp_post_button_upload_loading');
                     document.getElementById("axp_post_button_upload").disabled = false;
                 }
             })();
         }
+
+        // ボタンラベル初期設定
+        document.getElementById('axp_post_button_upload_label').textContent = this.axpObj._('@POST.BUTTON_SUBMIT');
     }
 }

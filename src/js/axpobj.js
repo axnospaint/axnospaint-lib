@@ -215,18 +215,21 @@ export class AXPObj {
                 isDisplay: true,
                 isInputRequired: false,
                 maxLength: 32,
+                placeholder: '',
             },
             // タイトル
             strTitle: {
                 isDisplay: true,
                 isInputRequired: false,
                 maxLength: 32,
+                placeholder: '',
             },
             // 本文
             strMessage: {
                 isDisplay: true,
                 isInputRequired: false,
                 maxLength: 1024,
+                placeholder: '',
             },
             // ウォッチリスト登録
             strWatchList: {
@@ -1367,11 +1370,12 @@ export class AXPObj {
                 this.isCanvasOpen = false;
                 // 投稿タブ内の情報更新
                 let isTrans = this.assistToolSystem.getIsTransparent();
-                document.getElementById('axp_post_span_transparent').textContent = isTrans ? this._('@COMMON.BG_TRANSPARENT') : this._('@COMMON.BG_WHITE');
+                //document.getElementById('axp_post_span_transparent').textContent = isTrans ? this._('@COMMON.BG_TRANSPARENT') : this._('@COMMON.BG_WHITE');
                 this.drawPostCanvas();
 
-                // ボタン表示初期化（お絵カキコする！）
-                document.getElementById("axp_post_button_upload").textContent = this._('@POST.BUTTON_SUBMIT');
+                // 投稿ボタン有効化
+                UTIL.show('axp_post_button_upload_label');
+                UTIL.hide('axp_post_button_upload_loading');
                 document.getElementById("axp_post_button_upload").disabled = false;
 
                 // 基にしてお絵カキコ
