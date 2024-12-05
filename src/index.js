@@ -144,6 +144,7 @@ export default class {
             let errorMessage = null;
             // 判定関数
             const isBoolean = (value) => typeof value === 'boolean';
+            const isText = (value) => typeof value === 'string';
             const isRangeLength = (value) => typeof value === 'number' && inRange(value, 1, 1024);
             const checkOptionValue = (value, condition, message) => {
                 // 正しい値が指定されているか判定
@@ -192,6 +193,14 @@ export default class {
                                 this.axpObj.postForm.input.strName.maxLength = option.postForm.input.strName.maxLength;
                             }
                         }
+                        if ('placeholder' in option.postForm.input.strName && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strName.placeholder,
+                                isText,
+                                'postForm.input.strName.placeholder')) {
+                                this.axpObj.postForm.input.strName.placeholder = option.postForm.input.strName.placeholder;
+                            }
+                        }
                     }
                     // タイトル
                     if ('strTitle' in option.postForm.input && !isErrorDetected) {
@@ -219,6 +228,15 @@ export default class {
                                 this.axpObj.postForm.input.strTitle.maxLength = option.postForm.input.strTitle.maxLength;
                             }
                         }
+                        if ('placeholder' in option.postForm.input.strTitle && !isErrorDetected) {
+                            console.log('指定あり');
+                            if (checkOptionValue(
+                                option.postForm.input.strTitle.placeholder,
+                                isText,
+                                'postForm.input.strTitle.placeholder')) {
+                                this.axpObj.postForm.input.strTitle.placeholder = option.postForm.input.strTitle.placeholder;
+                            }
+                        }
                     }
                     // 本文
                     if ('strMessage' in option.postForm.input && !isErrorDetected) {
@@ -244,6 +262,14 @@ export default class {
                                 isRangeLength,
                                 'postForm.input.strMessage.maxLength')) {
                                 this.axpObj.postForm.input.strMessage.maxLength = option.postForm.input.strMessage.maxLength;
+                            }
+                        }
+                        if ('placeholder' in option.postForm.input.strMessage && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strMessage.placeholder,
+                                isText,
+                                'postForm.input.strMessage.placeholder')) {
+                                this.axpObj.postForm.input.strMessage.placeholder = option.postForm.input.strMessage.placeholder;
                             }
                         }
                     }
