@@ -1,4 +1,4 @@
-// @description セーブ／ロード／自動保存から復元処理　indexedDB処理系
+// @description セーブ／ロード／自動保存から復元処理 indexedDB処理系
 
 import { UTIL, inRange, getFileNameFromURL } from './etc.js';
 
@@ -91,8 +91,8 @@ export class SaveSystem {
     }
     startEvent() {
         // セーブ／ロード画面の閉じるボタン
-        // （仕様変更）ボタン以外　document.getElementById('axp_saveload').onclick でも閉じることができたのを廃止
-        document.getElementById('axp_saveload_button_close').onclick = (e) => {
+        // （仕様変更）ボタン以外 document.getElementById('axp_saveload').onclick でも閉じることができたのを廃止
+        document.getElementById('axp_saveload_button_close').onclick = () => {
             this.closeWindow();
         }
     }
@@ -326,7 +326,7 @@ export class SaveSystem {
         if (!this.openWindow()) {
             return;
         }
-        document.getElementById('axp_saveload_span_message').textContent = '自動バックアップ（10ストローク毎に保存）を選択（※現在の描画内容は破棄されます）';
+        document.getElementById('axp_saveload_span_message').textContent = '自動バックアップ（10ストローク毎に最大20件まで保存）を選択（※現在の描画内容は破棄されます）';
         this.loadCommon('auto', STORE_NAME_SAVE_AUTO);
     }
     // 「基にしてお絵カキコ」情報のチェックと復元
@@ -442,7 +442,7 @@ export class SaveSystem {
         } else {
             // 復元データなし
             // console.log('ユーザー設定データなし');
-            return;
+            return null;
         }
     }
     // カラーパレットの保存

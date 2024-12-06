@@ -1,0 +1,77 @@
+#axp_launcher {
+    width: auto;
+}
+
+/* ランチャーボタン外枠 */
+#axp_launcher_div_buttons {
+    display: flex;
+}
+
+/* 個別ボタン外枠 */
+#axp_launcher_div_personalButtonsEntry {
+    display: flex;
+}
+
+/* ランチャーボタン */
+.axpc_launcher_personalButton,
+.axpc_launcher_allButton {
+    position: relative;
+    cursor: pointer;
+    border: 2px solid #000;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    margin: 0 2px;
+    background-color: #ddd;
+    border: 2px solid #aaa;
+}
+
+/* ランチャーボタンのアイコン部 */
+.axpc_launcher_personalButton>div,
+.axpc_launcher_allButton>div {
+    pointer-events: none;
+    width: 28px;
+    height: 28px;
+    margin: auto auto;
+    opacity: 1;
+}
+
+/* 個別ボタンが最小化状態 */
+.axpc_launcher_personalButton.axpc_launcher_minimize {
+    background-color: #888;
+}
+
+.axpc_launcher_personalButton.axpc_launcher_minimize>div {
+    opacity: 0.3;
+}
+
+/* ボタンにホバーしたとき */
+.axpc_launcher_personalButton:hover,
+.axpc_launcher_allButton:hover {
+    border: 2px solid #eee;
+}
+
+/* ボタンを押したとき */
+.axpc_launcher_personalButton:active,
+.axpc_launcher_allButton:active {
+    border: 2px solid #555;
+    background-color: #555;
+}
+
+/* ボタンサイズ */
+.axpc_launcher_sizeSmall {
+    width: 32px;
+    height: 32px;
+}
+
+.axpc_launcher_sizeBig {
+    width: 48px;
+    height: 48px;
+}
+
+#axp_launcher_separator {
+    width: 2px;
+    height: auto;
+    background-color: #888;
+    margin: 0 2px;
+}

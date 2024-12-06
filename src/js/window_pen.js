@@ -75,8 +75,8 @@ export class PenSystem extends ToolWindow {
     // 初期ウィンドウ位置
     getDefaultPosition() {
         return {
-            left: 10,
-            top: 10,
+            left: 0,
+            top: 100,
         }
     }
     // 初期化
@@ -734,7 +734,7 @@ export class PenSystem extends ToolWindow {
                 this.axpObj.msg('@AXP5005');
                 document.getElementById('axp_pen_button_spuitBase').dataset.selected = 'true';
                 break;
-            case 'axp_penmode_hand':
+            case 'axp_penmode_hand': {
                 // マウスポインタ：ハンド
                 this.axpObj.ELEMENT.view.style.cursor = 'grab';
                 // ペンガイド線非表示
@@ -750,6 +750,7 @@ export class PenSystem extends ToolWindow {
                 this.saveMsg = elementHand.dataset.msg;
                 elementHand.dataset.msg = document.getElementById(mode).dataset.msg;
                 break;
+            }
         }
         this.changePenMode(mode);
     }
@@ -772,7 +773,7 @@ export class PenSystem extends ToolWindow {
             case 'axp_penmode_spuit':
                 document.getElementById('axp_pen_button_spuitBase').dataset.selected = 'false';
                 break;
-            case 'axp_penmode_hand':
+            case 'axp_penmode_hand': {
                 // ハンド以外（移動ツール）が選択されていたとき、アイコンを元に戻す
                 let elementHand = document.getElementById('axp_pen_button_handBase');
                 elementHand.dataset.selected = 'false';
@@ -780,6 +781,7 @@ export class PenSystem extends ToolWindow {
                 elementHand.classList.remove(this.getClassIcon(mode));
                 elementHand.classList.add(this.getClassIcon(this.saveIcon));
                 break;
+            }
         }
         // 復元
         this.saveElement.dataset.selected = 'true';

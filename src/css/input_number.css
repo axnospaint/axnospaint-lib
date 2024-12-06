@@ -1,6 +1,6 @@
 /* 数値入力共通 */
 .axpc_number {
-    height: 30px;
+    min-height: 30px;
     margin: 4px 0;
 }
 

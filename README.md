@@ -197,13 +197,13 @@ function axnospaint_post(postObj) {
 
 #### 投稿情報オブジェクト
 
-AXNOS Paintはサーバーとのインターフェースとして、以下のメンバ変数をもつObject型データを関数に受け渡します。
+AXNOS Paintはサーバーとのインターフェースとして、以下のメンバ変数をもつObject型データを関数に受け渡します。本文などの項目を入力必須にしたい場合は、次項で解説する起動オプションの`isInputRequired`に`true`を指定してください。
 
 |  メンバ変数名        | 内容 |
 | ----           | ---- |
-|  strName       |  投稿者名。空欄可。trim()メソッドで文字列の両端の空白を削除済。  |
-|  strTitle      |  タイトル。空欄可。trim()メソッドで文字列の両端の空白を削除済。  |
-|  strMessage    |  本文。入力必須。trim()メソッドで文字列の両端の空白を削除済。<br>AXNOS Paint側で１文字以上入力されていることをチェックしている。  |
+|  strName       |  投稿者名。trim()メソッドで文字列の両端の空白を削除済。**デフォルト設定では省略可**  |
+|  strTitle      |  タイトル。trim()メソッドで文字列の両端の空白を削除済。**デフォルト設定では省略可**  |
+|  strMessage    |  本文。trim()メソッドで文字列の両端の空白を削除済。**デフォルト設定では省略可** |
 |  strWatchList  |  ウォッチリストに登録<br>チェックボックスが選択されている場合't'、それ以外は''（空文字）とする。  |
 |  oekaki_id  | 下書き機能(1)を使用した場合に付与される情報。未使用時はNULL。（URLパラメータで指定した`oekaki_id`の内容の転記。**ただし、AXNOSPaint使用中の操作で更新される場合があります。** |
 |  draftImageFile  | 下書き機能(2)を使用した場合に付与される情報。未使用時はNULL。（起動オプションで指定した`draftImageFile`の内容の転記。**ただし、AXNOSPaint使用中の操作で更新される場合があります。** |
@@ -220,7 +220,8 @@ AXNOS Paintは、キャンバスサイズの変更機能、画像のセーブ／
 
 #### 投稿用フォームのカスタマイズ
 
-起動オプションの`postForm`で、投稿用フォームの表示／非表示、入力必須の有無、最大文字数のカスタマイズが可能です。  
+起動オプションの`postForm`で、投稿用フォームの表示／非表示、入力必須の有無、最大文字数、プレースホルダーのカスタマイズが可能です。  
+以下に設定例を示します。
 
 ```js
 new AXNOSPaint({
@@ -234,18 +235,21 @@ new AXNOSPaint({
                 isDisplay: true, 
                 isInputRequired: false,
                 maxLength: 32,
+                placeholder: 'ななしのよっしん',
             },
             // タイトル
             strTitle: {
                 isDisplay: true, 
                 isInputRequired: false,
                 maxLength: 32,
+                placeholder: '',
             },
             // 本文
             strMessage: {
                 isDisplay: true, 
-                isInputRequired: false,
+                isInputRequired: true,
                 maxLength: 1024,
+                placeholder: '本文を入力してください。',
             },
             // ウォッチリスト登録
             strWatchList: {
@@ -264,8 +268,9 @@ new AXNOSPaint({
 |  オプション名   | 内容 | 初期値 |
 | ----           | ---- | ---- |
 |  isDisplay       | 項目表示フラグ。`false`を指定すると非表示になり、`isInputRequired`の入力チェックも実施しない。  | true |
-|  isInputRequired | 入力必須フラグ。`true`を指定すると項目が未入力の場合、入力を促すメッセージを表示する。  | false |
+|  isInputRequired | 入力必須フラグ。`true`を指定すると項目に「必須」の文字が表示される。未入力の場合、入力を促すメッセージを表示する。  | false |
 |  maxLength | 入力可能な最大文字数。1～1024の範囲内で指定する。  | ※1 |
+|  placeholder | プレースホルダーとして表示する文字列。要素のplaceholder属性に設定される。 | 空文字列 |
 
 ※1：未指定時の初期値は、投稿者名とタイトルは32文字、本文は1024文字。
 
@@ -470,8 +475,8 @@ axpc_所属名_任意の識別名
 | 1000～  | 各種ツールウィンドウ（最後に操作したウィンドウが前面になるように変動） |
 | 2000    | サブウィンドウ |
 | 3000    | マスコット |
-| 4000    | ウィンドウの最小化アイコン |
 | 5000    | セーブ／ロード画面 |
+| 6000    | ハンバーガーメニュー |
 | 10000   | アラート（`alert()`で表示されるポップアップ） |
 
 ## Copyright / License
