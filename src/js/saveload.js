@@ -1,4 +1,4 @@
-// @description セーブ／ロード／自動保存から復元処理　indexedDB処理系
+// @description セーブ／ロード／自動保存から復元処理 indexedDB処理系
 
 import { UTIL, inRange, getFileNameFromURL } from './etc.js';
 
@@ -91,8 +91,8 @@ export class SaveSystem {
     }
     startEvent() {
         // セーブ／ロード画面の閉じるボタン
-        // （仕様変更）ボタン以外　document.getElementById('axp_saveload').onclick でも閉じることができたのを廃止
-        document.getElementById('axp_saveload_button_close').onclick = (e) => {
+        // （仕様変更）ボタン以外 document.getElementById('axp_saveload').onclick でも閉じることができたのを廃止
+        document.getElementById('axp_saveload_button_close').onclick = () => {
             this.closeWindow();
         }
     }

@@ -145,7 +145,7 @@ export class PostSystem {
             document.getElementById('axp_post_div_thumbnailTitle').textContent = text;
         }
         // ボタン：お絵カキコする！
-        document.getElementById("axp_post_button_upload").onclick = (e) => {
+        document.getElementById("axp_post_button_upload").onclick = () => {
 
             // 入力必須項目のチェック（起動オプションで必須項目に指定されている場合、一文字以上入力されていなければ処理を中断してメッセージを表示する）
             // 投稿者名

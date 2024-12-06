@@ -6,14 +6,18 @@
     "dev-server": "webpack-dev-server",
     "build": "webpack",
     "prod": "cross-env NODE_ENV=prod webpack --config webpack.prod.js",
-    "prod-demo": "cross-env NODE_ENV=demo webpack --config webpack.prod.js"
+    "prod-demo": "cross-env NODE_ENV=demo webpack --config webpack.prod.js",
+    "eslint": "eslint src/**/*.js"
   },
   "author": "axnospaint",
   "license": "MPL-2.0",
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "cssnano": "^7.0.5",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
     "html-webpack-plugin": "^5.6.0",
     "json-loader": "^0.5.7",
     "postcss-loader": "^8.1.1",

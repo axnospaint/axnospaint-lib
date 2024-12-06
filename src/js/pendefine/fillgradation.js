@@ -1,7 +1,7 @@
 // @description ペン定義：親クラス＞バケツ＞階調バケツ
 
 import { Fill } from './fill.js';
-import { hex2rgb, inRange, getRectSize } from '../etc.js';
+import { inRange, getRectSize } from '../etc.js';
 
 // 階調バケツ
 export class Fillgradation extends Fill {
@@ -60,8 +60,6 @@ export class Fillgradation extends Fill {
                     // %1は透明色を使用できません。
                     this.axpObj.msg('@CAU0500', this.name);
                 } else {
-                    var pencolor = hex2rgb(this.axpObj.colorMakerSystem.getMainColor());
-                    //var rgbCode = [pencolor[0], pencolor[1], pencolor[2]];
                     var rgbCode = [255, 255, 255];
                     //console.log('rgb:', rgbCode);
 

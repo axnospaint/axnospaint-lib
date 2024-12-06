@@ -81,7 +81,7 @@ export default class {
             this.axpObj.oekakiTimeout = isNaN(option.oekakiTimeout) ? 15000 : option.oekakiTimeout;
 
             // 許容するキャンバスサイズ
-            // 　起動オプション指定がある場合、コンストラクタで設定済みのデフォルト値を上書き
+            // 起動オプション指定がある場合、コンストラクタで設定済みのデフォルト値を上書き
             if (typeof option.minWidth === 'number') {
                 if (inRange(option.minWidth, this.axpObj.CONST.MIN_SYSTEM_WIDTH, this.axpObj.CONST.MAX_SYSTEM_WIDTH)) {
                     this.axpObj.minWidth = option.minWidth;
@@ -114,7 +114,7 @@ export default class {
                     return;
                 }
             }
-            // 　論理チェック
+            // 論理チェック
             // console.log(
             //     this.axpObj.minWidth,
             //     this.axpObj.minHeight,
@@ -229,7 +229,6 @@ export default class {
                             }
                         }
                         if ('placeholder' in option.postForm.input.strTitle && !isErrorDetected) {
-                            console.log('指定あり');
                             if (checkOptionValue(
                                 option.postForm.input.strTitle.placeholder,
                                 isText,
