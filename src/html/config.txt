@@ -56,11 +56,11 @@
                     </form>
                 </div>
                 <div class="axpc_config_group" data-title="ポインタ座標の表示">
+                    <!-- 左下は最小化アイコン表示用領域 -->
                     <form id="axp_config_form_displayPosition" class="axpc_radio">
                         <span data-msg="@CFG0022" data-value="off" data-default="y">なし</span>
                         <span data-msg="@CFG0023" data-value="upperleft">左上</span>
                         <span data-msg="@CFG0024" data-value="upperright">右上</span>
-                        <span data-msg="@CFG0010" data-value="lowerleft">左下</span>
                         <span data-msg="@CFG0025" data-value="lowerright">右下</span>
                     </form>
                 </div>
@@ -76,20 +76,19 @@
                     <button id="axp_config_button_resetWindow" class="axpc_MSG axpc_button axpc_button_width260"
                         data-msg="@CFG0030">全ウィンドウ位置の初期化</button>
                 </div>
-                <div class="axpc_config_group" data-title="表示ウィンドウ">
-                    <u>アイコンサイズ</u>
-                    <form id="axp_config_form_minimizeButtonType" class="axpc_radio">
-                        <span data-msg="@CFG0036" data-value="small">小</span>
-                        <span data-msg="@CFG0036" data-value="medium" data-default="y">中</span>
-                        <span data-msg="@CFG0036" data-value="big">大</span>
+                <div class="axpc_config_group" data-title="最小化">
+                    <u>アイコン配置</u>
+                    <form id="axp_config_form_minimizeType" class="axpc_radio">
+                        <span data-msg="@CFG0031" data-value="horizontal" data-default="y">横並び</span>
+                        <span data-msg="@CFG0032" data-value="vertical">縦並び</span>
                     </form>
-                    <div style="margin-top: 8px;"></div>
-                    <div class="axpc_checkbox axpc_MSG" data-msg="@CFG0037">
-                        <label>
-                            <input id="axp_config_checkbox_singleWindowMode" class="axpc_SAVE"
-                                type="checkbox">単一ウィンドウモードを使用する
+                    <div class="axpc_number axpc_MSG" data-msg="@CFG0033">
+                        <label>最小化アニメの所要時間
+                            <input id="axp_config_number_minimizeDuration" class="axpc_SAVE" type="number" min="0"
+                                max="1000" value="350">[ミリ秒]
                         </label>
                     </div>
+                    （※最小0～最大1000。0を指定するとアニメ効果を省略します）
                 </div>
             </div>
             <div class="axpc_config_section" data-title="ペンツール" data-icon="axpc_icon_window_pen">

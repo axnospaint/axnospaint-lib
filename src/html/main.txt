@@ -2,12 +2,7 @@
 <div id="axp_main" class="axpc_main">
 	<!-- 切り替えタブ -->
 	<div id="axp_main_div_tab">
-		<!-- ハンバーガーメニューボタン -->
-		<input type="checkbox" id="axp_main_checkbox_hamburger">
-		<label id="axp_main_label_hamburger" for="axp_main_checkbox_hamburger">
-			<div class="axpc_icon_humburger"></div>
-		</label>
-		<div id="axp_main_div_tab_menu">
+		<div>
 			<div data-idx="0" class="axpc_MSG" data-msg="@BAS0001">${_("@TAB.CANVAS")}</div>
 			<div data-idx="1" class="axpc_MSG" data-msg="@BAS0002">${_("@TAB.SETTINGS")}</div>
 			<div data-idx="2" class="axpc_MSG" data-msg="@BAS0003">${_("@TAB.POST")}</div>

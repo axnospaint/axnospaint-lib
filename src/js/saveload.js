@@ -326,7 +326,7 @@ export class SaveSystem {
         if (!this.openWindow()) {
             return;
         }
-        document.getElementById('axp_saveload_span_message').textContent = '自動バックアップ（10ストローク毎に最大20件まで保存）を選択（※現在の描画内容は破棄されます）';
+        document.getElementById('axp_saveload_span_message').textContent = '自動バックアップ（10ストローク毎に保存）を選択（※現在の描画内容は破棄されます）';
         this.loadCommon('auto', STORE_NAME_SAVE_AUTO);
     }
     // 「基にしてお絵カキコ」情報のチェックと復元
@@ -442,7 +442,7 @@ export class SaveSystem {
         } else {
             // 復元データなし
             // console.log('ユーザー設定データなし');
-            return null;
+            return;
         }
     }
     // カラーパレットの保存

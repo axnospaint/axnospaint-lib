@@ -79,7 +79,7 @@
 
 /* レイヤーが選択状態のとき */
 #axp_layer_ul_layerBox li[data-selected="true"] {
-    background: rgba(235, 154, 50);
+    background: rgba(255, 174, 50, 0.6);
 }
 
 /* レイヤーセル全体 */

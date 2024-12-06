@@ -75,8 +75,8 @@ export class PenSystem extends ToolWindow {
     // 初期ウィンドウ位置
     getDefaultPosition() {
         return {
-            left: 0,
-            top: 100,
+            left: 10,
+            top: 10,
         }
     }
     // 初期化

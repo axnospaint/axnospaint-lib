@@ -9,11 +9,13 @@ const ALERT_BUTTON_CANCEL = "キャンセル";
 const createAlertHTML = (message, useCancel = false) => {
     let mObj = document.getElementsByTagName("body")[0].appendChild(document.createElement("div"));
     mObj.id = "axp_alert_div_modalContainer";
+    mObj.style.height = document.documentElement.scrollHeight + "px";
 
     let alertObj = mObj.appendChild(document.createElement("div"));
     alertObj.id = "axp_alert_div_alertBox";
     //※恐らくIEのための個別処理
     //if (document.all && !window.opera) alertObj.style.top = document.documentElement.scrollTop + "px";
+    alertObj.style.left = (document.documentElement.scrollWidth - alertObj.offsetWidth) / 2 + "px";
     alertObj.style.visiblity = "visible";
 
     let h1 = alertObj.appendChild(document.createElement("h1"));
