@@ -17,12 +17,12 @@ export class Fude extends Round {
 
         this.init_save();
     }
-    start_draw(x, y) {
+    start_draw() {
         // 筆用サイズ調整
         this.CANVAS.brush_ctx.lineWidth = this.size / 2;
     }
     // 描画中
-    move(x, y, e) {
+    move(x, y) {
         // 描画継続中
         if (this.axpObj.isDrawing && !this.axpObj.isDrawCancel) {
             // 描画確定済み

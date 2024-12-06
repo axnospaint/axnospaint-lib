@@ -275,10 +275,6 @@ export function getRectSize(img) {
 
 // イメージが空白であるかの判定
 export function isBlankImage(img) {
-    let x0 = img.width;
-    let y0 = img.height;
-    let x1 = 0;
-    let y1 = 0;
     // 描画情報あり（アルファチャンネルが１以上）なら矩形範囲更新
     for (var y = 0; y < img.height; y++) {
         for (var x = 0; x < img.width; x++) {

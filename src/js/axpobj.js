@@ -16,7 +16,7 @@ import { ConfigSystem } from './config.js';
 import { PostSystem } from './post.js';
 import { SaveSystem } from './saveload.js';
 import { KeyboardSystem } from './keyboard.js';
-import { UTIL, loadImageWithTimeout, calcDistance, inRange, adjustInRange, getFileNameFromURL } from './etc.js';
+import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange, getFileNameFromURL } from './etc.js';
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
 
@@ -341,7 +341,7 @@ export class AXPObj {
         // イベントリスナ設定（機能ボタン）
         const function_buttons = document.querySelectorAll('.axpc_FUNC');
         for (const item of function_buttons) {
-            item.addEventListener('click', (e) => {
+            item.addEventListener('click', () => {
                 this.TASK[item.dataset.function]();
             });
         }
@@ -789,10 +789,6 @@ export class AXPObj {
             //console.log('pointercancel');
             removeEvent(e);
         });
-        this.ELEMENT.base.addEventListener('pointerout', (e) => {
-            //console.log('pointerout');
-            //removeEvent(e);
-        });
         this.ELEMENT.base.addEventListener('pointerleave', (e) => {
             //console.log('pointerleave');
             removeEvent(e);
@@ -806,7 +802,7 @@ export class AXPObj {
         //document.addEventListener('DOMMouseScroll', (e) => { this.mouseWheel(e) }, { passive: false });
 
         // コンテキストメニュー抑止
-        document.oncontextmenu = (e) => {
+        document.oncontextmenu = () => {
             // キー入力可能な要素にフォーカス中の場合は有効
             if (document.activeElement.type === 'number' || document.activeElement.type === 'text' || document.activeElement.type === 'textarea') {
                 return true;
@@ -1219,7 +1215,7 @@ export class AXPObj {
                     this.penSystem.penObj[this.penSystem.pen_mode].drawCursor(e);
                 }
                 break;
-            case 'scroll':
+            case 'scroll': {
                 // スクロール（スクロール移動量に設定されている値を加減算）
                 const move_size = Number(document.getElementById('axp_config_number_mouseWheelMoveSize').value);
                 if (deltaY < 0) { //奥回転
@@ -1235,6 +1231,7 @@ export class AXPObj {
                     this.moveCanvas(-move_size, 0);
                 }
                 break;
+            }
         }
     }
     setCanvasSize(x_size, y_size) {
@@ -1366,11 +1363,9 @@ export class AXPObj {
                 this.configSystem.dispPalettebox(document.getElementById('axp_config_div_paletteBox'), this.colorPaletteSystem.currentPalette);
                 break;
             // 投稿
-            case '2':
+            case '2': {
                 this.isCanvasOpen = false;
                 // 投稿タブ内の情報更新
-                let isTrans = this.assistToolSystem.getIsTransparent();
-                //document.getElementById('axp_post_span_transparent').textContent = isTrans ? this._('@COMMON.BG_TRANSPARENT') : this._('@COMMON.BG_WHITE');
                 this.drawPostCanvas();
 
                 // 投稿ボタン有効化
@@ -1390,6 +1385,7 @@ export class AXPObj {
                     elemRefId.textContent = `${this._('@COMMON.DRAW_NEW')}`;
                 }
                 break;
+            }
         }
         //console.log('main select:', idx, this.isCanvasOpen);
     }
@@ -2143,7 +2139,7 @@ export class AXPObj {
 
             // アンドゥ使用可能最大数
             this.undo_max = document.getElementById('axp_config_form_undoMaxValue').result.value;
-            //　カスタムボタンツールウィンドウ表示切替
+            // カスタムボタンツールウィンドウ表示切替
             this.dispCustomButton();
             // 色作成ツールウィンドウ表示切替
             this.colorMakerSystem.updateMakeColorType();
@@ -2184,7 +2180,7 @@ export class AXPObj {
                 this.layerSystem.CANVAS.tmp_ctx.drawImage(this.oekaki_base, 0, 0);
                 // レイヤー更新
                 this.layerSystem.write(this.layerSystem.CANVAS.tmp_ctx.getImageData(0, 0, this.x_size, this.y_size));
-                //　[%1.png]を読み込みました。(画像サイズ 横:%2 × 縦:%3)
+                // [%1.png]を読み込みました。(画像サイズ 横:%2 × 縦:%3)
                 this.msg('@INF0050', imageload_filename, this.x_size, this.y_size);
             }
 

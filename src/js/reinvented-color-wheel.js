@@ -230,7 +230,7 @@ var ReinventedColorWheel = (function () {
     var Matrix = window.DOMMatrix || window.WebKitCSSMatrix || window.MSCSSMatrix;
     var inverseTransform = function (element) {
         var ancestors = [element];
-        while (element = element.parentElement) {
+        while ((element = element.parentElement) !== null) {
             ancestors.push(element);
         }
         var matrix = new Matrix();

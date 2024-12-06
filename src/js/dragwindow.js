@@ -17,7 +17,6 @@ export class DragWindow {
         // z-index（ウィンドウの表示優先順位）割り当て
         this.zIndex_max++;
         element.style.zIndex = this.zIndex_max;
-        const thisClass = this;
         element.addEventListener('pointerenter', (e) => { this.enter(e, objSystem) });
         element.addEventListener('pointerleave', (e) => { this.leave(e) });
         element.addEventListener('pointerup', (e) => { this.up(e) });

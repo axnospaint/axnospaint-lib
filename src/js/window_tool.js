@@ -64,7 +64,7 @@ export class AssistToolSystem extends ToolWindow {
             handleDiameter: 16,
             wheelReflectsSaturation: false,
             // handler
-            onChange: (color) => {
+            onChange: () => {
                 this.changeGridColor();
             },
         });
@@ -114,7 +114,7 @@ export class AssistToolSystem extends ToolWindow {
             const rangeWidth = rectView.width + rectCanvas.width;
             const rangeHeight = rectView.height + rectCanvas.height;
 
-            // 入力座標に対応するカメラ座標を算出　※画面中央の時[0,0]とする
+            // 入力座標に対応するカメラ座標を算出 ※画面中央の時[0,0]とする
             const dx = curX * rangeWidth / this.CONST.X_LOUPE_MAX - rangeWidth / 2;
             const dy = curY * rangeHeight / this.CONST.Y_LOUPE_MAX - rangeHeight / 2;
             this.axpObj.cameraX = Math.round(dx * 100 / this.axpObj.scale);
@@ -123,21 +123,21 @@ export class AssistToolSystem extends ToolWindow {
             // キャンバス表示更新
             this.axpObj.refreshCanvas();
         }
-        // 　ドラッグ開始
+        // ドラッグ開始
         document.getElementById('axp_tool_div_minimap_outer').onpointerdown = (e) => {
             this.isDragingMap = true;
             thumbnailHandMove(e);
         }
-        // 　ドラッグ中
+        // ドラッグ中
         document.getElementById('axp_tool_div_minimap_outer').onpointermove = (e) => {
             if (this.isDragingMap) {
                 thumbnailHandMove(e);
             }
         }
-        // 　ドラッグ終了
+        // ドラッグ終了
         document.getElementById('axp_tool_div_minimap_outer').onpointercancel =
             document.getElementById('axp_tool_div_minimap_outer').onpointerleave =
-            document.getElementById('axp_tool_div_minimap_outer').onpointerup = (e) => {
+            document.getElementById('axp_tool_div_minimap_outer').onpointerup = () => {
                 this.isDragingMap = false;
             }
 
@@ -196,7 +196,7 @@ export class AssistToolSystem extends ToolWindow {
             } else {
                 elem.dataset.checked = 'false';
             }
-            elem.addEventListener('click', (e) => {
+            elem.addEventListener('click', () => {
 
                 if (input.checked) {
                     input.checked = false;
@@ -212,7 +212,7 @@ export class AssistToolSystem extends ToolWindow {
         // 補助線ON/OFF切り替えボタン
         const elementButtons = document.querySelectorAll('.axp_grid_switch');
         for (const elem of elementButtons) {
-            elem.addEventListener('click', (e) => {
+            elem.addEventListener('click', () => {
                 this.axpObj.updateGrid();
             });
         }
@@ -250,11 +250,11 @@ export class AssistToolSystem extends ToolWindow {
         }
 
         // 不透明度
-        document.getElementById('axp_gridconfig_range_gridColor').addEventListener('input', (e) => {
+        document.getElementById('axp_gridconfig_range_gridColor').addEventListener('input', () => {
             this.changeGridColor();
         });
 
-        document.getElementById('axp_gridconfig').addEventListener('click', (e) => {
+        document.getElementById('axp_gridconfig').addEventListener('click', () => {
             // 操作中ボタン要素をリセット
             this.elementProcessingColor = null;
             this.axpObj.closeSubwindow('axp_gridconfig');
@@ -263,7 +263,7 @@ export class AssistToolSystem extends ToolWindow {
             // サブウィンドウ内クリックでウィンドウが閉じないように、親へのイベント伝播を中止
             e.stopPropagation();
         });
-        document.getElementById('axp_gridconfig_button_confirm').addEventListener('click', (e) => {
+        document.getElementById('axp_gridconfig_button_confirm').addEventListener('click', () => {
             // 操作中ボタン要素をリセット
             this.elementProcessingColor = null;
             this.axpObj.closeSubwindow('axp_gridconfig');
@@ -375,8 +375,8 @@ export class AssistToolSystem extends ToolWindow {
 
         if (c_rect.top < 0) {
             //console.log('上はみ出し');
-            var dy = Math.abs(c_rect.top);
-            var dy_sc = (1 - ((c_rect.height - dy) / c_rect.height)) * 120;
+            const dy = Math.abs(c_rect.top);
+            const dy_sc = (1 - ((c_rect.height - dy) / c_rect.height)) * 120;
             sub_top = dy_sc;
             sub_h = sub_h + parseInt(dy_sc);
             overflow = true;
@@ -385,16 +385,16 @@ export class AssistToolSystem extends ToolWindow {
         var v_down = c_rect.top + c_rect.height;
         if (b_rect.height < v_down) {
             //console.log('下はみ出し');
-            var dy = v_down - b_rect.height;
-            var dy_sc = (1 - ((c_rect.height - dy) / c_rect.height)) * 120;
+            const dy = v_down - b_rect.height;
+            const dy_sc = (1 - ((c_rect.height - dy) / c_rect.height)) * 120;
             sub_h = sub_h + parseInt(dy_sc);
             overflow = true;
         }
 
         if (c_rect.left < 0) {
             //console.log('左はみ出し');
-            var dx = Math.abs(c_rect.left);
-            var dx_sc = (1 - ((c_rect.width - dx) / c_rect.width)) * 120;
+            const dx = Math.abs(c_rect.left);
+            const dx_sc = (1 - ((c_rect.width - dx) / c_rect.width)) * 120;
             sub_left = dx_sc;
             sub_w = sub_w + parseInt(dx_sc);
             overflow = true;
@@ -403,8 +403,8 @@ export class AssistToolSystem extends ToolWindow {
         var v_left = c_rect.left + c_rect.width;
         if (b_rect.width < v_left) {
             //console.log('右はみ出し');
-            var dx = v_left - b_rect.width;
-            var dx_sc = (1 - ((c_rect.width - dx) / c_rect.width)) * 120;
+            const dx = v_left - b_rect.width;
+            const dx_sc = (1 - ((c_rect.width - dx) / c_rect.width)) * 120;
             sub_w = sub_w + parseInt(dx_sc);
             overflow = true;
         }
