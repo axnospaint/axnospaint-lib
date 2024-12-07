@@ -377,8 +377,8 @@ export default class {
                 this.axpObj.ENV.multiCanvas = true;
             }
             // 画面幅
-            // console.log('innerWidth:', window.innerWidth + 'px');
-            if (window.innerWidth < 600) {
+            // console.log('screen.width:', window.screen.width + 'px');
+            if (window.screen.width < 600) {
                 // デバイスの画面幅が600未満の場合の特別処理用
                 this.axpObj.ENV.isMobileWidth = true;
             }

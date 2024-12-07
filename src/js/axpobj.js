@@ -2167,11 +2167,14 @@ export class AXPObj {
             if (this.ENV.isFirstLaunch && this.ENV.isMobileWidth) {
                 document.getElementById('axp_config_checkbox_singleWindowMode').checked = true;
                 this.configSystem.saveConfig('CHECK_axp_config_checkbox_singleWindowMode', true);
+                // 単一ウィンドウモード
+                this.launcher.setSingleWindowMode(true, false);
                 alert('* 初回起動設定 *\n画面幅が600px未満のため、単一ウィンドウモードに設定しました。[設定]-[ツールウィンドウ]で変更が可能です。');
-            }
-            if (document.getElementById('axp_config_checkbox_singleWindowMode').checked) {
-                // 単一ウィンドウモード、復元時
-                this.launcher.setSingleWindowMode(true, true);
+            } else {
+                if (document.getElementById('axp_config_checkbox_singleWindowMode').checked) {
+                    // 単一ウィンドウモード、復元時
+                    this.launcher.setSingleWindowMode(true, true);
+                }
             }
 
             // 下書き読込
