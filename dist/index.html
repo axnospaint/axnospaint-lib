@@ -58,18 +58,21 @@
                             isDisplay: true,
                             isInputRequired: false,
                             maxLength: 32,
+                            placeholder: 'ななしのよっしん',
                         },
                         // タイトル
                         strTitle: {
                             isDisplay: true,
                             isInputRequired: false,
                             maxLength: 32,
+                            placeholder: '',
                         },
                         // 本文
                         strMessage: {
                             isDisplay: true,
-                            isInputRequired: false,
+                            isInputRequired: true,
                             maxLength: 1024,
+                            placeholder: '本文を入力してください。',
                         },
                         // ウォッチリスト登録
                         strWatchList: {
@@ -95,4 +98,4 @@
                 // resolve()で待機状態が終了し、再び投稿ボタンが押せるようになる（二重送信防止用）
                 resolve();
             });
-        }</script></head><body><div id="axnospaint_body"></div><script defer="defer" src="axnospaint-lib-2.3.0.min.js"></script></body></html>
+        }</script></head><body><div id="axnospaint_body"></div><script defer="defer" src="axnospaint-lib-2.4.0.min.js"></script></body></html>
