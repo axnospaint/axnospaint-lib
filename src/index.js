@@ -81,7 +81,7 @@ export default class {
             this.axpObj.oekakiTimeout = isNaN(option.oekakiTimeout) ? 15000 : option.oekakiTimeout;
 
             // 許容するキャンバスサイズ
-            // 　起動オプション指定がある場合、コンストラクタで設定済みのデフォルト値を上書き
+            // 起動オプション指定がある場合、コンストラクタで設定済みのデフォルト値を上書き
             if (typeof option.minWidth === 'number') {
                 if (inRange(option.minWidth, this.axpObj.CONST.MIN_SYSTEM_WIDTH, this.axpObj.CONST.MAX_SYSTEM_WIDTH)) {
                     this.axpObj.minWidth = option.minWidth;
@@ -114,13 +114,13 @@ export default class {
                     return;
                 }
             }
-            // 　論理チェック
-            console.log(
-                this.axpObj.minWidth,
-                this.axpObj.minHeight,
-                this.axpObj.maxWidth,
-                this.axpObj.maxHeight
-            );
+            // 論理チェック
+            // console.log(
+            //     this.axpObj.minWidth,
+            //     this.axpObj.minHeight,
+            //     this.axpObj.maxWidth,
+            //     this.axpObj.maxHeight
+            // );
             if (this.axpObj.minWidth > this.axpObj.maxWidth || this.axpObj.minHeight > this.axpObj.maxHeight) {
                 alert(`ERROR:\n起動オプションminWidth,minHeight,maxWidth,maxHeightの指定の組み合わせが正しくありません。`);
                 return;
@@ -144,6 +144,7 @@ export default class {
             let errorMessage = null;
             // 判定関数
             const isBoolean = (value) => typeof value === 'boolean';
+            const isText = (value) => typeof value === 'string';
             const isRangeLength = (value) => typeof value === 'number' && inRange(value, 1, 1024);
             const checkOptionValue = (value, condition, message) => {
                 // 正しい値が指定されているか判定
@@ -192,6 +193,14 @@ export default class {
                                 this.axpObj.postForm.input.strName.maxLength = option.postForm.input.strName.maxLength;
                             }
                         }
+                        if ('placeholder' in option.postForm.input.strName && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strName.placeholder,
+                                isText,
+                                'postForm.input.strName.placeholder')) {
+                                this.axpObj.postForm.input.strName.placeholder = option.postForm.input.strName.placeholder;
+                            }
+                        }
                     }
                     // タイトル
                     if ('strTitle' in option.postForm.input && !isErrorDetected) {
@@ -219,6 +228,14 @@ export default class {
                                 this.axpObj.postForm.input.strTitle.maxLength = option.postForm.input.strTitle.maxLength;
                             }
                         }
+                        if ('placeholder' in option.postForm.input.strTitle && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strTitle.placeholder,
+                                isText,
+                                'postForm.input.strTitle.placeholder')) {
+                                this.axpObj.postForm.input.strTitle.placeholder = option.postForm.input.strTitle.placeholder;
+                            }
+                        }
                     }
                     // 本文
                     if ('strMessage' in option.postForm.input && !isErrorDetected) {
@@ -244,6 +261,14 @@ export default class {
                                 isRangeLength,
                                 'postForm.input.strMessage.maxLength')) {
                                 this.axpObj.postForm.input.strMessage.maxLength = option.postForm.input.strMessage.maxLength;
+                            }
+                        }
+                        if ('placeholder' in option.postForm.input.strMessage && !isErrorDetected) {
+                            if (checkOptionValue(
+                                option.postForm.input.strMessage.placeholder,
+                                isText,
+                                'postForm.input.strMessage.placeholder')) {
+                                this.axpObj.postForm.input.strMessage.placeholder = option.postForm.input.strMessage.placeholder;
                             }
                         }
                     }
@@ -296,7 +321,7 @@ export default class {
                         anchor.setAttribute('href', this.axpObj.expansionTab.link);
                         anchor.setAttribute('target', '_blank');
                         anchor.setAttribute('rel', 'noopener');
-                        anchor.setAttribute('style', 'text-decoration: none;color:#fff');
+                        anchor.setAttribute('style', 'width:100%;text-decoration:none;color:#fff');
                         const div = document.createElement('div');
                         div.textContent = this.axpObj.expansionTab.name;
                         anchor.appendChild(div);
@@ -350,6 +375,12 @@ export default class {
             if (this.axpObj.browser === 'Safari') {
                 // safariの場合、キャンバス描画時の不具合回避用の処理を行う必要があるため、フラグを立てておく
                 this.axpObj.ENV.multiCanvas = true;
+            }
+            // 画面幅
+            // console.log('screen.width:', window.screen.width + 'px');
+            if (window.screen.width < 600) {
+                // デバイスの画面幅が600未満の場合の特別処理用
+                this.axpObj.ENV.isMobileWidth = true;
             }
             // 本体起動
             this.axpObj.exec();

@@ -1,56 +1,72 @@
 <!-- 投稿タブ -->
 <div id="axp_post_div_content">
-    <u>${_("@POST.POSTPICTURE")}</u><br>
-    <div id="axp_post_table_information">
-        <span id="axp_post_span_imageSize"></span> / ${_("@MISC.BUTTON_BG_ALPHA")}:<span
-            id="axp_post_span_transparent"></span> / <span id="axp_post_span_referenceOekakiId"></span>
-    </div>
-    <div id="axp_post_div_postingImage">
-        <canvas id="axp_post_canvas_postingImage" class="axpc_background_mesh"></canvas>
-        <div id="axp_post_div_thumbnall_h1">
-            ${_("@POST.THUMBNAIL")}
-            <div id="axp_post_div_thumbnall_h2">
-                <div id="axp_post_div_thumbnall_h3">
-                    <canvas id="axp_post_canvas_thumbnail" class="axpc_background_mesh"></canvas>
-                </div>
-            </div>
+    <div class="axpc_post_frame">
+        <!-- サムネイルと拡大表示ポップアップ -->
+        <div class="axpc_post_canvas">
+            <p>${_("@POST.THUMBNAIL")}</p>
+            <input type="checkbox" id="axp_post_checkbox_popup" />
+            <label for="axp_post_checkbox_popup" class="axpc_post_overlay">
+                <label for="axp_post_checkbox_popup" class="axpc_post_overlayWindow">
+                    <label for="axp_post_checkbox_popup" class="axpc_post_overlayCloseButton"></label>
+                    <canvas id="axp_post_canvas_postingImage" class="axpc_post_overlayCanvas"></canvas>
+                </label>
+            </label>
+            <label for="axp_post_checkbox_popup" class="axpc_post_thumbnail">
+                <canvas id="axp_post_canvas_thumbnail" class="axpc_background_mesh"></canvas>
+            </label>
             <div id="axp_post_div_thumbnailTitle">
+            </div>
+            <p class="axpc_post_thumbnailClick">${_("@POST.THUMBNAIL_CLICK")}</p>
+        </div>
+        <!-- 罫線 -->
+        <div class="axpc_post_line"></div>
+        <!-- 入力フォーム -->
+        <div id="axp_post_div_input">
+            <div class="axpc_post_input">
+                <div class="axpc_post_name_property">${_("@POST.NAME")}</div>
+                <div class="axpc_post_name_required axpc_NONE">${_("@COMMON.REQUIRED")}</div>
+
+                <input id="axp_post_text_name" type="text" spellcheck="false" />
+
+                <div class="axpc_post_title_property">${_("@POST.TITLE")}</div>
+                <div class="axpc_post_title_required axpc_NONE">${_("@COMMON.REQUIRED")}</div>
+
+                <input id="axp_post_text_title" type="text" spellcheck="false" />
+
+                <div class="axpc_post_message_property">${_("@POST.MESSAGE")}</div>
+                <div class="axpc_post_message_required axpc_NONE">${_("@COMMON.REQUIRED")}</div>
+
+                <textarea id="axp_post_textarea_message" spellcheck="false"></textarea>
+                <label class="axpc_post_watchList">
+                    <input id="axp_post_checkbox_watchList" type="checkbox" />
+                    ${_("@POST.WATCHLIST")}
+                </label>
+            </div>
+        </div>
+        <!-- 画像ステータス -->
+        <div class="axpc_post_status">
+            <div class="axpc_post_status_size_property">${_("@POST.STATUS.SIZE")}</div>
+            <div class="axpc_post_status_size_colon">:</div>
+            <div class="axpc_post_status_size_value">
+                <span id="axp_post_span_imageSize"></span>
+            </div>
+            <div class="axpc_post_status_bg_property">${_("@POST.STATUS.BG_TRANSPARENT")}</div>
+            <div class="axpc_post_status_bg_colon">:</div>
+            <div class="axpc_post_status_bg_value">
+                <span><input type="radio" id="axp_post_radio_bgWhite" name="axp_post_radio_bg" value="white"
+                        checked /><label for="axp_post_radio_bgWhite">${_("@COMMON.BG_WHITE")}</label></span>
+                <span><input type="radio" id="axp_post_radio_bgTransparent" name="axp_post_radio_bg"
+                        value="transparent" /><label
+                        for="axp_post_radio_bgTransparent">${_("@COMMON.BG_TRANSPARENT")}</label></span>
+            </div>
+            <div class="axpc_post_status_based_property">${_("@POST.STATUS.BASED")}</div>
+            <div class="axpc_post_status_based_colon">:</div>
+            <div class="axpc_post_status_bg_value">
+                <span id="axp_post_span_referenceOekakiId"></span>
             </div>
         </div>
     </div>
-    <div id="axp_post_div_input">
-        <u>${_("@POST.INPUT")}</u><br>
-        <span id="axp_post_span_message"></span>
-        <table id="axp_post_table_postForm">
-            <tr id="axp_post_tr_name">
-                <td class="axpc_post_postFormTd">${_("@POST.NAME")}</td>
-                <td>
-                    <input id="axp_post_text_name" type="text" size="40" />
-                </td>
-            </tr>
-            <tr id="axp_post_tr_title">
-                <td class="axpc_post_postFormTd">${_("@POST.TITLE")}</td>
-                <td>
-                    <input id="axp_post_text_title" type="text" size="40" />
-                </td>
-            </tr>
-            <tr id="axp_post_tr_message">
-                <td class="axpc_post_postFormTd">${_("@POST.MESSAGE")}</td>
-                <td>
-                    <textarea id="axp_post_textarea_message"></textarea>
-                </td>
-            </tr>
-            <tr id="axp_post_tr_watchlist">
-                <td></td>
-                <td>
-                    <label>
-                        <input id="axp_post_checkbox_watchList" type="checkbox" />
-                        ${_("@POST.WATCHLIST")}
-                    </label>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <!-- 注意事項 -->
     <div id="axp_post_div_notice">
         <u>${_("@POST.NOTICE")}</u>
         <div>
@@ -60,8 +76,12 @@
             <div>${_("@POST.NOTICE4")}</div>
         </div>
     </div>
+    <!-- 投稿ボタン -->
     <div id="axp_post_div_button">
-        <button id="axp_post_button_upload" class="axpc_MSG axpc_button axpc_button_width260"
-            data-msg="@POS0001"></button>
+        <span id="axp_post_span_message"></span>
+        <button id="axp_post_button_upload" class="axpc_MSG axpc_button" data-msg="@POS0001">
+            <div id="axp_post_button_upload_label"></div>
+            <div id="axp_post_button_upload_loading" class="axpc_NONE"></div>
+        </button>
     </div>
 </div>

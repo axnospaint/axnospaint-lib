@@ -200,15 +200,15 @@ export class PenObj {
         this.axpObj.penSystem.CANVAS.draw_ctx.globalCompositeOperation = type;
     }
     // 描画開始
-    start(x, y) {
+    start() {
         // ペンの種類ごとに子クラスでオーバーライドする
     }
     // 描画中
-    move(x, y) {
+    move() {
         // ペンの種類ごとに子クラスでオーバーライドする
     }
     // 描画終了
-    end(x, y) {
+    end() {
         // ペンの種類ごとに子クラスでオーバーライドする
     }
     init_brush() {

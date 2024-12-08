@@ -34,11 +34,11 @@ export class CustomButtonSystem extends ToolWindow {
         this.window_left = pos.left;
         this.window_top = pos.top;
     }
-    //　イベント受付開始
+    // イベント受付開始
     startEvent() {
         const buttons = document.querySelectorAll('#axp_custom button');
         for (const item of buttons) {
-            item.addEventListener('click', (e) => {
+            item.addEventListener('click', () => {
                 this.axpObj.callTask(`axp_config_custom_button${item.dataset.index}`, null);
             });
         }

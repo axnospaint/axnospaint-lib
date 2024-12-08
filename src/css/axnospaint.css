@@ -43,16 +43,17 @@ body {
 #axp_main_div_tab {
   display: flex;
   align-items: flex-end;
+  min-height: 30px;
 }
 
 /* 見出し枠 */
-#axp_main_div_tab>div {
+#axp_main_div_tab_menu {
   list-style-type: none;
   display: flex;
 }
 
 /* 見出し */
-#axp_main_div_tab>div>div {
+#axp_main_div_tab_menu>div {
   display: block;
   width: 98px;
   margin: 0;
@@ -68,13 +69,78 @@ body {
 }
 
 /* 見出しにカーソルを当てた時 */
-#axp_main_div_tab>div>div:hover {
-  background: #666;
+#axp_main_div_tab_menu>div:hover {
+  background: #555;
 }
 
 /* 選択されている見出し */
-#axp_main_div_tab>div>div[data-selected="true"] {
+#axp_main_div_tab_menu>div[data-selected="true"] {
   background: #777;
+}
+
+/* ハンバーガーメニュー */
+#axp_main_label_hamburger {
+  /* 通常は非表示 */
+  display: none;
+  height: 100%;
+  width: 30px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px;
+}
+
+/* ハンバーガーメニューチェックボックス */
+#axp_main_checkbox_hamburger {
+  display: none;
+}
+
+/* ブラウザの横幅が599px以下の場合 */
+@media (max-width: 599px) {
+
+  /* ハンバーガーメニュー表示 */
+  #axp_main_label_hamburger {
+    display: flex;
+  }
+
+  #axp_main_div_tab_menu {
+    position: absolute;
+    background: #333;
+    top: 0;
+    margin-top: 30px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 6000;
+  }
+
+  #axp_main_checkbox_hamburger~div>div {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  #axp_main_checkbox_hamburger:checked~div>div {
+    border: 1px solid #333;
+    height: 2.5em;
+    padding: 0.5em;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  #axp_main_div_tab_menu>div {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0.5em 0;
+    width: 100%;
+    border-radius: 10px 10px 10px 10px;
+  }
 }
 
 /* タブ横のテキスト */
@@ -224,7 +290,7 @@ body {
   background-color: #222;
   color: #ddd;
   display: flex;
-  min-height: 31px;
+  flex-basis: 31px;
 }
 
 #axp_footer_div_message {

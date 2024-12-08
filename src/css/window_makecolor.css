@@ -91,6 +91,7 @@
     grid-area: 3/8/5/11;
     margin: 1px;
     isolation: isolate;
+    background-size: 14px 14px;
 }
 
 /* コード入力 */

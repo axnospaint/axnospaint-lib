@@ -33,32 +33,44 @@
 }
 
 /* ツールウィンドウ */
+.axpc_icon_window_all_down {
+    background-repeat: no-repeat;
+    background-image: url('../../resource/window_all_down.png');
+    background-position: center;
+}
+
+.axpc_icon_window_all_up {
+    background-repeat: no-repeat;
+    background-image: url('../../resource/window_all_up.png');
+    background-position: center;
+}
+
 .axpc_icon_window_pen {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_pen.png');
     background-position: center;
 }
 
 .axpc_icon_window_layer {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_layer.png');
     background-position: center;
 }
 
 .axpc_icon_window_colormaker {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_colormaker.png');
     background-position: center;
 }
 
 .axpc_icon_window_palette {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_palette.png');
     background-position: center;
 }
 
 .axpc_icon_window_subtool {
-    background: no-repeat;
+    background-repeat: no-repeat;
     background-image: url('../../resource/window_subtool.png');
     background-position: center;
 }
@@ -106,4 +118,42 @@
     vertical-align: middle;
     width: 28px;
     height: 28px;
+}
+
+/* ハンバーガーメニュー */
+.axpc_icon_humburger,
+.axpc_icon_humburger::before,
+.axpc_icon_humburger::after {
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
+}
+
+.axpc_icon_humburger::before {
+    content: '';
+    margin-top: -8px;
+}
+
+.axpc_icon_humburger::after {
+    content: '';
+    margin-top: 8px;
+}
+
+/* ハンバーガーメニュー ボタン変化 */
+#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger::before {
+    margin-top: 0px;
+    transform: rotate(45deg);
+}
+
+#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger {
+    background: rgba(255, 255, 255, 0);
+}
+
+#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger::after {
+    margin-top: 0px;
+    transform: rotate(-45deg);
 }

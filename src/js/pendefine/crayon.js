@@ -45,6 +45,7 @@ export class Crayon extends Dot {
             const absY = Math.abs(y);
             // 丸みを帯びない矩形の範囲内であれば有効値とする
             if (absX > width0 && absY > width0) {
+                // 次の判定へ
             } else {
                 break;
             }
@@ -74,13 +75,12 @@ export class Crayon extends Dot {
         lineWidth,
         color,
     ) {
-        const { width, height, data } = imageData;
+        const { width, data } = imageData;
         const dx = Math.abs(x1 - x0);
         const dy = Math.abs(y1 - y0);
         const sx = (x0 < x1) ? 1 : -1;
         const sy = (y0 < y1) ? 1 : -1;
         const TIMES = 20 + lineWidth * 2;
-        const diff = parseInt(lineWidth / 2);
 
         let err = dx - dy;
         let vx = x0;
@@ -94,8 +94,6 @@ export class Crayon extends Dot {
             let divy0 = vy;
             // 計算座標が前回描画位置から変化した場合、その座標に幅lineWidthの正方形を描画
             if (divx0 !== old_divx0 || divy0 !== old_divy0) {
-                let divx1 = divx0 + lineWidth;
-                let divy1 = divy0 + lineWidth;
 
                 for (let i = 0; i < TIMES; i++) {
                     // 角丸の範囲内のランダムノイズ描画
@@ -142,7 +140,7 @@ export class Crayon extends Dot {
         lineWidth,
         color,
     ) {
-        const { width, height, data } = imageData;
+        const { width, data } = imageData;
         const TIMES = 20 + lineWidth * 2;
         const diff = parseInt(lineWidth / 2);
         const r = parseInt(Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2)));

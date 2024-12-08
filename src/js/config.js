@@ -359,7 +359,7 @@ export class ConfigSystem {
                         // ラジオボックス
                         this.saveConfig(`RADIO_${e.currentTarget.id}`, e.target.value);
                         break;
-                    case 'number':
+                    case 'number': {
                         // 数値入力
                         // 共通処理
                         let value = Number(e.target.value);
@@ -378,6 +378,7 @@ export class ConfigSystem {
                         e.target.value = value;
                         this.saveConfig(`VALUE_${e.target.id}`, value);
                         break;
+                    }
                 }
             })
         };
@@ -398,16 +399,16 @@ export class ConfigSystem {
         inputHeight.value = this.axpObj.y_size;
 
         // テキストボックス：お絵カキコのサイズ数値変更
-        inputWidth.onchange = (e) => {
+        inputWidth.onchange = () => {
             // キャンバスサイズの範囲チェック
             inputWidth.value = this.axpObj.checkCanvasSize_x(inputWidth.value);
         }
-        inputHeight.onchange = (e) => {
+        inputHeight.onchange = () => {
             // キャンバスサイズの範囲チェック
             inputHeight.value = this.axpObj.checkCanvasSize_y(inputHeight.value);
         }
         // ボタン：新規キャンバス
-        document.getElementById('axp_config_button_newCanvas').onclick = (e) => {
+        document.getElementById('axp_config_button_newCanvas').onclick = () => {
             // キャンバスサイズの範囲チェック
             let x = inputWidth.value = this.axpObj.checkCanvasSize_x(inputWidth.value);
             let y = inputHeight.value = this.axpObj.checkCanvasSize_y(inputHeight.value);
@@ -444,7 +445,7 @@ export class ConfigSystem {
                 });
         }
         // ボタン：お絵カキコのサイズ変更
-        document.getElementById('axp_config_button_changeCanvasSize').onpointerdown = (e) => {
+        document.getElementById('axp_config_button_changeCanvasSize').onpointerdown = () => {
 
             // 起動オプションで、下書き機能使用時のキャンバスサイズの変更が制限されている場合
             if (this.axpObj.restrictDraftCanvasResizing) {
@@ -512,54 +513,58 @@ export class ConfigSystem {
                 });
         }
         // ラジオボタン：キャンバスぼかし
-        document.getElementById('axp_config_form_antialiasing').onchange = (e) => {
+        document.getElementById('axp_config_form_antialiasing').onchange = () => {
             this.set_canvas_antialiasing();
         }
         // 画像をダウンロード
-        document.getElementById('axp_config_button_pngDownload').onmousedown = (e) => {
+        document.getElementById('axp_config_button_pngDownload').onmousedown = () => {
             this.axpObj.TASK['func_download']();
         }
 
         // ラジオボタン：ポインタ座標表示
-        document.getElementById('axp_config_form_displayPosition').onchange = (e) => {
+        document.getElementById('axp_config_form_displayPosition').onchange = () => {
             this.set_display_position();
         }
 
         // ◆ツールウィンドウ ----------------------------------------------------------------
         // ウィンドウ位置リセット
-        document.getElementById('axp_config_button_resetWindow').addEventListener('click', (e) => {
+        document.getElementById('axp_config_button_resetWindow').addEventListener('click', () => {
             this.axpObj.dragWindow.resetPosition();
             alert('全ウィンドウ位置を初期化しました。');
         })
 
         // ツールウィンドウ位置の自動調整
-        document.getElementById('axp_config_form_windowAutoAdjust').onchange = (e) => {
+        document.getElementById('axp_config_form_windowAutoAdjust').onchange = () => {
             // 全ツールウィンドウのcss（left,top）を更新
             this.axpObj.dragWindow.changeAutoAdjustPosition();
         };
-        // 最小化アイコン配置
-        document.getElementById('axp_config_form_minimizeType').onchange = (e) => {
-            this.axpObj.dragWindow.setMinimizeType();
+        // アイコンサイズ
+        document.getElementById('axp_config_form_minimizeButtonType').onchange = (e) => {
+            this.axpObj.launcher.setButtonSize(e.target.value);
+        };
+        // 単一ウィンドウモード
+        document.getElementById('axp_config_checkbox_singleWindowMode').onchange = (e) => {
+            this.axpObj.launcher.setSingleWindowMode(e.target.checked);
         };
 
         // ◆ペンツール ----------------------------------------------------------------
         // ラジオボタン：トーン濃度レンジスライダー
-        document.getElementById('axp_config_form_ToneLevel').onchange = (e) => {
+        document.getElementById('axp_config_form_ToneLevel').onchange = () => {
             this.axpObj.penSystem.changePenMode();
         }
         // ラジオボタン：ぼかし度レンジスライダー
-        document.getElementById('axp_config_form_blurLevel').onchange = (e) => {
+        document.getElementById('axp_config_form_blurLevel').onchange = () => {
             this.axpObj.penSystem.changePenMode();
         }
         // ラジオボタン：不透明度と太さの表示順序
-        document.getElementById('axp_config_form_pentoolRangeOrder').onchange = (e) => {
+        document.getElementById('axp_config_form_pentoolRangeOrder').onchange = () => {
             this.axpObj.penSystem.changeOrderSlider();
         }
-        // チェックボックス：手ぶれ補正　ペンツールウィンドウ内で変更可能にする
-        document.getElementById('axp_config_checkbox_stabilize').onchange = (e) => {
+        // チェックボックス：手ぶれ補正 ペンツールウィンドウ内で変更可能にする
+        document.getElementById('axp_config_checkbox_stabilize').onchange = () => {
             this.axpObj.penSystem.changePenMode();
         }
-        // レンジスライダー：手ぶれ補正　連動
+        // レンジスライダー：手ぶれ補正 連動
         // 設定タブ側
         document.getElementById('axp_config_form_stabilizerValue').onchange = (e) => {
             document.getElementById('axp_pen_form_stabilizer').volume.value = e.target.value;
@@ -573,7 +578,7 @@ export class ConfigSystem {
         }
 
         // ラジオボタン：長押しスポイト
-        document.getElementById('axp_config_form_useLongtap').onchange = (e) => {
+        document.getElementById('axp_config_form_useLongtap').onchange = () => {
             this.set_longtap_use();
         }
         // 初回リセット用
@@ -598,7 +603,7 @@ export class ConfigSystem {
         });
 
         // カラーパレットのファイル保存
-        document.getElementById('axp_config_button_saveColor').onclick = (e) => {
+        document.getElementById('axp_config_button_saveColor').onclick = () => {
             // カラーパレットのテキストデータを生成
             let colortext = new Array();
             // 列数
@@ -616,7 +621,7 @@ export class ConfigSystem {
             link.click();
         }
         // カラーパレットのファイル読込
-        document.getElementById('axp_config_button_loadColor').onclick = (e) => {
+        document.getElementById('axp_config_button_loadColor').onclick = () => {
             // ファイルオープンダイアログを開く
             document.getElementById('axp_config_file_loadColor').click();
         }
@@ -705,7 +710,7 @@ export class ConfigSystem {
             }
         }
         // カラーパレットの初期化
-        document.getElementById('axp_config_button_resetColor').onclick = (e) => {
+        document.getElementById('axp_config_button_resetColor').onclick = () => {
             // 確認ダイアログ表示
             confirmExPromise(`カラーパレットを初期状態に戻します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
                 .then(() => {
@@ -729,11 +734,11 @@ export class ConfigSystem {
 
         // ◆レイヤー ----------------------------------------------------------------
         // 合成モードの表示
-        document.getElementById('axp_config_form_blendModeDisplayType').onchange = (e) => {
+        document.getElementById('axp_config_form_blendModeDisplayType').onchange = () => {
             this.axpObj.layerSystem.updateBlendModeDisplayAll();
         }
         // カラータグ名の初期化
-        document.getElementById('axp_config_button_resetColorTag').onclick = (e) => {
+        document.getElementById('axp_config_button_resetColorTag').onclick = () => {
             // 確認ダイアログ表示
             confirmExPromise(`カラータグ名を初期状態に戻します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
                 .then(() => {
@@ -764,7 +769,7 @@ export class ConfigSystem {
             this.updateKeyCustomizationScaleTable(this.axpObj.currentScaleTable);
         }
         // 拡大率追加
-        document.getElementById('axp_config_button_addScale').addEventListener('click', (e) => {
+        document.getElementById('axp_config_button_addScale').addEventListener('click', () => {
             const inputValue = Number(document.getElementById('axp_config_number_scale').value);
             const min = this.axpObj.CONST.SCALE_MIN;
             const max = this.axpObj.CONST.SCALE_MAX;
@@ -820,7 +825,7 @@ export class ConfigSystem {
             }
         });
         // 拡大率削除
-        document.getElementById('axp_config_button_deleteScale').addEventListener('click', (e) => {
+        document.getElementById('axp_config_button_deleteScale').addEventListener('click', () => {
             const elements_li = document.querySelectorAll('#axp_config_ul_scale>li');
             let target = null;
             for (const item of elements_li) {
@@ -848,7 +853,7 @@ export class ConfigSystem {
             }
         });
         // 拡大率初期化
-        document.getElementById('axp_config_button_resetScale').addEventListener('click', (e) => {
+        document.getElementById('axp_config_button_resetScale').addEventListener('click', () => {
             // 確認ダイアログ表示
             confirmExPromise('拡大率の設定を初期状態に戻します。\nよろしいですか？')
                 .then(() => {
@@ -871,7 +876,7 @@ export class ConfigSystem {
 
         // ◆カスタムボタン --------------------------------------------------------------
         // カスタムボタンの使用の変更
-        document.getElementById('axp_config_form_useCustomButton').onchange = (e) => {
+        document.getElementById('axp_config_form_useCustomButton').onchange = () => {
             this.axpObj.dispCustomButton();
         }
 
@@ -880,11 +885,11 @@ export class ConfigSystem {
         // ◆キーボード ----------------------------------------------------------------
 
         // 割り当て無しのキーを非表示にする
-        document.getElementById('axp_config_checkbox_shortcutKeyHiddenNofunc').addEventListener('change', (e) => {
+        document.getElementById('axp_config_checkbox_shortcutKeyHiddenNofunc').addEventListener('change', () => {
             this.switchNofuncKeytable();
         });
         // ショートカットのファイル保存
-        document.getElementById('axp_config_button_saveShortcut').addEventListener('click', (e) => {
+        document.getElementById('axp_config_button_saveShortcut').addEventListener('click', () => {
             // セーブテキスト
             const saveText = new Array();
             saveText.push('// @name\tAXNOSPaintSHORTCUT\n');
@@ -903,7 +908,7 @@ export class ConfigSystem {
             link.click();
         });
         // カラーパレットのファイル読込
-        document.getElementById('axp_config_button_loadShortcut').onclick = (e) => {
+        document.getElementById('axp_config_button_loadShortcut').onclick = () => {
             // ２度同じファイルを選択したとき、onchangeが発火しない不具合を回避するため値を初期化する
             document.getElementById('axp_config_file_loadShortcut').value = '';
             // ファイルオープンダイアログを開く
@@ -980,7 +985,7 @@ export class ConfigSystem {
             }
         }
         // ショートカットの初期化
-        document.getElementById('axp_config_button_resetShortcut').onclick = (e) => {
+        document.getElementById('axp_config_button_resetShortcut').onclick = () => {
             // 確認ダイアログ表示
             confirmExPromise(`ショートカットを初期状態に戻します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
                 .then(() => {
@@ -1212,7 +1217,7 @@ export class ConfigSystem {
         selectMain.value = func;
 
         // 機能セレクトボックスが変更された時
-        selectMain.addEventListener('change', (e) => {
+        selectMain.addEventListener('change', () => {
             this.selectCustom(tr.id);
             this.saveCustom(tr.id);
             this.updateShortcutMessage();
@@ -1228,7 +1233,7 @@ export class ConfigSystem {
         inputSizeValue.setAttribute('max', '200');
         inputSizeValue.setAttribute('size', '3');
         // 描画サイズテキストエリアが変更された時
-        inputSizeValue.addEventListener('change', (e) => {
+        inputSizeValue.addEventListener('change', () => {
             this.saveCustom(tr.id);
         })
 
@@ -1242,7 +1247,7 @@ export class ConfigSystem {
         inputScaleValue.setAttribute('max', '1600');
         inputScaleValue.setAttribute('size', '4');
         // 拡大率テキストエリアが変更された時
-        inputScaleValue.addEventListener('change', (e) => {
+        inputScaleValue.addEventListener('change', () => {
             this.saveCustom(tr.id);
         })
 
@@ -1403,6 +1408,10 @@ export class ConfigSystem {
         console.log('設定削除:', key);
         // DBに保存
         this.axpObj.saveSystem.save_config(this.configObj);
+    }
+    // ユーザー設定から指定したkeyに対応するvalueを返却
+    getConfig(key) {
+        return this.configObj.get(key);
     }
     // ユーザー設定の復元
     restoreConfig(map) {
@@ -1576,6 +1585,20 @@ export class ConfigSystem {
                         }
                     }
                     break
+                // ツールウィンドウ最小化
+                case 'WDMIN':
+                    // 初期化する設定の場合、復元を行わない
+                    if (this.axpObj.config('axp_config_form_saveLastWindowPosition') === 'off') {
+                        // スキップしたことを記憶
+                        isSkiped = true;
+                    } else {
+                        // 復元処理
+                        if (!this.axpObj.dragWindow.restoreMinimize(elememtId)) {
+                            // 最小化の設定に失敗（無効なID）した場合、データを無効とする
+                            isAvailable = false;
+                        }
+                    }
+                    break;
                 // ペンツールの各種値
                 case 'P-SIZ':
                 case 'P-ALP':
