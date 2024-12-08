@@ -1,6 +1,6 @@
 # AXNOS Paint
 
-* 2024/12/8 [version 2.4.0 (2024-12-07T13:07:39.162Z)](https://github.com/axnospaint/axnospaint-lib/releasess/tag/v2.4.0)を公開しました。  
+* 2024/12/8 [version 2.4.0 (2024-12-07T13:07:39.162Z)](https://github.com/axnospaint/axnospaint-lib/releases/tag/v2.4.0)を公開しました。  
 * 更新履歴は[Releases](https://github.com/axnospaint/axnospaint-lib/releases)をご覧ください。
 
 ## 概要
