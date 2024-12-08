@@ -21,14 +21,17 @@ module.exports = {
     module: {
         rules: [
             {
-                // 拡張子 js のファイル（正規表現）
-                //test: /\.js$/,
-                // ローダーの指定
-                //loader: "babel-loader",
+                test: /\.html$/,
+                include: path.resolve(__dirname, 'src/html'),
+                type: 'asset/source',
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'postcss-loader',
+                ],
             },
             {
                 test: /\.txt$/,
@@ -45,7 +48,6 @@ module.exports = {
             }
         ],
     },
-
     devtool: 'source-map',
     devServer: {
         static: {

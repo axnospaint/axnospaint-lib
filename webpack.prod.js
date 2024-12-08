@@ -25,8 +25,15 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html$/,
+                include: path.resolve(__dirname, 'src/html'),
+                type: 'asset/source',
+            },
+            {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader",
+                use: [
+                    'style-loader',
+                    'css-loader',
                     {
                         loader: "postcss-loader",
                         options: {

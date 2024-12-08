@@ -12,6 +12,7 @@
 			<div data-idx="1" class="axpc_MSG" data-msg="@BAS0002">${_("@TAB.SETTINGS")}</div>
 			<div data-idx="2" class="axpc_MSG" data-msg="@BAS0003">${_("@TAB.POST")}</div>
 			<div data-idx="3" class="axpc_MSG" data-msg="@BAS0004"></div>
+			<div data-idx="4">開発用</div>
 		</div>
 		<div id="axp_main_div_headerText" class="axpc_MSG" data-msg="@BAS0005"></div>
 	</div>
@@ -130,6 +131,14 @@
 		<!-- 投稿 -->
 		<article>
 			<div id="axp_post"></div>
+		</article>
+		<!-- ヘルプ用ダミー -->
+		<article>
+			<div></div>
+		</article>
+		<!-- 開発用 -->
+		<article>
+			<div id="axp_settings"></div>
 		</article>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
-
+import tailwind from "eslint-plugin-tailwindcss";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -15,4 +15,5 @@ export default [
     }
   },
   pluginJs.configs.recommended,
+  ...tailwind.configs["flat/recommended"],
 ];

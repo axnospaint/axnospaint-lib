@@ -19,6 +19,7 @@ import { KeyboardSystem } from './keyboard.js';
 import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange, getFileNameFromURL } from './etc.js';
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
+import { Settings } from './settings.js';
 
 // 辞書データ（日本語のみデフォルトでバンドルする）
 import dictionaryJSON_ja from '../text/ja.json';
@@ -266,6 +267,7 @@ export class AXPObj {
         this.configSystem = new ConfigSystem(this);
         this.saveSystem = new SaveSystem(this);
         this.postSystem = new PostSystem(this);
+        this.settings = new Settings(this);
 
         // デフォルト値設定
         this.minWidth = this.CONST.CANVAS_X_MIN;
@@ -335,6 +337,7 @@ export class AXPObj {
         this.configSystem.init();
         this.saveSystem.init();
         this.postSystem.init();
+        this.settings.init();
 
         this.initTask();
 
@@ -869,7 +872,7 @@ export class AXPObj {
         }
 
         // メインのタブ制御
-        this.selectTab('0');
+        this.selectTab('4');
         const elementsTab = document.querySelectorAll('#axp_main_div_tab_menu > div');
         elementsTab.forEach((element) => {
             element.addEventListener('click', (e) => {
@@ -1386,6 +1389,10 @@ export class AXPObj {
                 }
                 break;
             }
+            // 設定
+            case '4':
+                this.isCanvasOpen = false;
+                break;
         }
         //console.log('main select:', idx, this.isCanvasOpen);
     }
