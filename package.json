@@ -1,13 +1,14 @@
 {
   "name": "axnospaint",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "お絵かき掲示板向けペイントツール",
   "scripts": {
     "dev-server": "webpack-dev-server",
     "build": "webpack",
     "prod": "cross-env NODE_ENV=prod webpack --config webpack.prod.js",
     "prod-demo": "cross-env NODE_ENV=demo webpack --config webpack.prod.js",
-    "eslint": "eslint src/**/*.js"
+    "eslint": "eslint src/**/*.js",
+    "audit": "npm audit"
   },
   "author": "axnospaint",
   "license": "MPL-2.0",
@@ -15,16 +16,16 @@
     "@eslint/js": "^9.16.0",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
-    "cssnano": "^7.0.5",
+    "cssnano": "^7.0.6",
     "eslint": "^9.16.0",
     "globals": "^15.13.0",
-    "html-webpack-plugin": "^5.6.0",
+    "html-webpack-plugin": "^5.6.3",
     "json-loader": "^0.5.7",
     "postcss-loader": "^8.1.1",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.94.0",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^5.1.0"
   }
 }
