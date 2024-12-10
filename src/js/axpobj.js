@@ -20,6 +20,7 @@ import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange, getFileNameFro
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
 import { Settings } from './settings.js';
+import tailwindScript from './tailwind.js';
 
 // 辞書データ（日本語のみデフォルトでバンドルする）
 import dictionaryJSON_ja from '../text/ja.json';
@@ -305,6 +306,14 @@ export class AXPObj {
             return transWords;
         });
         return resultHTML;
+    }
+    translateHTMLi18n(element) {
+        // data-i18nを検索して置換する
+        const elements = element.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const token = el.getAttribute('data-i18n');
+            el.textContent = this._(token);
+        })
     }
     // 起動時に１回だけ必要な処理
     init() {
@@ -2208,6 +2217,10 @@ export class AXPObj {
 
             // イベント受付開始
             this.startEvent();
+
+            // tailwind
+            tailwindScript();
+
             // 拡張機能イベント受付開始
             if (this.exTool) {
                 this.exTool.startEvent();

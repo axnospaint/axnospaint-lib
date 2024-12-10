@@ -1,9 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  darkMode: 'class', // クラスベースのダークモードを使用
+  content: [
+    "./src/**/*.{html,js}",
+    //'node_modules/preline/dist/*.js',
+  ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    //require('@tailwindcss/forms'),
+    //require('preline/plugin')
+    //require('@preline/scrollspy/index.js')
+  ],
 }
 

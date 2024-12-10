@@ -1,26 +1,286 @@
 <!-- 開発用タブ -->
-<div id="axp_settings_div_menu" class="bg-gray-50">
-    <div class="mt-4 px-4 bg-yellow-300 text-red-900">
-        <p>./src/html/settings.htmlを編集することで、内容が変化します</p>
-        <p>settings.htmlの中だけ、Tailwind CSSが使用可能です。（今後拡張予定）</p>
-        <p>VSCode拡張機能として、<a
-                href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss">Tailwind CSS
-                IntelliSense</a>を入れると、
-            Tailwind CSSのClass名を自動で補完できるようになります。</p>
-    </div>
-    <div class="containe">
-        <div class="flex justify-center">
-            <div class="w-1/2">
-                <div class="p-6 text-center shadow-md bg-white rounded-md">
-                    <p class="text-blue-900">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae vitae
-                        similique
-                        laborum odio
-                        laboriosam. Iure aliquid minima reprehenderit incidunt corrupti nostrum, placeat provident id
-                        minus consequuntur facere, officia nobis ipsam.</p>
 
-                    <a href="https://www.creative-tim.com/twcomponents/cheatsheet/" target="_blank"
-                        class="py-2 px-4 text-white bg-green-500 border-green-600 rounded-md mt-4 inline-block">Tailwind
-                        CSS Cheat Sheet</a>
+<div id="axp_settings_div_menu" class="bg-white text-black dark:bg-gray-900 dark:text-white">
+    <div class="container mx-auto p-4">
+        <div class="mb-4">
+            <button id="light-mode" class="px-4 py-2 bg-blue-500 text-white rounded">ライトモード</button>
+            <button id="dark-mode" class="px-4 py-2 bg-gray-700 text-white rounded">ダークモード</button>
+            <button id="system-mode" class="px-4 py-2 bg-green-500 text-white rounded">システム設定</button>
+        </div>
+        <div id="scrollspy-scrollable-parent-2" class="max-h-svh overflow-y-auto">
+            <div class="grid grid-cols-5">
+                <div class="col-span-2">
+                    <!-- <h2 class="text-xl font-medium dark:text-white">Navbar</h2> -->
+
+                    <ul class="sticky top-0" data-hs-scrollspy="#scrollspy-2"
+                        data-hs-scrollspy-scrollable-parent="#scrollspy-scrollable-parent-2">
+                        <li data-hs-scrollspy-group="">
+                            <a href="#item-1"
+                                class="block py-0.5 text-sm font-medium leading-6 text-gray-700 hover:text-gray-900 focus:outline-none focus:text-blue-600 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-500 active">
+                                <span data-i18n="@SETTINGS.MENU_CANVAS"></span>
+                            </a>
+                            <ul>
+                                <li class="ms-4">
+                                    <a href="#item-1-1"
+                                        class="group flex items-center gap-x-2 py-0.5 text-sm text-gray-700 leading-6 hover:text-gray-800 focus:outline-none focus:text-blue-600 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-500">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                        <span data-i18n="@SETTINGS.MENU_CANVAS.INIT"></span>
+                                    </a>
+                                </li>
+                                <li class="ms-4">
+                                    <a href="#item-1-2"
+                                        class="group flex items-center gap-x-2 py-0.5 text-sm text-gray-700 leading-6 hover:text-gray-800 focus:outline-none focus:text-blue-600 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-500">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                        <span data-i18n="@SETTINGS.MENU_CANVAS.RESIZE"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-hs-scrollspy-group="">
+                            <a href="#item-2"
+                                class="block py-0.5 text-sm font-medium leading-6 text-gray-700 hover:text-gray-900 focus:outline-none focus:text-blue-600 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-500">
+                                <span data-i18n="@SETTINGS.MENU_TOOL_WINDOWS"></span></a>
+                            <ul>
+                                <li class="ms-4">
+                                    <a href="#item-2-1"
+                                        class="group flex items-center gap-x-2 py-0.5 text-sm text-gray-700 leading-6 hover:text-gray-800 focus:outline-none focus:text-blue-600 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-500">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                        <span data-i18n="@SETTINGS.MENU_TOOL_WINDOWS.SINGLE"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-hs-scrollspy-group="">
+                            <a href="#item-3"
+                                class="block py-0.5 text-sm font-medium leading-6 text-gray-700 hover:text-gray-900 focus:outline-none focus:text-blue-600 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-500">
+                                <span data-i18n="@SETTINGS.MENU_PEN_TOOL"></span></a>
+                            <ul>
+                                <li class="ms-4">
+                                    <a href="#item-3-1"
+                                        class="group flex items-center gap-x-2 py-0.5 text-sm text-gray-700 leading-6 hover:text-gray-800 focus:outline-none focus:text-blue-600 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-500">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                        <span data-i18n="@SETTINGS.MENU_PEN_TOOL.STABILIZER"></span>
+                                    </a>
+                                </li>
+                                <li class="ms-4">
+                                    <a href="#item-3-2"
+                                        class="group flex items-center gap-x-2 py-0.5 text-sm text-gray-700 leading-6 hover:text-gray-800 focus:outline-none focus:text-blue-600 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-500">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                        Item 3-2
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-span-3">
+                    <div id="scrollspy-2" class="space-y-4">
+                        <div class="axpt_sandbox">
+                            <div>
+                                <ul>
+                                    <li>
+                                        何度も繰り返し使用するtailwindクラスの組み合わせは@applyディレクティブで部品化する。
+                                    </li>
+                                    <li>
+                                        /src/css/tailwind.cssに記述
+                                    </li>
+                                </ul>
+                                <div>
+                                    .axpt_btn {
+                                    @apply bg-yellow-300 text-black font-bold py-2 px-4 rounded;
+                                    }
+                                </div>
+
+                                <button class="axpt_btn">.axpt_btn</button>
+                                <div>
+                                    ただし、この方法は、
+                                    <a class="bg-blue-500"
+                                        href="https://tailwindcss.com/docs/reusing-styles">スタイルの再利用:https://tailwindcss.com/docs/reusing-styles</a>
+                                    で語られている通り、<br>
+                                    <ul>
+                                        <li class="list-disc">都度、重複しないクラス名を考える必要が生まれる</li>
+                                        <li class="list-disc">HTML単体で完結していたコードが、複数のファイルを参照しないと理解できなくなる</li>
+                                        <li class="list-disc">改造で変更を加える場合に、使用箇所すべての影響調査が必要になる</li>
+                                        <li class="list-disc">tailwindの仕様上、@applyでコードをまとめたほうがファイルサイズが大きくなる</li>
+                                    </ul>
+
+                                    というように、tailwind導入のメリットや意義を失うため、非推奨とされている。
+                                    よって、どうしても必要と判断される場合のみの最終手段とする。
+                                    なお、大規模プロジェクトではこの問題をスマートに解決するためのアンサーとしてReactやVueが用いられている。
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- キャンバス -->
+                        <div id="item-1">
+                            <h3 class="text-lg font-semibold dark:text-white">
+                                <span data-i18n="@SETTINGS.MENU_CANVAS"></span>
+                            </h3>
+                        </div>
+                        <!-- キャンバスの初期化 -->
+                        <div id="item-1-1" class="axpt_card">
+                            <h3 class="text-lg font-semibold dark:text-white">
+                                <span data-i18n="@SETTINGS.MENU_CANVAS.INIT"></span>
+                            </h3>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">
+                                <span data-i18n="@SETTINGS.MENU_CANVAS.INIT.MSG"></span>
+                                <button class="inline px-4 py-2 bg-blue-500 text-white rounded">
+                                    <span data-i18n="@COMMON.BUTTON_EXECUTION"></span>
+                                </button>
+                            </p>
+
+                        </div>
+
+                        <div id="item-1-2" class="axpt_card">
+                            <h3 class="text-lg font-semibold dark:text-white">
+                                <span data-i18n="@SETTINGS.MENU_CANVAS.RESIZE"></span>
+                            </h3>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">
+                                <span data-i18n="@SETTINGS.MENU_CANVAS.RESIZE.MSG"></span>
+                                <button class="inline px-4 py-2 bg-blue-500 text-white rounded">
+                                    <span data-i18n="@COMMON.BUTTON_EXECUTION"></span>
+                                </button>
+                            </p>
+
+                        </div>
+
+                        <!-- ツールウィンドウ -->
+                        <div id="item-2">
+                            <h3 class="text-lg font-semibold dark:text-white">
+                                <span data-i18n="@SETTINGS.MENU_TOOL_WINDOWS"></span>
+                            </h3>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">
+                            </p>
+                        </div>
+
+                        <div id="item-2-1" class="axpt_card">
+                            <h3 class="text-lg font-semibold dark:text-white">
+                                <span data-i18n="@SETTINGS.MENU_TOOL_WINDOWS.SINGLE"></span>
+                            </h3>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">
+                                <span data-i18n="@SETTINGS.MENU_TOOL_WINDOWS.SINGLE.MSG"></span>
+                            </p>
+
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <div
+                                    class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                </div>
+                                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Toggle me</span>
+                            </label>
+
+                        </div>
+
+                        <!-- ペンツール -->
+                        <div id="item-3">
+                            <h3 class="text-lg font-semibold dark:text-white">
+                                <span data-i18n="@SETTINGS.MENU_PEN_TOOL"></span>
+                            </h3>
+                        </div>
+
+                        <div id="item-3-1" class="axpt_card">
+                            <h3 class="text-lg font-semibold dark:text-white">
+                                <span data-i18n="@SETTINGS.MENU_PEN_TOOL.STABILIZER"></span>
+                            </h3>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">
+                                <span data-i18n="@SETTINGS.MENU_PEN_TOOL.STABILIZER.MSG"></span>
+                            </p>
+                            <input type="range" min="0" max="100" value="50" step="any" class="axpt_range">
+                        </div>
+
+                        <div id="item-3-2">
+                            <h3 class="text-lg font-semibold dark:text-white">Item 3-2</h3>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">This is some
+                                placeholder content for the scrollspy page. Note that as you scroll down the page, the
+                                appropriate navigation link is highlighted. It's repeated throughout the component
+                                example. We keep adding some more example copy here to emphasize the scrolling and
+                                highlighting.</p>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">This is some
+                                placeholder content for the scrollspy page. Note that as you scroll down the page, the
+                                appropriate navigation link is highlighted. It's repeated throughout the component
+                                example. We keep adding some more example copy here to emphasize the scrolling and
+                                highlighting.</p>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">This is some
+                                placeholder content for the scrollspy page. Note that as you scroll down the page, the
+                                appropriate navigation link is highlighted. It's repeated throughout the component
+                                example. We keep adding some more example copy here to emphasize the scrolling and
+                                highlighting.</p>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">This is some
+                                placeholder content for the scrollspy page. Note that as you scroll down the page, the
+                                appropriate navigation link is highlighted. It's repeated throughout the component
+                                example. We keep adding some more example copy here to emphasize the scrolling and
+                                highlighting.</p>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">This is some
+                                placeholder content for the scrollspy page. Note that as you scroll down the page, the
+                                appropriate navigation link is highlighted. It's repeated throughout the component
+                                example. We keep adding some more example copy here to emphasize the scrolling and
+                                highlighting.</p>
+                            <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-neutral-400">This is some
+                                placeholder content for the scrollspy page. Note that as you scroll down the page, the
+                                appropriate navigation link is highlighted. It's repeated throughout the component
+                                example. We keep adding some more example copy here to emphasize the scrolling and
+                                highlighting.</p>
+                            <button class="bg-blue-500 hover:bg-yellow-500 
+                                p-3 rounded-full font-bold transition duration-300
+                                text-white">Hover button</button>
+
+                            <div class="containe">
+                                <div class="flex justify-center">
+                                    <div class="w-1/2">
+                                        <div class="p-6 text-center shadow-md bg-white rounded-md">
+                                            <p class="text-blue-900">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                elit. Beatae vitae
+                                                similique
+                                                laborum odio
+                                                laboriosam. Iure aliquid minima reprehenderit incidunt corrupti nostrum,
+                                                placeat provident
+                                                id
+                                                minus consequuntur facere, officia nobis ipsam.</p>
+
+                                            <a href="https://www.creative-tim.com/twcomponents/cheatsheet/"
+                                                target="_blank"
+                                                class="py-2 px-4 text-white bg-green-500 border-green-600 rounded-md mt-4 inline-block">Tailwind
+                                                CSS Cheat Sheet</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 px-4 bg-yellow-300 text-red-900">
+                                <p>./src/html/settings.htmlを編集することで、内容が変化します</p>
+                                <p>settings.htmlの中だけ、Tailwind CSSが使用可能です。（今後拡張予定）</p>
+                                <p>VSCode拡張機能として、<a
+                                        href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss">Tailwind
+                                        CSS
+                                        IntelliSense</a>を入れると、
+                                    Tailwind CSSのClass名を自動で補完できるようになります。</p>
+                            </div>
+
+                            <div class="mt-[1000px]">END</div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -12,6 +12,8 @@ import { getBrowserType, inRange } from './js/etc.js';
 // htmlデータ
 import htmldata from './html/main.txt';
 // css適用
+require('./css/tailwind.css');
+
 require('./css/axnospaint.css');
 require('./css/common.css');
 require('./css/icon.css');
@@ -24,6 +26,8 @@ require('./css/input_number.css');
 require('./css/input_button.css');
 require('./css/input_toggle.css');
 require('./css/alert.css');
+
+//equire('../node_modules/preline/dist/preline.js');
 
 export default class {
     axpObj;

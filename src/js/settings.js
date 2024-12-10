@@ -10,6 +10,8 @@ export class Settings {
         // HTML生成
         //console.log(html);
         let targetElement = document.getElementById('axp_settings');
-        targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(html));
+        // targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(html));
+        targetElement.insertAdjacentHTML('afterbegin', html);
+        this.axpObj.translateHTMLi18n(targetElement);
     }
 }
