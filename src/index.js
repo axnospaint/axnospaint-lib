@@ -11,6 +11,11 @@ import { createCustomAlert } from './js/alert.js';
 import { getBrowserType, inRange } from './js/etc.js';
 // htmlデータ
 import htmldata from './html/main.txt';
+
+//import 'flowbite';
+import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse';
+
 // css適用
 require('./css/tailwind.css');
 
@@ -390,6 +395,9 @@ export default class {
             this.axpObj.exec();
             // ロード中マスクの解除
             document.getElementById('axp_main').style.display = 'flex';
+
+            Alpine.plugin(collapse);
+            Alpine.start();
         })();
     }
     // バージョン

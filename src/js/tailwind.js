@@ -37,6 +37,8 @@ export default function tailwindScript() {
         setMode(systemPreference);
     }
 
+    //setMode('dark');
+
     // const el = HSScrollspy.getInstance('[data-hs-scrollspy="#scrollspy-1"]', true);
 
     // console.log(el);

@@ -4,6 +4,7 @@ module.exports = {
   content: [
     "./src/**/*.{html,js}",
     //'node_modules/preline/dist/*.js',
+    //"./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {},
@@ -12,6 +13,7 @@ module.exports = {
     //require('@tailwindcss/forms'),
     //require('preline/plugin')
     //require('@preline/scrollspy/index.js')
+    //require('flowbite/plugin')
   ],
 }
 

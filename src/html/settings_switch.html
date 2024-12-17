@@ -1,0 +1,33 @@
+<div x-data="{ switchOn: false }" class="flex items-center space-x-2">
+  <input
+    id="thisId"
+    type="checkbox"
+    name="switch"
+    class="hidden"
+    :checked="switchOn"
+  />
+
+  <button
+    x-ref="switchButton"
+    type="button"
+    @click="switchOn = ! switchOn"
+    :class="switchOn ? 'bg-blue-600' : 'bg-neutral-200'"
+    class="relative ml-4 inline-flex h-6 w-10 rounded-full py-0.5 focus:outline-none"
+    x-cloak
+  >
+    <span
+      :class="switchOn ? 'translate-x-[18px]' : 'translate-x-0.5'"
+      class="h-5 w-5 rounded-full bg-white shadow-md duration-200 ease-in-out"
+    ></span>
+  </button>
+
+  <label
+    @click="$refs.switchButton.click(); $refs.switchButton.focus()"
+    :id="$id('switch')"
+    :class="{ 'text-blue-600': switchOn, 'text-gray-400': ! switchOn }"
+    class="select-none text-sm"
+    x-cloak
+  >
+    Enable Feature
+  </label>
+</div>

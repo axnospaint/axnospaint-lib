@@ -1,0 +1,171 @@
+[
+  {
+    "id": 1,
+    "title": "MENU_CANVAS",
+    "sections": [
+      {
+        "id": 1,
+        "title": "INIT",
+        "type": "button"
+      },
+      {
+        "id": 2,
+        "title": "RESIZE",
+        "type": "button"
+      },
+      {
+        "id": 3,
+        "title": "DOWNLOAD_IMAGE",
+        "type": "button"
+      },
+      {
+        "id": 4,
+        "title": "IMAGE_RENDERING",
+        "type": "switch"
+      },
+      {
+        "id": 5,
+        "title": "COORDINATE_POSITION",
+        "type": "select",
+        "selectedItem": "none",
+        "select": [
+          {
+            "title": "なし",
+            "value": "none",
+            "disabled": false
+          },
+          {
+            "title": "左上",
+            "value": "aaa",
+            "disabled": false
+          },
+          {
+            "title": "右上",
+            "value": "bbb",
+            "disabled": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "MENU_TOOL_WINDOWS",
+    "sections": [
+      {
+        "id": 1,
+        "title": "INIT",
+        "type": "button"
+      },
+      {
+        "id": 2,
+        "title": "AUTO_ADJUST",
+        "type": "switch"
+      },
+      {
+        "id": 3,
+        "title": "ICON_SIZE",
+        "type": "select",
+        "selectedItem": "none",
+        "select": [
+          {
+            "title": "小",
+            "value": "none",
+            "disabled": false
+          },
+          {
+            "title": "中",
+            "value": "aaa",
+            "disabled": false
+          },
+          {
+            "title": "大",
+            "value": "bbb",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "SINGLEMODE",
+        "type": "switch"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "MENU_PEN_TOOL",
+    "sections": [
+      {
+        "id": 2,
+        "title": "STABILIZER",
+        "type": "range"
+      },
+      {
+        "id": 3,
+        "title": "EYEDROPPER",
+        "type": "switch"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "MENU_COLOR",
+    "sections": []
+  },
+  {
+    "id": 5,
+    "title": "MENU_SWATCHES",
+    "sections": []
+  },
+  {
+    "id": 6,
+    "title": "MENU_LAYER",
+    "sections": []
+  },
+  {
+    "id": 7,
+    "title": "MENU_MISC",
+    "sections": []
+  },
+  {
+    "id": 8,
+    "title": "MENU_CUSTOM_BUTTONS",
+    "sections": []
+  },
+  {
+    "id": 9,
+    "title": "MENU_MOUSE",
+    "sections": []
+  },
+  {
+    "id": 10,
+    "title": "MENU_TOUCH_PANEL",
+    "sections": []
+  },
+  {
+    "id": 11,
+    "title": "MENU_KEYBOARD",
+    "sections": []
+  },
+  {
+    "id": 12,
+    "title": "MENU_STARTUP",
+    "sections": []
+  },
+  {
+    "id": 13,
+    "title": "MENU_VER_INFO",
+    "sections": []
+  },
+  {
+    "id": 14,
+    "title": "MENU_VER_INFO",
+    "sections": []
+  },
+  {
+    "id": 15,
+    "title": "MENU_VER_INFO",
+    "sections": []
+  }
+]

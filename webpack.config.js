@@ -43,9 +43,13 @@ module.exports = {
                 type: 'javascript/auto'
             },
             {
-                test: /\.png/,
+                test: /\.png$/,
                 type: 'asset/inline'
-            }
+            },
+            {
+                test: /\.svg$/,
+                type: 'asset/source',
+            },
         ],
     },
     devtool: 'source-map',
