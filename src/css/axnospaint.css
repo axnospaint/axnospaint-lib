@@ -43,7 +43,7 @@ body {
 #axp_main_div_tab {
   display: flex;
   align-items: flex-end;
-  min-height: 30px;
+  flex-basis: 32px;
 }
 
 /* 見出し枠 */
@@ -269,6 +269,7 @@ body {
   flex-grow: 1;
   flex-direction: column;
   overflow: hidden;
+  height: 100%;
 }
 
 /* タブ：設定 */
