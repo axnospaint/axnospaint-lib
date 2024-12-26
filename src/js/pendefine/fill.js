@@ -51,9 +51,6 @@ export class Fill extends PenObj {
         this.set_modeflag();
         this.init_brush(option);
     }
-    // 描画中
-    move(x, y) {
-    }
     // 描画終了
     end(x, y) {
         if (this.axpObj.isDrawing && !this.axpObj.isDrawCancel) {
@@ -125,7 +122,7 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
     selectColorRGB[2] = img_input.data[(y * img_input.width + x) * 4 + 2];
 
     var selectColorAlpha = img_input.data[(y * img_input.width + x) * 4 + 3];
-    var isAlpha = !Boolean(selectColorAlpha);
+    var isAlpha = !selectColorAlpha;
 
     var pxlArr = [{ x: x, y: y }];
     var idx, p;

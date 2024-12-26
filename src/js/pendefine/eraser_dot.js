@@ -47,7 +47,7 @@ export class EraserDot extends Dot {
         lineWidth,
         color,
     ) {
-        const { width, height, data } = imageData;
+        const { width, data } = imageData;
         const dx = Math.abs(x1 - x0);
         const dy = Math.abs(y1 - y0);
         const sx = (x0 < x1) ? 1 : -1;
@@ -112,7 +112,7 @@ export class EraserDot extends Dot {
         lineWidth,
         color,
     ) {
-        const { width, height, data } = imageData;
+        const { width, data } = imageData;
         const r = parseInt(Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2)));
 
         if (r <= 0) { return };

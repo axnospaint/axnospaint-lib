@@ -81,7 +81,7 @@ export class Round extends PenObj {
         this.CANVAS.brush_ctx.moveTo(x, y);
     }
     // 描画中
-    move(x, y, e) {
+    move(x, y) {
         // 描画継続中
         if (this.axpObj.isDrawing && !this.axpObj.isDrawCancel) {
             // 描画確定済み
@@ -104,7 +104,7 @@ export class Round extends PenObj {
         let midPoint = calcMidPointBetween(lastPoint, currentPoint);
 
         switch (this.drawmode) {
-            case this.axpObj.CONST.DRAW_FREEHAND:
+            case this.axpObj.CONST.DRAW_FREEHAND: {
                 let isStabilizer = false;
                 const stabilizer_value = Number(document.getElementById('axp_config_form_stabilizerValue').volume.value);
                 if (stabilizer_value !== 0) {
@@ -115,7 +115,7 @@ export class Round extends PenObj {
                         isStabilizer = true;
                     }
                 }
-                //　直線モードの場合、始点を最初の入力座標にする
+                // 直線モードの場合、始点を最初の入力座標にする
                 if (this.axpObj.isLine) {
                     this.CANVAS.brush_ctx.beginPath();
                     this.CANVAS.brush_ctx.moveTo(
@@ -140,6 +140,7 @@ export class Round extends PenObj {
                     );
                 }
                 break;
+            }
             case this.axpObj.CONST.DRAW_RECT:
                 this.CANVAS.brush_ctx.strokeRect(
                     firstPoint.x,
@@ -148,7 +149,7 @@ export class Round extends PenObj {
                     currentPoint.y - firstPoint.y
                 );
                 break;
-            case this.axpObj.CONST.DRAW_CIRCLE:
+            case this.axpObj.CONST.DRAW_CIRCLE: {
                 const r = calcDistance(
                     firstPoint.x,
                     firstPoint.y,
@@ -165,12 +166,13 @@ export class Round extends PenObj {
                     true
                 );
                 break;
+            }
         }
         this.CANVAS.brush_ctx.stroke();
         this.write();
     }
     // 描画終了
-    end(x, y, e) {
+    end(x, y) {
         if (this.axpObj.isDrawing && !this.axpObj.isDrawCancel) {
             this.isLastDrawing = true;
             // 入力座標の記憶

@@ -290,7 +290,7 @@ body {
   background-color: #222;
   color: #ddd;
   display: flex;
-  min-height: 31px;
+  flex-basis: 31px;
 }
 
 #axp_footer_div_message {

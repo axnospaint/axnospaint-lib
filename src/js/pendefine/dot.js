@@ -42,7 +42,7 @@ export class Dot extends Round {
 
         return { x: x, y: y };
     }
-    start_draw(x, y) {
+    start_draw() {
         this.img_draw = new ImageData(this.axpObj.x_size, this.axpObj.y_size);
     }
     // 描画中
@@ -91,7 +91,7 @@ export class Dot extends Round {
             case this.axpObj.CONST.DRAW_FREEHAND:
                 // 開始点（前回座標）
                 if (this.axpObj.isLine) {
-                    //　直線モードの場合、始点を最初の入力座標にする
+                    // 直線モードの場合、始点を最初の入力座標にする
                     start_x = this.trans_dot(this.input_position[0].x);
                     start_y = this.trans_dot(this.input_position[0].y);
                 } else {
@@ -138,7 +138,7 @@ export class Dot extends Round {
         lineWidth,
         color,
     ) {
-        const { width, height, data } = imageData;
+        const { width, data } = imageData;
         const dx = Math.abs(x1 - x0);
         const dy = Math.abs(y1 - y0);
         const sx = (x0 < x1) ? 1 : -1;
@@ -199,7 +199,7 @@ export class Dot extends Round {
         lineWidth,
         color,
     ) {
-        const { width, height, data } = imageData;
+        const { width, data } = imageData;
         const r = parseInt(Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2)));
 
         if (r <= 0) { return };

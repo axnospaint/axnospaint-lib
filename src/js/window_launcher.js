@@ -36,7 +36,7 @@ export class Launcher extends ToolWindow {
         this.window_left = pos.left;
         this.window_top = pos.top;
     }
-    //　イベント受付開始
+    // イベント受付開始
     startEvent() {
         // 個別のウィンドウボタン
         const personalButtons = document.querySelectorAll('.axpc_launcher_personalButton');

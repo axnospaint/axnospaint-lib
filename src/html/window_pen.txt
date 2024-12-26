@@ -37,7 +37,7 @@
                 <!-- バケツのグラデーション角度 -->
                 <form id="axp_pen_form_fillGradationDeg" oninput="result.value=parseInt(volume.value)"
                     class="axpc_range axpc_text_border">
-                    <input type="range" id="axp_pen_range_fillGradationDeg" name="volume" value="0" step="1" min="0"
+                    <input type="range" id="axp_pen_range_fillGradationDeg" name="volume" value="0" step="15" min="0"
                         max="360" class="axpc_MSG" data-msg="@PEN0005">
                     <div class="axpc_range_label">${_("@PEN.ANGLE")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>

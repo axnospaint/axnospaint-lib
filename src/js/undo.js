@@ -100,50 +100,50 @@ export class UndoSystem {
             case 'draw':
                 // 詳細情報に対応するテキスト取得
                 msgtext = this.getDetailText(actionObj.detail);
-                //　リドゥ用記憶
+                // リドゥ用記憶
                 this.axpObj.undoSystem.setRedo({
                     type: actionObj.type,
                     detail: actionObj.detail,
                     layerObj: this.axpObj.layerSystem.layerObj[this.axpObj.layerSystem.getLayerIndex(actionObj.layerObj.id)],
                 });
-                //　アンドゥ処理
+                // アンドゥ処理
                 this.axpObj.layerSystem.setImageId(actionObj.layerObj.image, actionObj.layerObj.id);
                 break;
 
             case 'layer-create':
                 msgtext = '[レイヤー:新規]';
-                //　リドゥ用記憶
+                // リドゥ用記憶
                 this.setRedo(actionObj);
-                //　アンドゥ処理
+                // アンドゥ処理
                 this.axpObj.layerSystem.deleteLayer(actionObj.layerObj.id);
                 break;
             case 'layer-copy':
                 msgtext = '[レイヤー:複製]';
-                //　リドゥ用記憶
+                // リドゥ用記憶
                 this.setRedo(actionObj);
-                //　アンドゥ処理
+                // アンドゥ処理
                 this.axpObj.layerSystem.deleteLayer(actionObj.layerObj.id);
                 break;
 
             case 'layer-delete':
                 msgtext = '[レイヤー:削除]';
-                //　リドゥ用記憶
+                // リドゥ用記憶
                 this.setRedo(actionObj);
-                //　アンドゥ処理
+                // アンドゥ処理
                 this.axpObj.layerSystem.restoreLayer(actionObj);
                 break;
 
             case 'layer-clear':
                 msgtext = '[レイヤー:クリア]';
-                //　リドゥ用記憶
+                // リドゥ用記憶
                 this.setRedo(actionObj);
-                //　アンドゥ処理
+                // アンドゥ処理
                 this.axpObj.layerSystem.setImageId(actionObj.layerObj.image, actionObj.layerObj.id);
                 break;
 
-            case 'layer-integrate':
+            case 'layer-integrate': {
                 msgtext = '[レイヤー:統合]';
-                //　リドゥ用記憶
+                // リドゥ用記憶
                 this.axpObj.undoSystem.setRedo({
                     type: actionObj.type,
                     // リドゥで消去する統合元のレイヤー
@@ -151,7 +151,7 @@ export class UndoSystem {
                     // リドゥで再統合される復元される統合先のレイヤー
                     layerObj_dest: this.axpObj.layerSystem.layerObj[this.axpObj.layerSystem.getLayerIndex(actionObj.layerObj_dest.id)],
                 });
-                //　アンドゥ処理
+                // アンドゥ処理
                 //  統合元レイヤーを復元
                 this.axpObj.layerSystem.restoreLayer(actionObj);
                 //  統合先レイヤーを復元
@@ -161,10 +161,11 @@ export class UndoSystem {
                 this.axpObj.layerSystem.layerObj[index].image = data.image;
                 this.axpObj.layerSystem.setAlpha(data.alpha, index);
                 break;
+            }
             case 'flip_h':
-                //　リドゥ用記憶
+                // リドゥ用記憶
                 this.setRedo(actionObj);
-                //  アンドゥ処理
+                // アンドゥ処理
                 //  idには、単体ならレイヤーのID、全体なら'all'が格納されている
                 this.axpObj.layerSystem.flip_h(actionObj.id);
                 //console.log(actionObj.index);
@@ -175,9 +176,9 @@ export class UndoSystem {
                 }
                 break;
             case 'flip_v':
-                //　リドゥ用記憶
+                // リドゥ用記憶
                 this.setRedo(actionObj);
-                //  アンドゥ処理
+                // アンドゥ処理
                 this.axpObj.layerSystem.flip_v(actionObj.id);
                 if (actionObj.id == 'all') {
                     msgtext = '[上下反転:全体]';
@@ -202,7 +203,7 @@ export class UndoSystem {
     setRedo(actionObj) {
         // 記録数が可能回数を超える場合、最古の記録を消す（可能回数以上になることはないはず）
         if (this.redoObj.length >= this.axpObj.undo_max) {
-            redoObj.shift();
+            this.redoObj.shift();
             alert('REDO error');
         }
         let obj = new UndoObj(actionObj);
@@ -260,7 +261,7 @@ export class UndoSystem {
                 // リドゥ処理
                 this.axpObj.layerSystem.clear(actionObj.layerObj.id);
                 break;
-            case 'layer-integrate':
+            case 'layer-integrate': {
                 msgtext = '[レイヤー:統合]';
                 // 再アンドゥ記憶
                 this.setUndo({
@@ -279,6 +280,7 @@ export class UndoSystem {
                 // 統合元レイヤーを削除
                 this.axpObj.layerSystem.deleteLayer(actionObj.layerObj.id);
                 break;
+            }
             case 'flip_h':
                 // 再アンドゥ記憶
                 this.setUndo(actionObj);

@@ -7,55 +7,46 @@
     background: #eee;
     color: #333;
     overflow: auto;
-}
-
-/* --- お絵カキコ情報表示部 --- */
-
-/* 投稿画像とサムネイル領域 */
-#axp_post_div_postingImage {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-/* 投稿画像キャンバス */
-#axp_post_canvas_postingImage {
-    height: fit-content;
-    border: 1px solid #aaa;
-    max-width: 100%;
-}
-
-/* サムネイル外枠 */
-#axp_post_div_thumbnall_h1 {
-    width: 140px;
-    height: fit-content;
-}
-
-#axp_post_div_thumbnall_h2 {
-    width: 134px;
-    height: 134px;
-    border: 1px solid #d1d1d1;
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    flex-direction: column;
+    gap: 15px 0;
     align-items: center;
-    justify-content: center;
 }
 
-#axp_post_div_thumbnall_h3 {
-    width: 120px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
+.axpc_post_frame,
+#axp_post_div_notice,
+#axp_post_div_button {
+    width: 100%;
+    max-width: 1024px;
+}
+
+.axpc_post_frame {
+    display: grid;
+    grid-template-rows: repeat(4, max-content);
+    grid-template-columns: 150px 2px 1fr;
+    grid-template-areas:
+        "post_canvas  post_line  ."
+        "post_canvas  post_line  post_div_input"
+        "post_canvas  post_line  post_status"
+        "post_canvas  post_line  .";
+    gap: 10px 10px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #dedede;
+}
+
+/* image canvas */
+.axpc_post_canvas {
+    grid-area: post_canvas;
+}
+
+.acpc_post_canvas p {
+    text-align: center;
 }
 
 /* サムネイルタイトル表示 */
 #axp_post_div_thumbnailTitle {
-    margin: 8px 0;
+    margin: auto;
     color: #1e7dc0;
     font-weight: 600;
     width: 134px;
@@ -69,64 +60,364 @@
     word-break: break-all;
 }
 
-/* お絵カキコの情報テーブル */
-#axp_post_table_information {
-    border: 0px solid #bbb;
-    padding: 4px;
+#axp_post_radio_bgWhite,
+#axp_post_radio_bgWhite~label,
+#axp_post_radio_bgTransparent,
+#axp_post_radio_bgTransparent~label {
+    cursor: pointer;
 }
 
-/* --- 投稿情報入力部 --- */
 
-/* 投稿画像とサムネイル領域 */
+/* 罫線 */
+.axpc_post_line {
+    grid-area: post_line;
+    background-image: linear-gradient(0deg, transparent, #aaa, transparent);
+}
+
+/* ※クリックで拡大表示 */
+.axpc_post_thumbnailClick {
+    text-align: center;
+}
+
+/* post form */
 #axp_post_div_input {
-    margin-top: 8px;
+    grid-area: post_div_input;
 }
 
-/* 本文を入力してくださいを表示するメッセージ領域 */
+.axpc_post_input {
+    display: grid;
+    align-items: center;
+    grid-template-columns: max-content max-content 1fr;
+    grid-template-areas:
+        "name_property      name_required      ."
+        "text_name          text_name          text_name"
+        "title_property     title_required     ."
+        "text_title         text_title         text_title"
+        "message_property   message_required   ."
+        "textarea_message   textarea_message   textarea_message"
+        "watchList          watchList          watchList";
+}
+
+.axpc_post_name_property,
+.axpc_post_title_property,
+.axpc_post_message_property {
+    line-height: normal;
+    background: #ccc;
+    padding: 2px 10px 5px;
+    border: #ddd 2px solid;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    /* border分のネガティブマージン */
+    margin-left: -2px;
+}
+
+.axpc_post_name_required,
+.axpc_post_title_required,
+.axpc_post_message_required {
+    font-size: 0.7em;
+    font-weight: bold;
+    background-color: #ff4444;
+    color: #eee;
+    padding: 0.2em 3px;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+#axp_post_text_name,
+#axp_post_text_title,
+#axp_post_textarea_message {
+    margin-bottom: 10px;
+    /* タブ部分へのネガティブマージン */
+    margin-top: -3px;
+}
+
+#axp_post_text_name,
+#axp_post_text_title {
+    line-height: 1.5lh;
+    padding: 0 4px;
+}
+
+#axp_post_textarea_message {
+    field-sizing: content;
+    min-height: 4.5lh;
+    height: auto;
+    resize: vertical;
+    line-height: 1.3em;
+    padding: 5px;
+    font-size: 13px;
+}
+
+.axpc_post_name_property {
+    grid-area: name_property;
+}
+
+.axpc_post_name_required {
+    grid-area: name_required;
+}
+
+#axp_post_text_name {
+    grid-area: text_name;
+}
+
+.axpc_post_title_property {
+    grid-area: title_property;
+}
+
+.axpc_post_title_required {
+    grid-area: title_required;
+}
+
+#axp_post_text_title {
+    grid-area: text_title;
+}
+
+.axpc_post_message_property {
+    grid-area: message_property;
+}
+
+.axpc_post_message_required {
+    grid-area: message_required;
+}
+
+#axp_post_textarea_message {
+    grid-area: textarea_message;
+}
+
+.axpc_post_watchList {
+    grid-area: watchList;
+}
+
+/* status */
+.axpc_post_status {
+    grid-area: post_status;
+    display: grid;
+    grid-template-areas:
+        "size_property    size_colon    size_value"
+        "bg_property      bg_colon      bg_value"
+        "based_property   based_colon   based_value";
+    grid-template-columns: max-content max-content 1fr;
+    align-items: center;
+}
+
+[class^="axpc_post_status_"][class$="_property"] {
+    text-align: right;
+}
+
+.axpc_post_status_size_property {
+    grid-area: size_property;
+}
+
+.axpc_post_status_bg_property {
+    grid-area: bg_property;
+}
+
+.axpc_post_status_based_property {
+    grid-area: based_property;
+}
+
+.axpc_post_status_size_value {
+    grid-area: size_value;
+}
+
+.axpc_post_status_based_value {
+    grid-area: based_value;
+}
+
+[class^="axpc_post_status_"][class$="_colon"] {
+    width: 1.5em;
+    text-align: center;
+}
+
+.axpc_post_status_size_colon {
+    grid-area: size_colon;
+}
+
+.axpc_post_status_bg_colon {
+    grid-area: bg_colon;
+}
+
+.axpc_post_status_based_colon {
+    grid-area: based_colon;
+}
+
+/* notice */
+#axp_post_div_notice {
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #dedede;
+}
+
+#axp_post_div_notice>u {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+
+#axp_post_div_notice div {
+    text-indent: 1em;
+    margin: 5px auto;
+}
+
+/* 投稿ボタン外枠 */
+#axp_post_div_button {
+    border-radius: 20px;
+    background-color: #dedede;
+    padding: 20px;
+}
+
+/* エラー時のメッセージ領域 */
 #axp_post_span_message {
     color: #d00;
     font-weight: 600;
 }
 
-/* 投稿情報の入力テーブル */
-#axp_post_table_postForm {
-    border: 0px solid #bbb;
-}
-
-/* 投稿情報の入力テーブル 特定の<td>のみ装飾 */
-.axpc_post_postFormTd {
-    border: 1px solid #999;
-    padding: 0 8px;
-    cursor: pointer;
-    background: #ddd;
-}
-
-/* 名前 */
-#axp_post_text_name {
-    padding: 4px;
-}
-
-/* タイトル */
-#axp_post_text_title {
-    padding: 4px;
-}
-
-/* 本文 */
-#axp_post_textarea_message {
-    min-width: 480px;
-    max-width: 480px;
-    width: 480px;
-    max-height: 200px;
-    height: 100px;
-    padding: 4px;
-}
-
-/* 注意事項 */
-#axp_post_div_notice {
-    margin-top: 8px;
-}
-
 /* 投稿ボタン */
-#axp_post_div_button {
-    margin-top: 8px;
+#axp_post_button_upload {
+    width: 260px;
+    display: block;
+    margin: auto;
+    transition: 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 投稿中 */
+#axp_post_button_upload_loading {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 0.25rem solid rgba(255, 255, 255, 0.2);
+    border-top-color: rgb(255, 255, 255);
+    animation: spin 1s infinite linear;
+}
+
+/* ポップアップ */
+.axpc_post_overlay {
+    position: fixed;
+    background: #0008;
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.axpc_post_overlay,
+.axpc_post_overlay * {
+    cursor: zoom-out;
+}
+
+.axpc_post_thumbnail {
+    cursor: zoom-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    background-color: #fff;
+}
+
+.axpc_post_thumbnail>img {
+    background-color: #fff;
+}
+
+#axp_post_checkbox_popup {
+    display: none;
+}
+
+#axp_post_checkbox_popup:checked+.axpc_post_overlay {
+    visibility: visible;
+    opacity: 1;
+    z-index: 10;
+    background-color: #0008;
+    width: 100%;
+}
+
+.axpc_post_overlayWindow {
+    border-radius: 15px;
+    min-width: fit-content;
+    max-width: 100%;
+    max-height: 100%;
+    position: fixed;
+    z-index: 11;
+    margin: 0 auto;
+    padding: 15px;
+    background: #fff5;
+    line-height: 0;
+}
+
+.axpc_post_overlayCloseButton {
+    cursor: pointer;
+    position: absolute;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    top: -35px;
+    right: -35px;
+    border: #666 solid 5px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #000;
+    background: #fff;
+    padding: 0;
+}
+
+.axpc_post_overlayCloseButton::after,
+.axpc_post_overlayCloseButton::before {
+    background-color: #666;
+    border-radius: 15% 15% 15% 15% / 50% 50% 50% 50%;
+    content: "";
+    display: block;
+    height: 22%;
+    left: 10%;
+    position: absolute;
+    top: 38%;
+    width: 80%;
+}
+
+.axpc_post_overlayCloseButton::before {
+    transform: rotate(135deg);
+}
+
+.axpc_post_overlayCloseButton::after {
+    transform: rotate(45deg);
+}
+
+.axpc_post_overlayCanvas {
+    max-width: calc(100vw - 120px);
+    max-height: calc(95vh - 110px);
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+/* ブラウザの横幅が599px以下の場合 */
+@media (max-width: 599px) {
+    .axpc_post_frame {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 罫線 */
+    .axpc_post_line {
+        height: 2px;
+        margin: 20px 10px;
+        background: linear-gradient(90deg, transparent, #aaa, transparent)
+    }
 }

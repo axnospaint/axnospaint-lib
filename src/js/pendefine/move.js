@@ -19,7 +19,7 @@ export class Move extends PenObj {
         this.init_save();
     }
     // 描画開始
-    start(x, y, e) {
+    start(x, y) {
         // 書き込み禁止状態
         if (this.axpObj.layerSystem.isWriteProtection()) {
             return;
@@ -66,7 +66,7 @@ export class Move extends PenObj {
         this.axpObj.layerSystem.updateCanvas();
     }
     // 描画終了
-    end(x, y, e) {
+    end(x, y) {
         if (this.axpObj.isDrawing && !this.axpObj.isDrawCancel) {
             // 入力座標の記憶
             this.input_position.push({ x, y });

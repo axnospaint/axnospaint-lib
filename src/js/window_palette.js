@@ -85,10 +85,10 @@ export class ColorPaletteSystem extends ToolWindow {
         // デフォルトパレット配列生成
         this.setPaletteArray();
     }
-    //　イベント受付開始
+    // イベント受付開始
     startEvent() {
         // ボタン：編集モード
-        const edit = (e) => {
+        const edit = () => {
             // 編集モードに切り替わる場合、事前にメインカラーを更新
             if (!this.isEditMode) {
                 this.axpObj.colorMakerSystem.setMainColor(this.getColor());
@@ -125,7 +125,7 @@ export class ColorPaletteSystem extends ToolWindow {
         }
         document.getElementById('axp_palette_button_edit').onclick = edit;
 
-        const p_delete = (e) => {
+        const p_delete = () => {
             if (this.currentPalette.palette.length <= 1) {
                 // すべてのパレットを削除することはできません。
                 this.axpObj.msg('@CAU3000');
@@ -238,7 +238,7 @@ export class ColorPaletteSystem extends ToolWindow {
             palette_sorting.swap(target);
         }
         // ドロップ
-        const onPointerUp = (e) => {
+        const onPointerUp = () => {
             const target = ps_data.target;
             const cloneSelector = `.${ps_data.cloneName}`;
             const clone = document.querySelector(cloneSelector);
@@ -426,7 +426,7 @@ export class ColorPaletteSystem extends ToolWindow {
         newButton.addEventListener('pointerdown', (e) => {
             var colorcode = e.target.dataset.color;
 
-            //　編集モード
+            // 編集モード
             if (this.isEditMode) {
                 this.drag_down(e);
             }

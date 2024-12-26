@@ -94,7 +94,7 @@ export class ColorMakerSystem extends ToolWindow {
         colorWheel.redraw();
         */
     }
-    //　イベント受付開始
+    // イベント受付開始
     startEvent() {
         // ボタン：スワップ
         document.getElementById('axp_makecolor_button_swapColor').addEventListener('click', () => {
@@ -143,7 +143,7 @@ export class ColorMakerSystem extends ToolWindow {
         }
 
         // テキストボックス：三原色カラー数値入力
-        const onchangeColorValue = (e) => {
+        const onchangeColorValue = () => {
             //console.log('onchange');
             //  RGBの取得
             var r = adjustColorValue(document.getElementById('axp_makecolor_number_red').value);
@@ -295,6 +295,7 @@ export class ColorMakerSystem extends ToolWindow {
         // 未指定の場合、サブ以外が選択されているなら、メインに戻す
         if (target === 'none') {
             if (document.getElementById('axp_makecolor_div_subColor').dataset.selected === 'true') {
+                // サブカラー選択状態
             } else {
                 target = 'main';
             }

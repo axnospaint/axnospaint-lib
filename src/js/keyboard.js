@@ -10,7 +10,7 @@ export class KeyboardSystem {
     }
     startEvent() {
         // ウィンドウ非アクティブの時、強制的に押しているキーを解除
-        window.addEventListener('blur', (e) => {
+        window.addEventListener('blur', () => {
             if (this.axpObj.isSPACE) {
                 this.axpObj.penSystem.restorePenModeTemporary('axp_penmode_hand');
                 this.axpObj.isSPACE = false;
