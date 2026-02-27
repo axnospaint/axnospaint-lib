@@ -65,6 +65,8 @@
 #axp_post_radio_bgTransparent,
 #axp_post_radio_bgTransparent~label {
     cursor: pointer;
+    vertical-align: middle;
+    margin: auto 2px;
 }
 
 
@@ -109,6 +111,7 @@
     border-radius: 10px 10px 0 0;
     /* border分のネガティブマージン */
     margin-left: -2px;
+    text-align: center;
 }
 
 .axpc_post_name_required,
