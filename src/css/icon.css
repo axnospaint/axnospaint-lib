@@ -127,10 +127,10 @@
     display: block;
     background-color: #fff;
     position: absolute;
-    height: 4px;
+    height: 2px;
     width: 30px;
     transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-    border-radius: 2px;
+    border-radius: 1px;
 }
 
 .axpc_icon_humburger::before {
