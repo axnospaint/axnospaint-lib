@@ -1376,7 +1376,7 @@ export class AXPObj {
                 // 基にしてお絵カキコ
                 let elemRefId = document.getElementById('axp_post_span_referenceOekakiId');
 
-                console.log(this.oekaki_id, this.draftImageFile);
+                console.log('oekaki_id: %s draftImageFile:', this.oekaki_id, this.draftImageFile);
                 if (this.draftImageFile !== null) {
                     elemRefId.textContent = `${this._('@COMMON.DRAW_BASED')}:${getFileNameFromURL(this.draftImageFile)}`;
                 } else if (this.oekaki_id !== null) {
