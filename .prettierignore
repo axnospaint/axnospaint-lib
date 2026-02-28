@@ -1,0 +1,26 @@
+# パッケージ管理
+node_modules
+package-lock.json
+
+# ビルド成果物
+dist
+
+# ドキュメント
+docs
+
+# 静的ファイル・画像
+resource
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.pdf
+*.md
+*.txt
+*.json
+
+# 設定ファイル (自分自身の整形を防ぐ)
+.prettierignore
+.gitignore

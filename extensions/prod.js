@@ -2,6 +2,6 @@
 
 export var isExtenstions = false;
 export class ExTool {
-    member = [];
-    constructor() { }
-} 
+  member = [];
+  constructor() {}
+}
