@@ -39,7 +39,7 @@ export class Fill extends PenObj {
     this.CANVAS.brush_ctx.lineCap = 'round';
     this.CANVAS.brush_ctx.lineJoin = 'round';
     // ぼかし無し
-    //        this.blur(0);
+    this.blur(0);
   }
   // 描画開始
   start(x, y, e, option) {
