@@ -58,11 +58,6 @@ module.exports = {
         type: 'asset/source',
       },
       {
-        test: /\.json$/,
-        loader: 'json-loader',
-        type: 'javascript/auto',
-      },
-      {
         test: /\.png/,
         type: 'asset/inline',
       },
