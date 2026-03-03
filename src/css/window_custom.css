@@ -27,3 +27,9 @@
   background: linear-gradient(#222, #444);
   border: 2px solid #333;
 }
+
+/* ドラッグ可能領域 */
+#axp_custom .axpc_window_header_dragZone {
+  grid-area: 1/1/2/4;
+  /* grid位置指定×部分なし */
+}
