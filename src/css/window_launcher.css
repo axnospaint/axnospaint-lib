@@ -77,3 +77,9 @@
   background-color: #888;
   margin: 0 2px;
 }
+
+/* ドラッグ可能領域 */
+#axp_launcher .axpc_window_header_dragZone {
+  grid-area: 1/1/2/4;
+  /* grid位置指定×部分なし */
+}
