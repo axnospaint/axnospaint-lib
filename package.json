@@ -8,6 +8,8 @@
     "prod": "cross-env NODE_ENV=prod webpack --config webpack.prod.js",
     "prod-demo": "cross-env NODE_ENV=demo webpack --config webpack.prod.js",
     "eslint": "eslint src/**/*.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "audit": "npm audit"
   },
   "author": "axnospaint",
@@ -22,6 +24,7 @@
     "html-webpack-plugin": "^5.6.3",
     "json-loader": "^0.5.7",
     "postcss-loader": "^8.1.1",
+    "prettier": "^3.8.1",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.10",
     "webpack": "^5.97.1",

@@ -1,159 +1,165 @@
 /* アイコン */
 
 .axpc_icon_msg_caution {
-    background-repeat: no-repeat;
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
-    background-image: url('../../resource/caution.png');
+  background-repeat: no-repeat;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../resource/caution.png');
 }
 
 .axpc_icon_msg_information {
-    background-repeat: no-repeat;
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
-    background-image: url('../../resource/information.png');
+  background-repeat: no-repeat;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../resource/information.png');
 }
 
 .axpc_icon_msg_ng {
-    background-repeat: no-repeat;
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
-    background-image: url('../../resource/ng.png');
+  background-repeat: no-repeat;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../resource/ng.png');
 }
 
 .axpc_icon_msg_color {
-    background-repeat: no-repeat;
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
-    background-image: url('../../resource/window_colormaker.png');
+  background-repeat: no-repeat;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../resource/window_colormaker.png');
 }
 
 /* ツールウィンドウ */
 .axpc_icon_window_all_down {
-    background-repeat: no-repeat;
-    background-image: url('../../resource/window_all_down.png');
-    background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../../resource/window_all_down.png');
+  background-position: center;
 }
 
 .axpc_icon_window_all_up {
-    background-repeat: no-repeat;
-    background-image: url('../../resource/window_all_up.png');
-    background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../../resource/window_all_up.png');
+  background-position: center;
 }
 
 .axpc_icon_window_pen {
-    background-repeat: no-repeat;
-    background-image: url('../../resource/window_pen.png');
-    background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../../resource/window_pen.png');
+  background-position: center;
 }
 
 .axpc_icon_window_layer {
-    background-repeat: no-repeat;
-    background-image: url('../../resource/window_layer.png');
-    background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../../resource/window_layer.png');
+  background-position: center;
 }
 
 .axpc_icon_window_colormaker {
-    background-repeat: no-repeat;
-    background-image: url('../../resource/window_colormaker.png');
-    background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../../resource/window_colormaker.png');
+  background-position: center;
 }
 
 .axpc_icon_window_palette {
-    background-repeat: no-repeat;
-    background-image: url('../../resource/window_palette.png');
-    background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../../resource/window_palette.png');
+  background-position: center;
 }
 
 .axpc_icon_window_subtool {
-    background-repeat: no-repeat;
-    background-image: url('../../resource/window_subtool.png');
-    background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../../resource/window_subtool.png');
+  background-position: center;
 }
 
 /* レイヤー */
 .axpc_icon_eyeON {
-    background: center no-repeat url('../../resource/eye_on.png');
+  background: center no-repeat url('../../resource/eye_on.png');
 }
 
 .axpc_icon_eyeOFF {
-    background: #555 center no-repeat url('../../resource/eye_off.png');
+  background: #555 center no-repeat url('../../resource/eye_off.png');
 }
 
 .axpc_icon_lockON {
-    background-color: #aa3;
-    background-image: url('../../resource/lock.png');
+  background-color: #aa3;
+  background-image: url('../../resource/lock.png');
 }
 
 .axpc_icon_lockOFF {
-    background-color: #555;
-    background-image: url('../../resource/unlock.png');
+  background-color: #555;
+  background-image: url('../../resource/unlock.png');
 }
 
 .axpc_icon_maskON {
-    background: #ff4 center no-repeat url('../../resource/mask_on.png');
+  background: #ff4 center no-repeat url('../../resource/mask_on.png');
 }
 
 .axpc_icon_maskOFF {
-    background: #555 center no-repeat url('../../resource/mask_on.png');
+  background: #555 center no-repeat url('../../resource/mask_on.png');
 }
 
 .axpc_icon_flipH {
-    background: center no-repeat url('../../resource/flip_h.png');
+  background: center no-repeat url('../../resource/flip_h.png');
 }
 
 .axpc_icon_flipV {
-    background: center no-repeat url('../../resource/flip_v.png');
+  background: center no-repeat url('../../resource/flip_v.png');
 }
 
 /* 設定の見出し調整用 */
 .axpc_icon_span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    width: 28px;
-    height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 28px;
+  height: 28px;
 }
 
 /* ハンバーガーメニュー */
 .axpc_icon_humburger,
 .axpc_icon_humburger::before,
 .axpc_icon_humburger::after {
-    display: block;
-    background-color: #fff;
-    position: absolute;
-    height: 4px;
-    width: 30px;
-    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-    border-radius: 2px;
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  height: 2px;
+  width: 30px;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 1px;
 }
 
 .axpc_icon_humburger::before {
-    content: '';
-    margin-top: -8px;
+  content: '';
+  margin-top: -8px;
 }
 
 .axpc_icon_humburger::after {
-    content: '';
-    margin-top: 8px;
+  content: '';
+  margin-top: 8px;
 }
 
 /* ハンバーガーメニュー ボタン変化 */
-#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger::before {
-    margin-top: 0px;
-    transform: rotate(45deg);
+#axp_main_checkbox_hamburger:checked
+  + #axp_main_label_hamburger
+  .axpc_icon_humburger::before {
+  margin-top: 0px;
+  transform: rotate(45deg);
 }
 
-#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger {
-    background: rgba(255, 255, 255, 0);
+#axp_main_checkbox_hamburger:checked
+  + #axp_main_label_hamburger
+  .axpc_icon_humburger {
+  background: rgba(255, 255, 255, 0);
 }
 
-#axp_main_checkbox_hamburger:checked+#axp_main_label_hamburger .axpc_icon_humburger::after {
-    margin-top: 0px;
-    transform: rotate(-45deg);
+#axp_main_checkbox_hamburger:checked
+  + #axp_main_label_hamburger
+  .axpc_icon_humburger::after {
+  margin-top: 0px;
+  transform: rotate(-45deg);
 }

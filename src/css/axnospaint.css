@@ -53,7 +53,7 @@ body {
 }
 
 /* 見出し */
-#axp_main_div_tab_menu>div {
+#axp_main_div_tab_menu > div {
   display: block;
   width: 98px;
   margin: 0;
@@ -69,12 +69,12 @@ body {
 }
 
 /* 見出しにカーソルを当てた時 */
-#axp_main_div_tab_menu>div:hover {
+#axp_main_div_tab_menu > div:hover {
   background: #555;
 }
 
 /* 選択されている見出し */
-#axp_main_div_tab_menu>div[data-selected="true"] {
+#axp_main_div_tab_menu > div[data-selected='true'] {
   background: #777;
 }
 
@@ -98,7 +98,6 @@ body {
 
 /* ブラウザの横幅が599px以下の場合 */
 @media (max-width: 599px) {
-
   /* ハンバーガーメニュー表示 */
   #axp_main_label_hamburger {
     display: flex;
@@ -118,7 +117,7 @@ body {
     z-index: 6000;
   }
 
-  #axp_main_checkbox_hamburger~div>div {
+  #axp_main_checkbox_hamburger ~ div > div {
     height: 0;
     margin: 0;
     padding: 0;
@@ -126,14 +125,14 @@ body {
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  #axp_main_checkbox_hamburger:checked~div>div {
+  #axp_main_checkbox_hamburger:checked ~ div > div {
     border: 1px solid #333;
-    height: 2.5em;
+    height: 3em;
     padding: 0.5em;
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  #axp_main_div_tab_menu>div {
+  #axp_main_div_tab_menu > div {
     display: flex;
     justify-content: center;
     margin: 0;
@@ -161,7 +160,7 @@ body {
 }
 
 /* タブにより切り替わる画面 */
-#axp_main_div_tabContent>article {
+#axp_main_div_tabContent > article {
   display: none;
   flex-grow: 1;
   flex-direction: column;
@@ -234,7 +233,7 @@ body {
   overflow: hidden;
 }
 
-#axp_canvas_div_debugInfo>div:nth-of-type(1) {
+#axp_canvas_div_debugInfo > div:nth-of-type(1) {
   font-family: monospace;
   color: #fff;
   font-size: 1em;
@@ -242,7 +241,7 @@ body {
   overflow: hidden;
 }
 
-#axp_canvas_div_debugInfo>div:nth-of-type(2) {
+#axp_canvas_div_debugInfo > div:nth-of-type(2) {
   font-family: monospace;
   font-size: 1em;
   color: #fff;
@@ -260,7 +259,6 @@ body {
   border: solid 2px rgba(0, 0, 0, 0.3);
   z-index: 700;
 }
-
 
 #axp_main_div_tabContent,
 #axp_config,
@@ -302,6 +300,5 @@ body {
 }
 
 #axp_footer_div_icon {
-  margin-left: 8px;
-  margin-top: 2px;
+  margin: auto 0 auto 8px;
 }
