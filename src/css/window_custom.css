@@ -33,3 +33,164 @@
   grid-area: 1/1/2/4;
   /* grid位置指定×部分なし */
 }
+.axpc_custom_button {
+  position: relative;
+  overflow: hidden;
+  /* 念のため */
+}
+
+.axpc_custom_button::before,
+.axpc_custom_button::after {
+  content: none;
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* 機能アイコン表示test */
+/* ペンツール各種別 */
+/* ペン種別 */
+.axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:丸ペン ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcepen1.png');
+}
+
+.axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:角ペン ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcepen2.png');
+}
+
+.axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:ドットペン ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcedot.png');
+}
+
+.axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:筆ペン ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcefude.png');
+}
+
+.axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:クレヨン ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcecrayon.png');
+}
+
+.axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:エアブラシ ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcebrush.png');
+}
+
+
+/* 消しゴム種別 */
+.axpc_custom_button[data-msg="カスタムボタン：[ 消しゴム種別:消しゴム ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourceeraser.png');
+}
+
+.axpc_custom_button[data-msg="カスタムボタン：[ 消しゴム種別:角消しゴム ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourceeraser_dot.png');
+}
+
+
+/* バケツ種別 */
+.axpc_custom_button[data-msg="カスタムボタン：[ バケツ種別:バケツ ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcefill.png');
+}
+
+.axpc_custom_button[data-msg="カスタムボタン：[ バケツ種別:階調バケツ ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcefillgradation.png');
+}
+
+/* ツール種別 */
+.axpc_custom_button[data-msg="カスタムボタン：[ ツール種別:ハンド ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcehand.png');
+}
+
+.axpc_custom_button[data-msg="カスタムボタン：[ ツール種別:移動ツール ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcemove.png');
+}
+
+
+/* ペンツール各選択 */
+/* ペン */
+.axpc_custom_button[data-msg="カスタムボタン：[ 選択:ペン ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcepen1.png');
+}
+
+/* 消しゴム */
+.axpc_custom_button[data-msg="カスタムボタン：[ 選択:消しゴム ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourceeraser.png');
+}
+
+/* バケツ */
+.axpc_custom_button[data-msg="カスタムボタン：[ 選択:バケツ ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcefill.png');
+}
+
+/* ツール */
+.axpc_custom_button[data-msg="カスタムボタン：[ 選択:ツール ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcehand.png');
+}
+
+/* スポイト */
+.axpc_custom_button[data-msg="カスタムボタン：[ 選択:スポイト ]"]::before {
+  content: "";
+  background: #555 no-repeat center url('../../resourcespuit.png');
+}
+
+/* ペン／消しゴム切替 */
+.axpc_custom_button[data-msg="カスタムボタン：[ 選択:ペン／消しゴム切替 ]"]::before {
+  clip-path: polygon(0 0, 0% 100%, 100% 0);
+  content: "";
+  background: #555 no-repeat left 0px top 0px/25px url('../../resourcepen1.png');
+}
+.axpc_custom_button[data-msg="カスタムボタン：[ 選択:ペン／消しゴム切替 ]"]::after {
+  clip-path: polygon(0 100%, 100% 100%, 100% 0);
+  content: "";
+  background: #555 no-repeat right 2px bottom 2px/25px url('../../resourceeraser.png');
+}
+
+
+/* serected=true　選択時に背景色を変更 */
+#axp_canvas:has(.axpc_penmode_round[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:丸ペン ]"]::before,
+#axp_canvas:has(.axpc_penmode_square[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:角ペン ]"]::before,
+#axp_canvas:has(.axpc_penmode_dot[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:ドットペン ]"]::before,
+#axp_canvas:has(.axpc_penmode_hude[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:筆ペン ]"]::before,
+#axp_canvas:has(.axpc_penmode_crayon[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:クレヨン ]"]::before,
+#axp_canvas:has(.axpc_penmode_brush[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ ペン種別:エアブラシ ]"]::before,
+#axp_canvas:has(.axpc_penmode_eraser_round[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 消しゴム種別:消しゴム ]"]::before,
+#axp_canvas:has(.axpc_penmode_eraser_dot[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 消しゴム種別:角消しゴム ]"]::before,
+#axp_canvas:has(.axpc_penmode_fill[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ バケツ種別:バケツ ]"]::before,
+#axp_canvas:has(.axpc_penmode_fillgradation[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ バケツ種別:階調バケツ ]"]::before,
+#axp_canvas:has(.axpc_penmode_hand[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ ツール種別:ハンド ]"]::before,
+#axp_canvas:has(.axpc_penmode_move[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ ツール種別:移動ツール ]"]::before,
+#axp_canvas:has(button#axp_pen_button_penBase[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 選択:ペン ]"]::before,
+#axp_canvas:has(button#axp_pen_button_eraserBase[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 選択:消しゴム ]"]::before,
+#axp_canvas:has(button#axp_pen_button_fillBase[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 選択:バケツ ]"]::before,
+#axp_canvas:has(button#axp_pen_button_handBase[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 選択:ツール ]"]::before,
+#axp_canvas:has(button#axp_pen_button_spuitBase[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 選択:スポイト ]"]::before {
+  background-color: #eeac60;
+}
+
+#axp_canvas:has(button#axp_pen_button_penBase[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 選択:ペン／消しゴム切替 ]"]::before {
+  background-color: #eeac60;
+}
+#axp_canvas:has(button#axp_pen_button_eraserBase[data-selected=true]) > #axp_custom .axpc_custom_button[data-msg="カスタムボタン：[ 選択:ペン／消しゴム切替 ]"]::after {
+  background-color: #eeac60;
+}
