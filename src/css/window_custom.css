@@ -237,9 +237,9 @@
 }
 
 
-/* ペンツール選択のときにTOOLの文字を入れる　テストするときはコメントアウト外す
+/* 種別選択ボタンとペンツール選択ボタンがあるときにツール選択ボタンにTOOLの文字を入れる　テストするときはコメントアウト外す
 
-#axp_custom .axpc_custom_button[data-msg*="選択:"]:not([data-msg="カスタムボタン：[ 選択:ペン／消しゴム切替 ]"])::after {
+#axp_custom_div_buttons:has(.axpc_custom_button[data-msg*="種別"]) > .axpc_custom_button[data-msg*="選択:"]:not([data-msg="カスタムボタン：[ 選択:ペン／消しゴム切替 ]"])::after {
   content: "TOOL";
   font-size: 10px;
   align-items: flex-end;
@@ -253,8 +253,9 @@
   black 2px 1px, black -2px 1px,
   black 2px -1px, black -2px -1px;
 }
-#axp_custom .axpc_custom_button[data-msg*="選択:"]:not([data-msg="カスタムボタン：[ 選択:ペン／消しゴム切替 ]"])::before {
+#axp_custom_div_buttons:has(.axpc_custom_button[data-msg*="種別"]) > .axpc_custom_button[data-msg*="選択"]:not([data-msg="カスタムボタン：[ 選択:ペン／消しゴム切替 ]"])::before {
   background-position: top;
 }
+
 
 */
