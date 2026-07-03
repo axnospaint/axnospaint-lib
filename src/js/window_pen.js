@@ -484,17 +484,18 @@ export class PenSystem extends ToolWindow {
         this.diffusionDetailOpen = (savedDetailOpen === true || savedDetailOpen === 'true');
 
         // 混色ペンのプリセットボタン
-        // シングルクリック: プリセット反映
-        // ダブルクリック: 名前変更＋「クリック前の」現在値で上書き保存
-        // （1回目のクリックで反映済みのため、保持しておいたクリック前の値を保存する）
+        // シングルクリック → 0.3秒待機 → 再クリックなし → プリセット反映
+        // 0.3秒以内の再クリック → 反映せず編集 (名前変更＋現在値で上書き保存)。
+        // 即時反映にすると「画面に見えている値と違う値が保存される」瞬間が
+        // 生まれるため、反映を遅延させて分岐を堅牢にしている。
         document.querySelectorAll('.axpc_pen_diffpreset').forEach((btn) => {
             const idx = Number(btn.dataset.pidx);
-            let lastTapTime = 0;
-            let valuesBeforeTap = null;
+            let clickTimerID = null; // 反映待機タイマー
             btn.addEventListener('pointerup', () => {
-                const now = Date.now();
-                if (now - lastTapTime < 300 && valuesBeforeTap) {
-                    // ダブルクリック: 名前変更＋クリック前の値で上書き
+                if (clickTimerID !== null) {
+                    // 待機中の再クリック: 反映せず編集
+                    clearTimeout(clickTimerID);
+                    clickTimerID = null;
                     const preset = this.diffusionPresets[idx];
                     const input = prompt(
                         'プリセット名を入力（現在の硬さ・広がり・引きずりを保存）',
@@ -502,25 +503,23 @@ export class PenSystem extends ToolWindow {
                     );
                     if (input !== null) {
                         const name = input.trim().substring(0, 20) || preset.name;
-                        this.diffusionPresets[idx] = { name, ...valuesBeforeTap };
-                        // 作業状態の保全: 1回目のクリックで反映された値を元に戻す
-                        this.applyDiffusionPreset(idx);
+                        this.diffusionPresets[idx] = {
+                            name,
+                            hardness: this.getHardness(),
+                            diffusion: this.getDiffusion(),
+                            drag: this.getDrag(),
+                        };
                         this.axpObj.configSystem.saveConfig(
                             'DPRST_' + idx, JSON.stringify(this.diffusionPresets[idx])
                         );
                         this.updateDiffusionPresetDisplay();
                     }
-                    lastTapTime = 0;
-                    valuesBeforeTap = null;
                 } else {
-                    lastTapTime = now;
-                    // クリック前の現在値を保持（ダブルクリック時の上書き保存用）
-                    valuesBeforeTap = {
-                        hardness: this.getHardness(),
-                        diffusion: this.getDiffusion(),
-                        drag: this.getDrag(),
-                    };
-                    this.applyDiffusionPreset(idx);
+                    // 0.3秒待機し、再クリックがなければ反映
+                    clickTimerID = setTimeout(() => {
+                        clickTimerID = null;
+                        this.applyDiffusionPreset(idx);
+                    }, 300);
                 }
             });
         });
