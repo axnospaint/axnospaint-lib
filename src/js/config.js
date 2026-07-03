@@ -1808,6 +1808,10 @@ export class ConfigSystem {
                 case 'COTAG':
                     this.axpObj.layerSystem.resetColorTagList(value);
                     break;
+                // 太さクイックボタン・混色ペンプリセット (値はペンツール側で解釈)
+                case 'QSIZE':
+                case 'DPRST':
+                    break;
                 // その他
                 default:
                     isAvailable = false;

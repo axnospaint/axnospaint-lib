@@ -52,8 +52,9 @@ export class Diffusion extends PixelFilterPenBase {
         this.size = 20;
         this.index = range_index(this.size);
         this.alpha = 100;    // 寄与度の上限 α_max (不透明度スライダー)
-        this.hardness = 50;  // 足跡フォールオフの硬さ (0-100)
-        this.diffusion = 50; // ぼかしの広がり (0-100)
+        // 初期値はプリセット1「ぼかしペン」と一致させる (初回から反映中表示になる)
+        this.hardness = 30;  // 足跡フォールオフの硬さ (0-100)
+        this.diffusion = 80; // ぼかしの広がり (0-100)
         this.drag = 0;       // 引きずりの強さ (0-100)
 
         this.init_save();
