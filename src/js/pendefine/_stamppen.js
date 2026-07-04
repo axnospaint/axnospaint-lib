@@ -104,14 +104,7 @@ export class StampPenBase extends DrawingPenBase {
     }
 
     // ── 内部ヘルパ ───────────────────────────────
-
-    // 入力イベント → パイプライン入力 (生筆圧のまま。カーブ変換はパイプライン側)
-    _toInput(x, y, e) {
-        const rawPressure = (e && typeof e.pressure === 'number') ? e.pressure : 1.0;
-        const pointerType = e ? e.pointerType : 'mouse';
-        const t = (e && typeof e.timeStamp === 'number') ? e.timeStamp : performance.now();
-        return { x, y, rawPressure, pointerType, t };
-    }
+    // (_toInput は DrawingPenBase 側に定義)
 
     // 確定点間隔: 太いほど粗く打てる (細部の取りこぼし防止に下限 2px)。
     // サブピクセル半透明モードでは gap を縮小してポリゴンタイリングを密にする。

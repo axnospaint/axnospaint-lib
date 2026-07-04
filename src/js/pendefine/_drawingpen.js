@@ -41,6 +41,14 @@ export class DrawingPenBase extends PenObj {
         return (this.size - 0.25) / 2;
     }
 
+    // 入力イベント → パイプライン入力 (生筆圧のまま。カーブ変換はパイプライン側)
+    _toInput(x, y, e) {
+        const rawPressure = (e && typeof e.pressure === 'number') ? e.pressure : 1.0;
+        const pointerType = e ? e.pointerType : 'mouse';
+        const t = (e && typeof e.timeStamp === 'number') ? e.timeStamp : performance.now();
+        return { x, y, rawPressure, pointerType, t };
+    }
+
     // ブラシ初期化 (既定: 通常色 / トーン濃度対応)。
     // 消しゴム・ブラシ等は destination-out やグラデのため override する。
     init_brush(option) {

@@ -86,6 +86,8 @@ export class UndoSystem {
     }
     // アンドゥ実行
     undo() {
+        // なげなわ変形中は確定してから処理する
+        this.axpObj.finalizeNagenawaSelection();
         if (this.undoObj.length <= 0) {
             // これ以上アンドゥできません。
             this.axpObj.msg('@CAU0400');
@@ -218,6 +220,8 @@ export class UndoSystem {
     }
     // リドゥ実行
     redo() {
+        // なげなわ変形中は確定してから処理する
+        this.axpObj.finalizeNagenawaSelection();
         if (this.redoObj.length <= 0) {
             // これ以上リドゥできません。
             this.axpObj.msg('@CAU0401');

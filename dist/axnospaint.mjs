@@ -1,5 +1,5 @@
 /*!
- * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-06-22T05:15:29.368Z)
+ * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-06-28T09:20:27.302Z)
  * (c) 2026- nijiurachan contributors
  * (c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」
  * Licensed under MPL 2.0
@@ -140,10 +140,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
 // Imports
 
 
+
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/overlay/rotate_left.svg */ "./resource/overlay/rotate_left.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/overlay/rotate.svg */ "./resource/overlay/rotate.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/overlay/rotate_right.svg */ "./resource/overlay/rotate_right.svg"), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
+var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `/* AXNOS Paintメイン */
 
@@ -365,6 +374,34 @@ body {
   z-index: 800;
 }
 
+/* 回転操作子グループ（ハンドツール時に上部中央へ表示） */
+#axp_canvas_div_rotateGroup {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3000;
+  display: flex;
+  gap: 4px;
+}
+
+#axp_canvas_div_rotateGroup > .axpc_overlay_knob,
+#axp_canvas_div_rotateGroup > .axpc_overlay_btn {
+  position: static;
+}
+
+#axp_canvas_div_rotateLeft {
+  background-image: url(${___CSS_LOADER_URL_REPLACEMENT_0___});
+}
+
+#axp_canvas_div_rotateHandle {
+  background-image: url(${___CSS_LOADER_URL_REPLACEMENT_1___});
+}
+
+#axp_canvas_div_rotateRight {
+  background-image: url(${___CSS_LOADER_URL_REPLACEMENT_2___});
+}
+
 /* デバッグ情報 */
 #axp_canvas_div_debugInfo {
   position: absolute;
@@ -450,7 +487,7 @@ body {
 #axp_footer_div_icon {
   margin-left: 8px;
   margin-top: 2px;
-}`, "",{"version":3,"sources":["webpack://./src/css/axnospaint.css"],"names":[],"mappings":"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","sourcesContent":["/* AXNOS Paintメイン */\n\nbody {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100vh;\n  /* iPad */\n  height: 100svh;\n  display: flex;\n  flex-direction: column;\n  /* Pull-to-Refresh防止 */\n  overscroll-behavior-y: none;\n  /* 注意　HTML5版も影響をうける */\n  overflow: hidden;\n}\n\n#axp_main {\n  touch-action: none;\n  -webkit-user-select: none;\n  user-select: none;\n  color: #fff;\n  background-color: #000;\n  font-size: 15px;\n  width: 100%;\n  margin: 0 auto;\n  padding: 0;\n  display: none;\n  flex-grow: 1;\n  flex-direction: column;\n  overflow: hidden;\n  font-family: sans-serif;\n}\n\n/* 詳細度0.0.0でツールの要素全体に指定 */\n:where(#axp_main) * {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n/* メインのタブ制御 */\n#axp_main_div_tab {\n  display: flex;\n  align-items: flex-end;\n  min-height: 30px;\n}\n\n/* 見出し枠 */\n#axp_main_div_tab_menu {\n  list-style-type: none;\n  display: flex;\n}\n\n/* 見出し */\n#axp_main_div_tab_menu>div {\n  display: block;\n  width: 98px;\n  margin: 0;\n  padding: 2px 0;\n  text-align: center;\n  border-top: 2px solid #000;\n  border-left: 0px solid #000;\n  border-right: 2px solid #000;\n  border-radius: 10px 10px 0 0;\n  background: #333;\n  box-sizing: border-box;\n  cursor: pointer;\n}\n\n/* 見出しにカーソルを当てた時 */\n#axp_main_div_tab_menu>div:hover {\n  background: #555;\n}\n\n/* 選択されている見出し */\n#axp_main_div_tab_menu>div[data-selected=\"true\"] {\n  background: #777;\n}\n\n/* ハンバーガーメニュー */\n#axp_main_label_hamburger {\n  /* 通常は非表示 */\n  display: none;\n  height: 100%;\n  width: 30px;\n  cursor: pointer;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  margin: 0 8px;\n}\n\n/* ハンバーガーメニューチェックボックス */\n#axp_main_checkbox_hamburger {\n  display: none;\n}\n\n/* ブラウザの横幅が599px以下の場合 */\n@media (max-width: 599px) {\n\n  /* ハンバーガーメニュー表示 */\n  #axp_main_label_hamburger {\n    display: flex;\n  }\n\n  #axp_main_div_tab_menu {\n    position: absolute;\n    background: #333;\n    top: 0;\n    margin-top: 30px;\n    left: 0;\n    flex-direction: column;\n    width: 100%;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n    z-index: 6000;\n  }\n\n  #axp_main_checkbox_hamburger~div>div {\n    height: 0;\n    margin: 0;\n    padding: 0;\n    border: 0;\n    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);\n  }\n\n  #axp_main_checkbox_hamburger:checked~div>div {\n    border: 1px solid #333;\n    height: 2.5em;\n    padding: 0.5em;\n    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);\n  }\n\n  #axp_main_div_tab_menu>div {\n    display: flex;\n    justify-content: center;\n    margin: 0;\n    padding: 0.5em 0;\n    width: 100%;\n    border-radius: 10px 10px 10px 10px;\n  }\n}\n\n/* タブ横のテキスト */\n#axp_main_div_headerText {\n  padding: 4px 10px 0;\n  color: #fff;\n  overflow: hidden;\n  white-space: pre;\n  flex-grow: 1;\n  cursor: pointer;\n  text-overflow: ellipsis;\n}\n\n/* タブ横のテキストクリック時、全文表示 */\n#axp_main_div_headerText:active {\n  overflow: visible;\n  white-space: normal;\n}\n\n/* タブにより切り替わる画面 */\n#axp_main_div_tabContent>article {\n  display: none;\n  flex-grow: 1;\n  flex-direction: column;\n  overflow: hidden;\n}\n\n/* inputのフォントサイズ指定 */\n#axp_main_div_tabContent input {\n  font-size: 13px;\n}\n\n/* タブ：キャンバス */\n#axp_canvas {\n  width: 100%;\n  overflow: hidden;\n  position: relative;\n  flex-grow: 1;\n}\n\n/* キャンバス外の灰色部分 */\n#axp_canvas_div_grayBackground {\n  width: 100%;\n  height: 100%;\n  background-color: #777;\n}\n\n/* メインキャンバス */\n#axp_canvas_canvas_main {\n  position: absolute;\n  image-rendering: pixelated;\n  z-index: 100;\n}\n\n/* 補助線 */\n#axp_canvas_div_grid {\n  /* イベントを受け取らない（重要） */\n  pointer-events: none;\n  image-rendering: auto;\n  position: absolute;\n  z-index: 600;\n}\n\n/* 座標表示用領域 */\n#axp_canvas_div_pointerPosition {\n  position: absolute;\n  right: 0;\n  bottom: 0;\n  font-family: monospace;\n  font-size: 18px;\n  font-weight: 500;\n  color: #fff;\n  background: rgba(0, 0, 0, 0.7);\n  box-shadow: #000;\n  z-index: 800;\n}\n\n/* デバッグ情報 */\n#axp_canvas_div_debugInfo {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-family: monospace;\n  font-size: 1em;\n  background: rgba(0, 0, 0, 0.7);\n  box-shadow: #000;\n  z-index: 900;\n  height: 50%;\n  max-height: 95%;\n  resize: both;\n  overflow: hidden;\n}\n\n#axp_canvas_div_debugInfo>div:nth-of-type(1) {\n  font-family: monospace;\n  color: #fff;\n  font-size: 1em;\n  height: 24px;\n  overflow: hidden;\n}\n\n#axp_canvas_div_debugInfo>div:nth-of-type(2) {\n  font-family: monospace;\n  font-size: 1em;\n  color: #fff;\n  background: rgba(0, 0, 0, 0);\n  min-width: 360px;\n  height: calc(100% - 24px);\n  overflow-x: hidden;\n  overflow-y: scroll;\n}\n\n/* カーソル位置に表示するペンの太さ表示*/\n#axp_canvas_div_penCursor {\n  pointer-events: none;\n  position: absolute;\n  border: solid 2px rgba(0, 0, 0, 0.3);\n  z-index: 700;\n}\n\n\n#axp_main_div_tabContent,\n#axp_config,\n#axp_config_div_menu {\n  display: flex;\n  flex-grow: 1;\n  flex-direction: column;\n  overflow: hidden;\n}\n\n/* タブ：設定 */\n#axp_config_div_content {\n  flex-grow: 1;\n}\n\n/* タブ：投稿 */\n#axp_post {\n  flex-grow: 1;\n  overflow: auto;\n}\n\n/* フッター領域 */\n#axp_footer {\n  touch-action: none;\n  -webkit-user-select: none;\n  user-select: none;\n  background-color: #222;\n  color: #ddd;\n  display: flex;\n  flex-basis: 31px;\n}\n\n#axp_footer_div_message {\n  background-color: rgba(0, 0, 0, 0);\n  font-size: 15px;\n  font-family: sans-serif;\n  padding: 4px;\n}\n\n#axp_footer_div_icon {\n  margin-left: 8px;\n  margin-top: 2px;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/css/axnospaint.css"],"names":[],"mappings":"AAAA,mBAAmB;;AAEnB;EACE,SAAS;EACT,UAAU;EACV,WAAW;EACX,aAAa;EACb,SAAS;EACT,cAAc;EACd,aAAa;EACb,sBAAsB;EACtB,sBAAsB;EACtB,2BAA2B;EAC3B,qBAAqB;EACrB,gBAAgB;AAClB;;AAEA;EACE,kBAAkB;EAClB,yBAAyB;EACzB,iBAAiB;EACjB,WAAW;EACX,sBAAsB;EACtB,eAAe;EACf,WAAW;EACX,cAAc;EACd,UAAU;EACV,aAAa;EACb,YAAY;EACZ,sBAAsB;EACtB,gBAAgB;EAChB,uBAAuB;AACzB;;AAEA,yBAAyB;AACzB;EACE,sBAAsB;EACtB,SAAS;EACT,UAAU;AACZ;;AAEA,aAAa;AACb;EACE,aAAa;EACb,qBAAqB;EACrB,gBAAgB;AAClB;;AAEA,SAAS;AACT;EACE,qBAAqB;EACrB,aAAa;AACf;;AAEA,QAAQ;AACR;EACE,cAAc;EACd,WAAW;EACX,SAAS;EACT,cAAc;EACd,kBAAkB;EAClB,0BAA0B;EAC1B,2BAA2B;EAC3B,4BAA4B;EAC5B,4BAA4B;EAC5B,gBAAgB;EAChB,sBAAsB;EACtB,eAAe;AACjB;;AAEA,kBAAkB;AAClB;EACE,gBAAgB;AAClB;;AAEA,eAAe;AACf;EACE,gBAAgB;AAClB;;AAEA,eAAe;AACf;EACE,WAAW;EACX,aAAa;EACb,YAAY;EACZ,WAAW;EACX,eAAe;EACf,sBAAsB;EACtB,uBAAuB;EACvB,mBAAmB;EACnB,aAAa;AACf;;AAEA,uBAAuB;AACvB;EACE,aAAa;AACf;;AAEA,uBAAuB;AACvB;;EAEE,iBAAiB;EACjB;IACE,aAAa;EACf;;EAEA;IACE,kBAAkB;IAClB,gBAAgB;IAChB,MAAM;IACN,gBAAgB;IAChB,OAAO;IACP,sBAAsB;IACtB,WAAW;IACX,uBAAuB;IACvB,mBAAmB;IACnB,gBAAgB;IAChB,aAAa;EACf;;EAEA;IACE,SAAS;IACT,SAAS;IACT,UAAU;IACV,SAAS;IACT,uDAAuD;EACzD;;EAEA;IACE,sBAAsB;IACtB,aAAa;IACb,cAAc;IACd,uDAAuD;EACzD;;EAEA;IACE,aAAa;IACb,uBAAuB;IACvB,SAAS;IACT,gBAAgB;IAChB,WAAW;IACX,kCAAkC;EACpC;AACF;;AAEA,aAAa;AACb;EACE,mBAAmB;EACnB,WAAW;EACX,gBAAgB;EAChB,gBAAgB;EAChB,YAAY;EACZ,eAAe;EACf,uBAAuB;AACzB;;AAEA,uBAAuB;AACvB;EACE,iBAAiB;EACjB,mBAAmB;AACrB;;AAEA,iBAAiB;AACjB;EACE,aAAa;EACb,YAAY;EACZ,sBAAsB;EACtB,gBAAgB;AAClB;;AAEA,oBAAoB;AACpB;EACE,eAAe;AACjB;;AAEA,aAAa;AACb;EACE,WAAW;EACX,gBAAgB;EAChB,kBAAkB;EAClB,YAAY;AACd;;AAEA,gBAAgB;AAChB;EACE,WAAW;EACX,YAAY;EACZ,sBAAsB;AACxB;;AAEA,aAAa;AACb;EACE,kBAAkB;EAClB,0BAA0B;EAC1B,YAAY;AACd;;AAEA,QAAQ;AACR;EACE,oBAAoB;EACpB,oBAAoB;EACpB,qBAAqB;EACrB,kBAAkB;EAClB,YAAY;AACd;;AAEA,YAAY;AACZ;EACE,kBAAkB;EAClB,QAAQ;EACR,SAAS;EACT,sBAAsB;EACtB,eAAe;EACf,gBAAgB;EAChB,WAAW;EACX,8BAA8B;EAC9B,gBAAgB;EAChB,YAAY;AACd;;AAEA,+BAA+B;AAC/B;EACE,kBAAkB;EAClB,QAAQ;EACR,SAAS;EACT,2BAA2B;EAC3B,aAAa;EACb,aAAa;EACb,QAAQ;AACV;;AAEA;;EAEE,gBAAgB;AAClB;;AAEA;EACE,yDAA+D;AACjE;;AAEA;EACE,yDAA0D;AAC5D;;AAEA;EACE,yDAAgE;AAClE;;AAEA,WAAW;AACX;EACE,kBAAkB;EAClB,MAAM;EACN,OAAO;EACP,sBAAsB;EACtB,cAAc;EACd,8BAA8B;EAC9B,gBAAgB;EAChB,YAAY;EACZ,WAAW;EACX,eAAe;EACf,YAAY;EACZ,gBAAgB;AAClB;;AAEA;EACE,sBAAsB;EACtB,WAAW;EACX,cAAc;EACd,YAAY;EACZ,gBAAgB;AAClB;;AAEA;EACE,sBAAsB;EACtB,cAAc;EACd,WAAW;EACX,4BAA4B;EAC5B,gBAAgB;EAChB,yBAAyB;EACzB,kBAAkB;EAClB,kBAAkB;AACpB;;AAEA,sBAAsB;AACtB;EACE,oBAAoB;EACpB,kBAAkB;EAClB,oCAAoC;EACpC,YAAY;AACd;;;AAGA;;;EAGE,aAAa;EACb,YAAY;EACZ,sBAAsB;EACtB,gBAAgB;AAClB;;AAEA,UAAU;AACV;EACE,YAAY;AACd;;AAEA,UAAU;AACV;EACE,YAAY;EACZ,cAAc;AAChB;;AAEA,WAAW;AACX;EACE,kBAAkB;EAClB,yBAAyB;EACzB,iBAAiB;EACjB,sBAAsB;EACtB,WAAW;EACX,aAAa;EACb,gBAAgB;AAClB;;AAEA;EACE,kCAAkC;EAClC,eAAe;EACf,uBAAuB;EACvB,YAAY;AACd;;AAEA;EACE,gBAAgB;EAChB,eAAe;AACjB","sourcesContent":["/* AXNOS Paintメイン */\n\nbody {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100vh;\n  /* iPad */\n  height: 100svh;\n  display: flex;\n  flex-direction: column;\n  /* Pull-to-Refresh防止 */\n  overscroll-behavior-y: none;\n  /* 注意　HTML5版も影響をうける */\n  overflow: hidden;\n}\n\n#axp_main {\n  touch-action: none;\n  -webkit-user-select: none;\n  user-select: none;\n  color: #fff;\n  background-color: #000;\n  font-size: 15px;\n  width: 100%;\n  margin: 0 auto;\n  padding: 0;\n  display: none;\n  flex-grow: 1;\n  flex-direction: column;\n  overflow: hidden;\n  font-family: sans-serif;\n}\n\n/* 詳細度0.0.0でツールの要素全体に指定 */\n:where(#axp_main) * {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n/* メインのタブ制御 */\n#axp_main_div_tab {\n  display: flex;\n  align-items: flex-end;\n  min-height: 30px;\n}\n\n/* 見出し枠 */\n#axp_main_div_tab_menu {\n  list-style-type: none;\n  display: flex;\n}\n\n/* 見出し */\n#axp_main_div_tab_menu>div {\n  display: block;\n  width: 98px;\n  margin: 0;\n  padding: 2px 0;\n  text-align: center;\n  border-top: 2px solid #000;\n  border-left: 0px solid #000;\n  border-right: 2px solid #000;\n  border-radius: 10px 10px 0 0;\n  background: #333;\n  box-sizing: border-box;\n  cursor: pointer;\n}\n\n/* 見出しにカーソルを当てた時 */\n#axp_main_div_tab_menu>div:hover {\n  background: #555;\n}\n\n/* 選択されている見出し */\n#axp_main_div_tab_menu>div[data-selected=\"true\"] {\n  background: #777;\n}\n\n/* ハンバーガーメニュー */\n#axp_main_label_hamburger {\n  /* 通常は非表示 */\n  display: none;\n  height: 100%;\n  width: 30px;\n  cursor: pointer;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  margin: 0 8px;\n}\n\n/* ハンバーガーメニューチェックボックス */\n#axp_main_checkbox_hamburger {\n  display: none;\n}\n\n/* ブラウザの横幅が599px以下の場合 */\n@media (max-width: 599px) {\n\n  /* ハンバーガーメニュー表示 */\n  #axp_main_label_hamburger {\n    display: flex;\n  }\n\n  #axp_main_div_tab_menu {\n    position: absolute;\n    background: #333;\n    top: 0;\n    margin-top: 30px;\n    left: 0;\n    flex-direction: column;\n    width: 100%;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n    z-index: 6000;\n  }\n\n  #axp_main_checkbox_hamburger~div>div {\n    height: 0;\n    margin: 0;\n    padding: 0;\n    border: 0;\n    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);\n  }\n\n  #axp_main_checkbox_hamburger:checked~div>div {\n    border: 1px solid #333;\n    height: 2.5em;\n    padding: 0.5em;\n    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);\n  }\n\n  #axp_main_div_tab_menu>div {\n    display: flex;\n    justify-content: center;\n    margin: 0;\n    padding: 0.5em 0;\n    width: 100%;\n    border-radius: 10px 10px 10px 10px;\n  }\n}\n\n/* タブ横のテキスト */\n#axp_main_div_headerText {\n  padding: 4px 10px 0;\n  color: #fff;\n  overflow: hidden;\n  white-space: pre;\n  flex-grow: 1;\n  cursor: pointer;\n  text-overflow: ellipsis;\n}\n\n/* タブ横のテキストクリック時、全文表示 */\n#axp_main_div_headerText:active {\n  overflow: visible;\n  white-space: normal;\n}\n\n/* タブにより切り替わる画面 */\n#axp_main_div_tabContent>article {\n  display: none;\n  flex-grow: 1;\n  flex-direction: column;\n  overflow: hidden;\n}\n\n/* inputのフォントサイズ指定 */\n#axp_main_div_tabContent input {\n  font-size: 13px;\n}\n\n/* タブ：キャンバス */\n#axp_canvas {\n  width: 100%;\n  overflow: hidden;\n  position: relative;\n  flex-grow: 1;\n}\n\n/* キャンバス外の灰色部分 */\n#axp_canvas_div_grayBackground {\n  width: 100%;\n  height: 100%;\n  background-color: #777;\n}\n\n/* メインキャンバス */\n#axp_canvas_canvas_main {\n  position: absolute;\n  image-rendering: pixelated;\n  z-index: 100;\n}\n\n/* 補助線 */\n#axp_canvas_div_grid {\n  /* イベントを受け取らない（重要） */\n  pointer-events: none;\n  image-rendering: auto;\n  position: absolute;\n  z-index: 600;\n}\n\n/* 座標表示用領域 */\n#axp_canvas_div_pointerPosition {\n  position: absolute;\n  right: 0;\n  bottom: 0;\n  font-family: monospace;\n  font-size: 18px;\n  font-weight: 500;\n  color: #fff;\n  background: rgba(0, 0, 0, 0.7);\n  box-shadow: #000;\n  z-index: 800;\n}\n\n/* 回転操作子グループ（ハンドツール時に上部中央へ表示） */\n#axp_canvas_div_rotateGroup {\n  position: absolute;\n  top: 8px;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 3000;\n  display: flex;\n  gap: 4px;\n}\n\n#axp_canvas_div_rotateGroup > .axpc_overlay_knob,\n#axp_canvas_div_rotateGroup > .axpc_overlay_btn {\n  position: static;\n}\n\n#axp_canvas_div_rotateLeft {\n  background-image: url('../../resource/overlay/rotate_left.svg');\n}\n\n#axp_canvas_div_rotateHandle {\n  background-image: url('../../resource/overlay/rotate.svg');\n}\n\n#axp_canvas_div_rotateRight {\n  background-image: url('../../resource/overlay/rotate_right.svg');\n}\n\n/* デバッグ情報 */\n#axp_canvas_div_debugInfo {\n  position: absolute;\n  top: 0;\n  left: 0;\n  font-family: monospace;\n  font-size: 1em;\n  background: rgba(0, 0, 0, 0.7);\n  box-shadow: #000;\n  z-index: 900;\n  height: 50%;\n  max-height: 95%;\n  resize: both;\n  overflow: hidden;\n}\n\n#axp_canvas_div_debugInfo>div:nth-of-type(1) {\n  font-family: monospace;\n  color: #fff;\n  font-size: 1em;\n  height: 24px;\n  overflow: hidden;\n}\n\n#axp_canvas_div_debugInfo>div:nth-of-type(2) {\n  font-family: monospace;\n  font-size: 1em;\n  color: #fff;\n  background: rgba(0, 0, 0, 0);\n  min-width: 360px;\n  height: calc(100% - 24px);\n  overflow-x: hidden;\n  overflow-y: scroll;\n}\n\n/* カーソル位置に表示するペンの太さ表示*/\n#axp_canvas_div_penCursor {\n  pointer-events: none;\n  position: absolute;\n  border: solid 2px rgba(0, 0, 0, 0.3);\n  z-index: 700;\n}\n\n\n#axp_main_div_tabContent,\n#axp_config,\n#axp_config_div_menu {\n  display: flex;\n  flex-grow: 1;\n  flex-direction: column;\n  overflow: hidden;\n}\n\n/* タブ：設定 */\n#axp_config_div_content {\n  flex-grow: 1;\n}\n\n/* タブ：投稿 */\n#axp_post {\n  flex-grow: 1;\n  overflow: auto;\n}\n\n/* フッター領域 */\n#axp_footer {\n  touch-action: none;\n  -webkit-user-select: none;\n  user-select: none;\n  background-color: #222;\n  color: #ddd;\n  display: flex;\n  flex-basis: 31px;\n}\n\n#axp_footer_div_message {\n  background-color: rgba(0, 0, 0, 0);\n  font-size: 15px;\n  font-family: sans-serif;\n  padding: 4px;\n}\n\n#axp_footer_div_icon {\n  margin-left: 8px;\n  margin-top: 2px;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -478,9 +515,9 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `/* 共通クラス */
 
-/* 要素非表示 */
+/* 要素非表示（IDセレクタのdisplay指定より優先させるため!important） */
 .axpc_NONE {
-    display: none;
+    display: none !important;
 }
 
 /* 要素非表示（レイアウト変更なし） */
@@ -554,7 +591,44 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 共通クラス */
     border-width: 2px;
     border-style: solid;
     border-color: #aaa;
-}`, "",{"version":3,"sources":["webpack://./src/css/common.css"],"names":[],"mappings":"AAAA,UAAU;;AAEV,UAAU;AACV;IACI,aAAa;AACjB;;AAEA,qBAAqB;AACrB;IACI,kBAAkB;AACtB;;AAEA,YAAY;AACZ;IACI;;;;;;;;uCAQmC;IACnC;;;;;KAKC;AACL;;AAEA,iBAAiB;AACjB;IACI,8BAA8B;IAC9B,gGAAgG;IAChG,0BAA0B;IAC1B,qDAAqD;AACzD;;AAEA,cAAc;AACd;IACI,kBAAkB;IAClB,yBAAyB;IACzB,iBAAiB;IACjB,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,gBAAgB;IAChB,kCAAkC;AACtC;;AAEA;IACI,sBAAsB;IACtB,WAAW;IACX,kBAAkB;IAClB,mBAAmB;IACnB,iBAAiB;IACjB,kBAAkB;IAClB,4BAA4B;IAC5B,kBAAkB;IAClB,YAAY;IACZ,YAAY;IACZ,YAAY;AAChB;;AAEA,qBAAqB;AACrB;IACI,YAAY;IACZ,WAAW;IACX,eAAe;IACf,kBAAkB;IAClB,WAAW;IACX,iBAAiB;IACjB,mBAAmB;IACnB,kBAAkB;AACtB","sourcesContent":["/* 共通クラス */\n\n/* 要素非表示 */\n.axpc_NONE {\n    display: none;\n}\n\n/* 要素非表示（レイアウト変更なし） */\n.axpc_HIDDEN {\n    visibility: hidden;\n}\n\n/* テキスト縁取り */\n.axpc_text_border {\n    text-shadow:\n        black 2px 0px, black -2px 0px,\n        black 0px -2px, black 0px 2px,\n        black 2px 2px, black -2px 2px,\n        black 2px -2px, black -2px -2px,\n        black 1px 2px, black -1px 2px,\n        black 1px -2px, black -1px -2px,\n        black 2px 1px, black -2px 1px,\n        black 2px -1px, black -2px -1px;\n    /*\n    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000,\n        -1px 1px 0 #000, 1px -1px 0 #000,\n        0px 1px 0 #000, 0-1px 0 #000,\n        -1px 0 0 #000, 1px 0 0 #000;\n    */\n}\n\n/* キャンバスの透過メッシュ */\n.axpc_background_mesh {\n    background: rgb(204, 204, 204);\n    background-image: repeating-conic-gradient(from 0deg, transparent 0deg 90deg, #fff 90deg 180deg);\n    background-size: 16px 16px;\n    background-position: 0 0, 8px 8px, 8px 8px, 16px 16px;\n}\n\n/* サブウィンドウ共通 */\n.axpc_subwindow {\n    touch-action: none;\n    -webkit-user-select: none;\n    user-select: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: hidden;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n.axpc_subwindow>div {\n    background-color: #333;\n    color: #fff;\n    border-color: #000;\n    border-style: solid;\n    border-width: 2px;\n    border-color: #aaa;\n    box-shadow: 4px 4px 8px #777;\n    border-radius: 5px;\n    width: 188px;\n    height: auto;\n    padding: 8px;\n}\n\n/* 色作成 補助線設定のカラー選択枠 */\n.axpc_colorRect {\n    height: 32px;\n    width: 32px;\n    cursor: pointer;\n    border-radius: 5px;\n    margin: 1px;\n    border-width: 2px;\n    border-style: solid;\n    border-color: #aaa;\n}"],"sourceRoot":""}]);
+}
+
+/* オーバーレイ操作子共通（キャンバス上に浮かぶUI部品） */
+.axpc_overlay_knob,
+.axpc_overlay_btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 3000;
+    border-radius: 8px;
+    background-color: var(--axp-knob-bg, rgba(85, 85, 85, 0.85));
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 26px 26px;
+    touch-action: none;
+    user-select: none;
+}
+
+/* オーバーレイノブ（ドラッグ操作用） */
+.axpc_overlay_knob {
+    border: 3px solid var(--axp-knob-border, #eee);
+    cursor: grab;
+}
+
+.axpc_overlay_knob:active {
+    cursor: all-scroll;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+/* オーバーレイボタン（タップ操作用） */
+.axpc_overlay_btn {
+    border: 2px solid var(--axp-btn-border, #ccc);
+    cursor: pointer;
+}
+
+.axpc_overlay_btn:active {
+    background-color: rgba(0, 0, 0, 0.85);
+}`, "",{"version":3,"sources":["webpack://./src/css/common.css"],"names":[],"mappings":"AAAA,UAAU;;AAEV,+CAA+C;AAC/C;IACI,wBAAwB;AAC5B;;AAEA,qBAAqB;AACrB;IACI,kBAAkB;AACtB;;AAEA,YAAY;AACZ;IACI;;;;;;;;uCAQmC;IACnC;;;;;KAKC;AACL;;AAEA,iBAAiB;AACjB;IACI,8BAA8B;IAC9B,gGAAgG;IAChG,0BAA0B;IAC1B,qDAAqD;AACzD;;AAEA,cAAc;AACd;IACI,kBAAkB;IAClB,yBAAyB;IACzB,iBAAiB;IACjB,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,gBAAgB;IAChB,kCAAkC;AACtC;;AAEA;IACI,sBAAsB;IACtB,WAAW;IACX,kBAAkB;IAClB,mBAAmB;IACnB,iBAAiB;IACjB,kBAAkB;IAClB,4BAA4B;IAC5B,kBAAkB;IAClB,YAAY;IACZ,YAAY;IACZ,YAAY;AAChB;;AAEA,qBAAqB;AACrB;IACI,YAAY;IACZ,WAAW;IACX,eAAe;IACf,kBAAkB;IAClB,WAAW;IACX,iBAAiB;IACjB,mBAAmB;IACnB,kBAAkB;AACtB;;AAEA,gCAAgC;AAChC;;IAEI,kBAAkB;IAClB,WAAW;IACX,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,4DAA4D;IAC5D,4BAA4B;IAC5B,2BAA2B;IAC3B,0BAA0B;IAC1B,kBAAkB;IAClB,iBAAiB;AACrB;;AAEA,sBAAsB;AACtB;IACI,8CAA8C;IAC9C,YAAY;AAChB;;AAEA;IACI,kBAAkB;IAClB,qCAAqC;AACzC;;AAEA,sBAAsB;AACtB;IACI,6CAA6C;IAC7C,eAAe;AACnB;;AAEA;IACI,qCAAqC;AACzC","sourcesContent":["/* 共通クラス */\n\n/* 要素非表示（IDセレクタのdisplay指定より優先させるため!important） */\n.axpc_NONE {\n    display: none !important;\n}\n\n/* 要素非表示（レイアウト変更なし） */\n.axpc_HIDDEN {\n    visibility: hidden;\n}\n\n/* テキスト縁取り */\n.axpc_text_border {\n    text-shadow:\n        black 2px 0px, black -2px 0px,\n        black 0px -2px, black 0px 2px,\n        black 2px 2px, black -2px 2px,\n        black 2px -2px, black -2px -2px,\n        black 1px 2px, black -1px 2px,\n        black 1px -2px, black -1px -2px,\n        black 2px 1px, black -2px 1px,\n        black 2px -1px, black -2px -1px;\n    /*\n    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000,\n        -1px 1px 0 #000, 1px -1px 0 #000,\n        0px 1px 0 #000, 0-1px 0 #000,\n        -1px 0 0 #000, 1px 0 0 #000;\n    */\n}\n\n/* キャンバスの透過メッシュ */\n.axpc_background_mesh {\n    background: rgb(204, 204, 204);\n    background-image: repeating-conic-gradient(from 0deg, transparent 0deg 90deg, #fff 90deg 180deg);\n    background-size: 16px 16px;\n    background-position: 0 0, 8px 8px, 8px 8px, 16px 16px;\n}\n\n/* サブウィンドウ共通 */\n.axpc_subwindow {\n    touch-action: none;\n    -webkit-user-select: none;\n    user-select: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: hidden;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n.axpc_subwindow>div {\n    background-color: #333;\n    color: #fff;\n    border-color: #000;\n    border-style: solid;\n    border-width: 2px;\n    border-color: #aaa;\n    box-shadow: 4px 4px 8px #777;\n    border-radius: 5px;\n    width: 188px;\n    height: auto;\n    padding: 8px;\n}\n\n/* 色作成 補助線設定のカラー選択枠 */\n.axpc_colorRect {\n    height: 32px;\n    width: 32px;\n    cursor: pointer;\n    border-radius: 5px;\n    margin: 1px;\n    border-width: 2px;\n    border-style: solid;\n    border-color: #aaa;\n}\n\n/* オーバーレイ操作子共通（キャンバス上に浮かぶUI部品） */\n.axpc_overlay_knob,\n.axpc_overlay_btn {\n    position: absolute;\n    width: 40px;\n    height: 40px;\n    z-index: 3000;\n    border-radius: 8px;\n    background-color: var(--axp-knob-bg, rgba(85, 85, 85, 0.85));\n    background-repeat: no-repeat;\n    background-position: center;\n    background-size: 26px 26px;\n    touch-action: none;\n    user-select: none;\n}\n\n/* オーバーレイノブ（ドラッグ操作用） */\n.axpc_overlay_knob {\n    border: 3px solid var(--axp-knob-border, #eee);\n    cursor: grab;\n}\n\n.axpc_overlay_knob:active {\n    cursor: all-scroll;\n    background-color: rgba(0, 0, 0, 0.85);\n}\n\n/* オーバーレイボタン（タップ操作用） */\n.axpc_overlay_btn {\n    border: 2px solid var(--axp-btn-border, #ccc);\n    cursor: pointer;\n}\n\n.axpc_overlay_btn:active {\n    background-color: rgba(0, 0, 0, 0.85);\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3244,7 +3318,8 @@ var ___CSS_LOADER_URL_IMPORT_8___ = new URL(/* asset import */ __webpack_require
 var ___CSS_LOADER_URL_IMPORT_9___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/fillgradation.png */ "./resource/fillgradation.png"), __webpack_require__.b);
 var ___CSS_LOADER_URL_IMPORT_10___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/hand.png */ "./resource/hand.png"), __webpack_require__.b);
 var ___CSS_LOADER_URL_IMPORT_11___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/move.png */ "./resource/move.png"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_12___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/spuit.png */ "./resource/spuit.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_12___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/nagenawa.png */ "./resource/nagenawa.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_13___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/spuit.png */ "./resource/spuit.png"), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
@@ -3259,6 +3334,7 @@ var ___CSS_LOADER_URL_REPLACEMENT_9___ = _node_modules_css_loader_dist_runtime_g
 var ___CSS_LOADER_URL_REPLACEMENT_10___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_10___);
 var ___CSS_LOADER_URL_REPLACEMENT_11___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_11___);
 var ___CSS_LOADER_URL_REPLACEMENT_12___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_12___);
+var ___CSS_LOADER_URL_REPLACEMENT_13___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_13___);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
 
@@ -3479,8 +3555,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
     background-image: url(${___CSS_LOADER_URL_REPLACEMENT_11___});
 }
 
-.axpc_penmode_spuit {
+.axpc_penmode_nagenawa {
     background-image: url(${___CSS_LOADER_URL_REPLACEMENT_12___});
+}
+
+.axpc_penmode_spuit {
+    background-image: url(${___CSS_LOADER_URL_REPLACEMENT_13___});
 }
 
 /* 太さクイックボタン */
@@ -3521,7 +3601,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
     font-size: 14px;
     font-weight: bold;
     line-height: 1;
-}`, "",{"version":3,"sources":["webpack://./src/css/window_pen.css"],"names":[],"mappings":"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","sourcesContent":["/* ペンツール */\n\n/* ペンツール外枠 */\n#axp_pen_div_content {\n    display: flex;\n}\n\n/* ペンツール左側（プレビュー、スライダー）外枠 */\n#axp_pen_div_leftSide {\n    width: 104px;\n    overflow: hidden;\n}\n\n/* ペンの名前 */\n#axp_pen_span_penName {\n    line-height: 1.0;\n}\n\n/* プレビュー領域 */\n#axp_pen_div_preview {\n    position: relative;\n    width: 104px;\n    height: 104px;\n    background: rgba(255, 255, 255, 0.4);\n    border: 2px #aaa solid;\n    cursor: default;\n    margin-top: 4px;\n}\n\n/* ペンの太さプレビュー用キャンバス */\n#axp_pen_canvas_previewPenSize {\n    position: absolute;\n    z-index: 2;\n    width: 100px;\n    height: 100px;\n}\n\n/* スポイト用キャンバス */\n#axp_pen_canvas_previewSpuit {\n    position: absolute;\n    z-index: 1;\n    width: 100px;\n    height: 100px;\n    image-rendering: pixelated;\n}\n\n/* ペンウィンドウ内チェックボックスのラベル縮小 */\n#axp_pen_div_slider .axpc_checkbox label {\n    font-size: 11px;\n}\n\n/* スポイトのRGBA表示用 */\n#axp_pen_div_spuitColorRGBA {\n    line-height: 1.3em;\n}\n\n/* スライダー領域 */\n#axp_pen_div_slider {\n    margin-top: 8px;\n    display: flex;\n    flex-flow: column;\n}\n\n/* セレクトボックス */\n#axp_pen_div_selectbox {\n    margin-top: 8px;\n}\n\n#axp_pen_select_drawMode,\n#axp_pen_select_fillMode {\n    width: 100px;\n    height: 24px;\n    border-radius: 5px;\n}\n\n/* ペンツール右側（機能ボタン）外枠 */\n#axp_pen_div_rightSide {\n    margin-left: 12px;\n}\n\n/* 各ボタンの枠 */\n#axp_pen_div_rightSide>div {\n    position: relative;\n}\n\n/* ペンツール内のアイコン（メイン＆サブ） */\n#axp_pen_div_rightSide>div>button,\n#axp_penmode button {\n    width: 44px;\n    height: 44px;\n    border-radius: 5px;\n    border: 3px solid #000;\n    box-shadow: 0px 0px 10px #000;\n    cursor: pointer;\n    background-repeat: no-repeat;\n    background-position: 2px 2px;\n    background-color: #aaa;\n}\n\n/* ホバーしたアイコンに枠をつける */\n#axp_pen_div_rightSide>div>button:hover,\n#axp_penmode button:hover {\n    background-color: #aaa;\n    border: 3px solid #fff;\n}\n\n/* 選択しているアイコンに色をつける */\n#axp_pen_div_rightSide>div>button[data-selected=\"true\"] {\n    background-color: rgb(238, 172, 96);\n}\n\n/* サブメニューがあることを示す表示効果 */\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    content: \"\";\n    position: absolute;\n    top: 6px;\n    left: -9px;\n    height: 16px;\n    border-width: 8px 7px 8px 0;\n    border-color: transparent #eeac60;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {\n    content: \"\";\n    position: absolute;\n    top: 18px;\n    left: -8px;\n    height: 0px;\n    border-width: 4px 4px 4px 0;\n    border-color: transparent #000;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    border-color: transparent #533C21;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n/* サブメニュー用外枠 */\n#axp_penmode {\n    touch-action: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n/* サブメニュー用内枠 */\n#axp_penmode>div {\n    -webkit-user-select: none;\n    user-select: none;\n    font-size: 15px;\n    border-radius: 8px;\n    color: #fff;\n    background: rgba(0, 0, 0, .8);\n    padding-left: 8px;\n}\n\n.axpc_penmode_round {\n    background-image: url('../../resource/pen1.png');\n}\n\n.axpc_penmode_square {\n    background-image: url('../../resource/pen2.png');\n}\n\n.axpc_penmode_dot {\n    background-image: url('../../resource/dot.png');\n}\n\n.axpc_penmode_fude {\n    background-image: url('../../resource/fude.png');\n}\n\n.axpc_penmode_crayon {\n    background-image: url('../../resource/crayon.png');\n}\n\n.axpc_penmode_brush {\n    background-image: url('../../resource/brush.png');\n}\n\n.axpc_penmode_eraser_round {\n    background-image: url('../../resource/eraser.png');\n}\n\n.axpc_penmode_eraser_dot {\n    background-image: url('../../resource/eraser_dot.png');\n}\n\n.axpc_penmode_fill {\n    background-image: url('../../resource/fill.png');\n}\n\n.axpc_penmode_fillgradation {\n    background-image: url('../../resource/fillgradation.png');\n}\n\n.axpc_penmode_hand {\n    background-image: url('../../resource/hand.png');\n}\n\n.axpc_penmode_move {\n    background-image: url('../../resource/move.png');\n}\n\n.axpc_penmode_spuit {\n    background-image: url('../../resource/spuit.png');\n}\n\n/* 太さクイックボタン */\n#axp_pen_div_quickSize {\n    display: flex;\n    gap: 2px;\n    margin-top: 4px;\n    width: 104px;\n}\n#axp_pen_div_quickSize.axpc_NONE {\n    display: none;\n}\n.axpc_pen_quicksize {\n    flex: 1;\n    height: 28px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    padding: 0;\n    line-height: 1;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    -webkit-user-select: none;\n    user-select: none;\n}\n.axpc_pen_quicksize:active {\n    background: #333;\n}\n.axpc_pen_quicksize .axpc_qs_label {\n    font-size: 7px;\n    line-height: 1;\n}\n.axpc_pen_quicksize .axpc_qs_num {\n    font-size: 14px;\n    font-weight: bold;\n    line-height: 1;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/css/window_pen.css"],"names":[],"mappings":"AAAA,UAAU;;AAEV,YAAY;AACZ;IACI,aAAa;AACjB;;AAEA,2BAA2B;AAC3B;IACI,YAAY;IACZ,gBAAgB;AACpB;;AAEA,UAAU;AACV;IACI,gBAAgB;AACpB;;AAEA,YAAY;AACZ;IACI,kBAAkB;IAClB,YAAY;IACZ,aAAa;IACb,oCAAoC;IACpC,sBAAsB;IACtB,eAAe;IACf,eAAe;AACnB;;AAEA,qBAAqB;AACrB;IACI,kBAAkB;IAClB,UAAU;IACV,YAAY;IACZ,aAAa;AACjB;;AAEA,eAAe;AACf;IACI,kBAAkB;IAClB,UAAU;IACV,YAAY;IACZ,aAAa;IACb,0BAA0B;AAC9B;;AAEA,2BAA2B;AAC3B;IACI,eAAe;AACnB;;AAEA,iBAAiB;AACjB;IACI,kBAAkB;AACtB;;AAEA,YAAY;AACZ;IACI,eAAe;IACf,aAAa;IACb,iBAAiB;AACrB;;AAEA,aAAa;AACb;IACI,eAAe;AACnB;;AAEA;;IAEI,YAAY;IACZ,YAAY;IACZ,kBAAkB;AACtB;;AAEA,qBAAqB;AACrB;IACI,iBAAiB;AACrB;;AAEA,WAAW;AACX;IACI,kBAAkB;AACtB;;AAEA,wBAAwB;AACxB;;IAEI,WAAW;IACX,YAAY;IACZ,kBAAkB;IAClB,sBAAsB;IACtB,6BAA6B;IAC7B,eAAe;IACf,4BAA4B;IAC5B,4BAA4B;IAC5B,sBAAsB;AAC1B;;AAEA,oBAAoB;AACpB;;IAEI,sBAAsB;IACtB,sBAAsB;AAC1B;;AAEA,qBAAqB;AACrB;IACI,mCAAmC;AACvC;;AAEA,uBAAuB;AACvB;IACI,WAAW;IACX,kBAAkB;IAClB,QAAQ;IACR,UAAU;IACV,YAAY;IACZ,2BAA2B;IAC3B,iCAAiC;IACjC,mBAAmB;IACnB;;KAEC;AACL;;AAEA;IACI,WAAW;IACX,kBAAkB;IAClB,SAAS;IACT,UAAU;IACV,WAAW;IACX,2BAA2B;IAC3B,8BAA8B;IAC9B,mBAAmB;IACnB;;KAEC;AACL;;AAEA;IACI,iCAAiC;IACjC;;KAEC;AACL;;AAEA,cAAc;AACd;IACI,kBAAkB;IAClB,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,cAAc;IACd,kCAAkC;AACtC;;AAEA,cAAc;AACd;IACI,yBAAyB;IACzB,iBAAiB;IACjB,eAAe;IACf,kBAAkB;IAClB,WAAW;IACX,6BAA6B;IAC7B,iBAAiB;AACrB;;AAEA;IACI,yDAAgD;AACpD;;AAEA;IACI,yDAAgD;AACpD;;AAEA;IACI,yDAA+C;AACnD;;AAEA;IACI,yDAAgD;AACpD;;AAEA;IACI,yDAAkD;AACtD;;AAEA;IACI,yDAAiD;AACrD;;AAEA;IACI,yDAAkD;AACtD;;AAEA;IACI,yDAAsD;AAC1D;;AAEA;IACI,yDAAgD;AACpD;;AAEA;IACI,yDAAyD;AAC7D;;AAEA;IACI,0DAAgD;AACpD;;AAEA;IACI,0DAAgD;AACpD;;AAEA;IACI,0DAAoD;AACxD;;AAEA;IACI,0DAAiD;AACrD;;AAEA,cAAc;AACd;IACI,aAAa;IACb,QAAQ;IACR,eAAe;IACf,YAAY;AAChB;AACA;IACI,aAAa;AACjB;AACA;IACI,OAAO;IACP,YAAY;IACZ,sBAAsB;IACtB,kBAAkB;IAClB,gBAAgB;IAChB,WAAW;IACX,eAAe;IACf,UAAU;IACV,cAAc;IACd,aAAa;IACb,sBAAsB;IACtB,mBAAmB;IACnB,uBAAuB;IACvB,yBAAyB;IACzB,iBAAiB;AACrB;AACA;IACI,gBAAgB;AACpB;AACA;IACI,cAAc;IACd,cAAc;AAClB;AACA;IACI,eAAe;IACf,iBAAiB;IACjB,cAAc;AAClB","sourcesContent":["/* ペンツール */\n\n/* ペンツール外枠 */\n#axp_pen_div_content {\n    display: flex;\n}\n\n/* ペンツール左側（プレビュー、スライダー）外枠 */\n#axp_pen_div_leftSide {\n    width: 104px;\n    overflow: hidden;\n}\n\n/* ペンの名前 */\n#axp_pen_span_penName {\n    line-height: 1.0;\n}\n\n/* プレビュー領域 */\n#axp_pen_div_preview {\n    position: relative;\n    width: 104px;\n    height: 104px;\n    background: rgba(255, 255, 255, 0.4);\n    border: 2px #aaa solid;\n    cursor: default;\n    margin-top: 4px;\n}\n\n/* ペンの太さプレビュー用キャンバス */\n#axp_pen_canvas_previewPenSize {\n    position: absolute;\n    z-index: 2;\n    width: 100px;\n    height: 100px;\n}\n\n/* スポイト用キャンバス */\n#axp_pen_canvas_previewSpuit {\n    position: absolute;\n    z-index: 1;\n    width: 100px;\n    height: 100px;\n    image-rendering: pixelated;\n}\n\n/* ペンウィンドウ内チェックボックスのラベル縮小 */\n#axp_pen_div_slider .axpc_checkbox label {\n    font-size: 11px;\n}\n\n/* スポイトのRGBA表示用 */\n#axp_pen_div_spuitColorRGBA {\n    line-height: 1.3em;\n}\n\n/* スライダー領域 */\n#axp_pen_div_slider {\n    margin-top: 8px;\n    display: flex;\n    flex-flow: column;\n}\n\n/* セレクトボックス */\n#axp_pen_div_selectbox {\n    margin-top: 8px;\n}\n\n#axp_pen_select_drawMode,\n#axp_pen_select_fillMode {\n    width: 100px;\n    height: 24px;\n    border-radius: 5px;\n}\n\n/* ペンツール右側（機能ボタン）外枠 */\n#axp_pen_div_rightSide {\n    margin-left: 12px;\n}\n\n/* 各ボタンの枠 */\n#axp_pen_div_rightSide>div {\n    position: relative;\n}\n\n/* ペンツール内のアイコン（メイン＆サブ） */\n#axp_pen_div_rightSide>div>button,\n#axp_penmode button {\n    width: 44px;\n    height: 44px;\n    border-radius: 5px;\n    border: 3px solid #000;\n    box-shadow: 0px 0px 10px #000;\n    cursor: pointer;\n    background-repeat: no-repeat;\n    background-position: 2px 2px;\n    background-color: #aaa;\n}\n\n/* ホバーしたアイコンに枠をつける */\n#axp_pen_div_rightSide>div>button:hover,\n#axp_penmode button:hover {\n    background-color: #aaa;\n    border: 3px solid #fff;\n}\n\n/* 選択しているアイコンに色をつける */\n#axp_pen_div_rightSide>div>button[data-selected=\"true\"] {\n    background-color: rgb(238, 172, 96);\n}\n\n/* サブメニューがあることを示す表示効果 */\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    content: \"\";\n    position: absolute;\n    top: 6px;\n    left: -9px;\n    height: 16px;\n    border-width: 8px 7px 8px 0;\n    border-color: transparent #eeac60;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {\n    content: \"\";\n    position: absolute;\n    top: 18px;\n    left: -8px;\n    height: 0px;\n    border-width: 4px 4px 4px 0;\n    border-color: transparent #000;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    border-color: transparent #533C21;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n/* サブメニュー用外枠 */\n#axp_penmode {\n    touch-action: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n/* サブメニュー用内枠 */\n#axp_penmode>div {\n    -webkit-user-select: none;\n    user-select: none;\n    font-size: 15px;\n    border-radius: 8px;\n    color: #fff;\n    background: rgba(0, 0, 0, .8);\n    padding-left: 8px;\n}\n\n.axpc_penmode_round {\n    background-image: url('../../resource/pen1.png');\n}\n\n.axpc_penmode_square {\n    background-image: url('../../resource/pen2.png');\n}\n\n.axpc_penmode_dot {\n    background-image: url('../../resource/dot.png');\n}\n\n.axpc_penmode_fude {\n    background-image: url('../../resource/fude.png');\n}\n\n.axpc_penmode_crayon {\n    background-image: url('../../resource/crayon.png');\n}\n\n.axpc_penmode_brush {\n    background-image: url('../../resource/brush.png');\n}\n\n.axpc_penmode_eraser_round {\n    background-image: url('../../resource/eraser.png');\n}\n\n.axpc_penmode_eraser_dot {\n    background-image: url('../../resource/eraser_dot.png');\n}\n\n.axpc_penmode_fill {\n    background-image: url('../../resource/fill.png');\n}\n\n.axpc_penmode_fillgradation {\n    background-image: url('../../resource/fillgradation.png');\n}\n\n.axpc_penmode_hand {\n    background-image: url('../../resource/hand.png');\n}\n\n.axpc_penmode_move {\n    background-image: url('../../resource/move.png');\n}\n\n.axpc_penmode_nagenawa {\n    background-image: url('../../resource/nagenawa.png');\n}\n\n.axpc_penmode_spuit {\n    background-image: url('../../resource/spuit.png');\n}\n\n/* 太さクイックボタン */\n#axp_pen_div_quickSize {\n    display: flex;\n    gap: 2px;\n    margin-top: 4px;\n    width: 104px;\n}\n#axp_pen_div_quickSize.axpc_NONE {\n    display: none;\n}\n.axpc_pen_quicksize {\n    flex: 1;\n    height: 28px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    padding: 0;\n    line-height: 1;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    -webkit-user-select: none;\n    user-select: none;\n}\n.axpc_pen_quicksize:active {\n    background: #333;\n}\n.axpc_pen_quicksize .axpc_qs_label {\n    font-size: 7px;\n    line-height: 1;\n}\n.axpc_pen_quicksize .axpc_qs_num {\n    font-size: 14px;\n    font-weight: bold;\n    line-height: 1;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3885,7 +3965,7 @@ module.exports = function (item) {
   \**************************/
 /***/ ((module) => {
 
-module.exports = {"@VERSION":"2.4.0","@LANGUAGE":"ja","@COMMON.OPACITY":"不透明度","@COMMON.RED":"赤","@COMMON.GREEN":"緑","@COMMON.BLUE":"青","@COMMON.ALPHA":"透","@COMMON.BUTTON_CLOSE":"閉じる","@COMMON.WIDTH":"横","@COMMON.HEIGHT":"縦","@COMMON.BG_WHITE":"白地","@COMMON.BG_TRANSPARENT":"透過","@COMMON.DRAW_NEW":"いちから描いた","@COMMON.DRAW_BASED":"もとの絵あるよ","@COMMON.REQUIRED":"必須","@TAB.CANVAS":"キャンバス","@TAB.SETTINGS":"設定","@TAB.POST":"投稿","@WINDOW.LAUNCHER":"表示","@WINDOW.PEN_TOOL":"ペンツール","@WINDOW.COLOR":"色作成","@WINDOW.SWATCHES":"パレット","@WINDOW.LAYER":"レイヤー","@WINDOW.MISC":"補助ツール","@WINDOW.CUSTOM_BUTTONS":"ｶｽﾀﾑ","@PEN.SIZE":"太さ","@PEN.GROW_FILL_AREA":"塗り残し補正","@PEN.ANGLE":"角度","@PEN.ROUNDNESS":"丸み","@PEN.BLUR":"ぼかし度","@PEN.TONE_DENSITY":"トーン濃度","@PEN.STABILIZER":"手ぶれ補正","@PEN.USE_PRESSURE":"筆圧を反映","@PEN.USE_SUBPX_ALPHA":"幅<1で透過","@PEN.ERASE_RATE":"消し率","@PEN.OPTION_FREE_HAND":"手描き","@PEN.OPTION_STRAIGHT":"直線","@PEN.OPTION_RECT":"長方形","@PEN.OPTION_CIRCLE":"円","@PEN.OPTION_FILL_SAMPLE_ALL":"全ﾚｲﾔｰ判定","@PEN.OPTION_FILL_SAMPLE_CURRENT":"現ﾚｲﾔｰ判定","@PEN.TYPE":"種別","@PENGROUP.PEN":"ペン","@PENGROUP.TOOL":"ツール","@PENGROUP.ERASER":"消しゴム","@PENGROUP.FILL":"バケツ","@PENGROUP.EYEDROPPER":"スポイト","@PENNAME.ROUND":"丸ペン","@PENNAME.SQUARE":"角ペン","@PENNAME.DOT":"ドットペン","@PENNAME.CALLIGRAPHY":"筆ペン","@PENNAME.CRAYON":"クレヨン","@PENNAME.AIRBRUSH":"エアブラシ","@PENNAME.ERASER":"消しゴム","@PENNAME.SQUARE_ERASER":"角消しゴム","@PENNAME.FILL":"バケツ","@PENNAME.GRADATION_FILL":"階調バケツ","@PENNAME.EYEDROPPER":"スポイト","@PENNAME.HAND":"ハンド","@PENNAME.MOVE_TOOL":"移動ツール","@SWATCHES.COLUMNS":"横幅","@SWATCHES.EDIT":"編集","@SWATCHES.SET":"登録","@SWATCHES.DEL":"削除","@LAYER.NEWLAYER_TEMPLATE":"レイヤー","@LAYER.OPTION_NORMAL":"通常","@LAYER.OPTION_CLIPING":"クリッピング","@LAYER.OPTION_MULTIPLY":"乗算","@LAYER.OPTION_SCREEN":"スクリーン","@LAYER.OPTION_OVERLAY":"オーバーレイ","@LAYER.OPTION_DARKEN":"比較（暗）","@LAYER.OPTION_LIGHTEN":"比較（明）","@LAYER.OPTION_DODGE":"覆い焼き","@LAYER.OPTION_BURN":"焼き込み","@LAYER.OPTION_HARD_LIGHT":"ハードライト","@LAYER.OPTION_SOFT_LIGHT":"ソフトライト","@LAYER.OPTION_DIFFERENCE":"差の絶対値","@LAYER.OPTION_EXCLUSION":"除外","@LAYER.BUTTON_CLEAR":"ｸﾘｱ","@LAYER.BUTTON_NEW":"新規","@LAYER.BUTTON_MERGE":"統","@LAYER.BUTTON_COPY":"複","@LAYER.BUTTON_DEL":"削","@LAYER.BUTTON_RENAME_OK":"決定","@LAYER.BUTTON_CLEAR_COLOR":"色解除","@LAYER.LAYERS_INFO":"レイヤー情報","@LAYER.PRESET_NAME":"登録名","@MISC.BUTTON_UNDO":"アンドゥ","@MISC.BUTTON_REDO":"リドゥ","@MISC.BUTTON_RESTORE_AUTOSAVE":"自動保存から復元","@MISC.BUTTON_SAVE":"セーブ","@MISC.BUTTON_LOAD":"ロード","@MISC.BUTTON_FLIP_H":"左右反転","@MISC.BUTTON_FLIP_V":"上下反転","@MISC.BUTTON_BG_ALPHA":"背景透過","@MISC.BUTTON_GRID":"補助線","@GRID.MAIN":"主線","@GRID.SUB":"副線","@GRID.DIAG":"斜め","@GRID.DIVISIONS_H":"分割数：横","@GRID.DIVISIONS_V":"分割数：縦","@GRID.CONSTRAIN":"縦横を連動","@GRID.LINE_COLOR":"補助線の色","@SETTINGS.MENU_CANVAS":"キャンバス","@SETTINGS.MENU_TOOL_WINDOWS":"ツールウィンドウ","@SETTINGS.MENU_PEN_TOOL":"ペンツール","@SETTINGS.MENU_COLOR":"色作成","@SETTINGS.MENU_SWATCHES":"パレット","@SETTINGS.MENU_LAYER":"レイヤー","@SETTINGS.MENU_MISC":"補助ツール","@SETTINGS.MENU_CUSTOM_BUTTONS":"カスタムボタン","@SETTINGS.MENU_MOUSE":"マウス","@SETTINGS.MENU_TOUCH_PANEL":"タッチパネル","@SETTINGS.MENU_KEYBOARD":"キーボード","@SETTINGS.MENU_STARTUP":"起動時","@SETTINGS.MENU_VER_INFO":"バージョン情報","@POST.POSTPICTURE":"投稿するお絵カキコ","@POST.THUMBNAIL":"サムネイル","@POST.THUMBNAIL_CLICK":"※クリックで拡大表示","@POST.INPUT":"投稿情報の入力","@POST.NAME":"投稿者名","@POST.TITLE":"タイトル","@POST.MESSAGE":"本文","@POST.WATCHLIST":"ウォッチリストに登録","@POST.STATUS.SIZE":"画像サイズ","@POST.STATUS.BG_TRANSPARENT":"背景の透過","@POST.STATUS.BASED":"もとの絵","@POST.BUTTON_SUBMIT":"お絵カキコする！","@POST.INFO_REQUIRED":"※必須項目が入力されていません。","@POST.NOTICE":"投稿前の注意事項","@POST.NOTICE1":"投稿時にすべてのレイヤーが統合されます。","@POST.NOTICE2":"","@POST.NOTICE3":"","@POST.NOTICE4":""}
+module.exports = {"@VERSION":"2.4.0","@LANGUAGE":"ja","@COMMON.OPACITY":"不透明度","@COMMON.RED":"赤","@COMMON.GREEN":"緑","@COMMON.BLUE":"青","@COMMON.ALPHA":"透","@COMMON.BUTTON_CLOSE":"閉じる","@COMMON.WIDTH":"横","@COMMON.HEIGHT":"縦","@COMMON.BG_WHITE":"白地","@COMMON.BG_TRANSPARENT":"透過","@COMMON.DRAW_NEW":"いちから描いた","@COMMON.DRAW_BASED":"もとの絵あるよ","@COMMON.REQUIRED":"必須","@TAB.CANVAS":"キャンバス","@TAB.SETTINGS":"設定","@TAB.POST":"投稿","@WINDOW.LAUNCHER":"表示","@WINDOW.PEN_TOOL":"ペンツール","@WINDOW.COLOR":"色作成","@WINDOW.SWATCHES":"パレット","@WINDOW.LAYER":"レイヤー","@WINDOW.MISC":"補助ツール","@WINDOW.CUSTOM_BUTTONS":"ｶｽﾀﾑ","@PEN.SIZE":"太さ","@PEN.GROW_FILL_AREA":"塗り残し補正","@PEN.ANGLE":"角度","@PEN.ROUNDNESS":"丸み","@PEN.BLUR":"ぼかし度","@PEN.TONE_DENSITY":"トーン濃度","@PEN.STABILIZER":"手ぶれ補正","@PEN.USE_PRESSURE":"筆圧を反映","@PEN.USE_SUBPX_ALPHA":"幅<1で透過","@PEN.ERASE_RATE":"消し率","@PEN.OPTION_FREE_HAND":"手描き","@PEN.OPTION_STRAIGHT":"直線","@PEN.OPTION_RECT":"長方形","@PEN.OPTION_CIRCLE":"円","@PEN.OPTION_FILL_SAMPLE_ALL":"全ﾚｲﾔｰ判定","@PEN.OPTION_FILL_SAMPLE_CURRENT":"現ﾚｲﾔｰ判定","@PEN.TYPE":"種別","@PENGROUP.PEN":"ペン","@PENGROUP.TOOL":"ツール","@PENGROUP.ERASER":"消しゴム","@PENGROUP.FILL":"バケツ","@PENGROUP.EYEDROPPER":"スポイト","@PENNAME.ROUND":"丸ペン","@PENNAME.SQUARE":"角ペン","@PENNAME.DOT":"ドットペン","@PENNAME.CALLIGRAPHY":"筆ペン","@PENNAME.CRAYON":"クレヨン","@PENNAME.AIRBRUSH":"エアブラシ","@PENNAME.ERASER":"消しゴム","@PENNAME.SQUARE_ERASER":"角消しゴム","@PENNAME.FILL":"バケツ","@PENNAME.GRADATION_FILL":"階調バケツ","@PENNAME.EYEDROPPER":"スポイト","@PENNAME.HAND":"ハンド","@PENNAME.MOVE_TOOL":"移動ツール","@PENNAME.NAGENAWA":"なげなわ","@SWATCHES.COLUMNS":"横幅","@SWATCHES.EDIT":"編集","@SWATCHES.SET":"登録","@SWATCHES.DEL":"削除","@LAYER.NEWLAYER_TEMPLATE":"レイヤー","@LAYER.OPTION_NORMAL":"通常","@LAYER.OPTION_CLIPING":"クリッピング","@LAYER.OPTION_MULTIPLY":"乗算","@LAYER.OPTION_SCREEN":"スクリーン","@LAYER.OPTION_OVERLAY":"オーバーレイ","@LAYER.OPTION_DARKEN":"比較（暗）","@LAYER.OPTION_LIGHTEN":"比較（明）","@LAYER.OPTION_DODGE":"覆い焼き","@LAYER.OPTION_BURN":"焼き込み","@LAYER.OPTION_HARD_LIGHT":"ハードライト","@LAYER.OPTION_SOFT_LIGHT":"ソフトライト","@LAYER.OPTION_DIFFERENCE":"差の絶対値","@LAYER.OPTION_EXCLUSION":"除外","@LAYER.BUTTON_CLEAR":"ｸﾘｱ","@LAYER.BUTTON_NEW":"新規","@LAYER.BUTTON_MERGE":"統","@LAYER.BUTTON_COPY":"複","@LAYER.BUTTON_DEL":"削","@LAYER.BUTTON_RENAME_OK":"決定","@LAYER.BUTTON_CLEAR_COLOR":"色解除","@LAYER.LAYERS_INFO":"レイヤー情報","@LAYER.PRESET_NAME":"登録名","@MISC.BUTTON_UNDO":"アンドゥ","@MISC.BUTTON_REDO":"リドゥ","@MISC.BUTTON_RESTORE_AUTOSAVE":"自動保存から復元","@MISC.BUTTON_SAVE":"セーブ","@MISC.BUTTON_LOAD":"ロード","@MISC.BUTTON_FLIP_H":"左右反転","@MISC.BUTTON_FLIP_V":"上下反転","@MISC.BUTTON_BG_ALPHA":"背景透過","@MISC.BUTTON_GRID":"補助線","@GRID.MAIN":"主線","@GRID.SUB":"副線","@GRID.DIAG":"斜め","@GRID.DIVISIONS_H":"分割数：横","@GRID.DIVISIONS_V":"分割数：縦","@GRID.CONSTRAIN":"縦横を連動","@GRID.LINE_COLOR":"補助線の色","@SETTINGS.MENU_CANVAS":"キャンバス","@SETTINGS.MENU_TOOL_WINDOWS":"ツールウィンドウ","@SETTINGS.MENU_PEN_TOOL":"ペンツール","@SETTINGS.MENU_COLOR":"色作成","@SETTINGS.MENU_SWATCHES":"パレット","@SETTINGS.MENU_LAYER":"レイヤー","@SETTINGS.MENU_MISC":"補助ツール","@SETTINGS.MENU_CUSTOM_BUTTONS":"カスタムボタン","@SETTINGS.MENU_MOUSE":"マウス","@SETTINGS.MENU_TOUCH_PANEL":"タッチパネル","@SETTINGS.MENU_KEYBOARD":"キーボード","@SETTINGS.MENU_STARTUP":"起動時","@SETTINGS.MENU_VER_INFO":"バージョン情報","@POST.POSTPICTURE":"投稿するお絵カキコ","@POST.THUMBNAIL":"サムネイル","@POST.THUMBNAIL_CLICK":"※クリックで拡大表示","@POST.INPUT":"投稿情報の入力","@POST.NAME":"投稿者名","@POST.TITLE":"タイトル","@POST.MESSAGE":"本文","@POST.WATCHLIST":"ウォッチリストに登録","@POST.STATUS.SIZE":"画像サイズ","@POST.STATUS.BG_TRANSPARENT":"背景の透過","@POST.STATUS.BASED":"もとの絵","@POST.BUTTON_SUBMIT":"お絵カキコする！","@POST.INFO_REQUIRED":"※必須項目が入力されていません。","@POST.NOTICE":"投稿前の注意事項","@POST.NOTICE1":"投稿時にすべてのレイヤーが統合されます。","@POST.NOTICE2":"","@POST.NOTICE3":"","@POST.NOTICE4":""}
 
 /***/ }),
 
@@ -5488,6 +5568,11 @@ class AXPObj {
         SCALE_TABLE_MAX: 50,
         MESSAGE_KEEP_TIME: 2000,
         DRAW_MULTI: 1,
+        // 回転ジェスチャ
+        ROTATE_WALL_VELOCITY: 0.18,     // 0/90/180/270°の壁を突破するのに必要な角速度（度/ミリ秒）
+        ROTATE_DRAG_SENSITIVITY: 0.5,   // PC回転操作子の左右ドラッグ感度（度/px）
+        ROTATE_TWIST_NOISE: 4,          // ネジレ判定に使う速度ベクトルの最小長（px）
+        TWIST_HISTORY_LEN: 3,           // 速度ベクトル算出に使うフレーム数
     }
     // 画面表示用キャンバス（※メモリ上のみで使用するcanvasは使用する各クラスで定義）
     CANVAS = {
@@ -5605,6 +5690,9 @@ class AXPObj {
     cameraX = 0;
     cameraY = 0;
 
+    // 回転表示角度（度数、[0,360)。あくまで表示の回転であり画像編集ではない）
+    rotation = 0;
+
     // 背景タイルプレビュー表示用
     url_backgroundimage;
 
@@ -5625,6 +5713,13 @@ class AXPObj {
     baseScale = -1;
     baseCameraX = -1;
     baseCameraY = -1;
+
+    // 回転ジェスチャ（ネジレ操作）用
+    twistHistA = [];        // 指A(evCache[0])の直近座標履歴（速度ベクトル算出用）
+    twistHistB = [];        // 指B(evCache[1])の直近座標履歴
+    prevLineAngle = 0;      // 直近フレームのA→B線分角度（度）
+    prevGestureTime = 0;    // 角速度算出用のタイムスタンプ
+    isTwisting = false;     // ジェスチャ中の回転ロックフラグ
 
     longPressTimerID = null;
     touchTimerID = null;
@@ -5899,6 +5994,15 @@ class AXPObj {
                     }
                     // 初期距離差分
                     this.baseDiff = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.calcDistance)(this.evCache[0].clientX, this.evCache[0].clientY, this.evCache[1].clientX, this.evCache[1].clientY);
+                    // 回転ジェスチャ用の初期状態（A=evCache[0], B=evCache[1]）
+                    this.twistHistA = [{ x: this.evCache[0].clientX, y: this.evCache[0].clientY }];
+                    this.twistHistB = [{ x: this.evCache[1].clientX, y: this.evCache[1].clientY }];
+                    this.prevLineAngle = Math.atan2(
+                        this.evCache[1].clientY - this.evCache[0].clientY,
+                        this.evCache[1].clientX - this.evCache[0].clientX
+                    ) * 180 / Math.PI;
+                    this.prevGestureTime = e.timeStamp;
+                    this.isTwisting = false;
                 };
             }
 
@@ -6149,19 +6253,58 @@ class AXPObj {
                         }
                         // スワイプが確定していれば、スワイプ処理を行う
                         if (this.touchTimerID === null) {
-                            // ピンチによる拡大／縮小
-                            if (this.config('axp_config_form_touchZoom') === 'on') {
-                                // 拡大率（初期値）に差分を加算する（指定可能範囲を超える場合は補正する）
-                                this.scale = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.adjustInRange)(this.baseScale + diffDistance, this.CONST.SCALE_MIN, this.CONST.SCALE_MAX);
-                            };
-                            // カメラ位置移動
-                            if (this.config('axp_config_form_touchHand') === 'on') {
-
-                                this.cameraX = Math.round(this.baseCameraX + (diffX * 100 / this.scale));
-                                this.cameraY = Math.round(this.baseCameraY + (diffY * 100 / this.scale));
-                            };
-                            // キャンバス表示更新
-                            this.refreshCanvas();
+                            // 現在のA→B線分角度（度）
+                            const ax = this.evCache[0].clientX, ay = this.evCache[0].clientY;
+                            const bx = this.evCache[1].clientX, by = this.evCache[1].clientY;
+                            const lineAngle = Math.atan2(by - ay, bx - ax) * 180 / Math.PI;
+                            // 各指の座標履歴を更新（速度ベクトル算出用）
+                            this.twistHistA.push({ x: ax, y: ay });
+                            if (this.twistHistA.length > this.CONST.TWIST_HISTORY_LEN) this.twistHistA.shift();
+                            this.twistHistB.push({ x: bx, y: by });
+                            if (this.twistHistB.length > this.CONST.TWIST_HISTORY_LEN) this.twistHistB.shift();
+                            // ネジレ判定（一度ネジレと判定したらジェスチャ終了まで維持）
+                            if (!this.isTwisting && this.twistHistA.length >= this.CONST.TWIST_HISTORY_LEN) {
+                                // 直近数フレームの速度ベクトル（累積変位ではなくフレーム間差分）
+                                const oldA = this.twistHistA[0], oldB = this.twistHistB[0];
+                                const vax = ax - oldA.x, vay = ay - oldA.y;
+                                const vbx = bx - oldB.x, vby = by - oldB.y;
+                                const lenA = Math.sqrt(vax * vax + vay * vay);
+                                const lenB = Math.sqrt(vbx * vbx + vby * vby);
+                                if (lenA >= this.CONST.ROTATE_TWIST_NOISE && lenB >= this.CONST.ROTATE_TWIST_NOISE) {
+                                    // 線分方向θに対する各点の移動方向の相対角
+                                    const relA = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.normalizeDeg180)(Math.atan2(vay, vax) * 180 / Math.PI - lineAngle);
+                                    const relB = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.normalizeDeg180)(Math.atan2(vby, vbx) * 180 / Math.PI - lineAngle);
+                                    const inPos = (v) => v >= 45 && v <= 135;
+                                    const inNeg = (v) => v >= -135 && v <= -45;
+                                    if ((inPos(relA) && inNeg(relB)) || (inPos(relB) && inNeg(relA))) {
+                                        this.isTwisting = true;
+                                    }
+                                }
+                            }
+                            if (this.isTwisting) {
+                                // ネジレ操作中：拡縮・パンをキャンセルし回転のみ適用
+                                const deltaLine = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.normalizeDeg180)(lineAngle - this.prevLineAngle);
+                                const dt = e.timeStamp - this.prevGestureTime;
+                                this.applyRotationDelta(deltaLine, dt);
+                            } else {
+                                // ピンチによる拡大／縮小
+                                if (this.config('axp_config_form_touchZoom') === 'on') {
+                                    // 拡大率（初期値）に差分を加算する（指定可能範囲を超える場合は補正する）
+                                    this.scale = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.adjustInRange)(this.baseScale + diffDistance, this.CONST.SCALE_MIN, this.CONST.SCALE_MAX);
+                                };
+                                // カメラ位置移動
+                                if (this.config('axp_config_form_touchHand') === 'on') {
+                                    // 画面上のドラッグ差分を -rotation だけ回し、カメラ（非回転）座標系へ変換
+                                    const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.rotateVector)(diffX, diffY, -this.rotation * Math.PI / 180);
+                                    this.cameraX = Math.round(this.baseCameraX + (r.x * 100 / this.scale));
+                                    this.cameraY = Math.round(this.baseCameraY + (r.y * 100 / this.scale));
+                                };
+                                // キャンバス表示更新
+                                this.refreshCanvas();
+                            }
+                            // 角速度算出のため毎フレーム更新
+                            this.prevLineAngle = lineAngle;
+                            this.prevGestureTime = e.timeStamp;
                         }
                     }
                 }
@@ -6198,6 +6341,12 @@ class AXPObj {
                     //console.log('認識されていないポインタIDを検出');
                     //this.evCache.splice(0);
                 }
+                // 2点未満になったらネジレ回転ロックを解除
+                if (this.evCache.length < 2) {
+                    this.isTwisting = false;
+                    this.twistHistA = [];
+                    this.twistHistB = [];
+                }
             }
             if (e.isPrimary) {
                 // キャンバス座標計算
@@ -6218,6 +6367,12 @@ class AXPObj {
                 );
                 if (index !== -1) {
                     this.evCache.splice(index, 1);
+                }
+                // 2点未満になったらネジレ回転ロックを解除
+                if (this.evCache.length < 2) {
+                    this.isTwisting = false;
+                    this.twistHistA = [];
+                    this.twistHistB = [];
                 }
                 // 描画が行われていた時
                 if (this.touchTimerID && this.isDrawn) {
@@ -6269,6 +6424,57 @@ class AXPObj {
             //console.log('pointerleave');
             removeEvent(e);
         });
+
+        // 回転操作子（PC/タブレット）：中央＝押して左右ドラッグで回転、左右＝タップで45度回転
+        const rotateHandle = document.getElementById('axp_canvas_div_rotateHandle');
+        if (rotateHandle) {
+            rotateHandle.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                let prevX = e.clientX;
+                let prevTime = e.timeStamp;
+                const onMove = (ev) => {
+                    const dx = ev.clientX - prevX;
+                    const deltaDeg = dx * this.CONST.ROTATE_DRAG_SENSITIVITY;
+                    const dt = ev.timeStamp - prevTime;
+                    this.applyRotationDelta(deltaDeg, dt);
+                    prevX = ev.clientX;
+                    prevTime = ev.timeStamp;
+                };
+                const cleanup = () => {
+                    window.removeEventListener('pointermove', onMove);
+                    window.removeEventListener('pointerup', cleanup);
+                    window.removeEventListener('pointercancel', cleanup);
+                    window.removeEventListener('blur', cleanup);
+                };
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', cleanup);
+                window.addEventListener('pointercancel', cleanup);
+                window.addEventListener('blur', cleanup);
+            });
+        }
+
+        const rotateLeft = document.getElementById('axp_canvas_div_rotateLeft');
+        if (rotateLeft) {
+            rotateLeft.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+            rotateLeft.addEventListener('click', () => {
+                this.rotateView45(-1);
+            });
+        }
+
+        const rotateRight = document.getElementById('axp_canvas_div_rotateRight');
+        if (rotateRight) {
+            rotateRight.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+            rotateRight.addEventListener('click', () => {
+                this.rotateView45(+1);
+            });
+        }
 
         // マウスホイール
         document.addEventListener('wheel', (e) => { this.mouseWheel(e) }, { passive: false });
@@ -6392,6 +6598,17 @@ class AXPObj {
         const svg = document.getElementById('axp_canvas_svg_grid');
         svg.setAttribute("viewBox", `-0.5, -0.5, ${width}, ${height}`);
 
+        // 回転表示（ビューポート中心を不動点とする）
+        // transform-originをキャンバス要素ローカルでビュー中心に一致させる
+        const originX = (this.x_size / 2 + this.cameraX) * this.scale / 100;
+        const originY = (this.y_size / 2 + this.cameraY) * this.scale / 100;
+        const transformOrigin = `${originX}px ${originY}px`;
+        const transform = this.rotation ? `rotate(${this.rotation}deg)` : '';
+        this.CANVAS.main.style.transformOrigin = transformOrigin;
+        this.CANVAS.main.style.transform = transform;
+        grid.style.transformOrigin = transformOrigin;
+        grid.style.transform = transform;
+
         this.updateGrid();
 
         // 拡大率数値表示
@@ -6404,7 +6621,12 @@ class AXPObj {
     }
     // 補助線更新
     updateGrid() {
-        const gridRect = document.getElementById('axp_canvas_div_grid').getBoundingClientRect();
+        // 回転表示中はgetBoundingClientRectが外接矩形を返し格子セルが歪むため、
+        // 非回転の表示サイズ（拡大率適用後）を用いる。
+        const gridRect = {
+            width: Math.round(this.x_size * this.scale / 100),
+            height: Math.round(this.y_size * this.scale / 100),
+        };
         const svg = document.getElementById('axp_canvas_svg_grid');
 
         // 作成済み補助線の消去
@@ -6566,6 +6788,79 @@ class AXPObj {
         // カメラ座標（キャンバス表示位置）を中央にリセット
         this.cameraX = 0;
         this.cameraY = 0;
+        // 回転表示もリセット
+        this.rotation = 0;
+    }
+    /**
+     * 表示の回転角度を相対的に変更する（あくまで表示の回転であり画像編集ではない）
+     * @param {Number} delta 変化量（度数）
+     */
+    rotateView(delta) {
+        this.rotation = ((this.rotation + delta) % 360 + 360) % 360;
+        this.refreshCanvas();
+    }
+    /**
+     * 45度グリッドにスナップする回転（左右回転ボタン用）
+     * @param {Number} direction +1 で右回転（時計回り）、-1 で左回転（反時計回り）
+     */
+    rotateView45(direction) {
+        const a = this.rotation;
+        let result;
+        if (direction > 0) {
+            result = Math.floor((a + 45) / 45) * 45;
+        } else {
+            result = Math.ceil((a - 45) / 45) * 45;
+        }
+        this.rotation = ((result % 360) + 360) % 360;
+        this.refreshCanvas();
+    }
+    /**
+     * 回転ジェスチャの角度変化を、0/90/180/270°の「角速度の壁」スナップを掛けて適用する。
+     * ゆっくりした回転は壁を越えられずその90°に落ち着き、速い回転は壁を突破する。
+     * @param {Number} deltaDeg 今回フレームの角度変化（度）
+     * @param {Number} dt 前回フレームからの経過時間（ミリ秒）
+     */
+    applyRotationDelta(deltaDeg, dt) {
+        if (!deltaDeg) { return; }
+        const a0 = this.rotation;
+        const candidate = a0 + deltaDeg;
+        // 角速度（度/ミリ秒）
+        const velocity = Math.abs(deltaDeg) / Math.max(dt, 1);
+        const fast = velocity >= this.CONST.ROTATE_WALL_VELOCITY;
+        const normalize = (x) => ((x % 360) + 360) % 360;
+        // 最寄りの90°境界
+        const nearest = Math.round(a0 / 90) * 90;
+        let result;
+        if (Math.abs(a0 - nearest) < 0.5) {
+            // ちょうど境界上にいる：脱出には角速度が必要（低速なら留まる）
+            result = fast ? candidate : nearest;
+        } else {
+            // 象限内：進行方向側の境界を跨ぐか判定
+            const boundary = (deltaDeg > 0) ? Math.ceil(a0 / 90) * 90 : Math.floor(a0 / 90) * 90;
+            const crossing = (deltaDeg > 0) ? (candidate >= boundary) : (candidate <= boundary);
+            if (crossing && !fast) {
+                // 低速で境界に到達：壁で停止
+                result = boundary;
+            } else {
+                // 高速で突破、または境界に達しない象限内移動
+                result = candidate;
+            }
+        }
+        this.rotation = normalize(result);
+        this.refreshCanvas();
+    }
+    /**
+     * 回転操作子（PC/タブレット用）の表示／非表示を現在のペンモードに合わせて更新する
+     */
+    updateRotateHandle() {
+        const group = document.getElementById('axp_canvas_div_rotateGroup');
+        const mode = this.penSystem.getPenMode();
+        if (!group) { return; }
+        if (mode === 'axp_penmode_hand') {
+            _etc_js__WEBPACK_IMPORTED_MODULE_13__.UTIL.show(group);
+        } else {
+            _etc_js__WEBPACK_IMPORTED_MODULE_13__.UTIL.hide(group);
+        }
     }
     /**
      * ポインタイベントを受け取り、入力の実座標からscale(尺度)を適用したキャンバス上のx,y座標を計算し、返却する
@@ -6573,12 +6868,20 @@ class AXPObj {
      * @returns {{x:Number,y:Number}} 座標(x,y)
      */
     calcScaleCoordinates(e) {
-        let clientRect_draw = this.CANVAS.main.getBoundingClientRect();
-        let calcX = Math.floor((e.clientX - clientRect_draw.left) * 100 / this.scale);
-        let calcY = Math.floor((e.clientY - clientRect_draw.top) * 100 / this.scale);
+        // 回転表示に対応するため、キャンバス要素のgetBoundingClientRect（回転時は外接矩形になりズレる）に
+        // 依存せず、非回転の表示エリア(view)中心を不動点として状態から逆算する。
+        const rectView = this.ELEMENT.view.getBoundingClientRect();
+        // ビューポート中心（回転のピボット）
+        const vx = rectView.left + rectView.width / 2;
+        const vy = rectView.top + rectView.height / 2;
+        // ポインタのビュー中心からの相対ベクトルを -rotation だけ回し、非回転状態の座標系に戻す
+        const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.rotateVector)(e.clientX - vx, e.clientY - vy, -this.rotation * Math.PI / 180);
+        // 非回転状態でのキャンバス左上からの表示px距離
+        const localX = r.x + (this.x_size / 2 + this.cameraX) * this.scale / 100;
+        const localY = r.y + (this.y_size / 2 + this.cameraY) * this.scale / 100;
         return {
-            x: calcX,
-            y: calcY,
+            x: Math.floor(localX * 100 / this.scale),
+            y: Math.floor(localY * 100 / this.scale),
         };
     }
     /**
@@ -6644,14 +6947,13 @@ class AXPObj {
         // ポインタ位置を拡大（カメラ位置調整）
         const adjustCamera = () => {
             if (this.scale !== currentScale) {
-                // 表示エリアの中央座標
+                // 表示エリア（ビューポート）中心：回転の不動点
                 const rectView = this.ELEMENT.view.getBoundingClientRect();
-                const centerX = rectView.width / 2;
-                const centerY = rectView.height / 2;
+                const vx = rectView.left + rectView.width / 2;
+                const vy = rectView.top + rectView.height / 2;
 
-                // ポインタ座標が原点からどれだけ離れているか
-                let pointerDX = e.clientX - centerX;
-                let pointerDY = e.clientY - centerY - rectView.top;
+                // ポインタのビュー中心からの相対ベクトルを -rotation だけ回し、非回転座標系に戻す
+                const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.rotateVector)(e.clientX - vx, e.clientY - vy, -this.rotation * Math.PI / 180);
 
                 // キャンバス座標が原点からどれだけ離れているか（ポインタがキャンバス外の場合はキャンバス内に補正）
                 let canvasX = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.adjustInRange)(pos.x, 0, this.x_size - 1);
@@ -6659,13 +6961,9 @@ class AXPObj {
                 let canvasY = (0,_etc_js__WEBPACK_IMPORTED_MODULE_13__.adjustInRange)(pos.y, 0, this.y_size - 1);
                 let canvasDY = (canvasY - this.y_size / 2) * this.scale / 100;
 
-                // 新しいカメラ位置
-                let cameraX = (canvasDX - pointerDX) * 100 / this.scale;
-                let cameraY = (canvasDY - pointerDY) * 100 / this.scale;
-                this.cameraX = cameraX;
-                this.cameraY = cameraY;
-                //console.log('cameraX:', pointerDX, canvasDX, cameraX);
-                //console.log('cameraY:', pointerDY, canvasDY, cameraY);
+                // 拡大後もポインタ下のキャンバス画素が同じ画面位置に残るようカメラ位置を求める
+                this.cameraX = (canvasDX - r.x) * 100 / this.scale;
+                this.cameraY = (canvasDY - r.y) * 100 / this.scale;
             }
         };
         switch (this.config('axp_config_form_mouseWheelRotate')) {
@@ -6956,6 +7254,29 @@ class AXPObj {
             this.refreshCanvas();
         }
 
+        // 表示回転
+        this.TASK['func_rotate_view_left'] = () => {
+            this.rotateView(-15);
+            this.msg('@INF5000');
+        }
+        this.TASK['func_rotate_view_right'] = () => {
+            this.rotateView(15);
+            this.msg('@INF5001');
+        }
+        this.TASK['func_rotate_view_left_45'] = () => {
+            this.rotateView45(-1);
+            this.msg('@INF5002');
+        }
+        this.TASK['func_rotate_view_right_45'] = () => {
+            this.rotateView45(+1);
+            this.msg('@INF5003');
+        }
+        this.TASK['func_rotate_view_reset'] = () => {
+            this.rotation = 0;
+            this.refreshCanvas();
+            this.msg('@INF5004');
+        }
+
         // ペンツール選択
         const switchPenMain = (id, inkey) => {
             const element = document.getElementById(id);
@@ -7043,6 +7364,9 @@ class AXPObj {
         }
         this.TASK['func_switch_axp_penmode_move'] = () => {
             switchPenSub('axp_penmode_move');
+        }
+        this.TASK['func_switch_axp_penmode_nagenawa'] = () => {
+            switchPenSub('axp_penmode_nagenawa');
         }
 
         // アンドゥ
@@ -7783,9 +8107,9 @@ const objButtonFunction = [
 const objKeyFunction = [
     ['*', 'ASTERISK', 'none'],
     ['+', 'PLUS', 'func_loupe_up'],
-    [',', 'COMMA', 'none'],
+    [',', 'COMMA', 'func_rotate_view_left'],
     ['-', 'MINUS', 'func_loupe_down'],
-    ['.', 'DOT', 'none'],
+    ['.', 'DOT', 'func_rotate_view_right'],
     ['/', 'SLASH', 'none'],
     ['1', '1', 'none'],
     ['2', '2', 'none'],
@@ -7878,6 +8202,7 @@ class ConfigSystem {
         { value: 'optgroup', name: 'ツール種別' },
         { value: 'func_switch_axp_penmode_hand', name: 'ツール種別:ハンド' },
         { value: 'func_switch_axp_penmode_move', name: 'ツール種別:移動ツール' },
+        { value: 'func_switch_axp_penmode_nagenawa', name: 'ツール種別:なげなわ' },
         { value: '/optgroup' },
         { value: 'optgroup', name: 'ペンの太さ' },
         { value: 'func_size', name: 'ペンの太さ（値指定）' },
@@ -7928,6 +8253,13 @@ class ConfigSystem {
         { value: 'func_scroll_left', name: '画面を左スクロール' },
         { value: 'func_scroll_right', name: '画面を右スクロール' },
         { value: '/optgroup' },
+        { value: 'optgroup', name: '表示回転' },
+        { value: 'func_rotate_view_left', name: '左に回転(15度)' },
+        { value: 'func_rotate_view_right', name: '右に回転(15度)' },
+        { value: 'func_rotate_view_left_45', name: '左に回転(45度)' },
+        { value: 'func_rotate_view_right_45', name: '右に回転(45度)' },
+        { value: 'func_rotate_view_reset', name: '回転リセット' },
+        { value: '/optgroup' },
         { value: 'optgroup', name: '補助線分割数' },
         { value: 'func_grid_up_h', name: '分割数:横を増やす' },
         { value: 'func_grid_down_h', name: '分割数:横を減らす' },
@@ -7951,7 +8283,7 @@ class ConfigSystem {
         let targetElement = document.getElementById('axp_config');
         targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(_html_config_txt__WEBPACK_IMPORTED_MODULE_2__));
         // バージョン情報の表示
-        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-06-22T05:15:29.368Z"})`
+        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-06-28T09:20:27.302Z"})`
     }
     // HTML展開
     deployHTML() {
@@ -10044,7 +10376,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   isBlankImage: () => (/* binding */ isBlankImage),
 /* harmony export */   isColor: () => (/* binding */ isColor),
 /* harmony export */   loadImageWithTimeout: () => (/* binding */ loadImageWithTimeout),
-/* harmony export */   rgb2hex: () => (/* binding */ rgb2hex)
+/* harmony export */   normalizeDeg180: () => (/* binding */ normalizeDeg180),
+/* harmony export */   rgb2hex: () => (/* binding */ rgb2hex),
+/* harmony export */   rotateVector: () => (/* binding */ rotateVector)
 /* harmony export */ });
 // @description ユーティリティ（独立した関数ライブラリ）
 
@@ -10129,6 +10463,32 @@ function getFileNameFromURL(input) {
  */
 function calcDistance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+}
+/**
+ * ベクトル(dx,dy)を角度rad(ラジアン)だけ回転させる
+ * @param {number} dx
+ * @param {number} dy
+ * @param {number} rad 回転角（ラジアン）
+ * @returns {{x:number,y:number}}
+ */
+function rotateVector(dx, dy, rad) {
+    const cos = Math.cos(rad);
+    const sin = Math.sin(rad);
+    return {
+        x: dx * cos - dy * sin,
+        y: dx * sin + dy * cos
+    };
+}
+/**
+ * 角度(度数)を -180〜180 の範囲に正規化する（角度差分の算出に使用）
+ * @param {number} deg
+ * @returns {number}
+ */
+function normalizeDeg180(deg) {
+    let d = deg % 360;
+    if (d > 180) { d -= 360; }
+    if (d < -180) { d += 360; }
+    return d;
 }
 /**
  * ２点の中点
@@ -11061,7 +11421,7 @@ class PenObj {
     // 描画終了 - 共通処理
     end_common() {
         if (this.axpObj.layerSystem.isStrokeActive) {
-            if (this.axpObj.layerSystem.compositeFastPathActive) {
+            if (this.axpObj.layerSystem.compositeFastPathActive && !this.axpObj.isDrawCancel) {
                 this.axpObj.layerSystem.write(
                     this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size)
                 );
@@ -11251,6 +11611,7 @@ class StampPenBase extends _drawingpen_js__WEBPACK_IMPORTED_MODULE_0__.DrawingPe
         // ピクセル単位の調節パラメータ (ペンごとに override 可)
         this.startRawPx = 2;   // 開幕この距離まで筆圧フィルタを素通し
         this.subPxFloor = 0.5; // サブピクセル幅の形状下限
+        this._activeRadiusXform = null; // _drawPointSequence 内で一時設定される半径変換
         this.useSubPxAlpha = true; // 極細時に半透明化 (false = 常に不透明)
         // 終端ハライ/ハネ (速度依存・筆圧テーパー)。筆圧ペンのみ有効。具体ペンで上書き可。
         this.flickTaper = {
@@ -11285,10 +11646,7 @@ class StampPenBase extends _drawingpen_js__WEBPACK_IMPORTED_MODULE_0__.DrawingPe
 
         if (this.drawmode === this.axpObj.CONST.DRAW_FREEHAND && !this.axpObj.isLine) {
             const commits = this.pipeline.onStart(this._toInput(x, y, e));
-            for (const cp of commits) {
-                this._drawStamp(cp);
-                this.lastCommitted = cp;
-            }
+            this.lastCommitted = this._drawCommits(commits, null);
         }
     }
 
@@ -11301,10 +11659,7 @@ class StampPenBase extends _drawingpen_js__WEBPACK_IMPORTED_MODULE_0__.DrawingPe
         if (this.drawmode === this.axpObj.CONST.DRAW_FREEHAND && !this.axpObj.isLine) {
             // FREEHAND: 累積描画 (ブラシキャンバスは clear せず、新しい区間のみ追加)
             const commits = this.pipeline.onMove(this._toInput(x, y, e), this._gap());
-            for (const cp of commits) {
-                this._drawSegment(this.lastCommitted, cp);
-                this.lastCommitted = cp;
-            }
+            this.lastCommitted = this._drawCommits(commits, this.lastCommitted);
             this.write();
         } else {
             // RECT/CIRCLE/直線モード: 従来通り全体再描画
@@ -11320,21 +11675,14 @@ class StampPenBase extends _drawingpen_js__WEBPACK_IMPORTED_MODULE_0__.DrawingPe
 
             if (this.drawmode === this.axpObj.CONST.DRAW_FREEHAND && !this.axpObj.isLine) {
                 const commits = this.pipeline.onEnd(this._toInput(x, y, e), this._gap());
-                for (const cp of commits) {
-                    this._drawSegment(this.lastCommitted, cp);
-                    this.lastCommitted = cp;
-                }
+                this.lastCommitted = this._drawCommits(commits, this.lastCommitted);
                 // 終端ハライ/ハネ・テーパー: 既存終端の筆圧を遡って下げる必要があるため、
                 // ブラシキャンバスを clear し、テーパー後の全確定点を再描画する (write が
                 // レイヤー再ロード後にブラシ全体を1回合成するため二重濃化は起きない)。
                 const rebuild = this.pipeline.consumeRebuild();
                 if (rebuild && rebuild.length > 0) {
                     this.CANVAS.brush_ctx.clearRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
-                    this.lastCommitted = null;
-                    for (const cp of rebuild) {
-                        this._drawSegment(this.lastCommitted, cp);
-                        this.lastCommitted = cp;
-                    }
+                    this.lastCommitted = this._drawCommits(rebuild, null);
                 }
                 // サブピクセル半透明モードの終端キャップ (ストローク中にスタンプを省略しているため)
                 if (this.useSubPxAlpha && this.lastCommitted) {
@@ -11375,10 +11723,12 @@ class StampPenBase extends _drawingpen_js__WEBPACK_IMPORTED_MODULE_0__.DrawingPe
     }
 
     // 描画半径: usePressure のとき筆圧に比例、それ以外は固定半幅。
+    // _activeRadiusXform が設定されている場合、算出後の半径に変換を適用する。
     _radiusAt(cp) {
         const half = this._halfWidth();
-        // 筆圧をそのまま半径に乗算 (下限なし → curve の不感地帯と終端テーパが機能)
-        return this.usePressure ? half * cp.pressure : half;
+        let r = this.usePressure ? half * cp.pressure : half;
+        if (this._activeRadiusXform) r = this._activeRadiusXform(r);
+        return r;
     }
 
     // サブピクセル幅 (直径 < 1px) のエミュレーション:
@@ -11387,6 +11737,33 @@ class StampPenBase extends _drawingpen_js__WEBPACK_IMPORTED_MODULE_0__.DrawingPe
         if (!this.useSubPxAlpha) return 1.0;
         const f = this.subPxFloor;
         return (rTrue < f) ? Math.max(0, rTrue) / f : 1.0;
+    }
+
+    // 点群描画 (関数F): alphaScale で brush_ctx の不透明度を制御し、
+    // radiusXform が渡された場合は _radiusAt の出力を変換する。
+    _drawPointSequence(points, alphaScale, prevPoint, radiusXform = null) {
+        if (points.length === 0) return prevPoint;
+        const ctx = this.CANVAS.brush_ctx;
+        const savedAlpha = ctx.globalAlpha;
+        const savedXform = this._activeRadiusXform;
+        ctx.globalAlpha = alphaScale;
+        this._activeRadiusXform = radiusXform;
+        try {
+            let last = prevPoint;
+            for (const cp of points) {
+                this._drawSegment(last, cp);
+                last = cp;
+            }
+            return last;
+        } finally {
+            ctx.globalAlpha = savedAlpha;
+            this._activeRadiusXform = savedXform;
+        }
+    }
+
+    // 確定点群の描画フック。既定は単一パス。ペン側で override して二重描画等を実現する。
+    _drawCommits(commits, prevPoint) {
+        return this._drawPointSequence(commits, 1.0, prevPoint);
     }
 
     // 円スタンプ (既定ニブ)
@@ -11795,7 +12172,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Dot: () => (/* binding */ Dot)
 /* harmony export */ });
 /* harmony import */ var _accumulativepen_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_accumulativepen.js */ "./src/js/pendefine/_accumulativepen.js");
+/* harmony import */ var _etc_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../etc.js */ "./src/js/etc.js");
 // @description ペン定義：蓄積系共通＞ドットペン
+
 
 
 
@@ -11823,21 +12202,22 @@ class Dot extends _accumulativepen_js__WEBPACK_IMPORTED_MODULE_0__.AccumulativeP
     }
     // ドット用
     getCursorPositionDot(e) {
-        // ヘッダを表示している場合、座標がズレるので補正する
-        const rect = this.axpObj.ELEMENT.view.getBoundingClientRect();
-
-        // ペンの太さ単位でドットを描画するため、太さに応じて座標ををずらす
-        let crect = this.axpObj.CANVAS.main.getBoundingClientRect();
-        // キャンバス座標を、ペンの太さで割り（剰余切り捨て）、ペンの太さを乗算する
-        let t_canvas_x = Math.floor((e.clientX - crect.left) * 100 / this.axpObj.scale);
-        let t_canvas_y = Math.floor((e.clientY - crect.top) * 100 / this.axpObj.scale);
-        let t_width = this.size;
-        let t_dot_x = Math.floor(t_canvas_x / t_width) * t_width;
-        let t_dot_y = Math.floor(t_canvas_y / t_width) * t_width;
-        let x = parseInt(t_dot_x * this.axpObj.scale / 100) + crect.left - rect.left;
-        let y = parseInt(t_dot_y * this.axpObj.scale / 100) + crect.top - rect.top;
-
-        return { x: x, y: y };
+        const rectView = this.axpObj.ELEMENT.view.getBoundingClientRect();
+        const scale = this.axpObj.scale;
+        // ポインタのキャンバス座標（回転対応の中核処理を利用）
+        const pos = this.axpObj.calcScaleCoordinates(e);
+        // ペンの太さ単位でドットを描画するため、太さ単位にスナップした左上キャンバス座標を求める
+        const t_width = this.size;
+        const t_dot_x = Math.floor(pos.x / t_width) * t_width;
+        const t_dot_y = Math.floor(pos.y / t_width) * t_width;
+        // スナップ位置（キャンバス左上px）を非回転状態のview内座標へ変換
+        const ux = rectView.width / 2 - (this.axpObj.x_size / 2 + this.axpObj.cameraX) * scale / 100 + t_dot_x * scale / 100;
+        const uy = rectView.height / 2 - (this.axpObj.y_size / 2 + this.axpObj.cameraY) * scale / 100 + t_dot_y * scale / 100;
+        // view中心を不動点として +rotation 回転させた表示位置を返す
+        const cx = rectView.width / 2;
+        const cy = rectView.height / 2;
+        const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_1__.rotateVector)(ux - cx, uy - cy, this.axpObj.rotation * Math.PI / 180);
+        return { x: parseInt(r.x + cx), y: parseInt(r.y + cy) };
     }
     start_draw() {
         this.img_draw = new ImageData(this.axpObj.x_size, this.axpObj.y_size);
@@ -12822,7 +13202,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Hand: () => (/* binding */ Hand)
 /* harmony export */ });
 /* harmony import */ var _penobj_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_penobj.js */ "./src/js/pendefine/_penobj.js");
+/* harmony import */ var _etc_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../etc.js */ "./src/js/etc.js");
 // @description ペン定義：親クラス＞ハンドツール
+
 
 
 
@@ -12858,8 +13240,10 @@ class Hand extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
             // カメラ位置移動
             const diffX = this.baseInputX - e.clientX;
             const diffY = this.baseInputY - e.clientY;
-            this.axpObj.cameraX = Math.round(this.baseCameraX + (diffX * 100 / this.axpObj.scale));
-            this.axpObj.cameraY = Math.round(this.baseCameraY + (diffY * 100 / this.axpObj.scale));
+            // 画面上のドラッグ差分を -rotation だけ回し、カメラ（非回転）座標系へ変換
+            const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_1__.rotateVector)(diffX, diffY, -this.axpObj.rotation * Math.PI / 180);
+            this.axpObj.cameraX = Math.round(this.baseCameraX + (r.x * 100 / this.axpObj.scale));
+            this.axpObj.cameraY = Math.round(this.baseCameraY + (r.y * 100 / this.axpObj.scale));
             this.axpObj.refreshCanvas();
         }
     }
@@ -12949,6 +13333,7 @@ class Move extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
         if (this.axpObj.layerSystem.compositeFastPathActive) {
             this.CANVAS.draw_ctx.globalCompositeOperation = 'source-over';
             this.CANVAS.draw_ctx.globalAlpha = 1;
+            this.CANVAS.draw_ctx.shadowBlur = 0; // 移動時にぼかしを引き継がない（前のペンの残存値対策）
             this.CANVAS.draw_ctx.drawImage(this.CANVAS.undoBase, dx, dy);
             this.axpObj.layerSystem.drawFast();
         } else {
@@ -12972,6 +13357,49 @@ class Move extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
         this.end_common();
     }
 }
+
+/***/ }),
+
+/***/ "./src/js/pendefine/nagenawa.js":
+/*!**************************************!*\
+  !*** ./src/js/pendefine/nagenawa.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Nagenawa: () => (/* binding */ Nagenawa)
+/* harmony export */ });
+/* harmony import */ var _penobj_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_penobj.js */ "./src/js/pendefine/_penobj.js");
+// @description ペン定義：親クラス＞なげなわツール
+
+
+
+// なげなわ
+class Nagenawa extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
+    constructor(option) {
+        super();
+        this.axpObj = option.axpObj;
+        this.CANVAS = option.CANVAS;
+        // 値（PenObjからの差分）
+        this.name = this.axpObj._('@PENNAME.NAGENAWA');
+        this.type = 'nagenawa';
+        this.cursor = 'crosshair';
+        // 制御
+
+        this.init_save();
+    }
+    // 描画開始
+    start(x, y, e) {
+    }
+    // 描画中
+    move(x, y, e) {
+    }
+    // 描画終了
+    end(x, y, e) {
+    }
+}
+
 
 /***/ }),
 
@@ -13053,6 +13481,20 @@ class Round extends _stamppen_js__WEBPACK_IMPORTED_MODULE_0__.StampPenBase {
         this.useSubPxAlphaControl = true;
 
         this.init_save();
+    }
+
+    // 芯/輪郭の二重描画: 輪郭を半透明で描いた上に縮小半径の芯を重ねる
+    _drawCommits(commits, prevPoint) {
+        if (commits.length === 0) return prevPoint;
+        this._drawPointSequence(commits, 0.3, prevPoint);
+        return this._drawPointSequence(commits, 1.0, prevPoint,
+            r => this._coreRadiusXform(r));
+    }
+
+    _coreRadiusXform(r) {
+        if (r > 1.4) return r - 0.7;
+        if (r > 0.5) return (2 * r - 1) / 9 + 0.5;
+        return r;
     }
 }
 
@@ -19054,10 +19496,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pendefine_spuit_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pendefine/spuit.js */ "./src/js/pendefine/spuit.js");
 /* harmony import */ var _pendefine_square_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pendefine/square.js */ "./src/js/pendefine/square.js");
 /* harmony import */ var _pendefine_move_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./pendefine/move.js */ "./src/js/pendefine/move.js");
-/* harmony import */ var _pendefine_dot_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pendefine/dot.js */ "./src/js/pendefine/dot.js");
-/* harmony import */ var _pendefine_fude_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pendefine/fude.js */ "./src/js/pendefine/fude.js");
-/* harmony import */ var _pendefine_crayon_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pendefine/crayon.js */ "./src/js/pendefine/crayon.js");
-/* harmony import */ var _pendefine_brush_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pendefine/brush.js */ "./src/js/pendefine/brush.js");
+/* harmony import */ var _pendefine_nagenawa_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pendefine/nagenawa.js */ "./src/js/pendefine/nagenawa.js");
+/* harmony import */ var _pendefine_dot_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./pendefine/dot.js */ "./src/js/pendefine/dot.js");
+/* harmony import */ var _pendefine_fude_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pendefine/fude.js */ "./src/js/pendefine/fude.js");
+/* harmony import */ var _pendefine_crayon_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pendefine/crayon.js */ "./src/js/pendefine/crayon.js");
+/* harmony import */ var _pendefine_brush_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pendefine/brush.js */ "./src/js/pendefine/brush.js");
 // @description ツールウィンドウ：親クラス＞ペンツール
 
 
@@ -19082,6 +19525,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // サブ
+
 
 
 
@@ -19187,10 +19631,11 @@ class PenSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
         // サブ
         this.penObj['axp_penmode_square'] = new _pendefine_square_js__WEBPACK_IMPORTED_MODULE_13__.Square({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_move'] = new _pendefine_move_js__WEBPACK_IMPORTED_MODULE_14__.Move({ axpObj: this.axpObj, CANVAS: this.CANVAS });
-        this.penObj['axp_penmode_dot'] = new _pendefine_dot_js__WEBPACK_IMPORTED_MODULE_15__.Dot({ axpObj: this.axpObj, CANVAS: this.CANVAS });
-        this.penObj['axp_penmode_fude'] = new _pendefine_fude_js__WEBPACK_IMPORTED_MODULE_16__.Fude({ axpObj: this.axpObj, CANVAS: this.CANVAS });
-        this.penObj['axp_penmode_crayon'] = new _pendefine_crayon_js__WEBPACK_IMPORTED_MODULE_17__.Crayon({ axpObj: this.axpObj, CANVAS: this.CANVAS });
-        this.penObj['axp_penmode_brush'] = new _pendefine_brush_js__WEBPACK_IMPORTED_MODULE_18__.Brush({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_nagenawa'] = new _pendefine_nagenawa_js__WEBPACK_IMPORTED_MODULE_15__.Nagenawa({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_dot'] = new _pendefine_dot_js__WEBPACK_IMPORTED_MODULE_16__.Dot({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_fude'] = new _pendefine_fude_js__WEBPACK_IMPORTED_MODULE_17__.Fude({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_crayon'] = new _pendefine_crayon_js__WEBPACK_IMPORTED_MODULE_18__.Crayon({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_brush'] = new _pendefine_brush_js__WEBPACK_IMPORTED_MODULE_19__.Brush({ axpObj: this.axpObj, CANVAS: this.CANVAS });
 
         // サブメニューをメインメニューに反映
         let elementsButton = document.querySelectorAll('#axp_pen_div_rightSide>div>button');
@@ -19964,6 +20409,9 @@ class PenSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
 
         // 選択されたペンの名称をウィンドウに表示
         document.getElementById('axp_pen_span_penName').textContent = this.getName();
+
+        // 回転操作子の表示／非表示をペンモードに追従させる（ハンドツール時のみ表示）
+        this.axpObj.updateRotateHandle();
     }
     previewPenSize() {
         this.penObj[this.pen_mode].previewPenSize();
@@ -19976,9 +20424,10 @@ class PenSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
             this.axpObj.msg('@CAU5002');
             return;
         }
-        var clientRect_draw = this.axpObj.CANVAS.main.getBoundingClientRect();
-        var x = parseInt((e.clientX - clientRect_draw.left) * 100 / this.axpObj.scale);
-        var y = parseInt((e.clientY - clientRect_draw.top) * 100 / this.axpObj.scale);
+        // 座標変換は中核処理に集約（回転表示にも対応）
+        var pos = this.axpObj.calcScaleCoordinates(e);
+        var x = pos.x;
+        var y = pos.y;
         // 座標のドットを読み取る
         var imagedata = this.axpObj.CANVAS.main_ctx.getImageData(x, y, 1, 1);
         // RGBAの取得
@@ -21002,6 +21451,16 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABz
 
 /***/ }),
 
+/***/ "./resource/nagenawa.png":
+/*!*******************************!*\
+  !*** ./resource/nagenawa.png ***!
+  \*******************************/
+/***/ ((module) => {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFQUExURbKysp6eno+Pj4mJiYqKioyMjI6OjpOTk6Ojo729vaenp4ODg4aGhpubm6GhoZCQkIWFhZWVlYiIiLq6uq2trZiYmLa2tpmZmZeXl4CAgJ2dnZSUlK6uro2Njbu7u4uLi4SEhLGxsbOzs6WlpampqZqamqCgoL6+voeHh7i4uIKCgqSkpIGBgQEBAQMDA3R0dKampgAAABAQEH9/f5KSkjw8PC8vLxgYGJycnJGRkaKiolBQUOvr6xYWFh8fH2JiYgwMDElJSf////Pz835+fn19fa+vr2RkZNDQ0O3t7XFxcTQ0NGBgYOjo6GVlZUBAQBUVFfDw8ODg4FxcXFZWVtnZ2QQEBKysrE5OTgUFBaqqqpaWllRUVNvb293d3bW1tWpqaqioqG9vb9HR0TAwMHh4eBwcHPf393d3dyQkJFNTU87Ozh4eHllZWQcHBwAAAK96apAAAABwdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wC3YWLSAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB3UlEQVQ4T4XT61PTQBAA8NqkTfVSkgZqTUNNQMSYVmXx1RQP4VBBRVBBsIhiVXzr/v/fnNyjl0ZnvC+72f3N5WYvKeF/VimXnikbhlmpWrWz/wLnKsQu12tTdccldrX2F2i4Xn1a5jNNm5jnJ4HlOvl9seUaE+CC7+TbiNgmgUg4mHU7hT6iZV/kkYMwmiv2cd69xGMGFqLLxTYieos8ZKBsXyl2ETHWwLCKTUS8mkzxmIFYj0Wvbk+ci4MZVb12/YZKTU9EDpZUFQCWb/Lsll/XwBtP6TbcAbiLiH1SlaUMpGSgBKzcSyms3k/UpDmYjmM1qLV1xjYeUKAP8wC7kfFIPG7SLcbY4ycUnuYBtpIk5CftwzbL1rMdCrs50Ca+T8Kg1fCe0xdcsJd7FFYUsKJOc6kbOE4a7ENTAMZe7dODbQ4OSSpfiIgHrxVg7HA45OCIvNHgmL7Neu9OgvfrFEC8Ik4q/dG8FPCBMfaRAsDap+NTechGJ44SQ1zJZ/qFsR34Kr0AiHjSjGOenMKIbdBvqj4G2VcoInxnIxhXSzgrszlbXvAu/fEzD+IGTwZmpG4dVuUUBXAia9DuuD1zQdWWQW+QnSEN7Z7vh7r2C4YTIPtzFo90CfH3ns7/AKcNYOmMIeDXAAAAAElFTkSuQmCC";
+
+/***/ }),
+
 /***/ "./resource/ng.png":
 /*!*************************!*\
   !*** ./resource/ng.png ***!
@@ -21009,6 +21468,36 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABz
 /***/ ((module) => {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA4klEQVRIia2VWw7EIAhF0cx3F0bXWxfWDTgfEywq8hh7kyZ96LkIpCTQVY3vXMnzsgMiopteShG5dNPAEajDLCWC74Cvcrf7E4/OJI/wq9zdhgici5gfayNFZIFX6/L44sSjWyxFOKZkBRcNpIh42qR8a1oaSIBIbVwGZCJF6oneZQBg12HLQCuop6VVg1VBPZ1mGni6xWMiGkRakZ9GStlkEO1za+3yVxGBa3smg3/AmjLANCxeETH5RKvRmWAElgCeFE2zN3AqcRaTWg0o+tVs3VFFxAq/U9D1mtpMZs+v6gsVx3EXSmjQgwAAAABJRU5ErkJggg==";
+
+/***/ }),
+
+/***/ "./resource/overlay/rotate.svg":
+/*!*************************************!*\
+  !*** ./resource/overlay/rotate.svg ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjZmZmZmZmIj48cGF0aCBkPSJNNDgyLTE2MHEtMTM0IDAtMjI4LTkzdC05NC0yMjd2LTdsLTY0IDY0LTU2LTU2IDE2MC0xNjAgMTYwIDE2MC01NiA1Ni02NC02NHY3cTAgMTAwIDcwLjUgMTcwVDQ4Mi0yNDBxMjYgMCA1MS02dDQ5LTE4bDYwIDYwcS0zOCAyMi03OCAzM3QtODIgMTFabTI3OC0xNjFMNjAwLTQ4MWw1Ni01NiA2NCA2NHYtN3EwLTEwMC03MC41LTE3MFQ0NzgtNzIwcS0yNiAwLTUxIDZ0LTQ5IDE4bC02MC02MHEzOC0yMiA3OC0zM3Q4Mi0xMXExMzQgMCAyMjggOTN0OTQgMjI3djdsNjQtNjQgNTYgNTYtMTYwIDE2MFoiLz48L3N2Zz4=";
+
+/***/ }),
+
+/***/ "./resource/overlay/rotate_left.svg":
+/*!******************************************!*\
+  !*** ./resource/overlay/rotate_left.svg ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjZmZmZmZmIj48cGF0aCBkPSJNNjAwLTE2MHYtMzYwSDI3Mmw2NCA2NC01NiA1Ni0xNjAtMTYwIDE2MC0xNjAgNTYgNTYtNjQgNjRoMzI4cTMzIDAgNTYuNSAyMy41VDY4MC01MjB2MzYwaC04MFoiLz48L3N2Zz4=";
+
+/***/ }),
+
+/***/ "./resource/overlay/rotate_right.svg":
+/*!*******************************************!*\
+  !*** ./resource/overlay/rotate_right.svg ***!
+  \*******************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjZmZmZmZmIj48cGF0aCBkPSJNMjgwLTE2MHYtMzYwcTAtMzMgMjMuNS01Ni41VDM2MC02MDBoMzI4bC02NC02NCA1Ni01NiAxNjAgMTYwLTE2MCAxNjAtNTYtNTYgNjQtNjRIMzYwdjM2MGgtODBaIi8+PC9zdmc+";
 
 /***/ }),
 
@@ -21168,7 +21657,7 @@ module.exports = "<!-- 設定タブ -->\n<div id=\"axp_config_div_menu\">\n    <
   \***************************/
 /***/ ((module) => {
 
-module.exports = "<!-- AXNOS Paintメイン -->\n<div id=\"axp_main\" class=\"axpc_main\">\n\t<!-- 切り替えタブ -->\n\t<div id=\"axp_main_div_tab\">\n\t\t<!-- ハンバーガーメニューボタン -->\n\t\t<input type=\"checkbox\" id=\"axp_main_checkbox_hamburger\">\n\t\t<label id=\"axp_main_label_hamburger\" for=\"axp_main_checkbox_hamburger\">\n\t\t\t<div class=\"axpc_icon_humburger\"></div>\n\t\t</label>\n\t\t<div id=\"axp_main_div_tab_menu\">\n\t\t\t<div data-idx=\"0\" class=\"axpc_MSG\" data-msg=\"@BAS0001\">${_(\"@TAB.CANVAS\")}</div>\n\t\t\t<div data-idx=\"1\" class=\"axpc_MSG\" data-msg=\"@BAS0002\">${_(\"@TAB.SETTINGS\")}</div>\n\t\t\t<div data-idx=\"2\" class=\"axpc_MSG\" data-msg=\"@BAS0003\">${_(\"@TAB.POST\")}</div>\n\t\t\t<div data-idx=\"3\" class=\"axpc_MSG\" data-msg=\"@BAS0004\"></div>\n\t\t</div>\n\t\t<div id=\"axp_main_div_headerText\" class=\"axpc_MSG\" data-msg=\"@BAS0005\"></div>\n\t\t<!-- ヘッダー右端のアンドゥ／リドゥボタン -->\n\t\t<button id=\"axp_main_button_undo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t<button id=\"axp_main_button_redo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t</div>\n\n\t<!-- タブにより切り替わる画面 -->\n\t<div id=\"axp_main_div_tabContent\">\n\t\t<!-- キャンバス -->\n\t\t<article>\n\t\t\t<div id=\"axp_canvas\">\n\t\t\t\t<!-- ペンの太さを表示する補助円 -->\n\t\t\t\t<div id=\"axp_canvas_div_penCursor\"></div>\n\n\t\t\t\t<!-- ポインタ座標表示領域 -->\n\t\t\t\t<div id=\"axp_canvas_div_pointerPosition\" class=\"axpc_NONE\"></div>\n\n\t\t\t\t<!-- デバッグ情報表示 -->\n\t\t\t\t<div id=\"axp_canvas_div_debugInfo\" class=\"axpc_NONE axpc_MSG\" data-msg=\"@BAS0100\">\n\t\t\t\t\t<div></div>\n\t\t\t\t\t<div></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 描画エリア -->\n\t\t\t\t<div id=\"axp_canvas_div_grayBackground\">\n\t\t\t\t\t<!-- 補助線 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_grid\" class=\"axpc_NONE\">\n\t\t\t\t\t\t<svg id=\"axp_canvas_svg_grid\" xmlns=\"http://www.w3.org/2000/svg\">\n\t\t\t\t\t\t\t<defs>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridVH\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridSubDivision\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridDiagonal\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel1\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel2\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t</defs>\n\t\t\t\t\t\t</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!-- canvas要素 -->\n\t\t\t\t\t<canvas id=\"axp_canvas_canvas_main\" class=\"axpc_background_mesh\"></canvas>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- セーブロードサブウィンドウ -->\n\t\t\t\t<div id=\"axp_saveload\" class=\"axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<span id=\"axp_saveload_span_message\"></span>\n\t\t\t\t\t\t<div id=\"axp_saveload_div_insertHTML\"></div>\n\t\t\t\t\t\t<button id=\"axp_saveload_button_close\" class=\"axpc_button\">${_(\"@COMMON.BUTTON_CLOSE\")}</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- レイヤー名変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_renamelayer\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.LAYERS_INFO\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_close\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0100\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_textarea\">\n\t\t\t\t\t\t\t<input id=\"axp_renamelayer_text_newLayerName\" type=\"text\" size=\"15\" maxlength=\"10\"\n\t\t\t\t\t\t\t\tautocomplete=\"off\" class=\"axpc_MSG\" data-msg=\"@LAY0101\" placeholder=\"空白にはできません\">\n\t\t\t\t\t\t\t<!-- 状態によりMSG変化 -->\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_confirm\"\n\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYER.BUTTON_RENAME_OK\")}</button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_buttonarea\">\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipH\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0110\"></button>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipV\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0111\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTagContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.PRESET_NAME\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_colorReset\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0102\">${_(\"@LAYER.BUTTON_CLEAR_COLOR\")}</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTag\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 補助線の色変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_gridconfig\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@GRID.LINE_COLOR\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_gridconfig_button_confirm\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@AST0122\"></button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_gridconfig_div_colorPicker\" class=\"axpc_MSG\" data-msg=\"@AST0120\"></div>\n\t\t\t\t\t\t<form id=\"axp_gridconfig_form_gridColor\" class=\"axpc_range axpc_text_border\"\n\t\t\t\t\t\t\toninput=\"result.value=parseInt(volume.value)\">\n\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_gridconfig_range_gridColor\" name=\"volume\" min=\"5\" max=\"100\"\n\t\t\t\t\t\t\t\tstep=\"5\" value=\"100\" class=\"axpc_MSG\" data-msg=\"@AST0121\">\n\t\t\t\t\t\t\t<div class=\"axpc_range_label\">${_(\"@COMMON.OPACITY\")}</div>\n\t\t\t\t\t\t\t<div class=\"axpc_range_value\"><output name=\"result\">100</output></div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</article>\n\t\t<!-- 設定 -->\n\t\t<article>\n\t\t\t<div id=\"axp_config\"></div>\n\t\t</article>\n\t\t<!-- 投稿 -->\n\t\t<article>\n\t\t\t<div id=\"axp_post\"></div>\n\t\t</article>\n\t</div>\n</div>\n<!-- フッター -->\n<div id=\"axp_footer\" class=\"axpc_MSG\" data-msg=\"@BAS0006\">\n\t<div id=\"axp_footer_div_icon\"></div>\n\t<div id=\"axp_footer_div_message\">AXNOS Paint（アクノスペイントあいもげカスタム）</div>\n</div>";
+module.exports = "<!-- AXNOS Paintメイン -->\n<div id=\"axp_main\" class=\"axpc_main\">\n\t<!-- 切り替えタブ -->\n\t<div id=\"axp_main_div_tab\">\n\t\t<!-- ハンバーガーメニューボタン -->\n\t\t<input type=\"checkbox\" id=\"axp_main_checkbox_hamburger\">\n\t\t<label id=\"axp_main_label_hamburger\" for=\"axp_main_checkbox_hamburger\">\n\t\t\t<div class=\"axpc_icon_humburger\"></div>\n\t\t</label>\n\t\t<div id=\"axp_main_div_tab_menu\">\n\t\t\t<div data-idx=\"0\" class=\"axpc_MSG\" data-msg=\"@BAS0001\">${_(\"@TAB.CANVAS\")}</div>\n\t\t\t<div data-idx=\"1\" class=\"axpc_MSG\" data-msg=\"@BAS0002\">${_(\"@TAB.SETTINGS\")}</div>\n\t\t\t<div data-idx=\"2\" class=\"axpc_MSG\" data-msg=\"@BAS0003\">${_(\"@TAB.POST\")}</div>\n\t\t\t<div data-idx=\"3\" class=\"axpc_MSG\" data-msg=\"@BAS0004\"></div>\n\t\t</div>\n\t\t<div id=\"axp_main_div_headerText\" class=\"axpc_MSG\" data-msg=\"@BAS0005\"></div>\n\t\t<!-- ヘッダー右端のアンドゥ／リドゥボタン -->\n\t\t<button id=\"axp_main_button_undo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t<button id=\"axp_main_button_redo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t</div>\n\n\t<!-- タブにより切り替わる画面 -->\n\t<div id=\"axp_main_div_tabContent\">\n\t\t<!-- キャンバス -->\n\t\t<article>\n\t\t\t<div id=\"axp_canvas\">\n\t\t\t\t<!-- ペンの太さを表示する補助円 -->\n\t\t\t\t<div id=\"axp_canvas_div_penCursor\"></div>\n\n\t\t\t\t<!-- 回転操作子グループ（ハンドツール時のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_rotateGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateLeft\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0020\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateHandle\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@AST0022\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateRight\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0021\"></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- ポインタ座標表示領域 -->\n\t\t\t\t<div id=\"axp_canvas_div_pointerPosition\" class=\"axpc_NONE\"></div>\n\n\t\t\t\t<!-- デバッグ情報表示 -->\n\t\t\t\t<div id=\"axp_canvas_div_debugInfo\" class=\"axpc_NONE axpc_MSG\" data-msg=\"@BAS0100\">\n\t\t\t\t\t<div></div>\n\t\t\t\t\t<div></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 描画エリア -->\n\t\t\t\t<div id=\"axp_canvas_div_grayBackground\">\n\t\t\t\t\t<!-- 補助線 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_grid\" class=\"axpc_NONE\">\n\t\t\t\t\t\t<svg id=\"axp_canvas_svg_grid\" xmlns=\"http://www.w3.org/2000/svg\">\n\t\t\t\t\t\t\t<defs>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridVH\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridSubDivision\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridDiagonal\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel1\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel2\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t</defs>\n\t\t\t\t\t\t</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!-- canvas要素 -->\n\t\t\t\t\t<canvas id=\"axp_canvas_canvas_main\" class=\"axpc_background_mesh\"></canvas>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- セーブロードサブウィンドウ -->\n\t\t\t\t<div id=\"axp_saveload\" class=\"axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<span id=\"axp_saveload_span_message\"></span>\n\t\t\t\t\t\t<div id=\"axp_saveload_div_insertHTML\"></div>\n\t\t\t\t\t\t<button id=\"axp_saveload_button_close\" class=\"axpc_button\">${_(\"@COMMON.BUTTON_CLOSE\")}</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- レイヤー名変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_renamelayer\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.LAYERS_INFO\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_close\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0100\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_textarea\">\n\t\t\t\t\t\t\t<input id=\"axp_renamelayer_text_newLayerName\" type=\"text\" size=\"15\" maxlength=\"10\"\n\t\t\t\t\t\t\t\tautocomplete=\"off\" class=\"axpc_MSG\" data-msg=\"@LAY0101\" placeholder=\"空白にはできません\">\n\t\t\t\t\t\t\t<!-- 状態によりMSG変化 -->\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_confirm\"\n\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYER.BUTTON_RENAME_OK\")}</button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_buttonarea\">\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipH\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0110\"></button>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipV\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0111\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTagContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.PRESET_NAME\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_colorReset\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0102\">${_(\"@LAYER.BUTTON_CLEAR_COLOR\")}</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTag\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 補助線の色変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_gridconfig\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@GRID.LINE_COLOR\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_gridconfig_button_confirm\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@AST0122\"></button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_gridconfig_div_colorPicker\" class=\"axpc_MSG\" data-msg=\"@AST0120\"></div>\n\t\t\t\t\t\t<form id=\"axp_gridconfig_form_gridColor\" class=\"axpc_range axpc_text_border\"\n\t\t\t\t\t\t\toninput=\"result.value=parseInt(volume.value)\">\n\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_gridconfig_range_gridColor\" name=\"volume\" min=\"5\" max=\"100\"\n\t\t\t\t\t\t\t\tstep=\"5\" value=\"100\" class=\"axpc_MSG\" data-msg=\"@AST0121\">\n\t\t\t\t\t\t\t<div class=\"axpc_range_label\">${_(\"@COMMON.OPACITY\")}</div>\n\t\t\t\t\t\t\t<div class=\"axpc_range_value\"><output name=\"result\">100</output></div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</article>\n\t\t<!-- 設定 -->\n\t\t<article>\n\t\t\t<div id=\"axp_config\"></div>\n\t\t</article>\n\t\t<!-- 投稿 -->\n\t\t<article>\n\t\t\t<div id=\"axp_post\"></div>\n\t\t</article>\n\t</div>\n</div>\n<!-- フッター -->\n<div id=\"axp_footer\" class=\"axpc_MSG\" data-msg=\"@BAS0006\">\n\t<div id=\"axp_footer_div_icon\"></div>\n\t<div id=\"axp_footer_div_message\">AXNOS Paint（アクノスペイントあいもげカスタム）</div>\n</div>";
 
 /***/ }),
 
@@ -21178,7 +21667,7 @@ module.exports = "<!-- AXNOS Paintメイン -->\n<div id=\"axp_main\" class=\"ax
   \******************************/
 /***/ ((module) => {
 
-module.exports = "<!-- ペンツールサブメニュー -->\n<div id=\"axp_penmode\" class=\"axpc_NONE\">\n    <div>\n        <span id=\"axp_penmode_span_modeName\"></span>\n        <article data-name=\"${_('@PENGROUP.PEN')}\">\n            <!-- ※idをそのままペン種別名として使用するため命名規則例外 -->\n            <button id=\"axp_penmode_round\" class=\"axpc_FUNC axpc_penmode_round\" data-idx=\"0\" data-msg=\"@PEN0100\"\n                data-function=\"func_switch_axp_penmode_round\"></button>\n            <button id=\"axp_penmode_square\" class=\"axpc_FUNC axpc_penmode_square\" data-idx=\"0\" data-msg=\"@PEN0101\"\n                data-function=\"func_switch_axp_penmode_square\"></button>\n            <button id=\"axp_penmode_dot\" class=\"axpc_FUNC axpc_penmode_dot\" data-idx=\"0\" data-msg=\"@PEN0102\"\n                data-function=\"func_switch_axp_penmode_dot\"></button>\n            <button id=\"axp_penmode_fude\" class=\"axpc_FUNC axpc_penmode_fude\" data-idx=\"0\" data-msg=\"@PEN0103\"\n                data-function=\"func_switch_axp_penmode_fude\"></button>\n            <button id=\"axp_penmode_crayon\" class=\"axpc_FUNC axpc_penmode_crayon\" data-idx=\"0\"\n                data-function=\"func_switch_axp_penmode_crayon\" data-msg=\"@PEN0104\"></button>\n            <button id=\"axp_penmode_brush\" class=\"axpc_FUNC axpc_penmode_brush\" data-idx=\"0\"\n                data-function=\"func_switch_axp_penmode_brush\" data-msg=\"@PEN0105\"></button>\n        </article>\n        <article data-name=\"${_('@PENGROUP.ERASER')}\">\n            <button id=\"axp_penmode_eraser_round\" class=\"axpc_FUNC axpc_penmode_eraser_round\" data-idx=\"1\"\n                data-function=\"func_switch_axp_penmode_eraser_round\" data-msg=\"@PEN0110\"></button>\n            <button id=\"axp_penmode_eraser_dot\" class=\"axpc_FUNC axpc_penmode_eraser_dot\" data-idx=\"1\"\n                data-function=\"func_switch_axp_penmode_eraser_dot\" data-msg=\"@PEN0111\"></button>\n        </article>\n        <article data-name=\"${_('@PENGROUP.FILL')}\">\n            <button id=\"axp_penmode_fill\" class=\"axpc_FUNC axpc_penmode_fill\" data-idx=\"2\"\n                data-function=\"func_switch_axp_penmode_fill\" data-msg=\"@PEN0120\"></button>\n            <button id=\"axp_penmode_fillgradation\" class=\"axpc_FUNC axpc_penmode_fillgradation\"\n                data-function=\"func_switch_axp_penmode_fillgradation\" data-idx=\"2\" data-msg=\"@PEN0121\"></button>\n        </article>\n        <article data-name=\"${_('@PENGROUP.TOOL')}\">\n            <button id=\"axp_penmode_hand\" class=\"axpc_FUNC axpc_penmode_hand\" data-idx=\"3\"\n                data-function=\"func_switch_axp_penmode_hand\" data-msg=\"@PEN0130\"></button>\n            <button id=\"axp_penmode_move\" class=\"axpc_FUNC axpc_penmode_move\" data-idx=\"3\"\n                data-function=\"func_switch_axp_penmode_move\" data-msg=\"@PEN0131\"></button>\n        </article>\n        <article data-name=\"${_('@PENGROUP.EYEDROPPER')}\">\n            <button id=\"axp_penmode_spuit\" class=\"axpc_penmode_spuit\" data-idx=\"4\"></button>\n        </article>\n    </div>\n</div>\n<!--追加用HTMLここまで -->";
+module.exports = "<!-- ペンツールサブメニュー -->\n<div id=\"axp_penmode\" class=\"axpc_NONE\">\n    <div>\n        <span id=\"axp_penmode_span_modeName\"></span>\n        <article data-name=\"${_('@PENGROUP.PEN')}\">\n            <!-- ※idをそのままペン種別名として使用するため命名規則例外 -->\n            <button id=\"axp_penmode_round\" class=\"axpc_FUNC axpc_penmode_round\" data-idx=\"0\" data-msg=\"@PEN0100\"\n                data-function=\"func_switch_axp_penmode_round\"></button>\n            <button id=\"axp_penmode_square\" class=\"axpc_FUNC axpc_penmode_square\" data-idx=\"0\" data-msg=\"@PEN0101\"\n                data-function=\"func_switch_axp_penmode_square\"></button>\n            <button id=\"axp_penmode_dot\" class=\"axpc_FUNC axpc_penmode_dot\" data-idx=\"0\" data-msg=\"@PEN0102\"\n                data-function=\"func_switch_axp_penmode_dot\"></button>\n            <button id=\"axp_penmode_fude\" class=\"axpc_FUNC axpc_penmode_fude\" data-idx=\"0\" data-msg=\"@PEN0103\"\n                data-function=\"func_switch_axp_penmode_fude\"></button>\n            <button id=\"axp_penmode_crayon\" class=\"axpc_FUNC axpc_penmode_crayon\" data-idx=\"0\"\n                data-function=\"func_switch_axp_penmode_crayon\" data-msg=\"@PEN0104\"></button>\n            <button id=\"axp_penmode_brush\" class=\"axpc_FUNC axpc_penmode_brush\" data-idx=\"0\"\n                data-function=\"func_switch_axp_penmode_brush\" data-msg=\"@PEN0105\"></button>\n        </article>\n        <article data-name=\"${_('@PENGROUP.ERASER')}\">\n            <button id=\"axp_penmode_eraser_round\" class=\"axpc_FUNC axpc_penmode_eraser_round\" data-idx=\"1\"\n                data-function=\"func_switch_axp_penmode_eraser_round\" data-msg=\"@PEN0110\"></button>\n            <button id=\"axp_penmode_eraser_dot\" class=\"axpc_FUNC axpc_penmode_eraser_dot\" data-idx=\"1\"\n                data-function=\"func_switch_axp_penmode_eraser_dot\" data-msg=\"@PEN0111\"></button>\n        </article>\n        <article data-name=\"${_('@PENGROUP.FILL')}\">\n            <button id=\"axp_penmode_fill\" class=\"axpc_FUNC axpc_penmode_fill\" data-idx=\"2\"\n                data-function=\"func_switch_axp_penmode_fill\" data-msg=\"@PEN0120\"></button>\n            <button id=\"axp_penmode_fillgradation\" class=\"axpc_FUNC axpc_penmode_fillgradation\"\n                data-function=\"func_switch_axp_penmode_fillgradation\" data-idx=\"2\" data-msg=\"@PEN0121\"></button>\n        </article>\n        <article data-name=\"${_('@PENGROUP.TOOL')}\">\n            <button id=\"axp_penmode_hand\" class=\"axpc_FUNC axpc_penmode_hand\" data-idx=\"3\"\n                data-function=\"func_switch_axp_penmode_hand\" data-msg=\"@PEN0130\"></button>\n            <button id=\"axp_penmode_move\" class=\"axpc_FUNC axpc_penmode_move\" data-idx=\"3\"\n                data-function=\"func_switch_axp_penmode_move\" data-msg=\"@PEN0131\"></button>\n            <button id=\"axp_penmode_nagenawa\" class=\"axpc_FUNC axpc_penmode_nagenawa\" data-idx=\"3\"\n                data-function=\"func_switch_axp_penmode_nagenawa\" data-msg=\"@PEN0132\"></button>\n        </article>\n        <article data-name=\"${_('@PENGROUP.EYEDROPPER')}\">\n            <button id=\"axp_penmode_spuit\" class=\"axpc_penmode_spuit\" data-idx=\"4\"></button>\n        </article>\n    </div>\n</div>\n<!--追加用HTMLここまで -->";
 
 /***/ }),
 
@@ -21268,7 +21757,7 @@ module.exports = "<!-- 補助ツール -->\n<div class=\"axpc_window_content\">\
   \**************************/
 /***/ ((module) => {
 
-module.exports = "@BAS0001,キャンバス：絵を描くメイン画面です。\n@BAS0002,設定：各種機能をカスタマイズできます。\n@BAS0003,投稿：描いたイラストを掲示板に投稿します。\n@BAS0004,拡張機能：ユーザーにより定義された拡張機能を実行します。\n@BAS0005,お知らせ領域です。文章が見切れる場合、クリックし続けると全文表示します。\n@BAS0006,機能解説などのガイドメッセージが表示されるエリアです。\n@BAS0100,デバッグ情報です。非表示にするには[設定]-[バージョン情報]-[デバッグ情報表示]のチェックを外してください。\n@LAU0001,一時的にすべてのウィンドウを非表示にします。\n@PEN0001,現在選択しているペンの名前が表示されます。\n@PEN0002,ペンの不透明度を変更します。0に近づくほど透明になります。\n@PEN0003,ペンの太さを変更します。\n@PEN0004,境界付近の塗り残しドットを目立たなくします。数字が大きいほど強く補正します。\n@PEN0005,グラデーションの向きを角度で指定します。\n@PEN0006,トーン濃度を指定します。数字が大きいほど濃くなります。\n@PEN0007,図形描画モードを選択できます。\n@PEN0008,「囲まれた領域」の判定方式を選択できます。（全ﾚｲﾔｰ判定を指定すると表示見たままで塗分けができます）\n@PEN0009,ぼかしの強さを指定します。数字が大きいほど描画する線がぼやけます。\n@PEN0010,外側の角の丸さを指定します。50で正円になります。\n@PEN0050,%1%2 [ 再選択 ]:ペン種別変更。\n@PEN0051,%1%2 [ 再選択 ]:消しゴム種別変更。\n@PEN0052,%1%2 [ 再選択 ]:バケツ種別変更。\n@PEN0053,%1%2 [ 再選択 ]:ツール種別変更。\n@PEN0054,%1スポイト：指定座標の色を取得し、描画色（%drawingColorName）に設定します。[ CTRL ]:押している間スポイトに変化。\n@PEN0100,%1丸ペン：一定の太さの線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0101,%1角ペン：先が四角い線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0102,%1ドットペン：ドット絵調の線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0103,%1筆ペン：強弱のついた線が描けるペン。\n@PEN0104,%1クレヨン：クレヨン風の塗りができるペン。[ SHIFT ]:直線描画。\n@PEN0105,%1エアブラシ：エアブラシ風の塗りができるペン。\n@PEN0110,%1消しゴム：辺が丸い消しゴム。[ SHIFT ]:直線描画。\n@PEN0111,%1角消しゴム：辺が四角い消しゴム。[ SHIFT ]:直線描画。\n@PEN0120,%1バケツ：囲まれた領域の内側を塗り潰します。\n@PEN0121,%1階調バケツ：メインカラーとサブカラーのグラデーションで、囲まれた領域の内側を塗り潰します。\n@PEN0130,%1ハンド：ドラッグでキャンバスの位置を移動します。[ SPACE ]:押している間ハンドに変化。\n@PEN0131,%1移動ツール：画像を上下左右に移動するツール（現在のレイヤーのみ対象）\n@PEN0200,%penPreviewGuide\n@PEN0201,%1のプレビュー。\n@PEN0202,%1の色プレビュー。\n@PEN0203,%1の色プレビュー。枠内をドラッグで角度を変更します。\n@PEN0204,ポインタ座標の画像を拡大表示します。赤枠の色がスポイトで取得されます。\n@PLT0001,カラーパレットの列数を変更します。∞を指定すると常に１行になります。\n@PLT0002,パレットの更新／位置入れ替え／削除を行うモードに切り替えます。\n@PLT0003,%addPaletteNameの色をカラーパレットに登録します。\n@PLT0004,選択しているパレットを削除します。\n@LAY0001,レイヤーの合成モードを変更します。詳細はマニュアルを参照してください。\n@LAY0002,現在のレイヤーの不透明度を変更します。0を指定すると完全に透明になります。\n@LAY0003,%1現在のレイヤーは残したまま、描画内容だけを消去します。\n@LAY0004,%1新しいレイヤーを作成します。（最大８枚まで）\n@LAY0005,%1現在のレイヤーを１つ下のレイヤーに統合します。統合後は不透明度が100%に調整されます。\n@LAY0006,%1現在のレイヤーのコピーを作成します。\n@LAY0007,%1現在のレイヤーを削除します。\n@LAY0008,描画するレイヤーを選択します。\n@LAY0100,レイヤー情報サブウィンドウを閉じます。\n@LAY0101,レイヤー名を変更する場合、ここに新しい名前を入力します。（10文字まで）\n@LAY0102,レイヤーに付与した色を解除します。（レイヤー名は変更されません）\n@LAY0110,レイヤー単体を左右反転します。\n@LAY0111,レイヤー単体を上下反転します。\n@MKC0001,%1描画色をメインカラーに切り替えます。\n@MKC0002,%1描画色をサブカラーに切り替えます。一部の機能で補助的に使用します。%2\n@MKC0003,%1描画色を透明色に切り替えます。%2\n@MKC0004,カラーコードを直接入力してメインカラーを変更します。\n@MKC0005,%addPaletteNameの色をカラーパレットに登録します。\n@MKC0006,メインカラーとサブカラーを入れ替えます。\n@MKC0007,%drawingColorNameの赤成分を変更します。(0～255)\n@MKC0008,赤成分を数値入力します。(0～255)\n@MKC0009,%drawingColorNameの緑成分を変更します。(0～255)\n@MKC0010,緑成分を数値入力します。(0～255)\n@MKC0011,%drawingColorNameの青成分を変更します。(0～255)\n@MKC0012,青成分を数値入力します。(0～255)\n@MKC0013,%drawingColorNameの色をカラーピッカーで変更します。\n@AST0001,キャンバスの大きさ。（※設定で変更可能）\n@AST0002,サムネイル表示。枠内をクリックまたはドラッグでキャンバスの位置を移動します。\n@AST0003,%1拡大率を１段階縮小します。\n@AST0004,%1拡大率とキャンバス位置をリセットします。\n@AST0005,%1拡大率を１段階拡大します。\n@AST0006,%1直前の描画を取消して元に戻します。ボタンの数字の回数だけ遡れます。\n@AST0007,%1アンドゥを取消します。ボタンの数字の回数だけ遡れます。\n@AST0008,%1自動バックアップから復元ポイントを選んで再開します。（※現在の描画内容は消去されます）\n@AST0009,%1描画内容をブラウザに一時保存し、復元ポイントを作成します。\n@AST0010,%1作成した復元ポイントから再開します（※現在の描画内容は消去されます）\n@AST0011,%1全レイヤーを左右反転します。\n@AST0012,%1全レイヤーを上下反転します。\n@AST0013,%1背景色の白地/透明色を切り替えます。（※投稿画像に反映されます）\n@AST0014,%1補助線のON/OFFを切り替えます。\n@AST0015,補助線の詳細設定ウィンドウを開閉します。\n@AST0100,補助線の横方向の分割数を変更します。\n@AST0101,補助線の縦方向の分割数を変更します。\n@AST0102,縦横の分割数の変更を連動させて同じ値にします。\n@AST0103,補助線（主線）の使用を切り替えます。分割数に応じた格子状の線を引きます。\n@AST0104,補助線（主線）の色と不透明度を変更します。\n@AST0105,補助線（副線）の使用を切り替えます。主線の内部を細分する線を引きます。\n@AST0106,補助線（副線）の色と不透明度を変更します。\n@AST0107,補助線（斜め）の使用を切り替えます。分割数に応じた斜線を引きます。\n@AST0108,補助線（斜め）の色と不透明度を変更します。\n@AST0109,補助線（ピクセル指定１）の使用を切り替えます。※表示に適さない拡大率の時、自動的に非表示になります。\n@AST0110,補助線（ピクセル指定１）の色と不透明度を変更します。\n@AST0111,補助線（ピクセル指定１）のピクセル間隔を変更します。\n@AST0112,補助線（ピクセル指定２）の使用を切り替えます。※表示に適さない拡大率の時、自動的に非表示になります。\n@AST0113,補助線（ピクセル指定２）の色と不透明度を変更します。\n@AST0114,補助線（ピクセル指定２）のピクセル間隔を変更します。\n@AST0120,補助線の色を変更します。\n@AST0121,補助線の不透明度を変更します。\n@AST0122,変更を終了して、サブメニューを閉じます。\n@POS0001,お絵カキコを投稿します。\n@CFG0010,現在のポインタ座標を表示します。（位置：左下）\n@CFG0016,過去に使用したキャンバスサイズの履歴です。直近8件まで保存されます。\n@CFG0017,新規キャンバスを作成します。（現在の描画内容はすべて消去されます）\n@CFG0018,現在の描画内容を残したまま、キャンバスのサイズを変更します。\n@CFG0019,描画内容をPNG形式ファイルとしてダウンロードします。ファイル名は現在日時が付与されます。\n@CFG0020,ぼかし（アンチエイリアシング）を無効にします。（ドット絵がボケなくなります）\n@CFG0021,ぼかし（アンチエイリアシング）を有効にします。\n@CFG0022,現在のポインタ座標を表示しません。\n@CFG0023,現在のポインタ座標を表示します。（位置：左上）\n@CFG0024,現在のポインタ座標を表示します。（位置：右上）\n@CFG0025,現在のポインタ座標を表示します。（位置：右下）\n@CFG0026,ツール起動時、ウィンドウ配置を毎回初期化します。\n@CFG0027,ツール起動時、ウィンドウ配置を前回終了時の位置に復元します。\n@CFG0028,ウィンドウ位置の自動調整を行いません。\n@CFG0029,ブラウザの画面サイズを変更したとき、ウィンドウが画面内に収まるように自動調整を行います。\n@CFG0030,すべてのツールウィンドウの配置を初期状態に戻します。\n@CFG0034,ツール起動時、ペンの太さ、不透明度などを毎回初期化します。\n@CFG0035,ツール起動時、ペンの太さ、不透明度などを前回終了時の値に復元します。\n@CFG0036,アイコンボタンのサイズを変更します。\n@CFG0037,ウィンドウを開く際に、他のウィンドウが自動的に閉じるようになります。一括開閉ボタンは無効になります。\n@CFG0040,全ペン共通の手ぶれ補正の強さを変更します。数値が大きいほど強い補正がかかります。0を指定すると補正を行いません。\n@CFG0041,ペンツールウィンドウ内にレンジスライダーを表示して、キャンバス画面でも手ぶれ補正を変更できるようにします。\n@CFG0043,自動切換機能を使用しません。\n@CFG0044,スポイトで色を取得した時、自動的にペンに切り替えます。\n@CFG0045,長押しスポイト機能を使用しません。\n@CFG0046,キャンバス上の取得したい色の位置で、ペン（またはマウスクリック）を長押しすることでスポイトが動作します。\n@CFG0047,長押し入力として認識するために、押し続ける必要がある時間を設定します。1000ミリ秒=１秒\n@CFG0048,長押し入力時に許容する手ぶれの範囲を設定します。数値が大きいほど長押しが認識されやすくなりますが、通常描画に影響がでます。\n@CFG0049,トーン濃度レンジスライダーを使用しません。\n@CFG0050,トーン濃度レンジスライダーをペンツールに追加します。\n@CFG0051,太さレンジスライダーを上に表示します。\n@CFG0052,不透明度レンジスライダーを上に表示します。\n@CFG0053,混色パレットを使用しません。\n@CFG0054,混色パレットを使用します。\n@CFG0055,RGBスライダーを使用しません。\n@CFG0056,光の三原色（赤、緑、青）強さを指定して色作成するスライダーを使用します。\n@CFG0057,カラーピッカーを使用しません。\n@CFG0058,HSV色空間（色相、彩度、明度）を指定するカラーピッカーを使用します。\n@CFG0059,ツール起動時、カラーパレットを毎回初期化します。\n@CFG0060,ツール起動時、カラーパレットを前回終了時の色に復元します。\n@CFG0062,パレット編集モード時にレンジスライダーを表示して、キャンバス画面でも横幅を変更できるようにします。\n@CFG0063,カラーパレットの列数を変更します。∞を指定すると常に１行になります。\n@CFG0064,現在のカラーパレットの内容をテキストファイルとしてダウンロードします。\n@CFG0065,色保存で作成したテキストファイルを読み込み、カラーパレットを更新します。\n@CFG0066,カラーパレットを初期状態に戻します。\n@CFG0067,アンドゥ／リドゥの可能回数を変更します。メモリ不足で動作が不安定になる場合は値を小さく設定してください。\n@CFG0070,拡大率を追加します。\n@CFG0071,選択している拡大率を削除します。\n@CFG0072,拡大率を初期状態に戻します。\n@CFG0080,カスタムボタンを使用しません。\n@CFG0081,カスタムボタンツールウィンドウを画面に追加します。\n@CFG0082,ボタンに機能を割り当てません。\n@CFG0083,ボタンでアンドゥを実行します。\n@CFG0084,ボタンでスポイトを実行します。\n@CFG0085,ボタンを押しながらドラッグでキャンバスの位置を移動します。\n@CFG0086,ボタンで拡大率とキャンバス位置をリセットします。\n@CFG0087,ボタンでメインカラーとサブカラーを切り替えます。\n@CFG0088,ボタンでメインカラーと透明色を切り替えます。\n@CFG0089,ホイールに機能を割り当てません。\n@CFG0090,ホイールでキャンバスを拡大/縮小します。\n@CFG0091,ホイールでキャンバスの位置を移動します。\n@CFG0092,操作を無効にします。タッチペン使用時、指による誤描画を防止します。\n@CFG0093,１本指タッチで描画を行います。指で線を描くことができます。\n@CFG0094,１本指タッチでハンドツールを操作します。指でキャンバスを移動できます。\n@CFG0095,操作を無効にします。\n@CFG0096,２本指スワイプ操作でキャンバスの移動を行います。\n@CFG0097,操作を無効にします。\n@CFG0098,ピンチアウト／ピンチイン操作でキャンバスの拡大／縮小を行います。\n@CFG0099,操作を無効にします。\n@CFG0100,２本指タップ操作でアンドゥを行います。\n@CFG0101,操作を無効にします。\n@CFG0102,３本指タップ操作でリドゥを行います。\n@CFG0103,タップ入力として認識するために、触れた指を離すまでの制限時間を設定します。1000ミリ秒=１秒\n@CFG0108,１回のボタン操作でスクロールする量を設定します。\n@CFG0111,機能が割り当てられていないキーを省略します。非表示のキーに機能を割り当てる場合はチェックを外してください。\n@CFG0112,キーと割り当てられている機能の対応表です。セレクトボックスから機能を選んで割り当てを変更することができます。\n@CFG0113,現在のショートカット設定をテキストファイルとしてダウンロードします。\n@CFG0114,ショートカットファイルを読み込み、ショートカット設定を更新します。\n@CFG0115,ショートカット設定を初期状態に戻します。\n@CFG0120,合成モードを表示しません。\n@CFG0121,合成モードをレイヤー名の下に表示します。\n@CFG0122,合成モードをレイヤー名の下に表示します。（合成モードが通常の場合は表示を省略します）\n@CFG0123,登録されているレイヤー名を変更します。（最大8文字）\n@CFG0124,登録されているレイヤー名を初期状態にリセットします。\n@CFG0200,ぼかし度レンジスライダーを使用しません。\n@CFG0201,ぼかし度レンジスライダーをペンツールに追加します。\n@CFG0211,追加する拡大率を入力します。\n@CFG0212,現在設定されている拡大率の一覧です。クリックで拡大率を選択します。\n@CFG0220,マウスホイールの回転方向を反転して入力を受け付けます。\n@CFG0221,１回のホイール操作でスクロールする量を設定します。\n@CFG0222,連続してマウスホイールを回転させた時、入力を抑止する時間を設定します。1000ミリ秒=１秒\n@CFG0223,マウスポインタの位置を参照し、キャンバスの狙った位置を拡大／縮小できるようにします。\n@CFG0230,画面スクロールの向きを反転します。上スクロールは下スクロールに、左スクロールは右スクロールに変換されます。\n@CFG0300,キャンバスの幅（横のサイズ）を入力します。（下のボタンで変更を確定します）\n@CFG0301,キャンバスの高さ（縦のサイズ）を入力します。（下のボタンで変更を確定します）\n@CFG0400,選択中のペンを使って透明色で描画します。（描画中だけ透明色に切り替わります）\n@CFG0401,タップ入力時に許容する手ぶれの範囲を設定します。\n@CFG2001,キャンバス全般に関する設定を行います。\n@CFG2002,ツールウィンドウ全般に関する設定を行います。\n@CFG2003,ペンツールの機能設定を行います。\n@CFG2004,色作成の機能設定を行います。\n@CFG2005,パレットの機能設定を行います。\n@CFG2006,レイヤーの機能設定を行います。\n@CFG2007,補助ツールの機能設定を行います。\n@CFG2008,カスタムボタンの機能設定を行います。\n@CFG2009,マウス／タッチパッド（トラックパッド）の設定を行います。\n@CFG2010,タッチパネルの設定を行います。\n@CFG2011,キーボードのキーコンフィグなどの設定を行います。\n@CFG2013,AXNOS Paint起動時の設定を行います。\n@CFG2020,バージョン情報を表示します。\n@COL0001,%drawingColorName RGB:(%1)\n@COL0002,透明色\n@COL0003,メインカラー RGB:(%1) / サブカラー (%2)\n@COL0004,混色パレット(%1%) RGB:(%2)\n@AXP0001,拡大率：%1%\n@AXP0003,%1の不透明度：%2\n@AXP0004,補助線分割数 横：%1 / 縦：%2\n@AXP0010,%1ペン／消しゴム切替(%2)\n@AXP2000,描画色を混色パレット(%1%)に変更します。RGB:(%2)\n@AXP3000,[編集モード] ドラッグで位置を入れ替え。色作成ウィンドウで選択中パレットの色を更新。\n@AXP3001,%drawingColorNameを指定色に変更します。RGB:(%1)\n@AXP4000,レイヤーの%1を切り替えます。(現在の状態:%2)\n@AXP4001,ドラッグで表示順序を入れ替え。ダブルクリックでレイヤー名変更。\n@AXP4010,レイヤー名の変更を決定して、サブメニューを閉じます。\n@AXP4012,登録された名前に変更し、色を付与します。\n@AXP4013,新しいレイヤー名を入力してください。\n@AXP5000,%1の太さ：%2\n@AXP5001,%1の不透明度：%2\n@AXP5002,%1の塗り残し補正：%2\n@AXP5003,%1の角度：%2\n@AXP5004,%1のトーン濃度：%2\n@AXP5005,[ CTRL ]: 押している間、ペンがスポイトに変化します。\n@AXP5006,[ SPACE ]: 押している間、ペンがハンドに変化します。\n@AXP5007,%1押している間、その場でペンの太さレンジスライダーを操作できます。\n@AXP5008,%1のぼかし度：%2\n@AXP5009,%1の丸み：%2\n@AXP5010,ペンツールの種別選択中です。\n@INF0001,%1は透明部分をロックしています。既に描画されている部分のみ上書き描画できます。\n@INF0002,拡大率とキャンバスの位置をリセットしました。\n@INF0003,ツールウィンドウの位置を初期化しました。\n@INF0005,背景のタイルプレビューを切り替えました。(現在の状態:%1)\n@INF0006,%1を全面塗り潰ししました。\n@INF0007,%1を90°回転しました。\n@INF0008,%1はクリッピングです。描画内容は%2の形に切り抜かれます。\n@INF0009,キャンバス全体のぼかしを切り替えました。(現在の状態:%1)\n@INF0050,[ %1 ]を読み込みました。(画像サイズ 横:%2 × 縦:%3)\n@INF0100,拡大率%1%を追加しました。\n@INF0101,拡大率%1%を削除しました。\n@INF0300,スロット%1にセーブしました。\n@INF0301,スロット%1をロードしました。\n@INF0302,自動保存されたデータをロードしました。\n@INF0400,%1をアンドゥしました。（残り回数：%2）\n@INF0401,%1をリドゥしました。（残り回数：%2）\n@INF1000,全レイヤーの左右を反転しました。\n@INF1001,選択中レイヤーの左右を反転しました。\n@INF1002,全レイヤーの上下を反転しました。\n@INF1003,選択中レイヤーの上下を反転しました。\n@INF1004,補助線の表示を切り替えました。（現在の状態:%1）\n@INF1005,背景を切り替えました。（現在の状態:%1）\n@INF2000,カラーコードの入力を受け付けました。%1 / RGB:(%2)\n@INF3000,パレット編集モードに切り替えました。（パレットの更新／位置入れ替え／削除が行えます）\n@INF3001,パレット編集モードを解除しました。\n@INF3002,カラーパレットを削除しました。\n@INF3003,カラーパレットを登録しました。RGB:(%1)\n@INF4000,%1をクリアしました。\n@INF4001,%1を作成しました。\n@INF4002,%1を複製して、%2を作成しました。\n@INF4003,%1を削除しました。\n@INF4004,%1と%2を統合しました。\n@INF4005,レイヤー名を[%1]に変更しました。\n@INF4006,レイヤーの%1を切り替えました。(現在の状態:%2)\n@INF4008,カラータグ名を[%1]に変更しました。\n@INF4009,レイヤーに付与した色を解除しました。\n@CAU0001,%1が%2のため、描画を禁止しています。\n@CAU0002,[ %1 ]キーには機能が割り当てられていません。（※設定で変更可能）\n@CAU0003,%1が%2のため、全面塗り潰しできません。\n@CAU0004,全面塗り潰しを使用する際は、ペン、消しゴム、バケツのいずれかを選択した状態にしてください。\n@CAU0005,%1が%2のため、90°回転できません。\n@CAU0006,%1の下層に親レイヤーが存在しないため、クリッピングが無効になっています。\n@CAU0100,追加できる拡大率は%1個までです。\n@CAU0101,拡大率%1%は既に追加されています。\n@CAU0102,追加できる拡大率は%1～%2%です。\n@CAU0103,削除する拡大率が選択されていません。\n@CAU0104,拡大率100%は変更できません。\n@CAU0200,%1の不透明度は変更できません。\n@CAU0201,%1の不透明度は100が最大値です。\n@CAU0202,%1の不透明度は5が最小値です。\n@CAU0203,%1の太さは変更できません。\n@CAU0204,%1の太さは200が最大値です。\n@CAU0205,%1の太さは1が最小値です。\n@CAU0206,補助線が表示されているときに有効なショートカットです。\n@CAU0300,現在セーブ/ロード機能は使用できません。ヘルプをご確認下さい。\n@CAU0301,スロット%1にはデータがありません。\n@CAU0400,これ以上アンドゥできません。\n@CAU0401,これ以上リドゥできません。\n@CAU0500,%1は透明色を使用できません。\n@CAU2000,カラーコードが正しくありません。入力例：#ffffff または #fff（#は省略可）\n@CAU3000,すべてのパレットを削除することはできません。\n@CAU3001,登録できるパレット数は%1個までです。\n@CAU4000,%1がロック状態のため、クリアできません。\n@CAU4001,%1は空白のレイヤーです。\n@CAU4002,レイヤーは%1枚までです。\n@CAU4003,%1がロック状態のため、削除できません。\n@CAU4004,レイヤーをすべて削除することはできません。\n@CAU4005,最下層のレイヤーは統合できません。\n@CAU4006,%1が%2のため、統合できません。\n@CAU4007,レイヤー名を空白にすることはできません。\n@CAU4008,カラータグ名を空白にすることはできません。\n@CAU5000,[ CTRL ]キーでスポイトに変化中です。別のペンは選択できません。\n@CAU5001,[ SPACE ]キーでハンドに変化中です。別のペンは選択できません。\n@CAU5002,スポイトを使用するにはキャンバス内を指定してください。";
+module.exports = "@BAS0001,キャンバス：絵を描くメイン画面です。\n@BAS0002,設定：各種機能をカスタマイズできます。\n@BAS0003,投稿：描いたイラストを掲示板に投稿します。\n@BAS0004,拡張機能：ユーザーにより定義された拡張機能を実行します。\n@BAS0005,お知らせ領域です。文章が見切れる場合、クリックし続けると全文表示します。\n@BAS0006,機能解説などのガイドメッセージが表示されるエリアです。\n@BAS0100,デバッグ情報です。非表示にするには[設定]-[バージョン情報]-[デバッグ情報表示]のチェックを外してください。\n@LAU0001,一時的にすべてのウィンドウを非表示にします。\n@PEN0001,現在選択しているペンの名前が表示されます。\n@PEN0002,ペンの不透明度を変更します。0に近づくほど透明になります。\n@PEN0003,ペンの太さを変更します。\n@PEN0004,境界付近の塗り残しドットを目立たなくします。数字が大きいほど強く補正します。\n@PEN0005,グラデーションの向きを角度で指定します。\n@PEN0006,トーン濃度を指定します。数字が大きいほど濃くなります。\n@PEN0007,図形描画モードを選択できます。\n@PEN0008,「囲まれた領域」の判定方式を選択できます。（全ﾚｲﾔｰ判定を指定すると表示見たままで塗分けができます）\n@PEN0009,ぼかしの強さを指定します。数字が大きいほど描画する線がぼやけます。\n@PEN0010,外側の角の丸さを指定します。50で正円になります。\n@PEN0050,%1%2 [ 再選択 ]:ペン種別変更。\n@PEN0051,%1%2 [ 再選択 ]:消しゴム種別変更。\n@PEN0052,%1%2 [ 再選択 ]:バケツ種別変更。\n@PEN0053,%1%2 [ 再選択 ]:ツール種別変更。\n@PEN0054,%1スポイト：指定座標の色を取得し、描画色（%drawingColorName）に設定します。[ CTRL ]:押している間スポイトに変化。\n@PEN0100,%1丸ペン：一定の太さの線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0101,%1角ペン：先が四角い線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0102,%1ドットペン：ドット絵調の線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0103,%1筆ペン：強弱のついた線が描けるペン。\n@PEN0104,%1クレヨン：クレヨン風の塗りができるペン。[ SHIFT ]:直線描画。\n@PEN0105,%1エアブラシ：エアブラシ風の塗りができるペン。\n@PEN0110,%1消しゴム：辺が丸い消しゴム。[ SHIFT ]:直線描画。\n@PEN0111,%1角消しゴム：辺が四角い消しゴム。[ SHIFT ]:直線描画。\n@PEN0120,%1バケツ：囲まれた領域の内側を塗り潰します。\n@PEN0121,%1階調バケツ：メインカラーとサブカラーのグラデーションで、囲まれた領域の内側を塗り潰します。\n@PEN0130,%1ハンド：ドラッグでキャンバスの位置を移動します。[ SPACE ]:押している間ハンドに変化。\n@PEN0131,%1移動ツール：画像を上下左右に移動するツール（現在のレイヤーのみ対象）\n@PEN0132,%1なげなわ：フリーハンドで囲んだ領域を選択するツール。\n@PEN0200,%penPreviewGuide\n@PEN0201,%1のプレビュー。\n@PEN0202,%1の色プレビュー。\n@PEN0203,%1の色プレビュー。枠内をドラッグで角度を変更します。\n@PEN0204,ポインタ座標の画像を拡大表示します。赤枠の色がスポイトで取得されます。\n@PLT0001,カラーパレットの列数を変更します。∞を指定すると常に１行になります。\n@PLT0002,パレットの更新／位置入れ替え／削除を行うモードに切り替えます。\n@PLT0003,%addPaletteNameの色をカラーパレットに登録します。\n@PLT0004,選択しているパレットを削除します。\n@LAY0001,レイヤーの合成モードを変更します。詳細はマニュアルを参照してください。\n@LAY0002,現在のレイヤーの不透明度を変更します。0を指定すると完全に透明になります。\n@LAY0003,%1現在のレイヤーは残したまま、描画内容だけを消去します。\n@LAY0004,%1新しいレイヤーを作成します。（最大８枚まで）\n@LAY0005,%1現在のレイヤーを１つ下のレイヤーに統合します。統合後は不透明度が100%に調整されます。\n@LAY0006,%1現在のレイヤーのコピーを作成します。\n@LAY0007,%1現在のレイヤーを削除します。\n@LAY0008,描画するレイヤーを選択します。\n@LAY0100,レイヤー情報サブウィンドウを閉じます。\n@LAY0101,レイヤー名を変更する場合、ここに新しい名前を入力します。（10文字まで）\n@LAY0102,レイヤーに付与した色を解除します。（レイヤー名は変更されません）\n@LAY0110,レイヤー単体を左右反転します。\n@LAY0111,レイヤー単体を上下反転します。\n@MKC0001,%1描画色をメインカラーに切り替えます。\n@MKC0002,%1描画色をサブカラーに切り替えます。一部の機能で補助的に使用します。%2\n@MKC0003,%1描画色を透明色に切り替えます。%2\n@MKC0004,カラーコードを直接入力してメインカラーを変更します。\n@MKC0005,%addPaletteNameの色をカラーパレットに登録します。\n@MKC0006,メインカラーとサブカラーを入れ替えます。\n@MKC0007,%drawingColorNameの赤成分を変更します。(0～255)\n@MKC0008,赤成分を数値入力します。(0～255)\n@MKC0009,%drawingColorNameの緑成分を変更します。(0～255)\n@MKC0010,緑成分を数値入力します。(0～255)\n@MKC0011,%drawingColorNameの青成分を変更します。(0～255)\n@MKC0012,青成分を数値入力します。(0～255)\n@MKC0013,%drawingColorNameの色をカラーピッカーで変更します。\n@AST0001,キャンバスの大きさ。（※設定で変更可能）\n@AST0002,サムネイル表示。枠内をクリックまたはドラッグでキャンバスの位置を移動します。\n@AST0003,%1拡大率を１段階縮小します。\n@AST0004,%1拡大率とキャンバス位置をリセットします。\n@AST0005,%1拡大率を１段階拡大します。\n@AST0006,%1直前の描画を取消して元に戻します。ボタンの数字の回数だけ遡れます。\n@AST0007,%1アンドゥを取消します。ボタンの数字の回数だけ遡れます。\n@AST0008,%1自動バックアップから復元ポイントを選んで再開します。（※現在の描画内容は消去されます）\n@AST0009,%1描画内容をブラウザに一時保存し、復元ポイントを作成します。\n@AST0010,%1作成した復元ポイントから再開します（※現在の描画内容は消去されます）\n@AST0011,%1全レイヤーを左右反転します。\n@AST0012,%1全レイヤーを上下反転します。\n@AST0013,%1背景色の白地/透明色を切り替えます。（※投稿画像に反映されます）\n@AST0014,%1補助線のON/OFFを切り替えます。\n@AST0015,補助線の詳細設定ウィンドウを開閉します。\n@AST0020,キャンバス表示を左に45度回転します。\n@AST0021,キャンバス表示を右に45度回転します。\n@AST0022,つまんで左右に動かすと、キャンバス表示が回転します。\n@AST0100,補助線の横方向の分割数を変更します。\n@AST0101,補助線の縦方向の分割数を変更します。\n@AST0102,縦横の分割数の変更を連動させて同じ値にします。\n@AST0103,補助線（主線）の使用を切り替えます。分割数に応じた格子状の線を引きます。\n@AST0104,補助線（主線）の色と不透明度を変更します。\n@AST0105,補助線（副線）の使用を切り替えます。主線の内部を細分する線を引きます。\n@AST0106,補助線（副線）の色と不透明度を変更します。\n@AST0107,補助線（斜め）の使用を切り替えます。分割数に応じた斜線を引きます。\n@AST0108,補助線（斜め）の色と不透明度を変更します。\n@AST0109,補助線（ピクセル指定１）の使用を切り替えます。※表示に適さない拡大率の時、自動的に非表示になります。\n@AST0110,補助線（ピクセル指定１）の色と不透明度を変更します。\n@AST0111,補助線（ピクセル指定１）のピクセル間隔を変更します。\n@AST0112,補助線（ピクセル指定２）の使用を切り替えます。※表示に適さない拡大率の時、自動的に非表示になります。\n@AST0113,補助線（ピクセル指定２）の色と不透明度を変更します。\n@AST0114,補助線（ピクセル指定２）のピクセル間隔を変更します。\n@AST0120,補助線の色を変更します。\n@AST0121,補助線の不透明度を変更します。\n@AST0122,変更を終了して、サブメニューを閉じます。\n@POS0001,お絵カキコを投稿します。\n@CFG0010,現在のポインタ座標を表示します。（位置：左下）\n@CFG0016,過去に使用したキャンバスサイズの履歴です。直近8件まで保存されます。\n@CFG0017,新規キャンバスを作成します。（現在の描画内容はすべて消去されます）\n@CFG0018,現在の描画内容を残したまま、キャンバスのサイズを変更します。\n@CFG0019,描画内容をPNG形式ファイルとしてダウンロードします。ファイル名は現在日時が付与されます。\n@CFG0020,ぼかし（アンチエイリアシング）を無効にします。（ドット絵がボケなくなります）\n@CFG0021,ぼかし（アンチエイリアシング）を有効にします。\n@CFG0022,現在のポインタ座標を表示しません。\n@CFG0023,現在のポインタ座標を表示します。（位置：左上）\n@CFG0024,現在のポインタ座標を表示します。（位置：右上）\n@CFG0025,現在のポインタ座標を表示します。（位置：右下）\n@CFG0026,ツール起動時、ウィンドウ配置を毎回初期化します。\n@CFG0027,ツール起動時、ウィンドウ配置を前回終了時の位置に復元します。\n@CFG0028,ウィンドウ位置の自動調整を行いません。\n@CFG0029,ブラウザの画面サイズを変更したとき、ウィンドウが画面内に収まるように自動調整を行います。\n@CFG0030,すべてのツールウィンドウの配置を初期状態に戻します。\n@CFG0034,ツール起動時、ペンの太さ、不透明度などを毎回初期化します。\n@CFG0035,ツール起動時、ペンの太さ、不透明度などを前回終了時の値に復元します。\n@CFG0036,アイコンボタンのサイズを変更します。\n@CFG0037,ウィンドウを開く際に、他のウィンドウが自動的に閉じるようになります。一括開閉ボタンは無効になります。\n@CFG0040,全ペン共通の手ぶれ補正の強さを変更します。数値が大きいほど強い補正がかかります。0を指定すると補正を行いません。\n@CFG0041,ペンツールウィンドウ内にレンジスライダーを表示して、キャンバス画面でも手ぶれ補正を変更できるようにします。\n@CFG0043,自動切換機能を使用しません。\n@CFG0044,スポイトで色を取得した時、自動的にペンに切り替えます。\n@CFG0045,長押しスポイト機能を使用しません。\n@CFG0046,キャンバス上の取得したい色の位置で、ペン（またはマウスクリック）を長押しすることでスポイトが動作します。\n@CFG0047,長押し入力として認識するために、押し続ける必要がある時間を設定します。1000ミリ秒=１秒\n@CFG0048,長押し入力時に許容する手ぶれの範囲を設定します。数値が大きいほど長押しが認識されやすくなりますが、通常描画に影響がでます。\n@CFG0049,トーン濃度レンジスライダーを使用しません。\n@CFG0050,トーン濃度レンジスライダーをペンツールに追加します。\n@CFG0051,太さレンジスライダーを上に表示します。\n@CFG0052,不透明度レンジスライダーを上に表示します。\n@CFG0053,混色パレットを使用しません。\n@CFG0054,混色パレットを使用します。\n@CFG0055,RGBスライダーを使用しません。\n@CFG0056,光の三原色（赤、緑、青）強さを指定して色作成するスライダーを使用します。\n@CFG0057,カラーピッカーを使用しません。\n@CFG0058,HSV色空間（色相、彩度、明度）を指定するカラーピッカーを使用します。\n@CFG0059,ツール起動時、カラーパレットを毎回初期化します。\n@CFG0060,ツール起動時、カラーパレットを前回終了時の色に復元します。\n@CFG0062,パレット編集モード時にレンジスライダーを表示して、キャンバス画面でも横幅を変更できるようにします。\n@CFG0063,カラーパレットの列数を変更します。∞を指定すると常に１行になります。\n@CFG0064,現在のカラーパレットの内容をテキストファイルとしてダウンロードします。\n@CFG0065,色保存で作成したテキストファイルを読み込み、カラーパレットを更新します。\n@CFG0066,カラーパレットを初期状態に戻します。\n@CFG0067,アンドゥ／リドゥの可能回数を変更します。メモリ不足で動作が不安定になる場合は値を小さく設定してください。\n@CFG0070,拡大率を追加します。\n@CFG0071,選択している拡大率を削除します。\n@CFG0072,拡大率を初期状態に戻します。\n@CFG0080,カスタムボタンを使用しません。\n@CFG0081,カスタムボタンツールウィンドウを画面に追加します。\n@CFG0082,ボタンに機能を割り当てません。\n@CFG0083,ボタンでアンドゥを実行します。\n@CFG0084,ボタンでスポイトを実行します。\n@CFG0085,ボタンを押しながらドラッグでキャンバスの位置を移動します。\n@CFG0086,ボタンで拡大率とキャンバス位置をリセットします。\n@CFG0087,ボタンでメインカラーとサブカラーを切り替えます。\n@CFG0088,ボタンでメインカラーと透明色を切り替えます。\n@CFG0089,ホイールに機能を割り当てません。\n@CFG0090,ホイールでキャンバスを拡大/縮小します。\n@CFG0091,ホイールでキャンバスの位置を移動します。\n@CFG0092,操作を無効にします。タッチペン使用時、指による誤描画を防止します。\n@CFG0093,１本指タッチで描画を行います。指で線を描くことができます。\n@CFG0094,１本指タッチでハンドツールを操作します。指でキャンバスを移動できます。\n@CFG0095,操作を無効にします。\n@CFG0096,２本指スワイプ操作でキャンバスの移動を行います。\n@CFG0097,操作を無効にします。\n@CFG0098,ピンチアウト／ピンチイン操作でキャンバスの拡大／縮小を行います。\n@CFG0099,操作を無効にします。\n@CFG0100,２本指タップ操作でアンドゥを行います。\n@CFG0101,操作を無効にします。\n@CFG0102,３本指タップ操作でリドゥを行います。\n@CFG0103,タップ入力として認識するために、触れた指を離すまでの制限時間を設定します。1000ミリ秒=１秒\n@CFG0108,１回のボタン操作でスクロールする量を設定します。\n@CFG0111,機能が割り当てられていないキーを省略します。非表示のキーに機能を割り当てる場合はチェックを外してください。\n@CFG0112,キーと割り当てられている機能の対応表です。セレクトボックスから機能を選んで割り当てを変更することができます。\n@CFG0113,現在のショートカット設定をテキストファイルとしてダウンロードします。\n@CFG0114,ショートカットファイルを読み込み、ショートカット設定を更新します。\n@CFG0115,ショートカット設定を初期状態に戻します。\n@CFG0120,合成モードを表示しません。\n@CFG0121,合成モードをレイヤー名の下に表示します。\n@CFG0122,合成モードをレイヤー名の下に表示します。（合成モードが通常の場合は表示を省略します）\n@CFG0123,登録されているレイヤー名を変更します。（最大8文字）\n@CFG0124,登録されているレイヤー名を初期状態にリセットします。\n@CFG0200,ぼかし度レンジスライダーを使用しません。\n@CFG0201,ぼかし度レンジスライダーをペンツールに追加します。\n@CFG0211,追加する拡大率を入力します。\n@CFG0212,現在設定されている拡大率の一覧です。クリックで拡大率を選択します。\n@CFG0220,マウスホイールの回転方向を反転して入力を受け付けます。\n@CFG0221,１回のホイール操作でスクロールする量を設定します。\n@CFG0222,連続してマウスホイールを回転させた時、入力を抑止する時間を設定します。1000ミリ秒=１秒\n@CFG0223,マウスポインタの位置を参照し、キャンバスの狙った位置を拡大／縮小できるようにします。\n@CFG0230,画面スクロールの向きを反転します。上スクロールは下スクロールに、左スクロールは右スクロールに変換されます。\n@CFG0300,キャンバスの幅（横のサイズ）を入力します。（下のボタンで変更を確定します）\n@CFG0301,キャンバスの高さ（縦のサイズ）を入力します。（下のボタンで変更を確定します）\n@CFG0400,選択中のペンを使って透明色で描画します。（描画中だけ透明色に切り替わります）\n@CFG0401,タップ入力時に許容する手ぶれの範囲を設定します。\n@CFG2001,キャンバス全般に関する設定を行います。\n@CFG2002,ツールウィンドウ全般に関する設定を行います。\n@CFG2003,ペンツールの機能設定を行います。\n@CFG2004,色作成の機能設定を行います。\n@CFG2005,パレットの機能設定を行います。\n@CFG2006,レイヤーの機能設定を行います。\n@CFG2007,補助ツールの機能設定を行います。\n@CFG2008,カスタムボタンの機能設定を行います。\n@CFG2009,マウス／タッチパッド（トラックパッド）の設定を行います。\n@CFG2010,タッチパネルの設定を行います。\n@CFG2011,キーボードのキーコンフィグなどの設定を行います。\n@CFG2013,AXNOS Paint起動時の設定を行います。\n@CFG2020,バージョン情報を表示します。\n@COL0001,%drawingColorName RGB:(%1)\n@COL0002,透明色\n@COL0003,メインカラー RGB:(%1) / サブカラー (%2)\n@COL0004,混色パレット(%1%) RGB:(%2)\n@AXP0001,拡大率：%1%\n@AXP0003,%1の不透明度：%2\n@AXP0004,補助線分割数 横：%1 / 縦：%2\n@AXP0010,%1ペン／消しゴム切替(%2)\n@AXP2000,描画色を混色パレット(%1%)に変更します。RGB:(%2)\n@AXP3000,[編集モード] ドラッグで位置を入れ替え。色作成ウィンドウで選択中パレットの色を更新。\n@AXP3001,%drawingColorNameを指定色に変更します。RGB:(%1)\n@AXP4000,レイヤーの%1を切り替えます。(現在の状態:%2)\n@AXP4001,ドラッグで表示順序を入れ替え。ダブルクリックでレイヤー名変更。\n@AXP4010,レイヤー名の変更を決定して、サブメニューを閉じます。\n@AXP4012,登録された名前に変更し、色を付与します。\n@AXP4013,新しいレイヤー名を入力してください。\n@AXP5000,%1の太さ：%2\n@AXP5001,%1の不透明度：%2\n@AXP5002,%1の塗り残し補正：%2\n@AXP5003,%1の角度：%2\n@AXP5004,%1のトーン濃度：%2\n@AXP5005,[ CTRL ]: 押している間、ペンがスポイトに変化します。\n@AXP5006,[ SPACE ]: 押している間、ペンがハンドに変化します。\n@AXP5007,%1押している間、その場でペンの太さレンジスライダーを操作できます。\n@AXP5008,%1のぼかし度：%2\n@AXP5009,%1の丸み：%2\n@AXP5010,ペンツールの種別選択中です。\n@INF0001,%1は透明部分をロックしています。既に描画されている部分のみ上書き描画できます。\n@INF0002,拡大率・キャンバスの位置・回転をリセットしました。\n@INF0003,ツールウィンドウの位置を初期化しました。\n@INF0005,背景のタイルプレビューを切り替えました。(現在の状態:%1)\n@INF0006,%1を全面塗り潰ししました。\n@INF0007,%1を90°回転しました。\n@INF0008,%1はクリッピングです。描画内容は%2の形に切り抜かれます。\n@INF0009,キャンバス全体のぼかしを切り替えました。(現在の状態:%1)\n@INF0050,[ %1 ]を読み込みました。(画像サイズ 横:%2 × 縦:%3)\n@INF0100,拡大率%1%を追加しました。\n@INF0101,拡大率%1%を削除しました。\n@INF0300,スロット%1にセーブしました。\n@INF0301,スロット%1をロードしました。\n@INF0302,自動保存されたデータをロードしました。\n@INF0400,%1をアンドゥしました。（残り回数：%2）\n@INF0401,%1をリドゥしました。（残り回数：%2）\n@INF1000,全レイヤーの左右を反転しました。\n@INF1001,選択中レイヤーの左右を反転しました。\n@INF1002,全レイヤーの上下を反転しました。\n@INF1003,選択中レイヤーの上下を反転しました。\n@INF1004,補助線の表示を切り替えました。（現在の状態:%1）\n@INF1005,背景を切り替えました。（現在の状態:%1）\n@INF2000,カラーコードの入力を受け付けました。%1 / RGB:(%2)\n@INF3000,パレット編集モードに切り替えました。（パレットの更新／位置入れ替え／削除が行えます）\n@INF3001,パレット編集モードを解除しました。\n@INF3002,カラーパレットを削除しました。\n@INF3003,カラーパレットを登録しました。RGB:(%1)\n@INF4000,%1をクリアしました。\n@INF4001,%1を作成しました。\n@INF4002,%1を複製して、%2を作成しました。\n@INF4003,%1を削除しました。\n@INF4004,%1と%2を統合しました。\n@INF4005,レイヤー名を[%1]に変更しました。\n@INF4006,レイヤーの%1を切り替えました。(現在の状態:%2)\n@INF4008,カラータグ名を[%1]に変更しました。\n@INF4009,レイヤーに付与した色を解除しました。\n@INF5000,表示を左に15度回転しました。\n@INF5001,表示を右に15度回転しました。\n@INF5002,表示を左に45度回転しました。\n@INF5003,表示を右に45度回転しました。\n@INF5004,回転表示の角度をリセットしました。\n@CAU0001,%1が%2のため、描画を禁止しています。\n@CAU0002,[ %1 ]キーには機能が割り当てられていません。（※設定で変更可能）\n@CAU0003,%1が%2のため、全面塗り潰しできません。\n@CAU0004,全面塗り潰しを使用する際は、ペン、消しゴム、バケツのいずれかを選択した状態にしてください。\n@CAU0005,%1が%2のため、90°回転できません。\n@CAU0006,%1の下層に親レイヤーが存在しないため、クリッピングが無効になっています。\n@CAU0100,追加できる拡大率は%1個までです。\n@CAU0101,拡大率%1%は既に追加されています。\n@CAU0102,追加できる拡大率は%1～%2%です。\n@CAU0103,削除する拡大率が選択されていません。\n@CAU0104,拡大率100%は変更できません。\n@CAU0200,%1の不透明度は変更できません。\n@CAU0201,%1の不透明度は100が最大値です。\n@CAU0202,%1の不透明度は5が最小値です。\n@CAU0203,%1の太さは変更できません。\n@CAU0204,%1の太さは200が最大値です。\n@CAU0205,%1の太さは1が最小値です。\n@CAU0206,補助線が表示されているときに有効なショートカットです。\n@CAU0300,現在セーブ/ロード機能は使用できません。ヘルプをご確認下さい。\n@CAU0301,スロット%1にはデータがありません。\n@CAU0400,これ以上アンドゥできません。\n@CAU0401,これ以上リドゥできません。\n@CAU0500,%1は透明色を使用できません。\n@CAU2000,カラーコードが正しくありません。入力例：#ffffff または #fff（#は省略可）\n@CAU3000,すべてのパレットを削除することはできません。\n@CAU3001,登録できるパレット数は%1個までです。\n@CAU4000,%1がロック状態のため、クリアできません。\n@CAU4001,%1は空白のレイヤーです。\n@CAU4002,レイヤーは%1枚までです。\n@CAU4003,%1がロック状態のため、削除できません。\n@CAU4004,レイヤーをすべて削除することはできません。\n@CAU4005,最下層のレイヤーは統合できません。\n@CAU4006,%1が%2のため、統合できません。\n@CAU4007,レイヤー名を空白にすることはできません。\n@CAU4008,カラータグ名を空白にすることはできません。\n@CAU5000,[ CTRL ]キーでスポイトに変化中です。別のペンは選択できません。\n@CAU5001,[ SPACE ]キーでハンドに変化中です。別のペンは選択できません。\n@CAU5002,スポイトを使用するにはキャンバス内を指定してください。";
 
 /***/ })
 
@@ -21431,7 +21920,7 @@ __webpack_require__.r(__webpack_exports__);
     axpObj;
     constructor(option) {
         console.log('version:', "3.0.0-alpha");
-        console.log('build:', "2026-06-22T05:15:29.368Z");
+        console.log('build:', "2026-06-28T09:20:27.302Z");
         (async () => {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
@@ -21812,7 +22301,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-06-22T05:15:29.368Z"})`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-06-28T09:20:27.302Z"})`;
     }
     // 画面の表示／非表示
     on() {
@@ -21824,7 +22313,7 @@ __webpack_require__.r(__webpack_exports__);
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${"3.0.0-alpha"} (${"2026-06-22T05:15:29.368Z"})`;
+        return `version ${"3.0.0-alpha"} (${"2026-06-28T09:20:27.302Z"})`;
     }
 });
 

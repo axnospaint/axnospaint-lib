@@ -205,6 +205,8 @@ export class SaveSystem {
             for (const item of elementsSlot) {
                 // スロットがクリックされたらセーブ処理を行う
                 item.onclick = (e) => {
+                    // なげなわ変形中は確定してから保存する（選択物が欠落した状態で保存されるのを防ぐ）
+                    this.axpObj.finalizeNagenawaSelection();
                     // data-keyに記憶しておいた主キーを使用する
                     const save_id = e.currentTarget.dataset.key;
                     const data = {
@@ -284,6 +286,9 @@ export class SaveSystem {
 
                             // 同一掲示板のみロード可能とする設定の場合、チェックを行う
                             if (this.restore_oekaki_id(data)) {
+                                // なげなわ変形中は確定してからロードする
+                                // （レイヤー消失後に finalize が走るとエラーになるため）
+                                this.axpObj.finalizeNagenawaSelection();
                                 this.restoreData(data);
                                 if (mode === 'auto') {
                                     // 自動保存されたデータをロードしました。

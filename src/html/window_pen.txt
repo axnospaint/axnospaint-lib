@@ -63,6 +63,42 @@
                     <div class="axpc_range_label">${_("@PEN.ROUNDNESS")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
+                <!-- 混色ペンのプリセット -->
+                <div id="axp_pen_div_diffusionPreset">
+                    <button type="button" class="axpc_pen_diffpreset axpc_MSG" data-pidx="0"
+                        data-msg="@PEN0014"></button>
+                    <button type="button" class="axpc_pen_diffpreset axpc_MSG" data-pidx="1"
+                        data-msg="@PEN0014"></button>
+                    <button type="button" class="axpc_pen_diffpreset axpc_MSG" data-pidx="2"
+                        data-msg="@PEN0014"></button>
+                </div>
+                <!-- 混色ペンの詳細設定開閉 -->
+                <button type="button" id="axp_pen_button_diffusionDetail" class="axpc_MSG"
+                    data-msg="@PEN0015"></button>
+                <!-- 混色ペンの硬さ -->
+                <form id="axp_pen_form_hardness" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_hardness" name="volume" value="70" step="1" min="0" max="100"
+                        class="axpc_MSG" data-msg="@PEN0011">
+                    <div class="axpc_range_label">${_("@PEN.HARDNESS")}</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- 混色ペンの広がり -->
+                <form id="axp_pen_form_diffusion" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_diffusion" name="volume" value="80" step="1" min="0"
+                        max="100" class="axpc_MSG" data-msg="@PEN0012">
+                    <div class="axpc_range_label">${_("@PEN.DIFFUSION_STRENGTH")}</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- 混色ペンの引きずり -->
+                <form id="axp_pen_form_drag" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_drag" name="volume" value="0" step="1" min="0" max="100"
+                        class="axpc_MSG" data-msg="@PEN0013">
+                    <div class="axpc_range_label">${_("@PEN.DRAG")}</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
                 <!-- ぼかし度（オプション） -->
                 <form id="axp_pen_form_blur" oninput="result.value=parseInt(volume.value)"
                     class="axpc_range axpc_text_border">

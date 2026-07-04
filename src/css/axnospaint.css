@@ -246,6 +246,42 @@ body {
   background-image: url('../../resource/overlay/rotate_right.svg');
 }
 
+/* なげなわ操作子グループ（なげなわ変形中に上部中央へ表示） */
+#axp_canvas_div_nagenawaGroup {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3000;
+  display: flex;
+  gap: 4px;
+}
+
+#axp_canvas_div_nagenawaGroup > .axpc_overlay_knob,
+#axp_canvas_div_nagenawaGroup > .axpc_overlay_btn {
+  position: static;
+}
+
+#axp_canvas_div_nagenawaScale {
+  background-image: url('../../resource/overlay/resize.svg');
+}
+
+#axp_canvas_div_nagenawaRotate {
+  background-image: url('../../resource/overlay/rotate.svg');
+}
+
+#axp_canvas_div_nagenawaFlip {
+  background-image: url('../../resource/overlay/flip.svg');
+}
+
+#axp_canvas_div_nagenawaDuplicate {
+  background-image: url('../../resource/overlay/duplicate.svg');
+}
+
+#axp_canvas_div_nagenawaFinish {
+  background-image: url('../../resource/overlay/check.svg');
+}
+
 /* デバッグ情報 */
 #axp_canvas_div_debugInfo {
   position: absolute;

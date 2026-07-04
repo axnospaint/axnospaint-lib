@@ -36,6 +36,15 @@
 					<div id="axp_canvas_div_rotateRight" class="axpc_overlay_btn axpc_MSG" data-msg="@AST0021"></div>
 				</div>
 
+				<!-- なげなわ操作子グループ（なげなわ変形中のみ表示） -->
+				<div id="axp_canvas_div_nagenawaGroup" class="axpc_NONE">
+					<div id="axp_canvas_div_nagenawaScale" class="axpc_overlay_knob axpc_MSG" data-msg="@NAG0001"></div>
+					<div id="axp_canvas_div_nagenawaRotate" class="axpc_overlay_knob axpc_MSG" data-msg="@NAG0002"></div>
+					<div id="axp_canvas_div_nagenawaFlip" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0004"></div>
+					<div id="axp_canvas_div_nagenawaDuplicate" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0005"></div>
+					<div id="axp_canvas_div_nagenawaFinish" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0003"></div>
+				</div>
+
 				<!-- ポインタ座標表示領域 -->
 				<div id="axp_canvas_div_pointerPosition" class="axpc_NONE"></div>
 

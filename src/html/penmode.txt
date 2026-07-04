@@ -16,6 +16,8 @@
                 data-function="func_switch_axp_penmode_crayon" data-msg="@PEN0104"></button>
             <button id="axp_penmode_brush" class="axpc_FUNC axpc_penmode_brush" data-idx="0"
                 data-function="func_switch_axp_penmode_brush" data-msg="@PEN0105"></button>
+            <button id="axp_penmode_diffusion" class="axpc_FUNC axpc_penmode_diffusion" data-idx="0"
+                data-function="func_switch_axp_penmode_diffusion" data-msg="@PEN0106"></button>
         </article>
         <article data-name="${_('@PENGROUP.ERASER')}">
             <button id="axp_penmode_eraser_round" class="axpc_FUNC axpc_penmode_eraser_round" data-idx="1"
@@ -34,6 +36,8 @@
                 data-function="func_switch_axp_penmode_hand" data-msg="@PEN0130"></button>
             <button id="axp_penmode_move" class="axpc_FUNC axpc_penmode_move" data-idx="3"
                 data-function="func_switch_axp_penmode_move" data-msg="@PEN0131"></button>
+            <button id="axp_penmode_nagenawa" class="axpc_FUNC axpc_penmode_nagenawa" data-idx="3"
+                data-function="func_switch_axp_penmode_nagenawa" data-msg="@PEN0132"></button>
         </article>
         <article data-name="${_('@PENGROUP.EYEDROPPER')}">
             <button id="axp_penmode_spuit" class="axpc_penmode_spuit" data-idx="4"></button>

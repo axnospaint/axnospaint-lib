@@ -99,6 +99,7 @@ export class ConfigSystem {
         { value: 'func_switch_axp_penmode_fude', name: 'ペン種別:筆ペン' },
         { value: 'func_switch_axp_penmode_crayon', name: 'ペン種別:クレヨン' },
         { value: 'func_switch_axp_penmode_brush', name: 'ペン種別:エアブラシ' },
+        { value: 'func_switch_axp_penmode_diffusion', name: 'ペン種別:混色ペン' },
         { value: '/optgroup' },
         { value: 'optgroup', name: '消しゴム種別' },
         { value: 'func_switch_axp_penmode_eraser_round', name: '消しゴム種別:消しゴム' },
@@ -111,6 +112,7 @@ export class ConfigSystem {
         { value: 'optgroup', name: 'ツール種別' },
         { value: 'func_switch_axp_penmode_hand', name: 'ツール種別:ハンド' },
         { value: 'func_switch_axp_penmode_move', name: 'ツール種別:移動ツール' },
+        { value: 'func_switch_axp_penmode_nagenawa', name: 'ツール種別:なげなわ' },
         { value: '/optgroup' },
         { value: 'optgroup', name: 'ペンの太さ' },
         { value: 'func_size', name: 'ペンの太さ（値指定）' },
@@ -424,6 +426,8 @@ export class ConfigSystem {
             confirmExPromise(`現在の描画内容を破棄して新規キャンバス（${x}×${y}）を作成します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
                 .then(() => {
                     // ※OK時の処理
+                    // なげなわ変形中は確定してから処理する
+                    this.axpObj.finalizeNagenawaSelection();
                     // タブをキャンバスに変更
                     this.axpObj.selectTab('0');
                     // キャンバス初期化
@@ -470,6 +474,8 @@ export class ConfigSystem {
             confirmExPromise(`キャンバスサイズを${x}×${y}に変更します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
                 .then(() => {
                     // ※OK時の処理
+                    // なげなわ変形中は確定してから処理する（未確定のままコピーすると選択物が欠落するため）
+                    this.axpObj.finalizeNagenawaSelection();
                     // タブをキャンバスに変更
                     this.axpObj.selectTab('0');
                     // レイヤーオブジェクトをコピーして一時保存
@@ -1605,6 +1611,18 @@ export class ConfigSystem {
                         pObj[elememtId].radius = Number(value);
                         pObj[elememtId].borderRadius = Number(value);
                         break;
+                    // 硬さ (混色ペン)
+                    case 'P-HRD':
+                        pObj[elememtId].hardness = Number(value);
+                        break;
+                    // 広がり (混色ペン)
+                    case 'P-DIF':
+                        pObj[elememtId].diffusion = Number(value);
+                        break;
+                    // 引きずり (混色ペン)
+                    case 'P-DRG':
+                        pObj[elememtId].drag = Number(value);
+                        break;
                     // 筆圧 ON/OFF (ペン別)。筆圧コントロールを持つペンのみ復元する
                     // (非対応ペンは保存値に関わらず false 維持。古い保存データ対策)
                     case 'P-USP':
@@ -1737,6 +1755,9 @@ export class ConfigSystem {
                 case 'P-TON':
                 case 'P-DEG':
                 case 'P-RAD':
+                case 'P-HRD':
+                case 'P-DIF':
+                case 'P-DRG':
                 case 'P-USP':
                 case 'P-SPA':
                     // 初期化する設定の場合、復元を行わない
@@ -1790,6 +1811,10 @@ export class ConfigSystem {
                 // カラータグリスト
                 case 'COTAG':
                     this.axpObj.layerSystem.resetColorTagList(value);
+                    break;
+                // 太さクイックボタン・混色ペンプリセット (値はペンツール側で解釈)
+                case 'QSIZE':
+                case 'DPRST':
                     break;
                 // その他
                 default:

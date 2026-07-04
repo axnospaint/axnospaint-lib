@@ -26,6 +26,9 @@ export class PenObj {
         this.blurLevel = null;
         this.gradation = null;
         this.radius = null;
+        this.hardness = null;  // 混色ペン専用：硬さ
+        this.diffusion = null; // 混色ペン専用：広がり
+        this.drag = null;      // 混色ペン専用：引きずり
         this.cursor = 'auto';
         // 制御
         this.usePenGuide = false;
