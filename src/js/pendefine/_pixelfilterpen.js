@@ -5,9 +5,10 @@
 // ブラシキャンバスへのベクタ描画ではなく、作業 ImageData (work) を直接更新する。
 //
 // 仕組み:
-//   - ストローク開始時に現在レイヤー画像の複製 (work) を作成し、layerSystem.write()
-//     でレイヤー画像と差し替える。layerSystem.save() が保持するのは差し替え前の
-//     ImageData への参照であるため、end_common() の差分アンドゥは無改修で機能する。
+//   - ストローク開始時に現在レイヤー画像の複製 (work) を作成し、
+//     layerSystem.replaceCurrentImage() でレイヤー画像と差し替える (isBlank 維持)。
+//     layerSystem.save() が保持するのは差し替え前の ImageData への参照であるため、
+//     end_common() の差分アンドゥは無改修で機能する。
 //   - work はカーネル (applyPoint) が in-place 更新し、write() の updateCanvas()
 //     による再合成 (putImageData) で画面に反映される。
 //   - GPU fast path はブラシ合成前提のため使用しない (activateFastPath を呼ばない)。
@@ -63,7 +64,9 @@ export class PixelFilterPenBase extends DrawingPenBase {
             base.width,
             base.height
         );
-        this.axpObj.layerSystem.write(this.work);
+        // isBlank を維持したまま差し替える (本ペンは透明画素から内容を生成できないため、
+        // 空レイヤーはストローク後も必ず空。write() だと開始しただけで非空扱いになる)
+        this.axpObj.layerSystem.replaceCurrentImage(this.work);
         this.startPixelStroke(option);
         return true;
     }
@@ -105,7 +108,7 @@ export class PixelFilterPenBase extends DrawingPenBase {
         } else if (this.work && this.axpObj.isDrawCancel) {
             // 描画キャンセル (長押しスポイト・ピンチ操作等)。
             // 作業イメージは既にレイヤーに差し替え済みのため、開始時の画像へ戻す。
-            this.axpObj.layerSystem.write(this.axpObj.layerSystem.load());
+            this.axpObj.layerSystem.replaceCurrentImage(this.axpObj.layerSystem.load());
         }
         this.endPixelStroke();
         this.work = null;

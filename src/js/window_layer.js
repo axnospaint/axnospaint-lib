@@ -764,6 +764,12 @@ export class LayerSystem extends ToolWindow {
         // 内容が書き換わったため、空レイヤー扱いを解除（描画されたとみなす）
         this.layerObj[idx].isBlank = false;
     }
+    // imagedataの差し替えのみ行い、isBlank判定を変更しない
+    // （内容を変更しない開始時スワップ・キャンセル時の復元用）
+    replaceCurrentImage(imageData) {
+        const idx = this.getLayerIndex(this.currentLayer.dataset.id);
+        this.layerObj[idx].image = imageData;
+    }
     setImageId(imageData, id) {
         const idx = this.getLayerIndex(id);
         this.layerObj[idx].image = imageData;
@@ -1742,6 +1748,12 @@ export class LayerSystem extends ToolWindow {
     }
     // レイヤーの統合
     buttonIntegrateLayer() {
+        // なげなわ変形中の場合、対象レイヤーが存在するうちに選択内容を確定する
+        // （統合後に確定すると削除済みレイヤーへの書き込みでエラーになるため）
+        const nagenawa = this.axpObj.penSystem.penObj['axp_penmode_nagenawa'];
+        if (nagenawa && nagenawa.state === 'transforming') {
+            nagenawa.finalizeSelection();
+        }
         var idx_source = this.getLayerIndex(this.currentLayer.dataset.id); // 統合元idx
 
         // 最下位チェック
@@ -1908,6 +1920,12 @@ export class LayerSystem extends ToolWindow {
     }
     // レイヤーの削除
     buttonDeleteLayer() {
+        // なげなわ変形中の場合、対象レイヤーが存在するうちに選択内容を確定する
+        // （削除後に確定すると削除済みレイヤーへの書き込みでエラーになるため）
+        const nagenawa = this.axpObj.penSystem.penObj['axp_penmode_nagenawa'];
+        if (nagenawa && nagenawa.state === 'transforming') {
+            nagenawa.finalizeSelection();
+        }
         // レイヤーがロック状態の場合は削除不可
         if (this.getLocked()) {
             // %1がロック状態のため、削除できません。

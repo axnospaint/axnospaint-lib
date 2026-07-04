@@ -182,9 +182,16 @@ export class Nagenawa extends PenObj {
     end(x, y, e) {
         if (this.state === 'drawing') {
             if (this.axpObj.isDrawing && !this.axpObj.isDrawCancel) {
+                // ポインタを離した位置もパスに含めて確定する
+                this.lassoPath.push({ x, y });
                 if (this.lassoPath.length < MIN_PATH_POINTS) {
                     this.cancelSelection();
                     return;
+                }
+                if (!this.axpObj.layerSystem.compositeFastPathActive) {
+                    // 非 fast path ではプレビュー（点線）がレイヤーへ write 済みのため、
+                    // 抽出前に開始時の画像へ復元する (isBlank も維持)
+                    this.axpObj.layerSystem.replaceCurrentImage(this.axpObj.layerSystem.load());
                 }
                 this.createSelectionMask();
                 this.extractRawData();
@@ -199,6 +206,11 @@ export class Nagenawa extends PenObj {
                 this.cancelSelection();
             }
         } else if (this.state === 'transforming') {
+            if (this.axpObj.isDrawCancel) {
+                // ピンチ・長押しスポイト等によるキャンセル: ドラッグ開始位置へ戻す
+                this.affine.tx = this.affineSaved.tx;
+                this.affine.ty = this.affineSaved.ty;
+            }
             this.axpObj.isDrawing = false;
             this.axpObj.isDrawCancel = false;
             this.drawTransformed();
