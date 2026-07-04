@@ -153,9 +153,9 @@ export class PenSystem extends ToolWindow {
 
         // 混色ペンのプリセット (既定値。保存値があれば startEvent で上書き復元)
         this.diffusionPresets = [
-            { name: this.axpObj._('@PENPRESET.BLUR'), hardness: 30, diffusion: 80, drag: 0 },
-            { name: this.axpObj._('@PENPRESET.FINGER'), hardness: 20, diffusion: 40, drag: 60 },
-            { name: this.axpObj._('@PENPRESET.KNIFE'), hardness: 70, diffusion: 20, drag: 90 },
+            { name: this.axpObj._('@PENPRESET.BLUR'), hardness: 70, diffusion: 80, drag: 0 },
+            { name: this.axpObj._('@PENPRESET.FINGER'), hardness: 40, diffusion: 15, drag: 30 },
+            { name: this.axpObj._('@PENPRESET.KNIFE'), hardness: 65, diffusion: 0, drag: 90 },
         ];
         // 混色ペンの詳細設定の開閉状態
         this.diffusionDetailOpen = false;
@@ -562,17 +562,8 @@ export class PenSystem extends ToolWindow {
             }
         );
 
-        // 太さクイックボタン
-        const quickSizeBtns = document.querySelectorAll('.axpc_pen_quicksize');
-        const renderQuickBtn = (btn) => {
-            const size = Number(btn.dataset.size);
-            btn.innerHTML = `<span class="axpc_qs_label">太さ</span><span class="axpc_qs_num">${size}</span>`;
-        };
-        quickSizeBtns.forEach((btn, i) => {
-            const saved = this.axpObj.configSystem.getConfig('QSIZE_' + i);
-            if (saved !== null && saved !== undefined) btn.dataset.size = saved;
-            renderQuickBtn(btn);
-
+        // 太さクイックボタン (登録値はペンごとに保存)
+        document.querySelectorAll('.axpc_pen_quicksize').forEach((btn, i) => {
             let lastTapTime = 0;
             btn.addEventListener('pointerup', () => {
                 const now = Date.now();
@@ -581,8 +572,8 @@ export class PenSystem extends ToolWindow {
                     if (input !== null) {
                         const val = Math.min(200, Math.max(1, parseInt(input) || 1));
                         btn.dataset.size = val;
-                        renderQuickBtn(btn);
-                        this.axpObj.configSystem.saveConfig('QSIZE_' + i, val);
+                        this.renderQuickSizeButton(btn);
+                        this.axpObj.configSystem.saveConfig(`QSIZE_${i}_${this.pen_mode}`, val);
                     }
                     lastTapTime = 0;
                 } else {
@@ -592,6 +583,8 @@ export class PenSystem extends ToolWindow {
                 }
             });
         });
+        // 初期表示 (保存値の反映)
+        this.updateQuickSizeButtons();
 
     }
 
@@ -828,6 +821,30 @@ export class PenSystem extends ToolWindow {
     getName() {
         return this.penObj[this.pen_mode].name;
     }
+    // 太さクイックボタンのラベル描画
+    renderQuickSizeButton(btn) {
+        const size = Number(btn.dataset.size);
+        btn.innerHTML = `<span class="axpc_qs_label">太さ</span><span class="axpc_qs_num">${size}</span>`;
+    }
+    // 太さクイックボタンの表示更新。登録値はペンごとに保存されており、
+    // ペン別保存値 → 旧共通保存値 (移行用フォールバック) → 既定値 の順で解決する
+    updateQuickSizeButtons() {
+        const DEFAULTS = [2, 4, 10];
+        document.querySelectorAll('.axpc_pen_quicksize').forEach((btn, i) => {
+            const perPen = this.axpObj.configSystem.getConfig(`QSIZE_${i}_${this.pen_mode}`);
+            const legacy = this.axpObj.configSystem.getConfig('QSIZE_' + i);
+            let size;
+            if (perPen !== null && perPen !== undefined) {
+                size = perPen;
+            } else if (legacy !== null && legacy !== undefined) {
+                size = legacy;
+            } else {
+                size = DEFAULTS[i];
+            }
+            btn.dataset.size = size;
+            this.renderQuickSizeButton(btn);
+        });
+    }
     // 混色ペンのプリセットを反映する
     applyDiffusionPreset(idx) {
         const preset = this.diffusionPresets[idx];
@@ -1022,9 +1039,10 @@ export class PenSystem extends ToolWindow {
             'axp_pen_form_penSize',
             this.getSize(),
         )
-        // 太さクイックボタンの表示制御
+        // 太さクイックボタンの表示制御 (登録値はペンごとのため表示値も更新)
         if (this.getSize()) {
             UTIL.show('axp_pen_div_quickSize');
+            this.updateQuickSizeButtons();
         } else {
             UTIL.hide('axp_pen_div_quickSize');
         }
@@ -1104,12 +1122,11 @@ export class PenSystem extends ToolWindow {
             this.getBlurLevel(),
             this.axpObj.config('axp_config_form_blurLevel') === 'on',
         )
-        // 手ぶれ（混色ペンでは詳細設定展開時のみ表示）
+        // 手ぶれ（設定オプションで管理されるペン共通属性のため、詳細設定の対象外）
         displaySlider(
             'axp_pen_form_stabilizer',
             document.getElementById('axp_config_form_stabilizerValue').volume.value,
-            type === 'draw' && document.getElementById('axp_config_checkbox_stabilize').checked
-            && (!isDiffusionPen || this.diffusionDetailOpen),
+            type === 'draw' && document.getElementById('axp_config_checkbox_stabilize').checked,
         )
         // 筆圧 ON/OFF (ペン別、usePressureControl が true のペンのみ表示。
         // 混色ペンでは詳細設定展開時のみ表示)
