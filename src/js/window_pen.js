@@ -1084,11 +1084,18 @@ export class PenSystem extends ToolWindow {
         )
         // 混色ペン（プリセット・詳細設定）
         const isDiffusionPen = this.getHardness() !== null;
+        // 手ぶれ補正バーの配置: 混色ペンでは「不透明度の下・プリセットの上」、
+        // 他のペンでは従来位置（筆圧チェックの直前）。DOM移動でもリスナーは維持される
+        const stabilizerForm = document.getElementById('axp_pen_form_stabilizer');
         if (isDiffusionPen) {
+            stabilizerForm.parentNode.insertBefore(
+                stabilizerForm, document.getElementById('axp_pen_div_diffusionPreset'));
             UTIL.show('axp_pen_div_diffusionPreset');
             UTIL.show('axp_pen_button_diffusionDetail');
             this.updateDiffusionPresetDisplay();
         } else {
+            stabilizerForm.parentNode.insertBefore(
+                stabilizerForm, document.getElementById('axp_pen_form_usePressure'));
             UTIL.hide('axp_pen_div_diffusionPreset');
             UTIL.hide('axp_pen_button_diffusionDetail');
         }

@@ -239,8 +239,8 @@
 
 .axpc_pen_diffpreset {
     width: 100%;
-    height: 16px;
-    font-size: 11px;
+    height: 18px;
+    font-size: 13px;
     line-height: 1;
     padding: 0 4px;
     border: 1px solid #888;
@@ -268,8 +268,8 @@
 /* 混色ペンの詳細設定開閉ボタン */
 #axp_pen_button_diffusionDetail {
     width: 100%;
-    height: 16px;
-    font-size: 11px;
+    height: 17px;
+    font-size: 12px;
     line-height: 1;
     padding: 0 4px;
     margin-top: 4px;
