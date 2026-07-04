@@ -154,7 +154,7 @@ export class PenSystem extends ToolWindow {
         // 混色ペンのプリセット (既定値。保存値があれば startEvent で上書き復元)
         this.diffusionPresets = [
             { name: this.axpObj._('@PENPRESET.BLUR'), hardness: 70, diffusion: 80, drag: 0 },
-            { name: this.axpObj._('@PENPRESET.FINGER'), hardness: 40, diffusion: 15, drag: 30 },
+            { name: this.axpObj._('@PENPRESET.FINGER'), hardness: 30, diffusion: 14, drag: 45 },
             { name: this.axpObj._('@PENPRESET.KNIFE'), hardness: 65, diffusion: 0, drag: 90 },
         ];
         // 混色ペンの詳細設定の開閉状態
