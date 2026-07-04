@@ -368,8 +368,18 @@ export class AXPObj {
             });
         }
     }
+    // なげなわ変形中の選択内容を確定する（キャンバス全体に影響する操作の前処理用）
+    finalizeNagenawaSelection() {
+        const nagenawa = this.penSystem?.penObj?.['axp_penmode_nagenawa'];
+        if (nagenawa && nagenawa.state === 'transforming') {
+            nagenawa.finalizeSelection();
+        }
+    }
     // キャンバスの初期化（新規キャンバス、ロード、自動保存から復元時などに行う処理）
     resetCanvas() {
+        // なげなわの変形状態が残留していれば破棄する（レイヤーが作り直されるため、
+        // 選択内容の確定は各操作の入口の責務。ここでは状態破棄のみ行う）
+        this.penSystem?.penObj?.['axp_penmode_nagenawa']?.forceIdle();
         this.CANVAS.main.style.width = this.x_size + 'px';
         this.CANVAS.main.style.height = this.y_size + 'px';
         this.CANVAS.main.width = this.x_size;
@@ -1625,6 +1635,8 @@ export class AXPObj {
             // 投稿
             case '2': {
                 this.isCanvasOpen = false;
+                // なげなわ変形中は確定してから投稿画像を生成する（点線プレビューの混入防止）
+                this.finalizeNagenawaSelection();
                 // 投稿タブ内の情報更新
                 this.drawPostCanvas();
 
@@ -1993,6 +2005,8 @@ export class AXPObj {
 
         // 90°回転
         this.TASK['func_rotate'] = () => {
+            // なげなわ変形中は確定してから処理する
+            this.finalizeNagenawaSelection();
             // 書き込み不可状態チェック
             if (this.layerSystem.isWriteProtection()) {
                 let layerName = this.layerSystem.getName();

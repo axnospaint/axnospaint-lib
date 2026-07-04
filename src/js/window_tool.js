@@ -287,6 +287,8 @@ export class AssistToolSystem extends ToolWindow {
 
     // 左右反転
     flip_h() {
+        // なげなわ変形中は確定してから処理する（未確定のまま反転すると、次の再描画で反転が上書きされるため）
+        this.axpObj.finalizeNagenawaSelection();
         // 全体
         this.axpObj.layerSystem.flip_h('all');
         // 全レイヤーの左右を反転しました。
@@ -299,6 +301,8 @@ export class AssistToolSystem extends ToolWindow {
     }
     // 上下反転
     flip_v() {
+        // なげなわ変形中は確定してから処理する（未確定のまま反転すると、次の再描画で反転が上書きされるため）
+        this.axpObj.finalizeNagenawaSelection();
         // 全体
         this.axpObj.layerSystem.flip_v('all');
         // 全レイヤーの上下を反転しました。
@@ -327,6 +331,8 @@ export class AssistToolSystem extends ToolWindow {
         this.axpObj.msg('@INF1004', msgtext);
     }
     transparent() {
+        // なげなわ変形中は確定してから処理する（レイヤー再合成で選択物が一時消失するため）
+        this.axpObj.finalizeNagenawaSelection();
         this.isTransparent = !this.isTransparent;
         document.getElementById('axp_tool_button_transparent').dataset.selected = this.isTransparent ? 'true' : 'false';
         this.axpObj.layerSystem.draw();

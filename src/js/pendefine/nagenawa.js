@@ -408,6 +408,15 @@ export class Nagenawa extends PenObj {
     finalizeSelection() {
         if (this.state !== 'transforming') return;
 
+        // 書き込み先レイヤーが消失している場合（ロード・キャンバス初期化直後など）、
+        // 確定は不可能なため変形状態の破棄のみ行う
+        const layerSystem = this.axpObj.layerSystem;
+        if (!layerSystem.currentLayer ||
+            layerSystem.getLayerIndex(layerSystem.currentLayer.dataset.id) === -1) {
+            this.forceIdle();
+            return;
+        }
+
         const w = this.axpObj.x_size;
         const h = this.axpObj.y_size;
 
@@ -475,6 +484,17 @@ export class Nagenawa extends PenObj {
         this.axpObj.layerSystem.save();
 
         this.drawTransformed();
+    }
+    // 変形・選択状態をレイヤーへ書き込まずに破棄して idle に戻す
+    // （書き込み先レイヤーの消失時や、キャンバス初期化時の後始末用）
+    forceIdle() {
+        if (this.state === 'idle') return;
+        this.axpObj.layerSystem.isStrokeActive = false;
+        this.axpObj.layerSystem.deactivateFastPath();
+        this.hideOverlay();
+        this.releaseCanvases();
+        this.reset_modeflag();
+        this.state = 'idle';
     }
     cancelSelection() {
         if (this.state === 'drawing' || this.state === 'transforming') {

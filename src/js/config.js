@@ -426,6 +426,8 @@ export class ConfigSystem {
             confirmExPromise(`現在の描画内容を破棄して新規キャンバス（${x}×${y}）を作成します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
                 .then(() => {
                     // ※OK時の処理
+                    // なげなわ変形中は確定してから処理する
+                    this.axpObj.finalizeNagenawaSelection();
                     // タブをキャンバスに変更
                     this.axpObj.selectTab('0');
                     // キャンバス初期化
@@ -472,6 +474,8 @@ export class ConfigSystem {
             confirmExPromise(`キャンバスサイズを${x}×${y}に変更します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
                 .then(() => {
                     // ※OK時の処理
+                    // なげなわ変形中は確定してから処理する（未確定のままコピーすると選択物が欠落するため）
+                    this.axpObj.finalizeNagenawaSelection();
                     // タブをキャンバスに変更
                     this.axpObj.selectTab('0');
                     // レイヤーオブジェクトをコピーして一時保存

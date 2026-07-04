@@ -182,10 +182,8 @@ export class LayerSystem extends ToolWindow {
     startEvent() {
         // セレクトボックス：レイヤー合成モード
         document.getElementById('axp_layer_select_blendMode').addEventListener('change', (e) => {
-            const nagenawa = this.axpObj.penSystem.penObj['axp_penmode_nagenawa'];
-            if (nagenawa && nagenawa.state === 'transforming') {
-                nagenawa.finalizeSelection();
-            }
+            // なげなわ変形中は確定してから処理する
+            this.axpObj.finalizeNagenawaSelection();
             // レイヤー合成モード変更
             this.setBlendMode(e.target.value);
             this.updateCanvas();
@@ -1360,10 +1358,8 @@ export class LayerSystem extends ToolWindow {
     }
     // カレントレイヤー更新
     setCurrentLayer(targetElement) {
-        const nagenawa = this.axpObj.penSystem.penObj['axp_penmode_nagenawa'];
-        if (nagenawa && nagenawa.state === 'transforming') {
-            nagenawa.finalizeSelection();
-        }
+        // なげなわ変形中は、選択が変わる前に確定する
+        this.axpObj.finalizeNagenawaSelection();
         // 引数の要素をカレントレイヤーとし、変更に伴う連動処理を行う
         const layerBoxElements = document.querySelectorAll('#axp_layer_ul_layerBox>li');
         // 一旦、全レイヤーを非選択に
@@ -1712,6 +1708,8 @@ export class LayerSystem extends ToolWindow {
     }
     // 画像をダウンロード
     downloadImage() {
+        // なげなわ変形中は確定してから出力する（点線プレビューの混入防止）
+        this.axpObj.finalizeNagenawaSelection();
         let link = document.createElement("a");
         if (this.axpObj.assistToolSystem.getIsTransparent()) {
             // 透過
@@ -1750,10 +1748,7 @@ export class LayerSystem extends ToolWindow {
     buttonIntegrateLayer() {
         // なげなわ変形中の場合、対象レイヤーが存在するうちに選択内容を確定する
         // （統合後に確定すると削除済みレイヤーへの書き込みでエラーになるため）
-        const nagenawa = this.axpObj.penSystem.penObj['axp_penmode_nagenawa'];
-        if (nagenawa && nagenawa.state === 'transforming') {
-            nagenawa.finalizeSelection();
-        }
+        this.axpObj.finalizeNagenawaSelection();
         var idx_source = this.getLayerIndex(this.currentLayer.dataset.id); // 統合元idx
 
         // 最下位チェック
@@ -1922,10 +1917,7 @@ export class LayerSystem extends ToolWindow {
     buttonDeleteLayer() {
         // なげなわ変形中の場合、対象レイヤーが存在するうちに選択内容を確定する
         // （削除後に確定すると削除済みレイヤーへの書き込みでエラーになるため）
-        const nagenawa = this.axpObj.penSystem.penObj['axp_penmode_nagenawa'];
-        if (nagenawa && nagenawa.state === 'transforming') {
-            nagenawa.finalizeSelection();
-        }
+        this.axpObj.finalizeNagenawaSelection();
         // レイヤーがロック状態の場合は削除不可
         if (this.getLocked()) {
             // %1がロック状態のため、削除できません。
