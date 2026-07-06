@@ -1993,12 +1993,6 @@ export class AXPObj {
         this.TASK['func_switch_axp_penmode_sketch'] = () => {
             switchPenSub('axp_penmode_sketch');
         }
-        this.TASK['func_switch_axp_penmode_dodge'] = () => {
-            switchPenSub('axp_penmode_dodge');
-        }
-        this.TASK['func_switch_axp_penmode_burn'] = () => {
-            switchPenSub('axp_penmode_burn');
-        }
         this.TASK['func_switch_axp_penmode_texturebrush'] = () => {
             switchPenSub('axp_penmode_texturebrush');
         }
@@ -2633,18 +2627,8 @@ export class AXPObj {
                 this.configSystem.updateCanvasSizeHistory();
             }
 
-            // 起動時ワンタップ復元: 下書き読込時は下書きを優先し確認しない。
-            // 直近の自動保存があれば「続きから再開するか」を確認し、復元した場合は
-            // 初期レイヤー作成をスキップする（restoreData内で既にレイヤーが復元されるため）。
-            let isOneTapRestored = false;
-            if (!isDraftLoaded) {
-                isOneTapRestored = await this.saveSystem.checkOneTapRestore();
-            }
-
             // 初期レイヤー作成（※合成モード表示の設定があるため、設定復元完了後に行う必要がある）
-            if (!isOneTapRestored) {
-                this.layerSystem.newLayer();
-            }
+            this.layerSystem.newLayer();
 
             // アンドゥ使用可能最大数
             this.undo_max = document.getElementById('axp_config_form_undoMaxValue').result.value;

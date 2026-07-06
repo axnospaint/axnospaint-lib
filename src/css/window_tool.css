@@ -119,32 +119,6 @@
     content: attr(data-label);
 }
 
-/* 対称・回転描画（曼荼羅/雪結晶） */
-#axp_tool_div_symmetry {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin: 2px 0 4px;
-    font-size: 11px;
-}
-
-#axp_tool_div_symmetry label {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-#axp_tool_div_symmetryCountRow {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-#axp_tool_div_symmetryCountRow .axpc_range {
-    width: 80px;
-    height: 16px;
-}
-
 /* 相互運用（参照画像など） */
 #axp_tool_div_interop {
     --axp-interop-compact-h: 22px;

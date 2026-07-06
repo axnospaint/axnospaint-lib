@@ -1,7 +1,6 @@
 // @description ペン定義：親クラス
 
 import { createTonePattern, compareImages } from '../etc.js';
-import { applySymmetryToStroke } from '../symmetrydraw.js';
 
 // ダーティ矩形（フレームごとに実際に変化した範囲）の和集合を保持する累積器。
 // E-4/フェーズ0（ブラシ合成のダーティ矩形化）対応ペンのみが使用する。
@@ -341,22 +340,6 @@ export class PenObj {
         if (this.axpObj.isDrawing) {
             // アンドゥ対象の機能かつ描画キャンセルされていない時アンドゥデータ作成
             if (this.canUndo && !this.axpObj.isDrawCancel) {
-                // 対称・回転描画（曼荼羅/雪結晶）：通常どおり確定したストロークに対し、
-                // undo比較の前に対称コピーを合成する。ライブプレビュー中は通常のストロークのみ
-                // 描画され、コピーはストローク確定時にのみ現れる（既存のDirtyRect部分再合成
-                // パイプラインには一切手を入れない後処理として実装）。
-                const symmetryConfig = this.axpObj.assistToolSystem?.symmetryConfig;
-                if (symmetryConfig?.enabled) {
-                    const beforeForSymmetry = this.axpObj.layerSystem.load();
-                    const rawStroke = this.axpObj.layerSystem.getCurrentLayerImage();
-                    const combined = applySymmetryToStroke(
-                        beforeForSymmetry, rawStroke, symmetryConfig,
-                        this.axpObj.x_size, this.axpObj.y_size,
-                        (this.axpObj.x_size - 1) / 2, (this.axpObj.y_size - 1) / 2
-                    );
-                    this.axpObj.layerSystem.write(combined);
-                    this.axpObj.layerSystem.updateCanvas(this.axpObj.layerSystem.getId());
-                }
                 // 描画前と描画後を比較し、差分があればアンドゥ用記録
                 // キャンバス外で描画操作を行った場合にアンドゥ対象としないための処理
                 // キャンバス外から太いペンでキャンバス内に描画したり、直線描画時にキャンバス外の２点を指定された場合を考慮

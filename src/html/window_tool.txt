@@ -23,27 +23,6 @@
                     <input type="checkbox" name="check" />
                 </div>
             </div>
-            <!-- 対称・回転描画（曼荼羅/雪結晶）。中心点はキャンバス中央固定 -->
-            <div id="axp_tool_div_symmetry">
-                <label>
-                    <input type="checkbox" id="axp_tool_checkbox_symmetryEnabled">
-                    <span>${_("@SYMMETRY.ENABLED")}</span>
-                </label>
-                <select id="axp_tool_select_symmetryMode">
-                    <option value="radial" selected>${_("@SYMMETRY.RADIAL")}</option>
-                    <option value="mirrorH">${_("@SYMMETRY.MIRROR_H")}</option>
-                    <option value="mirrorV">${_("@SYMMETRY.MIRROR_V")}</option>
-                    <option value="mirrorBoth">${_("@SYMMETRY.MIRROR_BOTH")}</option>
-                </select>
-                <div id="axp_tool_div_symmetryCountRow">
-                    <span>${_("@SYMMETRY.COUNT")}</span>
-                    <div class="axpc_range">
-                        <input type="range" id="axp_tool_range_symmetryCount" min="2" max="16" step="1" value="6">
-                    </div>
-                    <span id="axp_tool_span_symmetryCountValue">6</span>
-                </div>
-            </div>
-
             <div id="axp_tool_div_interop">
                 <button id="axp_tool_button_interopToggle" type="button" class="axpc_MSG axpc_button"
                     data-msg="@AST0200" aria-expanded="false"

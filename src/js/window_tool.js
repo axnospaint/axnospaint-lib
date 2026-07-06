@@ -4,7 +4,6 @@ import { ToolWindow } from './window.js';
 import htmldata from '../html/window_tool.txt';
 import { UTIL, adjustInRange } from './etc.js';
 import { confirmExPromise } from './alert.js';
-import { defaultSymmetryConfig } from './symmetrydraw.js';
 // css適用
 import '../css/window_tool.css';
 
@@ -20,8 +19,6 @@ export class AssistToolSystem extends ToolWindow {
     elementProcessingColor = null;
     // キャンバスサイズ・プリセット（E-1b）。configから復元し、無ければ既定値を使う
     sizePresets = [];
-    // 対称・回転描画（曼荼羅/雪結晶）設定。中心点は常にキャンバス中央固定（v1）
-    symmetryConfig = defaultSymmetryConfig();
     constructor(axpObj) {
         super(axpObj);
     }
@@ -302,33 +299,6 @@ export class AssistToolSystem extends ToolWindow {
             });
         }
 
-        // 対称・回転描画（曼荼羅/雪結晶）
-        const symEnabled = document.getElementById('axp_tool_checkbox_symmetryEnabled');
-        const symMode = document.getElementById('axp_tool_select_symmetryMode');
-        const symCount = document.getElementById('axp_tool_range_symmetryCount');
-        const symCountRow = document.getElementById('axp_tool_div_symmetryCountRow');
-        this.symmetryConfig.enabled = symEnabled.checked;
-        this.symmetryConfig.mode = symMode.value;
-        this.symmetryConfig.radialCount = Number(symCount.value);
-        const updateCountRowVisibility = () => {
-            symCountRow.style.display = (symMode.value === 'radial') ? '' : 'none';
-        };
-        symEnabled.addEventListener('change', () => {
-            this.symmetryConfig.enabled = symEnabled.checked;
-            this.axpObj.configSystem.saveConfig('CHECK_axp_tool_checkbox_symmetryEnabled', symEnabled.checked);
-        });
-        symMode.addEventListener('change', () => {
-            this.symmetryConfig.mode = symMode.value;
-            this.axpObj.configSystem.saveConfig('VALUE_axp_tool_select_symmetryMode', symMode.value);
-            updateCountRowVisibility();
-        });
-        symCount.addEventListener('input', () => {
-            this.symmetryConfig.radialCount = Number(symCount.value);
-            document.getElementById('axp_tool_span_symmetryCountValue').textContent = symCount.value;
-            this.axpObj.configSystem.saveConfig('VALUE_axp_tool_range_symmetryCount', symCount.value);
-        });
-        document.getElementById('axp_tool_span_symmetryCountValue').textContent = symCount.value;
-        updateCountRowVisibility();
     }
     // プリセット登録値をシステム上限(1000)内へ丸める。環境上限(maxWidth/Height)ではなくシステム上限で
     // 丸めることで、狭い環境（例:dev=600）で復元しても登録値そのものは保持され、無効表示のみで扱える。
@@ -642,6 +612,5 @@ export class AssistToolSystem extends ToolWindow {
         }
     }
 }
-
 
 

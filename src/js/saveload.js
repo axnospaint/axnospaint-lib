@@ -1,7 +1,6 @@
 // @description セーブ／ロード／自動保存から復元処理 indexedDB処理系
 
 import { UTIL, inRange, getFileNameFromURL } from './etc.js';
-import { confirmExPromise } from './alert.js';
 
 // 自動保存の間隔
 const AUTOSAVE_INTERVAL = 10;
@@ -95,65 +94,6 @@ export class SaveSystem {
                 console.log(error);
             }
         }
-    }
-    // 起動時ワンタップ復元: 直近の自動保存があれば、続きから再開するか確認する。
-    // 復元した場合はtrueを返す（呼び出し側はnewLayer()等の新規初期化をスキップする）。
-    // 下書き読込時・自動保存が存在しない・キャンセル時はfalseを返す。
-    async checkOneTapRestore() {
-        if (!this.isDBAvailable) return false;
-        let data;
-        let key;
-        try {
-            const latest = await this.dbSystem.getLatestAutoSave();
-            data = latest?.value || null;
-            key = latest?.key;
-        } catch (error) {
-            console.log(error);
-            return false;
-        }
-        if (!data || data.created === undefined) return false;
-        // 画像サイズが現在の許容範囲外なら復元しない（起動オプション変更等で範囲が変わった場合の安全策）
-        if (!inRange(data.x_max, this.axpObj.minWidth, this.axpObj.maxWidth)
-            || !inRange(data.y_max, this.axpObj.minHeight, this.axpObj.maxHeight)) {
-            return false;
-        }
-        // 同一掲示板チェック（手動ロードと同じ基準。restore_oekaki_id()は状態を書き換える
-        // 副作用を持つため、ここでは書き換えを伴わない判定のみ行う。実際の復元＝状態書き換えは
-        // ユーザーが確認ダイアログでOKした後にのみ行う（キャンセル時に書き換えが残ると、
-        // 新規キャンバスなのに破棄したはずの下書きのoekaki_id等を引き継いでしまうため）
-        const hasSourceImage = (data.draftImageFile !== undefined && data.draftImageFile !== null)
-            || (data.oekaki_id !== undefined && data.oekaki_id !== null);
-        if (this.axpObj.checkSameBBS && hasSourceImage
-            && data.oekaki_bbs_pageno !== this.axpObj.post_bbs_pageno) {
-            alert(data.oekaki_bbs_title
-                + '\nに投稿された画像を基にしているため、別の掲示板には投稿できません。\n同一の掲示板でロードしてください。');
-            return false;
-        }
-
-        const savedDate = (data.created instanceof Date) ? data.created : new Date(data.created);
-        const dateText = isNaN(savedDate.getTime()) ? '' : savedDate.toLocaleString();
-        try {
-            await confirmExPromise(`前回の描きかけ（自動保存: ${dateText}）があります。\n続きから再開しますか？`);
-        } catch {
-            // キャンセル時は新規開始（状態はまだ書き換えていないため巻き戻し不要）
-            return false;
-        }
-        if (!this.restore_oekaki_id(data)) {
-            alert(data.oekaki_bbs_title
-                + '\nに投稿された画像を基にしているため、別の掲示板には投稿できません。\n同一の掲示板でロードしてください。');
-            return false;
-        }
-        this.restoreData(data);
-        if (key !== undefined) {
-            try {
-                await this.dbSystem.deleteAutoSave(key);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        // 自動保存されたデータをロードしました。
-        this.axpObj.msg('@INF0302');
-        return true;
     }
     startEvent() {
         // セーブ／ロード画面の閉じるボタン

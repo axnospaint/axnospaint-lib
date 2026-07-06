@@ -39,8 +39,6 @@ import { Marker } from './pendefine/marker.js';
 import { Curve } from './pendefine/curve.js';
 import { Hatching } from './pendefine/hatching.js';
 import { Sketch } from './pendefine/sketch.js';
-import { Dodge } from './pendefine/dodge.js';
-import { Burn } from './pendefine/burn.js';
 import { TextureBrush } from './pendefine/texturebrush.js';
 import { SmoothPen } from './pendefine/smoothpen.js';
 
@@ -154,8 +152,6 @@ export class PenSystem extends ToolWindow {
         this.penObj['axp_penmode_curve'] = new Curve({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_hatching'] = new Hatching({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_sketch'] = new Sketch({ axpObj: this.axpObj, CANVAS: this.CANVAS });
-        this.penObj['axp_penmode_dodge'] = new Dodge({ axpObj: this.axpObj, CANVAS: this.CANVAS });
-        this.penObj['axp_penmode_burn'] = new Burn({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_texturebrush'] = new TextureBrush({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_smoothpen'] = new SmoothPen({ axpObj: this.axpObj, CANVAS: this.CANVAS });
 

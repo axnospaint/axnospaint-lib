@@ -26,10 +26,6 @@
                 data-function="func_switch_axp_penmode_hatching" data-msg="@PEN0109"></button>
             <button id="axp_penmode_sketch" class="axpc_FUNC axpc_penmode_sketch" data-idx="0"
                 data-function="func_switch_axp_penmode_sketch" data-msg="@PEN0112"></button>
-            <button id="axp_penmode_dodge" class="axpc_FUNC axpc_penmode_dodge" data-idx="0"
-                data-function="func_switch_axp_penmode_dodge" data-msg="@PEN0113"></button>
-            <button id="axp_penmode_burn" class="axpc_FUNC axpc_penmode_burn" data-idx="0"
-                data-function="func_switch_axp_penmode_burn" data-msg="@PEN0114"></button>
             <button id="axp_penmode_texturebrush" class="axpc_FUNC axpc_penmode_texturebrush" data-idx="0"
                 data-function="func_switch_axp_penmode_texturebrush" data-msg="@PEN0115"></button>
             <button id="axp_penmode_smoothpen" class="axpc_FUNC axpc_penmode_smoothpen" data-idx="0"
