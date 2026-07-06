@@ -218,6 +218,51 @@ body {
   z-index: 800;
 }
 
+/* タッチ操作バー（下部中央。coarseポインタ環境のみ表示） */
+#axp_canvas_div_touchBar {
+  display: none;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3000;
+  gap: 8px;
+}
+
+@media (pointer: coarse) {
+  #axp_canvas_div_touchBar {
+    display: flex;
+  }
+
+  /* 下部タッチバーと機能が重複するため、タッチ環境ではヘッダー右上のUndo/Redoを隠す。 */
+  .axpc_main_headerButton {
+    display: none;
+  }
+}
+
+#axp_canvas_div_touchBar > .axpc_touchbar_btn {
+  position: static;
+}
+
+/* Apple HIG準拠の44pt以上を確保（既定の40pxより拡大）。
+   common.cssの.axpc_overlay_btnが後読込されるため、詳細度を合わせて確実に上書きする。 */
+.axpc_overlay_btn.axpc_touchbar_btn {
+  width: 48px;
+  height: 48px;
+}
+
+#axp_canvas_button_touchUndo {
+  background-image: url('../../resource/undo.png');
+}
+
+#axp_canvas_button_touchRedo {
+  background-image: url('../../resource/redo.png');
+}
+
+#axp_canvas_button_touchViewReset {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>');
+}
+
 /* 回転操作子グループ（ハンドツール時に上部中央へ表示） */
 #axp_canvas_div_rotateGroup {
   position: absolute;
@@ -280,6 +325,29 @@ body {
 
 #axp_canvas_div_nagenawaFinish {
   background-image: url('../../resource/overlay/check.svg');
+}
+
+/* 多角形選択操作子グループ（頂点配置中に上部中央へ表示） */
+#axp_canvas_div_polygonGroup {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3000;
+  display: flex;
+  gap: 4px;
+}
+
+#axp_canvas_div_polygonGroup > .axpc_overlay_btn {
+  position: static;
+}
+
+#axp_canvas_div_polygonFinish {
+  background-image: url('../../resource/overlay/check.svg');
+}
+
+#axp_canvas_div_polygonCancel {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="%23ff9090"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56Z"/></svg>');
 }
 
 /* デバッグ情報 */

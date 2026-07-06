@@ -10,15 +10,18 @@ import { ColorPaletteSystem } from './window_palette.js';
 import { ColorMakerSystem } from './window_makecolor.js';
 import { AssistToolSystem } from './window_tool.js';
 import { CustomButtonSystem } from './window_custom.js';
+import { FilterSystem } from './window_filter.js';
 import { Launcher } from './window_launcher.js';
 import { UndoSystem } from './undo.js';
 import { ConfigSystem } from './config.js';
 import { PostSystem } from './post.js';
 import { SaveSystem } from './saveload.js';
 import { KeyboardSystem } from './keyboard.js';
+import { InteropSystem } from './interop.js';
 import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange, getFileNameFromURL, rotateVector, normalizeDeg180 } from './etc.js';
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
+import { combineSelectionMask, buildSelectionOverlayCanvas, countSelectedPixels } from './selectionutil.js';
 
 // 辞書データ（日本語のみデフォルトでバンドルする）
 import dictionaryJSON_ja from '../text/ja.json';
@@ -40,6 +43,8 @@ export class AXPObj {
         CANVAS_Y_MIN: 8,
         CANVAS_X_DEFAULT: 317,
         CANVAS_Y_DEFAULT: 317,
+        // デフォルト背景色（肌色）。起動オプションdefaultColor.sub未指定時のフォールバック（E-1c）
+        SKIN_BG_DEFAULT: '#f0e0d6',
         // 描画時のステータス
         DRAW_FREEHAND: Symbol(),
         DRAW_LINE: Symbol(),
@@ -113,6 +118,17 @@ export class AXPObj {
     // ----------------------------------------------------
     codeCHANGE_SIZE_KEY = null; // ショートカット「ペンの太さ調整」で押されたキー
 
+    // 選択範囲（マジックワンド／多角形選択、Phase2-6） -----
+    // ⚠️ なげなわ（nagenawa.js）の選択とは全く別の概念。なげなわは「切り取って移動・
+    // 変形する」フローティングクリップ（canvas/ImageDataベース、Nagenawaインスタンス内に
+    // 閉じた状態）だが、こちらは「バケツ塗り（fill.js/fillAll）の適用範囲を制約するだけ」の
+    // 軽量なブールマスク（Uint8Array、0=非選択/255=選択、axpObj直下のグローバル状態）。
+    // レイヤーのimageデータには一切書き込まない。両者は独立して共存し、互いを
+    // 感知・連携しない（なげなわで変形中でも、このselectionMaskは無関係に有効なまま）
+    selectionMask = null;
+    selectionOverlayCanvas = null; // 可視化用オフスクリーンcanvas（マスク変更時に再生成）
+    // ----------------------------------------------------
+
     // 実行環境系
     ENV = {
         // ブラウザがsafari系か
@@ -164,6 +180,10 @@ export class AXPObj {
     // 現在のキャンバスサイズ
     x_size;
     y_size;
+
+    // 背景の地色（肌色/白トグル、E-1c）。skinBackgroundColorは肌色の実値を保持
+    backgroundColor;
+    skinBackgroundColor;
 
     // 画像の縦横サイズが異なる時のサムネイルのセンタリング用
     ctx_map_shift_x;
@@ -278,6 +298,7 @@ export class AXPObj {
         this.toolWindow.push(this.colorPaletteSystem = new ColorPaletteSystem(this));
         this.toolWindow.push(this.layerSystem = new LayerSystem(this));
         this.toolWindow.push(this.assistToolSystem = new AssistToolSystem(this));
+        this.toolWindow.push(this.filterSystem = new FilterSystem(this));
 
         // カスタムボタンは別枠
         this.toolWindow.push(this.customButtonSystem = new CustomButtonSystem(this));
@@ -288,6 +309,7 @@ export class AXPObj {
         this.configSystem = new ConfigSystem(this);
         this.saveSystem = new SaveSystem(this);
         this.postSystem = new PostSystem(this);
+        this.interopSystem = new InteropSystem(this);
 
         // デフォルト値設定
         this.minWidth = this.CONST.CANVAS_X_MIN;
@@ -357,6 +379,7 @@ export class AXPObj {
         this.configSystem.init();
         this.saveSystem.init();
         this.postSystem.init();
+        this.interopSystem.init();
 
         this.initTask();
 
@@ -375,11 +398,74 @@ export class AXPObj {
             nagenawa.finalizeSelection();
         }
     }
+    // 選択範囲（マジックワンド／多角形選択）の適用。なげなわの「切り取って移動」とは
+    // 独立した、レイヤーのimageデータを一切変更しない範囲情報として保持する
+    applySelectionMask(newMask) {
+        const mode = document.getElementById('axp_pen_select_selectionMode')?.value || 'option_replace';
+        const modeKey = { option_replace: 'replace', option_add: 'add', option_subtract: 'subtract', option_intersect: 'intersect' }[mode] || 'replace';
+        const existing = this.getValidSelectionMask();
+        const combined = combineSelectionMask(existing, newMask, modeKey, this.x_size, this.y_size);
+        // 結果が全画素非選択（例: 差し引き/交差で選択範囲が消滅、色域選択で候補0件）の場合、
+        // 「選択されているが何も含まない」という紛らわしい状態にせず、選択解除として扱う
+        if (countSelectedPixels(combined) === 0) {
+            this.clearSelection();
+            return;
+        }
+        this.setSelectionMask(combined);
+    }
+    setSelectionMask(mask) {
+        this.selectionMask = mask;
+        this.selectionOverlayCanvas = buildSelectionOverlayCanvas(mask, this.x_size, this.y_size);
+        this._updateSelectionStatusUI();
+        this.layerSystem.updateCanvas();
+    }
+    clearSelection() {
+        if (!this.selectionMask) return;
+        this.selectionMask = null;
+        this.selectionOverlayCanvas = null;
+        this._updateSelectionStatusUI();
+        this.layerSystem.updateCanvas();
+    }
+    // 寸法不一致（キャンバスサイズ変更等で無効化された残留マスク）を検知し、
+    // 検出時は自動的に選択解除して null を返す（防御的チェック）。
+    // 長さ一致だけでは縦横が入れ替わるリサイズ（面積が同一）を検知できないため、
+    // オーバーレイキャンバスの width/height も併せて照合する
+    getValidSelectionMask() {
+        if (!this.selectionMask) return null;
+        const dimensionMismatch = this.selectionMask.length !== this.x_size * this.y_size ||
+            (this.selectionOverlayCanvas &&
+                (this.selectionOverlayCanvas.width !== this.x_size || this.selectionOverlayCanvas.height !== this.y_size));
+        if (dimensionMismatch) {
+            this.selectionMask = null;
+            this.selectionOverlayCanvas = null;
+            this._updateSelectionStatusUI();
+            return null;
+        }
+        return this.selectionMask;
+    }
+    _updateSelectionStatusUI() {
+        const elem = document.getElementById('axp_pen_div_selectionStatus');
+        if (!elem) return;
+        if (this.selectionMask) {
+            UTIL.show(elem);
+            const countElem = document.getElementById('axp_pen_span_selectionCount');
+            if (countElem) countElem.textContent = countSelectedPixels(this.selectionMask);
+        } else {
+            UTIL.hide(elem);
+        }
+    }
     // キャンバスの初期化（新規キャンバス、ロード、自動保存から復元時などに行う処理）
     resetCanvas() {
         // なげなわの変形状態が残留していれば破棄する（レイヤーが作り直されるため、
         // 選択内容の確定は各操作の入口の責務。ここでは状態破棄のみ行う）
         this.penSystem?.penObj?.['axp_penmode_nagenawa']?.forceIdle();
+        // 多角形選択の途中状態（頂点未確定）も同様に破棄する
+        this.penSystem?.penObj?.['axp_penmode_polygonselect']?.forceIdle();
+        // キャンバス寸法が変わるため、残留した選択範囲は無効化する
+        this.selectionMask = null;
+        this.selectionOverlayCanvas = null;
+        this._updateSelectionStatusUI();
+        this.interopSystem?.beforeCanvasReset(this.x_size, this.y_size);
         this.CANVAS.main.style.width = this.x_size + 'px';
         this.CANVAS.main.style.height = this.y_size + 'px';
         this.CANVAS.main.width = this.x_size;
@@ -396,6 +482,7 @@ export class AXPObj {
         this.assistToolSystem.resetCanvas();
         this.undoSystem.resetCanvas();
         this.postSystem.resetCanvas();
+        this.interopSystem.syncToCanvas();
     }
     // イベント受付開始
     startEvent() {
@@ -411,6 +498,13 @@ export class AXPObj {
         this.configSystem.startEvent();
         this.saveSystem.startEvent();
         this.postSystem.startEvent();
+        this.interopSystem.startEvent();
+
+        // a11y: アイコンのみのボタン（テキストラベルを持たない）へ、既存のホバー説明文
+        // （data-msg、msg.txt辞書）からaria-labelを自動付与する。スクリーンリーダー利用時に
+        // 「名前のないボタン」として読み上げられる問題への対応。全ツールウィンドウの
+        // startEvent()完了後（DOM構築完了後）に一括で行う。
+        this._assignAriaLabelsFromDataMsg();
 
         // iPad safari
         // ダブルタップを抑止
@@ -544,6 +638,12 @@ export class AXPObj {
 
                 if (this.config('axp_config_form_touchDrawType') === 'none' && e.pointerType === 'touch') {
                     // タッチ無効時は描画しない
+                } else if (this.layerSystem.maskEditMode
+                    && (e.target === this.CANVAS.main || e.target === this.ELEMENT.view)) {
+                    // 透明マスク編集モード中は専用のマスクブラシへ委譲する（キャンバス内のみ対象）。
+                    // タッチジェスチャ判定（evCache等）はここより前段の共通処理で既に完了しているため、
+                    // ここで分岐しても多指ジェスチャの追跡は壊れない
+                    this.layerSystem.maskBrushStart(pos.x, pos.y);
                 } else {
                     if (this.config('axp_config_form_touchDrawType') === 'hand' && e.pointerType === 'touch') {
                         mode = 'axp_penmode_hand';
@@ -555,8 +655,11 @@ export class AXPObj {
                     //console.log('描画準備:', mode);
                 }
 
-                // 長押しスポイトが有効の時、タイマーセット
-                if (this.config('axp_config_form_useLongtap') === 'on') {
+                // 長押しスポイトが有効の時、タイマーセット。
+                // 透明マスク編集モード中は対象外（マスクブラシは通常の描画パイプラインを
+                // 経由しないため、長押し後のスポイト発火・自動ペン切替えは意図しない
+                // 副作用になる）
+                if (this.config('axp_config_form_useLongtap') === 'on' && !this.layerSystem.maskEditMode) {
                     const time = Number(document.getElementById('axp_config_form_longtapDurationValue').volume.value);
                     this.longPressTimerID = setTimeout(() => {
                         // 描画中強制終了
@@ -585,6 +688,15 @@ export class AXPObj {
         this.ELEMENT.base.addEventListener('pointermove', (e) => {
             // モーダルウィンドウ表示中は無効
             if (this.isModalOpen) return;
+
+            // 透明マスク編集モード中はマスクブラシへ委譲する（通常の描画パイプラインと同様、
+            // キャンバス内のポインタ操作のみを対象とし、それ以外はホバー表示等の既存処理に委ねる）
+            if (this.layerSystem.maskEditMode && e.isPrimary
+                && (e.target === this.CANVAS.main || e.target === this.ELEMENT.view)) {
+                const maskPos = this.calcScaleCoordinates(e);
+                this.layerSystem.maskBrushMove(maskPos.x, maskPos.y);
+                return;
+            }
 
             // プライマリーポインタ
             if (e.isPrimary) {
@@ -843,10 +955,17 @@ export class AXPObj {
                 }
             }
             if (e.isPrimary) {
-                // キャンバス座標計算
-                let pos = this.calcScaleCoordinates(e);
-                // 機能呼び出し
-                this.penSystem.end(pos.x, pos.y, e);
+                // 透明マスク編集モード中はマスクブラシのストロークを終了する。
+                // pointerup/pointercancel/pointerleaveのいずれからもここを通るため、
+                // キャンバス外へドラッグして離した場合等も含め確実に後始末される
+                if (this.layerSystem.maskEditMode) {
+                    this.layerSystem.maskBrushEnd();
+                } else {
+                    // キャンバス座標計算
+                    let pos = this.calcScaleCoordinates(e);
+                    // 機能呼び出し
+                    this.penSystem.end(pos.x, pos.y, e);
+                }
             }
         };
         /**
@@ -1063,7 +1182,18 @@ export class AXPObj {
                 this.colorMakerSystem.colorWheel.redraw();
                 this.penSystem.previewPenSize();
                 this.drawPostCanvas();
+            } else if (document.visibilityState === 'hidden') {
+                // タブが非表示になったとき（離脱の可能性）：未保存の編集内容を即座に保存する。
+                // モバイル（特にiOS）はタブを予告なく破棄することがあり、
+                // beforeunload/pagehideが発火しない場合があるため、visibilitychange:hiddenが
+                // 確実な保存機会として最後になる。
+                this.saveSystem.autoSave(true);
             }
+        });
+        // 上記の保険。pagehideが発火する環境ではこちらでも確実に保存する
+        // （force指定のため、既にvisibilitychange:hiddenで保存済みなら未保存分が無く何もしない）
+        window.addEventListener('pagehide', () => {
+            this.saveSystem.autoSave(true);
         });
     }
     /**
@@ -1102,6 +1232,7 @@ export class AXPObj {
         this.CANVAS.main.style.transform = transform;
         grid.style.transformOrigin = transformOrigin;
         grid.style.transform = transform;
+        this.interopSystem?.syncToCanvas();
 
         this.updateGrid();
 
@@ -1848,6 +1979,30 @@ export class AXPObj {
         this.TASK['func_switch_axp_penmode_diffusion'] = () => {
             switchPenSub('axp_penmode_diffusion');
         }
+        this.TASK['func_switch_axp_penmode_marker'] = () => {
+            switchPenSub('axp_penmode_marker');
+        }
+        this.TASK['func_switch_axp_penmode_curve'] = () => {
+            switchPenSub('axp_penmode_curve');
+        }
+        this.TASK['func_switch_axp_penmode_hatching'] = () => {
+            switchPenSub('axp_penmode_hatching');
+        }
+        this.TASK['func_switch_axp_penmode_sketch'] = () => {
+            switchPenSub('axp_penmode_sketch');
+        }
+        this.TASK['func_switch_axp_penmode_dodge'] = () => {
+            switchPenSub('axp_penmode_dodge');
+        }
+        this.TASK['func_switch_axp_penmode_burn'] = () => {
+            switchPenSub('axp_penmode_burn');
+        }
+        this.TASK['func_switch_axp_penmode_texturebrush'] = () => {
+            switchPenSub('axp_penmode_texturebrush');
+        }
+        this.TASK['func_switch_axp_penmode_smoothpen'] = () => {
+            switchPenSub('axp_penmode_smoothpen');
+        }
         this.TASK['func_switch_axp_penmode_eraser_round'] = () => {
             switchPenSub('axp_penmode_eraser_round');
         }
@@ -1868,6 +2023,19 @@ export class AXPObj {
         }
         this.TASK['func_switch_axp_penmode_nagenawa'] = () => {
             switchPenSub('axp_penmode_nagenawa');
+        }
+        this.TASK['func_switch_axp_penmode_magicwand'] = () => {
+            switchPenSub('axp_penmode_magicwand');
+        }
+        this.TASK['func_switch_axp_penmode_polygonselect'] = () => {
+            switchPenSub('axp_penmode_polygonselect');
+        }
+        this.TASK['func_switch_axp_penmode_liquify'] = () => {
+            switchPenSub('axp_penmode_liquify');
+        }
+        // 選択解除
+        this.TASK['func_deselect'] = () => {
+            this.clearSelection();
         }
 
         // アンドゥ
@@ -2159,6 +2327,25 @@ export class AXPObj {
         }
 
     }
+    // a11y: アイコンのみのボタン（テキストラベルを持たない）に、既存のホバー説明文
+    // （data-msg属性、msg.txt辞書）からaria-labelを自動生成して付与する。
+    // 説明文の先頭にある「%1」等のプレースホルダ（ショートカットキー表示用）は
+    // aria-labelとしては不要なため除去する。既にaria-labelやテキストラベルを
+    // 持つ要素はスキップする（上書きしない）。
+    _assignAriaLabelsFromDataMsg() {
+        const elements = document.querySelectorAll('button[data-msg]');
+        for (const el of elements) {
+            if (el.hasAttribute('aria-label') || el.textContent.trim() !== '') continue;
+            const key = el.dataset.msg;
+            if (!key) continue;
+            // data-msgは辞書キー（@から始まる）と、動的生成ボタン（window.js）が
+            // 直接設定する生テキストの両方があり得る（msg()メソッドと同じ分岐）。
+            const raw = (key.charAt(0) === '@') ? Message.getMessage(key) : key;
+            if (!raw) continue;
+            const text = raw.replace(/%\d+/g, '').trim();
+            if (text) el.setAttribute('aria-label', text);
+        }
+    }
     // 表示系メソッド
     /**
      * 画面下部のメッセージエリアに引数で指定されたIDに対応するメッセージテキストを表示する。
@@ -2430,6 +2617,13 @@ export class AXPObj {
             }
             // ユーザー設定の復元が完了した後に行う処理 ------------------------------------------------
 
+            // 背景の地色（肌色/白）を確定する（E-1c）。初回updateCanvasの前に反映する必要がある。
+            // 肌色の実値は起動オプションdefaultColor.sub（あいもげ既定）、無指定時はSKIN_BG_DEFAULT。
+            this.skinBackgroundColor = (this.defaultColor && this.defaultColor.sub) ? this.defaultColor.sub : this.CONST.SKIN_BG_DEFAULT;
+            // トグルの保存状態（TOGSW）はrestoreConfigでcheckboxへ復元済み。白=checked。
+            const bgToggleInput = document.getElementById('axp_tool_toggle_bgColor')?.querySelector('input');
+            this.backgroundColor = (bgToggleInput && bgToggleInput.checked) ? '#ffffff' : this.skinBackgroundColor;
+
             // URLパラメータでキャンバスサイズの指定がされていた場合、補正後のキャンバスサイズを登録する
             if (this.oekaki_width || this.oekaki_height) {
                 // キャンバスサイズ履歴への追加と表示更新
@@ -2437,8 +2631,18 @@ export class AXPObj {
                 this.configSystem.updateCanvasSizeHistory();
             }
 
+            // 起動時ワンタップ復元: 下書き読込時は下書きを優先し確認しない。
+            // 直近の自動保存があれば「続きから再開するか」を確認し、復元した場合は
+            // 初期レイヤー作成をスキップする（restoreData内で既にレイヤーが復元されるため）。
+            let isOneTapRestored = false;
+            if (!isDraftLoaded) {
+                isOneTapRestored = await this.saveSystem.checkOneTapRestore();
+            }
+
             // 初期レイヤー作成（※合成モード表示の設定があるため、設定復元完了後に行う必要がある）
-            this.layerSystem.newLayer();
+            if (!isOneTapRestored) {
+                this.layerSystem.newLayer();
+            }
 
             // アンドゥ使用可能最大数
             this.undo_max = document.getElementById('axp_config_form_undoMaxValue').result.value;
@@ -2482,10 +2686,9 @@ export class AXPObj {
 
             // 下書き読込
             if (isDraftLoaded) {
-                // 基にしてお絵カキコ
-                this.layerSystem.CANVAS.tmp_ctx.drawImage(this.oekaki_base, 0, 0);
-                // レイヤー更新
-                this.layerSystem.write(this.layerSystem.CANVAS.tmp_ctx.getImageData(0, 0, this.x_size, this.y_size));
+                // 基にする画像は作品レイヤーへ書き込まず、参照オーバーレイとして表示する。
+                this.interopSystem.referenceImageSystem.loadBitmap(this.oekaki_base, 0);
+                this.interopSystem.syncReferenceControls();
                 // [%1.png]を読み込みました。(画像サイズ 横:%2 × 縦:%3)
                 this.msg('@INF0050', imageload_filename, this.x_size, this.y_size);
             }
@@ -2501,6 +2704,7 @@ export class AXPObj {
             let center_y = base_y / 2 - this.y_size / 2;
             this.CANVAS.main.style.left = center_x + 'px';
             this.CANVAS.main.style.top = center_y + 'px';
+            this.interopSystem.syncToCanvas();
 
             // イベント受付開始
             this.startEvent();

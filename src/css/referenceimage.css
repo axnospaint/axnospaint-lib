@@ -1,0 +1,29 @@
+/* Reference image overlay: display-only, never part of artwork layers. */
+
+#axp_canvas_div_referenceHost {
+  position: absolute;
+  pointer-events: none;
+  transform-origin: 0 0;
+  z-index: 500;
+}
+
+#axp_canvas_div_referenceFrame {
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+  transform-origin: center center;
+}
+
+#axp_canvas_div_referenceFrame[data-editing="true"] {
+  cursor: move;
+  outline: 2px dashed rgba(80, 190, 255, 0.9);
+  outline-offset: 2px;
+  pointer-events: auto;
+}
+
+#axp_canvas_canvas_reference {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: auto;
+}

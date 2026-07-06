@@ -96,6 +96,12 @@
                 },
             },
         });
+        // デバッグ用: URLパラメータ ?e2e=1 を明示指定した場合のみインスタンスをグローバル
+        // 参照可能にする（E2Eテストからの内部API呼び出し用）。既定では無効にし、この
+        // サンプルHTMLを実掲示板へ組み込む際に内部状態が誤って外部露出しないようにする。
+        if (new URLSearchParams(location.search).has('e2e')) {
+            window.axp = axp;
+        }
         // 投稿処理
         function axnospaint_post(postObj) {
             return new Promise(resolve => {
