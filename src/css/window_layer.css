@@ -305,6 +305,72 @@
     background: #555 center no-repeat url('../../resource/flip_v.png');
 }
 
+/* 非破壊レイヤースタイル（フチ取り・ドロップシャドウ） */
+#axp_renamelayer_div_layerStyle {
+    background: #333;
+    margin-bottom: 4px;
+    padding: 4px;
+}
+
+.axpc_layerstyle_section {
+    margin-bottom: 4px;
+}
+
+.axpc_layerstyle_section:last-child {
+    margin-bottom: 0;
+}
+
+.axpc_layerstyle_header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.axpc_layerstyle_controls {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 2px 0 2px 20px;
+    font-size: 11px;
+}
+
+.axpc_layerstyle_controls label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.axpc_layerstyle_controls .axpc_range {
+    width: 90px;
+    height: 16px;
+}
+
+.axpc_layerstyle_controls input[type="color"] {
+    width: 32px;
+    height: 18px;
+    padding: 0;
+    border: 1px solid #777;
+    background: none;
+}
+
+/* 透明マスク（非破壊消しゴム） */
+#axp_renamelayer_div_mask {
+    background: #333;
+    margin-bottom: 4px;
+    padding: 4px;
+}
+
+#axp_renamelayer_div_mask .axpc_layerstyle_header {
+    justify-content: space-between;
+}
+
+#axp_mask_button_editToggle[data-editing="true"] {
+    background-color: #5a5;
+}
+
 /* カラータグ用外枠 */
 #axp_renamelayer_div_colorTagContainer {
     background: #333;

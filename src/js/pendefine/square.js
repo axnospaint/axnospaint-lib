@@ -37,6 +37,7 @@ export class Square extends StampPenBase {
         ctx.globalAlpha = saved * alphaScale;
         ctx.fillRect(cp.x - r, cp.y - r, 2 * r, 2 * r);
         ctx.globalAlpha = saved;
+        this._dirty?.add({ x: cp.x - r, y: cp.y - r, w: 2 * r, h: 2 * r });
     }
 
     // 2 点間: 軸合わせ正方形の Minkowski sum (凸 6 角形 / 軸方向移動時は矩形)
@@ -75,5 +76,11 @@ export class Square extends StampPenBase {
         ctx.fill();
         ctx.globalAlpha = saved;
         // 6 角形は p2 の正方形を含むため、追加スタンプ不要
+        this._dirty?.add({
+            x: Math.min(p1.x, p2.x) - r,
+            y: Math.min(p1.y, p2.y) - r,
+            w: Math.abs(p2.x - p1.x) + 2 * r,
+            h: Math.abs(p2.y - p1.y) + 2 * r,
+        });
     }
 }

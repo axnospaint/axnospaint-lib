@@ -1,8 +1,24 @@
 <!-- 色作成 -->
 <div class="axpc_window_content">
+    <!-- 以下3種の色混合UIは目的が重なるため、使い分けを明記する（review4指摘）：
+         1. 混色パレット＝メイン⇔サブの1次元グラデーションから選ぶ（線形1系統のみ）
+         2. クロスボウル調色＝メイン/サブ/白/黒の4色を2次元の面で連続的に混ぜる
+         3. 混色ウェットパレット＝絵の具のように描画色を塗り重ねて任意の中間色を作る（試行錯誤向け） -->
     <!-- 混色パレット（オプション） -->
     <div id="axp_makecolor_div_mixedPalette">
         <div></div>
+    </div>
+    <!-- クロスボウル調色（2Dミキシングエリア。四隅：左上=メイン／右上=サブ／
+         左下=白／右下=黒を補間し、クリック／ドラッグで任意の混色を選べる） -->
+    <div id="axp_makecolor_div_crossBowl" class="axpc_MSG" data-msg="@MKC0015">
+        <canvas id="axp_makecolor_canvas_crossBowl" width="120" height="120"></canvas>
+    </div>
+    <!-- 混色ウェットパレット（ドラッグで現在の描画色を塗り重ねて混色し、
+         クリック（ドラッグなし）でその場所の色をサンプルして描画色にする） -->
+    <div id="axp_makecolor_div_wetPalette">
+        <canvas id="axp_makecolor_canvas_wetPalette" class="axpc_MSG axpc_background_mesh" width="140" height="70"
+            data-msg="@MKC0016"></canvas>
+        <button id="axp_makecolor_button_wetPaletteClear" class="axpc_MSG" data-msg="@MKC0017">${_("@COMMON.CLEAR")}</button>
     </div>
     <!-- 描画色 -->
     <div id="axp_makecolor_div_drawColor">
@@ -25,6 +41,8 @@
         <!-- メイン／サブ入れ替えボタン -->
         <div id="axp_makecolor_button_swapColor" class="axpc_MSG" data-msg="@MKC0006"></div>
     </div>
+    <!-- 色履歴（最近使った色） -->
+    <div id="axp_makecolor_div_colorHistory" class="axpc_MSG" data-msg="@MKC0014"></div>
     <!-- RGBスライダー -->
     <div id="axp_makecolor_div_RGBSlider">
         <div class="axpc_range">
@@ -46,5 +64,46 @@
     <!-- カラーピッカー -->
     <div id="axp_makecolor_div_colorPicker" class="axpc_MSG" data-msg="@MKC0013">
         <div></div>
+    </div>
+    <!-- CMYKスライダー -->
+    <div id="axp_makecolor_div_CMYKSlider">
+        <div class="axpc_range">
+            <span>${_("@COMMON.CYAN")}</span><input id="axp_makecolor_range_cyan" class="axpc_MSG range_color"
+                type="range" min="0" max="100" value="0" data-msg="@MKC0018"><input id="axp_makecolor_number_cyan"
+                class="axpc_MSG" type="number" min="0" max="100" value="0" maxlength="3" data-msg="@MKC0019">
+        </div>
+        <div class="axpc_range">
+            <span>${_("@COMMON.MAGENTA")}</span><input id="axp_makecolor_range_magenta" class="axpc_MSG range_color"
+                type="range" min="0" max="100" value="0" data-msg="@MKC0020"><input id="axp_makecolor_number_magenta"
+                class="axpc_MSG" type="number" min="0" max="100" value="0" maxlength="3" data-msg="@MKC0021">
+        </div>
+        <div class="axpc_range">
+            <span>${_("@COMMON.YELLOW")}</span><input id="axp_makecolor_range_yellow" class="axpc_MSG range_color"
+                type="range" min="0" max="100" value="0" data-msg="@MKC0022"><input id="axp_makecolor_number_yellow"
+                class="axpc_MSG" type="number" min="0" max="100" value="0" maxlength="3" data-msg="@MKC0023">
+        </div>
+        <div class="axpc_range">
+            <span>${_("@COMMON.KEY_BLACK")}</span><input id="axp_makecolor_range_key" class="axpc_MSG range_color"
+                type="range" min="0" max="100" value="0" data-msg="@MKC0024"><input id="axp_makecolor_number_key"
+                class="axpc_MSG" type="number" min="0" max="100" value="0" maxlength="3" data-msg="@MKC0025">
+        </div>
+    </div>
+    <!-- Labスライダー -->
+    <div id="axp_makecolor_div_LabSlider">
+        <div class="axpc_range">
+            <span>${_("@COMMON.LAB_L")}</span><input id="axp_makecolor_range_labL" class="axpc_MSG range_color"
+                type="range" min="0" max="100" value="0" data-msg="@MKC0026"><input id="axp_makecolor_number_labL"
+                class="axpc_MSG" type="number" min="0" max="100" value="0" maxlength="3" data-msg="@MKC0027">
+        </div>
+        <div class="axpc_range">
+            <span>${_("@COMMON.LAB_A")}</span><input id="axp_makecolor_range_labA" class="axpc_MSG range_color"
+                type="range" min="-128" max="127" value="0" data-msg="@MKC0028"><input id="axp_makecolor_number_labA"
+                class="axpc_MSG" type="number" min="-128" max="127" value="0" maxlength="4" data-msg="@MKC0029">
+        </div>
+        <div class="axpc_range">
+            <span>${_("@COMMON.LAB_B")}</span><input id="axp_makecolor_range_labB" class="axpc_MSG range_color"
+                type="range" min="-128" max="127" value="0" data-msg="@MKC0030"><input id="axp_makecolor_number_labB"
+                class="axpc_MSG" type="number" min="-128" max="127" value="0" maxlength="4" data-msg="@MKC0031">
+        </div>
     </div>
 </div>

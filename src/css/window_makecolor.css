@@ -181,3 +181,68 @@
     border-style: double;
     border-color: #f00;
 }
+
+/* 色履歴（最近使った色） */
+#axp_makecolor_div_colorHistory {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 2px 0;
+    min-height: 18px;
+}
+
+/* クロスボウル調色（2Dミキシングエリア） */
+#axp_makecolor_div_crossBowl {
+    margin-bottom: 4px;
+}
+
+#axp_makecolor_canvas_crossBowl {
+    width: 100%;
+    /* 実体は120x120（正方形）のため、表示も正方形を保ち歪みを防ぐ */
+    aspect-ratio: 1 / 1;
+    border: 1px solid #888;
+    border-radius: 3px;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+/* 混色ウェットパレット */
+#axp_makecolor_div_wetPalette {
+    margin-bottom: 4px;
+    display: flex;
+    flex-flow: column;
+    gap: 2px;
+}
+
+#axp_makecolor_canvas_wetPalette {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #888;
+    border-radius: 3px;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+#axp_makecolor_button_wetPaletteClear {
+    font-size: 11px;
+    line-height: 1;
+    padding: 3px 2px;
+    border: 1px solid #888;
+    border-radius: 3px;
+    background: #555;
+    color: #eee;
+    cursor: pointer;
+}
+
+#axp_makecolor_button_wetPaletteClear:active {
+    background: #333;
+}
+
+.axpc_makecolor_historySwatch {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #666;
+    border-radius: 2px;
+    cursor: pointer;
+    flex: 0 0 auto;
+}

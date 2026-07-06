@@ -15,6 +15,8 @@ export class Fill extends PenObj {
         this.alpha = 100;
         this.threshold = 2;
         this.toneLevel = 16;
+        // 色の許容誤差（0=完全一致。既存挙動を変えないための既定値）
+        this.colorTolerance = 0;
         // 制御
         this.usePenPreview = true;
         this.usePenLock = true;
@@ -82,7 +84,8 @@ export class Fill extends PenObj {
                     img_output,
                     x,
                     y,
-                    rgbCode
+                    rgbCode,
+                    this.colorTolerance
                 );
 
                 // 作成したimagedataをキャンバスに描画
@@ -108,9 +111,21 @@ export class Fill extends PenObj {
 // ImageData:canvasのgetImageDataで取得したデータ
 // x,y：現在の座標位置
 // fillColor:塗りつぶし用の色
-Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
+// colorTolerance:色の許容誤差（0-100。0は完全一致のみ。AA線画の境界に残る薄い色を許容して塗り漏れを防ぐ）
+Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor, colorTolerance = 0) {
 
     let oversize = Number(document.getElementById('axp_pen_range_fillThreshold').value);
+    // 許容誤差(0-100)をRGBユークリッド距離の2乗の上限(255²×3)へ換算。
+    // sqrt を比較の両辺で行わず2乗のまま比較することで、tolerance=100（最大許容）が
+    // 浮動小数点の丸め誤差で白黒間の距離をわずかに下回り不一致になる事態を避ける。
+    const clampedTolerance = Math.max(0, Math.min(100, Number(colorTolerance) || 0));
+    const toleranceDistanceSq = (clampedTolerance / 100) ** 2 * 255 * 255 * 3;
+
+    // 選択範囲（マジックワンド／多角形選択）が有効な場合、塗りつぶしの拡がりと
+    // 縁のオーバーサイズ描画を選択範囲内に制約する（未選択時はマスクなし=従来通りの動作）
+    const selectionMask = this.axpObj.getValidSelectionMask();
+    const selW = this.axpObj.x_size;
+    const isSelected = (px, py) => !selectionMask || selectionMask[py * selW + px] !== 0;
 
     var fillColorRGB = fillColor;
     if (x < 0 || y < 0 || x >= img_input.width || y >= img_input.height) {
@@ -142,6 +157,11 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
             return false;
         }
 
+        // 選択範囲外へは拡がらない
+        if (!isSelected(x, y)) {
+            return false;
+        }
+
         var currentColorRGB = new Array(3);
         currentColorRGB[0] = ImageData.data[(y * ImageData.width + x) * 4 + 0];
         currentColorRGB[1] = ImageData.data[(y * ImageData.width + x) * 4 + 1];
@@ -162,26 +182,31 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
                 return false;
             } else {
                 // 現在：有色
-                if (currentColorRGB[0] === selectColorRGB[0] &&
-                    currentColorRGB[1] === selectColorRGB[1] &&
-                    currentColorRGB[2] === selectColorRGB[2]) {
-                    // 同色
-                    return true;
-                } else {
-                    // 異色
-                    return false;
-                }
+                // 色距離（ユークリッド距離の2乗）が許容誤差以内なら同色とみなす。
+                // colorTolerance=0（既定）の場合は距離0のみ、すなわち従来の完全一致と等価。
+                const dr = currentColorRGB[0] - selectColorRGB[0];
+                const dg = currentColorRGB[1] - selectColorRGB[1];
+                const db = currentColorRGB[2] - selectColorRGB[2];
+                const distanceSq = dr * dr + dg * dg + db * db;
+                return distanceSq <= toleranceDistanceSq;
             }
         }
     }
+    // 戻り値: このオフセットより外側へオーバーサイズ描画を続けてよいか（false=壁に当たり中断）
     const setPixel = (imageData, x, y, fillColorRGB, Processed, oversize) => {
 
-        if (Processed[y * imageData.width + x] === true) {
-            return;
-        }
-
         if (x < 0 || y < 0 || x >= imageData.width || y >= imageData.height) {
-            return;
+            // キャンバス外：これより外側へ続けても無意味なため中断
+            return false;
+        }
+        // 縁のオーバーサイズ描画も選択範囲外へはみ出させない。ここで中断しないと、
+        // 選択範囲内に1px幅の非選択の隙間がある場合、その先の選択範囲まで
+        // 塗りが飛び越えてしまう
+        if (!isSelected(x, y)) {
+            return false;
+        }
+        if (Processed[y * imageData.width + x] === true) {
+            return true;
         }
         let idx = (y * img_input.width + x) * 4;
         let alpha = 255 - (oversize - 1) * 50;
@@ -193,6 +218,7 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
         if (imageData.data[idx + 3] < alpha) {
             imageData.data[idx + 3] = alpha;
         }
+        return true;
     }
 
     var loop_count = 0;
@@ -224,7 +250,7 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
                     pxlArr.push({ x: p.x, y: p.y - 1 });
                 } else {
                     for (let i = 1; i < oversize + 1; i++) {
-                        setPixel(img_output, p.x, p.y - i, fillColorRGB, Processed, i);
+                        if (!setPixel(img_output, p.x, p.y - i, fillColorRGB, Processed, i)) break;
                     }
                 }
 
@@ -233,7 +259,7 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
                     pxlArr.push({ x: p.x + 1, y: p.y });
                 } else {
                     for (let i = 1; i < oversize + 1; i++) {
-                        setPixel(img_output, p.x + i, p.y, fillColorRGB, Processed, i);
+                        if (!setPixel(img_output, p.x + i, p.y, fillColorRGB, Processed, i)) break;
                     }
                 }
 
@@ -242,7 +268,7 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
                     pxlArr.push({ x: p.x, y: p.y + 1 });
                 } else {
                     for (let i = 1; i < oversize + 1; i++) {
-                        setPixel(img_output, p.x, p.y + i, fillColorRGB, Processed, i);
+                        if (!setPixel(img_output, p.x, p.y + i, fillColorRGB, Processed, i)) break;
                     }
                 }
 
@@ -251,7 +277,7 @@ Fill.prototype.regionFill = function (img_input, img_output, x, y, fillColor) {
                     pxlArr.push({ x: p.x - 1, y: p.y });
                 } else {
                     for (let i = 1; i < oversize + 1; i++) {
-                        setPixel(img_output, p.x - i, p.y, fillColorRGB, Processed, i);
+                        if (!setPixel(img_output, p.x - i, p.y, fillColorRGB, Processed, i)) break;
                     }
                 }
             }
