@@ -8,6 +8,7 @@
 import { DrawingPenBase } from './_drawingpen.js';
 import { calcDistance } from '../etc.js';
 import { StrokePipeline, readStrokeSettings } from '../stabilizer/strokePipeline.js';
+import { DirtyRectAccumulator } from './_penobj.js';
 
 export class StampPenBase extends DrawingPenBase {
     constructor(option) {
@@ -31,6 +32,11 @@ export class StampPenBase extends DrawingPenBase {
     // 描画開始
     start(x, y, e, option) {
         if (!this._startCommon(x, y, option)) return;
+
+        // ダーティ矩形累積器（E-4/フェーズ0対応）。move()中の各フレームのみここへ蓄積し、
+        // end()の最終フローとshapeFull系（矩形/円/直線モード）は安全のため常にnullへ戻して
+        // 全面再合成にフォールバックする（詳細は各該当箇所のコメント参照）。
+        this._dirty = new DirtyRectAccumulator();
 
         // ハライは筆圧ペン入力時のみ。マウス/タッチは筆圧一定のため誤発火させない。
         const isPenInput = !!(e && e.pointerType === 'pen');
@@ -95,6 +101,12 @@ export class StampPenBase extends DrawingPenBase {
                         this._drawStamp(this.lastCommitted);
                     }
                 }
+                // ストローク末尾の最終フラッシュは常に全面再合成にする。
+                // 終端テーパー再構築（consumeRebuild）はbrush_ctx全体をclearRectしてから
+                // 全確定点を描き直すため、末尾で半径が縮む場合に旧半径分のインクが
+                // ダーティ矩形の外側に消し残る恐れがある。ストローク1回につき1度だけの
+                // 処理でありコストは無視できるため、安全側に倒して累積を破棄する。
+                this._dirty = null;
                 this.write();
             } else {
                 this._drawShapeFull();
@@ -176,6 +188,7 @@ export class StampPenBase extends DrawingPenBase {
         ctx.arc(cp.x, cp.y, r, 0, Math.PI * 2);
         ctx.fill();
         ctx.globalAlpha = saved;
+        this._dirty?.add({ x: cp.x - r, y: cp.y - r, w: 2 * r, h: 2 * r });
     }
 
     // ２点間の塗り (半径可変の外接共通接線で構成した凸多角形)
@@ -191,6 +204,16 @@ export class StampPenBase extends DrawingPenBase {
         // サブピクセル幅対応: 形状は >= subPxFloor にクランプ、不透明度で減衰
         const r1 = Math.max(r1True, this.subPxFloor);
         const r2 = Math.max(r2True, this.subPxFloor);
+        // ダーティ矩形: 両端円(p1,r1)(p2,r2)の和集合。以降のどの分岐（片方のみの
+        // スタンプ/包含関係での大きい方のみ/通常の外接多角形+終端スタンプ）で描く
+        // 図形も、この2つの円の和集合に完全に内包される（多角形の各頂点は
+        // いずれかの円周上の点であり、終端スタンプも円そのものであるため）。
+        this._dirty?.add({
+            x: Math.min(p1.x - r1, p2.x - r2),
+            y: Math.min(p1.y - r1, p2.y - r2),
+            w: Math.max(p1.x + r1, p2.x + r2) - Math.min(p1.x - r1, p2.x - r2),
+            h: Math.max(p1.y + r1, p2.y + r2) - Math.min(p1.y - r1, p2.y - r2),
+        });
         const segAlpha = (this._subPxAlpha(r1True) + this._subPxAlpha(r2True)) / 2;
         const dx = p2.x - p1.x;
         const dy = p2.y - p1.y;
@@ -239,6 +262,11 @@ export class StampPenBase extends DrawingPenBase {
 
     // RECT / CIRCLE / 直線モード: 毎フレーム全体を再描画
     _drawShapeFull() {
+        // このモードは毎フレーム brush_ctx 全体を clearRect してから描き直すため、
+        // ダーティ矩形（今回描いた分だけ）では前フレームの図形の消し残りが生じる。
+        // 常にnullへ戻し、このストロークの残りフレームも含めて全面再合成に固定する
+        // （_drawStraight経由で_drawStamp/_drawSegmentが内部でaddを呼んでも無効化される）。
+        this._dirty = null;
         const ctx = this.CANVAS.brush_ctx;
         ctx.globalCompositeOperation = 'source-over';
         ctx.clearRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
