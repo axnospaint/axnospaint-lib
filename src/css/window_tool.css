@@ -127,6 +127,7 @@
 /* 書出し・共有 / 参照画像 disclosure */
 .axp_tool_disclosure {
     --axp-interop-compact-h: 22px;
+
     display: flex;
     flex-direction: column;
     gap: 2px;

@@ -154,6 +154,7 @@ export class PixelFilterPenBase extends DrawingPenBase {
         }
         this.axpObj.pendingPenFlush = false;
         this.beforeFrameFlush();
+        if (this.work) this.applySelectionStrokeConstraint(this.work);
         this.axpObj.layerSystem.updateCanvas(this.axpObj.layerSystem.getId());
     }
 

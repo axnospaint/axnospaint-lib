@@ -113,6 +113,11 @@
     appearance: none;
 }
 
+.axpc_overlay_btn:focus-visible {
+    outline: 2px solid var(--axp-border-focus, #8bd3ff);
+    outline-offset: 2px;
+}
+
 .axpc_overlay_btn:active {
     background-color: rgba(0, 0, 0, 0.85);
 }

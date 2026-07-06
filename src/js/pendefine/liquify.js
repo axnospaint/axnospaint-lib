@@ -3,6 +3,7 @@ import { UTIL } from '../etc.js';
 import {
   LIQUIFY_MODE,
   applyLiquifyDab,
+  clampRect,
   createDisplacementField,
   renderDisplacement,
 } from '../liquify.js';
@@ -21,13 +22,130 @@ function cloneImageData(image) {
   return { data, width: image.width, height: image.height };
 }
 
-function cloneDisplacementField(field) {
+function isEmptyRect(rect) {
+  return !rect || rect.width <= 0 || rect.height <= 0;
+}
+
+function createLiquifyDirtyRect(x, y, radius, width, height) {
+  const effectiveRadius = Math.max(1, Number(radius) || 1);
+  return clampRect({
+    x: x - effectiveRadius,
+    y: y - effectiveRadius,
+    width: effectiveRadius * 2 + 1,
+    height: effectiveRadius * 2 + 1,
+  }, width, height);
+}
+
+function unionRects(first, second) {
+  const left = Math.min(first.x, second.x);
+  const top = Math.min(first.y, second.y);
+  const right = Math.max(first.x + first.width, second.x + second.width);
+  const bottom = Math.max(first.y + first.height, second.y + second.height);
   return {
-    width: field.width,
-    height: field.height,
-    dx: new Float32Array(field.dx),
-    dy: new Float32Array(field.dy),
+    x: left,
+    y: top,
+    width: right - left,
+    height: bottom - top,
   };
+}
+
+function rectContains(container, candidate) {
+  return candidate.x >= container.x &&
+    candidate.y >= container.y &&
+    candidate.x + candidate.width <= container.x + container.width &&
+    candidate.y + candidate.height <= container.y + container.height;
+}
+
+function copyImageRect(image, rect) {
+  const rowLength = rect.width * 4;
+  const data = new Uint8ClampedArray(rowLength * rect.height);
+  for (let row = 0; row < rect.height; row += 1) {
+    const sourceStart = ((rect.y + row) * image.width + rect.x) * 4;
+    const targetStart = row * rowLength;
+    data.set(image.data.subarray(sourceStart, sourceStart + rowLength), targetStart);
+  }
+  return data;
+}
+
+function copyFieldRect(field, rect, key) {
+  const data = new Float32Array(rect.width * rect.height);
+  for (let row = 0; row < rect.height; row += 1) {
+    const sourceStart = (rect.y + row) * field.width + rect.x;
+    const targetStart = row * rect.width;
+    data.set(field[key].subarray(sourceStart, sourceStart + rect.width), targetStart);
+  }
+  return data;
+}
+
+function createStrokeSnapshot(image, field, rect) {
+  return {
+    rect,
+    imageData: copyImageRect(image, rect),
+    dx: copyFieldRect(field, rect, 'dx'),
+    dy: copyFieldRect(field, rect, 'dy'),
+  };
+}
+
+function expandStrokeSnapshot(snapshot, image, field, rect) {
+  if (rectContains(snapshot.rect, rect)) return snapshot;
+
+  const nextRect = unionRects(snapshot.rect, rect);
+  const imageData = new Uint8ClampedArray(nextRect.width * nextRect.height * 4);
+  const dx = new Float32Array(nextRect.width * nextRect.height);
+  const dy = new Float32Array(nextRect.width * nextRect.height);
+
+  for (let y = 0; y < nextRect.height; y += 1) {
+    const canvasY = nextRect.y + y;
+    for (let x = 0; x < nextRect.width; x += 1) {
+      const canvasX = nextRect.x + x;
+      const targetIndex = y * nextRect.width + x;
+      const targetImageIndex = targetIndex * 4;
+      if (
+        canvasX >= snapshot.rect.x &&
+        canvasX < snapshot.rect.x + snapshot.rect.width &&
+        canvasY >= snapshot.rect.y &&
+        canvasY < snapshot.rect.y + snapshot.rect.height
+      ) {
+        const sourceIndex = (canvasY - snapshot.rect.y) * snapshot.rect.width +
+          (canvasX - snapshot.rect.x);
+        const sourceImageIndex = sourceIndex * 4;
+        imageData.set(snapshot.imageData.subarray(sourceImageIndex, sourceImageIndex + 4), targetImageIndex);
+        dx[targetIndex] = snapshot.dx[sourceIndex];
+        dy[targetIndex] = snapshot.dy[sourceIndex];
+        continue;
+      }
+
+      const sourceIndex = canvasY * image.width + canvasX;
+      const sourceImageIndex = sourceIndex * 4;
+      imageData.set(image.data.subarray(sourceImageIndex, sourceImageIndex + 4), targetImageIndex);
+      dx[targetIndex] = field.dx[sourceIndex];
+      dy[targetIndex] = field.dy[sourceIndex];
+    }
+  }
+
+  return {
+    rect: nextRect,
+    imageData,
+    dx,
+    dy,
+  };
+}
+
+function restoreStrokeSnapshot(image, field, snapshot) {
+  const { rect } = snapshot;
+  for (let row = 0; row < rect.height; row += 1) {
+    const imageSourceStart = row * rect.width * 4;
+    const imageTargetStart = ((rect.y + row) * image.width + rect.x) * 4;
+    image.data.set(
+      snapshot.imageData.subarray(imageSourceStart, imageSourceStart + rect.width * 4),
+      imageTargetStart,
+    );
+
+    const fieldSourceStart = row * rect.width;
+    const fieldTargetStart = (rect.y + row) * field.width + rect.x;
+    field.dx.set(snapshot.dx.subarray(fieldSourceStart, fieldSourceStart + rect.width), fieldTargetStart);
+    field.dy.set(snapshot.dy.subarray(fieldSourceStart, fieldSourceStart + rect.width), fieldTargetStart);
+  }
 }
 
 function sameImageData(a, b) {
@@ -68,6 +186,7 @@ export class Liquify extends PenObj {
     this.hasChanged = false;
     this.strokeStartImage = null;
     this.strokeStartDisplacementField = null;
+    this.strokeSnapshot = null;
     this.init_save();
   }
 
@@ -96,8 +215,9 @@ export class Liquify extends PenObj {
       this.session = 'active';
       this.showOverlay();
     }
-    this.strokeStartImage = cloneImageData(this.resultImage);
-    this.strokeStartDisplacementField = cloneDisplacementField(this.displacementField);
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
+    this.strokeSnapshot = null;
     this.previousX = x;
     this.previousY = y;
     this.isActive = true;
@@ -115,6 +235,17 @@ export class Liquify extends PenObj {
     if (this.session !== 'active' || !this.isActive || !this.axpObj.isDrawing || this.axpObj.isDrawCancel) return;
 
     const settings = this.settingsProvider();
+    const pendingDirtyRect = createLiquifyDirtyRect(
+      x,
+      y,
+      settings.radius,
+      this.axpObj.x_size,
+      this.axpObj.y_size,
+    );
+    const strength = Number(settings.strength);
+    if (!isEmptyRect(pendingDirtyRect) && Number.isFinite(strength) && strength > 0) {
+      this.captureStrokeSnapshot(pendingDirtyRect);
+    }
     const dirtyRect = applyLiquifyDab(this.displacementField, {
       mode: settings.mode,
       x,
@@ -140,6 +271,13 @@ export class Liquify extends PenObj {
     this.hasChanged = true;
     this.axpObj.isDrawn = true;
     this.drawPreview(dirtyRect);
+  }
+
+  captureStrokeSnapshot(rect) {
+    if (isEmptyRect(rect) || !this.resultImage || !this.displacementField) return;
+    this.strokeSnapshot = this.strokeSnapshot
+      ? expandStrokeSnapshot(this.strokeSnapshot, this.resultImage, this.displacementField, rect)
+      : createStrokeSnapshot(this.resultImage, this.displacementField, rect);
   }
 
   drawPreview(dirtyRect) {
@@ -175,6 +313,7 @@ export class Liquify extends PenObj {
     layerSystem.deactivateFastPath();
     this.strokeStartImage = null;
     this.strokeStartDisplacementField = null;
+    this.strokeSnapshot = null;
     this.isActive = false;
     this.axpObj.isDrawing = false;
     this.axpObj.isDrawn = false;
@@ -236,11 +375,9 @@ export class Liquify extends PenObj {
   cancelStroke() {
     if (!this.isActive) return;
     const layerSystem = this.axpObj.layerSystem;
-    const restoreImage = this.strokeStartImage || this.sourceImage;
-    if (this.strokeStartDisplacementField) {
-      this.displacementField = cloneDisplacementField(this.strokeStartDisplacementField);
+    if (this.strokeSnapshot) {
+      restoreStrokeSnapshot(this.resultImage, this.displacementField, this.strokeSnapshot);
     }
-    this.resultImage = cloneImageData(restoreImage);
     if (layerSystem.compositeFastPathActive) {
       this.CANVAS.draw_ctx.putImageData(this.resultImage, 0, 0);
       layerSystem.drawFast();
@@ -252,6 +389,7 @@ export class Liquify extends PenObj {
     layerSystem.deactivateFastPath();
     this.strokeStartImage = null;
     this.strokeStartDisplacementField = null;
+    this.strokeSnapshot = null;
     this.isActive = false;
     this.axpObj.isDrawing = false;
     this.axpObj.isDrawn = false;
@@ -306,6 +444,7 @@ export class Liquify extends PenObj {
     this.displacementField = null;
     this.strokeStartImage = null;
     this.strokeStartDisplacementField = null;
+    this.strokeSnapshot = null;
     this.session = 'idle';
     this.isActive = false;
     this.hasChanged = false;

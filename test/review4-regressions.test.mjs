@@ -152,13 +152,21 @@ test('forced autosave writes only when dirty or explicitly requested', async () 
 
 test('liquify overlay buttons support keyboard click activation', () => {
   const source = readFileSync(new URL('../src/js/pendefine/liquify.js', import.meta.url), 'utf8');
-  const match = source.match(/setupOverlayEvents\(\) \{(?<body>[\s\S]*?)\n  \}\n\n  showOverlay/);
+  const match = source.match(/setupOverlayEvents\(\) \{(?<body>[\s\S]*?)\n {2}\}\n\n {2}showOverlay/);
 
   assert.ok(match);
   assert.match(match.groups.body, /finishBtn\.addEventListener\('pointerdown', stopPointer\)/);
   assert.match(match.groups.body, /finishBtn\.addEventListener\('click', finishSession\)/);
   assert.match(match.groups.body, /cancelBtn\.addEventListener\('pointerdown', stopPointer\)/);
   assert.match(match.groups.body, /cancelBtn\.addEventListener\('click', cancelSession\)/);
+});
+
+test('canvas overlay buttons are keyboard focusable with visible focus styling', () => {
+  const main = readFileSync(new URL('../src/html/main.txt', import.meta.url), 'utf8');
+  const commonCss = readFileSync(new URL('../src/css/common.css', import.meta.url), 'utf8');
+
+  assert.doesNotMatch(main, /<div id="axp_canvas_div_(?:rotateLeft|rotateRight|nagenawaFlip|nagenawaDuplicate|nagenawaFinish|polygonCancel|polygonFinish)" class="[^"]*\baxpc_overlay_btn\b/);
+  assert.match(commonCss, /\.axpc_overlay_btn:focus-visible\s*\{[\s\S]*?outline:\s*2px solid var\(--axp-border-focus/);
 });
 
 test('Japanese fill sample labels use full-width layer wording', () => {

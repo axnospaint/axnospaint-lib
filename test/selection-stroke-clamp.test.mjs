@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import { DrawingPenBase } from '../src/js/pendefine/_drawingpen.js';
 import { PenObj } from '../src/js/pendefine/_penobj.js';
+import { PixelFilterPenBase } from '../src/js/pendefine/_pixelfilterpen.js';
 import { Diffusion } from '../src/js/pendefine/diffusion.js';
 
 function makeImage(width, height, data) {
@@ -172,4 +173,63 @@ test('diffusion drag leaves pixels outside the active selection unchanged', () =
 
   assert.notEqual(pen.work.data[0], 10);
   assert.equal(pen.work.data[4], 20);
+});
+
+test('diffusion drag carries colors from the full initial footprint across selection edges', () => {
+  const pen = new Diffusion({
+    axpObj: {
+      _: (key) => key,
+      layerSystem: { getMasked: () => false },
+    },
+    CANVAS: {},
+  });
+  pen.W = 3;
+  pen.H = 1;
+  pen.work = makeImage(3, 1, [
+    10, 0, 0, 255,
+    200, 0, 0, 255,
+    30, 0, 0, 255,
+  ]);
+  pen.basePre = new Uint8ClampedArray(pen.work.data);
+  pen.fLut = new Float32Array(512).fill(1);
+  pen.adLut = new Float32Array(512);
+  pen.drag = 100;
+  pen.masked = false;
+  pen.selectionMaskAtStrokeStart = new Uint8Array([0, 255, 0]);
+
+  pen._applyDrag({ x: 0.5, y: 0.5 }, 1, 1, 1, 0, 0, 2, 0);
+  pen._applyDrag({ x: 1.5, y: 0.5 }, 1, 1, 1, 0, 0, 2, 0);
+
+  assert.equal(pen.work.data[7], 255);
+});
+
+test('pixel filter pen write clamps any subclass changes to the active selection', () => {
+  const base = makeImage(2, 1, [
+    10, 0, 0, 255,
+    20, 0, 0, 255,
+  ]);
+  const pen = new PixelFilterPenBase({
+    axpObj: {
+      lastEventInFrame: true,
+      pendingPenFlush: false,
+      layerSystem: {
+        updateCanvas: () => {},
+        getId: () => '1',
+      },
+    },
+    CANVAS: {},
+  });
+  pen.selectionMaskAtStrokeStart = new Uint8Array([255, 0]);
+  pen.selectionBaseImage = base;
+  pen.work = makeImage(2, 1, [
+    110, 0, 0, 255,
+    220, 0, 0, 255,
+  ]);
+
+  pen.write();
+
+  assert.deepEqual(Array.from(pen.work.data), [
+    110, 0, 0, 255,
+    20, 0, 0, 255,
+  ]);
 });

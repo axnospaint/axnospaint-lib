@@ -31,24 +31,24 @@
 
 				<!-- 回転操作子グループ（ハンドツール時のみ表示） -->
 				<div id="axp_canvas_div_rotateGroup" class="axpc_NONE">
-					<div id="axp_canvas_div_rotateLeft" class="axpc_overlay_btn axpc_MSG" data-msg="@AST0020"></div>
+					<button id="axp_canvas_div_rotateLeft" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@AST0020"></button>
 					<div id="axp_canvas_div_rotateHandle" class="axpc_overlay_knob axpc_MSG" data-msg="@AST0022"></div>
-					<div id="axp_canvas_div_rotateRight" class="axpc_overlay_btn axpc_MSG" data-msg="@AST0021"></div>
+					<button id="axp_canvas_div_rotateRight" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@AST0021"></button>
 				</div>
 
 				<!-- なげなわ操作子グループ（なげなわ変形中のみ表示） -->
 				<div id="axp_canvas_div_nagenawaGroup" class="axpc_NONE">
 					<div id="axp_canvas_div_nagenawaScale" class="axpc_overlay_knob axpc_MSG" data-msg="@NAG0001"></div>
 					<div id="axp_canvas_div_nagenawaRotate" class="axpc_overlay_knob axpc_MSG" data-msg="@NAG0002"></div>
-					<div id="axp_canvas_div_nagenawaFlip" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0004"></div>
-					<div id="axp_canvas_div_nagenawaDuplicate" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0005"></div>
-					<div id="axp_canvas_div_nagenawaFinish" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0003"></div>
+					<button id="axp_canvas_div_nagenawaFlip" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0004"></button>
+					<button id="axp_canvas_div_nagenawaDuplicate" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0005"></button>
+					<button id="axp_canvas_div_nagenawaFinish" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@NAG0003"></button>
 				</div>
 
 				<!-- 多角形選択操作子グループ（頂点配置中のみ表示） -->
 				<div id="axp_canvas_div_polygonGroup" class="axpc_NONE">
-					<div id="axp_canvas_div_polygonCancel" class="axpc_overlay_btn axpc_MSG" data-msg="@POL0002"></div>
-					<div id="axp_canvas_div_polygonFinish" class="axpc_overlay_btn axpc_MSG" data-msg="@POL0001"></div>
+					<button id="axp_canvas_div_polygonCancel" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@POL0002"></button>
+					<button id="axp_canvas_div_polygonFinish" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@POL0001"></button>
 				</div>
 
 				<!-- 歪みツール操作子グループ（セッション中のみ表示） -->

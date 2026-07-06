@@ -166,7 +166,15 @@ export function renderDisplacement(source, field, rect, selectionMask = null, pr
     throw new RangeError('Source and displacement field dimensions must match');
   }
 
-  const output = new Uint8ClampedArray(previous?.data || source.data);
+  if (previous && (
+    previous.width !== source.width ||
+    previous.height !== source.height ||
+    previous.data.length !== source.data.length
+  )) {
+    throw new RangeError('Previous image dimensions must match source');
+  }
+
+  const output = previous ? previous.data : new Uint8ClampedArray(source.data);
   const dirtyRect = clampRect(rect, source.width, source.height);
   for (let y = dirtyRect.y; y < dirtyRect.y + dirtyRect.height; y += 1) {
     for (let x = dirtyRect.x; x < dirtyRect.x + dirtyRect.width; x += 1) {
@@ -185,5 +193,5 @@ export function renderDisplacement(source, field, rect, selectionMask = null, pr
     }
   }
 
-  return createImageDataResult(output, source.width, source.height);
+  return previous || createImageDataResult(output, source.width, source.height);
 }

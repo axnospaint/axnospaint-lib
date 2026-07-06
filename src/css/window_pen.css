@@ -341,6 +341,12 @@
     background: var(--axp-surface-panel);
 }
 
+.axpc_pen_modeCard {
+    border: 1px solid var(--axp-border-soft);
+    border-radius: var(--axp-r-md);
+    background: var(--axp-surface-panel);
+}
+
 #axp_pen_div_liquifyMode label {
     font-size: 10px;
     line-height: 12px;
@@ -422,7 +428,7 @@
 
 .axpc_pen_panelToggle:hover {
     border-color: var(--axp-accent);
-    background: rgba(238, 172, 96, 0.24);
+    background: color-mix(in srgb, var(--axp-accent) 24%, transparent);
 }
 
 #axp_pen_button_diffusionDetail:focus-visible,

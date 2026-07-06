@@ -279,7 +279,6 @@ export class Diffusion extends PixelFilterPenBase {
                 for (let ox = 0; ox < D; ox++) {
                     const sx = Math.max(0, Math.min(this.W - 1, icx + ox - R));
                     const si = sy * W + sx;
-                    if (!this.isStrokeSelectionPixelSelected(si)) continue;
                     const sp = si * 4;
                     const a = work[sp + 3];
                     const t = (oy * D + ox) * 4;

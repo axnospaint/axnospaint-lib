@@ -143,6 +143,15 @@ test('cancelled liquify stroke preserves earlier session changes', () => {
   assert.equal(fixture.getAutoSaveCount(), 1);
 });
 
+test('liquify stroke start defers undo snapshot storage until a dirty rect exists', () => {
+  const fixture = createFixture();
+
+  fixture.pen.start(2, 2, { altKey: false });
+
+  assert.equal(fixture.pen.strokeStartImage, null);
+  assert.equal(fixture.pen.strokeStartDisplacementField, null);
+});
+
 test('fast-path liquify stroke cancel writes ImageData-compatible previews', () => {
   const OriginalImageData = globalThis.ImageData;
   class TestImageData {

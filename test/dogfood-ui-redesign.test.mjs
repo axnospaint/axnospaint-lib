@@ -29,8 +29,10 @@ test('pen and auxiliary windows carry the compact dogfood layout hooks', () => {
   const toolCss = readFileSync(new URL('../src/css/window_tool.css', import.meta.url), 'utf8');
 
   assert.match(penHtml, /id="axp_pen_div_slider" class="axpc_pen_settingsStack"/);
+  assert.match(penHtml, /id="axp_pen_div_liquifyMode" class="axpc_text_border axpc_pen_modeCard axpc_NONE"/);
   assert.match(penHtml, /id="axp_pen_button_diffusionDetail" class="axpc_MSG axpc_pen_panelToggle"/);
   assert.match(penCss, /\.axpc_pen_settingsStack\s*\{[\s\S]*?gap:/);
+  assert.match(penCss, /\.axpc_pen_modeCard\s*\{[\s\S]*?border:\s*1px solid var\(--axp-border-soft\)/);
   assert.match(penCss, /#axp_pen_div_liquifyMode\s*\{[\s\S]*?border:\s*1px solid var\(--axp-border-soft\)/);
 
   assert.match(toolHtml, /id="axp_tool_div_content" class="axpc_tool_shell"/);
