@@ -130,6 +130,7 @@ export function applyLiquifyDab(field, options) {
     width: radius * 2 + 1,
     height: radius * 2 + 1,
   }, field.width, field.height);
+  if (dirtyRect.width <= 0 || dirtyRect.height <= 0) return null;
   const strokeX = options.x - options.previousX;
   const strokeY = options.y - options.previousY;
   const invertDirection = options.invert ? -1 : 1;

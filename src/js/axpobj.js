@@ -461,6 +461,8 @@ export class AXPObj {
         this.penSystem?.penObj?.['axp_penmode_nagenawa']?.forceIdle();
         // 多角形選択の途中状態（頂点未確定）も同様に破棄する
         this.penSystem?.penObj?.['axp_penmode_polygonselect']?.forceIdle();
+        // 歪みツールの途中ストロークも旧キャンバス寸法を保持するため破棄する
+        this.penSystem?.penObj?.['axp_penmode_liquify']?.forceIdle();
         // キャンバス寸法が変わるため、残留した選択範囲は無効化する
         this.selectionMask = null;
         this.selectionOverlayCanvas = null;

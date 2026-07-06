@@ -70,6 +70,100 @@ test('timelapse recorder collects chunks and stops stream tracks', async () => {
   assert.equal(recorder.isRecording, false);
 });
 
+test('timelapse start failure stops tracks and resets state', () => {
+  const stoppedTracks = [];
+  const stream = {
+    getTracks: () => [{ stop: () => stoppedTracks.push('video') }],
+  };
+  const canvas = {
+    width: 320,
+    height: 240,
+    captureStream: () => stream,
+  };
+  class ThrowingStartRecorder {
+    static isTypeSupported(mime) {
+      return mime === 'video/webm';
+    }
+
+    constructor() {}
+
+    start() {
+      throw new Error('start-failed');
+    }
+  }
+
+  const recorder = new TimelapseRecorder({ MediaRecorderCtor: ThrowingStartRecorder });
+
+  assert.throws(() => recorder.start(canvas), /start-failed/);
+  assert.deepEqual(stoppedTracks, ['video']);
+  assert.equal(recorder.isRecording, false);
+  assert.equal(recorder.mediaRecorder, null);
+  assert.equal(recorder.stream, null);
+});
+
+test('timelapse stop failure stops tracks and resets state', async () => {
+  const stoppedTracks = [];
+  const stream = {
+    getTracks: () => [{ stop: () => stoppedTracks.push('video') }],
+  };
+  const canvas = {
+    width: 320,
+    height: 240,
+    captureStream: () => stream,
+  };
+  class ThrowingStopRecorder {
+    static isTypeSupported(mime) {
+      return mime === 'video/webm';
+    }
+
+    constructor() {}
+
+    start() {}
+
+    stop() {
+      throw new Error('stop-failed');
+    }
+  }
+
+  const recorder = new TimelapseRecorder({ MediaRecorderCtor: ThrowingStopRecorder });
+  recorder.start(canvas);
+  const blob = await recorder.stop();
+
+  assert.equal(blob, null);
+  assert.deepEqual(stoppedTracks, ['video']);
+  assert.equal(recorder.isRecording, false);
+  assert.equal(recorder.mediaRecorder, null);
+});
+
+test('timelapse recorder error handler stops tracks and resets state', () => {
+  const stoppedTracks = [];
+  const stream = {
+    getTracks: () => [{ stop: () => stoppedTracks.push('video') }],
+  };
+  const canvas = {
+    width: 320,
+    height: 240,
+    captureStream: () => stream,
+  };
+  class ErroringRecorder {
+    static isTypeSupported(mime) {
+      return mime === 'video/webm';
+    }
+
+    constructor() {}
+
+    start() {}
+  }
+
+  const recorder = new TimelapseRecorder({ MediaRecorderCtor: ErroringRecorder });
+  recorder.start(canvas);
+  recorder.mediaRecorder.onerror();
+
+  assert.deepEqual(stoppedTracks, ['video']);
+  assert.equal(recorder.isRecording, false);
+  assert.equal(recorder.mediaRecorder, null);
+});
+
 test('clipboard exporter writes one PNG item and does not mutate canvas state', async () => {
   const writes = [];
   const canvas = {

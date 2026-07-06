@@ -32,6 +32,21 @@ export class TimelapseRecorder {
     this.sourceHeight = null;
   }
 
+  _stopTracks() {
+    for (const track of this.stream?.getTracks?.() || []) {
+      track.stop();
+    }
+  }
+
+  _resetState() {
+    this.mediaRecorder = null;
+    this.stream = null;
+    this.chunks = [];
+    this.isRecording = false;
+    this.sourceWidth = null;
+    this.sourceHeight = null;
+  }
+
   start(canvas) {
     if (this.isRecording) throw new Error('timelapse-already-recording');
     if (!this.MediaRecorderCtor) throw new Error('media-recorder-unavailable');
@@ -51,8 +66,18 @@ export class TimelapseRecorder {
         this.chunks.push(event.data);
       }
     };
-    this.mediaRecorder.start();
-    this.isRecording = true;
+    this.mediaRecorder.onerror = () => {
+      this._stopTracks();
+      this._resetState();
+    };
+    try {
+      this.mediaRecorder.start();
+      this.isRecording = true;
+    } catch (error) {
+      this._stopTracks();
+      this._resetState();
+      throw error;
+    }
   }
 
   matchesSourceSize(width, height) {
@@ -66,19 +91,18 @@ export class TimelapseRecorder {
     return new Promise((resolve) => {
       const recorder = this.mediaRecorder;
       recorder.onstop = () => {
-        for (const track of this.stream?.getTracks?.() || []) {
-          track.stop();
-        }
         const blob = new Blob(this.chunks, { type: this.mimeType });
-        this.mediaRecorder = null;
-        this.stream = null;
-        this.chunks = [];
-        this.isRecording = false;
-        this.sourceWidth = null;
-        this.sourceHeight = null;
+        this._stopTracks();
+        this._resetState();
         resolve(blob);
       };
-      recorder.stop();
+      try {
+        recorder.stop();
+      } catch {
+        this._stopTracks();
+        this._resetState();
+        resolve(null);
+      }
     });
   }
 }

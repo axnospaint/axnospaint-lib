@@ -9,6 +9,7 @@ import '../css/window_pen.css';
 
 import { createTonePattern, UTIL, rgb2hex } from './etc.js';
 import { range_index, range_value } from './pendefine/rangeindex.js';
+import { LIQUIFY_MODE } from './liquify.js';
 
 // メイン
 import { Round } from './pendefine/round.js';
@@ -523,7 +524,9 @@ export class PenSystem extends ToolWindow {
             this.axpObj.configSystem.getConfig('P-LQH_axp_penmode_liquify');
         const savedLiquifyStrength = Number(savedLiquifyStrengthRaw);
         const savedLiquifyHardness = Number(savedLiquifyHardnessRaw);
-        if (savedLiquifyMode) liquifyPen.liquifyMode = savedLiquifyMode;
+        if (Object.values(LIQUIFY_MODE).includes(savedLiquifyMode)) {
+            liquifyPen.liquifyMode = savedLiquifyMode;
+        }
         if (savedLiquifyStrengthRaw !== null && Number.isFinite(savedLiquifyStrength)) {
             liquifyPen.strength = savedLiquifyStrength;
         }

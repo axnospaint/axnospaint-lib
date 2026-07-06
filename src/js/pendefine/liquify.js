@@ -20,6 +20,14 @@ function cloneImageData(image) {
   return { data, width: image.width, height: image.height };
 }
 
+function sameImageData(a, b) {
+  if (!a || !b || a.width !== b.width || a.height !== b.height || a.data.length !== b.data.length) return false;
+  for (let i = 0; i < a.data.length; i += 1) {
+    if (a.data[i] !== b.data[i]) return false;
+  }
+  return true;
+}
+
 export class Liquify extends PenObj {
   constructor(option) {
     super();
@@ -133,7 +141,7 @@ export class Liquify extends PenObj {
 
   end() {
     if (!this.isActive) return;
-    if (this.axpObj.isDrawCancel || !this.hasChanged) {
+    if (this.axpObj.isDrawCancel || !this.hasChanged || sameImageData(this.sourceImage, this.resultImage)) {
       this.cancelStroke();
       return;
     }

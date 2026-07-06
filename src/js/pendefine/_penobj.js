@@ -35,7 +35,7 @@ export class DirtyRectAccumulator {
 // ⚠️ マージン係数（blur値の5倍）はChromiumのshadowBlurガウシアン近似のみに基づく
 // 安全側の暫定値であり、HTML Living StandardはshadowBlurの拡散アルゴリズムを
 // 規定していないため、Firefox/WebKit系エンジンでの滲み範囲は未検証・未保証。
-// 決定的ピクセルテスト（puppeteer-core=Chromiumのみ）でもこの前提自体は検証できない。
+// Chromiumでの決定的ピクセルテストでもこの前提自体は検証できない。
 // 他エンジンでの目視確認を行うまでは、この余白は保守的な安全マージンとして
 // 実測値より大きめ（3→5倍）にしてある。
 // クランプ後に実質範囲がなくなった場合はnullを返す（＝呼び出し元は全面再合成にフォールバック）。
@@ -352,7 +352,7 @@ export class PenObj {
                     const combined = applySymmetryToStroke(
                         beforeForSymmetry, rawStroke, symmetryConfig,
                         this.axpObj.x_size, this.axpObj.y_size,
-                        this.axpObj.x_size / 2, this.axpObj.y_size / 2
+                        (this.axpObj.x_size - 1) / 2, (this.axpObj.y_size - 1) / 2
                     );
                     this.axpObj.layerSystem.write(combined);
                     this.axpObj.layerSystem.updateCanvas(this.axpObj.layerSystem.getId());

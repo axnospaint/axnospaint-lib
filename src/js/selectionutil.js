@@ -45,13 +45,34 @@ export function floodFillMask(imageData, x, y, colorTolerance, width, height) {
         const p = queue[head++];
         const px = p % width;
         const py = (p - px) / width;
-        const neighbors = [[px, py - 1], [px + 1, py], [px, py + 1], [px - 1, py]];
-        for (const [nx, ny] of neighbors) {
-            if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
-            const nIdx = ny * width + nx;
-            if (visited[nIdx]) continue;
+        if (py > 0 && !visited[p - width]) {
+            const nIdx = p - width;
             visited[nIdx] = 1;
-            if (matches(nx, ny)) {
+            if (matches(px, py - 1)) {
+                mask[nIdx] = 255;
+                queue.push(nIdx);
+            }
+        }
+        if (px < width - 1 && !visited[p + 1]) {
+            const nIdx = p + 1;
+            visited[nIdx] = 1;
+            if (matches(px + 1, py)) {
+                mask[nIdx] = 255;
+                queue.push(nIdx);
+            }
+        }
+        if (py < height - 1 && !visited[p + width]) {
+            const nIdx = p + width;
+            visited[nIdx] = 1;
+            if (matches(px, py + 1)) {
+                mask[nIdx] = 255;
+                queue.push(nIdx);
+            }
+        }
+        if (px > 0 && !visited[p - 1]) {
+            const nIdx = p - 1;
+            visited[nIdx] = 1;
+            if (matches(px - 1, py)) {
                 mask[nIdx] = 255;
                 queue.push(nIdx);
             }
@@ -77,7 +98,7 @@ export function polygonToMask(points, width, height) {
     const data = ctx.getImageData(0, 0, width, height).data;
     const mask = new Uint8Array(width * height);
     for (let i = 0; i < width * height; i++) {
-        mask[i] = data[i * 4 + 3] > 0 ? 255 : 0;
+        mask[i] = data[i * 4 + 3] >= 128 ? 255 : 0;
     }
     return mask;
 }

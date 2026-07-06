@@ -45,11 +45,41 @@ test('liquify persisted config keys are accepted during restore', () => {
 test('layer style commits mark autosave dirty after registering undo', () => {
   const source = readFileSync(new URL('../src/js/window_layer.js', import.meta.url), 'utf8');
   const match = source.match(
-    /type: 'layer-style'[\s\S]*?this\.axpObj\.msg\('@INF1012'\);(?<tail>[\s\S]*?)\n\s+\};/
+    /const commitEdit = \(\) => \{(?<body>[\s\S]*?)\n\s+\};\n\s+for \(const el of Object\.values\(els\)\)/
   );
 
   assert.ok(match);
-  assert.match(match.groups.tail, /saveSystem\.autoSave\(\)/);
+  assert.match(match.groups.body, /type: 'layer-style'/);
+  assert.match(match.groups.body, /this\.axpObj\.msg\('@INF1012'\);[\s\S]*?saveSystem\.autoSave\(\)/);
+});
+
+test('auxiliary size preset classes use the component prefix', () => {
+  const html = readFileSync(new URL('../src/html/window_tool.txt', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../src/css/window_tool.css', import.meta.url), 'utf8');
+
+  assert.doesNotMatch(html, /axp_tool_sizePreset/);
+  assert.doesNotMatch(css, /\.axp_tool_sizePreset/);
+  assert.match(html, /axpc_tool_sizePreset/);
+  assert.match(css, /\.axpc_tool_sizePreset/);
+});
+
+test('background color toggle label uses translated text and data label content', () => {
+  const html = readFileSync(new URL('../src/html/window_tool.txt', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../src/css/window_tool.css', import.meta.url), 'utf8');
+  const messages = JSON.parse(readFileSync(new URL('../src/text/ja.json', import.meta.url), 'utf8'));
+
+  assert.match(html, /\$\{_\(("@MISC\.BG_COLOR_LABEL"|'@MISC\.BG_COLOR_LABEL')\)\}/);
+  assert.match(css, /#axp_tool_toggle_bgColor::after\s*\{[\s\S]*?content:\s*attr\(data-label\)/);
+  assert.equal(messages['@MISC.BG_SKIN_SHORT'], '肌');
+  assert.equal(messages['@MISC.BG_WHITE_SHORT'], '白');
+});
+
+test('resetCanvas clears liquify in-progress state', () => {
+  const source = readFileSync(new URL('../src/js/axpobj.js', import.meta.url), 'utf8');
+  const match = source.match(/resetCanvas\(\) \{(?<body>[\s\S]*?)\n\s+this\.CANVAS\.main\.style\.width/);
+
+  assert.ok(match);
+  assert.match(match.groups.body, /axp_penmode_liquify'\]\?\.forceIdle\(\)/);
 });
 
 test('Japanese fill sample labels use full-width layer wording', () => {

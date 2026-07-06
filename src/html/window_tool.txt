@@ -8,17 +8,17 @@
                 <span id="axp_tool_span_canvasSize" class="axpc_MSG" data-msg="@AST0001"></span>
             </div>
             <div id="axp_tool_div_canvasSizePreset">
-                <button id="axp_tool_button_sizePreset0" class="axpc_MSG axpc_button axp_tool_sizePreset"
+                <button id="axp_tool_button_sizePreset0" class="axpc_MSG axpc_button axpc_tool_sizePreset"
                     data-msg="@AST0016" data-sidx="0"></button>
-                <button id="axp_tool_button_sizePreset1" class="axpc_MSG axpc_button axp_tool_sizePreset"
+                <button id="axp_tool_button_sizePreset1" class="axpc_MSG axpc_button axpc_tool_sizePreset"
                     data-msg="@AST0016" data-sidx="1"></button>
-                <button id="axp_tool_button_sizePreset2" class="axpc_MSG axpc_button axp_tool_sizePreset"
+                <button id="axp_tool_button_sizePreset2" class="axpc_MSG axpc_button axpc_tool_sizePreset"
                     data-msg="@AST0016" data-sidx="2"></button>
-                <button id="axp_tool_button_sizePreset3" class="axpc_MSG axpc_button axp_tool_sizePreset"
+                <button id="axp_tool_button_sizePreset3" class="axpc_MSG axpc_button axpc_tool_sizePreset"
                     data-msg="@AST0016" data-sidx="3"></button>
             </div>
             <div id="axp_tool_div_bgColor">
-                <span id="axp_tool_span_bgColorLabel">背景</span>
+                <span id="axp_tool_span_bgColorLabel">${_("@MISC.BG_COLOR_LABEL")}</span>
                 <div id="axp_tool_toggle_bgColor" class="axpc_MSG axpc_toggle_switch" data-msg="@AST0017">
                     <input type="checkbox" name="check" />
                 </div>

@@ -102,8 +102,11 @@ export class SaveSystem {
     async checkOneTapRestore() {
         if (!this.isDBAvailable) return false;
         let data;
+        let key;
         try {
-            data = await this.dbSystem.getLatestAutoSave();
+            const latest = await this.dbSystem.getLatestAutoSave();
+            data = latest?.value || null;
+            key = latest?.key;
         } catch (error) {
             console.log(error);
             return false;
@@ -122,6 +125,8 @@ export class SaveSystem {
             || (data.oekaki_id !== undefined && data.oekaki_id !== null);
         if (this.axpObj.checkSameBBS && hasSourceImage
             && data.oekaki_bbs_pageno !== this.axpObj.post_bbs_pageno) {
+            alert(data.oekaki_bbs_title
+                + '\nに投稿された画像を基にしているため、別の掲示板には投稿できません。\n同一の掲示板でロードしてください。');
             return false;
         }
 
@@ -133,8 +138,19 @@ export class SaveSystem {
             // キャンセル時は新規開始（状態はまだ書き換えていないため巻き戻し不要）
             return false;
         }
-        this.restore_oekaki_id(data);
+        if (!this.restore_oekaki_id(data)) {
+            alert(data.oekaki_bbs_title
+                + '\nに投稿された画像を基にしているため、別の掲示板には投稿できません。\n同一の掲示板でロードしてください。');
+            return false;
+        }
         this.restoreData(data);
+        if (key !== undefined) {
+            try {
+                await this.dbSystem.deleteAutoSave(key);
+            } catch (error) {
+                console.log(error);
+            }
+        }
         // 自動保存されたデータをロードしました。
         this.axpObj.msg('@INF0302');
         return true;
@@ -656,7 +672,27 @@ class DbSystem {
                 }
                 readReq.onsuccess = () => {
                     const cursor = readReq.result;
-                    resolve(cursor ? cursor.value : null);
+                    resolve(cursor ? { key: cursor.primaryKey, value: cursor.value } : null);
+                }
+            }
+        });
+    }
+    deleteAutoSave(key) {
+        return new Promise((resolve, reject) => {
+            const openReq = indexedDB.open(DB_NAME, DB_VERSION);
+            openReq.onerror = () => {
+                reject(new Error('deleteAutoSave:openReq.onerror'));
+            }
+            openReq.onsuccess = () => {
+                const db = openReq.result;
+                const transaction = db.transaction(STORE_NAME_SAVE_AUTO, "readwrite");
+                const store = transaction.objectStore(STORE_NAME_SAVE_AUTO);
+                const deleteReq = store.delete(key);
+                deleteReq.onerror = () => {
+                    reject(new Error('deleteAutoSave:deleteReq.onerror'));
+                }
+                deleteReq.onsuccess = () => {
+                    resolve();
                 }
             }
         });

@@ -101,6 +101,49 @@ function pngHeader(width, height) {
   return buffer;
 }
 
+function jpegHeader(width, height) {
+  const bytes = new Uint8Array(32);
+  bytes.set([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x04, 0x00, 0x00], 0);
+  bytes.set([0xff, 0xc0, 0x00, 0x11, 0x08], 8);
+  bytes[13] = (height >> 8) & 0xff;
+  bytes[14] = height & 0xff;
+  bytes[15] = (width >> 8) & 0xff;
+  bytes[16] = width & 0xff;
+  return bytes.buffer;
+}
+
+function webpHeader(format, width, height) {
+  const bytes = new Uint8Array(32);
+  bytes.set([0x52, 0x49, 0x46, 0x46], 0);
+  bytes.set([0x57, 0x45, 0x42, 0x50], 8);
+  bytes.set([...format].map((c) => c.charCodeAt(0)), 12);
+  if (format === 'VP8X') {
+    const w = width - 1;
+    const h = height - 1;
+    bytes[24] = w & 0xff;
+    bytes[25] = (w >> 8) & 0xff;
+    bytes[26] = (w >> 16) & 0xff;
+    bytes[27] = h & 0xff;
+    bytes[28] = (h >> 8) & 0xff;
+    bytes[29] = (h >> 16) & 0xff;
+  } else if (format === 'VP8 ') {
+    bytes.set([0x9d, 0x01, 0x2a], 23);
+    bytes[26] = width & 0xff;
+    bytes[27] = (width >> 8) & 0xff;
+    bytes[28] = height & 0xff;
+    bytes[29] = (height >> 8) & 0xff;
+  } else if (format === 'VP8L') {
+    const w = width - 1;
+    const h = height - 1;
+    bytes[20] = 0x2f;
+    bytes[21] = w & 0xff;
+    bytes[22] = ((w >> 8) & 0x3f) | ((h & 0x03) << 6);
+    bytes[23] = (h >> 2) & 0xff;
+    bytes[24] = (h >> 10) & 0x0f;
+  }
+  return bytes.buffer;
+}
+
 test('reference image loader rejects oversized PNG dimensions before decoding', async () => {
   const system = new ReferenceImageSystem({ x_size: 100, y_size: 80, scale: 100 });
   const previousCreateImageBitmap = globalThis.createImageBitmap;
@@ -125,6 +168,22 @@ test('reference image header parser extracts PNG dimensions', () => {
     width: 320,
     height: 240,
   });
+});
+
+test('reference image header parser extracts JPEG dimensions', () => {
+  assert.deepEqual(parseReferenceImageHeader(jpegHeader(320, 240), 'image/jpeg'), {
+    width: 320,
+    height: 240,
+  });
+});
+
+test('reference image header parser extracts WebP dimensions', () => {
+  for (const format of ['VP8X', 'VP8 ', 'VP8L']) {
+    assert.deepEqual(parseReferenceImageHeader(webpHeader(format, 321, 241), 'image/webp'), {
+      width: 321,
+      height: 241,
+    });
+  }
 });
 
 test('legacy startup draft image path loads as a reference overlay, not artwork pixels', () => {

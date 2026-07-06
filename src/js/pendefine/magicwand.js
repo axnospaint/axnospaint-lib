@@ -37,7 +37,7 @@ export class MagicWand extends PenObj {
     // 描画終了
     end(x, y) {
         if (this.axpObj.isDrawing && !this.axpObj.isDrawCancel) {
-            if (inRange(x, 0, this.axpObj.x_size) && inRange(y, 0, this.axpObj.y_size)) {
+            if (inRange(x, 0, this.axpObj.x_size - 1) && inRange(y, 0, this.axpObj.y_size - 1)) {
                 const isCurrentLayerOnly =
                     document.getElementById('axp_pen_select_fillMode').value === 'option_layer';
                 const img = isCurrentLayerOnly

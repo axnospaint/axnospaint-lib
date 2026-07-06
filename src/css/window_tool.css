@@ -91,7 +91,7 @@
     margin: 2px 0 4px;
 }
 
-.axp_tool_sizePreset {
+.axpc_tool_sizePreset {
     flex: 1;
     min-width: 0;
     padding: 3px 0;
@@ -99,7 +99,7 @@
 }
 
 /* この環境の上限を超えるプリセットの無効表示（ダブルクリック編集は可能） */
-.axp_tool_sizePreset.axp_tool_sizePreset_disabled {
+.axpc_tool_sizePreset.axpc_tool_sizePreset_disabled {
     opacity: 0.4;
 }
 
@@ -116,11 +116,7 @@
 }
 
 #axp_tool_toggle_bgColor::after {
-    content: "肌";
-}
-
-#axp_tool_toggle_bgColor[data-checked="true"]::after {
-    content: "白";
+    content: attr(data-label);
 }
 
 /* 対称・回転描画（曼荼羅/雪結晶） */

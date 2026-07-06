@@ -23,6 +23,7 @@ export class ColorMakerSystem extends ToolWindow {
     // 操作が一段落してから（デバウンス）記録する。
     colorHistory = [];
     _historyDebounceTimer = null;
+    _cmykModelOverride = null;
     CONST = {
         COLOR_HISTORY_MAX: 12,
         COLOR_HISTORY_DEBOUNCE_MS: 800,
@@ -325,6 +326,7 @@ export class ColorMakerSystem extends ToolWindow {
             const m = Number(document.getElementById('axp_makecolor_range_magenta').value);
             const y = Number(document.getElementById('axp_makecolor_range_yellow').value);
             const k = Number(document.getElementById('axp_makecolor_range_key').value);
+            this._cmykModelOverride = [c, m, y, k];
             const rgb = cmyk2rgb([c, m, y, k]);
             this.setMainColor('#' + rgb2hex(rgb), 'cmyk');
         }
@@ -336,10 +338,9 @@ export class ColorMakerSystem extends ToolWindow {
             const m = clampRange(document.getElementById('axp_makecolor_number_magenta').value, 0, 100);
             const y = clampRange(document.getElementById('axp_makecolor_number_yellow').value, 0, 100);
             const k = clampRange(document.getElementById('axp_makecolor_number_key').value, 0, 100);
-            // クランプ後の値はsetMainColor()→_updateColorModelInputs()が無条件で
-            // CMYK欄自身へも書き戻すため、ここでの明示的な書き戻しは不要
+            this._cmykModelOverride = [c, m, y, k];
             const rgb = cmyk2rgb([c, m, y, k]);
-            this.setMainColor('#' + rgb2hex(rgb));
+            this.setMainColor('#' + rgb2hex(rgb), 'cmyk');
         }
         for (const id of ['axp_makecolor_number_cyan', 'axp_makecolor_number_magenta', 'axp_makecolor_number_yellow', 'axp_makecolor_number_key']) {
             document.getElementById(id).onchange = onchangeCMYKValue;
@@ -396,6 +397,7 @@ export class ColorMakerSystem extends ToolWindow {
     }
     setMainColor(colorcode, changer = null) {
         //console.log('setmaincolor:', colorcode, changer);
+        const cmykModelOverride = changer === 'cmyk' ? this._cmykModelOverride : null;
         // ＠サブカラー
         if (document.getElementById('axp_makecolor_div_subColor').dataset.selected === 'true') {
             this.subcolor = colorcode;
@@ -430,7 +432,10 @@ export class ColorMakerSystem extends ToolWindow {
         document.getElementById('axp_makecolor_number_blue').value = parseInt(rgbcolor[2], 16);
 
         // 多モデル数値ピッカー（CMYK/Lab）
-        this._updateColorModelInputs(hex2rgb(colorcode));
+        if (changer === 'cmyk' && cmykModelOverride) {
+            this._cmykModelOverride = cmykModelOverride;
+        }
+        this._updateColorModelInputs(hex2rgb(colorcode), changer);
 
         // 編集モードならカラーパレットにも反映
         this.axpObj.colorPaletteSystem.setColor(colorcode);
@@ -457,12 +462,13 @@ export class ColorMakerSystem extends ToolWindow {
     // range/numberの2コントロールがあり、片方（例:numberでCだけ変更）を起点とした更新を
     // changerで丸ごとスキップすると、もう片方（rangeのC）が古い値のまま取り残され、
     // 次に別チャンネル（M等）を操作した際に古いC値を使って計算してしまう（実際に発生した
-    // バグ）。rgb2cmyk/cmyk2rgb・rgb2lab/lab2rgbは自分自身が生成した値に対しては
-    // 往復変換が恒等になるため（GCR形式で最小成分が常に0になる、Labも同様に可逆）、
-    // RGBスライダー同様、無条件更新で値がドラッグ中に不自然にスナップすることもない
-    _updateColorModelInputs(rgb) {
+    // バグ）。ただし任意CMYK値はRGBへ投影するとGCR形式へ再分解されるため、CMYK入力が
+    // 起点の更新では直前のCMYK値をそのまま書き戻して、入力中のチャンネルジャンプを防ぐ。
+    _updateColorModelInputs(rgb, changer = null) {
         {
-            const [c, m, y, k] = rgb2cmyk(rgb);
+            const [c, m, y, k] = (changer === 'cmyk' && Array.isArray(this._cmykModelOverride))
+                ? this._cmykModelOverride
+                : rgb2cmyk(rgb);
             document.getElementById('axp_makecolor_range_cyan').value = c;
             document.getElementById('axp_makecolor_number_cyan').value = c;
             document.getElementById('axp_makecolor_range_magenta').value = m;
@@ -471,6 +477,7 @@ export class ColorMakerSystem extends ToolWindow {
             document.getElementById('axp_makecolor_number_yellow').value = y;
             document.getElementById('axp_makecolor_range_key').value = k;
             document.getElementById('axp_makecolor_number_key').value = k;
+            if (changer !== 'cmyk') this._cmykModelOverride = null;
         }
         {
             const [L, a, b] = rgb2lab(rgb).map(Math.round);
@@ -713,8 +720,11 @@ export class ColorMakerSystem extends ToolWindow {
         // colorWheel.hexへの代入で発生する再帰的なsetMainColor('picker')呼び出しの間も
         // 再描画を抑止できるよう、フラグはsetMainColor呼び出し全体を囲む
         this._suppressCrossBowlRender = true;
-        this.setMainColor(colorcode, 'crossBowl');
-        this._suppressCrossBowlRender = false;
+        try {
+            this.setMainColor(colorcode, 'crossBowl');
+        } finally {
+            this._suppressCrossBowlRender = false;
+        }
     }
     // 他システムが参照する色
     getAdjustColor() {

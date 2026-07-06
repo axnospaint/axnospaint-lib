@@ -56,4 +56,8 @@ export class Sketch extends StampPenBase {
         // 通常のポリゴン塗り（外接多角形）は行わず、スタンプのみで構成する
         this._drawStamp(p2);
     }
+    _drawShapeFull() {
+        this._sketchHistory = [];
+        super._drawShapeFull();
+    }
 }

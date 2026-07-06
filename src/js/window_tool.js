@@ -283,11 +283,19 @@ export class AssistToolSystem extends ToolWindow {
         //   ここでは切替後の状態を読み、背景の地色を更新して再描画する。
         const bgToggle = document.getElementById('axp_tool_toggle_bgColor');
         if (bgToggle) {
+            const updateBgToggleLabel = () => {
+                const isWhite = bgToggle.querySelector('input').checked;
+                bgToggle.dataset.label = isWhite
+                    ? this.axpObj._('@MISC.BG_WHITE_SHORT')
+                    : this.axpObj._('@MISC.BG_SKIN_SHORT');
+            };
+            updateBgToggleLabel();
             bgToggle.addEventListener('click', () => {
                 // 共通トグル処理（input.checked/data-checkedの更新）がこのリスナーより先に
                 // 登録されている前提に依存しないよう、同期処理完了後（次のマイクロタスク）に読む
                 setTimeout(() => {
                     const isWhite = bgToggle.querySelector('input').checked;
+                    updateBgToggleLabel();
                     this.axpObj.backgroundColor = isWhite ? '#ffffff' : this.axpObj.skinBackgroundColor;
                     this.axpObj.layerSystem.updateCanvas();
                 }, 0);
@@ -299,20 +307,27 @@ export class AssistToolSystem extends ToolWindow {
         const symMode = document.getElementById('axp_tool_select_symmetryMode');
         const symCount = document.getElementById('axp_tool_range_symmetryCount');
         const symCountRow = document.getElementById('axp_tool_div_symmetryCountRow');
+        this.symmetryConfig.enabled = symEnabled.checked;
+        this.symmetryConfig.mode = symMode.value;
+        this.symmetryConfig.radialCount = Number(symCount.value);
         const updateCountRowVisibility = () => {
             symCountRow.style.display = (symMode.value === 'radial') ? '' : 'none';
         };
         symEnabled.addEventListener('change', () => {
             this.symmetryConfig.enabled = symEnabled.checked;
+            this.axpObj.configSystem.saveConfig('CHECK_axp_tool_checkbox_symmetryEnabled', symEnabled.checked);
         });
         symMode.addEventListener('change', () => {
             this.symmetryConfig.mode = symMode.value;
+            this.axpObj.configSystem.saveConfig('VALUE_axp_tool_select_symmetryMode', symMode.value);
             updateCountRowVisibility();
         });
         symCount.addEventListener('input', () => {
             this.symmetryConfig.radialCount = Number(symCount.value);
             document.getElementById('axp_tool_span_symmetryCountValue').textContent = symCount.value;
+            this.axpObj.configSystem.saveConfig('VALUE_axp_tool_range_symmetryCount', symCount.value);
         });
+        document.getElementById('axp_tool_span_symmetryCountValue').textContent = symCount.value;
         updateCountRowVisibility();
     }
     // プリセット登録値をシステム上限(1000)内へ丸める。環境上限(maxWidth/Height)ではなくシステム上限で
@@ -359,7 +374,7 @@ export class AssistToolSystem extends ToolWindow {
             return { w: d.w, h: d.h };
         });
         // 単/複クリック判別（混色ペンプリセットに準拠）
-        document.querySelectorAll('.axp_tool_sizePreset').forEach((btn) => {
+        document.querySelectorAll('.axpc_tool_sizePreset').forEach((btn) => {
             const idx = Number(btn.dataset.sidx);
             let clickTimerID = null; // 適用待機タイマー
             btn.addEventListener('pointerup', () => {
@@ -381,14 +396,14 @@ export class AssistToolSystem extends ToolWindow {
     }
     // ボタンラベルと無効表示（この環境の上限超）の更新
     updateSizePresetDisplay() {
-        document.querySelectorAll('.axp_tool_sizePreset').forEach((btn) => {
+        document.querySelectorAll('.axpc_tool_sizePreset').forEach((btn) => {
             const idx = Number(btn.dataset.sidx);
             const p = this.sizePresets[idx];
             if (!p) return;
             btn.textContent = `${p.w}×${p.h}`;
             // この環境の上限を超えるプリセットは無効表示（適用不可・ダブルクリック編集は可能）
             const overLimit = (p.w > this.axpObj.maxWidth || p.h > this.axpObj.maxHeight);
-            btn.classList.toggle('axp_tool_sizePreset_disabled', overLimit);
+            btn.classList.toggle('axpc_tool_sizePreset_disabled', overLimit);
         });
     }
     // プリセット適用（シングルクリック）
@@ -627,7 +642,6 @@ export class AssistToolSystem extends ToolWindow {
         }
     }
 }
-
 
 
 

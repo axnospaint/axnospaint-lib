@@ -90,6 +90,7 @@ export class Fillgradation extends Fill {
     setSelectedGradientStopColor() {
         if (!this.selectedStop) return;
         this.selectedStop.color = this.axpObj.colorMakerSystem.getMainColor();
+        this.selectedStop.role = null;
     }
     setSelectedGradientStopPosition(offsetPercent) {
         if (!this.selectedStop) return;

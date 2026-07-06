@@ -48,10 +48,10 @@ export class Hatching extends StampPenBase {
         const segDx = p2.x - p1.x;
         const segDy = p2.y - p1.y;
         const segLen = Math.hypot(segDx, segDy);
-        const tileCount = Math.min(500, Math.max(1, Math.ceil(segLen / this.hatchSpacing)));
+        const tileCount = segLen === 0 ? 0 : Math.min(500, Math.max(1, Math.ceil(segLen / this.hatchSpacing)));
 
         for (let t = 0; t <= tileCount; t++) {
-            const frac = t / tileCount;
+            const frac = tileCount === 0 ? 0 : t / tileCount;
             const midX = p1.x + segDx * frac;
             const midY = p1.y + segDy * frac;
             for (let off = -halfBand; off <= halfBand; off += this.hatchSpacing) {

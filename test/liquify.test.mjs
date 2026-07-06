@@ -154,6 +154,23 @@ test('dirty rectangle is clipped to the canvas', () => {
   });
 });
 
+test('dab outside the canvas is treated as a no-op', () => {
+  const field = createDisplacementField(5, 4);
+  const dirtyRect = applyLiquifyDab(field, {
+    mode: LIQUIFY_MODE.EXPAND,
+    x: -10,
+    y: -10,
+    previousX: -11,
+    previousY: -10,
+    radius: 2,
+    strength: 1,
+    hardness: 0.5,
+    invert: false,
+  });
+
+  assert.equal(dirtyRect, null);
+});
+
 test('inverse displacement samples source pixels and preserves the source', () => {
   const source = {
     width: 3,

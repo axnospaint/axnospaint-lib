@@ -400,11 +400,11 @@ export class LayerSystem extends ToolWindow {
             shadowOpacity: document.getElementById('axp_layerstyle_range_shadowOpacity'),
             shadowColor: document.getElementById('axp_layerstyle_color_shadow'),
         };
-        let styleBeforeEdit = null;
+        this._layerStyleBeforeEdit = null;
         const currentLayerId = () => Number(this.currentLayer.dataset.id);
         const beginEdit = () => {
-            if (styleBeforeEdit === null) {
-                styleBeforeEdit = JSON.parse(JSON.stringify(this.getLayerStyle(currentLayerId())));
+            if (this._layerStyleBeforeEdit === null) {
+                this._layerStyleBeforeEdit = JSON.parse(JSON.stringify(this.getLayerStyle(currentLayerId())));
             }
         };
         const readStyleFromControls = () => ({
@@ -428,11 +428,11 @@ export class LayerSystem extends ToolWindow {
             this.updateCanvas(id);
         };
         const commitEdit = () => {
-            if (styleBeforeEdit === null) return;
+            if (this._layerStyleBeforeEdit === null) return;
             const id = currentLayerId();
-            const before = styleBeforeEdit;
+            const before = this._layerStyleBeforeEdit;
             const after = JSON.parse(JSON.stringify(this.getLayerStyle(id)));
-            styleBeforeEdit = null;
+            this._layerStyleBeforeEdit = null;
             // 変化がなければアンドゥ登録しない（開いただけ・値を戻して閉じた等）
             if (JSON.stringify(before) === JSON.stringify(after)) return;
             this.axpObj.undoSystem.setUndo({
@@ -454,6 +454,7 @@ export class LayerSystem extends ToolWindow {
     }
     // レイヤースタイルUIコントロールへ、指定レイヤーの現在値を反映する
     _populateLayerStyleControls(id) {
+        this._layerStyleBeforeEdit = null;
         const style = this.getLayerStyle(id);
         document.getElementById('axp_layerstyle_checkbox_strokeEnabled').checked = style.stroke.enabled;
         document.getElementById('axp_layerstyle_range_strokeRadius').value = style.stroke.radius;
@@ -549,7 +550,11 @@ export class LayerSystem extends ToolWindow {
         if (!this.maskEditMode) return;
         const id = Number(this.currentLayer.dataset.id);
         const idx = this.getLayerIndex(id);
-        if (!this.layerObj[idx].mask) return;
+        if (!this.layerObj[idx].mask) {
+            this.maskEditMode = false;
+            this._populateMaskControls(id);
+            return;
+        }
         // ロックされたレイヤーは通常の描画と同様にマスク編集も禁止する
         if (this.isWriteProtection(idx)) return;
         this._maskBrushTargetId = id;

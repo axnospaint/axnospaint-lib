@@ -12,8 +12,7 @@ function createImage(width, height) {
   return { width, height, data };
 }
 
-function createFixture() {
-  const source = createImage(5, 5);
+function createFixture({ source = createImage(5, 5) } = {}) {
   let currentImage = source;
   let savedImage = null;
   const undoEntries = [];
@@ -100,6 +99,31 @@ test('cancelled stroke restores the source without creating undo', () => {
   fixture.pen.end(3, 2, { altKey: false });
 
   assert.deepEqual(fixture.getCurrentImage().data, fixture.source.data);
+  assert.equal(fixture.getUndoEntries().length, 0);
+  assert.equal(fixture.getAutoSaveCount(), 0);
+});
+
+test('out-of-canvas liquify stroke does not create undo or autosave', () => {
+  const fixture = createFixture();
+
+  fixture.pen.start(2, 2, { altKey: false });
+  fixture.pen.move(-10, -10, { altKey: false });
+  fixture.pen.end(-10, -10, { altKey: false });
+
+  assert.deepEqual(fixture.getCurrentImage().data, fixture.source.data);
+  assert.equal(fixture.getUndoEntries().length, 0);
+  assert.equal(fixture.getAutoSaveCount(), 0);
+});
+
+test('liquify stroke with no image delta does not create undo or autosave', () => {
+  const source = { width: 5, height: 5, data: new Uint8ClampedArray(5 * 5 * 4) };
+  const fixture = createFixture({ source });
+
+  fixture.pen.start(2, 2, { altKey: false });
+  fixture.pen.move(3, 2, { altKey: false });
+  fixture.pen.end(3, 2, { altKey: false });
+
+  assert.deepEqual(fixture.getCurrentImage().data, source.data);
   assert.equal(fixture.getUndoEntries().length, 0);
   assert.equal(fixture.getAutoSaveCount(), 0);
 });
