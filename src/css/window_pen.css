@@ -336,9 +336,6 @@
     overflow: hidden;
     margin-top: 3px;
     padding: 4px;
-    border: 1px solid var(--axp-border-soft);
-    border-radius: var(--axp-r-md);
-    background: var(--axp-surface-panel);
 }
 
 .axpc_pen_modeCard {

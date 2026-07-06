@@ -33,7 +33,9 @@ test('pen and auxiliary windows carry the compact dogfood layout hooks', () => {
   assert.match(penHtml, /id="axp_pen_button_diffusionDetail" class="axpc_MSG axpc_pen_panelToggle"/);
   assert.match(penCss, /\.axpc_pen_settingsStack\s*\{[\s\S]*?gap:/);
   assert.match(penCss, /\.axpc_pen_modeCard\s*\{[\s\S]*?border:\s*1px solid var\(--axp-border-soft\)/);
-  assert.match(penCss, /#axp_pen_div_liquifyMode\s*\{[\s\S]*?border:\s*1px solid var\(--axp-border-soft\)/);
+  const liquifyModeRule = penCss.match(/#axp_pen_div_liquifyMode\s*\{(?<body>[\s\S]*?)\n\}/);
+  assert.ok(liquifyModeRule);
+  assert.doesNotMatch(liquifyModeRule.groups.body, /\b(?:border|border-radius|background):/);
 
   assert.match(toolHtml, /id="axp_tool_div_content" class="axpc_tool_shell"/);
   assert.match(toolHtml, /id="axp_tool_div_rightSide" class="axpc_tool_actionGrid"/);

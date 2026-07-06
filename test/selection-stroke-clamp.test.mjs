@@ -233,3 +233,37 @@ test('pixel filter pen write clamps any subclass changes to the active selection
     20, 0, 0, 255,
   ]);
 });
+
+test('diffusion write skips the full-frame selection clamp because the kernel enforces it', () => {
+  const pen = new Diffusion({
+    axpObj: {
+      _: (key) => key,
+      lastEventInFrame: true,
+      pendingPenFlush: false,
+      layerSystem: {
+        getMasked: () => false,
+        updateCanvas: () => {},
+        getId: () => '1',
+      },
+    },
+    CANVAS: {},
+  });
+  pen.selectionMaskAtStrokeStart = new Uint8Array([255, 0]);
+  pen.selectionBaseImage = makeImage(2, 1, [
+    10, 0, 0, 255,
+    20, 0, 0, 255,
+  ]);
+  pen.work = makeImage(2, 1, [
+    110, 0, 0, 255,
+    20, 0, 0, 255,
+  ]);
+  let clampCalls = 0;
+  pen.applySelectionStrokeConstraint = (imageData) => {
+    clampCalls += 1;
+    return imageData;
+  };
+
+  pen.write();
+
+  assert.equal(clampCalls, 0);
+});
