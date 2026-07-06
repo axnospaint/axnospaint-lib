@@ -15,14 +15,8 @@
                 <canvas id="axp_pen_canvas_previewPenSize"></canvas>
                 <canvas id="axp_pen_canvas_previewSpuit"></canvas>
             </div>
-            <!-- 太さクイックボタン -->
-            <div id="axp_pen_div_quickSize" class="axpc_text_border">
-                <button class="axpc_pen_quicksize" data-qidx="0" data-size="2"></button>
-                <button class="axpc_pen_quicksize" data-qidx="1" data-size="4"></button>
-                <button class="axpc_pen_quicksize" data-qidx="2" data-size="10"></button>
-            </div>
             <!-- スライダー領域 -->
-            <div id="axp_pen_div_slider">
+            <div id="axp_pen_div_slider" class="axpc_pen_settingsStack">
                 <!-- ペンの不透明度 -->
                 <form id="axp_pen_form_alpha" class="axpc_range axpc_text_border"
                     oninput="result.value=parseInt(volume.value)">
@@ -45,7 +39,7 @@
                     <div class="axpc_range_label">${_("@PEN.SIZE")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
-                <div id="axp_pen_div_liquifyMode" class="axpc_text_border axpc_NONE">
+                <div id="axp_pen_div_liquifyMode" class="axpc_text_border axpc_pen_modeCard axpc_NONE">
                     <label for="axp_pen_select_liquifyMode">${_("@LIQUIFY.MODE")}</label>
                     <select id="axp_pen_select_liquifyMode">
                         <option value="push">${_("@LIQUIFY.PUSH")}</option>
@@ -115,7 +109,7 @@
                         data-msg="@PEN0014"></button>
                 </div>
                 <!-- 混色ペンの詳細設定開閉 -->
-                <button type="button" id="axp_pen_button_diffusionDetail" class="axpc_MSG"
+                <button type="button" id="axp_pen_button_diffusionDetail" class="axpc_MSG axpc_pen_panelToggle"
                     data-msg="@PEN0015"></button>
                 <!-- 混色ペンの硬さ -->
                 <form id="axp_pen_form_hardness" oninput="result.value=parseInt(volume.value)"

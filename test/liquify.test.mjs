@@ -213,3 +213,33 @@ test('selection mask prevents output changes outside the selection', () => {
 
   assert.deepEqual(result.data, source.data);
 });
+
+test('renderDisplacement reuses the previous output buffer for dirty rect updates', () => {
+  const source = {
+    width: 3,
+    height: 1,
+    data: new Uint8ClampedArray([
+      255, 0, 0, 255,
+      0, 255, 0, 255,
+      0, 0, 255, 255,
+    ]),
+  };
+  const previous = {
+    width: 3,
+    height: 1,
+    data: new Uint8ClampedArray(source.data),
+  };
+  const field = createDisplacementField(3, 1);
+  field.dx[1] = 1;
+
+  const result = renderDisplacement(
+    source,
+    field,
+    { x: 1, y: 0, width: 1, height: 1 },
+    null,
+    previous,
+  );
+
+  assert.equal(result, previous);
+  assert.deepEqual([...result.data.slice(4, 8)], [255, 0, 0, 255]);
+});

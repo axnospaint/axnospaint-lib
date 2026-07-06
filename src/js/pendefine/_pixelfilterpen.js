@@ -34,6 +34,7 @@ export class PixelFilterPenBase extends DrawingPenBase {
         this.work = null;                // ストローク中の作業 ImageData (レイヤー画像と同一実体)
         this.pipeline = null;
         this.lastCommitted = null;
+        this.enforcesSelectionConstraintInKernel = false;
     }
 
     // フリーハンド固定 (非表示の drawMode select の stale 値や isLineMod を読まない)
@@ -58,7 +59,8 @@ export class PixelFilterPenBase extends DrawingPenBase {
         // 描画開始時のイメージ記憶 (差し替え前の参照がアンドゥ差分の基準になる)
         this.axpObj.layerSystem.save();
         this.axpObj.layerSystem.isStrokeActive = true;
-        const base = this.axpObj.layerSystem.load();
+        this.beginSelectionStrokeConstraint();
+        const base = this.selectionBaseImage || this.axpObj.layerSystem.load();
         this.work = new ImageData(
             new Uint8ClampedArray(base.data),
             base.width,
@@ -153,6 +155,9 @@ export class PixelFilterPenBase extends DrawingPenBase {
         }
         this.axpObj.pendingPenFlush = false;
         this.beforeFrameFlush();
+        if (this.work && !this.enforcesSelectionConstraintInKernel) {
+            this.applySelectionStrokeConstraint(this.work);
+        }
         this.axpObj.layerSystem.updateCanvas(this.axpObj.layerSystem.getId());
     }
 

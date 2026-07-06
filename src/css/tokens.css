@@ -1,0 +1,26 @@
+/* AXNOS Paint UI tokens */
+:root {
+    --axp-surface-window: rgba(0, 0, 0, 0.30);
+    --axp-surface-content: rgba(0, 0, 0, 0.50);
+    --axp-surface-panel: rgba(0, 0, 0, 0.35);
+    --axp-surface-panel-strong: rgba(0, 0, 0, 0.62);
+    --axp-text-primary: #fff;
+    --axp-text-secondary: #ddd;
+    --axp-text-muted: #aaa;
+    --axp-border-soft: #555;
+    --axp-border-strong: #888;
+    --axp-border-focus: #8bd3ff;
+    --axp-accent: #eeac60;
+    --axp-accent-soft: rgba(238, 172, 96, 0.16);
+    --axp-accent-border: rgba(238, 172, 96, 0.45);
+    --axp-danger: #f009;
+    --axp-r-lg: 8px;
+    --axp-r-md: 5px;
+    --axp-r-sm: 3px;
+    --axp-sp-1: 4px;
+    --axp-sp-2: 6px;
+    --axp-sp-3: 8px;
+    --axp-h-icon-btn: 44px;
+    --axp-h-compact-btn: 24px;
+    --axp-h-compact-range: 24px;
+}

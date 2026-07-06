@@ -405,8 +405,8 @@ export class Nagenawa extends PenObj {
             this.axpObj.layerSystem.updateCanvas();
         }
     }
-    finalizeSelection() {
-        if (this.state !== 'transforming') return;
+    finalizeSelection({ autoSave = true } = {}) {
+        if (this.state !== 'transforming') return false;
 
         // 書き込み先レイヤーが消失している場合（ロード・キャンバス初期化直後など）、
         // 確定は不可能なため変形状態の破棄のみ行う
@@ -414,7 +414,7 @@ export class Nagenawa extends PenObj {
         if (!layerSystem.currentLayer ||
             layerSystem.getLayerIndex(layerSystem.currentLayer.dataset.id) === -1) {
             this.forceIdle();
-            return;
+            return false;
         }
 
         const w = this.axpObj.x_size;
@@ -447,11 +447,12 @@ export class Nagenawa extends PenObj {
         if (this.axpObj.isBackgroundimage) {
             this.axpObj.drawBackground();
         }
-        this.axpObj.saveSystem.autoSave();
+        if (autoSave) this.axpObj.saveSystem.autoSave();
 
         this.hideOverlay();
         this.releaseCanvases();
         this.state = 'idle';
+        return true;
     }
     duplicateSelection() {
         if (this.state !== 'transforming') return;

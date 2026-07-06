@@ -52,6 +52,7 @@ export class Diffusion extends PixelFilterPenBase {
         this.size = 20;
         this.index = range_index(this.size);
         this.alpha = 100;    // 寄与度の上限 α_max (不透明度スライダー)
+        this.enforcesSelectionConstraintInKernel = true;
         // 初期値はプリセット1「ぼかしペン」と一致させる (初回から反映中表示になる)
         this.hardness = 70;  // 足跡フォールオフの硬さ (0-100)
         this.diffusion = 80; // ぼかしの広がり (0-100)
@@ -236,6 +237,8 @@ export class Diffusion extends PixelFilterPenBase {
             const xs = Math.max(x0, Math.ceil(cp.x - 0.5 - halfSpan));
             const xe = Math.min(x1, Math.floor(cp.x - 0.5 + halfSpan));
             for (let x = xs; x <= xe; x++) {
+                const i = y * W + x;
+                if (!this.isStrokeSelectionPixelSelected(i)) continue;
                 const fx = x + 0.5 - cp.x;
                 const d2 = fx * fx + fy2;
                 let li = (d2 * lutScale) | 0;
@@ -243,7 +246,6 @@ export class Diffusion extends PixelFilterPenBase {
                 const f = fLut[li];
                 if (f <= 0) continue;
                 const m = gain * f;
-                const i = y * W + x;
                 if (m <= mask[i]) continue; // max 合成: 二重ぼかしなし
                 mask[i] = m;
                 const q = i * 4;
@@ -277,7 +279,8 @@ export class Diffusion extends PixelFilterPenBase {
                 const sy = Math.max(0, Math.min(this.H - 1, icy + oy - R));
                 for (let ox = 0; ox < D; ox++) {
                     const sx = Math.max(0, Math.min(this.W - 1, icx + ox - R));
-                    const sp = (sy * W + sx) * 4;
+                    const si = sy * W + sx;
+                    const sp = si * 4;
                     const a = work[sp + 3];
                     const t = (oy * D + ox) * 4;
                     this.carried[t] = work[sp] * a / 255;
@@ -317,6 +320,8 @@ export class Diffusion extends PixelFilterPenBase {
             const xs = Math.max(x0, Math.ceil(cp.x - 0.5 - halfSpan));
             const xe = Math.min(x1, Math.floor(cp.x - 0.5 + halfSpan));
             for (let x = xs; x <= xe; x++) {
+                const i = y * W + x;
+                if (!this.isStrokeSelectionPixelSelected(i)) continue;
                 const fx = x + 0.5 - cp.x;
                 const d2 = fx * fx + fy2;
                 let li = (d2 * lutScale) | 0;
@@ -325,7 +330,7 @@ export class Diffusion extends PixelFilterPenBase {
                 if (ad <= 0.0005) continue;
                 const ox = x - icx + R;
                 if (ox < 0 || ox >= D) continue;
-                const q = (y * W + x) * 4;
+                const q = i * 4;
                 const t = (oy * D + ox) * 4;
                 // 現在のキャンバス色 (premultiply)
                 const ca = work[q + 3];

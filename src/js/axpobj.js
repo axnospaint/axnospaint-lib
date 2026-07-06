@@ -392,11 +392,20 @@ export class AXPObj {
         }
     }
     // なげなわ変形中の選択内容を確定する（キャンバス全体に影響する操作の前処理用）
-    finalizeNagenawaSelection() {
+    finalizeNagenawaSelection(options = {}) {
         const nagenawa = this.penSystem?.penObj?.['axp_penmode_nagenawa'];
         if (nagenawa && nagenawa.state === 'transforming') {
-            nagenawa.finalizeSelection();
+            return nagenawa.finalizeSelection(options) === true;
         }
+        return false;
+    }
+    // 歪みツールの未確定セッションを確定する（キャンバス全体に影響する操作の前処理用）
+    finalizeLiquifySession(options = {}) {
+        const liquify = this.penSystem?.penObj?.['axp_penmode_liquify'];
+        if (liquify && liquify.session === 'active') {
+            return liquify.finalizeLiquifySession(options) === true;
+        }
+        return false;
     }
     // 選択範囲（マジックワンド／多角形選択）の適用。なげなわの「切り取って移動」とは
     // 独立した、レイヤーのimageデータを一切変更しない範囲情報として保持する
@@ -1189,13 +1198,17 @@ export class AXPObj {
                 // モバイル（特にiOS）はタブを予告なく破棄することがあり、
                 // beforeunload/pagehideが発火しない場合があるため、visibilitychange:hiddenが
                 // 確実な保存機会として最後になる。
-                this.saveSystem.autoSave(true);
+                const finalizedNagenawa = this.finalizeNagenawaSelection({ autoSave: false });
+                const finalizedLiquify = this.finalizeLiquifySession({ autoSave: false });
+                this.saveSystem.autoSave(true, { forceWrite: finalizedNagenawa || finalizedLiquify });
             }
         });
         // 上記の保険。pagehideが発火する環境ではこちらでも確実に保存する
         // （force指定のため、既にvisibilitychange:hiddenで保存済みなら未保存分が無く何もしない）
         window.addEventListener('pagehide', () => {
-            this.saveSystem.autoSave(true);
+            const finalizedNagenawa = this.finalizeNagenawaSelection({ autoSave: false });
+            const finalizedLiquify = this.finalizeLiquifySession({ autoSave: false });
+            this.saveSystem.autoSave(true, { forceWrite: finalizedNagenawa || finalizedLiquify });
         });
     }
     /**
@@ -1770,6 +1783,7 @@ export class AXPObj {
                 this.isCanvasOpen = false;
                 // なげなわ変形中は確定してから投稿画像を生成する（点線プレビューの混入防止）
                 this.finalizeNagenawaSelection();
+                this.finalizeLiquifySession();
                 // 投稿タブ内の情報更新
                 this.drawPostCanvas();
 
@@ -1993,12 +2007,6 @@ export class AXPObj {
         this.TASK['func_switch_axp_penmode_sketch'] = () => {
             switchPenSub('axp_penmode_sketch');
         }
-        this.TASK['func_switch_axp_penmode_dodge'] = () => {
-            switchPenSub('axp_penmode_dodge');
-        }
-        this.TASK['func_switch_axp_penmode_burn'] = () => {
-            switchPenSub('axp_penmode_burn');
-        }
         this.TASK['func_switch_axp_penmode_texturebrush'] = () => {
             switchPenSub('axp_penmode_texturebrush');
         }
@@ -2177,6 +2185,7 @@ export class AXPObj {
         this.TASK['func_rotate'] = () => {
             // なげなわ変形中は確定してから処理する
             this.finalizeNagenawaSelection();
+            this.finalizeLiquifySession();
             // 書き込み不可状態チェック
             if (this.layerSystem.isWriteProtection()) {
                 let layerName = this.layerSystem.getName();
@@ -2633,18 +2642,8 @@ export class AXPObj {
                 this.configSystem.updateCanvasSizeHistory();
             }
 
-            // 起動時ワンタップ復元: 下書き読込時は下書きを優先し確認しない。
-            // 直近の自動保存があれば「続きから再開するか」を確認し、復元した場合は
-            // 初期レイヤー作成をスキップする（restoreData内で既にレイヤーが復元されるため）。
-            let isOneTapRestored = false;
-            if (!isDraftLoaded) {
-                isOneTapRestored = await this.saveSystem.checkOneTapRestore();
-            }
-
             // 初期レイヤー作成（※合成モード表示の設定があるため、設定復元完了後に行う必要がある）
-            if (!isOneTapRestored) {
-                this.layerSystem.newLayer();
-            }
+            this.layerSystem.newLayer();
 
             // アンドゥ使用可能最大数
             this.undo_max = document.getElementById('axp_config_form_undoMaxValue').result.value;

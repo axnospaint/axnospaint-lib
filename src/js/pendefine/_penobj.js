@@ -1,7 +1,6 @@
 // @description ペン定義：親クラス
 
 import { createTonePattern, compareImages } from '../etc.js';
-import { applySymmetryToStroke } from '../symmetrydraw.js';
 
 // ダーティ矩形（フレームごとに実際に変化した範囲）の和集合を保持する累積器。
 // E-4/フェーズ0（ブラシ合成のダーティ矩形化）対応ペンのみが使用する。
@@ -99,6 +98,8 @@ export class PenObj {
         this.borderStyle = null;
         this.lineCap = null;
         this.lineJoin = null;
+        this.selectionMaskAtStrokeStart = null;
+        this.selectionBaseImage = null;
 
     }
     // 太さ、不透明度の初期値の保存（初期化用）
@@ -261,6 +262,50 @@ export class PenObj {
         }
         this.axpObj.penSystem.CANVAS.draw_ctx.globalCompositeOperation = type;
     }
+    beginSelectionStrokeConstraint() {
+        const selectionMask = this.axpObj.getValidSelectionMask?.();
+        if (!selectionMask) {
+            this.clearSelectionStrokeConstraint();
+            return false;
+        }
+        this.selectionMaskAtStrokeStart = selectionMask;
+        this.selectionBaseImage = this.axpObj.layerSystem.load();
+        return true;
+    }
+    clearSelectionStrokeConstraint() {
+        this.selectionMaskAtStrokeStart = null;
+        this.selectionBaseImage = null;
+    }
+    hasSelectionStrokeConstraint() {
+        return this.selectionMaskAtStrokeStart !== null && this.selectionBaseImage !== null;
+    }
+    isStrokeSelectionPixelSelected(pixelIndex) {
+        const selectionMask = this.selectionMaskAtStrokeStart;
+        return selectionMask === null || selectionMask[pixelIndex] !== 0;
+    }
+    applySelectionStrokeConstraint(imageData) {
+        if (!this.hasSelectionStrokeConstraint()) return imageData;
+        const selectionMask = this.selectionMaskAtStrokeStart;
+        const baseImage = this.selectionBaseImage;
+        const pixelCount = imageData.width * imageData.height;
+        if (
+            selectionMask.length !== pixelCount ||
+            baseImage.width !== imageData.width ||
+            baseImage.height !== imageData.height
+        ) {
+            return imageData;
+        }
+        const data = imageData.data;
+        const base = baseImage.data;
+        for (let i = 0, q = 0; i < pixelCount; i++, q += 4) {
+            if (selectionMask[i] !== 0) continue;
+            data[q] = base[q];
+            data[q + 1] = base[q + 1];
+            data[q + 2] = base[q + 2];
+            data[q + 3] = base[q + 3];
+        }
+        return imageData;
+    }
     // 描画開始
     start() {
         // ペンの種類ごとに子クラスでオーバーライドする
@@ -290,6 +335,9 @@ export class PenObj {
             return;
         }
         this.axpObj.pendingPenFlush = false;
+        if (this.hasSelectionStrokeConstraint() && this.axpObj.layerSystem.compositeFastPathActive) {
+            this.axpObj.layerSystem.deactivateFastPath();
+        }
         if (this.axpObj.layerSystem.compositeFastPathActive) {
             // GPU fast path: restore base via drawImage (GPU→GPU) instead of putImageData
             const savedOp = this.CANVAS.draw_ctx.globalCompositeOperation;
@@ -317,9 +365,9 @@ export class PenObj {
         } else {
             this.CANVAS.draw_ctx.putImageData(this.axpObj.layerSystem.load(), 0, 0);
             this.CANVAS.draw_ctx.drawImage(this.CANVAS.brush, 0, 0);
-            this.axpObj.layerSystem.write(
-                this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size)
-            );
+            const imageData = this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+            this.applySelectionStrokeConstraint(imageData);
+            this.axpObj.layerSystem.write(imageData);
             this.axpObj.layerSystem.updateCanvas(this.axpObj.layerSystem.getId());
         }
     }
@@ -330,9 +378,9 @@ export class PenObj {
         this._dirty = null;
         if (this.axpObj.layerSystem.isStrokeActive) {
             if (this.axpObj.layerSystem.compositeFastPathActive && !this.axpObj.isDrawCancel) {
-                this.axpObj.layerSystem.write(
-                    this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size)
-                );
+                const imageData = this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+                this.applySelectionStrokeConstraint(imageData);
+                this.axpObj.layerSystem.write(imageData);
             }
             this.axpObj.layerSystem.isStrokeActive = false;
             this.axpObj.layerSystem.deactivateFastPath();
@@ -341,22 +389,6 @@ export class PenObj {
         if (this.axpObj.isDrawing) {
             // アンドゥ対象の機能かつ描画キャンセルされていない時アンドゥデータ作成
             if (this.canUndo && !this.axpObj.isDrawCancel) {
-                // 対称・回転描画（曼荼羅/雪結晶）：通常どおり確定したストロークに対し、
-                // undo比較の前に対称コピーを合成する。ライブプレビュー中は通常のストロークのみ
-                // 描画され、コピーはストローク確定時にのみ現れる（既存のDirtyRect部分再合成
-                // パイプラインには一切手を入れない後処理として実装）。
-                const symmetryConfig = this.axpObj.assistToolSystem?.symmetryConfig;
-                if (symmetryConfig?.enabled) {
-                    const beforeForSymmetry = this.axpObj.layerSystem.load();
-                    const rawStroke = this.axpObj.layerSystem.getCurrentLayerImage();
-                    const combined = applySymmetryToStroke(
-                        beforeForSymmetry, rawStroke, symmetryConfig,
-                        this.axpObj.x_size, this.axpObj.y_size,
-                        (this.axpObj.x_size - 1) / 2, (this.axpObj.y_size - 1) / 2
-                    );
-                    this.axpObj.layerSystem.write(combined);
-                    this.axpObj.layerSystem.updateCanvas(this.axpObj.layerSystem.getId());
-                }
                 // 描画前と描画後を比較し、差分があればアンドゥ用記録
                 // キャンバス外で描画操作を行った場合にアンドゥ対象としないための処理
                 // キャンバス外から太いペンでキャンバス内に描画したり、直線描画時にキャンバス外の２点を指定された場合を考慮
@@ -392,6 +424,7 @@ export class PenObj {
             // 描画フラグリセット
             this.reset_modeflag();
         }
+        this.clearSelectionStrokeConstraint();
     }
     // ペンの太さプレビュー表示
     previewPenSize() {

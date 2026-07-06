@@ -1,9 +1,9 @@
 <!-- 補助ツール -->
 <div class="axpc_window_content">
     <!-- 補助ツールメイン -->
-    <div id="axp_tool_div_content">
+    <div id="axp_tool_div_content" class="axpc_tool_shell">
         <!-- 補助ツール左側 -->
-        <div id="axp_tool_div_leftSide">
+        <div id="axp_tool_div_leftSide" class="axpc_tool_controlDeck">
             <div id="axp_tool_div_canvasSize">
                 <span id="axp_tool_span_canvasSize" class="axpc_MSG" data-msg="@AST0001"></span>
             </div>
@@ -23,38 +23,24 @@
                     <input type="checkbox" name="check" />
                 </div>
             </div>
-            <!-- 対称・回転描画（曼荼羅/雪結晶）。中心点はキャンバス中央固定 -->
-            <div id="axp_tool_div_symmetry">
-                <label>
-                    <input type="checkbox" id="axp_tool_checkbox_symmetryEnabled">
-                    <span>${_("@SYMMETRY.ENABLED")}</span>
-                </label>
-                <select id="axp_tool_select_symmetryMode">
-                    <option value="radial" selected>${_("@SYMMETRY.RADIAL")}</option>
-                    <option value="mirrorH">${_("@SYMMETRY.MIRROR_H")}</option>
-                    <option value="mirrorV">${_("@SYMMETRY.MIRROR_V")}</option>
-                    <option value="mirrorBoth">${_("@SYMMETRY.MIRROR_BOTH")}</option>
-                </select>
-                <div id="axp_tool_div_symmetryCountRow">
-                    <span>${_("@SYMMETRY.COUNT")}</span>
-                    <div class="axpc_range">
-                        <input type="range" id="axp_tool_range_symmetryCount" min="2" max="16" step="1" value="6">
-                    </div>
-                    <span id="axp_tool_span_symmetryCountValue">6</span>
-                </div>
-            </div>
-
-            <div id="axp_tool_div_interop">
-                <button id="axp_tool_button_interopToggle" type="button" class="axpc_MSG axpc_button"
+            <div id="axp_tool_div_interop" class="axp_tool_disclosure">
+                <button id="axp_tool_button_interopToggle" type="button" class="axpc_MSG axp_tool_disclosureToggle"
                     data-msg="@AST0200" aria-expanded="false"
                     aria-controls="axp_tool_div_interopControls">${_("@INTEROP.TITLE")}</button>
-                <div id="axp_tool_div_interopControls" class="axpc_NONE" hidden>
+                <div id="axp_tool_div_interopControls" class="axp_tool_disclosurePanel axpc_NONE" hidden>
                     <button id="axp_tool_button_timelapse" type="button" class="axpc_MSG axpc_button"
                         data-msg="@AST0203" aria-pressed="false">${_("@INTEROP.TIMELAPSE_START")}</button>
                     <button id="axp_tool_button_clipboardCopy" type="button" class="axpc_MSG axpc_button"
                         data-msg="@AST0204">${_("@INTEROP.CLIPBOARD_COPY")}</button>
                     <button id="axp_tool_button_psdExport" type="button" class="axpc_MSG axpc_button"
                         data-msg="@AST0202">${_("@INTEROP.PSD_EXPORT")}</button>
+                </div>
+            </div>
+            <div id="axp_tool_div_reference" class="axp_tool_disclosure">
+                <button id="axp_tool_button_referenceToggle" type="button" class="axpc_MSG axp_tool_disclosureToggle"
+                    data-msg="@AST0205" aria-expanded="false"
+                    aria-controls="axp_tool_div_referenceControls">${_("@INTEROP.REFERENCE_TITLE")}</button>
+                <div id="axp_tool_div_referenceControls" class="axp_tool_disclosurePanel axpc_NONE" hidden>
                     <button id="axp_tool_button_referenceLoad" type="button" class="axpc_MSG axpc_button"
                         data-msg="@AST0201">${_("@INTEROP.REFERENCE_LOAD")}</button>
                     <input id="axp_tool_file_reference" type="file" accept="image/png,image/jpeg,image/webp,.psd">
@@ -113,7 +99,7 @@
                 data-msg="@AST0005">+</button>
         </div>
         <!-- 補助ツール右側 -->
-        <div id="axp_tool_div_rightSide">
+        <div id="axp_tool_div_rightSide" class="axpc_tool_actionGrid">
             <button id="axp_tool_button_restore" class="axpc_FUNC axpc_button" data-function="func_restore"
                 data-msg="@AST0008">${_("@MISC.BUTTON_RESTORE_AUTOSAVE")}</button>
 

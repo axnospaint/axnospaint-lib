@@ -4,8 +4,9 @@
     width: 300px;
 }
 
-#axp_tool_div_content {
+.axpc_tool_shell {
     display: flex;
+    gap: var(--axp-sp-3);
 }
 
 /* 補助ツール左側 */
@@ -15,6 +16,10 @@
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
+}
+
+.axpc_tool_controlDeck {
+    gap: 2px;
 }
 
 /* キャンバスサイズ表示ラベル */
@@ -56,14 +61,14 @@
 }
 
 /* 補助ツール右側 */
-#axp_tool_div_rightSide {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    flex-direction: row;
-    gap: 0px 6px;
+.axpc_tool_actionGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 4px;
     margin-top: 2px;
-    margin-left: 4px;
+    margin-left: 0;
+    min-width: 146px;
 }
 
 /* 100% */
@@ -119,45 +124,52 @@
     content: attr(data-label);
 }
 
-/* 対称・回転描画（曼荼羅/雪結晶） */
-#axp_tool_div_symmetry {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin: 2px 0 4px;
-    font-size: 11px;
-}
-
-#axp_tool_div_symmetry label {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-#axp_tool_div_symmetryCountRow {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-#axp_tool_div_symmetryCountRow .axpc_range {
-    width: 80px;
-    height: 16px;
-}
-
-/* 相互運用（参照画像など） */
-#axp_tool_div_interop {
+/* 書出し・共有 / 参照画像 disclosure */
+.axp_tool_disclosure {
     --axp-interop-compact-h: 22px;
+
     display: flex;
     flex-direction: column;
     gap: 2px;
     width: 132px;
     margin: 2px 4px 4px 0;
+    padding: 3px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: var(--axp-r-lg);
+    background: var(--axp-surface-panel);
     font-size: 11px;
     box-sizing: border-box;
 }
 
-#axp_tool_button_interopToggle,
+.axp_tool_disclosureToggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 26px;
+    padding: 3px 5px;
+    border: 1px solid var(--axp-border-soft);
+    border-radius: var(--axp-r-md);
+    color: inherit;
+    background: rgba(255, 255, 255, .08);
+    line-height: 1.1;
+    text-align: left;
+    cursor: pointer;
+}
+
+.axp_tool_disclosureToggle::before {
+    content: "▸";
+    display: inline-block;
+    flex: 0 0 auto;
+    transform-origin: 50% 50%;
+    transition: transform .12s ease;
+}
+
+.axp_tool_disclosureToggle[aria-expanded="true"]::before {
+    transform: rotate(90deg);
+}
+
 #axp_tool_button_timelapse,
 #axp_tool_button_clipboardCopy,
 #axp_tool_button_psdExport,
@@ -175,13 +187,17 @@
     content: "● ";
 }
 
-#axp_tool_div_interopControls {
+.axp_tool_disclosurePanel {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    padding-left: 7px;
+    border-left: 2px solid var(--axp-accent-border);
 }
 
-#axp_tool_div_interopControls[hidden] {
+.axp_tool_disclosurePanel[hidden] {
     display: none;
 }
 
@@ -190,9 +206,9 @@
     gap: 2px;
     box-sizing: border-box;
     padding: 3px;
-    border: 1px solid #555;
-    border-radius: 5px;
-    background: rgba(20, 20, 20, .35);
+    border: 1px solid var(--axp-border-soft);
+    border-radius: var(--axp-r-md);
+    background: var(--axp-surface-panel-strong);
 }
 
 #axp_tool_div_referenceDetails[hidden] {
@@ -279,18 +295,18 @@
     box-shadow: -72px 0 0 72px #777;
 }
 
-#axp_tool_div_interop button:focus-visible,
+.axp_tool_disclosure button:focus-visible,
 #axp_tool_div_referenceDetails input:focus-visible {
-    outline: 2px solid #8bd3ff;
+    outline: 2px solid var(--axp-border-focus);
     outline-offset: 1px;
 }
 
 @media (pointer: coarse) {
-    #axp_tool_div_interop {
+    .axp_tool_disclosure {
         gap: 6px;
     }
 
-    #axp_tool_button_interopToggle,
+    .axp_tool_disclosureToggle,
     #axp_tool_button_timelapse,
     #axp_tool_button_clipboardCopy,
     #axp_tool_button_psdExport,
@@ -335,7 +351,7 @@
 #axp_tool_button_flipV,
 #axp_tool_button_transparent,
 #axp_tool_div_gridbutton {
-    width: 70px;
+    width: 100%;
 }
 
 /* 補助線ボタン枠 */
@@ -345,14 +361,15 @@
 
 /* 補助線 */
 #axp_tool_button_grid {
-    width: 50px;
+    flex: 1;
+    min-width: 0;
 }
 
 /* 補助線設定（歯車アイコン） */
 #axp_tool_button_gridConfig {
     isolation: isolate;
     height: 100%;
-    width: 20px;
+    width: 24px;
     background-image: url('../../resource/config.png');
     background-position: 0% 50%;
     background-repeat: no-repeat;

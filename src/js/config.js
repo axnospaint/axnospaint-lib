@@ -428,6 +428,7 @@ export class ConfigSystem {
                     // ※OK時の処理
                     // なげなわ変形中は確定してから処理する
                     this.axpObj.finalizeNagenawaSelection();
+                    this.axpObj.finalizeLiquifySession();
                     // タブをキャンバスに変更
                     this.axpObj.selectTab('0');
                     // キャンバス初期化
@@ -1373,6 +1374,7 @@ export class ConfigSystem {
         }
         // なげなわ変形中は確定してから処理する（未確定のままコピーすると選択物が欠落するため）
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         // タブをキャンバスに変更
         this.axpObj.selectTab('0');
         // レイヤーオブジェクトをコピーして一時保存
