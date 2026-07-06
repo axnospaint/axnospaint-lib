@@ -98,6 +98,8 @@ export class PenObj {
         this.borderStyle = null;
         this.lineCap = null;
         this.lineJoin = null;
+        this.selectionMaskAtStrokeStart = null;
+        this.selectionBaseImage = null;
 
     }
     // 太さ、不透明度の初期値の保存（初期化用）
@@ -260,6 +262,50 @@ export class PenObj {
         }
         this.axpObj.penSystem.CANVAS.draw_ctx.globalCompositeOperation = type;
     }
+    beginSelectionStrokeConstraint() {
+        const selectionMask = this.axpObj.getValidSelectionMask?.();
+        if (!selectionMask) {
+            this.clearSelectionStrokeConstraint();
+            return false;
+        }
+        this.selectionMaskAtStrokeStart = selectionMask;
+        this.selectionBaseImage = this.axpObj.layerSystem.load();
+        return true;
+    }
+    clearSelectionStrokeConstraint() {
+        this.selectionMaskAtStrokeStart = null;
+        this.selectionBaseImage = null;
+    }
+    hasSelectionStrokeConstraint() {
+        return this.selectionMaskAtStrokeStart !== null && this.selectionBaseImage !== null;
+    }
+    isStrokeSelectionPixelSelected(pixelIndex) {
+        const selectionMask = this.selectionMaskAtStrokeStart;
+        return selectionMask === null || selectionMask[pixelIndex] !== 0;
+    }
+    applySelectionStrokeConstraint(imageData) {
+        if (!this.hasSelectionStrokeConstraint()) return imageData;
+        const selectionMask = this.selectionMaskAtStrokeStart;
+        const baseImage = this.selectionBaseImage;
+        const pixelCount = imageData.width * imageData.height;
+        if (
+            selectionMask.length !== pixelCount ||
+            baseImage.width !== imageData.width ||
+            baseImage.height !== imageData.height
+        ) {
+            return imageData;
+        }
+        const data = imageData.data;
+        const base = baseImage.data;
+        for (let i = 0, q = 0; i < pixelCount; i++, q += 4) {
+            if (selectionMask[i] !== 0) continue;
+            data[q] = base[q];
+            data[q + 1] = base[q + 1];
+            data[q + 2] = base[q + 2];
+            data[q + 3] = base[q + 3];
+        }
+        return imageData;
+    }
     // 描画開始
     start() {
         // ペンの種類ごとに子クラスでオーバーライドする
@@ -289,6 +335,9 @@ export class PenObj {
             return;
         }
         this.axpObj.pendingPenFlush = false;
+        if (this.hasSelectionStrokeConstraint() && this.axpObj.layerSystem.compositeFastPathActive) {
+            this.axpObj.layerSystem.deactivateFastPath();
+        }
         if (this.axpObj.layerSystem.compositeFastPathActive) {
             // GPU fast path: restore base via drawImage (GPU→GPU) instead of putImageData
             const savedOp = this.CANVAS.draw_ctx.globalCompositeOperation;
@@ -316,9 +365,9 @@ export class PenObj {
         } else {
             this.CANVAS.draw_ctx.putImageData(this.axpObj.layerSystem.load(), 0, 0);
             this.CANVAS.draw_ctx.drawImage(this.CANVAS.brush, 0, 0);
-            this.axpObj.layerSystem.write(
-                this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size)
-            );
+            const imageData = this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+            this.applySelectionStrokeConstraint(imageData);
+            this.axpObj.layerSystem.write(imageData);
             this.axpObj.layerSystem.updateCanvas(this.axpObj.layerSystem.getId());
         }
     }
@@ -329,9 +378,9 @@ export class PenObj {
         this._dirty = null;
         if (this.axpObj.layerSystem.isStrokeActive) {
             if (this.axpObj.layerSystem.compositeFastPathActive && !this.axpObj.isDrawCancel) {
-                this.axpObj.layerSystem.write(
-                    this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size)
-                );
+                const imageData = this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+                this.applySelectionStrokeConstraint(imageData);
+                this.axpObj.layerSystem.write(imageData);
             }
             this.axpObj.layerSystem.isStrokeActive = false;
             this.axpObj.layerSystem.deactivateFastPath();
@@ -375,6 +424,7 @@ export class PenObj {
             // 描画フラグリセット
             this.reset_modeflag();
         }
+        this.clearSelectionStrokeConstraint();
     }
     // ペンの太さプレビュー表示
     previewPenSize() {

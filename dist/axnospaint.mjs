@@ -1,5 +1,5 @@
 /*!
- * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-06T08:46:45.138Z)
+ * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-06T08:56:01.775Z)
  * (c) 2026- nijiurachan contributors
  * (c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」
  * Licensed under MPL 2.0
@@ -30077,7 +30077,7 @@ class ConfigSystem {
         let targetElement = document.getElementById('axp_config');
         targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(_html_config_txt__WEBPACK_IMPORTED_MODULE_2__));
         // バージョン情報の表示
-        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:46:45.138Z"})`
+        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:56:01.775Z"})`
     }
     // HTML展開
     deployHTML() {
@@ -33915,8 +33915,13 @@ class DrawingPenBase extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
         // 描画開始時のイメージ記憶
         this.axpObj.layerSystem.save();
         this.axpObj.layerSystem.isStrokeActive = true;
-        this.axpObj.layerSystem.activateFastPath();
-        if (this.axpObj.layerSystem.compositeFastPathActive) {
+        const hasSelectionConstraint = this.beginSelectionStrokeConstraint();
+        if (hasSelectionConstraint) {
+            this.axpObj.layerSystem.deactivateFastPath();
+        } else {
+            this.axpObj.layerSystem.activateFastPath();
+        }
+        if (!hasSelectionConstraint && this.axpObj.layerSystem.compositeFastPathActive) {
             this.CANVAS.undoBase_ctx.putImageData(this.axpObj.layerSystem.load(), 0, 0);
         }
         this.init_brush(option);
@@ -34040,6 +34045,8 @@ class PenObj {
         this.borderStyle = null;
         this.lineCap = null;
         this.lineJoin = null;
+        this.selectionMaskAtStrokeStart = null;
+        this.selectionBaseImage = null;
 
     }
     // 太さ、不透明度の初期値の保存（初期化用）
@@ -34202,6 +34209,50 @@ class PenObj {
         }
         this.axpObj.penSystem.CANVAS.draw_ctx.globalCompositeOperation = type;
     }
+    beginSelectionStrokeConstraint() {
+        const selectionMask = this.axpObj.getValidSelectionMask?.();
+        if (!selectionMask) {
+            this.clearSelectionStrokeConstraint();
+            return false;
+        }
+        this.selectionMaskAtStrokeStart = selectionMask;
+        this.selectionBaseImage = this.axpObj.layerSystem.load();
+        return true;
+    }
+    clearSelectionStrokeConstraint() {
+        this.selectionMaskAtStrokeStart = null;
+        this.selectionBaseImage = null;
+    }
+    hasSelectionStrokeConstraint() {
+        return this.selectionMaskAtStrokeStart !== null && this.selectionBaseImage !== null;
+    }
+    isStrokeSelectionPixelSelected(pixelIndex) {
+        const selectionMask = this.selectionMaskAtStrokeStart;
+        return selectionMask === null || selectionMask[pixelIndex] !== 0;
+    }
+    applySelectionStrokeConstraint(imageData) {
+        if (!this.hasSelectionStrokeConstraint()) return imageData;
+        const selectionMask = this.selectionMaskAtStrokeStart;
+        const baseImage = this.selectionBaseImage;
+        const pixelCount = imageData.width * imageData.height;
+        if (
+            selectionMask.length !== pixelCount ||
+            baseImage.width !== imageData.width ||
+            baseImage.height !== imageData.height
+        ) {
+            return imageData;
+        }
+        const data = imageData.data;
+        const base = baseImage.data;
+        for (let i = 0, q = 0; i < pixelCount; i++, q += 4) {
+            if (selectionMask[i] !== 0) continue;
+            data[q] = base[q];
+            data[q + 1] = base[q + 1];
+            data[q + 2] = base[q + 2];
+            data[q + 3] = base[q + 3];
+        }
+        return imageData;
+    }
     // 描画開始
     start() {
         // ペンの種類ごとに子クラスでオーバーライドする
@@ -34231,6 +34282,9 @@ class PenObj {
             return;
         }
         this.axpObj.pendingPenFlush = false;
+        if (this.hasSelectionStrokeConstraint() && this.axpObj.layerSystem.compositeFastPathActive) {
+            this.axpObj.layerSystem.deactivateFastPath();
+        }
         if (this.axpObj.layerSystem.compositeFastPathActive) {
             // GPU fast path: restore base via drawImage (GPU→GPU) instead of putImageData
             const savedOp = this.CANVAS.draw_ctx.globalCompositeOperation;
@@ -34258,9 +34312,9 @@ class PenObj {
         } else {
             this.CANVAS.draw_ctx.putImageData(this.axpObj.layerSystem.load(), 0, 0);
             this.CANVAS.draw_ctx.drawImage(this.CANVAS.brush, 0, 0);
-            this.axpObj.layerSystem.write(
-                this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size)
-            );
+            const imageData = this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+            this.applySelectionStrokeConstraint(imageData);
+            this.axpObj.layerSystem.write(imageData);
             this.axpObj.layerSystem.updateCanvas(this.axpObj.layerSystem.getId());
         }
     }
@@ -34271,9 +34325,9 @@ class PenObj {
         this._dirty = null;
         if (this.axpObj.layerSystem.isStrokeActive) {
             if (this.axpObj.layerSystem.compositeFastPathActive && !this.axpObj.isDrawCancel) {
-                this.axpObj.layerSystem.write(
-                    this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size)
-                );
+                const imageData = this.CANVAS.draw_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+                this.applySelectionStrokeConstraint(imageData);
+                this.axpObj.layerSystem.write(imageData);
             }
             this.axpObj.layerSystem.isStrokeActive = false;
             this.axpObj.layerSystem.deactivateFastPath();
@@ -34317,6 +34371,7 @@ class PenObj {
             // 描画フラグリセット
             this.reset_modeflag();
         }
+        this.clearSelectionStrokeConstraint();
     }
     // ペンの太さプレビュー表示
     previewPenSize() {
@@ -34503,7 +34558,8 @@ class PixelFilterPenBase extends _drawingpen_js__WEBPACK_IMPORTED_MODULE_0__.Dra
         // 描画開始時のイメージ記憶 (差し替え前の参照がアンドゥ差分の基準になる)
         this.axpObj.layerSystem.save();
         this.axpObj.layerSystem.isStrokeActive = true;
-        const base = this.axpObj.layerSystem.load();
+        this.beginSelectionStrokeConstraint();
+        const base = this.selectionBaseImage || this.axpObj.layerSystem.load();
         this.work = new ImageData(
             new Uint8ClampedArray(base.data),
             base.width,
@@ -35512,6 +35568,8 @@ class Diffusion extends _pixelfilterpen_js__WEBPACK_IMPORTED_MODULE_0__.PixelFil
             const xs = Math.max(x0, Math.ceil(cp.x - 0.5 - halfSpan));
             const xe = Math.min(x1, Math.floor(cp.x - 0.5 + halfSpan));
             for (let x = xs; x <= xe; x++) {
+                const i = y * W + x;
+                if (!this.isStrokeSelectionPixelSelected(i)) continue;
                 const fx = x + 0.5 - cp.x;
                 const d2 = fx * fx + fy2;
                 let li = (d2 * lutScale) | 0;
@@ -35519,7 +35577,6 @@ class Diffusion extends _pixelfilterpen_js__WEBPACK_IMPORTED_MODULE_0__.PixelFil
                 const f = fLut[li];
                 if (f <= 0) continue;
                 const m = gain * f;
-                const i = y * W + x;
                 if (m <= mask[i]) continue; // max 合成: 二重ぼかしなし
                 mask[i] = m;
                 const q = i * 4;
@@ -35553,7 +35610,9 @@ class Diffusion extends _pixelfilterpen_js__WEBPACK_IMPORTED_MODULE_0__.PixelFil
                 const sy = Math.max(0, Math.min(this.H - 1, icy + oy - R));
                 for (let ox = 0; ox < D; ox++) {
                     const sx = Math.max(0, Math.min(this.W - 1, icx + ox - R));
-                    const sp = (sy * W + sx) * 4;
+                    const si = sy * W + sx;
+                    if (!this.isStrokeSelectionPixelSelected(si)) continue;
+                    const sp = si * 4;
                     const a = work[sp + 3];
                     const t = (oy * D + ox) * 4;
                     this.carried[t] = work[sp] * a / 255;
@@ -35593,6 +35652,8 @@ class Diffusion extends _pixelfilterpen_js__WEBPACK_IMPORTED_MODULE_0__.PixelFil
             const xs = Math.max(x0, Math.ceil(cp.x - 0.5 - halfSpan));
             const xe = Math.min(x1, Math.floor(cp.x - 0.5 + halfSpan));
             for (let x = xs; x <= xe; x++) {
+                const i = y * W + x;
+                if (!this.isStrokeSelectionPixelSelected(i)) continue;
                 const fx = x + 0.5 - cp.x;
                 const d2 = fx * fx + fy2;
                 let li = (d2 * lutScale) | 0;
@@ -35601,7 +35662,7 @@ class Diffusion extends _pixelfilterpen_js__WEBPACK_IMPORTED_MODULE_0__.PixelFil
                 if (ad <= 0.0005) continue;
                 const ox = x - icx + R;
                 if (ox < 0 || ox >= D) continue;
-                const q = (y * W + x) * 4;
+                const q = i * 4;
                 const t = (oy * D + ox) * 4;
                 // 現在のキャンバス色 (premultiply)
                 const ca = work[q + 3];
@@ -49306,7 +49367,7 @@ __webpack_require__.r(__webpack_exports__);
     axpObj;
     constructor(option) {
         console.log('version:', "3.0.0-alpha");
-        console.log('build:', "2026-07-06T08:46:45.138Z");
+        console.log('build:', "2026-07-06T08:56:01.775Z");
         (async () => {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
@@ -49687,7 +49748,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:46:45.138Z"})`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:56:01.775Z"})`;
     }
     // 画面の表示／非表示
     on() {
@@ -49699,7 +49760,7 @@ __webpack_require__.r(__webpack_exports__);
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${"3.0.0-alpha"} (${"2026-07-06T08:46:45.138Z"})`;
+        return `version ${"3.0.0-alpha"} (${"2026-07-06T08:56:01.775Z"})`;
     }
 });
 

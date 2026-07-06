@@ -93,8 +93,13 @@ export class DrawingPenBase extends PenObj {
         // 描画開始時のイメージ記憶
         this.axpObj.layerSystem.save();
         this.axpObj.layerSystem.isStrokeActive = true;
-        this.axpObj.layerSystem.activateFastPath();
-        if (this.axpObj.layerSystem.compositeFastPathActive) {
+        const hasSelectionConstraint = this.beginSelectionStrokeConstraint();
+        if (hasSelectionConstraint) {
+            this.axpObj.layerSystem.deactivateFastPath();
+        } else {
+            this.axpObj.layerSystem.activateFastPath();
+        }
+        if (!hasSelectionConstraint && this.axpObj.layerSystem.compositeFastPathActive) {
             this.CANVAS.undoBase_ctx.putImageData(this.axpObj.layerSystem.load(), 0, 0);
         }
         this.init_brush(option);
