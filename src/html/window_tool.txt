@@ -7,6 +7,97 @@
             <div id="axp_tool_div_canvasSize">
                 <span id="axp_tool_span_canvasSize" class="axpc_MSG" data-msg="@AST0001"></span>
             </div>
+            <div id="axp_tool_div_canvasSizePreset">
+                <button id="axp_tool_button_sizePreset0" class="axpc_MSG axpc_button axpc_tool_sizePreset"
+                    data-msg="@AST0016" data-sidx="0"></button>
+                <button id="axp_tool_button_sizePreset1" class="axpc_MSG axpc_button axpc_tool_sizePreset"
+                    data-msg="@AST0016" data-sidx="1"></button>
+                <button id="axp_tool_button_sizePreset2" class="axpc_MSG axpc_button axpc_tool_sizePreset"
+                    data-msg="@AST0016" data-sidx="2"></button>
+                <button id="axp_tool_button_sizePreset3" class="axpc_MSG axpc_button axpc_tool_sizePreset"
+                    data-msg="@AST0016" data-sidx="3"></button>
+            </div>
+            <div id="axp_tool_div_bgColor">
+                <span id="axp_tool_span_bgColorLabel">${_("@MISC.BG_COLOR_LABEL")}</span>
+                <div id="axp_tool_toggle_bgColor" class="axpc_MSG axpc_toggle_switch" data-msg="@AST0017">
+                    <input type="checkbox" name="check" />
+                </div>
+            </div>
+            <!-- 対称・回転描画（曼荼羅/雪結晶）。中心点はキャンバス中央固定 -->
+            <div id="axp_tool_div_symmetry">
+                <label>
+                    <input type="checkbox" id="axp_tool_checkbox_symmetryEnabled">
+                    <span>${_("@SYMMETRY.ENABLED")}</span>
+                </label>
+                <select id="axp_tool_select_symmetryMode">
+                    <option value="radial" selected>${_("@SYMMETRY.RADIAL")}</option>
+                    <option value="mirrorH">${_("@SYMMETRY.MIRROR_H")}</option>
+                    <option value="mirrorV">${_("@SYMMETRY.MIRROR_V")}</option>
+                    <option value="mirrorBoth">${_("@SYMMETRY.MIRROR_BOTH")}</option>
+                </select>
+                <div id="axp_tool_div_symmetryCountRow">
+                    <span>${_("@SYMMETRY.COUNT")}</span>
+                    <div class="axpc_range">
+                        <input type="range" id="axp_tool_range_symmetryCount" min="2" max="16" step="1" value="6">
+                    </div>
+                    <span id="axp_tool_span_symmetryCountValue">6</span>
+                </div>
+            </div>
+
+            <div id="axp_tool_div_interop">
+                <button id="axp_tool_button_interopToggle" type="button" class="axpc_MSG axpc_button"
+                    data-msg="@AST0200" aria-expanded="false"
+                    aria-controls="axp_tool_div_interopControls">${_("@INTEROP.TITLE")}</button>
+                <div id="axp_tool_div_interopControls" class="axpc_NONE" hidden>
+                    <button id="axp_tool_button_timelapse" type="button" class="axpc_MSG axpc_button"
+                        data-msg="@AST0203" aria-pressed="false">${_("@INTEROP.TIMELAPSE_START")}</button>
+                    <button id="axp_tool_button_clipboardCopy" type="button" class="axpc_MSG axpc_button"
+                        data-msg="@AST0204">${_("@INTEROP.CLIPBOARD_COPY")}</button>
+                    <button id="axp_tool_button_psdExport" type="button" class="axpc_MSG axpc_button"
+                        data-msg="@AST0202">${_("@INTEROP.PSD_EXPORT")}</button>
+                    <button id="axp_tool_button_referenceLoad" type="button" class="axpc_MSG axpc_button"
+                        data-msg="@AST0201">${_("@INTEROP.REFERENCE_LOAD")}</button>
+                    <input id="axp_tool_file_reference" type="file" accept="image/png,image/jpeg,image/webp,.psd">
+                    <div id="axp_tool_div_referenceDetails" class="axpc_NONE" hidden>
+                        <div id="axp_tool_div_referenceToggles" class="axp_tool_referenceInline">
+                            <label>
+                                <input type="checkbox" id="axp_tool_checkbox_referenceEdit">
+                                <span>${_("@INTEROP.REFERENCE_EDIT")}</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="axp_tool_checkbox_referenceVisible" checked>
+                                <span>${_("@INTEROP.REFERENCE_VISIBLE")}</span>
+                            </label>
+                        </div>
+                        <div id="axp_tool_div_referencePosition" class="axp_tool_referenceInline">
+                            <label>${_("@INTEROP.REFERENCE_X")}
+                                <input type="number" id="axp_tool_number_referenceX" step="1" value="0">
+                            </label>
+                            <label>${_("@INTEROP.REFERENCE_Y")}
+                                <input type="number" id="axp_tool_number_referenceY" step="1" value="0">
+                            </label>
+                        </div>
+                        <label>${_("@INTEROP.REFERENCE_OPACITY")}
+                            <div class="axpc_range">
+                                <input type="range" id="axp_tool_range_referenceOpacity" min="5" max="100" value="50">
+                            </div>
+                        </label>
+                        <label>${_("@INTEROP.REFERENCE_SCALE")}
+                            <div class="axpc_range">
+                                <input type="range" id="axp_tool_range_referenceScale" min="5" max="400" value="100">
+                            </div>
+                        </label>
+                        <label>${_("@INTEROP.REFERENCE_ROTATION")}
+                            <div class="axpc_range">
+                                <input type="range" id="axp_tool_range_referenceRotation" min="-180" max="180" value="0">
+                            </div>
+                        </label>
+                        <button id="axp_tool_button_referenceRemove" type="button"
+                            class="axpc_button">${_("@INTEROP.REFERENCE_REMOVE")}</button>
+                    </div>
+                </div>
+            </div>
+
             <div id="axp_tool_div_minimap_outer" class="axpc_MSG" data-msg="@AST0002">
                 <div id="axp_tool_div_minimap_line" class="axpc_NONE"></div>
                 <div id="axp_tool_div_minimap_inner">
@@ -23,10 +114,6 @@
         </div>
         <!-- 補助ツール右側 -->
         <div id="axp_tool_div_rightSide">
-            <button id="axp_tool_button_undo" class="axpc_FUNC axpc_button" data-function="func_undo"
-                data-msg="@AST0006">${_("@MISC.BUTTON_UNDO")}(0)</button>
-            <button id="axp_tool_button_redo" class="axpc_FUNC axpc_button" data-function="func_redo"
-                data-msg="@AST0007">${_("@MISC.BUTTON_REDO")}(0)</button>
             <button id="axp_tool_button_restore" class="axpc_FUNC axpc_button" data-function="func_restore"
                 data-msg="@AST0008">${_("@MISC.BUTTON_RESTORE_AUTOSAVE")}</button>
 

@@ -3,6 +3,8 @@
 import { ToolWindow } from './window.js';
 import htmldata from '../html/window_tool.txt';
 import { UTIL, adjustInRange } from './etc.js';
+import { confirmExPromise } from './alert.js';
+import { defaultSymmetryConfig } from './symmetrydraw.js';
 // css適用
 import '../css/window_tool.css';
 
@@ -16,6 +18,10 @@ export class AssistToolSystem extends ToolWindow {
     isGrid = false;
     isTransparent = false;
     elementProcessingColor = null;
+    // キャンバスサイズ・プリセット（E-1b）。configから復元し、無ければ既定値を使う
+    sizePresets = [];
+    // 対称・回転描画（曼荼羅/雪結晶）設定。中心点は常にキャンバス中央固定（v1）
+    symmetryConfig = defaultSymmetryConfig();
     constructor(axpObj) {
         super(axpObj);
     }
@@ -269,6 +275,202 @@ export class AssistToolSystem extends ToolWindow {
             this.axpObj.closeSubwindow('axp_gridconfig');
         });
 
+        // キャンバスサイズ・プリセット（E-1b）
+        this.initSizePresets();
+
+        // 背景色トグル（肌色/白）（E-1c）
+        // ※トグルのON/OFF・data-checked・config(TOGSW)保存は共通トグル処理が担う。
+        //   ここでは切替後の状態を読み、背景の地色を更新して再描画する。
+        const bgToggle = document.getElementById('axp_tool_toggle_bgColor');
+        if (bgToggle) {
+            const updateBgToggleLabel = () => {
+                const isWhite = bgToggle.querySelector('input').checked;
+                bgToggle.dataset.label = isWhite
+                    ? this.axpObj._('@MISC.BG_WHITE_SHORT')
+                    : this.axpObj._('@MISC.BG_SKIN_SHORT');
+            };
+            updateBgToggleLabel();
+            bgToggle.addEventListener('click', () => {
+                // 共通トグル処理（input.checked/data-checkedの更新）がこのリスナーより先に
+                // 登録されている前提に依存しないよう、同期処理完了後（次のマイクロタスク）に読む
+                setTimeout(() => {
+                    const isWhite = bgToggle.querySelector('input').checked;
+                    updateBgToggleLabel();
+                    this.axpObj.backgroundColor = isWhite ? '#ffffff' : this.axpObj.skinBackgroundColor;
+                    this.axpObj.layerSystem.updateCanvas();
+                }, 0);
+            });
+        }
+
+        // 対称・回転描画（曼荼羅/雪結晶）
+        const symEnabled = document.getElementById('axp_tool_checkbox_symmetryEnabled');
+        const symMode = document.getElementById('axp_tool_select_symmetryMode');
+        const symCount = document.getElementById('axp_tool_range_symmetryCount');
+        const symCountRow = document.getElementById('axp_tool_div_symmetryCountRow');
+        this.symmetryConfig.enabled = symEnabled.checked;
+        this.symmetryConfig.mode = symMode.value;
+        this.symmetryConfig.radialCount = Number(symCount.value);
+        const updateCountRowVisibility = () => {
+            symCountRow.style.display = (symMode.value === 'radial') ? '' : 'none';
+        };
+        symEnabled.addEventListener('change', () => {
+            this.symmetryConfig.enabled = symEnabled.checked;
+            this.axpObj.configSystem.saveConfig('CHECK_axp_tool_checkbox_symmetryEnabled', symEnabled.checked);
+        });
+        symMode.addEventListener('change', () => {
+            this.symmetryConfig.mode = symMode.value;
+            this.axpObj.configSystem.saveConfig('VALUE_axp_tool_select_symmetryMode', symMode.value);
+            updateCountRowVisibility();
+        });
+        symCount.addEventListener('input', () => {
+            this.symmetryConfig.radialCount = Number(symCount.value);
+            document.getElementById('axp_tool_span_symmetryCountValue').textContent = symCount.value;
+            this.axpObj.configSystem.saveConfig('VALUE_axp_tool_range_symmetryCount', symCount.value);
+        });
+        document.getElementById('axp_tool_span_symmetryCountValue').textContent = symCount.value;
+        updateCountRowVisibility();
+    }
+    // プリセット登録値をシステム上限(1000)内へ丸める。環境上限(maxWidth/Height)ではなくシステム上限で
+    // 丸めることで、狭い環境（例:dev=600）で復元しても登録値そのものは保持され、無効表示のみで扱える。
+    // 不正値（NaN・最小未満等）はnullを返す。
+    clampPresetW(v) {
+        v = Number(v);
+        if (!Number.isFinite(v) || v < this.axpObj.minWidth) return null;
+        return Math.min(this.axpObj.CONST.MAX_SYSTEM_WIDTH, Math.round(v));
+    }
+    clampPresetH(v) {
+        v = Number(v);
+        if (!Number.isFinite(v) || v < this.axpObj.minHeight) return null;
+        return Math.min(this.axpObj.CONST.MAX_SYSTEM_HEIGHT, Math.round(v));
+    }
+    // キャンバスサイズ・プリセットの既定値（E-1b）
+    getDefaultSizePresets() {
+        return [
+            { w: 600, h: 424 },
+            { w: 400, h: 282 },
+            { w: 424, h: 600 },
+            { w: 1000, h: 1000 },
+        ];
+    }
+    // プリセットの復元・ラベル描画・クリックイベント配線
+    initSizePresets() {
+        const defaults = this.getDefaultSizePresets();
+        this.sizePresets = defaults.map((d, i) => {
+            // ※キー名はconfig.jsのrestoreConfigが前提とする「5文字プレフィックス+_」規約に合わせる
+            //  （5文字以外にするとrestoreConfig側で復元されず永続化が失敗する）
+            const saved = this.axpObj.configSystem.getConfig('AUXSZ_' + i);
+            if (typeof saved === 'string') {
+                try {
+                    const obj = JSON.parse(saved);
+                    const w = this.clampPresetW(obj.w);
+                    const h = this.clampPresetH(obj.h);
+                    if (w !== null && h !== null) {
+                        return { w, h };
+                    }
+                } catch {
+                    // 破損データは既定値のまま
+                }
+            }
+            return { w: d.w, h: d.h };
+        });
+        // 単/複クリック判別（混色ペンプリセットに準拠）
+        document.querySelectorAll('.axpc_tool_sizePreset').forEach((btn) => {
+            const idx = Number(btn.dataset.sidx);
+            let clickTimerID = null; // 適用待機タイマー
+            btn.addEventListener('pointerup', () => {
+                if (clickTimerID !== null) {
+                    // 待機中の再クリック: 適用せず登録サイズを編集
+                    clearTimeout(clickTimerID);
+                    clickTimerID = null;
+                    this.editSizePreset(idx);
+                } else {
+                    // 0.3秒待機し、再クリックがなければ適用
+                    clickTimerID = setTimeout(() => {
+                        clickTimerID = null;
+                        this.applySizePreset(idx);
+                    }, 300);
+                }
+            });
+        });
+        this.updateSizePresetDisplay();
+    }
+    // ボタンラベルと無効表示（この環境の上限超）の更新
+    updateSizePresetDisplay() {
+        document.querySelectorAll('.axpc_tool_sizePreset').forEach((btn) => {
+            const idx = Number(btn.dataset.sidx);
+            const p = this.sizePresets[idx];
+            if (!p) return;
+            btn.textContent = `${p.w}×${p.h}`;
+            // この環境の上限を超えるプリセットは無効表示（適用不可・ダブルクリック編集は可能）
+            const overLimit = (p.w > this.axpObj.maxWidth || p.h > this.axpObj.maxHeight);
+            btn.classList.toggle('axpc_tool_sizePreset_disabled', overLimit);
+        });
+    }
+    // プリセット適用（シングルクリック）
+    applySizePreset(idx) {
+        const p = this.sizePresets[idx];
+        if (!p) return;
+        // 起動オプションで、下書き機能使用時のキャンバスサイズの変更が制限されている場合
+        // （既存の「お絵カキコのサイズ変更」ボタンと同じガード。config.jsのchangeCanvasSizeKeepImage
+        //  内にも同等チェックがあるが、確認ダイアログを出す前にここで早期リターンする）
+        if (this.axpObj.restrictDraftCanvasResizing) {
+            if (this.axpObj.oekaki_id !== null || this.axpObj.draftImageFile !== null) {
+                alert('下書き機能を利用したキャンバスは、サイズの変更ができません。');
+                return;
+            }
+        }
+        // この環境の上限を超える場合は適用しない
+        if (p.w > this.axpObj.maxWidth || p.h > this.axpObj.maxHeight) {
+            alert(`このサイズ（${p.w}×${p.h}）はこの環境の上限（${this.axpObj.maxWidth}×${this.axpObj.maxHeight}）を超えるため適用できません。\nすばやく2回クリックで登録サイズを変更できます。`);
+            return;
+        }
+        const x = this.axpObj.checkCanvasSize_x(p.w);
+        const y = this.axpObj.checkCanvasSize_y(p.h);
+        // 現在と同じサイズなら何もしない
+        if (x === this.axpObj.x_size && y === this.axpObj.y_size) {
+            return;
+        }
+        // 縮小時のみ警告（拡大・同サイズは無警告で即適用）
+        if (x < this.axpObj.x_size || y < this.axpObj.y_size) {
+            confirmExPromise('キャンバスを縮小すると、はみ出した部分の画像が失われる可能性があります。\n続行しますか？')
+                .then(() => {
+                    this.axpObj.configSystem.changeCanvasSizeKeepImage(x, y);
+                })
+                .catch(() => {
+                    // キャンセル時は何もしない
+                });
+        } else {
+            this.axpObj.configSystem.changeCanvasSizeKeepImage(x, y);
+        }
+    }
+    // 登録サイズの編集（ダブルクリック相当）
+    editSizePreset(idx) {
+        const p = this.sizePresets[idx];
+        if (!p) return;
+        const input = prompt(
+            `登録するキャンバスサイズを入力してください（幅×高さ）\n例: 600x424\n（システム上限 ${this.axpObj.CONST.MAX_SYSTEM_WIDTH}×${this.axpObj.CONST.MAX_SYSTEM_HEIGHT}）`,
+            `${p.w}x${p.h}`
+        );
+        if (input === null) return;
+        // 全角数字・大文字X・全角×等をIME入力でも受け付けられるよう正規化してから解析
+        const normalized = input.trim()
+            .replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xFEE0))
+            .toLowerCase();
+        const m = normalized.match(/^(\d+)[\sx×,]+(\d+)$/);
+        if (!m) {
+            alert('入力の形式が正しくありません。「幅x高さ」（例: 600x424）の形式で入力してください。');
+            return;
+        }
+        const w = this.clampPresetW(m[1]);
+        const h = this.clampPresetH(m[2]);
+        if (w === null || h === null) {
+            alert(`入力値が正しくありません。${this.axpObj.minWidth}以上、システム上限${this.axpObj.CONST.MAX_SYSTEM_WIDTH}×${this.axpObj.CONST.MAX_SYSTEM_HEIGHT}以内の数値を入力してください。`);
+            return;
+        }
+        this.sizePresets[idx] = { w, h };
+        // ※キー名はconfig.jsのrestoreConfigが前提とする「5文字プレフィックス+_」規約に合わせる
+        this.axpObj.configSystem.saveConfig('AUXSZ_' + idx, JSON.stringify({ w, h }));
+        this.updateSizePresetDisplay();
     }
     changeGridColor() {
         // カラーピッカーと不透明度スライダーからカラーコード（アルファ含む）を生成
@@ -440,7 +642,6 @@ export class AssistToolSystem extends ToolWindow {
         }
     }
 }
-
 
 
 

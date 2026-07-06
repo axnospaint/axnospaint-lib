@@ -75,6 +75,13 @@
     background-position: center;
 }
 
+/* フィルタウィンドウ（漏斗アイコン、インラインSVG。新規PNG資産を追加しないための代替） */
+.axpc_icon_window_filter {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg>');
+}
+
 /* レイヤー */
 .axpc_icon_eyeON {
     background: center no-repeat url('../../resource/eye_on.png');

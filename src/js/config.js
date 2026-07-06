@@ -474,50 +474,8 @@ export class ConfigSystem {
             confirmExPromise(`キャンバスサイズを${x}×${y}に変更します。\nよろしいですか？\n（※この処理はアンドゥできません）`)
                 .then(() => {
                     // ※OK時の処理
-                    // なげなわ変形中は確定してから処理する（未確定のままコピーすると選択物が欠落するため）
-                    this.axpObj.finalizeNagenawaSelection();
-                    // タブをキャンバスに変更
-                    this.axpObj.selectTab('0');
-                    // レイヤーオブジェクトをコピーして一時保存
-                    let obj = this.axpObj.layerSystem.layerObj;
-                    var copy_layerOBJ = obj.map(obj => ({ ...obj }));
-
-                    // キャンバスサイズ設定
-                    this.axpObj.setCanvasSize(x, y);
-
-                    // レイヤーオブジェクトのimagedataサイズを新しいサイズに変更する（全レイヤー分繰り返す）
-                    const newCanvas = document.createElement('canvas');
-                    newCanvas.width = x;
-                    newCanvas.height = y;
-                    const newCanvas_ctx = newCanvas.getContext('2d', { willReadFrequently: true });
-
-                    for (let item of copy_layerOBJ) {
-                        newCanvas_ctx.clearRect(0, 0, x, y);
-                        newCanvas_ctx.putImageData(item.image, 0, 0);
-                        item.image = newCanvas_ctx.getImageData(0, 0, x, y);
-                    }
-
-                    var data = {
-                        version: this.axpObj.saveSystem.CONST.DATA_VERSION,
-                        id: null,
-                        created: null,
-                        src: null,
-                        x_max: x,
-                        y_max: y,
-                        counter: this.axpObj.layerSystem.layer_counter,
-                        layer: copy_layerOBJ,
-                        transparent: this.axpObj.assistToolSystem.getIsTransparent(),
-                    }
-                    // 復元処理
-                    this.axpObj.saveSystem.restoreData(data);
-
-                    copy_layerOBJ = null;
-                    data = null;
-
-                    // キャンバスサイズ履歴への追加と表示更新
-                    this.addCanvasSizeHistory(x, y);
-                    this.updateCanvasSizeHistory();
-
+                    // 現在の描画内容を保持したままサイズ変更
+                    this.changeCanvasSizeKeepImage(x, y);
                     alert(`キャンバスサイズを変更しました。横:${x} 縦:${y}`);
                 })
                 .catch(() => {
@@ -716,6 +674,12 @@ export class ConfigSystem {
             this.axpObj.colorMakerSystem.updateMakeColorType();
         });
         document.getElementById('axp_config_form_makeColorTypeMixed').addEventListener('change', () => {
+            this.axpObj.colorMakerSystem.updateMakeColorType();
+        });
+        document.getElementById('axp_config_form_makeColorTypeCMYK').addEventListener('change', () => {
+            this.axpObj.colorMakerSystem.updateMakeColorType();
+        });
+        document.getElementById('axp_config_form_makeColorTypeLab').addEventListener('change', () => {
             this.axpObj.colorMakerSystem.updateMakeColorType();
         });
         // ◆カラーパレット ----------------------------------------------------------------
@@ -1396,6 +1360,79 @@ export class ConfigSystem {
     }
 
     // --------------------------------------------------------
+    // 現在の描画内容を保持したままキャンバスサイズを変更する
+    // （新規作成と異なり、各レイヤーの画像を新サイズへ再配置して保持する）
+    changeCanvasSizeKeepImage(x, y) {
+        // 起動オプションで、下書き機能使用時のキャンバスサイズの変更が制限されている場合
+        // （呼び出し元（設定画面ボタン・補助ツールのサイズプリセット等）に依らず、ここで一元的にガードする）
+        if (this.axpObj.restrictDraftCanvasResizing) {
+            if (this.axpObj.oekaki_id !== null || this.axpObj.draftImageFile !== null) {
+                alert('下書き機能を利用したキャンバスは、サイズの変更ができません。');
+                return false;
+            }
+        }
+        // なげなわ変形中は確定してから処理する（未確定のままコピーすると選択物が欠落するため）
+        this.axpObj.finalizeNagenawaSelection();
+        // タブをキャンバスに変更
+        this.axpObj.selectTab('0');
+        // レイヤーオブジェクトをコピーして一時保存
+        let obj = this.axpObj.layerSystem.layerObj;
+        var copy_layerOBJ = obj.map(obj => ({ ...obj }));
+
+        // キャンバスサイズ設定
+        this.axpObj.setCanvasSize(x, y);
+
+        // レイヤーオブジェクトのimagedataサイズを新しいサイズに変更する（全レイヤー分繰り返す）
+        const newCanvas = document.createElement('canvas');
+        newCanvas.width = x;
+        newCanvas.height = y;
+        const newCanvas_ctx = newCanvas.getContext('2d', { willReadFrequently: true });
+
+        for (let item of copy_layerOBJ) {
+            newCanvas_ctx.clearRect(0, 0, x, y);
+            newCanvas_ctx.putImageData(item.image, 0, 0);
+            item.image = newCanvas_ctx.getImageData(0, 0, x, y);
+            // 透明マスクも同じ手順でリサイズする（マスクのみ古いサイズのまま残ると、
+            // applyLayerMask()でのレイヤー画像とマスクの座標がズレて破綻するため）
+            if (item.mask) {
+                newCanvas_ctx.clearRect(0, 0, x, y);
+                newCanvas_ctx.putImageData(item.mask.image, 0, 0);
+                item.mask = { ...item.mask, image: newCanvas_ctx.getImageData(0, 0, x, y) };
+            }
+        }
+
+        var data = {
+            version: this.axpObj.saveSystem.CONST.DATA_VERSION,
+            id: null,
+            created: null,
+            src: null,
+            x_max: x,
+            y_max: y,
+            counter: this.axpObj.layerSystem.layer_counter,
+            layer: copy_layerOBJ,
+            transparent: this.axpObj.assistToolSystem.getIsTransparent(),
+        }
+        // 復元処理
+        this.axpObj.saveSystem.restoreData(data);
+
+        copy_layerOBJ = null;
+        data = null;
+
+        // キャンバスサイズ履歴への追加と表示更新
+        this.addCanvasSizeHistory(x, y);
+        this.updateCanvasSizeHistory();
+
+        // 設定画面のキャンバスサイズ数値入力欄を新サイズへ同期
+        // （同期しないと、次に設定画面でこの欄を操作した時に変更前のサイズへ意図せず戻る）
+        const inputWidth = document.getElementById('axp_config_number_oekakiWidth');
+        const inputHeight = document.getElementById('axp_config_number_oekakiHeight');
+        if (inputWidth) inputWidth.value = x;
+        if (inputHeight) inputHeight.value = y;
+
+        return true;
+    }
+
+    // --------------------------------------------------------
     // キャンバスサイズ履歴の追加
     addCanvasSizeHistory(x, y) {
         let history = `${x},${y}`;
@@ -1594,6 +1631,10 @@ export class ConfigSystem {
                     case 'P-THR':
                         pObj[elememtId].threshold = Number(value);
                         break;
+                    // 色の許容誤差
+                    case 'P-CTL':
+                        pObj[elememtId].colorTolerance = Number(value);
+                        break;
                     // ぼかし
                     case 'P-BLU':
                         pObj[elememtId].blurLevel = Number(value);
@@ -1751,6 +1792,7 @@ export class ConfigSystem {
                 case 'P-SIZ':
                 case 'P-ALP':
                 case 'P-THR':
+                case 'P-CTL':
                 case 'P-BLU':
                 case 'P-TON':
                 case 'P-DEG':
@@ -1812,9 +1854,14 @@ export class ConfigSystem {
                 case 'COTAG':
                     this.axpObj.layerSystem.resetColorTagList(value);
                     break;
-                // 太さクイックボタン・混色ペンプリセット (値はペンツール側で解釈)
+                // 太さクイックボタン・混色ペンプリセット・歪みペン設定・キャンバスサイズプリセット・色履歴 (値は各ツール側で解釈)
                 case 'QSIZE':
                 case 'DPRST':
+                case 'P-LQM':
+                case 'P-LQS':
+                case 'P-LQH':
+                case 'AUXSZ':
+                case 'COLHS':
                     break;
                 // その他
                 default:

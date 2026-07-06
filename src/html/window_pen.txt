@@ -4,6 +4,12 @@
         <!-- ペンツール左側 -->
         <div id="axp_pen_div_leftSide">
             <span id="axp_pen_span_penName" class="axpc_MSG" data-msg="@PEN0001"></span>
+            <!-- 選択範囲の状態表示（選択中のみ、現在のペン種別に関わらず表示） -->
+            <div id="axp_pen_div_selectionStatus" class="axpc_NONE axpc_text_border">
+                <span>${_("@PEN.SELECTION_ACTIVE")} <span id="axp_pen_span_selectionCount">0</span>px</span>
+                <button id="axp_pen_button_deselect" class="axpc_FUNC" data-function="func_deselect"
+                    data-msg="@PEN0018">${_("@PEN.DESELECT")}</button>
+            </div>
             <!-- プレビュー領域 -->
             <div id="axp_pen_div_preview" class="axpc_MSG" data-msg="@PEN0200">
                 <canvas id="axp_pen_canvas_previewPenSize"></canvas>
@@ -39,12 +45,48 @@
                     <div class="axpc_range_label">${_("@PEN.SIZE")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
+                <div id="axp_pen_div_liquifyMode" class="axpc_text_border axpc_NONE">
+                    <label for="axp_pen_select_liquifyMode">${_("@LIQUIFY.MODE")}</label>
+                    <select id="axp_pen_select_liquifyMode">
+                        <option value="push">${_("@LIQUIFY.PUSH")}</option>
+                        <option value="expand">${_("@LIQUIFY.EXPAND")}</option>
+                        <option value="pinch">${_("@LIQUIFY.PINCH")}</option>
+                        <option value="push-left">${_("@LIQUIFY.PUSH_LEFT")}</option>
+                        <option value="push-right">${_("@LIQUIFY.PUSH_RIGHT")}</option>
+                        <option value="twirl-clockwise">${_("@LIQUIFY.TWIRL_CLOCKWISE")}</option>
+                        <option value="twirl-anticlockwise">${_("@LIQUIFY.TWIRL_ANTICLOCKWISE")}</option>
+                    </select>
+                </div>
+                <form id="axp_pen_form_liquifyStrength" class="axpc_range axpc_text_border axpc_NONE"
+                    oninput="result.value=parseInt(volume.value)">
+                    <input type="range" id="axp_pen_range_liquifyStrength" name="volume"
+                        value="50" step="1" min="1" max="100" data-msg="@PEN0023" class="axpc_MSG"
+                        aria-label="${_("@LIQUIFY.STRENGTH")}">
+                    <div class="axpc_range_label">${_("@LIQUIFY.STRENGTH")}</div>
+                    <div class="axpc_range_value"><output name="result">50</output></div>
+                </form>
+                <form id="axp_pen_form_liquifyHardness" class="axpc_range axpc_text_border axpc_NONE"
+                    oninput="result.value=parseInt(volume.value)">
+                    <input type="range" id="axp_pen_range_liquifyHardness" name="volume"
+                        value="50" step="1" min="0" max="100" data-msg="@PEN0024" class="axpc_MSG"
+                        aria-label="${_("@LIQUIFY.HARDNESS")}">
+                    <div class="axpc_range_label">${_("@LIQUIFY.HARDNESS")}</div>
+                    <div class="axpc_range_value"><output name="result">50</output></div>
+                </form>
                 <!-- バケツの境界補正 -->
                 <form id="axp_pen_form_fillThreshold" oninput="result.value=parseInt(volume.value)"
                     class="axpc_range axpc_text_border">
                     <input type="range" id="axp_pen_range_fillThreshold" name="volume" value="0" step="1" min="0"
                         max="5" class="axpc_MSG" data-msg="@PEN0004">
                     <div class="axpc_range_label">${_("@PEN.GROW_FILL_AREA")}</div>
+                    <div class="axpc_range_value"><output name="result"></output></div>
+                </form>
+                <!-- バケツの色許容誤差 -->
+                <form id="axp_pen_form_fillColorTolerance" oninput="result.value=parseInt(volume.value)"
+                    class="axpc_range axpc_text_border">
+                    <input type="range" id="axp_pen_range_fillColorTolerance" name="volume" value="0" step="1" min="0"
+                        max="100" class="axpc_MSG" data-msg="@PEN0016">
+                    <div class="axpc_range_label">${_("@PEN.COLOR_TOLERANCE")}</div>
                     <div class="axpc_range_value"><output name="result"></output></div>
                 </form>
                 <!-- バケツのグラデーション角度 -->
@@ -135,6 +177,21 @@
                         <input type="checkbox" id="axp_pen_checkbox_useSubPxAlpha" checked>${_("@PEN.USE_SUBPX_ALPHA")}
                     </label>
                 </div>
+                <!-- 階調バケツ：多ストップグラデーション編集（専用UI） -->
+                <div id="axp_pen_div_gradientStops" class="axpc_NONE">
+                    <div id="axp_pen_div_gradientPreview"></div>
+                    <div id="axp_pen_div_gradientStopList"></div>
+                    <div id="axp_pen_div_gradientStopControls">
+                        <input type="number" id="axp_pen_number_gradientStopPosition" min="0" max="100" value="0"
+                            class="axpc_MSG" data-msg="@PEN0021">
+                        <button type="button" id="axp_pen_button_gradientAddStop" class="axpc_MSG"
+                            data-msg="@PEN0019">${_("@PEN.GRADIENT_ADD_STOP")}</button>
+                        <button type="button" id="axp_pen_button_gradientRemoveStop" class="axpc_MSG"
+                            data-msg="@PEN0020">${_("@PEN.GRADIENT_REMOVE_STOP")}</button>
+                        <button type="button" id="axp_pen_button_gradientSetColor" class="axpc_MSG"
+                            data-msg="@PEN0022">${_("@PEN.GRADIENT_SET_COLOR")}</button>
+                    </div>
+                </div>
             </div>
 
             <div id="axp_pen_div_spuitColorRGBA">
@@ -154,6 +211,12 @@
                 <select id="axp_pen_select_fillMode" class="axpc_MSG axpc_NONE" data-msg="@PEN0008">
                     <option value="option_all">${_("@PEN.OPTION_FILL_SAMPLE_ALL")}</option>
                     <option value="option_layer">${_("@PEN.OPTION_FILL_SAMPLE_CURRENT")}</option>
+                </select>
+                <select id="axp_pen_select_selectionMode" class="axpc_MSG axpc_NONE" data-msg="@PEN0017">
+                    <option value="option_replace">${_("@PEN.OPTION_SELECTION_REPLACE")}</option>
+                    <option value="option_add">${_("@PEN.OPTION_SELECTION_ADD")}</option>
+                    <option value="option_subtract">${_("@PEN.OPTION_SELECTION_SUBTRACT")}</option>
+                    <option value="option_intersect">${_("@PEN.OPTION_SELECTION_INTERSECT")}</option>
                 </select>
             </div>
 

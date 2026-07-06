@@ -9,6 +9,7 @@ import '../css/window_pen.css';
 
 import { createTonePattern, UTIL, rgb2hex } from './etc.js';
 import { range_index, range_value } from './pendefine/rangeindex.js';
+import { LIQUIFY_MODE } from './liquify.js';
 
 // メイン
 import { Round } from './pendefine/round.js';
@@ -25,12 +26,23 @@ import { Spuit } from './pendefine/spuit.js';
 import { Square } from './pendefine/square.js';
 import { Move } from './pendefine/move.js';
 import { Nagenawa } from './pendefine/nagenawa.js';
+import { MagicWand } from './pendefine/magicwand.js';
+import { PolygonSelect } from './pendefine/polygonselect.js';
+import { Liquify } from './pendefine/liquify.js';
 import { Dot } from './pendefine/dot.js';
 
 import { Fude } from './pendefine/fude.js';
 import { Crayon } from './pendefine/crayon.js';
 import { Brush } from './pendefine/brush.js';
 import { Diffusion } from './pendefine/diffusion.js';
+import { Marker } from './pendefine/marker.js';
+import { Curve } from './pendefine/curve.js';
+import { Hatching } from './pendefine/hatching.js';
+import { Sketch } from './pendefine/sketch.js';
+import { Dodge } from './pendefine/dodge.js';
+import { Burn } from './pendefine/burn.js';
+import { TextureBrush } from './pendefine/texturebrush.js';
+import { SmoothPen } from './pendefine/smoothpen.js';
 
 // 共通処理：ペンモード変更時
 export class PenSystem extends ToolWindow {
@@ -123,6 +135,7 @@ export class PenSystem extends ToolWindow {
 
         this.penObj['axp_penmode_fill'] = new Fill({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_fillgradation'] = new Fillgradation({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_magicwand'] = new MagicWand({ axpObj: this.axpObj, CANVAS: this.CANVAS });
 
         this.penObj['axp_penmode_hand'] = new Hand({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_spuit'] = new Spuit({ axpObj: this.axpObj, CANVAS: this.CANVAS });
@@ -130,11 +143,21 @@ export class PenSystem extends ToolWindow {
         this.penObj['axp_penmode_square'] = new Square({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_move'] = new Move({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_nagenawa'] = new Nagenawa({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_polygonselect'] = new PolygonSelect({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_liquify'] = new Liquify({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_dot'] = new Dot({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_fude'] = new Fude({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_crayon'] = new Crayon({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_brush'] = new Brush({ axpObj: this.axpObj, CANVAS: this.CANVAS });
         this.penObj['axp_penmode_diffusion'] = new Diffusion({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_marker'] = new Marker({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_curve'] = new Curve({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_hatching'] = new Hatching({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_sketch'] = new Sketch({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_dodge'] = new Dodge({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_burn'] = new Burn({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_texturebrush'] = new TextureBrush({ axpObj: this.axpObj, CANVAS: this.CANVAS });
+        this.penObj['axp_penmode_smoothpen'] = new SmoothPen({ axpObj: this.axpObj, CANVAS: this.CANVAS });
 
         // サブメニューをメインメニューに反映
         let elementsButton = document.querySelectorAll('#axp_pen_div_rightSide>div>button');
@@ -162,6 +185,8 @@ export class PenSystem extends ToolWindow {
 
         // なげなわオーバーレイのイベント設定
         this.penObj['axp_penmode_nagenawa'].setupOverlayEvents();
+        // 多角形選択オーバーレイのイベント設定
+        this.penObj['axp_penmode_polygonselect'].setupOverlayEvents();
     }
     // id名からアイコン用class名を取得
     getClassIcon(id) {
@@ -357,6 +382,20 @@ export class PenSystem extends ToolWindow {
                 this.axpObj.configSystem.saveConfig('P-THR_' + this.pen_mode, threshold);
             }
         );
+        // レンジスライダー：色の許容誤差
+        document.getElementById('axp_pen_range_fillColorTolerance').addEventListener('input',
+            (e) => {
+                let colorTolerance = Number(e.target.value);
+                let name = this.getName();
+                this.setColorTolerance(colorTolerance);
+                // %1の色の許容誤差：%2
+                this.axpObj.msg('@AXP5014', name, colorTolerance);
+                // バケツ専用なのでプレビューは無し
+
+                // コンフィグオブジェクトをDBに保存
+                this.axpObj.configSystem.saveConfig('P-CTL_' + this.pen_mode, colorTolerance);
+            }
+        );
         // レンジスライダー：角度
         document.getElementById('axp_pen_range_fillGradationDeg').addEventListener('input',
             (e) => {
@@ -458,6 +497,42 @@ export class PenSystem extends ToolWindow {
                 this.updateDiffusionPresetHighlight();
             }
         );
+
+        document.getElementById('axp_pen_select_liquifyMode').addEventListener('change', (e) => {
+            const pen = this.penObj['axp_penmode_liquify'];
+            pen.liquifyMode = e.target.value;
+            this.axpObj.configSystem.saveConfig('P-LQM_axp_penmode_liquify', pen.liquifyMode);
+        });
+        document.getElementById('axp_pen_range_liquifyStrength').addEventListener('input', (e) => {
+            const pen = this.penObj['axp_penmode_liquify'];
+            pen.strength = Number(e.target.value);
+            document.getElementById('axp_pen_form_liquifyStrength').result.value = pen.strength;
+            this.axpObj.configSystem.saveConfig('P-LQS_axp_penmode_liquify', pen.strength);
+        });
+        document.getElementById('axp_pen_range_liquifyHardness').addEventListener('input', (e) => {
+            const pen = this.penObj['axp_penmode_liquify'];
+            pen.hardness = Number(e.target.value);
+            document.getElementById('axp_pen_form_liquifyHardness').result.value = pen.hardness;
+            this.axpObj.configSystem.saveConfig('P-LQH_axp_penmode_liquify', pen.hardness);
+        });
+
+        const liquifyPen = this.penObj['axp_penmode_liquify'];
+        const savedLiquifyMode = this.axpObj.configSystem.getConfig('P-LQM_axp_penmode_liquify');
+        const savedLiquifyStrengthRaw =
+            this.axpObj.configSystem.getConfig('P-LQS_axp_penmode_liquify');
+        const savedLiquifyHardnessRaw =
+            this.axpObj.configSystem.getConfig('P-LQH_axp_penmode_liquify');
+        const savedLiquifyStrength = Number(savedLiquifyStrengthRaw);
+        const savedLiquifyHardness = Number(savedLiquifyHardnessRaw);
+        if (Object.values(LIQUIFY_MODE).includes(savedLiquifyMode)) {
+            liquifyPen.liquifyMode = savedLiquifyMode;
+        }
+        if (savedLiquifyStrengthRaw !== null && Number.isFinite(savedLiquifyStrength)) {
+            liquifyPen.strength = savedLiquifyStrength;
+        }
+        if (savedLiquifyHardnessRaw !== null && Number.isFinite(savedLiquifyHardness)) {
+            liquifyPen.hardness = savedLiquifyHardness;
+        }
 
         // 混色ペンのプリセット（保存値の復元）
         for (let i = 0; i < this.diffusionPresets.length; i++) {
@@ -561,6 +636,26 @@ export class PenSystem extends ToolWindow {
                 this.axpObj.configSystem.saveConfig('P-SPA_' + this.pen_mode, checked);
             }
         );
+
+        // 階調バケツ：多ストップグラデーション編集（表示中は必ずpen_modeが階調バケツのため、
+        // 現在選択中のペンオブジェクトをそのまま操作対象にする。RGBスライダー等と同じ考え方）
+        document.getElementById('axp_pen_button_gradientAddStop').addEventListener('click', () => {
+            // 位置は明示せず、既存ストップの隙間へ自動配置する（addGradientStop参照）
+            this.penObj[this.pen_mode].addGradientStop();
+            this.penObj[this.pen_mode].renderGradientStopsUI();
+        });
+        document.getElementById('axp_pen_button_gradientRemoveStop').addEventListener('click', () => {
+            this.penObj[this.pen_mode].removeSelectedGradientStop();
+            this.penObj[this.pen_mode].renderGradientStopsUI();
+        });
+        document.getElementById('axp_pen_button_gradientSetColor').addEventListener('click', () => {
+            this.penObj[this.pen_mode].setSelectedGradientStopColor();
+            this.penObj[this.pen_mode].renderGradientStopsUI();
+        });
+        document.getElementById('axp_pen_number_gradientStopPosition').onchange = (e) => {
+            this.penObj[this.pen_mode].setSelectedGradientStopPosition(e.target.value);
+            this.penObj[this.pen_mode].renderGradientStopsUI();
+        };
 
         // 太さクイックボタン (登録値はペンごとに保存)
         document.querySelectorAll('.axpc_pen_quicksize').forEach((btn, i) => {
@@ -728,6 +823,18 @@ export class PenSystem extends ToolWindow {
             this.penObj[this.pen_mode].threshold = threshold;
         } else {
             throw new Error('内部エラー：不正な塗り残し補正指定です');
+        }
+    }
+    getColorTolerance() {
+        return this.penObj[this.pen_mode].colorTolerance;
+    }
+    setColorTolerance(colorTolerance) {
+        // セット可能チェック
+        if (this.penObj[this.pen_mode].colorTolerance !== null) {
+            // 更新
+            this.penObj[this.pen_mode].colorTolerance = colorTolerance;
+        } else {
+            throw new Error('内部エラー：不正な色の許容誤差指定です');
         }
     }
     getGradation() {
@@ -1013,6 +1120,21 @@ export class PenSystem extends ToolWindow {
                 nagenawa.finalizeSelection();
             }
         }
+        // 多角形選択の頂点配置中に他ツールへ切り替え → 破棄（確定に足る情報が無いため）。
+        // ただしCTRL/SPACEによる一時的なツール切替（changePenModeTemporary経由、isTemporary=true）
+        // では、一時切替の解除時に同じモードへ戻るだけなので破棄しない（配置済み頂点を温存する）
+        const polygonSelect = this.penObj['axp_penmode_polygonselect'];
+        if (polygonSelect && polygonSelect.state === 'drawing' && !this.isTemporary) {
+            const newMode = mode || this.pen_mode;
+            if (newMode !== 'axp_penmode_polygonselect') {
+                polygonSelect.cancelPolygon();
+            }
+        }
+        const liquify = this.penObj['axp_penmode_liquify'];
+        if (liquify?.isActive && !this.isTemporary) {
+            const newMode = mode || this.pen_mode;
+            if (newMode !== 'axp_penmode_liquify') liquify.cancelStroke();
+        }
         if (mode) {
             this.pen_mode = mode;
         }
@@ -1046,12 +1168,13 @@ export class PenSystem extends ToolWindow {
         } else {
             UTIL.hide('axp_pen_div_quickSize');
         }
+        const isLiquifyPen = type === 'liquify';
         // 不透明度 (消しゴムは消し率で代替するため非表示)
         {
             const isEraser = this.penObj[this.pen_mode].type === 'eraser';
             displaySlider(
                 'axp_pen_form_alpha',
-                isEraser ? null : this.getAlpha(),
+                isEraser || isLiquifyPen ? null : this.getAlpha(),
             )
         }
         // 消し率 (消しゴム専用)
@@ -1072,6 +1195,11 @@ export class PenSystem extends ToolWindow {
             'axp_pen_form_fillThreshold',
             this.getThreshold(),
         )
+        // バケツ色許容誤差
+        displaySlider(
+            'axp_pen_form_fillColorTolerance',
+            this.getColorTolerance(),
+        )
         // バケツ角度
         displaySlider(
             'axp_pen_form_fillGradationDeg',
@@ -1083,7 +1211,7 @@ export class PenSystem extends ToolWindow {
             this.getRadius(),
         )
         // 混色ペン（プリセット・詳細設定）
-        const isDiffusionPen = this.getHardness() !== null;
+        const isDiffusionPen = this.getHardness() !== null && !isLiquifyPen;
         // 手ぶれ補正バーの配置: 混色ペンでは「不透明度の下・プリセットの上」、
         // 他のペンでは従来位置（筆圧チェックの直前）。DOM移動でもリスナーは維持される
         const stabilizerForm = document.getElementById('axp_pen_form_stabilizer');
@@ -1117,6 +1245,22 @@ export class PenSystem extends ToolWindow {
             this.getDrag(),
             this.diffusionDetailOpen,
         )
+        if (isLiquifyPen) {
+            const pen = this.penObj[this.pen_mode];
+            UTIL.show('axp_pen_div_liquifyMode');
+            UTIL.show('axp_pen_form_liquifyStrength');
+            UTIL.show('axp_pen_form_liquifyHardness');
+            document.getElementById('axp_pen_select_liquifyMode').value =
+                pen.liquifyMode || 'push';
+            document.getElementById('axp_pen_form_liquifyStrength').volume.value = pen.strength;
+            document.getElementById('axp_pen_form_liquifyStrength').result.value = pen.strength;
+            document.getElementById('axp_pen_form_liquifyHardness').volume.value = pen.hardness;
+            document.getElementById('axp_pen_form_liquifyHardness').result.value = pen.hardness;
+        } else {
+            UTIL.hide('axp_pen_div_liquifyMode');
+            UTIL.hide('axp_pen_form_liquifyStrength');
+            UTIL.hide('axp_pen_form_liquifyHardness');
+        }
         // トーン濃度
         displaySlider(
             'axp_pen_form_toneLevel',
@@ -1163,11 +1307,26 @@ export class PenSystem extends ToolWindow {
         } else {
             UTIL.hide('axp_pen_select_drawMode');
         }
-        // 塗り潰し判定セレクトボックス
-        if (type === 'fill') {
+        // 塗り潰し判定セレクトボックス（マジックワンドも同じ「判定対象」概念のため共用）
+        if (type === 'fill' || type === 'magicwand') {
             UTIL.show('axp_pen_select_fillMode');
         } else {
             UTIL.hide('axp_pen_select_fillMode');
+        }
+        // 選択範囲の合成方法セレクトボックス（マジックワンド・多角形選択で共用）
+        if (this.penObj[this.pen_mode].usesSelectionMode) {
+            UTIL.show('axp_pen_select_selectionMode');
+        } else {
+            UTIL.hide('axp_pen_select_selectionMode');
+        }
+        // 階調バケツ：多ストップグラデーション編集UI（Fillgradationのtypeは基底のFillと同じ
+        // 'fill'のままのため、専用フラグusesGradientStopsで判別する。usesSelectionModeと
+        // 同じ設計＝プロパティ存在チェックだと将来別ペンの同名プロパティと衝突しうるため）
+        if (this.penObj[this.pen_mode].usesGradientStops) {
+            UTIL.show('axp_pen_div_gradientStops');
+            this.penObj[this.pen_mode].renderGradientStopsUI();
+        } else {
+            UTIL.hide('axp_pen_div_gradientStops');
         }
         // スポイトRGB表示
         if (type === 'spuit') {
@@ -1272,6 +1431,17 @@ export class PenSystem extends ToolWindow {
         // 全面塗り潰しデータを作成
         this.CANVAS.brush_ctx.clearRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
         this.CANVAS.brush_ctx.fillRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+
+        // 選択範囲（マジックワンド／多角形選択）が有効な場合、バケツ塗りと同様に
+        // 塗りつぶし範囲を選択範囲内に制約する
+        const selectionMask = this.axpObj.getValidSelectionMask();
+        if (selectionMask) {
+            const fillImg = this.CANVAS.brush_ctx.getImageData(0, 0, this.axpObj.x_size, this.axpObj.y_size);
+            for (let i = 0; i < selectionMask.length; i++) {
+                if (!selectionMask[i]) fillImg.data[i * 4 + 3] = 0;
+            }
+            this.CANVAS.brush_ctx.putImageData(fillImg, 0, 0);
+        }
 
         // 現在のレイヤーの画像に、透明度を指定して合成
         this.CANVAS.draw_ctx.putImageData(this.axpObj.layerSystem.getImage(), 0, 0);

@@ -26,6 +26,13 @@ class UndoObj {
         this.layerObj = (obj.layerObj) ? new Layerdata(obj.layerObj) : null;
         // レイヤー統合時の統合先レイヤー
         this.layerObj_dest = (obj.layerObj_dest) ? new Layerdata(obj.layerObj_dest) : null;;
+        // レイヤースタイル変更の前後値（type:'layer-style'で使用。自己反転しない操作のため
+        // flip_h/flip_vと異なり前後両方の値を保持する）
+        this.styleBefore = obj.styleBefore;
+        this.styleAfter = obj.styleAfter;
+        // 透明マスクブラシ編集の前後ImageData（type:'mask-edit'で使用）
+        this.maskBefore = obj.maskBefore;
+        this.maskAfter = obj.maskAfter;
     }
 }
 
@@ -37,8 +44,6 @@ export class UndoSystem {
 
     isUndoing = false;
     isRedoing = false;
-    undoButtonElement = null;
-    redoButtonElement = null;
 
     constructor(axpObj) {
         this.axpObj = axpObj;
@@ -46,25 +51,10 @@ export class UndoSystem {
     }
     // 初期化（＆キャンバスリセット時の再初期化）
     init() {
-        //console.log('...UndoSystem:init');
-        this.setUndoButtonElement(document.getElementById('axp_tool_button_undo'));
-        this.setRedoButtonElement(document.getElementById('axp_tool_button_redo'));
     }
     resetCanvas() {
         this.undoObj.splice(0);
         this.redoObj.splice(0);
-        this.dispCount();
-    }
-    // ボタン回数表示
-    dispCount() {
-        this.undoButtonElement.textContent = `${this.axpObj._('@MISC.BUTTON_UNDO')}(${this.undoObj.length})`;
-        this.redoButtonElement.textContent = `${this.axpObj._('@MISC.BUTTON_REDO')}(${this.redoObj.length})`;
-    }
-    setUndoButtonElement(targetElement) {
-        this.undoButtonElement = targetElement;
-    }
-    setRedoButtonElement(targetElement) {
-        this.redoButtonElement = targetElement;
     }
     setUndo(actionObj) {
         //console.log('exec:', actionObj.type);
@@ -81,8 +71,6 @@ export class UndoSystem {
         let obj = new UndoObj(actionObj);
         this.undoObj.push(obj);
         //console.log("undo", this.undoObj, "redo", this.redoObj);
-        this.dispCount();
-
     }
     // アンドゥ実行
     undo() {
@@ -196,6 +184,31 @@ export class UndoSystem {
                 }
                 break;
 
+            case 'layer-style':
+                // リドゥ用記憶（前後値は変わらないため同じ内容をそのまま積み直す）
+                this.setRedo(actionObj);
+                // アンドゥ処理：変更前の値へ戻す
+                this.axpObj.layerSystem.setLayerStyle(actionObj.id, actionObj.styleBefore);
+                msgtext = '[レイヤースタイル変更]';
+                changedLayerId = actionObj.id;
+                break;
+
+            case 'mask-edit': {
+                // リドゥ用記憶（前後値は変わらないため同じ内容をそのまま積み直す）
+                this.setRedo(actionObj);
+                // アンドゥ処理：マスクを変更前の画像へ戻す（マスク追加/削除は非アンドゥ対象のため、
+                // この編集後にマスク自体が削除されている場合は復元先が無く何もしない）
+                const layer = this.axpObj.layerSystem.layerObj[this.axpObj.layerSystem.getLayerIndex(actionObj.id)];
+                if (layer?.mask) {
+                    // mask全体を新しいオブジェクトで置き換える（既存オブジェクトを直接書き換えると、
+                    // 同じmaskを参照している別のスナップショット/redo記録にも波及してしまうため）
+                    layer.mask = { ...layer.mask, image: actionObj.maskBefore };
+                }
+                msgtext = '[マスク編集]';
+                changedLayerId = actionObj.id;
+                break;
+            }
+
             default:
                 console.log('WARNING:未登録のactionObj.type:', actionObj.type);
         }
@@ -204,8 +217,6 @@ export class UndoSystem {
         this.axpObj.msg('@INF0400', msgtext, this.undoObj.length);
         // キャンバス再描画
         this.axpObj.layerSystem.updateCanvas(changedLayerId);
-        // アンドゥ／リドゥボタンの回数表示更新
-        this.dispCount();
 
         //console.log("undo", undoObj , "redo" , redoObj);
     }
@@ -320,6 +331,26 @@ export class UndoSystem {
                     changedLayerId = actionObj.id;
                 }
                 break;
+            case 'layer-style':
+                // 再アンドゥ記憶（前後値は変わらないため同じ内容をそのまま積み直す）
+                this.setUndo(actionObj);
+                // リドゥ処理：変更後の値を再適用する
+                this.axpObj.layerSystem.setLayerStyle(actionObj.id, actionObj.styleAfter);
+                msgtext = '[レイヤースタイル変更]';
+                changedLayerId = actionObj.id;
+                break;
+            case 'mask-edit': {
+                // 再アンドゥ記憶（前後値は変わらないため同じ内容をそのまま積み直す）
+                this.setUndo(actionObj);
+                // リドゥ処理：マスクを変更後の画像へ再適用する（マスクが削除済みなら何もしない）
+                const layer = this.axpObj.layerSystem.layerObj[this.axpObj.layerSystem.getLayerIndex(actionObj.id)];
+                if (layer?.mask) {
+                    layer.mask = { ...layer.mask, image: actionObj.maskAfter };
+                }
+                msgtext = '[マスク編集]';
+                changedLayerId = actionObj.id;
+                break;
+            }
             default:
                 console.log('WARNING:未登録のactionObj.type:', actionObj.type);
         }
@@ -328,8 +359,6 @@ export class UndoSystem {
         this.axpObj.msg('@INF0401', msgtext, this.redoObj.length);
         // キャンバス再描画
         this.axpObj.layerSystem.updateCanvas(changedLayerId);
-        // アンドゥ／リドゥボタンの回数表示更新
-        this.dispCount();
         //console.log("undo", undoObj , "redo" , redoObj);
     }
     getDetailText(detail) {
@@ -349,6 +378,9 @@ export class UndoSystem {
                 break;
             case 'rotate90':
                 msgtext = '[90°回転]';
+                break;
+            case 'filter':
+                msgtext = '[フィルタ]';
                 break;
             default:
                 msgtext = '[線の描画]';

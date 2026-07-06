@@ -15,6 +15,7 @@
     "build": "webpack",
     "prod": "cross-env NODE_ENV=prod webpack --config webpack.prod.js",
     "prod-demo": "cross-env NODE_ENV=demo webpack --config webpack.prod.js",
+    "test": "node --test",
     "eslint": "eslint src/**/*.js",
     "audit": "npm audit"
   },
@@ -35,5 +36,9 @@
     "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "ag-psd": "31.0.2",
+    "perfect-freehand": "^1.2.3"
   }
 }

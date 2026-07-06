@@ -18,6 +18,22 @@
                 data-function="func_switch_axp_penmode_brush" data-msg="@PEN0105"></button>
             <button id="axp_penmode_diffusion" class="axpc_FUNC axpc_penmode_diffusion" data-idx="0"
                 data-function="func_switch_axp_penmode_diffusion" data-msg="@PEN0106"></button>
+            <button id="axp_penmode_marker" class="axpc_FUNC axpc_penmode_marker" data-idx="0"
+                data-function="func_switch_axp_penmode_marker" data-msg="@PEN0107"></button>
+            <button id="axp_penmode_curve" class="axpc_FUNC axpc_penmode_curve" data-idx="0"
+                data-function="func_switch_axp_penmode_curve" data-msg="@PEN0108"></button>
+            <button id="axp_penmode_hatching" class="axpc_FUNC axpc_penmode_hatching" data-idx="0"
+                data-function="func_switch_axp_penmode_hatching" data-msg="@PEN0109"></button>
+            <button id="axp_penmode_sketch" class="axpc_FUNC axpc_penmode_sketch" data-idx="0"
+                data-function="func_switch_axp_penmode_sketch" data-msg="@PEN0112"></button>
+            <button id="axp_penmode_dodge" class="axpc_FUNC axpc_penmode_dodge" data-idx="0"
+                data-function="func_switch_axp_penmode_dodge" data-msg="@PEN0113"></button>
+            <button id="axp_penmode_burn" class="axpc_FUNC axpc_penmode_burn" data-idx="0"
+                data-function="func_switch_axp_penmode_burn" data-msg="@PEN0114"></button>
+            <button id="axp_penmode_texturebrush" class="axpc_FUNC axpc_penmode_texturebrush" data-idx="0"
+                data-function="func_switch_axp_penmode_texturebrush" data-msg="@PEN0115"></button>
+            <button id="axp_penmode_smoothpen" class="axpc_FUNC axpc_penmode_smoothpen" data-idx="0"
+                data-function="func_switch_axp_penmode_smoothpen" data-msg="@PEN0116"></button>
         </article>
         <article data-name="${_('@PENGROUP.ERASER')}">
             <button id="axp_penmode_eraser_round" class="axpc_FUNC axpc_penmode_eraser_round" data-idx="1"
@@ -30,6 +46,8 @@
                 data-function="func_switch_axp_penmode_fill" data-msg="@PEN0120"></button>
             <button id="axp_penmode_fillgradation" class="axpc_FUNC axpc_penmode_fillgradation"
                 data-function="func_switch_axp_penmode_fillgradation" data-idx="2" data-msg="@PEN0121"></button>
+            <button id="axp_penmode_magicwand" class="axpc_FUNC axpc_penmode_magicwand" data-idx="2"
+                data-function="func_switch_axp_penmode_magicwand" data-msg="@PEN0122"></button>
         </article>
         <article data-name="${_('@PENGROUP.TOOL')}">
             <button id="axp_penmode_hand" class="axpc_FUNC axpc_penmode_hand" data-idx="3"
@@ -38,6 +56,10 @@
                 data-function="func_switch_axp_penmode_move" data-msg="@PEN0131"></button>
             <button id="axp_penmode_nagenawa" class="axpc_FUNC axpc_penmode_nagenawa" data-idx="3"
                 data-function="func_switch_axp_penmode_nagenawa" data-msg="@PEN0132"></button>
+            <button id="axp_penmode_polygonselect" class="axpc_FUNC axpc_penmode_polygonselect" data-idx="3"
+                data-function="func_switch_axp_penmode_polygonselect" data-msg="@PEN0133"></button>
+            <button id="axp_penmode_liquify" class="axpc_FUNC axpc_penmode_liquify" data-idx="3"
+                data-function="func_switch_axp_penmode_liquify" data-msg="@PEN0134"></button>
         </article>
         <article data-name="${_('@PENGROUP.EYEDROPPER')}">
             <button id="axp_penmode_spuit" class="axpc_penmode_spuit" data-idx="4"></button>

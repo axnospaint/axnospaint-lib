@@ -2,7 +2,9 @@
 
 import { ToolWindow } from './window.js';
 import htmldata from '../html/window_layer.txt';
-import { isBlankImage, flip_horizontal, flip_vertical, dispDate } from './etc.js';
+import { isBlankImage, flip_horizontal, flip_vertical, dispDate, compareImages } from './etc.js';
+import { defaultLayerStyle, hasActiveLayerStyle, applyLayerStyle } from './layerstyle.js';
+import { defaultMaskImage, hasActiveMask, applyLayerMask } from './layermask.js';
 // css適用
 import '../css/window_layer.css';
 
@@ -44,6 +46,11 @@ export class Layerdata {
         this.image = layerData.image; // 画像データ（imageData）
         // 描画スキップ用キャッシュ（true: 全画素が透明であることが既知。誤って true を設定すると描画抜けが起きるため、保守的に false 寄りに保つ）
         this.isBlank = layerData.isBlank === true;
+        // 非破壊レイヤースタイル（フチ取り・ドロップシャドウ）。ピクセルデータ(image)は変更せず、
+        // 合成のたびに一時的に重ねて表示する（layerstyle.js）。未指定時は既定値（両効果とも無効）
+        this.layerStyle = layerData.layerStyle || defaultLayerStyle();
+        // 透明マスク（非破壊消しゴム）。null = マスク無し。{enabled, image} 形式（layermask.js）
+        this.mask = layerData.mask || null;
     }
 }
 
@@ -52,6 +59,8 @@ export class LayerSystem extends ToolWindow {
     layer_counter = 0;
     // 選択しているレイヤー要素
     currentLayer = null;
+    // 透明マスク編集モードのon/off（特定レイヤーIDには紐付けない。常に選択中レイヤーに対して働く）
+    maskEditMode = false;
     // レイヤー情報管理用配列（内部的に添え字０を最上位レイヤーとし、添え字順により下位のレイヤーとする）
     layerObj = [];
     // 合成背景
@@ -368,8 +377,261 @@ export class LayerSystem extends ToolWindow {
             });
         });
 
+        // 非破壊レイヤースタイル（フチ取り・ドロップシャドウ）UI配線
+        this._wireLayerStyleControls();
+        // 透明マスク（非破壊消しゴム）UI配線
+        this._wireMaskControls();
+
         // レイヤーUIの内部スクロール（カスタムスクロールバー）
         this.initLayerScroll();
+    }
+    // 非破壊レイヤースタイル（フチ取り・ドロップシャドウ）コントロールの配線。
+    // ライブプレビュー(input)は都度即時反映、アンドゥ登録(change)は編集開始時の値との
+    // 差分が確定した時点で1件のみ記録する（スライダーの途中経過を逐一記録しない）。
+    _wireLayerStyleControls() {
+        const els = {
+            strokeEnabled: document.getElementById('axp_layerstyle_checkbox_strokeEnabled'),
+            strokeRadius: document.getElementById('axp_layerstyle_range_strokeRadius'),
+            strokeColor: document.getElementById('axp_layerstyle_color_stroke'),
+            shadowEnabled: document.getElementById('axp_layerstyle_checkbox_shadowEnabled'),
+            shadowOffsetX: document.getElementById('axp_layerstyle_range_shadowOffsetX'),
+            shadowOffsetY: document.getElementById('axp_layerstyle_range_shadowOffsetY'),
+            shadowBlur: document.getElementById('axp_layerstyle_range_shadowBlur'),
+            shadowOpacity: document.getElementById('axp_layerstyle_range_shadowOpacity'),
+            shadowColor: document.getElementById('axp_layerstyle_color_shadow'),
+        };
+        this._layerStyleBeforeEdit = null;
+        const currentLayerId = () => Number(this.currentLayer.dataset.id);
+        const beginEdit = () => {
+            if (this._layerStyleBeforeEdit === null) {
+                this._layerStyleBeforeEdit = JSON.parse(JSON.stringify(this.getLayerStyle(currentLayerId())));
+            }
+        };
+        const readStyleFromControls = () => ({
+            stroke: {
+                enabled: els.strokeEnabled.checked,
+                radius: Number(els.strokeRadius.value),
+                color: els.strokeColor.value,
+            },
+            dropShadow: {
+                enabled: els.shadowEnabled.checked,
+                offsetX: Number(els.shadowOffsetX.value),
+                offsetY: Number(els.shadowOffsetY.value),
+                blur: Number(els.shadowBlur.value),
+                opacity: Number(els.shadowOpacity.value),
+                color: els.shadowColor.value,
+            },
+        });
+        const applyLive = () => {
+            const id = currentLayerId();
+            this.setLayerStyle(id, readStyleFromControls());
+            this.updateCanvas(id);
+        };
+        const commitEdit = () => {
+            if (this._layerStyleBeforeEdit === null) return;
+            const id = currentLayerId();
+            const before = this._layerStyleBeforeEdit;
+            const after = JSON.parse(JSON.stringify(this.getLayerStyle(id)));
+            this._layerStyleBeforeEdit = null;
+            // 変化がなければアンドゥ登録しない（開いただけ・値を戻して閉じた等）
+            if (JSON.stringify(before) === JSON.stringify(after)) return;
+            this.axpObj.undoSystem.setUndo({
+                type: 'layer-style',
+                id,
+                styleBefore: before,
+                styleAfter: after,
+            });
+            // レイヤースタイルを変更しました。
+            this.axpObj.msg('@INF1012');
+            this.axpObj.saveSystem.autoSave();
+        };
+        for (const el of Object.values(els)) {
+            el.addEventListener('pointerdown', beginEdit);
+            el.addEventListener('focus', beginEdit);
+            el.addEventListener('input', applyLive);
+            el.addEventListener('change', commitEdit);
+        }
+    }
+    // レイヤースタイルUIコントロールへ、指定レイヤーの現在値を反映する
+    _populateLayerStyleControls(id) {
+        this._layerStyleBeforeEdit = null;
+        const style = this.getLayerStyle(id);
+        document.getElementById('axp_layerstyle_checkbox_strokeEnabled').checked = style.stroke.enabled;
+        document.getElementById('axp_layerstyle_range_strokeRadius').value = style.stroke.radius;
+        document.getElementById('axp_layerstyle_color_stroke').value = style.stroke.color;
+        document.getElementById('axp_layerstyle_checkbox_shadowEnabled').checked = style.dropShadow.enabled;
+        document.getElementById('axp_layerstyle_range_shadowOffsetX').value = style.dropShadow.offsetX;
+        document.getElementById('axp_layerstyle_range_shadowOffsetY').value = style.dropShadow.offsetY;
+        document.getElementById('axp_layerstyle_range_shadowBlur').value = style.dropShadow.blur;
+        document.getElementById('axp_layerstyle_range_shadowOpacity').value = style.dropShadow.opacity;
+        document.getElementById('axp_layerstyle_color_shadow').value = style.dropShadow.color;
+    }
+    // 透明マスク（非破壊消しゴム）：追加・削除・有効/無効はメタ情報の切替であり、
+    // rename/blendMode/alpha/lock/visibility等の既存の切替系と同じくアンドゥ非対応とする
+    // （既存踏襲。ピクセルを直接書き換えるマスクブラシのストロークのみアンドゥ対象とする）。
+    // mask.image / mask全体は常に「新しいオブジェクトで置き換える」方式とし、既存オブジェクトの
+    // プロパティを直接書き換えない（copyLayer/undoスナップショットは参照コピーのため、直接書き換える
+    // と後からの編集がスナップショット側にも波及してしまう＝アンドゥ履歴が静かに壊れる不具合を防ぐ）。
+    addMask(id = null) {
+        const targetId = id ?? this.getId();
+        const idx = this.getLayerIndex(targetId);
+        if (this.layerObj[idx].mask) return;
+        this.layerObj[idx].mask = { enabled: true, image: defaultMaskImage(this.x_size, this.y_size) };
+        this.updateCanvas(targetId);
+    }
+    removeMask(id = null) {
+        const targetId = id ?? this.getId();
+        const idx = this.getLayerIndex(targetId);
+        if (!this.layerObj[idx].mask) return;
+        this.layerObj[idx].mask = null;
+        // このレイヤーのマスクに対する未実行のundo/redo（'mask-edit'）は、対象マスクが
+        // 消滅した以上意味を持たない（再追加された無関係な新しいマスクを誤って上書きする
+        // 事故を防ぐため、残さず破棄する）
+        this.axpObj.undoSystem.undoObj = this.axpObj.undoSystem.undoObj.filter(
+            (a) => !(a.type === 'mask-edit' && a.id === targetId)
+        );
+        this.axpObj.undoSystem.redoObj = this.axpObj.undoSystem.redoObj.filter(
+            (a) => !(a.type === 'mask-edit' && a.id === targetId)
+        );
+        this.updateCanvas(targetId);
+    }
+    toggleMaskEnabled(id = null) {
+        const targetId = id ?? this.getId();
+        const idx = this.getLayerIndex(targetId);
+        if (!this.layerObj[idx].mask) return;
+        this.layerObj[idx].mask = { ...this.layerObj[idx].mask, enabled: !this.layerObj[idx].mask.enabled };
+        this.updateCanvas(targetId);
+    }
+    // マスク編集コントロールの配線
+    _wireMaskControls() {
+        const btnAddRemove = document.getElementById('axp_mask_button_addRemove');
+        const cbEnabled = document.getElementById('axp_mask_checkbox_enabled');
+        const btnEditToggle = document.getElementById('axp_mask_button_editToggle');
+
+        btnAddRemove.addEventListener('click', () => {
+            const id = Number(this.currentLayer.dataset.id);
+            if (this.layerObj[this.getLayerIndex(id)].mask) {
+                this.removeMask(id);
+            } else {
+                this.addMask(id);
+            }
+            this._populateMaskControls(id);
+        });
+        cbEnabled.addEventListener('change', () => {
+            this.toggleMaskEnabled(Number(this.currentLayer.dataset.id));
+        });
+        btnEditToggle.addEventListener('click', () => {
+            // マスク編集モードは特定レイヤーのIDではなく単純なon/offのモードとして持つ
+            // （選択中レイヤーに対して働く。選択レイヤーの切替やレイヤー削除でIDが不整合になる
+            // 問題を根本的に避けるため）
+            this.maskEditMode = !this.maskEditMode;
+            this._populateMaskControls(Number(this.currentLayer.dataset.id));
+        });
+    }
+    // マスクUIコントロールへ、指定レイヤーの現在値を反映する
+    _populateMaskControls(id) {
+        const idx = this.getLayerIndex(id);
+        const mask = this.layerObj[idx].mask;
+        const btnAddRemove = document.getElementById('axp_mask_button_addRemove');
+        const cbEnabled = document.getElementById('axp_mask_checkbox_enabled');
+        const btnEditToggle = document.getElementById('axp_mask_button_editToggle');
+        btnAddRemove.textContent = mask ? this.axpObj._('@LAYERMASK.REMOVE') : this.axpObj._('@LAYERMASK.ADD');
+        cbEnabled.checked = !!mask?.enabled;
+        cbEnabled.disabled = !mask;
+        btnEditToggle.disabled = !mask;
+        btnEditToggle.dataset.editing = this.maskEditMode ? 'true' : 'false';
+    }
+    // ==== マスクブラシ（マスク編集モード専用の簡易円ブラシ。既存ペンツールとは独立） ====
+    // マスク編集モードでのキャンバスへのポインタ操作は、axpobj.jsのpointerdown/move/upハンドラから
+    // このstart/move/endへ委譲される（通常の描画パイプラインは経由しない）。
+    // 対象レイヤーはstart時にcurrentLayerから解決し、ストローク中は固定する
+    // （ストローク途中でレイヤー選択が変わっても書き込み先がぶれないようにするため）。
+    maskBrushStart(x, y) {
+        if (!this.maskEditMode) return;
+        const id = Number(this.currentLayer.dataset.id);
+        const idx = this.getLayerIndex(id);
+        if (!this.layerObj[idx].mask) {
+            this.maskEditMode = false;
+            this._populateMaskControls(id);
+            return;
+        }
+        // ロックされたレイヤーは通常の描画と同様にマスク編集も禁止する
+        if (this.isWriteProtection(idx)) return;
+        this._maskBrushTargetId = id;
+        this._maskBrushBefore = this.layerObj[idx].mask.image;
+        this._maskBrushCanvas = document.createElement('canvas');
+        this._maskBrushCanvas.width = this.x_size;
+        this._maskBrushCanvas.height = this.y_size;
+        this._maskBrushCtx = this._maskBrushCanvas.getContext('2d');
+        this._maskBrushCtx.putImageData(this._maskBrushBefore, 0, 0);
+        this._maskBrushLastX = null;
+        this._maskBrushLastY = null;
+        this._maskBrushStamp(x, y);
+    }
+    maskBrushMove(x, y) {
+        if (!this._maskBrushCtx) return;
+        this._maskBrushStamp(x, y);
+    }
+    maskBrushEnd() {
+        if (!this._maskBrushCtx) return;
+        const id = this._maskBrushTargetId;
+        const idx = this.getLayerIndex(id);
+        const after = this._maskBrushCtx.getImageData(0, 0, this.x_size, this.y_size);
+        const before = this._maskBrushBefore;
+        // レイヤーが消えている場合（ストローク中の削除等）は書き戻さない
+        if (idx !== -1 && this.layerObj[idx].mask) {
+            this.layerObj[idx].mask = { ...this.layerObj[idx].mask, image: after };
+        }
+        if (!compareImages(before, after)) {
+            this.axpObj.undoSystem.setUndo({
+                type: 'mask-edit',
+                id,
+                maskBefore: before,
+                maskAfter: after,
+            });
+            // マスクを編集しました。
+            this.axpObj.msg('@INF1013');
+            this.axpObj.saveSystem.autoSave();
+        }
+        this._maskBrushCtx = null;
+        this._maskBrushCanvas = null;
+        this._maskBrushBefore = null;
+        this._maskBrushTargetId = null;
+        this.updateCanvas(id);
+    }
+    // 円形スタンプを1点描く。lastX/lastY があれば区間を等間隔で補間して線を繋ぐ
+    _maskBrushStamp(x, y) {
+        const size = Number(document.getElementById('axp_mask_range_brushSize').value);
+        const strength = Number(document.getElementById('axp_mask_range_brushStrength').value) / 100;
+        const isRestore = document.getElementById('axp_mask_checkbox_restoreMode').checked;
+        const ctx = this._maskBrushCtx;
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = strength;
+        ctx.fillStyle = isRestore ? '#ffffff' : '#000000';
+        const drawDot = (px, py) => {
+            ctx.beginPath();
+            ctx.arc(px, py, size / 2, 0, Math.PI * 2);
+            ctx.fill();
+        };
+        if (this._maskBrushLastX === null) {
+            drawDot(x, y);
+        } else {
+            const dx = x - this._maskBrushLastX;
+            const dy = y - this._maskBrushLastY;
+            const dist = Math.hypot(dx, dy);
+            const step = Math.max(1, size / 4);
+            const steps = Math.max(1, Math.ceil(dist / step));
+            for (let i = 1; i <= steps; i++) {
+                drawDot(this._maskBrushLastX + dx * (i / steps), this._maskBrushLastY + dy * (i / steps));
+            }
+        }
+        this._maskBrushLastX = x;
+        this._maskBrushLastY = y;
+        // ライブプレビュー（フルフレーム再合成。マスク編集はfast path対象外のためこれで十分）
+        const idx = this.getLayerIndex(this._maskBrushTargetId);
+        if (idx === -1 || !this.layerObj[idx].mask) return;
+        this.layerObj[idx].mask = { ...this.layerObj[idx].mask, image: ctx.getImageData(0, 0, this.x_size, this.y_size) };
+        this.updateCanvas(this._maskBrushTargetId);
     }
     // レイヤーUIの内部スクロール初期化
     initLayerScroll() {
@@ -662,6 +924,16 @@ export class LayerSystem extends ToolWindow {
             return this.colorTagList[index].color;
         }
     }
+    // レイヤースタイル（非破壊のフチ取り・ドロップシャドウ設定）を取得
+    getLayerStyle(id = null) {
+        const idx = (id === null) ? this.getLayerIndex(this.currentLayer.dataset.id) : this.getLayerIndex(id);
+        return this.layerObj[idx].layerStyle;
+    }
+    // レイヤースタイルを設定する（アンドゥ/リドゥ・UI操作の両方から呼ばれる）
+    setLayerStyle(id, style) {
+        const idx = this.getLayerIndex(id);
+        this.layerObj[idx].layerStyle = style;
+    }
     getAlpha(index = null) {
         if (index) {
             return this.layerObj[index].alpha;
@@ -856,6 +1128,12 @@ export class LayerSystem extends ToolWindow {
         //console.log(this.imageForUndo);
     }
     flip_h(target) {
+        // 選択範囲（マジックワンド／多角形選択）はキャンバス座標に固定されたマスクのため、
+        // 反転後のピクセル配置とは対応が取れなくなる。なげなわの浮動選択がflip前に
+        // finalizeNagenawaSelection()で保護されるのと同じ理由で、こちらは単純に解除する
+        // （全呼び出し経路：全体反転・レイヤー個別反転・undo/redoがここに集約されるため
+        // 一箇所の変更で全経路をカバーできる）
+        this.axpObj.clearSelection();
         if (target == 'all') {
             // 全体
             console.log('全体');
@@ -875,6 +1153,8 @@ export class LayerSystem extends ToolWindow {
         this.drawThumbnail();
     }
     flip_v(target) {
+        // flip_h()と同じ理由で、選択範囲マスクは反転前に解除する
+        this.axpObj.clearSelection();
         if (target == 'all') {
             // 全体
             console.log('全体');
@@ -945,6 +1225,10 @@ export class LayerSystem extends ToolWindow {
             locked: sourceObj.locked,
             masked: sourceObj.masked,
             tag: sourceObj.tag,
+            // レイヤースタイルも複製する（参照ではなく複製先が独立して編集できるよう複製する）
+            layerStyle: JSON.parse(JSON.stringify(sourceObj.layerStyle)),
+            // マスクも複製する（ImageDataは新規生成しdataのみコピーする。参照共有を避けるため）
+            mask: sourceObj.mask ? { enabled: sourceObj.mask.enabled, image: new ImageData(new Uint8ClampedArray(sourceObj.mask.image.data), sourceObj.mask.image.width, sourceObj.mask.image.height) } : null,
             // 空のイメージを生成
             image: this.CANVAS.tmp_ctx.createImageData(this.axpObj.x_size, this.axpObj.y_size),
             // 挿入位置：カレントレイヤーの一つ上に追加
@@ -972,6 +1256,21 @@ export class LayerSystem extends ToolWindow {
             masked: actionObj.layerObj.masked,
             // セーブデータにtagが含まれていない場合、初期値-1を設定（version 1.99.55カラータグ実装以前のセーブデータの互換性維持）
             tag: actionObj.layerObj.tag === undefined ? -1 : actionObj.layerObj.tag,
+            // セーブデータにlayerStyleが含まれていない場合（本機能実装以前のセーブデータ）は
+            // undefinedのままにし、Layerdataコンストラクタの既定値フォールバックに委ねる
+            layerStyle: actionObj.layerObj.layerStyle,
+            // セーブデータにmaskが含まれていない場合も同様にundefinedのままにする。
+            // 存在する場合は複製する（copyLayer()と同じく、参照共有によるアンドゥ履歴汚染を防ぐため）
+            mask: actionObj.layerObj.mask
+                ? {
+                    enabled: actionObj.layerObj.mask.enabled,
+                    image: new ImageData(
+                        new Uint8ClampedArray(actionObj.layerObj.mask.image.data),
+                        actionObj.layerObj.mask.image.width,
+                        actionObj.layerObj.mask.image.height
+                    ),
+                }
+                : actionObj.layerObj.mask,
             // 元のイメージを復元
             image: actionObj.layerObj.image,
             // 挿入位置：レイヤーが存在した元の位置に挿入
@@ -1276,6 +1575,11 @@ export class LayerSystem extends ToolWindow {
         // テキストエリアにフォーカス
         textbox.focus();
         textbox.select();
+
+        // レイヤースタイル（フチ取り・ドロップシャドウ）コントロールへ現在値を反映
+        this._populateLayerStyleControls(this.currentLayer.dataset.id);
+        // 透明マスクコントロールへ現在値を反映
+        this._populateMaskControls(Number(this.currentLayer.dataset.id));
     }
     // レイヤーのドラッグ＆ドロップ
     drag_down(e) {
@@ -1471,6 +1775,13 @@ export class LayerSystem extends ToolWindow {
             this.compositeFastPathActive = false;
             return;
         }
+        // レイヤースタイル（フチ取り/ドロップシャドウ）・透明マスクは1フレームごとの部分再合成に
+        // 未対応のため、いずれかのレイヤーに有効なものがあれば安全側に倒し、通常の全面再合成に委ねる
+        // （クリッピングレイヤーと同じ「fast path対象外」の扱い）
+        if (this.layerObj.some((l) => hasActiveLayerStyle(l.layerStyle) || hasActiveMask(l.mask))) {
+            this.compositeFastPathActive = false;
+            return;
+        }
         this._compositeLayerRange(
             this.CANVAS.compositeBelowCtx,
             currentIdx + 1, this.layerObj.length - 1
@@ -1481,15 +1792,74 @@ export class LayerSystem extends ToolWindow {
         );
         this.strokeCanvas = this.axpObj.penSystem.CANVAS.draw;
         this.compositeFastPathActive = true;
+        // ダーティ矩形化のための基準値（ストローク中に不透明度/合成モードが変化した
+        // かどうかの判定に使う。activateFastPath直後の値を基準とする）
+        this._fastPathMode = item.mode;
+        this._fastPathAlpha = item.alpha;
     }
     deactivateFastPath() {
         this.compositeFastPathActive = false;
         this.strokeCanvas = null;
     }
-    drawFast() {
+    // dirtyRect（{x,y,w,h}、キャンバス座標系）が渡された場合はその矩形だけを再合成する。
+    // 省略・null・不正な矩形の場合は従来どおりの全面再合成にフォールバックする。
+    drawFast(dirtyRect = null) {
         const currentIdx = this.getLayerIndex(this.currentLayer.dataset.id);
         const item = this.layerObj[currentIdx];
 
+        // ストローク中に不透明度/合成モードが変化した場合（レイヤーパネル操作の
+        // 同時操作等）、dirtyRect範囲外は前回値のまま取り残されるため、この
+        // フレームだけ全面再合成にフォールバックして即座に最新値へ揃える。
+        if (item.mode !== this._fastPathMode || item.alpha !== this._fastPathAlpha) {
+            this._fastPathMode = item.mode;
+            this._fastPathAlpha = item.alpha;
+            this._drawFastFull(item);
+            return;
+        }
+
+        if (!dirtyRect || dirtyRect.w <= 0 || dirtyRect.h <= 0) {
+            this._drawFastFull(item);
+            return;
+        }
+
+        const { x, y, w, h } = dirtyRect;
+
+        this.CANVAS.backscreen_trans_ctx.beginPath();
+        this.CANVAS.backscreen_trans_ctx.clearRect(x, y, w, h);
+
+        this.CANVAS.backscreen_trans_ctx.globalCompositeOperation = 'source-over';
+        this.CANVAS.backscreen_trans_ctx.globalAlpha = 1;
+        this.CANVAS.backscreen_trans_ctx.drawImage(this.CANVAS.compositeBelow, x, y, w, h, x, y, w, h);
+
+        this.CANVAS.backscreen_trans_ctx.globalCompositeOperation = item.mode;
+        this.CANVAS.backscreen_trans_ctx.globalAlpha = item.alpha / 100;
+        this.CANVAS.backscreen_trans_ctx.drawImage(this.strokeCanvas, x, y, w, h, x, y, w, h);
+
+        this.CANVAS.backscreen_trans_ctx.globalCompositeOperation = 'source-over';
+        this.CANVAS.backscreen_trans_ctx.globalAlpha = 1;
+        this.CANVAS.backscreen_trans_ctx.drawImage(this.CANVAS.compositeAbove, x, y, w, h, x, y, w, h);
+
+        this.CANVAS.backscreen_white_ctx.beginPath();
+        this.CANVAS.backscreen_white_ctx.clearRect(x, y, w, h);
+        this.CANVAS.backscreen_white_ctx.globalAlpha = 1;
+        this.CANVAS.backscreen_white_ctx.fillStyle = this.axpObj.backgroundColor || this.axpObj.defaultColor?.sub || '#FFFFFF';
+        this.CANVAS.backscreen_white_ctx.fillRect(x, y, w, h);
+        this.CANVAS.backscreen_white_ctx.drawImage(this.CANVAS.backscreen_trans, x, y, w, h, x, y, w, h);
+
+        let ctx = this.axpObj.CANVAS.main_ctx;
+        if (this.axpObj.assistToolSystem.getIsTransparent()) {
+            ctx.clearRect(x, y, w, h);
+            ctx.drawImage(this.CANVAS.backscreen_trans, x, y, w, h, x, y, w, h);
+        } else {
+            ctx.drawImage(this.CANVAS.backscreen_white, x, y, w, h, x, y, w, h);
+        }
+        // 選択範囲の可視化オーバーレイ（どのレイヤーのimageデータにも書き込まない、表示専用）
+        if (this.axpObj.selectionOverlayCanvas) {
+            ctx.drawImage(this.axpObj.selectionOverlayCanvas, x, y, w, h, x, y, w, h);
+        }
+    }
+    // drawFast()の全面再合成版（従来ロジック）。dirtyRect未指定/不正時のフォールバック先。
+    _drawFastFull(item) {
         this.CANVAS.backscreen_trans_ctx.beginPath();
         this.CANVAS.backscreen_trans_ctx.clearRect(0, 0, this.x_size, this.y_size);
 
@@ -1508,7 +1878,7 @@ export class LayerSystem extends ToolWindow {
         this.CANVAS.backscreen_white_ctx.beginPath();
         this.CANVAS.backscreen_white_ctx.clearRect(0, 0, this.x_size, this.y_size);
         this.CANVAS.backscreen_white_ctx.globalAlpha = 1;
-        this.CANVAS.backscreen_white_ctx.fillStyle = this.axpObj.defaultColor?.sub || '#FFFFFF';
+        this.CANVAS.backscreen_white_ctx.fillStyle = this.axpObj.backgroundColor || this.axpObj.defaultColor?.sub || '#FFFFFF';
         this.CANVAS.backscreen_white_ctx.fillRect(0, 0, this.x_size, this.y_size);
         this.CANVAS.backscreen_white_ctx.drawImage(this.CANVAS.backscreen_trans, 0, 0);
 
@@ -1518,6 +1888,10 @@ export class LayerSystem extends ToolWindow {
             ctx.drawImage(this.CANVAS.backscreen_trans, 0, 0);
         } else {
             ctx.drawImage(this.CANVAS.backscreen_white, 0, 0);
+        }
+        // 選択範囲の可視化オーバーレイ（どのレイヤーのimageデータにも書き込まない、表示専用）
+        if (this.axpObj.selectionOverlayCanvas) {
+            ctx.drawImage(this.axpObj.selectionOverlayCanvas, 0, 0);
         }
     }
     draw(changedLayerId = null) {
@@ -1545,9 +1919,23 @@ export class LayerSystem extends ToolWindow {
             } else {
                 tmp_ctx = this.CANVAS.tmp_ctx;
             }
+            // 非破壊レイヤースタイル（フチ取り・ドロップシャドウ）・透明マスクが有効な場合、
+            // 元データ(item.image)自体は変更せず、合成用に一時的に重ねた結果を使う。
+            // クリッピング合成（後段）でも同じcomposited値を使うため、ループ内スコープで保持する
+            let composited = item.image;
             // 非表示・空レイヤーは putImageData をスキップ（合成時にも不要）
             if (!isInvisible) {
-                tmp_ctx.putImageData(item.image, 0, 0);
+                // マスクを先に適用してから輪郭/影を生成する（先にスタイルを生成すると、後で
+                // マスクにより隠れる部分の輪郭がそのまま切り取られたり、逆に見えている縁に
+                // 輪郭が付かなかったりする不整合が起きるため。マスクは「このレイヤーの実効的な
+                // 形状」を決めるものなので、スタイルはその形状に対して計算するのが自然）
+                composited = hasActiveMask(item.mask)
+                    ? applyLayerMask(item.image, item.mask.image)
+                    : item.image;
+                if (hasActiveLayerStyle(item.layerStyle)) {
+                    composited = applyLayerStyle(composited, item.layerStyle, this.x_size, this.y_size);
+                }
+                tmp_ctx.putImageData(composited, 0, 0);
             }
 
             // レイヤー毎のサムネイル描画（変動レイヤーのみ更新）
@@ -1602,14 +1990,23 @@ export class LayerSystem extends ToolWindow {
                                 elementCliping.dataset.mode = this.layerObj[skipIdx].mode;
 
                                 // 子レイヤーが「表示」の場合、そのレイヤーを親と合成する
+                                // （子レイヤー自身のスタイル/マスクもここで適用する）
                                 if (this.layerObj[skipIdx].checked) {
+                                    const childItem = this.layerObj[skipIdx];
+                                    // マスク→スタイルの順で適用する（上のメインループと同じ理由）
+                                    let childComposited = hasActiveMask(childItem.mask)
+                                        ? applyLayerMask(childItem.image, childItem.mask.image)
+                                        : childItem.image;
+                                    if (hasActiveLayerStyle(childItem.layerStyle)) {
+                                        childComposited = applyLayerStyle(childComposited, childItem.layerStyle, this.x_size, this.y_size);
+                                    }
                                     // safari
                                     if (this.axpObj.ENV.multiCanvas) {
-                                        this.CANVAS.layer_ctx[skipIdx].putImageData(this.layerObj[skipIdx].image, 0, 0);
+                                        this.CANVAS.layer_ctx[skipIdx].putImageData(childComposited, 0, 0);
                                         this.CANVAS.clip_ctx.globalAlpha = this.layerObj[skipIdx].alpha / 100;
                                         this.CANVAS.clip_ctx.drawImage(this.CANVAS.layer_ctx[skipIdx].canvas, 0, 0);
                                     } else {
-                                        tmp_ctx.putImageData(this.layerObj[skipIdx].image, 0, 0);
+                                        tmp_ctx.putImageData(childComposited, 0, 0);
                                         this.CANVAS.clip_ctx.globalAlpha = this.layerObj[skipIdx].alpha / 100;
                                         this.CANVAS.clip_ctx.drawImage(tmp_ctx.canvas, 0, 0);
                                     }
@@ -1621,8 +2018,8 @@ export class LayerSystem extends ToolWindow {
                         }
                         // 描画領域の初期化
                         this.CANVAS.merge_ctx.clearRect(0, 0, this.axpObj.x_size, this.axpObj.y_size);
-                        // 親レイヤーの画像をベースにする
-                        this.CANVAS.merge_ctx.putImageData(item.image, 0, 0);
+                        // 親レイヤーの画像をベースにする（スタイル/マスク適用済みのcompositedを使う）
+                        this.CANVAS.merge_ctx.putImageData(composited, 0, 0);
                         // 子と合成
                         this.CANVAS.merge_ctx.globalCompositeOperation = 'source-atop';
                         this.CANVAS.merge_ctx.globalAlpha = 1;
@@ -1648,7 +2045,7 @@ export class LayerSystem extends ToolWindow {
         this.CANVAS.backscreen_white_ctx.beginPath();
         this.CANVAS.backscreen_white_ctx.clearRect(0, 0, this.x_size, this.y_size);
         this.CANVAS.backscreen_white_ctx.globalAlpha = 1;
-        this.CANVAS.backscreen_white_ctx.fillStyle = this.axpObj.defaultColor?.sub || '#FFFFFF';
+        this.CANVAS.backscreen_white_ctx.fillStyle = this.axpObj.backgroundColor || this.axpObj.defaultColor?.sub || '#FFFFFF';
         this.CANVAS.backscreen_white_ctx.fillRect(0, 0, this.x_size, this.y_size);
         this.CANVAS.backscreen_white_ctx.drawImage(this.CANVAS.backscreen_trans, 0, 0);
 
@@ -1660,6 +2057,11 @@ export class LayerSystem extends ToolWindow {
         } else {
             // 白背景
             ctx.drawImage(this.CANVAS.backscreen_white, 0, 0);
+        }
+
+        // 選択範囲の可視化オーバーレイ（どのレイヤーのimageデータにも書き込まない、表示専用）
+        if (this.axpObj.selectionOverlayCanvas) {
+            ctx.drawImage(this.axpObj.selectionOverlayCanvas, 0, 0);
         }
 
         // 背景タイルプレビュー表示

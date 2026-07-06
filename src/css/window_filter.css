@@ -1,0 +1,52 @@
+/* フィルタウィンドウ */
+
+#axp_filter_div_content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+}
+
+#axp_filter_button_colorToAlpha,
+#axp_filter_button_mosaic,
+#axp_filter_button_grayscale {
+    width: 140px;
+}
+
+.axpc_filter_section {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: #333;
+    padding: 4px;
+    margin-top: 2px;
+    font-size: 11px;
+}
+
+.axpc_filter_sectionTitle {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.axpc_filter_subTitle {
+    font-size: 11px;
+    color: #ccc;
+    margin-top: 2px;
+}
+
+.axpc_filter_section label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.axpc_filter_section .axpc_range {
+    width: 100px;
+    height: 16px;
+}
+
+.axpc_filter_section button {
+    margin-top: 4px;
+}
