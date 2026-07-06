@@ -28,15 +28,12 @@ export class InteropSystem {
   startEvent() {
     const controls = document.getElementById('axp_tool_div_interopControls');
     const toggle = document.getElementById('axp_tool_button_interopToggle');
+    const referenceControls = document.getElementById('axp_tool_div_referenceControls');
+    const referenceToggle = document.getElementById('axp_tool_button_referenceToggle');
     const fileInput = document.getElementById('axp_tool_file_reference');
     const timelapseButton = document.getElementById('axp_tool_button_timelapse');
-    toggle.addEventListener('click', () => {
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      const nextExpanded = !isExpanded;
-      toggle.setAttribute('aria-expanded', String(nextExpanded));
-      controls.hidden = !nextExpanded;
-      controls.classList.toggle('axpc_NONE', !nextExpanded);
-    });
+    this.setupDisclosure(toggle, controls);
+    this.setupDisclosure(referenceToggle, referenceControls);
     timelapseButton.addEventListener('click', async () => {
       if (this.timelapseRecorder.isRecording) {
         await this.stopTimelapse(true);
@@ -119,6 +116,16 @@ export class InteropSystem {
     });
     this.syncReferenceControls();
     this.syncTimelapseButton();
+  }
+
+  setupDisclosure(toggle, controls) {
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      const nextExpanded = !isExpanded;
+      toggle.setAttribute('aria-expanded', String(nextExpanded));
+      controls.hidden = !nextExpanded;
+      controls.classList.toggle('axpc_NONE', !nextExpanded);
+    });
   }
 
   syncReferenceControls() {

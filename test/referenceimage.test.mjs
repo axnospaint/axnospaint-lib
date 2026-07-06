@@ -208,12 +208,41 @@ test('interop and liquify provisional controls expose the accessibility hooks ne
   assert.match(penHtml, /id="axp_pen_range_liquifyHardness"[\s\S]*aria-label="\$\{_\(("@LIQUIFY\.HARDNESS"|'@LIQUIFY\.HARDNESS')\)\}"/);
 });
 
-test('interop panel starts truly collapsed and groups reference controls for compact dogfooding UI', () => {
+test('interop and reference panels start collapsed as independent disclosures', () => {
   const toolHtml = readFileSync(new URL('../src/html/window_tool.txt', import.meta.url), 'utf8');
 
+  assert.match(toolHtml, /id="axp_tool_button_interopToggle"[^>]*aria-expanded="false"/);
   assert.match(toolHtml, /id="axp_tool_div_interopControls"[^>]*hidden/);
+  assert.match(
+    toolHtml,
+    /id="axp_tool_button_referenceToggle"[^>]*aria-expanded="false"[\s\S]*?aria-controls="axp_tool_div_referenceControls"/,
+  );
+  assert.match(toolHtml, /id="axp_tool_div_referenceControls"[^>]*hidden/);
   assert.match(toolHtml, /id="axp_tool_div_referenceToggles"/);
   assert.match(toolHtml, /id="axp_tool_div_referencePosition"/);
+});
+
+test('reference image controls are outside the export and share disclosure', () => {
+  const toolHtml = readFileSync(new URL('../src/html/window_tool.txt', import.meta.url), 'utf8');
+  const interopControls = toolHtml.match(
+    /id="axp_tool_div_interopControls"[^>]*>(?<body>[\s\S]*?)\n\s+<\/div>\n\s+<\/div>/,
+  );
+  const referenceControls = toolHtml.match(
+    /id="axp_tool_div_referenceControls"[^>]*>(?<body>[\s\S]*?)\n\s+<\/div>\n\s+<\/div>/,
+  );
+
+  assert.ok(interopControls);
+  assert.ok(referenceControls);
+  assert.doesNotMatch(interopControls.groups.body, /axp_tool_button_referenceLoad/);
+  assert.match(referenceControls.groups.body, /axp_tool_button_referenceLoad/);
+});
+
+test('auxiliary disclosures use a chevron heading and indented panel treatment', () => {
+  const css = readFileSync(new URL('../src/css/window_tool.css', import.meta.url), 'utf8');
+
+  assert.match(css, /\.axp_tool_disclosureToggle::before\s*\{[\s\S]*?content:\s*"▸"/);
+  assert.match(css, /\.axp_tool_disclosureToggle\[aria-expanded="true"\]::before\s*\{[\s\S]*?transform:\s*rotate\(90deg\)/);
+  assert.match(css, /\.axp_tool_disclosurePanel\s*\{[\s\S]*?border-left:/);
 });
 
 test('reference sliders are explicitly compacted inside the auxiliary tool panel', () => {

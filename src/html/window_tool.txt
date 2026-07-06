@@ -23,17 +23,24 @@
                     <input type="checkbox" name="check" />
                 </div>
             </div>
-            <div id="axp_tool_div_interop">
-                <button id="axp_tool_button_interopToggle" type="button" class="axpc_MSG axpc_button"
+            <div id="axp_tool_div_interop" class="axp_tool_disclosure">
+                <button id="axp_tool_button_interopToggle" type="button" class="axpc_MSG axp_tool_disclosureToggle"
                     data-msg="@AST0200" aria-expanded="false"
                     aria-controls="axp_tool_div_interopControls">${_("@INTEROP.TITLE")}</button>
-                <div id="axp_tool_div_interopControls" class="axpc_NONE" hidden>
+                <div id="axp_tool_div_interopControls" class="axp_tool_disclosurePanel axpc_NONE" hidden>
                     <button id="axp_tool_button_timelapse" type="button" class="axpc_MSG axpc_button"
                         data-msg="@AST0203" aria-pressed="false">${_("@INTEROP.TIMELAPSE_START")}</button>
                     <button id="axp_tool_button_clipboardCopy" type="button" class="axpc_MSG axpc_button"
                         data-msg="@AST0204">${_("@INTEROP.CLIPBOARD_COPY")}</button>
                     <button id="axp_tool_button_psdExport" type="button" class="axpc_MSG axpc_button"
                         data-msg="@AST0202">${_("@INTEROP.PSD_EXPORT")}</button>
+                </div>
+            </div>
+            <div id="axp_tool_div_reference" class="axp_tool_disclosure">
+                <button id="axp_tool_button_referenceToggle" type="button" class="axpc_MSG axp_tool_disclosureToggle"
+                    data-msg="@AST0205" aria-expanded="false"
+                    aria-controls="axp_tool_div_referenceControls">${_("@INTEROP.REFERENCE_TITLE")}</button>
+                <div id="axp_tool_div_referenceControls" class="axp_tool_disclosurePanel axpc_NONE" hidden>
                     <button id="axp_tool_button_referenceLoad" type="button" class="axpc_MSG axpc_button"
                         data-msg="@AST0201">${_("@INTEROP.REFERENCE_LOAD")}</button>
                     <input id="axp_tool_file_reference" type="file" accept="image/png,image/jpeg,image/webp,.psd">

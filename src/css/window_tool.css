@@ -119,8 +119,8 @@
     content: attr(data-label);
 }
 
-/* 相互運用（参照画像など） */
-#axp_tool_div_interop {
+/* 書出し・共有 / 参照画像 disclosure */
+.axp_tool_disclosure {
     --axp-interop-compact-h: 22px;
     display: flex;
     flex-direction: column;
@@ -131,7 +131,35 @@
     box-sizing: border-box;
 }
 
-#axp_tool_button_interopToggle,
+.axp_tool_disclosureToggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 26px;
+    padding: 3px 5px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    color: inherit;
+    background: rgba(255, 255, 255, .08);
+    line-height: 1.1;
+    text-align: left;
+    cursor: pointer;
+}
+
+.axp_tool_disclosureToggle::before {
+    content: "▸";
+    display: inline-block;
+    flex: 0 0 auto;
+    transform-origin: 50% 50%;
+    transition: transform .12s ease;
+}
+
+.axp_tool_disclosureToggle[aria-expanded="true"]::before {
+    transform: rotate(90deg);
+}
+
 #axp_tool_button_timelapse,
 #axp_tool_button_clipboardCopy,
 #axp_tool_button_psdExport,
@@ -149,13 +177,17 @@
     content: "● ";
 }
 
-#axp_tool_div_interopControls {
+.axp_tool_disclosurePanel {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    padding-left: 7px;
+    border-left: 2px solid #666;
 }
 
-#axp_tool_div_interopControls[hidden] {
+.axp_tool_disclosurePanel[hidden] {
     display: none;
 }
 
@@ -253,18 +285,18 @@
     box-shadow: -72px 0 0 72px #777;
 }
 
-#axp_tool_div_interop button:focus-visible,
+.axp_tool_disclosure button:focus-visible,
 #axp_tool_div_referenceDetails input:focus-visible {
     outline: 2px solid #8bd3ff;
     outline-offset: 1px;
 }
 
 @media (pointer: coarse) {
-    #axp_tool_div_interop {
+    .axp_tool_disclosure {
         gap: 6px;
     }
 
-    #axp_tool_button_interopToggle,
+    .axp_tool_disclosureToggle,
     #axp_tool_button_timelapse,
     #axp_tool_button_clipboardCopy,
     #axp_tool_button_psdExport,
