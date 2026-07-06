@@ -76,31 +76,65 @@ function createFixture({ source = createImage(5, 5) } = {}) {
   };
 }
 
-test('completed stroke creates one undo entry and one autosave event', () => {
+test('multiple liquify strokes commit once when the session is finalized', () => {
   const fixture = createFixture();
 
   fixture.pen.start(2, 2, { altKey: false });
   fixture.pen.move(3, 2, { altKey: false });
   fixture.pen.end(3, 2, { altKey: false });
+  fixture.pen.start(3, 2, { altKey: false });
+  fixture.pen.move(3, 3, { altKey: false });
+  fixture.pen.end(3, 3, { altKey: false });
+
+  assert.equal(fixture.getUndoEntries().length, 0);
+  assert.equal(fixture.getAutoSaveCount(), 0);
+  assert.equal(fixture.axpObj.layerSystem.isStrokeActive, false);
+
+  fixture.pen.finalizeLiquifySession();
 
   assert.equal(fixture.getUndoEntries().length, 1);
   assert.equal(fixture.getUndoEntries()[0].detail, 'liquify');
   assert.equal(fixture.getUndoEntries()[0].layerObj.image, fixture.source);
   assert.equal(fixture.getAutoSaveCount(), 1);
   assert.equal(fixture.axpObj.layerSystem.isStrokeActive, false);
+  assert.equal(fixture.pen.session, 'idle');
+  assert.notDeepEqual(fixture.getCurrentImage().data, fixture.source.data);
 });
 
-test('cancelled stroke restores the source without creating undo', () => {
+test('cancelled liquify session restores the source without creating undo', () => {
   const fixture = createFixture();
 
   fixture.pen.start(2, 2, { altKey: false });
   fixture.pen.move(3, 2, { altKey: false });
-  fixture.axpObj.isDrawCancel = true;
   fixture.pen.end(3, 2, { altKey: false });
+  fixture.pen.cancelLiquifySession();
 
   assert.deepEqual(fixture.getCurrentImage().data, fixture.source.data);
   assert.equal(fixture.getUndoEntries().length, 0);
   assert.equal(fixture.getAutoSaveCount(), 0);
+  assert.equal(fixture.pen.session, 'idle');
+});
+
+test('cancelled liquify stroke preserves earlier session changes', () => {
+  const fixture = createFixture();
+
+  fixture.pen.start(2, 2, { altKey: false });
+  fixture.pen.move(3, 2, { altKey: false });
+  fixture.pen.end(3, 2, { altKey: false });
+  const afterFirstStroke = fixture.getCurrentImage();
+  fixture.pen.start(3, 2, { altKey: false });
+  fixture.pen.move(3, 3, { altKey: false });
+  fixture.axpObj.isDrawCancel = true;
+  fixture.pen.end(3, 3, { altKey: false });
+
+  assert.deepEqual(fixture.getCurrentImage().data, afterFirstStroke.data);
+  assert.equal(fixture.getUndoEntries().length, 0);
+  assert.equal(fixture.getAutoSaveCount(), 0);
+
+  fixture.pen.finalizeLiquifySession();
+
+  assert.equal(fixture.getUndoEntries().length, 1);
+  assert.equal(fixture.getAutoSaveCount(), 1);
 });
 
 test('out-of-canvas liquify stroke does not create undo or autosave', () => {
@@ -109,6 +143,7 @@ test('out-of-canvas liquify stroke does not create undo or autosave', () => {
   fixture.pen.start(2, 2, { altKey: false });
   fixture.pen.move(-10, -10, { altKey: false });
   fixture.pen.end(-10, -10, { altKey: false });
+  fixture.pen.finalizeLiquifySession();
 
   assert.deepEqual(fixture.getCurrentImage().data, fixture.source.data);
   assert.equal(fixture.getUndoEntries().length, 0);
@@ -122,6 +157,7 @@ test('liquify stroke with no image delta does not create undo or autosave', () =
   fixture.pen.start(2, 2, { altKey: false });
   fixture.pen.move(3, 2, { altKey: false });
   fixture.pen.end(3, 2, { altKey: false });
+  fixture.pen.finalizeLiquifySession();
 
   assert.deepEqual(fixture.getCurrentImage().data, source.data);
   assert.equal(fixture.getUndoEntries().length, 0);

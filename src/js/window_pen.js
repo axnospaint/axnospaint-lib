@@ -183,6 +183,8 @@ export class PenSystem extends ToolWindow {
         this.penObj['axp_penmode_nagenawa'].setupOverlayEvents();
         // 多角形選択オーバーレイのイベント設定
         this.penObj['axp_penmode_polygonselect'].setupOverlayEvents();
+        // 歪みツール確定/取消オーバーレイのイベント設定
+        this.penObj['axp_penmode_liquify'].setupOverlayEvents();
     }
     // id名からアイコン用class名を取得
     getClassIcon(id) {
@@ -1127,9 +1129,12 @@ export class PenSystem extends ToolWindow {
             }
         }
         const liquify = this.penObj['axp_penmode_liquify'];
-        if (liquify?.isActive && !this.isTemporary) {
+        if (liquify?.session === 'active' && !this.isTemporary) {
             const newMode = mode || this.pen_mode;
-            if (newMode !== 'axp_penmode_liquify') liquify.cancelStroke();
+            if (newMode !== 'axp_penmode_liquify') {
+                if (liquify.isActive) liquify.cancelStroke();
+                liquify.finalizeLiquifySession();
+            }
         }
         if (mode) {
             this.pen_mode = mode;

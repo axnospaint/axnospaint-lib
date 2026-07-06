@@ -58,6 +58,7 @@ export class InteropSystem {
     document.getElementById('axp_tool_button_psdExport').addEventListener('click', () => {
       try {
         this.axpObj.finalizeNagenawaSelection?.();
+        this.axpObj.finalizeLiquifySession?.();
         const unsupportedBlendLayers = collectUnsupportedBlendLayers(this.axpObj.layerSystem.layerObj);
         if (unsupportedBlendLayers.length > 0) {
           this.axpObj.msg('@CAU6004', unsupportedBlendLayers.join(', '));

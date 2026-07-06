@@ -83,6 +83,7 @@ export class FilterSystem extends ToolWindow {
         }
         // なげなわ変形中は確定してから処理する
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         const before = this.axpObj.layerSystem.getCurrentLayerImage();
         const after = filterFn(before);
         // 無変化なら何もしない（_penobj.jsのend_common()と同じcompareImagesによる契約に合わせる。

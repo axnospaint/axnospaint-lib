@@ -398,6 +398,13 @@ export class AXPObj {
             nagenawa.finalizeSelection();
         }
     }
+    // 歪みツールの未確定セッションを確定する（キャンバス全体に影響する操作の前処理用）
+    finalizeLiquifySession() {
+        const liquify = this.penSystem?.penObj?.['axp_penmode_liquify'];
+        if (liquify && liquify.session === 'active') {
+            liquify.finalizeLiquifySession();
+        }
+    }
     // 選択範囲（マジックワンド／多角形選択）の適用。なげなわの「切り取って移動」とは
     // 独立した、レイヤーのimageデータを一切変更しない範囲情報として保持する
     applySelectionMask(newMask) {
@@ -1770,6 +1777,7 @@ export class AXPObj {
                 this.isCanvasOpen = false;
                 // なげなわ変形中は確定してから投稿画像を生成する（点線プレビューの混入防止）
                 this.finalizeNagenawaSelection();
+                this.finalizeLiquifySession();
                 // 投稿タブ内の情報更新
                 this.drawPostCanvas();
 
@@ -2171,6 +2179,7 @@ export class AXPObj {
         this.TASK['func_rotate'] = () => {
             // なげなわ変形中は確定してから処理する
             this.finalizeNagenawaSelection();
+            this.finalizeLiquifySession();
             // 書き込み不可状態チェック
             if (this.layerSystem.isWriteProtection()) {
                 let layerName = this.layerSystem.getName();

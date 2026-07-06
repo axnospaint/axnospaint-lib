@@ -82,6 +82,29 @@ test('resetCanvas clears liquify in-progress state', () => {
   assert.match(match.groups.body, /axp_penmode_liquify'\]\?\.forceIdle\(\)/);
 });
 
+test('liquify session finalization guards mirror nagenawa finalization calls', () => {
+  const guardedFiles = [
+    '../src/js/undo.js',
+    '../src/js/window_layer.js',
+    '../src/js/window_tool.js',
+    '../src/js/window_filter.js',
+    '../src/js/config.js',
+    '../src/js/saveload.js',
+    '../src/js/interop.js',
+    '../src/js/axpobj.js',
+  ];
+
+  for (const file of guardedFiles) {
+    const source = readFileSync(new URL(file, import.meta.url), 'utf8');
+    const lines = source.split('\n');
+    lines.forEach((line, index) => {
+      if (!line.includes('finalizeNagenawaSelection') || !line.includes('();')) return;
+      const guardWindow = lines.slice(index, index + 4).join('\n');
+      assert.match(guardWindow, /finalizeLiquifySession(?:\?\.)?\(\);/, `${file}:${index + 1}`);
+    });
+  }
+});
+
 test('Japanese fill sample labels use full-width layer wording', () => {
   const msg = readFileSync(new URL('../src/text/msg.txt', import.meta.url), 'utf8');
   const ja = readFileSync(new URL('../src/text/ja.json', import.meta.url), 'utf8');

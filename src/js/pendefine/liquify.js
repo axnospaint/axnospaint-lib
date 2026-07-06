@@ -1,4 +1,5 @@
 import { PenObj } from './_penobj.js';
+import { UTIL } from '../etc.js';
 import {
   LIQUIFY_MODE,
   applyLiquifyDab,
@@ -18,6 +19,15 @@ function cloneImageData(image) {
     return new ImageData(data, image.width, image.height);
   }
   return { data, width: image.width, height: image.height };
+}
+
+function cloneDisplacementField(field) {
+  return {
+    width: field.width,
+    height: field.height,
+    dx: new Float32Array(field.dx),
+    dy: new Float32Array(field.dy),
+  };
 }
 
 function sameImageData(a, b) {
@@ -53,8 +63,11 @@ export class Liquify extends PenObj {
     this.displacementField = null;
     this.previousX = 0;
     this.previousY = 0;
+    this.session = 'idle';
     this.isActive = false;
     this.hasChanged = false;
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
     this.init_save();
   }
 
@@ -74,14 +87,20 @@ export class Liquify extends PenObj {
     if (this.axpObj.layerSystem.isWriteProtection()) return;
 
     const layerSystem = this.axpObj.layerSystem;
-    layerSystem.save();
-    this.sourceImage = cloneImageData(layerSystem.getCurrentLayerImage());
-    this.resultImage = cloneImageData(this.sourceImage);
-    this.displacementField = createDisplacementField(this.axpObj.x_size, this.axpObj.y_size);
+    if (this.session === 'idle') {
+      layerSystem.save();
+      this.sourceImage = cloneImageData(layerSystem.getCurrentLayerImage());
+      this.resultImage = cloneImageData(this.sourceImage);
+      this.displacementField = createDisplacementField(this.axpObj.x_size, this.axpObj.y_size);
+      this.hasChanged = false;
+      this.session = 'active';
+      this.showOverlay();
+    }
+    this.strokeStartImage = cloneImageData(this.resultImage);
+    this.strokeStartDisplacementField = cloneDisplacementField(this.displacementField);
     this.previousX = x;
     this.previousY = y;
     this.isActive = true;
-    this.hasChanged = false;
     this.axpObj.isDrawing = true;
     this.axpObj.isDrawn = false;
     this.axpObj.isDrawCancel = false;
@@ -93,7 +112,7 @@ export class Liquify extends PenObj {
   }
 
   move(x, y, event) {
-    if (!this.isActive || !this.axpObj.isDrawing || this.axpObj.isDrawCancel) return;
+    if (this.session !== 'active' || !this.isActive || !this.axpObj.isDrawing || this.axpObj.isDrawCancel) return;
 
     const settings = this.settingsProvider();
     const dirtyRect = applyLiquifyDab(this.displacementField, {
@@ -141,12 +160,44 @@ export class Liquify extends PenObj {
 
   end() {
     if (!this.isActive) return;
-    if (this.axpObj.isDrawCancel || !this.hasChanged || sameImageData(this.sourceImage, this.resultImage)) {
+    if (this.axpObj.isDrawCancel) {
       this.cancelStroke();
+      return;
+    }
+    this.finishStroke();
+  }
+
+  finishStroke() {
+    if (!this.isActive) return;
+
+    const layerSystem = this.axpObj.layerSystem;
+    layerSystem.isStrokeActive = false;
+    layerSystem.deactivateFastPath();
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
+    this.isActive = false;
+    this.axpObj.isDrawing = false;
+    this.axpObj.isDrawn = false;
+    this.axpObj.isDrawCancel = false;
+  }
+
+  finalizeLiquifySession() {
+    if (this.session !== 'active') return;
+    if (this.isActive) {
+      if (this.axpObj.isDrawCancel) {
+        this.cancelStroke();
+      } else {
+        this.finishStroke();
+      }
+    }
+
+    if (!this.hasChanged || sameImageData(this.sourceImage, this.resultImage)) {
+      this.cancelLiquifySession();
       return;
     }
 
     const layerSystem = this.axpObj.layerSystem;
+    const imageForUndo = layerSystem.load();
     layerSystem.write(this.resultImage);
     layerSystem.isStrokeActive = false;
     layerSystem.deactivateFastPath();
@@ -163,36 +214,97 @@ export class Liquify extends PenObj {
         locked: layerSystem.getLocked(),
         masked: layerSystem.getMasked(),
         name: layerSystem.getName(),
-        image: layerSystem.load(),
+        image: imageForUndo,
       },
     });
     if (this.axpObj.isBackgroundimage) this.axpObj.drawBackground();
     this.axpObj.saveSystem.autoSave();
-    this.releaseStroke();
+    this.releaseSession();
+  }
+
+  cancelLiquifySession() {
+    if (this.session !== 'active') return;
+    const layerSystem = this.axpObj.layerSystem;
+    layerSystem.write(layerSystem.load() || this.sourceImage);
+    layerSystem.isStrokeActive = false;
+    layerSystem.deactivateFastPath();
+    layerSystem.updateCanvas(layerSystem.getId());
+    this.releaseSession();
   }
 
   cancelStroke() {
     if (!this.isActive) return;
     const layerSystem = this.axpObj.layerSystem;
-    layerSystem.replaceCurrentImage(this.sourceImage);
+    const restoreImage = this.strokeStartImage || this.sourceImage;
+    if (this.strokeStartDisplacementField) {
+      this.displacementField = cloneDisplacementField(this.strokeStartDisplacementField);
+    }
+    this.resultImage = cloneImageData(restoreImage);
+    if (layerSystem.compositeFastPathActive) {
+      this.CANVAS.draw_ctx.putImageData(this.resultImage, 0, 0);
+      layerSystem.drawFast();
+    } else {
+      layerSystem.replaceCurrentImage(this.resultImage);
+      layerSystem.updateCanvas(layerSystem.getId());
+    }
     layerSystem.isStrokeActive = false;
     layerSystem.deactivateFastPath();
-    layerSystem.updateCanvas(layerSystem.getId());
-    this.releaseStroke();
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
+    this.isActive = false;
+    this.axpObj.isDrawing = false;
+    this.axpObj.isDrawn = false;
+    this.axpObj.isDrawCancel = false;
   }
 
   forceIdle() {
-    this.cancelStroke();
+    this.cancelLiquifySession();
   }
 
-  releaseStroke() {
+  setupOverlayEvents() {
+    if (typeof document === 'undefined') return;
+    const finishBtn = document.getElementById('axp_canvas_button_liquifyFinish');
+    const cancelBtn = document.getElementById('axp_canvas_button_liquifyCancel');
+    if (finishBtn) {
+      finishBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.finalizeLiquifySession();
+      });
+    }
+    if (cancelBtn) {
+      cancelBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.cancelLiquifySession();
+      });
+    }
+  }
+
+  showOverlay() {
+    if (typeof document === 'undefined') return;
+    const group = document.getElementById('axp_canvas_div_liquifyGroup');
+    if (group) UTIL.show(group);
+  }
+
+  hideOverlay() {
+    if (typeof document === 'undefined') return;
+    const group = document.getElementById('axp_canvas_div_liquifyGroup');
+    if (group) UTIL.hide(group);
+  }
+
+  releaseSession() {
     this.sourceImage = null;
     this.resultImage = null;
     this.displacementField = null;
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
+    this.session = 'idle';
     this.isActive = false;
     this.hasChanged = false;
     this.axpObj.isDrawing = false;
     this.axpObj.isDrawn = false;
     this.axpObj.isDrawCancel = false;
+    this.hideOverlay();
   }
 }

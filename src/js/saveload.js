@@ -213,6 +213,7 @@ export class SaveSystem {
                 item.onclick = (e) => {
                     // なげなわ変形中は確定してから保存する（選択物が欠落した状態で保存されるのを防ぐ）
                     this.axpObj.finalizeNagenawaSelection();
+                    this.axpObj.finalizeLiquifySession();
                     // data-keyに記憶しておいた主キーを使用する
                     const save_id = e.currentTarget.dataset.key;
                     const data = {
@@ -295,6 +296,7 @@ export class SaveSystem {
                                 // なげなわ変形中は確定してからロードする
                                 // （レイヤー消失後に finalize が走るとエラーになるため）
                                 this.axpObj.finalizeNagenawaSelection();
+                                this.axpObj.finalizeLiquifySession();
                                 this.restoreData(data);
                                 if (mode === 'auto') {
                                     // 自動保存されたデータをロードしました。

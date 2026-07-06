@@ -1,5 +1,5 @@
 /*!
- * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-06T08:38:45.777Z)
+ * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-06T08:46:45.138Z)
  * (c) 2026- nijiurachan contributors
  * (c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」
  * Licensed under MPL 2.0
@@ -26678,7 +26678,7 @@ module.exports = "<!-- 設定タブ -->\n<div id=\"axp_config_div_menu\">\n    <
   \***************************/
 /***/ ((module) => {
 
-module.exports = "<!-- AXNOS Paintメイン -->\n<div id=\"axp_main\" class=\"axpc_main\">\n\t<!-- 切り替えタブ -->\n\t<div id=\"axp_main_div_tab\">\n\t\t<!-- ハンバーガーメニューボタン -->\n\t\t<input type=\"checkbox\" id=\"axp_main_checkbox_hamburger\">\n\t\t<label id=\"axp_main_label_hamburger\" for=\"axp_main_checkbox_hamburger\">\n\t\t\t<div class=\"axpc_icon_humburger\"></div>\n\t\t</label>\n\t\t<div id=\"axp_main_div_tab_menu\">\n\t\t\t<div data-idx=\"0\" class=\"axpc_MSG\" data-msg=\"@BAS0001\">${_(\"@TAB.CANVAS\")}</div>\n\t\t\t<div data-idx=\"1\" class=\"axpc_MSG\" data-msg=\"@BAS0002\">${_(\"@TAB.SETTINGS\")}</div>\n\t\t\t<div data-idx=\"2\" class=\"axpc_MSG\" data-msg=\"@BAS0003\">${_(\"@TAB.POST\")}</div>\n\t\t\t<div data-idx=\"3\" class=\"axpc_MSG\" data-msg=\"@BAS0004\"></div>\n\t\t</div>\n\t\t<div id=\"axp_main_div_headerText\" class=\"axpc_MSG\" data-msg=\"@BAS0005\"></div>\n\t\t<!-- ヘッダー右端のアンドゥ／リドゥボタン -->\n\t\t<button id=\"axp_main_button_undo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t<button id=\"axp_main_button_redo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t</div>\n\n\t<!-- タブにより切り替わる画面 -->\n\t<div id=\"axp_main_div_tabContent\">\n\t\t<!-- キャンバス -->\n\t\t<article>\n\t\t\t<div id=\"axp_canvas\">\n\t\t\t\t<!-- ペンの太さを表示する補助円 -->\n\t\t\t\t<div id=\"axp_canvas_div_penCursor\"></div>\n\n\t\t\t\t<!-- 回転操作子グループ（ハンドツール時のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_rotateGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateLeft\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0020\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateHandle\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@AST0022\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateRight\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0021\"></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- なげなわ操作子グループ（なげなわ変形中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_nagenawaGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaScale\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@NAG0001\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaRotate\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@NAG0002\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaFlip\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0004\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaDuplicate\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0005\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaFinish\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0003\"></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 多角形選択操作子グループ（頂点配置中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_polygonGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_polygonCancel\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@POL0002\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_polygonFinish\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@POL0001\"></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- タッチ操作バー（pointer:coarse時のみCSSで表示。Undo/Redo/表示リセットの大型タップ領域） -->\n\t\t\t\t<div id=\"axp_canvas_div_touchBar\">\n\t\t\t\t\t<button id=\"axp_canvas_button_touchUndo\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_touchRedo\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_touchViewReset\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_loupe_reset\" data-msg=\"@AST0004\"\n\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_VIEW_RESET\")}\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- ポインタ座標表示領域 -->\n\t\t\t\t<div id=\"axp_canvas_div_pointerPosition\" class=\"axpc_NONE\"></div>\n\n\t\t\t\t<!-- デバッグ情報表示 -->\n\t\t\t\t<div id=\"axp_canvas_div_debugInfo\" class=\"axpc_NONE axpc_MSG\" data-msg=\"@BAS0100\">\n\t\t\t\t\t<div></div>\n\t\t\t\t\t<div></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 描画エリア -->\n\t\t\t\t<div id=\"axp_canvas_div_grayBackground\">\n\t\t\t\t\t<!-- 補助線 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_grid\" class=\"axpc_NONE\">\n\t\t\t\t\t\t<svg id=\"axp_canvas_svg_grid\" xmlns=\"http://www.w3.org/2000/svg\">\n\t\t\t\t\t\t\t<defs>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridVH\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridSubDivision\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridDiagonal\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel1\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel2\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t</defs>\n\t\t\t\t\t\t</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!-- canvas要素 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_referenceHost\" hidden>\n\t\t\t\t\t\t<div id=\"axp_canvas_div_referenceFrame\" data-editing=\"false\">\n\t\t\t\t\t\t\t<canvas id=\"axp_canvas_canvas_reference\"></canvas>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<canvas id=\"axp_canvas_canvas_main\" class=\"axpc_background_mesh\"></canvas>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- セーブロードサブウィンドウ -->\n\t\t\t\t<div id=\"axp_saveload\" class=\"axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<span id=\"axp_saveload_span_message\"></span>\n\t\t\t\t\t\t<div id=\"axp_saveload_div_insertHTML\"></div>\n\t\t\t\t\t\t<button id=\"axp_saveload_button_close\" class=\"axpc_button\">${_(\"@COMMON.BUTTON_CLOSE\")}</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- レイヤー名変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_renamelayer\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.LAYERS_INFO\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_close\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0100\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_textarea\">\n\t\t\t\t\t\t\t<input id=\"axp_renamelayer_text_newLayerName\" type=\"text\" size=\"15\" maxlength=\"10\"\n\t\t\t\t\t\t\t\tautocomplete=\"off\" class=\"axpc_MSG\" data-msg=\"@LAY0101\" placeholder=\"空白にはできません\">\n\t\t\t\t\t\t\t<!-- 状態によりMSG変化 -->\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_confirm\"\n\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYER.BUTTON_RENAME_OK\")}</button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_buttonarea\">\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipH\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0110\"></button>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipV\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0111\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<!-- 非破壊レイヤースタイル（フチ取り・ドロップシャドウ/光彩）。\n\t\t\t\t\t\t\tピクセルデータは変更せず、合成のたびに一時的に重ねて表示する。 -->\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_layerStyle\">\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_section\">\n\t\t\t\t\t\t\t\t<label class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_layerstyle_checkbox_strokeEnabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERSTYLE.STROKE\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.RADIUS\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_strokeRadius\" min=\"1\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"4\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.COLOR\")}\n\t\t\t\t\t\t\t\t\t\t<input type=\"color\" id=\"axp_layerstyle_color_stroke\" value=\"#000000\">\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_section\">\n\t\t\t\t\t\t\t\t<label class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_layerstyle_checkbox_shadowEnabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERSTYLE.DROPSHADOW\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.OFFSET_X\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOffsetX\" min=\"-30\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.OFFSET_Y\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOffsetY\" min=\"-30\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.BLUR\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowBlur\" min=\"0\" max=\"30\"\n\t\t\t\t\t\t\t\t\t\t\t\tstep=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@COMMON.OPACITY\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOpacity\" min=\"0\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"100\" step=\"1\" value=\"60\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.COLOR\")}\n\t\t\t\t\t\t\t\t\t\t<input type=\"color\" id=\"axp_layerstyle_color_shadow\" value=\"#000000\">\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<!-- 透明マスク（非破壊消しゴム）。マスクの輝度でレイヤーのアルファを乗算する。\n\t\t\t\t\t\t\tピクセルデータは変更せず、マスク画像自体を専用ブラシで編集する。 -->\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_mask\">\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t<button id=\"axp_mask_button_addRemove\"\n\t\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYERMASK.ADD\")}</button>\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_mask_checkbox_enabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERMASK.ENABLED\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t<button id=\"axp_mask_button_editToggle\"\n\t\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYERMASK.EDIT\")}</button>\n\t\t\t\t\t\t\t\t<label>${_(\"@LAYERMASK.BRUSH_SIZE\")}\n\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_mask_range_brushSize\" min=\"1\" max=\"200\" step=\"1\"\n\t\t\t\t\t\t\t\t\t\t\tvalue=\"30\">\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<label>${_(\"@LAYERMASK.BRUSH_STRENGTH\")}\n\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_mask_range_brushStrength\" min=\"1\" max=\"100\"\n\t\t\t\t\t\t\t\t\t\t\tstep=\"1\" value=\"100\">\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_mask_checkbox_restoreMode\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERMASK.RESTORE_MODE\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTagContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.PRESET_NAME\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_colorReset\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0102\">${_(\"@LAYER.BUTTON_CLEAR_COLOR\")}</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTag\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 補助線の色変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_gridconfig\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@GRID.LINE_COLOR\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_gridconfig_button_confirm\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@AST0122\"></button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_gridconfig_div_colorPicker\" class=\"axpc_MSG\" data-msg=\"@AST0120\"></div>\n\t\t\t\t\t\t<form id=\"axp_gridconfig_form_gridColor\" class=\"axpc_range axpc_text_border\"\n\t\t\t\t\t\t\toninput=\"result.value=parseInt(volume.value)\">\n\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_gridconfig_range_gridColor\" name=\"volume\" min=\"5\" max=\"100\"\n\t\t\t\t\t\t\t\tstep=\"5\" value=\"100\" class=\"axpc_MSG\" data-msg=\"@AST0121\">\n\t\t\t\t\t\t\t<div class=\"axpc_range_label\">${_(\"@COMMON.OPACITY\")}</div>\n\t\t\t\t\t\t\t<div class=\"axpc_range_value\"><output name=\"result\">100</output></div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</article>\n\t\t<!-- 設定 -->\n\t\t<article>\n\t\t\t<div id=\"axp_config\"></div>\n\t\t</article>\n\t\t<!-- 投稿 -->\n\t\t<article>\n\t\t\t<div id=\"axp_post\"></div>\n\t\t</article>\n\t</div>\n</div>\n<!-- フッター -->\n<div id=\"axp_footer\" class=\"axpc_MSG\" data-msg=\"@BAS0006\">\n\t<div id=\"axp_footer_div_icon\"></div>\n\t<div id=\"axp_footer_div_message\">AXNOS Paint（アクノスペイントあいもげカスタム）</div>\n</div>\n";
+module.exports = "<!-- AXNOS Paintメイン -->\n<div id=\"axp_main\" class=\"axpc_main\">\n\t<!-- 切り替えタブ -->\n\t<div id=\"axp_main_div_tab\">\n\t\t<!-- ハンバーガーメニューボタン -->\n\t\t<input type=\"checkbox\" id=\"axp_main_checkbox_hamburger\">\n\t\t<label id=\"axp_main_label_hamburger\" for=\"axp_main_checkbox_hamburger\">\n\t\t\t<div class=\"axpc_icon_humburger\"></div>\n\t\t</label>\n\t\t<div id=\"axp_main_div_tab_menu\">\n\t\t\t<div data-idx=\"0\" class=\"axpc_MSG\" data-msg=\"@BAS0001\">${_(\"@TAB.CANVAS\")}</div>\n\t\t\t<div data-idx=\"1\" class=\"axpc_MSG\" data-msg=\"@BAS0002\">${_(\"@TAB.SETTINGS\")}</div>\n\t\t\t<div data-idx=\"2\" class=\"axpc_MSG\" data-msg=\"@BAS0003\">${_(\"@TAB.POST\")}</div>\n\t\t\t<div data-idx=\"3\" class=\"axpc_MSG\" data-msg=\"@BAS0004\"></div>\n\t\t</div>\n\t\t<div id=\"axp_main_div_headerText\" class=\"axpc_MSG\" data-msg=\"@BAS0005\"></div>\n\t\t<!-- ヘッダー右端のアンドゥ／リドゥボタン -->\n\t\t<button id=\"axp_main_button_undo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t<button id=\"axp_main_button_redo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t</div>\n\n\t<!-- タブにより切り替わる画面 -->\n\t<div id=\"axp_main_div_tabContent\">\n\t\t<!-- キャンバス -->\n\t\t<article>\n\t\t\t<div id=\"axp_canvas\">\n\t\t\t\t<!-- ペンの太さを表示する補助円 -->\n\t\t\t\t<div id=\"axp_canvas_div_penCursor\"></div>\n\n\t\t\t\t<!-- 回転操作子グループ（ハンドツール時のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_rotateGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateLeft\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0020\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateHandle\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@AST0022\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateRight\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0021\"></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- なげなわ操作子グループ（なげなわ変形中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_nagenawaGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaScale\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@NAG0001\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaRotate\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@NAG0002\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaFlip\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0004\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaDuplicate\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0005\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaFinish\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0003\"></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 多角形選択操作子グループ（頂点配置中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_polygonGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_polygonCancel\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@POL0002\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_polygonFinish\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@POL0001\"></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 歪みツール操作子グループ（セッション中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_liquifyGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_button_liquifyCancel\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@LQF0002\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_button_liquifyFinish\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@LQF0001\"></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- タッチ操作バー（pointer:coarse時のみCSSで表示。Undo/Redo/表示リセットの大型タップ領域） -->\n\t\t\t\t<div id=\"axp_canvas_div_touchBar\">\n\t\t\t\t\t<button id=\"axp_canvas_button_touchUndo\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_touchRedo\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_touchViewReset\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_loupe_reset\" data-msg=\"@AST0004\"\n\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_VIEW_RESET\")}\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- ポインタ座標表示領域 -->\n\t\t\t\t<div id=\"axp_canvas_div_pointerPosition\" class=\"axpc_NONE\"></div>\n\n\t\t\t\t<!-- デバッグ情報表示 -->\n\t\t\t\t<div id=\"axp_canvas_div_debugInfo\" class=\"axpc_NONE axpc_MSG\" data-msg=\"@BAS0100\">\n\t\t\t\t\t<div></div>\n\t\t\t\t\t<div></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 描画エリア -->\n\t\t\t\t<div id=\"axp_canvas_div_grayBackground\">\n\t\t\t\t\t<!-- 補助線 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_grid\" class=\"axpc_NONE\">\n\t\t\t\t\t\t<svg id=\"axp_canvas_svg_grid\" xmlns=\"http://www.w3.org/2000/svg\">\n\t\t\t\t\t\t\t<defs>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridVH\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridSubDivision\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridDiagonal\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel1\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel2\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t</defs>\n\t\t\t\t\t\t</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!-- canvas要素 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_referenceHost\" hidden>\n\t\t\t\t\t\t<div id=\"axp_canvas_div_referenceFrame\" data-editing=\"false\">\n\t\t\t\t\t\t\t<canvas id=\"axp_canvas_canvas_reference\"></canvas>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<canvas id=\"axp_canvas_canvas_main\" class=\"axpc_background_mesh\"></canvas>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- セーブロードサブウィンドウ -->\n\t\t\t\t<div id=\"axp_saveload\" class=\"axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<span id=\"axp_saveload_span_message\"></span>\n\t\t\t\t\t\t<div id=\"axp_saveload_div_insertHTML\"></div>\n\t\t\t\t\t\t<button id=\"axp_saveload_button_close\" class=\"axpc_button\">${_(\"@COMMON.BUTTON_CLOSE\")}</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- レイヤー名変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_renamelayer\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.LAYERS_INFO\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_close\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0100\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_textarea\">\n\t\t\t\t\t\t\t<input id=\"axp_renamelayer_text_newLayerName\" type=\"text\" size=\"15\" maxlength=\"10\"\n\t\t\t\t\t\t\t\tautocomplete=\"off\" class=\"axpc_MSG\" data-msg=\"@LAY0101\" placeholder=\"空白にはできません\">\n\t\t\t\t\t\t\t<!-- 状態によりMSG変化 -->\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_confirm\"\n\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYER.BUTTON_RENAME_OK\")}</button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_buttonarea\">\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipH\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0110\"></button>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipV\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0111\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<!-- 非破壊レイヤースタイル（フチ取り・ドロップシャドウ/光彩）。\n\t\t\t\t\t\t\tピクセルデータは変更せず、合成のたびに一時的に重ねて表示する。 -->\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_layerStyle\">\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_section\">\n\t\t\t\t\t\t\t\t<label class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_layerstyle_checkbox_strokeEnabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERSTYLE.STROKE\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.RADIUS\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_strokeRadius\" min=\"1\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"4\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.COLOR\")}\n\t\t\t\t\t\t\t\t\t\t<input type=\"color\" id=\"axp_layerstyle_color_stroke\" value=\"#000000\">\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_section\">\n\t\t\t\t\t\t\t\t<label class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_layerstyle_checkbox_shadowEnabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERSTYLE.DROPSHADOW\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.OFFSET_X\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOffsetX\" min=\"-30\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.OFFSET_Y\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOffsetY\" min=\"-30\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.BLUR\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowBlur\" min=\"0\" max=\"30\"\n\t\t\t\t\t\t\t\t\t\t\t\tstep=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@COMMON.OPACITY\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOpacity\" min=\"0\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"100\" step=\"1\" value=\"60\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.COLOR\")}\n\t\t\t\t\t\t\t\t\t\t<input type=\"color\" id=\"axp_layerstyle_color_shadow\" value=\"#000000\">\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<!-- 透明マスク（非破壊消しゴム）。マスクの輝度でレイヤーのアルファを乗算する。\n\t\t\t\t\t\t\tピクセルデータは変更せず、マスク画像自体を専用ブラシで編集する。 -->\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_mask\">\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t<button id=\"axp_mask_button_addRemove\"\n\t\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYERMASK.ADD\")}</button>\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_mask_checkbox_enabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERMASK.ENABLED\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t<button id=\"axp_mask_button_editToggle\"\n\t\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYERMASK.EDIT\")}</button>\n\t\t\t\t\t\t\t\t<label>${_(\"@LAYERMASK.BRUSH_SIZE\")}\n\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_mask_range_brushSize\" min=\"1\" max=\"200\" step=\"1\"\n\t\t\t\t\t\t\t\t\t\t\tvalue=\"30\">\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<label>${_(\"@LAYERMASK.BRUSH_STRENGTH\")}\n\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_mask_range_brushStrength\" min=\"1\" max=\"100\"\n\t\t\t\t\t\t\t\t\t\t\tstep=\"1\" value=\"100\">\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_mask_checkbox_restoreMode\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERMASK.RESTORE_MODE\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTagContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.PRESET_NAME\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_colorReset\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0102\">${_(\"@LAYER.BUTTON_CLEAR_COLOR\")}</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTag\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 補助線の色変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_gridconfig\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@GRID.LINE_COLOR\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_gridconfig_button_confirm\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@AST0122\"></button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_gridconfig_div_colorPicker\" class=\"axpc_MSG\" data-msg=\"@AST0120\"></div>\n\t\t\t\t\t\t<form id=\"axp_gridconfig_form_gridColor\" class=\"axpc_range axpc_text_border\"\n\t\t\t\t\t\t\toninput=\"result.value=parseInt(volume.value)\">\n\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_gridconfig_range_gridColor\" name=\"volume\" min=\"5\" max=\"100\"\n\t\t\t\t\t\t\t\tstep=\"5\" value=\"100\" class=\"axpc_MSG\" data-msg=\"@AST0121\">\n\t\t\t\t\t\t\t<div class=\"axpc_range_label\">${_(\"@COMMON.OPACITY\")}</div>\n\t\t\t\t\t\t\t<div class=\"axpc_range_value\"><output name=\"result\">100</output></div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</article>\n\t\t<!-- 設定 -->\n\t\t<article>\n\t\t\t<div id=\"axp_config\"></div>\n\t\t</article>\n\t\t<!-- 投稿 -->\n\t\t<article>\n\t\t\t<div id=\"axp_post\"></div>\n\t\t</article>\n\t</div>\n</div>\n<!-- フッター -->\n<div id=\"axp_footer\" class=\"axpc_MSG\" data-msg=\"@BAS0006\">\n\t<div id=\"axp_footer_div_icon\"></div>\n\t<div id=\"axp_footer_div_message\">AXNOS Paint（アクノスペイントあいもげカスタム）</div>\n</div>\n";
 
 /***/ }),
 
@@ -26788,7 +26788,7 @@ module.exports = "<!-- 補助ツール -->\n<div class=\"axpc_window_content\">\
   \**************************/
 /***/ ((module) => {
 
-module.exports = "@BAS0001,キャンバス：絵を描くメイン画面です。\n@BAS0002,設定：各種機能をカスタマイズできます。\n@BAS0003,投稿：描いたイラストを掲示板に投稿します。\n@BAS0004,拡張機能：ユーザーにより定義された拡張機能を実行します。\n@BAS0005,お知らせ領域です。文章が見切れる場合、クリックし続けると全文表示します。\n@BAS0006,機能解説などのガイドメッセージが表示されるエリアです。\n@BAS0100,デバッグ情報です。非表示にするには[設定]-[バージョン情報]-[デバッグ情報表示]のチェックを外してください。\n@LAU0001,一時的にすべてのウィンドウを非表示にします。\n@AST0200,書出し・共有機能を表示します。\n@AST0201,下絵・資料として参照画像を読み込みます。作品レイヤーには追加されません。\n@AST0202,作品レイヤーだけをPSDとして書き出します。参照画像は含めません。\n@AST0203,作品キャンバスだけをタイムラプス録画します。参照画像やUIは含めません。\n@AST0204,作品キャンバスだけをPNGとしてクリップボードへコピーします。貼り付け読込は行いません。\n@AST0205,参照画像の操作を表示します。\n@PEN0001,現在選択しているペンの名前が表示されます。\n@PEN0002,ペンの不透明度を変更します。0に近づくほど透明になります。\n@PEN0003,ペンの太さを変更します。\n@PEN0004,境界付近の塗り残しドットを目立たなくします。数字が大きいほど強く補正します。\n@PEN0005,グラデーションの向きを角度で指定します。\n@PEN0006,トーン濃度を指定します。数字が大きいほど濃くなります。\n@PEN0007,図形描画モードを選択できます。\n@PEN0008,「囲まれた領域」の判定方式を選択できます。（全レイヤー判定を指定すると表示見たままで判定できます。バケツは塗り分け、マジックワンドは選択に使われます）\n@PEN0009,ぼかしの強さを指定します。数字が大きいほど描画する線がぼやけます。\n@PEN0010,外側の角の丸さを指定します。50で正円になります。\n@PEN0011,効果の縁のかたさを指定します。数字が大きいほど境界がくっきりします。\n@PEN0012,ぼかしの広がりを指定します。数字が大きいほど強くぼやけます。\n@PEN0013,色を引きずる強さを指定します。数字が大きいほど強く色が引き伸ばされます。\n@PEN0014,プリセット：クリックで設定を反映します。ダブルクリックで名前を変更し、現在の硬さ・広がり・引きずりを上書き保存します。\n@PEN0015,詳細設定（硬さ・広がり・引きずり・筆圧）の表示／非表示を切り替えます。\n@PEN0016,色の許容誤差を指定します。数字が大きいほど近い色も同じ色とみなして塗ります。（アンチエイリアスの境界に残る塗り漏れの軽減に有効）\n@PEN0017,選択範囲の合成方法を選択できます。（置換／追加／差し引き／交差）\n@PEN0018,現在の選択範囲を解除します。\n@PEN0019,グラデーションに新しいストップ（色の変化点）を追加します。\n@PEN0020,選択中のストップを削除します。（最低2点は残ります）\n@PEN0021,選択中のストップの位置を0〜100%で指定します。\n@PEN0022,選択中のストップの色を、現在の描画色に変更します。\n@PEN0023,歪み効果の強さを指定します。数字が大きいほど変形量が増えます。\n@PEN0024,歪み効果の硬さを指定します。数字が大きいほどブラシ内を均等に変形します。\n@PEN0050,%1%2 [ 再選択 ]:ペン種別変更。\n@PEN0051,%1%2 [ 再選択 ]:消しゴム種別変更。\n@PEN0052,%1%2 [ 再選択 ]:バケツ種別変更。\n@PEN0053,%1%2 [ 再選択 ]:ツール種別変更。\n@PEN0054,%1スポイト：指定座標の色を取得し、描画色（%drawingColorName）に設定します。[ CTRL ]:押している間スポイトに変化。\n@PEN0100,%1丸ペン：一定の太さの線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0101,%1角ペン：先が四角い線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0102,%1ドットペン：ドット絵調の線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0103,%1筆ペン：強弱のついた線が描けるペン。\n@PEN0104,%1クレヨン：クレヨン風の塗りができるペン。[ SHIFT ]:直線描画。\n@PEN0105,%1エアブラシ：エアブラシ風の塗りができるペン。\n@PEN0106,%1混色ペン：下の絵をぼかしたり、引きずって混色できるペン。\n@PEN0107,%1マーカー：塗り重ねると濃くなる蛍光ペン風のペン。\n@PEN0108,%1カーブ：低い不透明度で塗り重なる、柔らかいリボン状の線が描けるペン。\n@PEN0109,%1ハッチング：斜めの平行線で階調を表現するペン。\n@PEN0110,%1消しゴム：辺が丸い消しゴム。[ SHIFT ]:直線描画。\n@PEN0111,%1角消しゴム：辺が四角い消しゴム。[ SHIFT ]:直線描画。\n@PEN0112,%1スケッチ：近くの通過点へランダムに線をつなぐ、ラフ画向けのペン。\n@PEN0115,%1テクスチャブラシ：紙目のような質感が出るペン。\n@PEN0116,%1スムーズペン：速度に応じて先細りする、なめらかな輪郭の線が描けるペン。\n@PEN0120,%1バケツ：囲まれた領域の内側を塗り潰します。\n@PEN0121,%1階調バケツ：メインカラーとサブカラーのグラデーションで、囲まれた領域の内側を塗り潰します。\n@PEN0122,%1マジックワンド：クリックした位置に近い色の範囲を選択します。\n@PEN0130,%1ハンド：ドラッグでキャンバスの位置を移動します。[ SPACE ]:押している間ハンドに変化。\n@PEN0131,%1移動ツール：画像を上下左右に移動するツール（現在のレイヤーのみ対象）\n@PEN0132,%1なげなわ：フリーハンドで囲んだ領域を選択するツール。\n@PEN0133,%1多角形選択：クリックで頂点を配置し、始点付近のクリックで確定する選択ツール。\n@PEN0134,%1歪み：ブラシでなぞった方向や形に画像を変形します。[ ALT ]:効果を反転。\n@INF6000,参照画像を読み込みました。\n@INF6001,PSDを書き出しました。\n@INF6002,タイムラプス録画を開始しました。\n@INF6003,タイムラプス録画を保存しました。\n@INF6004,PNGをクリップボードへコピーしました。\n@INF6005,キャンバスサイズ変更のため、タイムラプス録画を保存して停止しました。\n@CAU6000,参照画像を読み込めませんでした。対応形式または画像サイズを確認してください。\n@CAU6001,PSDを書き出せませんでした。未対応の状態がないか確認してください。\n@CAU6002,タイムラプス録画を開始または保存できませんでした。このブラウザの録画対応状況を確認してください。\n@CAU6003,クリップボードへコピーできませんでした。ブラウザの権限を確認するかPNG保存を使用してください。\n@CAU6004,PSDで未対応の合成モードを通常合成に変換して書き出します: %1\n@NAG0001,拡縮ノブ：左右にドラッグして選択範囲を拡大縮小します。\n@NAG0002,回転ノブ：左右にドラッグして選択範囲を回転します。\n@NAG0003,終了：なげなわ選択を確定し、変形結果をレイヤーに反映します。\n@NAG0004,反転：選択範囲を左右反転します。\n@NAG0005,複製：選択範囲を現在位置にスタンプし、変形を継続します。\n@POL0001,確定：多角形選択を確定します。\n@POL0002,取消：多角形選択を中止します。\n@PEN0200,%penPreviewGuide\n@PEN0201,%1のプレビュー。\n@PEN0202,%1の色プレビュー。\n@PEN0203,%1の色プレビュー。枠内をドラッグで角度を変更します。\n@PEN0204,ポインタ座標の画像を拡大表示します。赤枠の色がスポイトで取得されます。\n@PLT0001,カラーパレットの列数を変更します。∞を指定すると常に１行になります。\n@PLT0002,パレットの更新／位置入れ替え／削除を行うモードに切り替えます。\n@PLT0003,%addPaletteNameの色をカラーパレットに登録します。\n@PLT0004,選択しているパレットを削除します。\n@LAY0001,レイヤーの合成モードを変更します。詳細はマニュアルを参照してください。\n@LAY0002,現在のレイヤーの不透明度を変更します。0を指定すると完全に透明になります。\n@LAY0003,%1現在のレイヤーは残したまま、描画内容だけを消去します。\n@LAY0004,%1新しいレイヤーを作成します。（最大８枚まで）\n@LAY0005,%1現在のレイヤーを１つ下のレイヤーに統合します。統合後は不透明度が100%に調整されます。\n@LAY0006,%1現在のレイヤーのコピーを作成します。\n@LAY0007,%1現在のレイヤーを削除します。\n@LAY0008,描画するレイヤーを選択します。\n@LAY0100,レイヤー情報サブウィンドウを閉じます。\n@LAY0101,レイヤー名を変更する場合、ここに新しい名前を入力します。（10文字まで）\n@LAY0102,レイヤーに付与した色を解除します。（レイヤー名は変更されません）\n@LAY0110,レイヤー単体を左右反転します。\n@LAY0111,レイヤー単体を上下反転します。\n@MKC0001,%1描画色をメインカラーに切り替えます。\n@MKC0002,%1描画色をサブカラーに切り替えます。一部の機能で補助的に使用します。%2\n@MKC0003,%1描画色を透明色に切り替えます。%2\n@MKC0004,カラーコードを直接入力してメインカラーを変更します。\n@MKC0005,%addPaletteNameの色をカラーパレットに登録します。\n@MKC0006,メインカラーとサブカラーを入れ替えます。\n@MKC0007,%drawingColorNameの赤成分を変更します。(0～255)\n@MKC0008,赤成分を数値入力します。(0～255)\n@MKC0009,%drawingColorNameの緑成分を変更します。(0～255)\n@MKC0010,緑成分を数値入力します。(0～255)\n@MKC0011,%drawingColorNameの青成分を変更します。(0～255)\n@MKC0012,青成分を数値入力します。(0～255)\n@MKC0013,%drawingColorNameの色をカラーピッカーで変更します。\n@MKC0014,最近使った色の履歴です。クリックで描画色に反映します。\n@MKC0015,クロスボウル調色：四隅（左上=メイン／右上=サブ／左下=白／右下=黒）を補間した混色エリアです。クリックまたはドラッグで任意の混色を描画色にします。\n@MKC0016,混色ウェットパレット：ドラッグすると現在の描画色を塗り重ねて混色できます。ドラッグせずクリックすると、その場所の色をサンプルして描画色にします。\n@MKC0017,ウェットパレットを塗り直します。\n@MKC0018,シアン成分を変更します。(0～100)\n@MKC0019,シアン成分を数値入力します。(0～100)\n@MKC0020,マゼンタ成分を変更します。(0～100)\n@MKC0021,マゼンタ成分を数値入力します。(0～100)\n@MKC0022,イエロー成分を変更します。(0～100)\n@MKC0023,イエロー成分を数値入力します。(0～100)\n@MKC0024,キープレート（黒）成分を変更します。(0～100)\n@MKC0025,キープレート（黒）成分を数値入力します。(0～100)\n@MKC0026,明度(L)を変更します。(0～100)\n@MKC0027,明度(L)を数値入力します。(0～100)\n@MKC0028,色相a（緑〜赤方向）を変更します。(-128～127)\n@MKC0029,色相aを数値入力します。(-128～127)\n@MKC0030,色相b（青〜黄方向）を変更します。(-128～127)\n@MKC0031,色相bを数値入力します。(-128～127)\n@AST0001,キャンバスの大きさ。（※設定で変更可能）\n@AST0002,サムネイル表示。枠内をクリックまたはドラッグでキャンバスの位置を移動します。\n@AST0003,%1拡大率を１段階縮小します。\n@AST0004,%1拡大率・キャンバス位置・回転をリセットします。\n@AST0005,%1拡大率を１段階拡大します。\n@AST0006,%1直前の描画を取消して元に戻します。\n@AST0007,%1アンドゥを取消します。\n@AST0008,%1自動バックアップから復元ポイントを選んで再開します。（※現在の描画内容は消去されます）\n@AST0009,%1描画内容をブラウザに一時保存し、復元ポイントを作成します。\n@AST0010,%1作成した復元ポイントから再開します（※現在の描画内容は消去されます）\n@AST0011,%1全レイヤーを左右反転します。\n@AST0012,%1全レイヤーを上下反転します。\n@AST0013,%1背景色の白地/透明色を切り替えます。（※投稿画像に反映されます）\n@AST0014,%1補助線のON/OFFを切り替えます。\n@AST0015,補助線の詳細設定ウィンドウを開閉します。\n@AST0016,クリックでこのサイズにキャンバスを変更します。（縮小時のみ確認）すばやく2回クリックで登録サイズを変更できます。\n@AST0017,背景の地色を肌色と白色で切り替えます。（次回起動時も保持されます）\n@AST0020,キャンバス表示を左に45度回転します。\n@AST0021,キャンバス表示を右に45度回転します。\n@AST0022,つまんで左右に動かすと、キャンバス表示が回転します。\n@AST0100,補助線の横方向の分割数を変更します。\n@AST0101,補助線の縦方向の分割数を変更します。\n@AST0102,縦横の分割数の変更を連動させて同じ値にします。\n@AST0103,補助線（主線）の使用を切り替えます。分割数に応じた格子状の線を引きます。\n@AST0104,補助線（主線）の色と不透明度を変更します。\n@AST0105,補助線（副線）の使用を切り替えます。主線の内部を細分する線を引きます。\n@AST0106,補助線（副線）の色と不透明度を変更します。\n@AST0107,補助線（斜め）の使用を切り替えます。分割数に応じた斜線を引きます。\n@AST0108,補助線（斜め）の色と不透明度を変更します。\n@AST0109,補助線（ピクセル指定１）の使用を切り替えます。※表示に適さない拡大率の時、自動的に非表示になります。\n@AST0110,補助線（ピクセル指定１）の色と不透明度を変更します。\n@AST0111,補助線（ピクセル指定１）のピクセル間隔を変更します。\n@AST0112,補助線（ピクセル指定２）の使用を切り替えます。※表示に適さない拡大率の時、自動的に非表示になります。\n@AST0113,補助線（ピクセル指定２）の色と不透明度を変更します。\n@AST0114,補助線（ピクセル指定２）のピクセル間隔を変更します。\n@AST0120,補助線の色を変更します。\n@AST0121,補助線の不透明度を変更します。\n@AST0122,変更を終了して、サブメニューを閉じます。\n@POS0001,お絵カキコを投稿します。\n@CFG0010,現在のポインタ座標を表示します。（位置：左下）\n@CFG0016,過去に使用したキャンバスサイズの履歴です。直近8件まで保存されます。\n@CFG0017,新規キャンバスを作成します。（現在の描画内容はすべて消去されます）\n@CFG0018,現在の描画内容を残したまま、キャンバスのサイズを変更します。\n@CFG0019,描画内容をPNG形式ファイルとしてダウンロードします。ファイル名は現在日時が付与されます。\n@CFG0020,ぼかし（アンチエイリアシング）を無効にします。（ドット絵がボケなくなります）\n@CFG0021,ぼかし（アンチエイリアシング）を有効にします。\n@CFG0022,現在のポインタ座標を表示しません。\n@CFG0023,現在のポインタ座標を表示します。（位置：左上）\n@CFG0024,現在のポインタ座標を表示します。（位置：右上）\n@CFG0025,現在のポインタ座標を表示します。（位置：右下）\n@CFG0026,ツール起動時、ウィンドウ配置を毎回初期化します。\n@CFG0027,ツール起動時、ウィンドウ配置を前回終了時の位置に復元します。\n@CFG0028,ウィンドウ位置の自動調整を行いません。\n@CFG0029,ブラウザの画面サイズを変更したとき、ウィンドウが画面内に収まるように自動調整を行います。\n@CFG0030,すべてのツールウィンドウの配置を初期状態に戻します。\n@CFG0034,ツール起動時、ペンの太さ、不透明度などを毎回初期化します。\n@CFG0035,ツール起動時、ペンの太さ、不透明度などを前回終了時の値に復元します。\n@CFG0036,アイコンボタンのサイズを変更します。\n@CFG0037,ウィンドウを開く際に、他のウィンドウが自動的に閉じるようになります。一括開閉ボタンは無効になります。\n@CFG0040,全ペン共通の手ぶれ補正の強さを変更します。数値が大きいほど強い補正がかかります。0を指定すると補正を行いません。\n@CFG0041,ペンツールウィンドウ内にレンジスライダーを表示して、キャンバス画面でも手ぶれ補正を変更できるようにします。\n@CFG0043,自動切換機能を使用しません。\n@CFG0044,スポイトで色を取得した時、自動的にペンに切り替えます。\n@CFG0045,長押しスポイト機能を使用しません。\n@CFG0046,キャンバス上の取得したい色の位置で、ペン（またはマウスクリック）を長押しすることでスポイトが動作します。\n@CFG0047,長押し入力として認識するために、押し続ける必要がある時間を設定します。1000ミリ秒=１秒\n@CFG0048,長押し入力時に許容する手ぶれの範囲を設定します。数値が大きいほど長押しが認識されやすくなりますが、通常描画に影響がでます。\n@CFG0049,トーン濃度レンジスライダーを使用しません。\n@CFG0050,トーン濃度レンジスライダーをペンツールに追加します。\n@CFG0051,太さレンジスライダーを上に表示します。\n@CFG0052,不透明度レンジスライダーを上に表示します。\n@CFG0053,混色パレットを使用しません。\n@CFG0054,混色パレットを使用します。\n@CFG0055,RGBスライダーを使用しません。\n@CFG0056,光の三原色（赤、緑、青）強さを指定して色作成するスライダーを使用します。\n@CFG0057,カラーピッカーを使用しません。\n@CFG0058,HSV色空間（色相、彩度、明度）を指定するカラーピッカーを使用します。\n@CFG0059,ツール起動時、カラーパレットを毎回初期化します。\n@CFG0060,ツール起動時、カラーパレットを前回終了時の色に復元します。\n@CFG0062,パレット編集モード時にレンジスライダーを表示して、キャンバス画面でも横幅を変更できるようにします。\n@CFG0063,カラーパレットの列数を変更します。∞を指定すると常に１行になります。\n@CFG0064,現在のカラーパレットの内容をテキストファイルとしてダウンロードします。\n@CFG0065,色保存で作成したテキストファイルを読み込み、カラーパレットを更新します。\n@CFG0066,カラーパレットを初期状態に戻します。\n@CFG0067,アンドゥ／リドゥの可能回数を変更します。メモリ不足で動作が不安定になる場合は値を小さく設定してください。\n@CFG0070,拡大率を追加します。\n@CFG0071,選択している拡大率を削除します。\n@CFG0072,拡大率を初期状態に戻します。\n@CFG0080,カスタムボタンを使用しません。\n@CFG0081,カスタムボタンツールウィンドウを画面に追加します。\n@CFG0082,ボタンに機能を割り当てません。\n@CFG0083,ボタンでアンドゥを実行します。\n@CFG0084,ボタンでスポイトを実行します。\n@CFG0085,ボタンを押しながらドラッグでキャンバスの位置を移動します。\n@CFG0086,ボタンで拡大率とキャンバス位置をリセットします。\n@CFG0087,ボタンでメインカラーとサブカラーを切り替えます。\n@CFG0088,ボタンでメインカラーと透明色を切り替えます。\n@CFG0089,ホイールに機能を割り当てません。\n@CFG0090,ホイールでキャンバスを拡大/縮小します。\n@CFG0091,ホイールでキャンバスの位置を移動します。\n@CFG0092,操作を無効にします。タッチペン使用時、指による誤描画を防止します。\n@CFG0093,１本指タッチで描画を行います。指で線を描くことができます。\n@CFG0094,１本指タッチでハンドツールを操作します。指でキャンバスを移動できます。\n@CFG0095,操作を無効にします。\n@CFG0096,２本指スワイプ操作でキャンバスの移動を行います。\n@CFG0097,操作を無効にします。\n@CFG0098,ピンチアウト／ピンチイン操作でキャンバスの拡大／縮小を行います。\n@CFG0099,操作を無効にします。\n@CFG0100,２本指タップ操作でアンドゥを行います。\n@CFG0101,操作を無効にします。\n@CFG0102,３本指タップ操作でリドゥを行います。\n@CFG0103,タップ入力として認識するために、触れた指を離すまでの制限時間を設定します。1000ミリ秒=１秒\n@CFG0108,１回のボタン操作でスクロールする量を設定します。\n@CFG0111,機能が割り当てられていないキーを省略します。非表示のキーに機能を割り当てる場合はチェックを外してください。\n@CFG0112,キーと割り当てられている機能の対応表です。セレクトボックスから機能を選んで割り当てを変更することができます。\n@CFG0113,現在のショートカット設定をテキストファイルとしてダウンロードします。\n@CFG0114,ショートカットファイルを読み込み、ショートカット設定を更新します。\n@CFG0115,ショートカット設定を初期状態に戻します。\n@CFG0120,合成モードを表示しません。\n@CFG0121,合成モードをレイヤー名の下に表示します。\n@CFG0122,合成モードをレイヤー名の下に表示します。（合成モードが通常の場合は表示を省略します）\n@CFG0123,登録されているレイヤー名を変更します。（最大8文字）\n@CFG0124,登録されているレイヤー名を初期状態にリセットします。\n@CFG0125,CMYKスライダーを使用しません。\n@CFG0126,印刷用の減法混色（シアン・マゼンタ・イエロー・キープレート）を指定するスライダーを使用します。\n@CFG0127,Labスライダーを使用しません。\n@CFG0128,知覚的な均等性を持つCIE Lab色空間（明度・色相a・色相b）を指定するスライダーを使用します。\n@CFG0200,ぼかし度レンジスライダーを使用しません。\n@CFG0201,ぼかし度レンジスライダーをペンツールに追加します。\n@CFG0211,追加する拡大率を入力します。\n@CFG0212,現在設定されている拡大率の一覧です。クリックで拡大率を選択します。\n@CFG0220,マウスホイールの回転方向を反転して入力を受け付けます。\n@CFG0221,１回のホイール操作でスクロールする量を設定します。\n@CFG0222,連続してマウスホイールを回転させた時、入力を抑止する時間を設定します。1000ミリ秒=１秒\n@CFG0223,マウスポインタの位置を参照し、キャンバスの狙った位置を拡大／縮小できるようにします。\n@CFG0230,画面スクロールの向きを反転します。上スクロールは下スクロールに、左スクロールは右スクロールに変換されます。\n@CFG0300,キャンバスの幅（横のサイズ）を入力します。（下のボタンで変更を確定します）\n@CFG0301,キャンバスの高さ（縦のサイズ）を入力します。（下のボタンで変更を確定します）\n@CFG0400,選択中のペンを使って透明色で描画します。（描画中だけ透明色に切り替わります）\n@CFG0401,タップ入力時に許容する手ぶれの範囲を設定します。\n@CFG2001,キャンバス全般に関する設定を行います。\n@CFG2002,ツールウィンドウ全般に関する設定を行います。\n@CFG2003,ペンツールの機能設定を行います。\n@CFG2004,色作成の機能設定を行います。\n@CFG2005,パレットの機能設定を行います。\n@CFG2006,レイヤーの機能設定を行います。\n@CFG2007,補助ツールの機能設定を行います。\n@CFG2008,カスタムボタンの機能設定を行います。\n@CFG2009,マウス／タッチパッド（トラックパッド）の設定を行います。\n@CFG2010,タッチパネルの設定を行います。\n@CFG2011,キーボードのキーコンフィグなどの設定を行います。\n@CFG2013,AXNOS Paint起動時の設定を行います。\n@CFG2020,バージョン情報を表示します。\n@COL0001,%drawingColorName RGB:(%1)\n@COL0002,透明色\n@COL0003,メインカラー RGB:(%1) / サブカラー (%2)\n@COL0004,混色パレット(%1%) RGB:(%2)\n@AXP0001,拡大率：%1%\n@AXP0003,%1の不透明度：%2\n@AXP0004,補助線分割数 横：%1 / 縦：%2\n@AXP0010,%1ペン／消しゴム切替(%2)\n@AXP2000,描画色を混色パレット(%1%)に変更します。RGB:(%2)\n@AXP3000,[編集モード] ドラッグで位置を入れ替え。色作成ウィンドウで選択中パレットの色を更新。\n@AXP3001,%drawingColorNameを指定色に変更します。RGB:(%1)\n@AXP4000,レイヤーの%1を切り替えます。(現在の状態:%2)\n@AXP4001,ドラッグで表示順序を入れ替え。ダブルクリックでレイヤー名変更。\n@AXP4010,レイヤー名の変更を決定して、サブメニューを閉じます。\n@AXP4012,登録された名前に変更し、色を付与します。\n@AXP4013,新しいレイヤー名を入力してください。\n@AXP5000,%1の太さ：%2\n@AXP5001,%1の不透明度：%2\n@AXP5002,%1の塗り残し補正：%2\n@AXP5003,%1の角度：%2\n@AXP5004,%1のトーン濃度：%2\n@AXP5005,[ CTRL ]: 押している間、ペンがスポイトに変化します。\n@AXP5006,[ SPACE ]: 押している間、ペンがハンドに変化します。\n@AXP5007,%1押している間、その場でペンの太さレンジスライダーを操作できます。\n@AXP5008,%1のぼかし度：%2\n@AXP5009,%1の丸み：%2\n@AXP5010,ペンツールの種別選択中です。\n@AXP5011,%1の硬さ：%2\n@AXP5012,%1の広がり：%2\n@AXP5013,%1の引きずり：%2\n@AXP5014,%1の色の許容誤差：%2\n@INF0001,%1は透明部分をロックしています。既に描画されている部分のみ上書き描画できます。\n@INF0002,拡大率・キャンバスの位置・回転をリセットしました。\n@INF0003,ツールウィンドウの位置を初期化しました。\n@INF0005,背景のタイルプレビューを切り替えました。(現在の状態:%1)\n@INF0006,%1を全面塗り潰ししました。\n@INF0007,%1を90°回転しました。\n@INF0008,%1はクリッピングです。描画内容は%2の形に切り抜かれます。\n@INF0009,キャンバス全体のぼかしを切り替えました。(現在の状態:%1)\n@INF0050,[ %1 ]を読み込みました。(画像サイズ 横:%2 × 縦:%3)\n@INF0100,拡大率%1%を追加しました。\n@INF0101,拡大率%1%を削除しました。\n@INF0300,スロット%1にセーブしました。\n@INF0301,スロット%1をロードしました。\n@INF0302,自動保存されたデータをロードしました。\n@INF0400,%1をアンドゥしました。（残り回数：%2）\n@INF0401,%1をリドゥしました。（残り回数：%2）\n@INF1000,全レイヤーの左右を反転しました。\n@INF1001,選択中レイヤーの左右を反転しました。\n@INF1002,全レイヤーの上下を反転しました。\n@INF1003,選択中レイヤーの上下を反転しました。\n@INF1004,補助線の表示を切り替えました。（現在の状態:%1）\n@INF1005,背景を切り替えました。（現在の状態:%1）\n@INF1010,%1に「白を透明化」フィルタを適用しました。\n@INF1011,%1に「モザイク」フィルタを適用しました。\n@INF1012,レイヤースタイルを変更しました。\n@INF1013,マスクを編集しました。\n@INF1014,%1に「グレースケール」フィルタを適用しました。\n@INF1015,%1に「レベル補正」フィルタを適用しました。\n@INF1016,%1に「トーンカーブ」フィルタを適用しました。\n@INF1017,%1に「HSV調整」フィルタを適用しました。\n@INF1018,%1に「カラーバランス」フィルタを適用しました。\n@FLT0001,現在のレイヤーの白色を透明度へ変換します（アンチエイリアスの境界も自然に半透明化されます）。\n@FLT0002,現在のレイヤーへモザイク（ブロック平均化）を適用します。ブロックサイズを指定できます。\n@FLT0003,現在のレイヤーをグレースケール（白黒）に変換します。\n@INF2000,カラーコードの入力を受け付けました。%1 / RGB:(%2)\n@INF3000,パレット編集モードに切り替えました。（パレットの更新／位置入れ替え／削除が行えます）\n@INF3001,パレット編集モードを解除しました。\n@INF3002,カラーパレットを削除しました。\n@INF3003,カラーパレットを登録しました。RGB:(%1)\n@INF4000,%1をクリアしました。\n@INF4001,%1を作成しました。\n@INF4002,%1を複製して、%2を作成しました。\n@INF4003,%1を削除しました。\n@INF4004,%1と%2を統合しました。\n@INF4005,レイヤー名を[%1]に変更しました。\n@INF4006,レイヤーの%1を切り替えました。(現在の状態:%2)\n@INF4008,カラータグ名を[%1]に変更しました。\n@INF4009,レイヤーに付与した色を解除しました。\n@INF5000,表示を左に15度回転しました。\n@INF5001,表示を右に15度回転しました。\n@INF5002,表示を左に45度回転しました。\n@INF5003,表示を右に45度回転しました。\n@INF5004,回転表示の角度をリセットしました。\n@CAU0001,%1が%2のため、描画を禁止しています。\n@CAU0002,[ %1 ]キーには機能が割り当てられていません。（※設定で変更可能）\n@CAU0003,%1が%2のため、全面塗り潰しできません。\n@CAU0004,全面塗り潰しを使用する際は、ペン、消しゴム、バケツのいずれかを選択した状態にしてください。\n@CAU0005,%1が%2のため、90°回転できません。\n@CAU0006,%1の下層に親レイヤーが存在しないため、クリッピングが無効になっています。\n@CAU0100,追加できる拡大率は%1個までです。\n@CAU0101,拡大率%1%は既に追加されています。\n@CAU0102,追加できる拡大率は%1～%2%です。\n@CAU0103,削除する拡大率が選択されていません。\n@CAU0104,拡大率100%は変更できません。\n@CAU0200,%1の不透明度は変更できません。\n@CAU0201,%1の不透明度は100が最大値です。\n@CAU0202,%1の不透明度は5が最小値です。\n@CAU0203,%1の太さは変更できません。\n@CAU0204,%1の太さは200が最大値です。\n@CAU0205,%1の太さは1が最小値です。\n@CAU0206,補助線が表示されているときに有効なショートカットです。\n@CAU0300,現在セーブ/ロード機能は使用できません。ヘルプをご確認下さい。\n@CAU0301,スロット%1にはデータがありません。\n@CAU0400,これ以上アンドゥできません。\n@CAU0401,これ以上リドゥできません。\n@CAU0500,%1は透明色を使用できません。\n@CAU2000,カラーコードが正しくありません。入力例：#ffffff または #fff（#は省略可）\n@CAU3000,すべてのパレットを削除することはできません。\n@CAU3001,登録できるパレット数は%1個までです。\n@CAU4000,%1がロック状態のため、クリアできません。\n@CAU4001,%1は空白のレイヤーです。\n@CAU4002,レイヤーは%1枚までです。\n@CAU4003,%1がロック状態のため、削除できません。\n@CAU4004,レイヤーをすべて削除することはできません。\n@CAU4005,最下層のレイヤーは統合できません。\n@CAU4006,%1が%2のため、統合できません。\n@CAU4007,レイヤー名を空白にすることはできません。\n@CAU4008,カラータグ名を空白にすることはできません。\n@CAU5000,[ CTRL ]キーでスポイトに変化中です。別のペンは選択できません。\n@CAU5001,[ SPACE ]キーでハンドに変化中です。別のペンは選択できません。\n@CAU5002,スポイトを使用するにはキャンバス内を指定してください。\n";
+module.exports = "@BAS0001,キャンバス：絵を描くメイン画面です。\n@BAS0002,設定：各種機能をカスタマイズできます。\n@BAS0003,投稿：描いたイラストを掲示板に投稿します。\n@BAS0004,拡張機能：ユーザーにより定義された拡張機能を実行します。\n@BAS0005,お知らせ領域です。文章が見切れる場合、クリックし続けると全文表示します。\n@BAS0006,機能解説などのガイドメッセージが表示されるエリアです。\n@BAS0100,デバッグ情報です。非表示にするには[設定]-[バージョン情報]-[デバッグ情報表示]のチェックを外してください。\n@LAU0001,一時的にすべてのウィンドウを非表示にします。\n@AST0200,書出し・共有機能を表示します。\n@AST0201,下絵・資料として参照画像を読み込みます。作品レイヤーには追加されません。\n@AST0202,作品レイヤーだけをPSDとして書き出します。参照画像は含めません。\n@AST0203,作品キャンバスだけをタイムラプス録画します。参照画像やUIは含めません。\n@AST0204,作品キャンバスだけをPNGとしてクリップボードへコピーします。貼り付け読込は行いません。\n@AST0205,参照画像の操作を表示します。\n@PEN0001,現在選択しているペンの名前が表示されます。\n@PEN0002,ペンの不透明度を変更します。0に近づくほど透明になります。\n@PEN0003,ペンの太さを変更します。\n@PEN0004,境界付近の塗り残しドットを目立たなくします。数字が大きいほど強く補正します。\n@PEN0005,グラデーションの向きを角度で指定します。\n@PEN0006,トーン濃度を指定します。数字が大きいほど濃くなります。\n@PEN0007,図形描画モードを選択できます。\n@PEN0008,「囲まれた領域」の判定方式を選択できます。（全レイヤー判定を指定すると表示見たままで判定できます。バケツは塗り分け、マジックワンドは選択に使われます）\n@PEN0009,ぼかしの強さを指定します。数字が大きいほど描画する線がぼやけます。\n@PEN0010,外側の角の丸さを指定します。50で正円になります。\n@PEN0011,効果の縁のかたさを指定します。数字が大きいほど境界がくっきりします。\n@PEN0012,ぼかしの広がりを指定します。数字が大きいほど強くぼやけます。\n@PEN0013,色を引きずる強さを指定します。数字が大きいほど強く色が引き伸ばされます。\n@PEN0014,プリセット：クリックで設定を反映します。ダブルクリックで名前を変更し、現在の硬さ・広がり・引きずりを上書き保存します。\n@PEN0015,詳細設定（硬さ・広がり・引きずり・筆圧）の表示／非表示を切り替えます。\n@PEN0016,色の許容誤差を指定します。数字が大きいほど近い色も同じ色とみなして塗ります。（アンチエイリアスの境界に残る塗り漏れの軽減に有効）\n@PEN0017,選択範囲の合成方法を選択できます。（置換／追加／差し引き／交差）\n@PEN0018,現在の選択範囲を解除します。\n@PEN0019,グラデーションに新しいストップ（色の変化点）を追加します。\n@PEN0020,選択中のストップを削除します。（最低2点は残ります）\n@PEN0021,選択中のストップの位置を0〜100%で指定します。\n@PEN0022,選択中のストップの色を、現在の描画色に変更します。\n@PEN0023,歪み効果の強さを指定します。数字が大きいほど変形量が増えます。\n@PEN0024,歪み効果の硬さを指定します。数字が大きいほどブラシ内を均等に変形します。\n@PEN0050,%1%2 [ 再選択 ]:ペン種別変更。\n@PEN0051,%1%2 [ 再選択 ]:消しゴム種別変更。\n@PEN0052,%1%2 [ 再選択 ]:バケツ種別変更。\n@PEN0053,%1%2 [ 再選択 ]:ツール種別変更。\n@PEN0054,%1スポイト：指定座標の色を取得し、描画色（%drawingColorName）に設定します。[ CTRL ]:押している間スポイトに変化。\n@PEN0100,%1丸ペン：一定の太さの線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0101,%1角ペン：先が四角い線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0102,%1ドットペン：ドット絵調の線が描けるペン。[ SHIFT ]:直線描画。\n@PEN0103,%1筆ペン：強弱のついた線が描けるペン。\n@PEN0104,%1クレヨン：クレヨン風の塗りができるペン。[ SHIFT ]:直線描画。\n@PEN0105,%1エアブラシ：エアブラシ風の塗りができるペン。\n@PEN0106,%1混色ペン：下の絵をぼかしたり、引きずって混色できるペン。\n@PEN0107,%1マーカー：塗り重ねると濃くなる蛍光ペン風のペン。\n@PEN0108,%1カーブ：低い不透明度で塗り重なる、柔らかいリボン状の線が描けるペン。\n@PEN0109,%1ハッチング：斜めの平行線で階調を表現するペン。\n@PEN0110,%1消しゴム：辺が丸い消しゴム。[ SHIFT ]:直線描画。\n@PEN0111,%1角消しゴム：辺が四角い消しゴム。[ SHIFT ]:直線描画。\n@PEN0112,%1スケッチ：近くの通過点へランダムに線をつなぐ、ラフ画向けのペン。\n@PEN0115,%1テクスチャブラシ：紙目のような質感が出るペン。\n@PEN0116,%1スムーズペン：速度に応じて先細りする、なめらかな輪郭の線が描けるペン。\n@PEN0120,%1バケツ：囲まれた領域の内側を塗り潰します。\n@PEN0121,%1階調バケツ：メインカラーとサブカラーのグラデーションで、囲まれた領域の内側を塗り潰します。\n@PEN0122,%1マジックワンド：クリックした位置に近い色の範囲を選択します。\n@PEN0130,%1ハンド：ドラッグでキャンバスの位置を移動します。[ SPACE ]:押している間ハンドに変化。\n@PEN0131,%1移動ツール：画像を上下左右に移動するツール（現在のレイヤーのみ対象）\n@PEN0132,%1なげなわ：フリーハンドで囲んだ領域を選択するツール。\n@PEN0133,%1多角形選択：クリックで頂点を配置し、始点付近のクリックで確定する選択ツール。\n@PEN0134,%1歪み：ブラシでなぞった方向や形に画像を変形します。[ ALT ]:効果を反転。\n@INF6000,参照画像を読み込みました。\n@INF6001,PSDを書き出しました。\n@INF6002,タイムラプス録画を開始しました。\n@INF6003,タイムラプス録画を保存しました。\n@INF6004,PNGをクリップボードへコピーしました。\n@INF6005,キャンバスサイズ変更のため、タイムラプス録画を保存して停止しました。\n@CAU6000,参照画像を読み込めませんでした。対応形式または画像サイズを確認してください。\n@CAU6001,PSDを書き出せませんでした。未対応の状態がないか確認してください。\n@CAU6002,タイムラプス録画を開始または保存できませんでした。このブラウザの録画対応状況を確認してください。\n@CAU6003,クリップボードへコピーできませんでした。ブラウザの権限を確認するかPNG保存を使用してください。\n@CAU6004,PSDで未対応の合成モードを通常合成に変換して書き出します: %1\n@NAG0001,拡縮ノブ：左右にドラッグして選択範囲を拡大縮小します。\n@NAG0002,回転ノブ：左右にドラッグして選択範囲を回転します。\n@NAG0003,終了：なげなわ選択を確定し、変形結果をレイヤーに反映します。\n@NAG0004,反転：選択範囲を左右反転します。\n@NAG0005,複製：選択範囲を現在位置にスタンプし、変形を継続します。\n@POL0001,確定：多角形選択を確定します。\n@POL0002,取消：多角形選択を中止します。\n@LQF0001,確定：歪みツールの調整をレイヤーに反映します。\n@LQF0002,取消：歪みツールの調整を開始前に戻します。\n@PEN0200,%penPreviewGuide\n@PEN0201,%1のプレビュー。\n@PEN0202,%1の色プレビュー。\n@PEN0203,%1の色プレビュー。枠内をドラッグで角度を変更します。\n@PEN0204,ポインタ座標の画像を拡大表示します。赤枠の色がスポイトで取得されます。\n@PLT0001,カラーパレットの列数を変更します。∞を指定すると常に１行になります。\n@PLT0002,パレットの更新／位置入れ替え／削除を行うモードに切り替えます。\n@PLT0003,%addPaletteNameの色をカラーパレットに登録します。\n@PLT0004,選択しているパレットを削除します。\n@LAY0001,レイヤーの合成モードを変更します。詳細はマニュアルを参照してください。\n@LAY0002,現在のレイヤーの不透明度を変更します。0を指定すると完全に透明になります。\n@LAY0003,%1現在のレイヤーは残したまま、描画内容だけを消去します。\n@LAY0004,%1新しいレイヤーを作成します。（最大８枚まで）\n@LAY0005,%1現在のレイヤーを１つ下のレイヤーに統合します。統合後は不透明度が100%に調整されます。\n@LAY0006,%1現在のレイヤーのコピーを作成します。\n@LAY0007,%1現在のレイヤーを削除します。\n@LAY0008,描画するレイヤーを選択します。\n@LAY0100,レイヤー情報サブウィンドウを閉じます。\n@LAY0101,レイヤー名を変更する場合、ここに新しい名前を入力します。（10文字まで）\n@LAY0102,レイヤーに付与した色を解除します。（レイヤー名は変更されません）\n@LAY0110,レイヤー単体を左右反転します。\n@LAY0111,レイヤー単体を上下反転します。\n@MKC0001,%1描画色をメインカラーに切り替えます。\n@MKC0002,%1描画色をサブカラーに切り替えます。一部の機能で補助的に使用します。%2\n@MKC0003,%1描画色を透明色に切り替えます。%2\n@MKC0004,カラーコードを直接入力してメインカラーを変更します。\n@MKC0005,%addPaletteNameの色をカラーパレットに登録します。\n@MKC0006,メインカラーとサブカラーを入れ替えます。\n@MKC0007,%drawingColorNameの赤成分を変更します。(0～255)\n@MKC0008,赤成分を数値入力します。(0～255)\n@MKC0009,%drawingColorNameの緑成分を変更します。(0～255)\n@MKC0010,緑成分を数値入力します。(0～255)\n@MKC0011,%drawingColorNameの青成分を変更します。(0～255)\n@MKC0012,青成分を数値入力します。(0～255)\n@MKC0013,%drawingColorNameの色をカラーピッカーで変更します。\n@MKC0014,最近使った色の履歴です。クリックで描画色に反映します。\n@MKC0015,クロスボウル調色：四隅（左上=メイン／右上=サブ／左下=白／右下=黒）を補間した混色エリアです。クリックまたはドラッグで任意の混色を描画色にします。\n@MKC0016,混色ウェットパレット：ドラッグすると現在の描画色を塗り重ねて混色できます。ドラッグせずクリックすると、その場所の色をサンプルして描画色にします。\n@MKC0017,ウェットパレットを塗り直します。\n@MKC0018,シアン成分を変更します。(0～100)\n@MKC0019,シアン成分を数値入力します。(0～100)\n@MKC0020,マゼンタ成分を変更します。(0～100)\n@MKC0021,マゼンタ成分を数値入力します。(0～100)\n@MKC0022,イエロー成分を変更します。(0～100)\n@MKC0023,イエロー成分を数値入力します。(0～100)\n@MKC0024,キープレート（黒）成分を変更します。(0～100)\n@MKC0025,キープレート（黒）成分を数値入力します。(0～100)\n@MKC0026,明度(L)を変更します。(0～100)\n@MKC0027,明度(L)を数値入力します。(0～100)\n@MKC0028,色相a（緑〜赤方向）を変更します。(-128～127)\n@MKC0029,色相aを数値入力します。(-128～127)\n@MKC0030,色相b（青〜黄方向）を変更します。(-128～127)\n@MKC0031,色相bを数値入力します。(-128～127)\n@AST0001,キャンバスの大きさ。（※設定で変更可能）\n@AST0002,サムネイル表示。枠内をクリックまたはドラッグでキャンバスの位置を移動します。\n@AST0003,%1拡大率を１段階縮小します。\n@AST0004,%1拡大率・キャンバス位置・回転をリセットします。\n@AST0005,%1拡大率を１段階拡大します。\n@AST0006,%1直前の描画を取消して元に戻します。\n@AST0007,%1アンドゥを取消します。\n@AST0008,%1自動バックアップから復元ポイントを選んで再開します。（※現在の描画内容は消去されます）\n@AST0009,%1描画内容をブラウザに一時保存し、復元ポイントを作成します。\n@AST0010,%1作成した復元ポイントから再開します（※現在の描画内容は消去されます）\n@AST0011,%1全レイヤーを左右反転します。\n@AST0012,%1全レイヤーを上下反転します。\n@AST0013,%1背景色の白地/透明色を切り替えます。（※投稿画像に反映されます）\n@AST0014,%1補助線のON/OFFを切り替えます。\n@AST0015,補助線の詳細設定ウィンドウを開閉します。\n@AST0016,クリックでこのサイズにキャンバスを変更します。（縮小時のみ確認）すばやく2回クリックで登録サイズを変更できます。\n@AST0017,背景の地色を肌色と白色で切り替えます。（次回起動時も保持されます）\n@AST0020,キャンバス表示を左に45度回転します。\n@AST0021,キャンバス表示を右に45度回転します。\n@AST0022,つまんで左右に動かすと、キャンバス表示が回転します。\n@AST0100,補助線の横方向の分割数を変更します。\n@AST0101,補助線の縦方向の分割数を変更します。\n@AST0102,縦横の分割数の変更を連動させて同じ値にします。\n@AST0103,補助線（主線）の使用を切り替えます。分割数に応じた格子状の線を引きます。\n@AST0104,補助線（主線）の色と不透明度を変更します。\n@AST0105,補助線（副線）の使用を切り替えます。主線の内部を細分する線を引きます。\n@AST0106,補助線（副線）の色と不透明度を変更します。\n@AST0107,補助線（斜め）の使用を切り替えます。分割数に応じた斜線を引きます。\n@AST0108,補助線（斜め）の色と不透明度を変更します。\n@AST0109,補助線（ピクセル指定１）の使用を切り替えます。※表示に適さない拡大率の時、自動的に非表示になります。\n@AST0110,補助線（ピクセル指定１）の色と不透明度を変更します。\n@AST0111,補助線（ピクセル指定１）のピクセル間隔を変更します。\n@AST0112,補助線（ピクセル指定２）の使用を切り替えます。※表示に適さない拡大率の時、自動的に非表示になります。\n@AST0113,補助線（ピクセル指定２）の色と不透明度を変更します。\n@AST0114,補助線（ピクセル指定２）のピクセル間隔を変更します。\n@AST0120,補助線の色を変更します。\n@AST0121,補助線の不透明度を変更します。\n@AST0122,変更を終了して、サブメニューを閉じます。\n@POS0001,お絵カキコを投稿します。\n@CFG0010,現在のポインタ座標を表示します。（位置：左下）\n@CFG0016,過去に使用したキャンバスサイズの履歴です。直近8件まで保存されます。\n@CFG0017,新規キャンバスを作成します。（現在の描画内容はすべて消去されます）\n@CFG0018,現在の描画内容を残したまま、キャンバスのサイズを変更します。\n@CFG0019,描画内容をPNG形式ファイルとしてダウンロードします。ファイル名は現在日時が付与されます。\n@CFG0020,ぼかし（アンチエイリアシング）を無効にします。（ドット絵がボケなくなります）\n@CFG0021,ぼかし（アンチエイリアシング）を有効にします。\n@CFG0022,現在のポインタ座標を表示しません。\n@CFG0023,現在のポインタ座標を表示します。（位置：左上）\n@CFG0024,現在のポインタ座標を表示します。（位置：右上）\n@CFG0025,現在のポインタ座標を表示します。（位置：右下）\n@CFG0026,ツール起動時、ウィンドウ配置を毎回初期化します。\n@CFG0027,ツール起動時、ウィンドウ配置を前回終了時の位置に復元します。\n@CFG0028,ウィンドウ位置の自動調整を行いません。\n@CFG0029,ブラウザの画面サイズを変更したとき、ウィンドウが画面内に収まるように自動調整を行います。\n@CFG0030,すべてのツールウィンドウの配置を初期状態に戻します。\n@CFG0034,ツール起動時、ペンの太さ、不透明度などを毎回初期化します。\n@CFG0035,ツール起動時、ペンの太さ、不透明度などを前回終了時の値に復元します。\n@CFG0036,アイコンボタンのサイズを変更します。\n@CFG0037,ウィンドウを開く際に、他のウィンドウが自動的に閉じるようになります。一括開閉ボタンは無効になります。\n@CFG0040,全ペン共通の手ぶれ補正の強さを変更します。数値が大きいほど強い補正がかかります。0を指定すると補正を行いません。\n@CFG0041,ペンツールウィンドウ内にレンジスライダーを表示して、キャンバス画面でも手ぶれ補正を変更できるようにします。\n@CFG0043,自動切換機能を使用しません。\n@CFG0044,スポイトで色を取得した時、自動的にペンに切り替えます。\n@CFG0045,長押しスポイト機能を使用しません。\n@CFG0046,キャンバス上の取得したい色の位置で、ペン（またはマウスクリック）を長押しすることでスポイトが動作します。\n@CFG0047,長押し入力として認識するために、押し続ける必要がある時間を設定します。1000ミリ秒=１秒\n@CFG0048,長押し入力時に許容する手ぶれの範囲を設定します。数値が大きいほど長押しが認識されやすくなりますが、通常描画に影響がでます。\n@CFG0049,トーン濃度レンジスライダーを使用しません。\n@CFG0050,トーン濃度レンジスライダーをペンツールに追加します。\n@CFG0051,太さレンジスライダーを上に表示します。\n@CFG0052,不透明度レンジスライダーを上に表示します。\n@CFG0053,混色パレットを使用しません。\n@CFG0054,混色パレットを使用します。\n@CFG0055,RGBスライダーを使用しません。\n@CFG0056,光の三原色（赤、緑、青）強さを指定して色作成するスライダーを使用します。\n@CFG0057,カラーピッカーを使用しません。\n@CFG0058,HSV色空間（色相、彩度、明度）を指定するカラーピッカーを使用します。\n@CFG0059,ツール起動時、カラーパレットを毎回初期化します。\n@CFG0060,ツール起動時、カラーパレットを前回終了時の色に復元します。\n@CFG0062,パレット編集モード時にレンジスライダーを表示して、キャンバス画面でも横幅を変更できるようにします。\n@CFG0063,カラーパレットの列数を変更します。∞を指定すると常に１行になります。\n@CFG0064,現在のカラーパレットの内容をテキストファイルとしてダウンロードします。\n@CFG0065,色保存で作成したテキストファイルを読み込み、カラーパレットを更新します。\n@CFG0066,カラーパレットを初期状態に戻します。\n@CFG0067,アンドゥ／リドゥの可能回数を変更します。メモリ不足で動作が不安定になる場合は値を小さく設定してください。\n@CFG0070,拡大率を追加します。\n@CFG0071,選択している拡大率を削除します。\n@CFG0072,拡大率を初期状態に戻します。\n@CFG0080,カスタムボタンを使用しません。\n@CFG0081,カスタムボタンツールウィンドウを画面に追加します。\n@CFG0082,ボタンに機能を割り当てません。\n@CFG0083,ボタンでアンドゥを実行します。\n@CFG0084,ボタンでスポイトを実行します。\n@CFG0085,ボタンを押しながらドラッグでキャンバスの位置を移動します。\n@CFG0086,ボタンで拡大率とキャンバス位置をリセットします。\n@CFG0087,ボタンでメインカラーとサブカラーを切り替えます。\n@CFG0088,ボタンでメインカラーと透明色を切り替えます。\n@CFG0089,ホイールに機能を割り当てません。\n@CFG0090,ホイールでキャンバスを拡大/縮小します。\n@CFG0091,ホイールでキャンバスの位置を移動します。\n@CFG0092,操作を無効にします。タッチペン使用時、指による誤描画を防止します。\n@CFG0093,１本指タッチで描画を行います。指で線を描くことができます。\n@CFG0094,１本指タッチでハンドツールを操作します。指でキャンバスを移動できます。\n@CFG0095,操作を無効にします。\n@CFG0096,２本指スワイプ操作でキャンバスの移動を行います。\n@CFG0097,操作を無効にします。\n@CFG0098,ピンチアウト／ピンチイン操作でキャンバスの拡大／縮小を行います。\n@CFG0099,操作を無効にします。\n@CFG0100,２本指タップ操作でアンドゥを行います。\n@CFG0101,操作を無効にします。\n@CFG0102,３本指タップ操作でリドゥを行います。\n@CFG0103,タップ入力として認識するために、触れた指を離すまでの制限時間を設定します。1000ミリ秒=１秒\n@CFG0108,１回のボタン操作でスクロールする量を設定します。\n@CFG0111,機能が割り当てられていないキーを省略します。非表示のキーに機能を割り当てる場合はチェックを外してください。\n@CFG0112,キーと割り当てられている機能の対応表です。セレクトボックスから機能を選んで割り当てを変更することができます。\n@CFG0113,現在のショートカット設定をテキストファイルとしてダウンロードします。\n@CFG0114,ショートカットファイルを読み込み、ショートカット設定を更新します。\n@CFG0115,ショートカット設定を初期状態に戻します。\n@CFG0120,合成モードを表示しません。\n@CFG0121,合成モードをレイヤー名の下に表示します。\n@CFG0122,合成モードをレイヤー名の下に表示します。（合成モードが通常の場合は表示を省略します）\n@CFG0123,登録されているレイヤー名を変更します。（最大8文字）\n@CFG0124,登録されているレイヤー名を初期状態にリセットします。\n@CFG0125,CMYKスライダーを使用しません。\n@CFG0126,印刷用の減法混色（シアン・マゼンタ・イエロー・キープレート）を指定するスライダーを使用します。\n@CFG0127,Labスライダーを使用しません。\n@CFG0128,知覚的な均等性を持つCIE Lab色空間（明度・色相a・色相b）を指定するスライダーを使用します。\n@CFG0200,ぼかし度レンジスライダーを使用しません。\n@CFG0201,ぼかし度レンジスライダーをペンツールに追加します。\n@CFG0211,追加する拡大率を入力します。\n@CFG0212,現在設定されている拡大率の一覧です。クリックで拡大率を選択します。\n@CFG0220,マウスホイールの回転方向を反転して入力を受け付けます。\n@CFG0221,１回のホイール操作でスクロールする量を設定します。\n@CFG0222,連続してマウスホイールを回転させた時、入力を抑止する時間を設定します。1000ミリ秒=１秒\n@CFG0223,マウスポインタの位置を参照し、キャンバスの狙った位置を拡大／縮小できるようにします。\n@CFG0230,画面スクロールの向きを反転します。上スクロールは下スクロールに、左スクロールは右スクロールに変換されます。\n@CFG0300,キャンバスの幅（横のサイズ）を入力します。（下のボタンで変更を確定します）\n@CFG0301,キャンバスの高さ（縦のサイズ）を入力します。（下のボタンで変更を確定します）\n@CFG0400,選択中のペンを使って透明色で描画します。（描画中だけ透明色に切り替わります）\n@CFG0401,タップ入力時に許容する手ぶれの範囲を設定します。\n@CFG2001,キャンバス全般に関する設定を行います。\n@CFG2002,ツールウィンドウ全般に関する設定を行います。\n@CFG2003,ペンツールの機能設定を行います。\n@CFG2004,色作成の機能設定を行います。\n@CFG2005,パレットの機能設定を行います。\n@CFG2006,レイヤーの機能設定を行います。\n@CFG2007,補助ツールの機能設定を行います。\n@CFG2008,カスタムボタンの機能設定を行います。\n@CFG2009,マウス／タッチパッド（トラックパッド）の設定を行います。\n@CFG2010,タッチパネルの設定を行います。\n@CFG2011,キーボードのキーコンフィグなどの設定を行います。\n@CFG2013,AXNOS Paint起動時の設定を行います。\n@CFG2020,バージョン情報を表示します。\n@COL0001,%drawingColorName RGB:(%1)\n@COL0002,透明色\n@COL0003,メインカラー RGB:(%1) / サブカラー (%2)\n@COL0004,混色パレット(%1%) RGB:(%2)\n@AXP0001,拡大率：%1%\n@AXP0003,%1の不透明度：%2\n@AXP0004,補助線分割数 横：%1 / 縦：%2\n@AXP0010,%1ペン／消しゴム切替(%2)\n@AXP2000,描画色を混色パレット(%1%)に変更します。RGB:(%2)\n@AXP3000,[編集モード] ドラッグで位置を入れ替え。色作成ウィンドウで選択中パレットの色を更新。\n@AXP3001,%drawingColorNameを指定色に変更します。RGB:(%1)\n@AXP4000,レイヤーの%1を切り替えます。(現在の状態:%2)\n@AXP4001,ドラッグで表示順序を入れ替え。ダブルクリックでレイヤー名変更。\n@AXP4010,レイヤー名の変更を決定して、サブメニューを閉じます。\n@AXP4012,登録された名前に変更し、色を付与します。\n@AXP4013,新しいレイヤー名を入力してください。\n@AXP5000,%1の太さ：%2\n@AXP5001,%1の不透明度：%2\n@AXP5002,%1の塗り残し補正：%2\n@AXP5003,%1の角度：%2\n@AXP5004,%1のトーン濃度：%2\n@AXP5005,[ CTRL ]: 押している間、ペンがスポイトに変化します。\n@AXP5006,[ SPACE ]: 押している間、ペンがハンドに変化します。\n@AXP5007,%1押している間、その場でペンの太さレンジスライダーを操作できます。\n@AXP5008,%1のぼかし度：%2\n@AXP5009,%1の丸み：%2\n@AXP5010,ペンツールの種別選択中です。\n@AXP5011,%1の硬さ：%2\n@AXP5012,%1の広がり：%2\n@AXP5013,%1の引きずり：%2\n@AXP5014,%1の色の許容誤差：%2\n@INF0001,%1は透明部分をロックしています。既に描画されている部分のみ上書き描画できます。\n@INF0002,拡大率・キャンバスの位置・回転をリセットしました。\n@INF0003,ツールウィンドウの位置を初期化しました。\n@INF0005,背景のタイルプレビューを切り替えました。(現在の状態:%1)\n@INF0006,%1を全面塗り潰ししました。\n@INF0007,%1を90°回転しました。\n@INF0008,%1はクリッピングです。描画内容は%2の形に切り抜かれます。\n@INF0009,キャンバス全体のぼかしを切り替えました。(現在の状態:%1)\n@INF0050,[ %1 ]を読み込みました。(画像サイズ 横:%2 × 縦:%3)\n@INF0100,拡大率%1%を追加しました。\n@INF0101,拡大率%1%を削除しました。\n@INF0300,スロット%1にセーブしました。\n@INF0301,スロット%1をロードしました。\n@INF0302,自動保存されたデータをロードしました。\n@INF0400,%1をアンドゥしました。（残り回数：%2）\n@INF0401,%1をリドゥしました。（残り回数：%2）\n@INF1000,全レイヤーの左右を反転しました。\n@INF1001,選択中レイヤーの左右を反転しました。\n@INF1002,全レイヤーの上下を反転しました。\n@INF1003,選択中レイヤーの上下を反転しました。\n@INF1004,補助線の表示を切り替えました。（現在の状態:%1）\n@INF1005,背景を切り替えました。（現在の状態:%1）\n@INF1010,%1に「白を透明化」フィルタを適用しました。\n@INF1011,%1に「モザイク」フィルタを適用しました。\n@INF1012,レイヤースタイルを変更しました。\n@INF1013,マスクを編集しました。\n@INF1014,%1に「グレースケール」フィルタを適用しました。\n@INF1015,%1に「レベル補正」フィルタを適用しました。\n@INF1016,%1に「トーンカーブ」フィルタを適用しました。\n@INF1017,%1に「HSV調整」フィルタを適用しました。\n@INF1018,%1に「カラーバランス」フィルタを適用しました。\n@FLT0001,現在のレイヤーの白色を透明度へ変換します（アンチエイリアスの境界も自然に半透明化されます）。\n@FLT0002,現在のレイヤーへモザイク（ブロック平均化）を適用します。ブロックサイズを指定できます。\n@FLT0003,現在のレイヤーをグレースケール（白黒）に変換します。\n@INF2000,カラーコードの入力を受け付けました。%1 / RGB:(%2)\n@INF3000,パレット編集モードに切り替えました。（パレットの更新／位置入れ替え／削除が行えます）\n@INF3001,パレット編集モードを解除しました。\n@INF3002,カラーパレットを削除しました。\n@INF3003,カラーパレットを登録しました。RGB:(%1)\n@INF4000,%1をクリアしました。\n@INF4001,%1を作成しました。\n@INF4002,%1を複製して、%2を作成しました。\n@INF4003,%1を削除しました。\n@INF4004,%1と%2を統合しました。\n@INF4005,レイヤー名を[%1]に変更しました。\n@INF4006,レイヤーの%1を切り替えました。(現在の状態:%2)\n@INF4008,カラータグ名を[%1]に変更しました。\n@INF4009,レイヤーに付与した色を解除しました。\n@INF5000,表示を左に15度回転しました。\n@INF5001,表示を右に15度回転しました。\n@INF5002,表示を左に45度回転しました。\n@INF5003,表示を右に45度回転しました。\n@INF5004,回転表示の角度をリセットしました。\n@CAU0001,%1が%2のため、描画を禁止しています。\n@CAU0002,[ %1 ]キーには機能が割り当てられていません。（※設定で変更可能）\n@CAU0003,%1が%2のため、全面塗り潰しできません。\n@CAU0004,全面塗り潰しを使用する際は、ペン、消しゴム、バケツのいずれかを選択した状態にしてください。\n@CAU0005,%1が%2のため、90°回転できません。\n@CAU0006,%1の下層に親レイヤーが存在しないため、クリッピングが無効になっています。\n@CAU0100,追加できる拡大率は%1個までです。\n@CAU0101,拡大率%1%は既に追加されています。\n@CAU0102,追加できる拡大率は%1～%2%です。\n@CAU0103,削除する拡大率が選択されていません。\n@CAU0104,拡大率100%は変更できません。\n@CAU0200,%1の不透明度は変更できません。\n@CAU0201,%1の不透明度は100が最大値です。\n@CAU0202,%1の不透明度は5が最小値です。\n@CAU0203,%1の太さは変更できません。\n@CAU0204,%1の太さは200が最大値です。\n@CAU0205,%1の太さは1が最小値です。\n@CAU0206,補助線が表示されているときに有効なショートカットです。\n@CAU0300,現在セーブ/ロード機能は使用できません。ヘルプをご確認下さい。\n@CAU0301,スロット%1にはデータがありません。\n@CAU0400,これ以上アンドゥできません。\n@CAU0401,これ以上リドゥできません。\n@CAU0500,%1は透明色を使用できません。\n@CAU2000,カラーコードが正しくありません。入力例：#ffffff または #fff（#は省略可）\n@CAU3000,すべてのパレットを削除することはできません。\n@CAU3001,登録できるパレット数は%1個までです。\n@CAU4000,%1がロック状態のため、クリアできません。\n@CAU4001,%1は空白のレイヤーです。\n@CAU4002,レイヤーは%1枚までです。\n@CAU4003,%1がロック状態のため、削除できません。\n@CAU4004,レイヤーをすべて削除することはできません。\n@CAU4005,最下層のレイヤーは統合できません。\n@CAU4006,%1が%2のため、統合できません。\n@CAU4007,レイヤー名を空白にすることはできません。\n@CAU4008,カラータグ名を空白にすることはできません。\n@CAU5000,[ CTRL ]キーでスポイトに変化中です。別のペンは選択できません。\n@CAU5001,[ SPACE ]キーでハンドに変化中です。別のペンは選択できません。\n@CAU5002,スポイトを使用するにはキャンバス内を指定してください。\n";
 
 /***/ }),
 
@@ -27344,6 +27344,13 @@ class AXPObj {
         const nagenawa = this.penSystem?.penObj?.['axp_penmode_nagenawa'];
         if (nagenawa && nagenawa.state === 'transforming') {
             nagenawa.finalizeSelection();
+        }
+    }
+    // 歪みツールの未確定セッションを確定する（キャンバス全体に影響する操作の前処理用）
+    finalizeLiquifySession() {
+        const liquify = this.penSystem?.penObj?.['axp_penmode_liquify'];
+        if (liquify && liquify.session === 'active') {
+            liquify.finalizeLiquifySession();
         }
     }
     // 選択範囲（マジックワンド／多角形選択）の適用。なげなわの「切り取って移動」とは
@@ -28718,6 +28725,7 @@ class AXPObj {
                 this.isCanvasOpen = false;
                 // なげなわ変形中は確定してから投稿画像を生成する（点線プレビューの混入防止）
                 this.finalizeNagenawaSelection();
+                this.finalizeLiquifySession();
                 // 投稿タブ内の情報更新
                 this.drawPostCanvas();
 
@@ -29119,6 +29127,7 @@ class AXPObj {
         this.TASK['func_rotate'] = () => {
             // なげなわ変形中は確定してから処理する
             this.finalizeNagenawaSelection();
+            this.finalizeLiquifySession();
             // 書き込み不可状態チェック
             if (this.layerSystem.isWriteProtection()) {
                 let layerName = this.layerSystem.getName();
@@ -30068,7 +30077,7 @@ class ConfigSystem {
         let targetElement = document.getElementById('axp_config');
         targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(_html_config_txt__WEBPACK_IMPORTED_MODULE_2__));
         // バージョン情報の表示
-        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:38:45.777Z"})`
+        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:46:45.138Z"})`
     }
     // HTML展開
     deployHTML() {
@@ -30303,6 +30312,7 @@ class ConfigSystem {
                     // ※OK時の処理
                     // なげなわ変形中は確定してから処理する
                     this.axpObj.finalizeNagenawaSelection();
+                    this.axpObj.finalizeLiquifySession();
                     // タブをキャンバスに変更
                     this.axpObj.selectTab('0');
                     // キャンバス初期化
@@ -31248,6 +31258,7 @@ class ConfigSystem {
         }
         // なげなわ変形中は確定してから処理する（未確定のままコピーすると選択物が欠落するため）
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         // タブをキャンバスに変更
         this.axpObj.selectTab('0');
         // レイヤーオブジェクトをコピーして一時保存
@@ -32958,6 +32969,7 @@ class InteropSystem {
     document.getElementById('axp_tool_button_psdExport').addEventListener('click', () => {
       try {
         this.axpObj.finalizeNagenawaSelection?.();
+        this.axpObj.finalizeLiquifySession?.();
         const unsupportedBlendLayers = (0,_psdcodec_js__WEBPACK_IMPORTED_MODULE_1__.collectUnsupportedBlendLayers)(this.axpObj.layerSystem.layerObj);
         if (unsupportedBlendLayers.length > 0) {
           this.axpObj.msg('@CAU6004', unsupportedBlendLayers.join(', '));
@@ -37147,7 +37159,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Liquify: () => (/* binding */ Liquify)
 /* harmony export */ });
 /* harmony import */ var _penobj_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_penobj.js */ "./src/js/pendefine/_penobj.js");
-/* harmony import */ var _liquify_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../liquify.js */ "./src/js/liquify.js");
+/* harmony import */ var _etc_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../etc.js */ "./src/js/etc.js");
+/* harmony import */ var _liquify_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../liquify.js */ "./src/js/liquify.js");
+
 
 
 
@@ -37163,6 +37177,15 @@ function cloneImageData(image) {
     return new ImageData(data, image.width, image.height);
   }
   return { data, width: image.width, height: image.height };
+}
+
+function cloneDisplacementField(field) {
+  return {
+    width: field.width,
+    height: field.height,
+    dx: new Float32Array(field.dx),
+    dy: new Float32Array(field.dy),
+  };
 }
 
 function sameImageData(a, b) {
@@ -37186,7 +37209,7 @@ class Liquify extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
     this.alpha = 100;
     this.strength = DEFAULT_STRENGTH;
     this.hardness = DEFAULT_HARDNESS;
-    this.liquifyMode = _liquify_js__WEBPACK_IMPORTED_MODULE_1__.LIQUIFY_MODE.PUSH;
+    this.liquifyMode = _liquify_js__WEBPACK_IMPORTED_MODULE_2__.LIQUIFY_MODE.PUSH;
     this.cursor = 'crosshair';
     this.usePenGuide = true;
     this.usePenPreview = true;
@@ -37198,8 +37221,11 @@ class Liquify extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
     this.displacementField = null;
     this.previousX = 0;
     this.previousY = 0;
+    this.session = 'idle';
     this.isActive = false;
     this.hasChanged = false;
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
     this.init_save();
   }
 
@@ -37219,14 +37245,20 @@ class Liquify extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
     if (this.axpObj.layerSystem.isWriteProtection()) return;
 
     const layerSystem = this.axpObj.layerSystem;
-    layerSystem.save();
-    this.sourceImage = cloneImageData(layerSystem.getCurrentLayerImage());
-    this.resultImage = cloneImageData(this.sourceImage);
-    this.displacementField = (0,_liquify_js__WEBPACK_IMPORTED_MODULE_1__.createDisplacementField)(this.axpObj.x_size, this.axpObj.y_size);
+    if (this.session === 'idle') {
+      layerSystem.save();
+      this.sourceImage = cloneImageData(layerSystem.getCurrentLayerImage());
+      this.resultImage = cloneImageData(this.sourceImage);
+      this.displacementField = (0,_liquify_js__WEBPACK_IMPORTED_MODULE_2__.createDisplacementField)(this.axpObj.x_size, this.axpObj.y_size);
+      this.hasChanged = false;
+      this.session = 'active';
+      this.showOverlay();
+    }
+    this.strokeStartImage = cloneImageData(this.resultImage);
+    this.strokeStartDisplacementField = cloneDisplacementField(this.displacementField);
     this.previousX = x;
     this.previousY = y;
     this.isActive = true;
-    this.hasChanged = false;
     this.axpObj.isDrawing = true;
     this.axpObj.isDrawn = false;
     this.axpObj.isDrawCancel = false;
@@ -37238,10 +37270,10 @@ class Liquify extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
   }
 
   move(x, y, event) {
-    if (!this.isActive || !this.axpObj.isDrawing || this.axpObj.isDrawCancel) return;
+    if (this.session !== 'active' || !this.isActive || !this.axpObj.isDrawing || this.axpObj.isDrawCancel) return;
 
     const settings = this.settingsProvider();
-    const dirtyRect = (0,_liquify_js__WEBPACK_IMPORTED_MODULE_1__.applyLiquifyDab)(this.displacementField, {
+    const dirtyRect = (0,_liquify_js__WEBPACK_IMPORTED_MODULE_2__.applyLiquifyDab)(this.displacementField, {
       mode: settings.mode,
       x,
       y,
@@ -37256,7 +37288,7 @@ class Liquify extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
     this.previousY = y;
     if (!dirtyRect) return;
 
-    this.resultImage = (0,_liquify_js__WEBPACK_IMPORTED_MODULE_1__.renderDisplacement)(
+    this.resultImage = (0,_liquify_js__WEBPACK_IMPORTED_MODULE_2__.renderDisplacement)(
       this.sourceImage,
       this.displacementField,
       dirtyRect,
@@ -37286,12 +37318,44 @@ class Liquify extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
 
   end() {
     if (!this.isActive) return;
-    if (this.axpObj.isDrawCancel || !this.hasChanged || sameImageData(this.sourceImage, this.resultImage)) {
+    if (this.axpObj.isDrawCancel) {
       this.cancelStroke();
+      return;
+    }
+    this.finishStroke();
+  }
+
+  finishStroke() {
+    if (!this.isActive) return;
+
+    const layerSystem = this.axpObj.layerSystem;
+    layerSystem.isStrokeActive = false;
+    layerSystem.deactivateFastPath();
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
+    this.isActive = false;
+    this.axpObj.isDrawing = false;
+    this.axpObj.isDrawn = false;
+    this.axpObj.isDrawCancel = false;
+  }
+
+  finalizeLiquifySession() {
+    if (this.session !== 'active') return;
+    if (this.isActive) {
+      if (this.axpObj.isDrawCancel) {
+        this.cancelStroke();
+      } else {
+        this.finishStroke();
+      }
+    }
+
+    if (!this.hasChanged || sameImageData(this.sourceImage, this.resultImage)) {
+      this.cancelLiquifySession();
       return;
     }
 
     const layerSystem = this.axpObj.layerSystem;
+    const imageForUndo = layerSystem.load();
     layerSystem.write(this.resultImage);
     layerSystem.isStrokeActive = false;
     layerSystem.deactivateFastPath();
@@ -37308,37 +37372,98 @@ class Liquify extends _penobj_js__WEBPACK_IMPORTED_MODULE_0__.PenObj {
         locked: layerSystem.getLocked(),
         masked: layerSystem.getMasked(),
         name: layerSystem.getName(),
-        image: layerSystem.load(),
+        image: imageForUndo,
       },
     });
     if (this.axpObj.isBackgroundimage) this.axpObj.drawBackground();
     this.axpObj.saveSystem.autoSave();
-    this.releaseStroke();
+    this.releaseSession();
+  }
+
+  cancelLiquifySession() {
+    if (this.session !== 'active') return;
+    const layerSystem = this.axpObj.layerSystem;
+    layerSystem.write(layerSystem.load() || this.sourceImage);
+    layerSystem.isStrokeActive = false;
+    layerSystem.deactivateFastPath();
+    layerSystem.updateCanvas(layerSystem.getId());
+    this.releaseSession();
   }
 
   cancelStroke() {
     if (!this.isActive) return;
     const layerSystem = this.axpObj.layerSystem;
-    layerSystem.replaceCurrentImage(this.sourceImage);
+    const restoreImage = this.strokeStartImage || this.sourceImage;
+    if (this.strokeStartDisplacementField) {
+      this.displacementField = cloneDisplacementField(this.strokeStartDisplacementField);
+    }
+    this.resultImage = cloneImageData(restoreImage);
+    if (layerSystem.compositeFastPathActive) {
+      this.CANVAS.draw_ctx.putImageData(this.resultImage, 0, 0);
+      layerSystem.drawFast();
+    } else {
+      layerSystem.replaceCurrentImage(this.resultImage);
+      layerSystem.updateCanvas(layerSystem.getId());
+    }
     layerSystem.isStrokeActive = false;
     layerSystem.deactivateFastPath();
-    layerSystem.updateCanvas(layerSystem.getId());
-    this.releaseStroke();
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
+    this.isActive = false;
+    this.axpObj.isDrawing = false;
+    this.axpObj.isDrawn = false;
+    this.axpObj.isDrawCancel = false;
   }
 
   forceIdle() {
-    this.cancelStroke();
+    this.cancelLiquifySession();
   }
 
-  releaseStroke() {
+  setupOverlayEvents() {
+    if (typeof document === 'undefined') return;
+    const finishBtn = document.getElementById('axp_canvas_button_liquifyFinish');
+    const cancelBtn = document.getElementById('axp_canvas_button_liquifyCancel');
+    if (finishBtn) {
+      finishBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.finalizeLiquifySession();
+      });
+    }
+    if (cancelBtn) {
+      cancelBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.cancelLiquifySession();
+      });
+    }
+  }
+
+  showOverlay() {
+    if (typeof document === 'undefined') return;
+    const group = document.getElementById('axp_canvas_div_liquifyGroup');
+    if (group) _etc_js__WEBPACK_IMPORTED_MODULE_1__.UTIL.show(group);
+  }
+
+  hideOverlay() {
+    if (typeof document === 'undefined') return;
+    const group = document.getElementById('axp_canvas_div_liquifyGroup');
+    if (group) _etc_js__WEBPACK_IMPORTED_MODULE_1__.UTIL.hide(group);
+  }
+
+  releaseSession() {
     this.sourceImage = null;
     this.resultImage = null;
     this.displacementField = null;
+    this.strokeStartImage = null;
+    this.strokeStartDisplacementField = null;
+    this.session = 'idle';
     this.isActive = false;
     this.hasChanged = false;
     this.axpObj.isDrawing = false;
     this.axpObj.isDrawn = false;
     this.axpObj.isDrawCancel = false;
+    this.hideOverlay();
   }
 }
 
@@ -40400,6 +40525,7 @@ class SaveSystem {
                 item.onclick = (e) => {
                     // なげなわ変形中は確定してから保存する（選択物が欠落した状態で保存されるのを防ぐ）
                     this.axpObj.finalizeNagenawaSelection();
+                    this.axpObj.finalizeLiquifySession();
                     // data-keyに記憶しておいた主キーを使用する
                     const save_id = e.currentTarget.dataset.key;
                     const data = {
@@ -40482,6 +40608,7 @@ class SaveSystem {
                                 // なげなわ変形中は確定してからロードする
                                 // （レイヤー消失後に finalize が走るとエラーになるため）
                                 this.axpObj.finalizeNagenawaSelection();
+                                this.axpObj.finalizeLiquifySession();
                                 this.restoreData(data);
                                 if (mode === 'auto') {
                                     // 自動保存されたデータをロードしました。
@@ -41779,6 +41906,7 @@ class UndoSystem {
     undo() {
         // なげなわ変形中は確定してから処理する
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         if (this.undoObj.length <= 0) {
             // これ以上アンドゥできません。
             this.axpObj.msg('@CAU0400');
@@ -41936,6 +42064,7 @@ class UndoSystem {
     redo() {
         // なげなわ変形中は確定してから処理する
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         if (this.redoObj.length <= 0) {
             // これ以上リドゥできません。
             this.axpObj.msg('@CAU0401');
@@ -42409,6 +42538,7 @@ class FilterSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
         }
         // なげなわ変形中は確定してから処理する
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         const before = this.axpObj.layerSystem.getCurrentLayerImage();
         const after = filterFn(before);
         // 無変化なら何もしない（_penobj.jsのend_common()と同じcompareImagesによる契約に合わせる。
@@ -42878,6 +43008,7 @@ class LayerSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
         document.getElementById('axp_layer_select_blendMode').addEventListener('change', (e) => {
             // なげなわ変形中は確定してから処理する
             this.axpObj.finalizeNagenawaSelection();
+            this.axpObj.finalizeLiquifySession();
             // レイヤー合成モード変更
             this.setBlendMode(e.target.value);
             this.updateCanvas();
@@ -44349,6 +44480,7 @@ class LayerSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
     setCurrentLayer(targetElement) {
         // なげなわ変形中は、選択が変わる前に確定する
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         // 引数の要素をカレントレイヤーとし、変更に伴う連動処理を行う
         const layerBoxElements = document.querySelectorAll('#axp_layer_ul_layerBox>li');
         // 一旦、全レイヤーを非選択に
@@ -44797,6 +44929,7 @@ class LayerSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
     downloadImage() {
         // なげなわ変形中は確定してから出力する（点線プレビューの混入防止）
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         let link = document.createElement("a");
         if (this.axpObj.assistToolSystem.getIsTransparent()) {
             // 透過
@@ -44836,6 +44969,7 @@ class LayerSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
         // なげなわ変形中の場合、対象レイヤーが存在するうちに選択内容を確定する
         // （統合後に確定すると削除済みレイヤーへの書き込みでエラーになるため）
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         var idx_source = this.getLayerIndex(this.currentLayer.dataset.id); // 統合元idx
 
         // 最下位チェック
@@ -45005,6 +45139,7 @@ class LayerSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
         // なげなわ変形中の場合、対象レイヤーが存在するうちに選択内容を確定する
         // （削除後に確定すると削除済みレイヤーへの書き込みでエラーになるため）
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         // レイヤーがロック状態の場合は削除不可
         if (this.getLocked()) {
             // %1がロック状態のため、削除できません。
@@ -46798,6 +46933,8 @@ class PenSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
         this.penObj['axp_penmode_nagenawa'].setupOverlayEvents();
         // 多角形選択オーバーレイのイベント設定
         this.penObj['axp_penmode_polygonselect'].setupOverlayEvents();
+        // 歪みツール確定/取消オーバーレイのイベント設定
+        this.penObj['axp_penmode_liquify'].setupOverlayEvents();
     }
     // id名からアイコン用class名を取得
     getClassIcon(id) {
@@ -47742,9 +47879,12 @@ class PenSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
             }
         }
         const liquify = this.penObj['axp_penmode_liquify'];
-        if (liquify?.isActive && !this.isTemporary) {
+        if (liquify?.session === 'active' && !this.isTemporary) {
             const newMode = mode || this.pen_mode;
-            if (newMode !== 'axp_penmode_liquify') liquify.cancelStroke();
+            if (newMode !== 'axp_penmode_liquify') {
+                if (liquify.isActive) liquify.cancelStroke();
+                liquify.finalizeLiquifySession();
+            }
         }
         if (mode) {
             this.pen_mode = mode;
@@ -48818,6 +48958,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
     flip_h() {
         // なげなわ変形中は確定してから処理する（未確定のまま反転すると、次の再描画で反転が上書きされるため）
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         // 全体
         this.axpObj.layerSystem.flip_h('all');
         // 全レイヤーの左右を反転しました。
@@ -48832,6 +48973,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
     flip_v() {
         // なげなわ変形中は確定してから処理する（未確定のまま反転すると、次の再描画で反転が上書きされるため）
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         // 全体
         this.axpObj.layerSystem.flip_v('all');
         // 全レイヤーの上下を反転しました。
@@ -48862,6 +49004,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
     transparent() {
         // なげなわ変形中は確定してから処理する（レイヤー再合成で選択物が一時消失するため）
         this.axpObj.finalizeNagenawaSelection();
+        this.axpObj.finalizeLiquifySession();
         this.isTransparent = !this.isTransparent;
         document.getElementById('axp_tool_button_transparent').dataset.selected = this.isTransparent ? 'true' : 'false';
         this.axpObj.layerSystem.draw();
@@ -48969,7 +49112,6 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
         }
     }
 }
-
 
 
 
@@ -49164,7 +49306,7 @@ __webpack_require__.r(__webpack_exports__);
     axpObj;
     constructor(option) {
         console.log('version:', "3.0.0-alpha");
-        console.log('build:', "2026-07-06T08:38:45.777Z");
+        console.log('build:', "2026-07-06T08:46:45.138Z");
         (async () => {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
@@ -49545,7 +49687,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:38:45.777Z"})`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:46:45.138Z"})`;
     }
     // 画面の表示／非表示
     on() {
@@ -49557,7 +49699,7 @@ __webpack_require__.r(__webpack_exports__);
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${"3.0.0-alpha"} (${"2026-07-06T08:38:45.777Z"})`;
+        return `version ${"3.0.0-alpha"} (${"2026-07-06T08:46:45.138Z"})`;
     }
 });
 

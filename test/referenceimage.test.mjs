@@ -198,6 +198,8 @@ test('legacy startup draft image path loads as a reference overlay, not artwork 
 test('interop and liquify provisional controls expose the accessibility hooks needed for dogfooding', () => {
   const toolHtml = readFileSync(new URL('../src/html/window_tool.txt', import.meta.url), 'utf8');
   const penHtml = readFileSync(new URL('../src/html/window_pen.txt', import.meta.url), 'utf8');
+  const mainHtml = readFileSync(new URL('../src/html/main.txt', import.meta.url), 'utf8');
+  const msg = readFileSync(new URL('../src/text/msg.txt', import.meta.url), 'utf8');
 
   assert.match(
     toolHtml,
@@ -206,6 +208,9 @@ test('interop and liquify provisional controls expose the accessibility hooks ne
   assert.match(toolHtml, /id="axp_tool_div_referenceDetails"/);
   assert.match(penHtml, /id="axp_pen_range_liquifyStrength"[\s\S]*aria-label="\$\{_\(("@LIQUIFY\.STRENGTH"|'@LIQUIFY\.STRENGTH')\)\}"/);
   assert.match(penHtml, /id="axp_pen_range_liquifyHardness"[\s\S]*aria-label="\$\{_\(("@LIQUIFY\.HARDNESS"|'@LIQUIFY\.HARDNESS')\)\}"/);
+  assert.match(mainHtml, /id="axp_canvas_div_liquifyGroup"[\s\S]*id="axp_canvas_button_liquifyCancel"[\s\S]*id="axp_canvas_button_liquifyFinish"/);
+  assert.match(msg, /@LQF0001,/);
+  assert.match(msg, /@LQF0002,/);
 });
 
 test('interop and reference panels start collapsed as independent disclosures', () => {
