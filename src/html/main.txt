@@ -53,8 +53,8 @@
 
 				<!-- 歪みツール操作子グループ（セッション中のみ表示） -->
 				<div id="axp_canvas_div_liquifyGroup" class="axpc_NONE">
-					<div id="axp_canvas_button_liquifyCancel" class="axpc_overlay_btn axpc_MSG" data-msg="@LQF0002"></div>
-					<div id="axp_canvas_button_liquifyFinish" class="axpc_overlay_btn axpc_MSG" data-msg="@LQF0001"></div>
+					<button id="axp_canvas_button_liquifyCancel" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@LQF0002"></button>
+					<button id="axp_canvas_button_liquifyFinish" type="button" class="axpc_overlay_btn axpc_MSG" data-msg="@LQF0001"></button>
 				</div>
 
 				<!-- タッチ操作バー（pointer:coarse時のみCSSで表示。Undo/Redo/表示リセットの大型タップ領域） -->

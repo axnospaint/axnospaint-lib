@@ -57,10 +57,11 @@ export class SaveSystem {
     }
     // オートセーブ（カウントとセーブ実行）
     // force=true の場合、規定回数に達していなくても未保存分（counter>0）があれば即座に保存する
+    // options.forceWrite=true の場合は counter に関係なく現在状態を書き込む
     // （離脱時=visibilitychange:hidden/pagehide からの緊急保存用。iOSはタブを予告なく
     // 破棄するため、規定回数を待たず未保存の編集内容を確実に残す必要がある）。
     // force呼び出し自体は描画操作ではないためカウンタを増やさない。
-    async autoSave(force = false) {
+    async autoSave(force = false, options = {}) {
         // DB使用不可の場合処理しない
         if (!this.isDBAvailable) return;
 
@@ -68,7 +69,7 @@ export class SaveSystem {
             this.autosave_counter++;
         }
         // 規定回数の描画操作を行ったら、またはforce指定時に未保存分があれば即座にオートセーブ
-        if ((force && this.autosave_counter > 0) || (!force && this.autosave_counter >= AUTOSAVE_INTERVAL)) {
+        if (options.forceWrite || (force && this.autosave_counter > 0) || (!force && this.autosave_counter >= AUTOSAVE_INTERVAL)) {
             this.autosave_counter = 0;
             const data = {
                 created: new Date(),

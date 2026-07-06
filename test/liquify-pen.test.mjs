@@ -12,14 +12,19 @@ function createImage(width, height) {
   return { width, height, data };
 }
 
-function createFixture({ source = createImage(5, 5) } = {}) {
+function createFixture({
+  source = createImage(5, 5),
+  compositeFastPathActive = false,
+  putImageData = () => {},
+  drawFast = () => {},
+} = {}) {
   let currentImage = source;
   let savedImage = null;
   const undoEntries = [];
   let autoSaveCount = 0;
   const layerSystem = {
     currentLayer: { dataset: { id: '1' } },
-    compositeFastPathActive: false,
+    compositeFastPathActive,
     isStrokeActive: false,
     isWriteProtection: () => false,
     save: () => { savedImage = currentImage; },
@@ -29,6 +34,7 @@ function createFixture({ source = createImage(5, 5) } = {}) {
     replaceCurrentImage: (image) => { currentImage = image; },
     activateFastPath: () => {},
     deactivateFastPath: () => {},
+    drawFast,
     updateCanvas: () => {},
     getId: () => '1',
     getIndex: () => 0,
@@ -57,7 +63,7 @@ function createFixture({ source = createImage(5, 5) } = {}) {
     isBackgroundimage: false,
   };
   const canvas = {
-    draw_ctx: { putImageData: () => {} },
+    draw_ctx: { putImageData },
   };
   const settingsProvider = () => ({
     mode: 'push',
@@ -135,6 +141,57 @@ test('cancelled liquify stroke preserves earlier session changes', () => {
 
   assert.equal(fixture.getUndoEntries().length, 1);
   assert.equal(fixture.getAutoSaveCount(), 1);
+});
+
+test('fast-path liquify stroke cancel writes ImageData-compatible previews', () => {
+  const OriginalImageData = globalThis.ImageData;
+  class TestImageData {
+    constructor(data, width, height) {
+      this.data = data;
+      this.width = width;
+      this.height = height;
+    }
+  }
+  globalThis.ImageData = TestImageData;
+  const previewWrites = [];
+  try {
+    const fixture = createFixture({
+      compositeFastPathActive: true,
+      putImageData: (image) => {
+        assert.ok(image instanceof TestImageData);
+        previewWrites.push(image);
+      },
+    });
+
+    fixture.pen.start(2, 2, { altKey: false });
+    fixture.pen.move(3, 2, { altKey: false });
+    fixture.axpObj.isDrawCancel = true;
+    fixture.pen.end(3, 2, { altKey: false });
+
+    assert.equal(fixture.axpObj.layerSystem.isStrokeActive, false);
+    assert.equal(fixture.pen.isActive, false);
+    assert.ok(previewWrites.length >= 3);
+  } finally {
+    if (OriginalImageData === undefined) {
+      delete globalThis.ImageData;
+    } else {
+      globalThis.ImageData = OriginalImageData;
+    }
+  }
+});
+
+test('finalizing liquify for emergency save can defer autosave to the caller', () => {
+  const fixture = createFixture();
+
+  fixture.pen.start(2, 2, { altKey: false });
+  fixture.pen.move(3, 2, { altKey: false });
+  fixture.pen.end(3, 2, { altKey: false });
+  const finalized = fixture.pen.finalizeLiquifySession({ autoSave: false });
+
+  assert.equal(finalized, true);
+  assert.equal(fixture.getUndoEntries().length, 1);
+  assert.equal(fixture.getAutoSaveCount(), 0);
+  assert.equal(fixture.pen.session, 'idle');
 });
 
 test('out-of-canvas liquify stroke does not create undo or autosave', () => {

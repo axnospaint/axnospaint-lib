@@ -181,8 +181,8 @@ export class Liquify extends PenObj {
     this.axpObj.isDrawCancel = false;
   }
 
-  finalizeLiquifySession() {
-    if (this.session !== 'active') return;
+  finalizeLiquifySession({ autoSave = true } = {}) {
+    if (this.session !== 'active') return false;
     if (this.isActive) {
       if (this.axpObj.isDrawCancel) {
         this.cancelStroke();
@@ -193,7 +193,7 @@ export class Liquify extends PenObj {
 
     if (!this.hasChanged || sameImageData(this.sourceImage, this.resultImage)) {
       this.cancelLiquifySession();
-      return;
+      return false;
     }
 
     const layerSystem = this.axpObj.layerSystem;
@@ -218,8 +218,9 @@ export class Liquify extends PenObj {
       },
     });
     if (this.axpObj.isBackgroundimage) this.axpObj.drawBackground();
-    this.axpObj.saveSystem.autoSave();
+    if (autoSave) this.axpObj.saveSystem.autoSave();
     this.releaseSession();
+    return true;
   }
 
   cancelLiquifySession() {
@@ -265,19 +266,25 @@ export class Liquify extends PenObj {
     if (typeof document === 'undefined') return;
     const finishBtn = document.getElementById('axp_canvas_button_liquifyFinish');
     const cancelBtn = document.getElementById('axp_canvas_button_liquifyCancel');
+    const stopPointer = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+    const finishSession = (e) => {
+      stopPointer(e);
+      this.finalizeLiquifySession();
+    };
+    const cancelSession = (e) => {
+      stopPointer(e);
+      this.cancelLiquifySession();
+    };
     if (finishBtn) {
-      finishBtn.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.finalizeLiquifySession();
-      });
+      finishBtn.addEventListener('pointerdown', stopPointer);
+      finishBtn.addEventListener('click', finishSession);
     }
     if (cancelBtn) {
-      cancelBtn.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.cancelLiquifySession();
-      });
+      cancelBtn.addEventListener('pointerdown', stopPointer);
+      cancelBtn.addEventListener('click', cancelSession);
     }
   }
 

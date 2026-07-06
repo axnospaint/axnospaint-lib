@@ -208,7 +208,10 @@ test('interop and liquify provisional controls expose the accessibility hooks ne
   assert.match(toolHtml, /id="axp_tool_div_referenceDetails"/);
   assert.match(penHtml, /id="axp_pen_range_liquifyStrength"[\s\S]*aria-label="\$\{_\(("@LIQUIFY\.STRENGTH"|'@LIQUIFY\.STRENGTH')\)\}"/);
   assert.match(penHtml, /id="axp_pen_range_liquifyHardness"[\s\S]*aria-label="\$\{_\(("@LIQUIFY\.HARDNESS"|'@LIQUIFY\.HARDNESS')\)\}"/);
-  assert.match(mainHtml, /id="axp_canvas_div_liquifyGroup"[\s\S]*id="axp_canvas_button_liquifyCancel"[\s\S]*id="axp_canvas_button_liquifyFinish"/);
+  assert.match(
+    mainHtml,
+    /id="axp_canvas_div_liquifyGroup"[\s\S]*<button id="axp_canvas_button_liquifyCancel" type="button"[\s\S]*<button id="axp_canvas_button_liquifyFinish" type="button"/,
+  );
   assert.match(msg, /@LQF0001,/);
   assert.match(msg, /@LQF0002,/);
 });

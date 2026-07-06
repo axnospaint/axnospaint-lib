@@ -392,18 +392,20 @@ export class AXPObj {
         }
     }
     // なげなわ変形中の選択内容を確定する（キャンバス全体に影響する操作の前処理用）
-    finalizeNagenawaSelection() {
+    finalizeNagenawaSelection(options = {}) {
         const nagenawa = this.penSystem?.penObj?.['axp_penmode_nagenawa'];
         if (nagenawa && nagenawa.state === 'transforming') {
-            nagenawa.finalizeSelection();
+            return nagenawa.finalizeSelection(options) === true;
         }
+        return false;
     }
     // 歪みツールの未確定セッションを確定する（キャンバス全体に影響する操作の前処理用）
-    finalizeLiquifySession() {
+    finalizeLiquifySession(options = {}) {
         const liquify = this.penSystem?.penObj?.['axp_penmode_liquify'];
         if (liquify && liquify.session === 'active') {
-            liquify.finalizeLiquifySession();
+            return liquify.finalizeLiquifySession(options) === true;
         }
+        return false;
     }
     // 選択範囲（マジックワンド／多角形選択）の適用。なげなわの「切り取って移動」とは
     // 独立した、レイヤーのimageデータを一切変更しない範囲情報として保持する
@@ -1196,13 +1198,17 @@ export class AXPObj {
                 // モバイル（特にiOS）はタブを予告なく破棄することがあり、
                 // beforeunload/pagehideが発火しない場合があるため、visibilitychange:hiddenが
                 // 確実な保存機会として最後になる。
-                this.saveSystem.autoSave(true);
+                const finalizedNagenawa = this.finalizeNagenawaSelection({ autoSave: false });
+                const finalizedLiquify = this.finalizeLiquifySession({ autoSave: false });
+                this.saveSystem.autoSave(true, { forceWrite: finalizedNagenawa || finalizedLiquify });
             }
         });
         // 上記の保険。pagehideが発火する環境ではこちらでも確実に保存する
         // （force指定のため、既にvisibilitychange:hiddenで保存済みなら未保存分が無く何もしない）
         window.addEventListener('pagehide', () => {
-            this.saveSystem.autoSave(true);
+            const finalizedNagenawa = this.finalizeNagenawaSelection({ autoSave: false });
+            const finalizedLiquify = this.finalizeLiquifySession({ autoSave: false });
+            this.saveSystem.autoSave(true, { forceWrite: finalizedNagenawa || finalizedLiquify });
         });
     }
     /**
