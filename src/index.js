@@ -13,6 +13,7 @@ import { getBrowserType, inRange, isColor } from './js/etc.js';
 // htmlデータ
 import htmldata from './html/main.txt';
 // css適用
+import './css/tokens.css';
 import './css/axnospaint.css';
 import './css/common.css';
 import './css/icon.css';
@@ -426,4 +427,3 @@ export default class {
         return `version ${PACKAGE_VERSION} (${PACKAGE_DATE})`;
     }
 }
-

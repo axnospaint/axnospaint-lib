@@ -655,30 +655,6 @@ export class PenSystem extends ToolWindow {
             this.penObj[this.pen_mode].renderGradientStopsUI();
         };
 
-        // 太さクイックボタン (登録値はペンごとに保存)
-        document.querySelectorAll('.axpc_pen_quicksize').forEach((btn, i) => {
-            let lastTapTime = 0;
-            btn.addEventListener('pointerup', () => {
-                const now = Date.now();
-                if (now - lastTapTime < 300) {
-                    const input = prompt('太さを入力 (1〜200)', btn.dataset.size);
-                    if (input !== null) {
-                        const val = Math.min(200, Math.max(1, parseInt(input) || 1));
-                        btn.dataset.size = val;
-                        this.renderQuickSizeButton(btn);
-                        this.axpObj.configSystem.saveConfig(`QSIZE_${i}_${this.pen_mode}`, val);
-                    }
-                    lastTapTime = 0;
-                } else {
-                    lastTapTime = now;
-                    const size = Number(btn.dataset.size);
-                    this.setPenSize(size);
-                }
-            });
-        });
-        // 初期表示 (保存値の反映)
-        this.updateQuickSizeButtons();
-
     }
 
     start(x, y, e, mode, option) {
@@ -926,30 +902,6 @@ export class PenSystem extends ToolWindow {
     getName() {
         return this.penObj[this.pen_mode].name;
     }
-    // 太さクイックボタンのラベル描画
-    renderQuickSizeButton(btn) {
-        const size = Number(btn.dataset.size);
-        btn.innerHTML = `<span class="axpc_qs_label">太さ</span><span class="axpc_qs_num">${size}</span>`;
-    }
-    // 太さクイックボタンの表示更新。登録値はペンごとに保存されており、
-    // ペン別保存値 → 旧共通保存値 (移行用フォールバック) → 既定値 の順で解決する
-    updateQuickSizeButtons() {
-        const DEFAULTS = [2, 4, 10];
-        document.querySelectorAll('.axpc_pen_quicksize').forEach((btn, i) => {
-            const perPen = this.axpObj.configSystem.getConfig(`QSIZE_${i}_${this.pen_mode}`);
-            const legacy = this.axpObj.configSystem.getConfig('QSIZE_' + i);
-            let size;
-            if (perPen !== null && perPen !== undefined) {
-                size = perPen;
-            } else if (legacy !== null && legacy !== undefined) {
-                size = legacy;
-            } else {
-                size = DEFAULTS[i];
-            }
-            btn.dataset.size = size;
-            this.renderQuickSizeButton(btn);
-        });
-    }
     // 混色ペンのプリセットを反映する
     applyDiffusionPreset(idx) {
         const preset = this.diffusionPresets[idx];
@@ -1162,13 +1114,6 @@ export class PenSystem extends ToolWindow {
             'axp_pen_form_penSize',
             this.getSize(),
         )
-        // 太さクイックボタンの表示制御 (登録値はペンごとのため表示値も更新)
-        if (this.getSize()) {
-            UTIL.show('axp_pen_div_quickSize');
-            this.updateQuickSizeButtons();
-        } else {
-            UTIL.hide('axp_pen_div_quickSize');
-        }
         const isLiquifyPen = type === 'liquify';
         // 不透明度 (消しゴムは消し率で代替するため非表示)
         {

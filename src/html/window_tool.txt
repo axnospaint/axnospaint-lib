@@ -1,9 +1,9 @@
 <!-- 補助ツール -->
 <div class="axpc_window_content">
     <!-- 補助ツールメイン -->
-    <div id="axp_tool_div_content">
+    <div id="axp_tool_div_content" class="axpc_tool_shell">
         <!-- 補助ツール左側 -->
-        <div id="axp_tool_div_leftSide">
+        <div id="axp_tool_div_leftSide" class="axpc_tool_controlDeck">
             <div id="axp_tool_div_canvasSize">
                 <span id="axp_tool_span_canvasSize" class="axpc_MSG" data-msg="@AST0001"></span>
             </div>
@@ -99,7 +99,7 @@
                 data-msg="@AST0005">+</button>
         </div>
         <!-- 補助ツール右側 -->
-        <div id="axp_tool_div_rightSide">
+        <div id="axp_tool_div_rightSide" class="axpc_tool_actionGrid">
             <button id="axp_tool_button_restore" class="axpc_FUNC axpc_button" data-function="func_restore"
                 data-msg="@AST0008">${_("@MISC.BUTTON_RESTORE_AUTOSAVE")}</button>
 

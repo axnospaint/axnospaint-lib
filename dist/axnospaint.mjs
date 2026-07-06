@@ -1,5 +1,5 @@
 /*!
- * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-06T08:56:01.775Z)
+ * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-06T09:09:38.581Z)
  * (c) 2026- nijiurachan contributors
  * (c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」
  * Licensed under MPL 2.0
@@ -23,7 +23,7 @@ var isExtenstions = false;
 class ExTool {
     member = [];
     constructor() { }
-} 
+}
 
 /***/ }),
 
@@ -103,12 +103,12 @@ function parseBrushShape(desc) {
                 flipY: desc.flipY,
             };
         case 'dTips': {
-            return Object.assign(Object.assign({ type: 'tips', angle: (0, descriptor_1.parseAngle)(desc.Angl), size: (0, descriptor_1.parseUnitsToNumber)(desc.Dmtr, 'Pixels'), shape: dynamicBrushShapeShapes[desc['Shp ']], physics: desc.physics, spacing: (0, descriptor_1.parsePercent)(desc.Spcn), spacingOn: desc.Intr, flipX: desc.flipX, flipY: desc.flipY, 
+            return Object.assign(Object.assign({ type: 'tips', angle: (0, descriptor_1.parseAngle)(desc.Angl), size: (0, descriptor_1.parseUnitsToNumber)(desc.Dmtr, 'Pixels'), shape: dynamicBrushShapeShapes[desc['Shp ']], physics: desc.physics, spacing: (0, descriptor_1.parsePercent)(desc.Spcn), spacingOn: desc.Intr, flipX: desc.flipX, flipY: desc.flipY,
                 // tips:
                 tipsType: tipsBrushShapeShapes[desc.dtipsType], tipsLengthRatio: (0, descriptor_1.parsePercent)(desc.dtipsLengthRatio), tipsHardness: (0, descriptor_1.parsePercent)(desc.dtipsHardness) }, ((desc.dtipsGridSize && desc.dtipsErodibleTipHeightMap) ? {
                 tipsGridSize: desc.dtipsGridSize,
                 tipsErodibleTipHeightMap: parseHeightmap(desc.dtipsErodibleTipHeightMap),
-            } : {})), { 
+            } : {})), {
                 // airbrush
                 tipsAirbrushCutoffAngle: desc.dtipsAirbrushCutoffAngle, tipsAirbrushGranularity: (0, descriptor_1.parsePercent)(desc.dtipsAirbrushGranularity), tipsAirbrushStreakiness: (0, descriptor_1.parsePercent)(desc.dtipsAirbrushStreakiness), tipsAirbrushSplatSize: (0, descriptor_1.parsePercent)(desc.dtipsAirbrushSplatSize), tipsAirbrushSplatCount: desc.dtipsAirbrushSplatCount });
         }
@@ -2415,7 +2415,7 @@ addHandler('SoLd', hasKey('placedLayer'), (reader, target, left) => {
     if (!placed.id || typeof placed.id !== 'string' || !/^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$/.test(placed.id)) {
         throw new Error('Placed layer ID must be in a GUID format (example: 20953ddb-9391-11ec-b4f1-c15674f50bc4)');
     }
-    const desc = Object.assign(Object.assign({ Idnt: placed.id, placed: (_a = placed.placed) !== null && _a !== void 0 ? _a : placed.id, PgNm: placed.pageNumber || 1, totalPages: placed.totalPages || 1 }, (placed.crop ? { Crop: placed.crop } : {})), { frameStep: placed.frameStep || { numerator: 0, denominator: 600 }, duration: placed.duration || { numerator: 0, denominator: 600 }, frameCount: placed.frameCount || 0, Annt: 16, Type: placedLayerTypes.indexOf(placed.type), Trnf: placed.transform, nonAffineTransform: (_b = placed.nonAffineTransform) !== null && _b !== void 0 ? _b : placed.transform, 
+    const desc = Object.assign(Object.assign({ Idnt: placed.id, placed: (_a = placed.placed) !== null && _a !== void 0 ? _a : placed.id, PgNm: placed.pageNumber || 1, totalPages: placed.totalPages || 1 }, (placed.crop ? { Crop: placed.crop } : {})), { frameStep: placed.frameStep || { numerator: 0, denominator: 600 }, duration: placed.duration || { numerator: 0, denominator: 600 }, frameCount: placed.frameCount || 0, Annt: 16, Type: placedLayerTypes.indexOf(placed.type), Trnf: placed.transform, nonAffineTransform: (_b = placed.nonAffineTransform) !== null && _b !== void 0 ? _b : placed.transform,
         // quiltWarp: {} as any,
         warp: encodeWarp(getWarpFromPlacedLayer(placed)), 'Sz  ': {
             _name: '',
@@ -15189,6 +15189,58 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/css/tokens.css":
+/*!******************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/css/tokens.css ***!
+  \******************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* AXNOS Paint UI tokens */
+:root {
+    --axp-surface-window: rgba(0, 0, 0, 0.30);
+    --axp-surface-content: rgba(0, 0, 0, 0.50);
+    --axp-surface-panel: rgba(0, 0, 0, 0.35);
+    --axp-surface-panel-strong: rgba(0, 0, 0, 0.62);
+    --axp-text-primary: #fff;
+    --axp-text-secondary: #ddd;
+    --axp-text-muted: #aaa;
+    --axp-border-soft: #555;
+    --axp-border-strong: #888;
+    --axp-border-focus: #8bd3ff;
+    --axp-accent: #eeac60;
+    --axp-accent-soft: rgba(238, 172, 96, 0.16);
+    --axp-accent-border: rgba(238, 172, 96, 0.45);
+    --axp-danger: #f009;
+    --axp-r-lg: 8px;
+    --axp-r-md: 5px;
+    --axp-r-sm: 3px;
+    --axp-sp-1: 4px;
+    --axp-sp-2: 6px;
+    --axp-sp-3: 8px;
+    --axp-h-icon-btn: 44px;
+    --axp-h-compact-btn: 24px;
+    --axp-h-compact-range: 24px;
+}
+`, "",{"version":3,"sources":["webpack://./src/css/tokens.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;IACI,yCAAyC;IACzC,0CAA0C;IAC1C,wCAAwC;IACxC,+CAA+C;IAC/C,wBAAwB;IACxB,0BAA0B;IAC1B,sBAAsB;IACtB,uBAAuB;IACvB,yBAAyB;IACzB,2BAA2B;IAC3B,qBAAqB;IACrB,2CAA2C;IAC3C,6CAA6C;IAC7C,mBAAmB;IACnB,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,sBAAsB;IACtB,yBAAyB;IACzB,2BAA2B;AAC/B","sourcesContent":["/* AXNOS Paint UI tokens */\n:root {\n    --axp-surface-window: rgba(0, 0, 0, 0.30);\n    --axp-surface-content: rgba(0, 0, 0, 0.50);\n    --axp-surface-panel: rgba(0, 0, 0, 0.35);\n    --axp-surface-panel-strong: rgba(0, 0, 0, 0.62);\n    --axp-text-primary: #fff;\n    --axp-text-secondary: #ddd;\n    --axp-text-muted: #aaa;\n    --axp-border-soft: #555;\n    --axp-border-strong: #888;\n    --axp-border-focus: #8bd3ff;\n    --axp-accent: #eeac60;\n    --axp-accent-soft: rgba(238, 172, 96, 0.16);\n    --axp-accent-border: rgba(238, 172, 96, 0.45);\n    --axp-danger: #f009;\n    --axp-r-lg: 8px;\n    --axp-r-md: 5px;\n    --axp-r-sm: 3px;\n    --axp-sp-1: 4px;\n    --axp-sp-2: 6px;\n    --axp-sp-3: 8px;\n    --axp-h-icon-btn: 44px;\n    --axp-h-compact-btn: 24px;\n    --axp-h-compact-range: 24px;\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/css/window.css":
 /*!******************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/css/window.css ***!
@@ -16501,11 +16553,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
 /* ペンツール外枠 */
 #axp_pen_div_content {
     display: flex;
+    gap: var(--axp-sp-3);
 }
 
 /* ペンツール左側（プレビュー、スライダー）外枠 */
 #axp_pen_div_leftSide {
-    width: 104px;
+    width: 108px;
     overflow: hidden;
 }
 
@@ -16542,28 +16595,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
 /* プレビュー領域 */
 #axp_pen_div_preview {
     position: relative;
-    width: 104px;
-    height: 104px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 2px #aaa solid;
+    width: 108px;
+    height: 96px;
+    background: rgba(255, 255, 255, 0.32);
+    border: 1px solid var(--axp-border-strong);
+    border-radius: var(--axp-r-md);
     cursor: default;
     margin-top: 4px;
+    overflow: hidden;
 }
 
 /* ペンの太さプレビュー用キャンバス */
 #axp_pen_canvas_previewPenSize {
     position: absolute;
     z-index: 2;
-    width: 100px;
-    height: 100px;
+    width: 106px;
+    height: 94px;
 }
 
 /* スポイト用キャンバス */
 #axp_pen_canvas_previewSpuit {
     position: absolute;
     z-index: 1;
-    width: 100px;
-    height: 100px;
+    width: 106px;
+    height: 94px;
     image-rendering: pixelated;
 }
 
@@ -16584,6 +16639,50 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
     flex-flow: column;
 }
 
+.axpc_pen_settingsStack {
+    gap: 3px;
+}
+
+.axpc_pen_settingsStack .axpc_range {
+    overflow: hidden;
+    border-radius: var(--axp-r-md);
+}
+
+.axpc_pen_settingsStack .axpc_range input[type="range"] {
+    height: var(--axp-h-compact-range);
+    border-width: 2px;
+    border-radius: var(--axp-r-md);
+}
+
+.axpc_pen_settingsStack .axpc_range input[type="range"]::-webkit-slider-thumb {
+    width: var(--axp-h-compact-range);
+    height: var(--axp-h-compact-range);
+    border-width: 3px;
+    border-radius: var(--axp-r-md);
+}
+
+.axpc_pen_settingsStack .axpc_range input[type="range"]::-moz-range-track {
+    height: var(--axp-h-compact-range);
+}
+
+.axpc_pen_settingsStack .axpc_range input[type="range"]::-moz-range-thumb {
+    width: var(--axp-h-compact-range);
+    height: var(--axp-h-compact-range);
+    border-width: 3px;
+    border-radius: var(--axp-r-md) !important;
+}
+
+.axpc_pen_settingsStack .axpc_range_label {
+    font-size: 11px;
+    line-height: 12px;
+    padding-top: 1px;
+}
+
+.axpc_pen_settingsStack .axpc_range_value {
+    font-size: 13px;
+    padding-top: 11px;
+}
+
 /* セレクトボックス */
 #axp_pen_div_selectbox {
     margin-top: 8px;
@@ -16598,7 +16697,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
 
 /* ペンツール右側（機能ボタン）外枠 */
 #axp_pen_div_rightSide {
-    margin-left: 12px;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--axp-sp-2);
 }
 
 /* 各ボタンの枠 */
@@ -16609,9 +16711,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
 /* ペンツール内のアイコン（メイン＆サブ） */
 #axp_pen_div_rightSide>div>button,
 #axp_penmode button {
-    width: 44px;
-    height: 44px;
-    border-radius: 5px;
+    width: var(--axp-h-icon-btn);
+    height: var(--axp-h-icon-btn);
+    border-radius: var(--axp-r-md);
     border: 3px solid #000;
     box-shadow: 0px 0px 10px #000;
     cursor: pointer;
@@ -16629,7 +16731,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
 
 /* 選択しているアイコンに色をつける */
 #axp_pen_div_rightSide>div>button[data-selected="true"] {
-    background-color: rgb(238, 172, 96);
+    background-color: var(--axp-accent);
 }
 
 /* サブメニューがあることを示す表示効果 */
@@ -16779,13 +16881,14 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
 
 #axp_pen_div_liquifyMode {
     display: grid;
-    gap: var(--spacing-control, 2px);
+    gap: var(--axp-sp-1);
     box-sizing: border-box;
     overflow: hidden;
     margin-top: 3px;
-    padding: 2px;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, .18);
+    padding: 4px;
+    border: 1px solid var(--axp-border-soft);
+    border-radius: var(--axp-r-md);
+    background: var(--axp-surface-panel);
 }
 
 #axp_pen_div_liquifyMode label {
@@ -16854,57 +16957,29 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
 /* 混色ペンの詳細設定開閉ボタン */
 #axp_pen_button_diffusionDetail {
     width: 100%;
-    height: 17px;
+    min-height: var(--axp-h-compact-btn);
     font-size: 12px;
     line-height: 1;
-    padding: 0 4px;
+    padding: 0 6px;
     margin-top: 4px;
-    border: 1px dashed #888;
-    border-radius: 3px;
-    background: none;
-    color: #eee;
+    border: 1px solid var(--axp-accent-border);
+    border-radius: var(--axp-r-md);
+    background: var(--axp-accent-soft);
+    color: var(--axp-accent);
     cursor: pointer;
     text-align: left;
 }
 
-/* 太さクイックボタン */
-#axp_pen_div_quickSize {
-    display: flex;
-    gap: 2px;
-    margin-top: 4px;
-    width: 104px;
+.axpc_pen_panelToggle:hover {
+    border-color: var(--axp-accent);
+    background: rgba(238, 172, 96, 0.24);
 }
-#axp_pen_div_quickSize.axpc_NONE {
-    display: none;
-}
-.axpc_pen_quicksize {
-    flex: 1;
-    height: 28px;
-    border: 1px solid #888;
-    border-radius: 3px;
-    background: #555;
-    color: #eee;
-    cursor: pointer;
-    padding: 0;
-    line-height: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    -webkit-user-select: none;
-    user-select: none;
-}
-.axpc_pen_quicksize:active {
-    background: #333;
-}
-.axpc_pen_quicksize .axpc_qs_label {
-    font-size: 7px;
-    line-height: 1;
-}
-.axpc_pen_quicksize .axpc_qs_num {
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1;
+
+#axp_pen_button_diffusionDetail:focus-visible,
+#axp_pen_select_liquifyMode:focus-visible,
+#axp_pen_button_deselect:focus-visible {
+    outline: 2px solid var(--axp-border-focus);
+    outline-offset: 1px;
 }
 
 /* 階調バケツ：多ストップグラデーション編集UI */
@@ -16973,7 +17048,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
     opacity: 0.4;
     cursor: default;
 }
-`, "",{"version":3,"sources":["webpack://./src/css/window_pen.css"],"names":[],"mappings":"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","sourcesContent":["/* ペンツール */\n\n/* ペンツール外枠 */\n#axp_pen_div_content {\n    display: flex;\n}\n\n/* ペンツール左側（プレビュー、スライダー）外枠 */\n#axp_pen_div_leftSide {\n    width: 104px;\n    overflow: hidden;\n}\n\n/* ペンの名前 */\n#axp_pen_span_penName {\n    line-height: 1.0;\n}\n\n/* 選択範囲の状態表示（選択中のみ表示） */\n#axp_pen_div_selectionStatus {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 4px;\n    margin-top: 2px;\n    font-size: 11px;\n}\n\n#axp_pen_button_deselect {\n    font-size: 11px;\n    line-height: 1;\n    padding: 2px 6px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_button_deselect:active {\n    background: #333;\n}\n\n/* プレビュー領域 */\n#axp_pen_div_preview {\n    position: relative;\n    width: 104px;\n    height: 104px;\n    background: rgba(255, 255, 255, 0.4);\n    border: 2px #aaa solid;\n    cursor: default;\n    margin-top: 4px;\n}\n\n/* ペンの太さプレビュー用キャンバス */\n#axp_pen_canvas_previewPenSize {\n    position: absolute;\n    z-index: 2;\n    width: 100px;\n    height: 100px;\n}\n\n/* スポイト用キャンバス */\n#axp_pen_canvas_previewSpuit {\n    position: absolute;\n    z-index: 1;\n    width: 100px;\n    height: 100px;\n    image-rendering: pixelated;\n}\n\n/* ペンウィンドウ内チェックボックスのラベル縮小 */\n#axp_pen_div_slider .axpc_checkbox label {\n    font-size: 11px;\n}\n\n/* スポイトのRGBA表示用 */\n#axp_pen_div_spuitColorRGBA {\n    line-height: 1.3em;\n}\n\n/* スライダー領域 */\n#axp_pen_div_slider {\n    margin-top: 8px;\n    display: flex;\n    flex-flow: column;\n}\n\n/* セレクトボックス */\n#axp_pen_div_selectbox {\n    margin-top: 8px;\n}\n\n#axp_pen_select_drawMode,\n#axp_pen_select_fillMode {\n    width: 100px;\n    height: 24px;\n    border-radius: 5px;\n}\n\n/* ペンツール右側（機能ボタン）外枠 */\n#axp_pen_div_rightSide {\n    margin-left: 12px;\n}\n\n/* 各ボタンの枠 */\n#axp_pen_div_rightSide>div {\n    position: relative;\n}\n\n/* ペンツール内のアイコン（メイン＆サブ） */\n#axp_pen_div_rightSide>div>button,\n#axp_penmode button {\n    width: 44px;\n    height: 44px;\n    border-radius: 5px;\n    border: 3px solid #000;\n    box-shadow: 0px 0px 10px #000;\n    cursor: pointer;\n    background-repeat: no-repeat;\n    background-position: 2px 2px;\n    background-color: #aaa;\n}\n\n/* ホバーしたアイコンに枠をつける */\n#axp_pen_div_rightSide>div>button:hover,\n#axp_penmode button:hover {\n    background-color: #aaa;\n    border: 3px solid #fff;\n}\n\n/* 選択しているアイコンに色をつける */\n#axp_pen_div_rightSide>div>button[data-selected=\"true\"] {\n    background-color: rgb(238, 172, 96);\n}\n\n/* サブメニューがあることを示す表示効果 */\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    content: \"\";\n    position: absolute;\n    top: 6px;\n    left: -9px;\n    height: 16px;\n    border-width: 8px 7px 8px 0;\n    border-color: transparent #eeac60;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {\n    content: \"\";\n    position: absolute;\n    top: 18px;\n    left: -8px;\n    height: 0px;\n    border-width: 4px 4px 4px 0;\n    border-color: transparent #000;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    border-color: transparent #533C21;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n/* サブメニュー用外枠 */\n#axp_penmode {\n    touch-action: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n/* サブメニュー用内枠 */\n#axp_penmode>div {\n    -webkit-user-select: none;\n    user-select: none;\n    font-size: 15px;\n    border-radius: 8px;\n    color: #fff;\n    background: rgba(0, 0, 0, .8);\n    padding-left: 8px;\n}\n\n.axpc_penmode_round {\n    background-image: url('../../resource/pen1.png');\n}\n\n.axpc_penmode_square {\n    background-image: url('../../resource/pen2.png');\n}\n\n.axpc_penmode_dot {\n    background-image: url('../../resource/dot.png');\n}\n\n.axpc_penmode_fude {\n    background-image: url('../../resource/fude.png');\n}\n\n.axpc_penmode_crayon {\n    background-image: url('../../resource/crayon.png');\n}\n\n.axpc_penmode_brush {\n    background-image: url('../../resource/brush.png');\n}\n\n.axpc_penmode_diffusion {\n    background-image: url('../../resource/bokasi.png');\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_marker {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 3l4 4-9 9-5 1 1-5z\"/><path d=\"M3 21h6\"/></svg>');\n}\n\n.axpc_penmode_curve {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18c4 0 4-12 9-12s5 12 9 12\"/></svg>');\n}\n\n.axpc_penmode_hatching {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20L14 4M9 20L19 4M-1 14L7 2\"/></svg>');\n}\n\n.axpc_penmode_sketch {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18l4-9 3 6 3-11 3 9 3-4 2 6\"/></svg>');\n}\n\n.axpc_penmode_texturebrush {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"4\" cy=\"5\" r=\"1\"/><circle cx=\"10\" cy=\"4\" r=\"1\"/><circle cx=\"16\" cy=\"6\" r=\"1\"/><circle cx=\"20\" cy=\"4\" r=\"1\"/><circle cx=\"6\" cy=\"11\" r=\"1\"/><circle cx=\"13\" cy=\"10\" r=\"1\"/><circle cx=\"19\" cy=\"11\" r=\"1\"/><circle cx=\"3\" cy=\"16\" r=\"1\"/><circle cx=\"9\" cy=\"17\" r=\"1\"/><circle cx=\"15\" cy=\"16\" r=\"1\"/><circle cx=\"21\" cy=\"17\" r=\"1\"/><circle cx=\"6\" cy=\"21\" r=\"1\"/><circle cx=\"12\" cy=\"20\" r=\"1\"/><circle cx=\"18\" cy=\"21\" r=\"1\"/></svg>');\n}\n\n.axpc_penmode_smoothpen {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M3 20c2-6 4-14 6-14 1.5 0 1 4 3 4s2-6 4-4c1.5 1.4 1 8 3 8 1 0 1.5-1 2-2l1 1c-1 2-2 3.5-4 3.5-2.5 0-2-6-3.5-6-1.2 0-1.5 4-3.5 4-2 0-1.5-6-3-6-1 0-2 6-3.5 11z\"/></svg>');\n}\n\n.axpc_penmode_eraser_round {\n    background-image: url('../../resource/eraser.png');\n}\n\n.axpc_penmode_eraser_dot {\n    background-image: url('../../resource/eraser_dot.png');\n}\n\n.axpc_penmode_fill {\n    background-image: url('../../resource/fill.png');\n}\n\n.axpc_penmode_fillgradation {\n    background-image: url('../../resource/fillgradation.png');\n}\n\n.axpc_penmode_hand {\n    background-image: url('../../resource/hand.png');\n}\n\n.axpc_penmode_move {\n    background-image: url('../../resource/move.png');\n}\n\n.axpc_penmode_nagenawa {\n    background-image: url('../../resource/nagenawa.png');\n}\n\n.axpc_penmode_liquify {\n    background-image: url('../../resource/overlay/rotate.svg');\n}\n\n#axp_pen_div_liquifyMode {\n    display: grid;\n    gap: var(--spacing-control, 2px);\n    box-sizing: border-box;\n    overflow: hidden;\n    margin-top: 3px;\n    padding: 2px;\n    border-radius: 4px;\n    background: rgba(0, 0, 0, .18);\n}\n\n#axp_pen_div_liquifyMode label {\n    font-size: 10px;\n    line-height: 12px;\n}\n\n#axp_pen_select_liquifyMode {\n    box-sizing: border-box;\n    width: 100%;\n    min-width: 0;\n    max-width: 100%;\n    height: 22px;\n    font-size: 10px;\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_magicwand {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20L15 9\"/><path d=\"M15 9l2 2\"/><path d=\"M13 4v2M13 10v2M9 6h2M15 6h2\"/><path d=\"M20 14v2M20 20v2M18 18h2M22 18h2\"/></svg>');\n}\n\n.axpc_penmode_polygonselect {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8l8-5 8 5-3 11H7z\" stroke-dasharray=\"3,2.5\"/><circle cx=\"4\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"12\" cy=\"3\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"20\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"17\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"7\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/></svg>');\n}\n\n.axpc_penmode_spuit {\n    background-image: url('../../resource/spuit.png');\n}\n\n/* 混色ペンのプリセットボタン */\n#axp_pen_div_diffusionPreset {\n    display: flex;\n    flex-flow: column;\n    gap: 2px;\n    margin-top: 4px;\n}\n\n.axpc_pen_diffpreset {\n    width: 100%;\n    height: 18px;\n    font-size: 13px;\n    line-height: 1;\n    padding: 0 4px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    text-align: center;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.axpc_pen_diffpreset:active {\n    background: #333;\n}\n\n/* 反映中 (現在値が格納値と一致) の明示 */\n.axpc_pen_diffpreset[data-active=\"true\"] {\n    background: #000;\n    color: #fff;\n    border-color: #000;\n}\n\n/* 混色ペンの詳細設定開閉ボタン */\n#axp_pen_button_diffusionDetail {\n    width: 100%;\n    height: 17px;\n    font-size: 12px;\n    line-height: 1;\n    padding: 0 4px;\n    margin-top: 4px;\n    border: 1px dashed #888;\n    border-radius: 3px;\n    background: none;\n    color: #eee;\n    cursor: pointer;\n    text-align: left;\n}\n\n/* 太さクイックボタン */\n#axp_pen_div_quickSize {\n    display: flex;\n    gap: 2px;\n    margin-top: 4px;\n    width: 104px;\n}\n#axp_pen_div_quickSize.axpc_NONE {\n    display: none;\n}\n.axpc_pen_quicksize {\n    flex: 1;\n    height: 28px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    padding: 0;\n    line-height: 1;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    -webkit-user-select: none;\n    user-select: none;\n}\n.axpc_pen_quicksize:active {\n    background: #333;\n}\n.axpc_pen_quicksize .axpc_qs_label {\n    font-size: 7px;\n    line-height: 1;\n}\n.axpc_pen_quicksize .axpc_qs_num {\n    font-size: 14px;\n    font-weight: bold;\n    line-height: 1;\n}\n\n/* 階調バケツ：多ストップグラデーション編集UI */\n#axp_pen_div_gradientStops {\n    margin-top: 4px;\n    display: flex;\n    flex-flow: column;\n    gap: 4px;\n}\n\n#axp_pen_div_gradientPreview {\n    width: 100%;\n    height: 20px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: repeating-conic-gradient(#666 0% 25%, #444 0% 50%) 50% / 8px 8px;\n}\n\n#axp_pen_div_gradientStopList {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 2px;\n    min-height: 18px;\n}\n\n.axpc_gradient_stopSwatch {\n    width: 18px;\n    height: 18px;\n    padding: 0;\n    border: 1px solid #888;\n    border-radius: 3px;\n    cursor: pointer;\n}\n\n.axpc_gradient_stopSwatch[data-selected=\"true\"] {\n    border: 2px solid #fff;\n}\n\n#axp_pen_div_gradientStopControls {\n    display: flex;\n    gap: 2px;\n    align-items: center;\n}\n\n#axp_pen_number_gradientStopPosition {\n    width: 40px;\n}\n\n#axp_pen_div_gradientStopControls button {\n    flex: 1;\n    font-size: 11px;\n    line-height: 1;\n    padding: 3px 2px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_div_gradientStopControls button:active {\n    background: #333;\n}\n\n#axp_pen_div_gradientStopControls button:disabled {\n    opacity: 0.4;\n    cursor: default;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/css/window_pen.css"],"names":[],"mappings":"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","sourcesContent":["/* ペンツール */\n\n/* ペンツール外枠 */\n#axp_pen_div_content {\n    display: flex;\n    gap: var(--axp-sp-3);\n}\n\n/* ペンツール左側（プレビュー、スライダー）外枠 */\n#axp_pen_div_leftSide {\n    width: 108px;\n    overflow: hidden;\n}\n\n/* ペンの名前 */\n#axp_pen_span_penName {\n    line-height: 1.0;\n}\n\n/* 選択範囲の状態表示（選択中のみ表示） */\n#axp_pen_div_selectionStatus {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 4px;\n    margin-top: 2px;\n    font-size: 11px;\n}\n\n#axp_pen_button_deselect {\n    font-size: 11px;\n    line-height: 1;\n    padding: 2px 6px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_button_deselect:active {\n    background: #333;\n}\n\n/* プレビュー領域 */\n#axp_pen_div_preview {\n    position: relative;\n    width: 108px;\n    height: 96px;\n    background: rgba(255, 255, 255, 0.32);\n    border: 1px solid var(--axp-border-strong);\n    border-radius: var(--axp-r-md);\n    cursor: default;\n    margin-top: 4px;\n    overflow: hidden;\n}\n\n/* ペンの太さプレビュー用キャンバス */\n#axp_pen_canvas_previewPenSize {\n    position: absolute;\n    z-index: 2;\n    width: 106px;\n    height: 94px;\n}\n\n/* スポイト用キャンバス */\n#axp_pen_canvas_previewSpuit {\n    position: absolute;\n    z-index: 1;\n    width: 106px;\n    height: 94px;\n    image-rendering: pixelated;\n}\n\n/* ペンウィンドウ内チェックボックスのラベル縮小 */\n#axp_pen_div_slider .axpc_checkbox label {\n    font-size: 11px;\n}\n\n/* スポイトのRGBA表示用 */\n#axp_pen_div_spuitColorRGBA {\n    line-height: 1.3em;\n}\n\n/* スライダー領域 */\n#axp_pen_div_slider {\n    margin-top: 8px;\n    display: flex;\n    flex-flow: column;\n}\n\n.axpc_pen_settingsStack {\n    gap: 3px;\n}\n\n.axpc_pen_settingsStack .axpc_range {\n    overflow: hidden;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"] {\n    height: var(--axp-h-compact-range);\n    border-width: 2px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-track {\n    height: var(--axp-h-compact-range);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md) !important;\n}\n\n.axpc_pen_settingsStack .axpc_range_label {\n    font-size: 11px;\n    line-height: 12px;\n    padding-top: 1px;\n}\n\n.axpc_pen_settingsStack .axpc_range_value {\n    font-size: 13px;\n    padding-top: 11px;\n}\n\n/* セレクトボックス */\n#axp_pen_div_selectbox {\n    margin-top: 8px;\n}\n\n#axp_pen_select_drawMode,\n#axp_pen_select_fillMode {\n    width: 100px;\n    height: 24px;\n    border-radius: 5px;\n}\n\n/* ペンツール右側（機能ボタン）外枠 */\n#axp_pen_div_rightSide {\n    margin-left: 0;\n    display: flex;\n    flex-direction: column;\n    gap: var(--axp-sp-2);\n}\n\n/* 各ボタンの枠 */\n#axp_pen_div_rightSide>div {\n    position: relative;\n}\n\n/* ペンツール内のアイコン（メイン＆サブ） */\n#axp_pen_div_rightSide>div>button,\n#axp_penmode button {\n    width: var(--axp-h-icon-btn);\n    height: var(--axp-h-icon-btn);\n    border-radius: var(--axp-r-md);\n    border: 3px solid #000;\n    box-shadow: 0px 0px 10px #000;\n    cursor: pointer;\n    background-repeat: no-repeat;\n    background-position: 2px 2px;\n    background-color: #aaa;\n}\n\n/* ホバーしたアイコンに枠をつける */\n#axp_pen_div_rightSide>div>button:hover,\n#axp_penmode button:hover {\n    background-color: #aaa;\n    border: 3px solid #fff;\n}\n\n/* 選択しているアイコンに色をつける */\n#axp_pen_div_rightSide>div>button[data-selected=\"true\"] {\n    background-color: var(--axp-accent);\n}\n\n/* サブメニューがあることを示す表示効果 */\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    content: \"\";\n    position: absolute;\n    top: 6px;\n    left: -9px;\n    height: 16px;\n    border-width: 8px 7px 8px 0;\n    border-color: transparent #eeac60;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {\n    content: \"\";\n    position: absolute;\n    top: 18px;\n    left: -8px;\n    height: 0px;\n    border-width: 4px 4px 4px 0;\n    border-color: transparent #000;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    border-color: transparent #533C21;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n/* サブメニュー用外枠 */\n#axp_penmode {\n    touch-action: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n/* サブメニュー用内枠 */\n#axp_penmode>div {\n    -webkit-user-select: none;\n    user-select: none;\n    font-size: 15px;\n    border-radius: 8px;\n    color: #fff;\n    background: rgba(0, 0, 0, .8);\n    padding-left: 8px;\n}\n\n.axpc_penmode_round {\n    background-image: url('../../resource/pen1.png');\n}\n\n.axpc_penmode_square {\n    background-image: url('../../resource/pen2.png');\n}\n\n.axpc_penmode_dot {\n    background-image: url('../../resource/dot.png');\n}\n\n.axpc_penmode_fude {\n    background-image: url('../../resource/fude.png');\n}\n\n.axpc_penmode_crayon {\n    background-image: url('../../resource/crayon.png');\n}\n\n.axpc_penmode_brush {\n    background-image: url('../../resource/brush.png');\n}\n\n.axpc_penmode_diffusion {\n    background-image: url('../../resource/bokasi.png');\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_marker {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 3l4 4-9 9-5 1 1-5z\"/><path d=\"M3 21h6\"/></svg>');\n}\n\n.axpc_penmode_curve {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18c4 0 4-12 9-12s5 12 9 12\"/></svg>');\n}\n\n.axpc_penmode_hatching {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20L14 4M9 20L19 4M-1 14L7 2\"/></svg>');\n}\n\n.axpc_penmode_sketch {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18l4-9 3 6 3-11 3 9 3-4 2 6\"/></svg>');\n}\n\n.axpc_penmode_texturebrush {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"4\" cy=\"5\" r=\"1\"/><circle cx=\"10\" cy=\"4\" r=\"1\"/><circle cx=\"16\" cy=\"6\" r=\"1\"/><circle cx=\"20\" cy=\"4\" r=\"1\"/><circle cx=\"6\" cy=\"11\" r=\"1\"/><circle cx=\"13\" cy=\"10\" r=\"1\"/><circle cx=\"19\" cy=\"11\" r=\"1\"/><circle cx=\"3\" cy=\"16\" r=\"1\"/><circle cx=\"9\" cy=\"17\" r=\"1\"/><circle cx=\"15\" cy=\"16\" r=\"1\"/><circle cx=\"21\" cy=\"17\" r=\"1\"/><circle cx=\"6\" cy=\"21\" r=\"1\"/><circle cx=\"12\" cy=\"20\" r=\"1\"/><circle cx=\"18\" cy=\"21\" r=\"1\"/></svg>');\n}\n\n.axpc_penmode_smoothpen {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M3 20c2-6 4-14 6-14 1.5 0 1 4 3 4s2-6 4-4c1.5 1.4 1 8 3 8 1 0 1.5-1 2-2l1 1c-1 2-2 3.5-4 3.5-2.5 0-2-6-3.5-6-1.2 0-1.5 4-3.5 4-2 0-1.5-6-3-6-1 0-2 6-3.5 11z\"/></svg>');\n}\n\n.axpc_penmode_eraser_round {\n    background-image: url('../../resource/eraser.png');\n}\n\n.axpc_penmode_eraser_dot {\n    background-image: url('../../resource/eraser_dot.png');\n}\n\n.axpc_penmode_fill {\n    background-image: url('../../resource/fill.png');\n}\n\n.axpc_penmode_fillgradation {\n    background-image: url('../../resource/fillgradation.png');\n}\n\n.axpc_penmode_hand {\n    background-image: url('../../resource/hand.png');\n}\n\n.axpc_penmode_move {\n    background-image: url('../../resource/move.png');\n}\n\n.axpc_penmode_nagenawa {\n    background-image: url('../../resource/nagenawa.png');\n}\n\n.axpc_penmode_liquify {\n    background-image: url('../../resource/overlay/rotate.svg');\n}\n\n#axp_pen_div_liquifyMode {\n    display: grid;\n    gap: var(--axp-sp-1);\n    box-sizing: border-box;\n    overflow: hidden;\n    margin-top: 3px;\n    padding: 4px;\n    border: 1px solid var(--axp-border-soft);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-surface-panel);\n}\n\n#axp_pen_div_liquifyMode label {\n    font-size: 10px;\n    line-height: 12px;\n}\n\n#axp_pen_select_liquifyMode {\n    box-sizing: border-box;\n    width: 100%;\n    min-width: 0;\n    max-width: 100%;\n    height: 22px;\n    font-size: 10px;\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_magicwand {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20L15 9\"/><path d=\"M15 9l2 2\"/><path d=\"M13 4v2M13 10v2M9 6h2M15 6h2\"/><path d=\"M20 14v2M20 20v2M18 18h2M22 18h2\"/></svg>');\n}\n\n.axpc_penmode_polygonselect {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8l8-5 8 5-3 11H7z\" stroke-dasharray=\"3,2.5\"/><circle cx=\"4\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"12\" cy=\"3\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"20\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"17\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"7\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/></svg>');\n}\n\n.axpc_penmode_spuit {\n    background-image: url('../../resource/spuit.png');\n}\n\n/* 混色ペンのプリセットボタン */\n#axp_pen_div_diffusionPreset {\n    display: flex;\n    flex-flow: column;\n    gap: 2px;\n    margin-top: 4px;\n}\n\n.axpc_pen_diffpreset {\n    width: 100%;\n    height: 18px;\n    font-size: 13px;\n    line-height: 1;\n    padding: 0 4px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    text-align: center;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.axpc_pen_diffpreset:active {\n    background: #333;\n}\n\n/* 反映中 (現在値が格納値と一致) の明示 */\n.axpc_pen_diffpreset[data-active=\"true\"] {\n    background: #000;\n    color: #fff;\n    border-color: #000;\n}\n\n/* 混色ペンの詳細設定開閉ボタン */\n#axp_pen_button_diffusionDetail {\n    width: 100%;\n    min-height: var(--axp-h-compact-btn);\n    font-size: 12px;\n    line-height: 1;\n    padding: 0 6px;\n    margin-top: 4px;\n    border: 1px solid var(--axp-accent-border);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-accent-soft);\n    color: var(--axp-accent);\n    cursor: pointer;\n    text-align: left;\n}\n\n.axpc_pen_panelToggle:hover {\n    border-color: var(--axp-accent);\n    background: rgba(238, 172, 96, 0.24);\n}\n\n#axp_pen_button_diffusionDetail:focus-visible,\n#axp_pen_select_liquifyMode:focus-visible,\n#axp_pen_button_deselect:focus-visible {\n    outline: 2px solid var(--axp-border-focus);\n    outline-offset: 1px;\n}\n\n/* 階調バケツ：多ストップグラデーション編集UI */\n#axp_pen_div_gradientStops {\n    margin-top: 4px;\n    display: flex;\n    flex-flow: column;\n    gap: 4px;\n}\n\n#axp_pen_div_gradientPreview {\n    width: 100%;\n    height: 20px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: repeating-conic-gradient(#666 0% 25%, #444 0% 50%) 50% / 8px 8px;\n}\n\n#axp_pen_div_gradientStopList {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 2px;\n    min-height: 18px;\n}\n\n.axpc_gradient_stopSwatch {\n    width: 18px;\n    height: 18px;\n    padding: 0;\n    border: 1px solid #888;\n    border-radius: 3px;\n    cursor: pointer;\n}\n\n.axpc_gradient_stopSwatch[data-selected=\"true\"] {\n    border: 2px solid #fff;\n}\n\n#axp_pen_div_gradientStopControls {\n    display: flex;\n    gap: 2px;\n    align-items: center;\n}\n\n#axp_pen_number_gradientStopPosition {\n    width: 40px;\n}\n\n#axp_pen_div_gradientStopControls button {\n    flex: 1;\n    font-size: 11px;\n    line-height: 1;\n    padding: 3px 2px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_div_gradientStopControls button:active {\n    background: #333;\n}\n\n#axp_pen_div_gradientStopControls button:disabled {\n    opacity: 0.4;\n    cursor: default;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17010,8 +17085,14 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
     width: 300px;
 }
 
+.axpc_tool_shell {
+    display: flex;
+    gap: var(--axp-sp-3);
+}
+
 #axp_tool_div_content {
     display: flex;
+    gap: var(--axp-sp-3);
 }
 
 /* 補助ツール左側 */
@@ -17021,6 +17102,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
+}
+
+.axpc_tool_controlDeck {
+    gap: 2px;
 }
 
 /* キャンバスサイズ表示ラベル */
@@ -17062,14 +17147,24 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
 }
 
 /* 補助ツール右側 */
-#axp_tool_div_rightSide {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    flex-direction: row;
-    gap: 0px 6px;
+.axpc_tool_actionGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 4px;
     margin-top: 2px;
-    margin-left: 4px;
+    margin-left: 0;
+    min-width: 146px;
+}
+
+#axp_tool_div_rightSide {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 4px;
+    margin-top: 2px;
+    margin-left: 0;
+    min-width: 146px;
 }
 
 /* 100% */
@@ -17133,6 +17228,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
     gap: 2px;
     width: 132px;
     margin: 2px 4px 4px 0;
+    padding: 3px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: var(--axp-r-lg);
+    background: var(--axp-surface-panel);
     font-size: 11px;
     box-sizing: border-box;
 }
@@ -17145,8 +17244,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
     width: 100%;
     min-height: 26px;
     padding: 3px 5px;
-    border: 1px solid #666;
-    border-radius: 5px;
+    border: 1px solid var(--axp-border-soft);
+    border-radius: var(--axp-r-md);
     color: inherit;
     background: rgba(255, 255, 255, .08);
     line-height: 1.1;
@@ -17190,7 +17289,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
     box-sizing: border-box;
     margin-left: 5px;
     padding-left: 7px;
-    border-left: 2px solid #666;
+    border-left: 2px solid var(--axp-accent-border);
 }
 
 .axp_tool_disclosurePanel[hidden] {
@@ -17202,9 +17301,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
     gap: 2px;
     box-sizing: border-box;
     padding: 3px;
-    border: 1px solid #555;
-    border-radius: 5px;
-    background: rgba(20, 20, 20, .35);
+    border: 1px solid var(--axp-border-soft);
+    border-radius: var(--axp-r-md);
+    background: var(--axp-surface-panel-strong);
 }
 
 #axp_tool_div_referenceDetails[hidden] {
@@ -17293,7 +17392,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
 
 .axp_tool_disclosure button:focus-visible,
 #axp_tool_div_referenceDetails input:focus-visible {
-    outline: 2px solid #8bd3ff;
+    outline: 2px solid var(--axp-border-focus);
     outline-offset: 1px;
 }
 
@@ -17347,7 +17446,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
 #axp_tool_button_flipV,
 #axp_tool_button_transparent,
 #axp_tool_div_gridbutton {
-    width: 70px;
+    width: 100%;
 }
 
 /* 補助線ボタン枠 */
@@ -17357,14 +17456,15 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
 
 /* 補助線 */
 #axp_tool_button_grid {
-    width: 50px;
+    flex: 1;
+    min-width: 0;
 }
 
 /* 補助線設定（歯車アイコン） */
 #axp_tool_button_gridConfig {
     isolation: isolate;
     height: 100%;
-    width: 20px;
+    width: 24px;
     background-image: url(${___CSS_LOADER_URL_REPLACEMENT_0___});
     background-position: 0% 50%;
     background-repeat: no-repeat;
@@ -17419,7 +17519,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 補助ツール */
 #axp_gridconfig_range_gridColor {
     width: 100% !important;
 }
-`, "",{"version":3,"sources":["webpack://./src/css/window_tool.css"],"names":[],"mappings":"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","sourcesContent":["/* 補助ツール */\n\n#axp_tool {\n    width: 300px;\n}\n\n#axp_tool_div_content {\n    display: flex;\n}\n\n/* 補助ツール左側 */\n#axp_tool_div_leftSide {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    align-items: flex-start;\n    align-content: flex-start;\n}\n\n/* キャンバスサイズ表示ラベル */\n#axp_tool_div_canvasSize {\n    text-align: center;\n}\n\n/* キャンバスサイズ文字 */\n#axp_tool_span_canvasSize {\n    font-size: 13px;\n}\n\n/* サムネイル表示の外枠 */\n#axp_tool_div_minimap_outer {\n    cursor: grab;\n    position: relative;\n    width: 132px;\n    height: 132px;\n    margin-right: 4px;\n    margin-top: 2px;\n    margin-bottom: 4px;\n    border: 6px solid #888;\n}\n\n/* サムネイル表示の内枠 */\n#axp_tool_div_minimap_inner {\n    width: 120px;\n    height: 120px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: #777;\n}\n\n/* キャンバスが画面をはみ出た時に、サムネイルに表示する赤線 */\n#axp_tool_div_minimap_line {\n    position: absolute;\n    border: 2px #f00 solid;\n}\n\n/* 補助ツール右側 */\n#axp_tool_div_rightSide {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: flex-start;\n    flex-direction: row;\n    gap: 0px 6px;\n    margin-top: 2px;\n    margin-left: 4px;\n}\n\n/* 100% */\n#axp_tool_button_loupeReset {\n    width: 62px;\n    margin: 0 5px 0 1px;\n}\n\n/* 拡大縮小（＋－） */\n#axp_tool_button_loupeUp,\n#axp_tool_button_loupeDown {\n    width: 30px;\n    margin-right: 4px;\n}\n\n/* 復元 */\n#axp_tool_button_restore {\n    width: 100%\n}\n\n/* キャンバスサイズ・プリセット */\n#axp_tool_div_canvasSizePreset {\n    display: flex;\n    gap: 3px;\n    margin: 2px 0 4px;\n}\n\n.axpc_tool_sizePreset {\n    flex: 1;\n    min-width: 0;\n    padding: 3px 0;\n    font-size: 11px;\n}\n\n/* この環境の上限を超えるプリセットの無効表示（ダブルクリック編集は可能） */\n.axpc_tool_sizePreset.axpc_tool_sizePreset_disabled {\n    opacity: 0.4;\n}\n\n/* 背景色トグル（肌色/白） */\n#axp_tool_div_bgColor {\n    display: flex;\n    align-items: center;\n    gap: 6px;\n    margin: 2px 0 4px;\n}\n\n#axp_tool_span_bgColorLabel {\n    font-size: 12px;\n}\n\n#axp_tool_toggle_bgColor::after {\n    content: attr(data-label);\n}\n\n/* 書出し・共有 / 参照画像 disclosure */\n.axp_tool_disclosure {\n    --axp-interop-compact-h: 22px;\n    display: flex;\n    flex-direction: column;\n    gap: 2px;\n    width: 132px;\n    margin: 2px 4px 4px 0;\n    font-size: 11px;\n    box-sizing: border-box;\n}\n\n.axp_tool_disclosureToggle {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    box-sizing: border-box;\n    width: 100%;\n    min-height: 26px;\n    padding: 3px 5px;\n    border: 1px solid #666;\n    border-radius: 5px;\n    color: inherit;\n    background: rgba(255, 255, 255, .08);\n    line-height: 1.1;\n    text-align: left;\n    cursor: pointer;\n}\n\n.axp_tool_disclosureToggle::before {\n    content: \"▸\";\n    display: inline-block;\n    flex: 0 0 auto;\n    transform-origin: 50% 50%;\n    transition: transform .12s ease;\n}\n\n.axp_tool_disclosureToggle[aria-expanded=\"true\"]::before {\n    transform: rotate(90deg);\n}\n\n#axp_tool_button_timelapse,\n#axp_tool_button_clipboardCopy,\n#axp_tool_button_psdExport,\n#axp_tool_button_referenceLoad,\n#axp_tool_button_referenceRemove {\n    box-sizing: border-box;\n    width: 100%;\n    min-height: 24px;\n    line-height: 1.1;\n    padding-right: 3px;\n    padding-left: 3px;\n}\n\n#axp_tool_button_timelapse[data-recording=\"true\"]::before {\n    content: \"● \";\n}\n\n.axp_tool_disclosurePanel {\n    display: flex;\n    flex-direction: column;\n    gap: 2px;\n    box-sizing: border-box;\n    margin-left: 5px;\n    padding-left: 7px;\n    border-left: 2px solid #666;\n}\n\n.axp_tool_disclosurePanel[hidden] {\n    display: none;\n}\n\n#axp_tool_div_referenceDetails {\n    display: grid;\n    gap: 2px;\n    box-sizing: border-box;\n    padding: 3px;\n    border: 1px solid #555;\n    border-radius: 5px;\n    background: rgba(20, 20, 20, .35);\n}\n\n#axp_tool_div_referenceDetails[hidden] {\n    display: none;\n}\n\n#axp_tool_file_reference {\n    display: none;\n}\n\n#axp_tool_div_referenceDetails label {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 3px;\n    box-sizing: border-box;\n    min-width: 0;\n    height: var(--axp-interop-compact-h);\n    font-size: 10.5px;\n    white-space: nowrap;\n}\n\n.axp_tool_referenceInline {\n    display: grid;\n    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);\n    gap: 2px;\n    align-items: center;\n}\n\n#axp_tool_div_referenceToggles label {\n    justify-content: flex-start;\n}\n\n#axp_tool_div_referenceToggles input[type=\"checkbox\"] {\n    margin: 0 2px 0 0;\n}\n\n#axp_tool_div_referencePosition label {\n    gap: 1px;\n    font-size: 10px;\n}\n\n#axp_tool_div_referenceDetails input[type=\"number\"] {\n    width: 32px;\n    height: 20px;\n    box-sizing: border-box;\n    padding: 0 1px;\n    font-size: 10px;\n}\n\n#axp_tool_div_referenceDetails .axpc_range {\n    box-sizing: border-box;\n    flex: 0 0 72px;\n    width: 72px;\n    height: 18px;\n    overflow: hidden;\n    border-radius: 5px;\n}\n\n#axp_tool_div_referenceDetails .axpc_range input[type=\"range\"] {\n    width: 72px;\n    height: 18px;\n    border: 2px solid #444;\n    border-radius: 5px;\n}\n\n#axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n    width: 18px;\n    height: 18px;\n    border: 3px solid #777;\n    border-radius: 5px;\n    box-shadow: -72px 0 0 72px #777;\n}\n\n#axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-moz-range-track {\n    height: 18px;\n}\n\n#axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-moz-range-thumb {\n    width: 18px;\n    height: 18px;\n    border: 3px solid #777;\n    border-radius: 5px !important;\n    box-shadow: -72px 0 0 72px #777;\n}\n\n.axp_tool_disclosure button:focus-visible,\n#axp_tool_div_referenceDetails input:focus-visible {\n    outline: 2px solid #8bd3ff;\n    outline-offset: 1px;\n}\n\n@media (pointer: coarse) {\n    .axp_tool_disclosure {\n        gap: 6px;\n    }\n\n    .axp_tool_disclosureToggle,\n    #axp_tool_button_timelapse,\n    #axp_tool_button_clipboardCopy,\n    #axp_tool_button_psdExport,\n    #axp_tool_button_referenceLoad,\n    #axp_tool_button_referenceRemove {\n        min-height: 44px;\n    }\n\n    #axp_tool_div_referenceDetails label {\n        min-height: 44px;\n    }\n\n    #axp_tool_div_referenceDetails input[type=\"checkbox\"] {\n        min-width: 24px;\n        min-height: 24px;\n    }\n\n    #axp_tool_div_referenceDetails label {\n        height: auto;\n    }\n\n    #axp_tool_div_referenceDetails .axpc_range,\n    #axp_tool_div_referenceDetails .axpc_range input[type=\"range\"] {\n        height: 28px;\n    }\n\n    #axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n        width: 28px;\n        height: 28px;\n    }\n\n    #axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-moz-range-thumb {\n        width: 28px;\n        height: 28px;\n    }\n}\n\n/* セーブ ロード 左右反転 上下反転 背景透過 補助線の枠 */\n#axp_tool_button_save,\n#axp_tool_button_load,\n#axp_tool_button_flipH,\n#axp_tool_button_flipV,\n#axp_tool_button_transparent,\n#axp_tool_div_gridbutton {\n    width: 70px;\n}\n\n/* 補助線ボタン枠 */\n#axp_tool_div_gridbutton {\n    display: flex;\n}\n\n/* 補助線 */\n#axp_tool_button_grid {\n    width: 50px;\n}\n\n/* 補助線設定（歯車アイコン） */\n#axp_tool_button_gridConfig {\n    isolation: isolate;\n    height: 100%;\n    width: 20px;\n    background-image: url('../../resource/config.png');\n    background-position: 0% 50%;\n    background-repeat: no-repeat;\n}\n\n/* 補助線設定UI */\n#axp_tool_div_gridConfig {\n    padding: 4px 0;\n}\n\n#axp_tool_div_gridConfig>div {\n    display: flex;\n    column-gap: 8px;\n}\n\n/* 右側のスライダーコンテナ */\n#axp_tool_div_gridConfig>div>div:nth-of-type(2) {\n    display: flex;\n    padding-top: 4px;\n}\n\n/* 補助線：表示ボタンなど用コンテナ */\n.axpc_tool_div_gridConfigButton {\n    display: flex;\n    border: 2px solid #555;\n    border-radius: 8px;\n    column-gap: 8px;\n    margin-bottom: 2px;\n}\n\n/* 主線などのラベル */\n.axpc_tool_div_gridConfigButton>div:nth-of-type(1) {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: #666;\n    width: 50px;\n}\n\n/* px指定テキストボックス */\n#axp_tool_number_gridPixel1,\n#axp_tool_number_gridPixel2 {\n    border-radius: 5px;\n    width: 60px;\n    height: 32px;\n    font-family: \"Arial Black\", Arial, sans-serif;\n    padding-left: 2px;\n}\n\n/* 補助線の色変更サブメニュー */\n/* 不透明度 */\n#axp_gridconfig_range_gridColor {\n    width: 100% !important;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/css/window_tool.css"],"names":[],"mappings":"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","sourcesContent":["/* 補助ツール */\n\n#axp_tool {\n    width: 300px;\n}\n\n.axpc_tool_shell {\n    display: flex;\n    gap: var(--axp-sp-3);\n}\n\n#axp_tool_div_content {\n    display: flex;\n    gap: var(--axp-sp-3);\n}\n\n/* 補助ツール左側 */\n#axp_tool_div_leftSide {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    align-items: flex-start;\n    align-content: flex-start;\n}\n\n.axpc_tool_controlDeck {\n    gap: 2px;\n}\n\n/* キャンバスサイズ表示ラベル */\n#axp_tool_div_canvasSize {\n    text-align: center;\n}\n\n/* キャンバスサイズ文字 */\n#axp_tool_span_canvasSize {\n    font-size: 13px;\n}\n\n/* サムネイル表示の外枠 */\n#axp_tool_div_minimap_outer {\n    cursor: grab;\n    position: relative;\n    width: 132px;\n    height: 132px;\n    margin-right: 4px;\n    margin-top: 2px;\n    margin-bottom: 4px;\n    border: 6px solid #888;\n}\n\n/* サムネイル表示の内枠 */\n#axp_tool_div_minimap_inner {\n    width: 120px;\n    height: 120px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: #777;\n}\n\n/* キャンバスが画面をはみ出た時に、サムネイルに表示する赤線 */\n#axp_tool_div_minimap_line {\n    position: absolute;\n    border: 2px #f00 solid;\n}\n\n/* 補助ツール右側 */\n.axpc_tool_actionGrid {\n    display: grid;\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    align-content: start;\n    gap: 4px;\n    margin-top: 2px;\n    margin-left: 0;\n    min-width: 146px;\n}\n\n#axp_tool_div_rightSide {\n    display: grid;\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    align-content: start;\n    gap: 4px;\n    margin-top: 2px;\n    margin-left: 0;\n    min-width: 146px;\n}\n\n/* 100% */\n#axp_tool_button_loupeReset {\n    width: 62px;\n    margin: 0 5px 0 1px;\n}\n\n/* 拡大縮小（＋－） */\n#axp_tool_button_loupeUp,\n#axp_tool_button_loupeDown {\n    width: 30px;\n    margin-right: 4px;\n}\n\n/* 復元 */\n#axp_tool_button_restore {\n    width: 100%\n}\n\n/* キャンバスサイズ・プリセット */\n#axp_tool_div_canvasSizePreset {\n    display: flex;\n    gap: 3px;\n    margin: 2px 0 4px;\n}\n\n.axpc_tool_sizePreset {\n    flex: 1;\n    min-width: 0;\n    padding: 3px 0;\n    font-size: 11px;\n}\n\n/* この環境の上限を超えるプリセットの無効表示（ダブルクリック編集は可能） */\n.axpc_tool_sizePreset.axpc_tool_sizePreset_disabled {\n    opacity: 0.4;\n}\n\n/* 背景色トグル（肌色/白） */\n#axp_tool_div_bgColor {\n    display: flex;\n    align-items: center;\n    gap: 6px;\n    margin: 2px 0 4px;\n}\n\n#axp_tool_span_bgColorLabel {\n    font-size: 12px;\n}\n\n#axp_tool_toggle_bgColor::after {\n    content: attr(data-label);\n}\n\n/* 書出し・共有 / 参照画像 disclosure */\n.axp_tool_disclosure {\n    --axp-interop-compact-h: 22px;\n    display: flex;\n    flex-direction: column;\n    gap: 2px;\n    width: 132px;\n    margin: 2px 4px 4px 0;\n    padding: 3px;\n    border: 1px solid rgba(255, 255, 255, .08);\n    border-radius: var(--axp-r-lg);\n    background: var(--axp-surface-panel);\n    font-size: 11px;\n    box-sizing: border-box;\n}\n\n.axp_tool_disclosureToggle {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    box-sizing: border-box;\n    width: 100%;\n    min-height: 26px;\n    padding: 3px 5px;\n    border: 1px solid var(--axp-border-soft);\n    border-radius: var(--axp-r-md);\n    color: inherit;\n    background: rgba(255, 255, 255, .08);\n    line-height: 1.1;\n    text-align: left;\n    cursor: pointer;\n}\n\n.axp_tool_disclosureToggle::before {\n    content: \"▸\";\n    display: inline-block;\n    flex: 0 0 auto;\n    transform-origin: 50% 50%;\n    transition: transform .12s ease;\n}\n\n.axp_tool_disclosureToggle[aria-expanded=\"true\"]::before {\n    transform: rotate(90deg);\n}\n\n#axp_tool_button_timelapse,\n#axp_tool_button_clipboardCopy,\n#axp_tool_button_psdExport,\n#axp_tool_button_referenceLoad,\n#axp_tool_button_referenceRemove {\n    box-sizing: border-box;\n    width: 100%;\n    min-height: 24px;\n    line-height: 1.1;\n    padding-right: 3px;\n    padding-left: 3px;\n}\n\n#axp_tool_button_timelapse[data-recording=\"true\"]::before {\n    content: \"● \";\n}\n\n.axp_tool_disclosurePanel {\n    display: flex;\n    flex-direction: column;\n    gap: 2px;\n    box-sizing: border-box;\n    margin-left: 5px;\n    padding-left: 7px;\n    border-left: 2px solid var(--axp-accent-border);\n}\n\n.axp_tool_disclosurePanel[hidden] {\n    display: none;\n}\n\n#axp_tool_div_referenceDetails {\n    display: grid;\n    gap: 2px;\n    box-sizing: border-box;\n    padding: 3px;\n    border: 1px solid var(--axp-border-soft);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-surface-panel-strong);\n}\n\n#axp_tool_div_referenceDetails[hidden] {\n    display: none;\n}\n\n#axp_tool_file_reference {\n    display: none;\n}\n\n#axp_tool_div_referenceDetails label {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 3px;\n    box-sizing: border-box;\n    min-width: 0;\n    height: var(--axp-interop-compact-h);\n    font-size: 10.5px;\n    white-space: nowrap;\n}\n\n.axp_tool_referenceInline {\n    display: grid;\n    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);\n    gap: 2px;\n    align-items: center;\n}\n\n#axp_tool_div_referenceToggles label {\n    justify-content: flex-start;\n}\n\n#axp_tool_div_referenceToggles input[type=\"checkbox\"] {\n    margin: 0 2px 0 0;\n}\n\n#axp_tool_div_referencePosition label {\n    gap: 1px;\n    font-size: 10px;\n}\n\n#axp_tool_div_referenceDetails input[type=\"number\"] {\n    width: 32px;\n    height: 20px;\n    box-sizing: border-box;\n    padding: 0 1px;\n    font-size: 10px;\n}\n\n#axp_tool_div_referenceDetails .axpc_range {\n    box-sizing: border-box;\n    flex: 0 0 72px;\n    width: 72px;\n    height: 18px;\n    overflow: hidden;\n    border-radius: 5px;\n}\n\n#axp_tool_div_referenceDetails .axpc_range input[type=\"range\"] {\n    width: 72px;\n    height: 18px;\n    border: 2px solid #444;\n    border-radius: 5px;\n}\n\n#axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n    width: 18px;\n    height: 18px;\n    border: 3px solid #777;\n    border-radius: 5px;\n    box-shadow: -72px 0 0 72px #777;\n}\n\n#axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-moz-range-track {\n    height: 18px;\n}\n\n#axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-moz-range-thumb {\n    width: 18px;\n    height: 18px;\n    border: 3px solid #777;\n    border-radius: 5px !important;\n    box-shadow: -72px 0 0 72px #777;\n}\n\n.axp_tool_disclosure button:focus-visible,\n#axp_tool_div_referenceDetails input:focus-visible {\n    outline: 2px solid var(--axp-border-focus);\n    outline-offset: 1px;\n}\n\n@media (pointer: coarse) {\n    .axp_tool_disclosure {\n        gap: 6px;\n    }\n\n    .axp_tool_disclosureToggle,\n    #axp_tool_button_timelapse,\n    #axp_tool_button_clipboardCopy,\n    #axp_tool_button_psdExport,\n    #axp_tool_button_referenceLoad,\n    #axp_tool_button_referenceRemove {\n        min-height: 44px;\n    }\n\n    #axp_tool_div_referenceDetails label {\n        min-height: 44px;\n    }\n\n    #axp_tool_div_referenceDetails input[type=\"checkbox\"] {\n        min-width: 24px;\n        min-height: 24px;\n    }\n\n    #axp_tool_div_referenceDetails label {\n        height: auto;\n    }\n\n    #axp_tool_div_referenceDetails .axpc_range,\n    #axp_tool_div_referenceDetails .axpc_range input[type=\"range\"] {\n        height: 28px;\n    }\n\n    #axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n        width: 28px;\n        height: 28px;\n    }\n\n    #axp_tool_div_referenceDetails .axpc_range input[type=\"range\"]::-moz-range-thumb {\n        width: 28px;\n        height: 28px;\n    }\n}\n\n/* セーブ ロード 左右反転 上下反転 背景透過 補助線の枠 */\n#axp_tool_button_save,\n#axp_tool_button_load,\n#axp_tool_button_flipH,\n#axp_tool_button_flipV,\n#axp_tool_button_transparent,\n#axp_tool_div_gridbutton {\n    width: 100%;\n}\n\n/* 補助線ボタン枠 */\n#axp_tool_div_gridbutton {\n    display: flex;\n}\n\n/* 補助線 */\n#axp_tool_button_grid {\n    flex: 1;\n    min-width: 0;\n}\n\n/* 補助線設定（歯車アイコン） */\n#axp_tool_button_gridConfig {\n    isolation: isolate;\n    height: 100%;\n    width: 24px;\n    background-image: url('../../resource/config.png');\n    background-position: 0% 50%;\n    background-repeat: no-repeat;\n}\n\n/* 補助線設定UI */\n#axp_tool_div_gridConfig {\n    padding: 4px 0;\n}\n\n#axp_tool_div_gridConfig>div {\n    display: flex;\n    column-gap: 8px;\n}\n\n/* 右側のスライダーコンテナ */\n#axp_tool_div_gridConfig>div>div:nth-of-type(2) {\n    display: flex;\n    padding-top: 4px;\n}\n\n/* 補助線：表示ボタンなど用コンテナ */\n.axpc_tool_div_gridConfigButton {\n    display: flex;\n    border: 2px solid #555;\n    border-radius: 8px;\n    column-gap: 8px;\n    margin-bottom: 2px;\n}\n\n/* 主線などのラベル */\n.axpc_tool_div_gridConfigButton>div:nth-of-type(1) {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: #666;\n    width: 50px;\n}\n\n/* px指定テキストボックス */\n#axp_tool_number_gridPixel1,\n#axp_tool_number_gridPixel2 {\n    border-radius: 5px;\n    width: 60px;\n    height: 32px;\n    font-family: \"Arial Black\", Arial, sans-serif;\n    padding-left: 2px;\n}\n\n/* 補助線の色変更サブメニュー */\n/* 不透明度 */\n#axp_gridconfig_range_gridColor {\n    width: 100% !important;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24611,15 +24711,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_alert_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./alert.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/alert.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -24663,15 +24763,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_axnospaint_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./axnospaint.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/axnospaint.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -24715,15 +24815,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_common_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./common.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/common.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -24767,15 +24867,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_config_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./config.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/config.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -24819,15 +24919,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_icon_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./icon.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/icon.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -24871,15 +24971,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_button_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_button.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_button.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -24923,15 +25023,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_checkbox_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_checkbox.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_checkbox.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -24975,15 +25075,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_number_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_number.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_number.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25027,15 +25127,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_radio_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_radio.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_radio.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25079,15 +25179,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_range_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_range.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_range.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25131,15 +25231,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_toggle_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_toggle.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_toggle.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25183,15 +25283,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_post_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./post.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/post.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25235,15 +25335,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_referenceimage_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./referenceimage.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/referenceimage.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25287,15 +25387,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_reinvented_color_wheel_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./reinvented-color-wheel.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/reinvented-color-wheel.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25339,15 +25439,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_saveload_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./saveload.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/saveload.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25363,6 +25463,58 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_saveload_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_saveload_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_saveload_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
+/***/ "./src/css/tokens.css":
+/*!****************************!*\
+  !*** ./src/css/tokens.css ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_tokens_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./tokens.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/tokens.css");
+
+
+
+
+
+
+
+
+
+
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_tokens_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_tokens_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_tokens_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_tokens_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
@@ -25391,15 +25543,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25443,15 +25595,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_custom_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_custom.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_custom.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25495,15 +25647,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_filter_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_filter.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_filter.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25547,15 +25699,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_launcher_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_launcher.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_launcher.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25599,15 +25751,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_layer_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_layer.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_layer.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25651,15 +25803,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_makecolor_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_makecolor.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_makecolor.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25703,15 +25855,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_palette_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_palette.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_palette.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25755,15 +25907,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_pen_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_pen.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_pen.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -25807,15 +25959,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_tool_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_tool.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_tool.css");
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
 
 var options = {};
 
@@ -26768,7 +26920,7 @@ module.exports = "<!-- パレット -->\n<div class=\"axpc_window_content\">\n  
   \*********************************/
 /***/ ((module) => {
 
-module.exports = "<!-- ペンツール -->\n<div class=\"axpc_window_content\">\n    <div id=\"axp_pen_div_content\">\n        <!-- ペンツール左側 -->\n        <div id=\"axp_pen_div_leftSide\">\n            <span id=\"axp_pen_span_penName\" class=\"axpc_MSG\" data-msg=\"@PEN0001\"></span>\n            <!-- 選択範囲の状態表示（選択中のみ、現在のペン種別に関わらず表示） -->\n            <div id=\"axp_pen_div_selectionStatus\" class=\"axpc_NONE axpc_text_border\">\n                <span>${_(\"@PEN.SELECTION_ACTIVE\")} <span id=\"axp_pen_span_selectionCount\">0</span>px</span>\n                <button id=\"axp_pen_button_deselect\" class=\"axpc_FUNC\" data-function=\"func_deselect\"\n                    data-msg=\"@PEN0018\">${_(\"@PEN.DESELECT\")}</button>\n            </div>\n            <!-- プレビュー領域 -->\n            <div id=\"axp_pen_div_preview\" class=\"axpc_MSG\" data-msg=\"@PEN0200\">\n                <canvas id=\"axp_pen_canvas_previewPenSize\"></canvas>\n                <canvas id=\"axp_pen_canvas_previewSpuit\"></canvas>\n            </div>\n            <!-- 太さクイックボタン -->\n            <div id=\"axp_pen_div_quickSize\" class=\"axpc_text_border\">\n                <button class=\"axpc_pen_quicksize\" data-qidx=\"0\" data-size=\"2\"></button>\n                <button class=\"axpc_pen_quicksize\" data-qidx=\"1\" data-size=\"4\"></button>\n                <button class=\"axpc_pen_quicksize\" data-qidx=\"2\" data-size=\"10\"></button>\n            </div>\n            <!-- スライダー領域 -->\n            <div id=\"axp_pen_div_slider\">\n                <!-- ペンの不透明度 -->\n                <form id=\"axp_pen_form_alpha\" class=\"axpc_range axpc_text_border\"\n                    oninput=\"result.value=parseInt(volume.value)\">\n                    <input type=\"range\" id=\"axp_pen_range_alpha\" name=\"volume\" min=\"5\" max=\"100\" value=\"100\" step=\"5\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0002\">\n                    <div class=\"axpc_range_label\">${_(\"@COMMON.OPACITY\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 消し率（消しゴム専用） -->\n                <form id=\"axp_pen_form_eraseRate\" oninput=\"result.value=[2,5,10,20,50,100][parseInt(volume.value)]\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_eraseRate\" name=\"volume\" min=\"0\" max=\"5\" value=\"5\" step=\"1\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.ERASE_RATE\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\">100</output></div>\n                </form>\n                <!-- ペンの太さ -->\n                <form id=\"axp_pen_form_penSize\" class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_penSize\" name=\"volume\" min=\"1\" max=\"100\" value=\"1\" step=\"1\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0003\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.SIZE\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <div id=\"axp_pen_div_liquifyMode\" class=\"axpc_text_border axpc_NONE\">\n                    <label for=\"axp_pen_select_liquifyMode\">${_(\"@LIQUIFY.MODE\")}</label>\n                    <select id=\"axp_pen_select_liquifyMode\">\n                        <option value=\"push\">${_(\"@LIQUIFY.PUSH\")}</option>\n                        <option value=\"expand\">${_(\"@LIQUIFY.EXPAND\")}</option>\n                        <option value=\"pinch\">${_(\"@LIQUIFY.PINCH\")}</option>\n                        <option value=\"push-left\">${_(\"@LIQUIFY.PUSH_LEFT\")}</option>\n                        <option value=\"push-right\">${_(\"@LIQUIFY.PUSH_RIGHT\")}</option>\n                        <option value=\"twirl-clockwise\">${_(\"@LIQUIFY.TWIRL_CLOCKWISE\")}</option>\n                        <option value=\"twirl-anticlockwise\">${_(\"@LIQUIFY.TWIRL_ANTICLOCKWISE\")}</option>\n                    </select>\n                </div>\n                <form id=\"axp_pen_form_liquifyStrength\" class=\"axpc_range axpc_text_border axpc_NONE\"\n                    oninput=\"result.value=parseInt(volume.value)\">\n                    <input type=\"range\" id=\"axp_pen_range_liquifyStrength\" name=\"volume\"\n                        value=\"50\" step=\"1\" min=\"1\" max=\"100\" data-msg=\"@PEN0023\" class=\"axpc_MSG\"\n                        aria-label=\"${_(\"@LIQUIFY.STRENGTH\")}\">\n                    <div class=\"axpc_range_label\">${_(\"@LIQUIFY.STRENGTH\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\">50</output></div>\n                </form>\n                <form id=\"axp_pen_form_liquifyHardness\" class=\"axpc_range axpc_text_border axpc_NONE\"\n                    oninput=\"result.value=parseInt(volume.value)\">\n                    <input type=\"range\" id=\"axp_pen_range_liquifyHardness\" name=\"volume\"\n                        value=\"50\" step=\"1\" min=\"0\" max=\"100\" data-msg=\"@PEN0024\" class=\"axpc_MSG\"\n                        aria-label=\"${_(\"@LIQUIFY.HARDNESS\")}\">\n                    <div class=\"axpc_range_label\">${_(\"@LIQUIFY.HARDNESS\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\">50</output></div>\n                </form>\n                <!-- バケツの境界補正 -->\n                <form id=\"axp_pen_form_fillThreshold\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_fillThreshold\" name=\"volume\" value=\"0\" step=\"1\" min=\"0\"\n                        max=\"5\" class=\"axpc_MSG\" data-msg=\"@PEN0004\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.GROW_FILL_AREA\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- バケツの色許容誤差 -->\n                <form id=\"axp_pen_form_fillColorTolerance\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_fillColorTolerance\" name=\"volume\" value=\"0\" step=\"1\" min=\"0\"\n                        max=\"100\" class=\"axpc_MSG\" data-msg=\"@PEN0016\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.COLOR_TOLERANCE\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- バケツのグラデーション角度 -->\n                <form id=\"axp_pen_form_fillGradationDeg\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_fillGradationDeg\" name=\"volume\" value=\"0\" step=\"15\" min=\"0\"\n                        max=\"360\" class=\"axpc_MSG\" data-msg=\"@PEN0005\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.ANGLE\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- クレヨンの丸み -->\n                <form id=\"axp_pen_form_radius\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_radius\" name=\"volume\" value=\"50\" step=\"1\" min=\"0\" max=\"50\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0010\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.ROUNDNESS\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 混色ペンのプリセット -->\n                <div id=\"axp_pen_div_diffusionPreset\">\n                    <button type=\"button\" class=\"axpc_pen_diffpreset axpc_MSG\" data-pidx=\"0\"\n                        data-msg=\"@PEN0014\"></button>\n                    <button type=\"button\" class=\"axpc_pen_diffpreset axpc_MSG\" data-pidx=\"1\"\n                        data-msg=\"@PEN0014\"></button>\n                    <button type=\"button\" class=\"axpc_pen_diffpreset axpc_MSG\" data-pidx=\"2\"\n                        data-msg=\"@PEN0014\"></button>\n                </div>\n                <!-- 混色ペンの詳細設定開閉 -->\n                <button type=\"button\" id=\"axp_pen_button_diffusionDetail\" class=\"axpc_MSG\"\n                    data-msg=\"@PEN0015\"></button>\n                <!-- 混色ペンの硬さ -->\n                <form id=\"axp_pen_form_hardness\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_hardness\" name=\"volume\" value=\"70\" step=\"1\" min=\"0\" max=\"100\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0011\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.HARDNESS\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 混色ペンの広がり -->\n                <form id=\"axp_pen_form_diffusion\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_diffusion\" name=\"volume\" value=\"80\" step=\"1\" min=\"0\"\n                        max=\"100\" class=\"axpc_MSG\" data-msg=\"@PEN0012\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.DIFFUSION_STRENGTH\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 混色ペンの引きずり -->\n                <form id=\"axp_pen_form_drag\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_drag\" name=\"volume\" value=\"0\" step=\"1\" min=\"0\" max=\"100\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0013\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.DRAG\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- ぼかし度（オプション） -->\n                <form id=\"axp_pen_form_blur\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_blur\" name=\"volume\" value=\"0\" step=\"1\" min=\"0\" max=\"5\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0009\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.BLUR\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- トーン濃度（オプション） -->\n                <form id=\"axp_pen_form_toneLevel\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_toneLevel\" name=\"volume\" value=\"16\" step=\"1\" min=\"1\" max=\"16\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0006\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.TONE_DENSITY\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 手ぶれ補正（オプション） -->\n                <form id=\"axp_pen_form_stabilizer\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_stabilizer\" name=\"volume\" value=\"2\" step=\"1\" min=\"0\" max=\"10\"\n                        class=\"axpc_MSG\" data-msg=\"@CFG0040\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.STABILIZER\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 筆圧 ON/OFF（オプション、ペン別） -->\n                <div id=\"axp_pen_form_usePressure\" class=\"axpc_checkbox axpc_text_border\">\n                    <label>\n                        <input type=\"checkbox\" id=\"axp_pen_checkbox_usePressure\" checked>${_(\"@PEN.USE_PRESSURE\")}\n                    </label>\n                </div>\n                <!-- 極細時に半透明化（オプション、ペン別） -->\n                <div id=\"axp_pen_form_useSubPxAlpha\" class=\"axpc_checkbox axpc_text_border\">\n                    <label>\n                        <input type=\"checkbox\" id=\"axp_pen_checkbox_useSubPxAlpha\" checked>${_(\"@PEN.USE_SUBPX_ALPHA\")}\n                    </label>\n                </div>\n                <!-- 階調バケツ：多ストップグラデーション編集（専用UI） -->\n                <div id=\"axp_pen_div_gradientStops\" class=\"axpc_NONE\">\n                    <div id=\"axp_pen_div_gradientPreview\"></div>\n                    <div id=\"axp_pen_div_gradientStopList\"></div>\n                    <div id=\"axp_pen_div_gradientStopControls\">\n                        <input type=\"number\" id=\"axp_pen_number_gradientStopPosition\" min=\"0\" max=\"100\" value=\"0\"\n                            class=\"axpc_MSG\" data-msg=\"@PEN0021\">\n                        <button type=\"button\" id=\"axp_pen_button_gradientAddStop\" class=\"axpc_MSG\"\n                            data-msg=\"@PEN0019\">${_(\"@PEN.GRADIENT_ADD_STOP\")}</button>\n                        <button type=\"button\" id=\"axp_pen_button_gradientRemoveStop\" class=\"axpc_MSG\"\n                            data-msg=\"@PEN0020\">${_(\"@PEN.GRADIENT_REMOVE_STOP\")}</button>\n                        <button type=\"button\" id=\"axp_pen_button_gradientSetColor\" class=\"axpc_MSG\"\n                            data-msg=\"@PEN0022\">${_(\"@PEN.GRADIENT_SET_COLOR\")}</button>\n                    </div>\n                </div>\n            </div>\n\n            <div id=\"axp_pen_div_spuitColorRGBA\">\n                <div>${_(\"@COMMON.RED\")}:<span id=\"axp_pen_span_spuitColorRed\">-</span></div>\n                <div>${_(\"@COMMON.GREEN\")}:<span id=\"axp_pen_span_spuitColorGreen\">-</span></div>\n                <div>${_(\"@COMMON.BLUE\")}:<span id=\"axp_pen_span_spuitColorBlue\">-</span></div>\n                <div>${_(\"@COMMON.ALPHA\")}:<span id=\"axp_pen_span_spuitColorAlpha\">-</span></div>\n            </div>\n\n            <div id=\"axp_pen_div_selectbox\">\n                <select id=\"axp_pen_select_drawMode\" class=\"axpc_MSG\" data-msg=\"@PEN0007\">\n                    <option value=\"option_normal\">${_(\"@PEN.OPTION_FREE_HAND\")}</option>\n                    <option value=\"option_line\">${_(\"@PEN.OPTION_STRAIGHT\")}</option>\n                    <option value=\"option_rectangle\">${_(\"@PEN.OPTION_RECT\")}</option>\n                    <option value=\"option_circle\">${_(\"@PEN.OPTION_CIRCLE\")}</option>\n                </select>\n                <select id=\"axp_pen_select_fillMode\" class=\"axpc_MSG axpc_NONE\" data-msg=\"@PEN0008\">\n                    <option value=\"option_all\">${_(\"@PEN.OPTION_FILL_SAMPLE_ALL\")}</option>\n                    <option value=\"option_layer\">${_(\"@PEN.OPTION_FILL_SAMPLE_CURRENT\")}</option>\n                </select>\n                <select id=\"axp_pen_select_selectionMode\" class=\"axpc_MSG axpc_NONE\" data-msg=\"@PEN0017\">\n                    <option value=\"option_replace\">${_(\"@PEN.OPTION_SELECTION_REPLACE\")}</option>\n                    <option value=\"option_add\">${_(\"@PEN.OPTION_SELECTION_ADD\")}</option>\n                    <option value=\"option_subtract\">${_(\"@PEN.OPTION_SELECTION_SUBTRACT\")}</option>\n                    <option value=\"option_intersect\">${_(\"@PEN.OPTION_SELECTION_INTERSECT\")}</option>\n                </select>\n            </div>\n\n        </div>\n        <!-- ペンツール右側 -->\n        <div id=\"axp_pen_div_rightSide\">\n            <div>\n                <button data-idx=\"0\" id=\"axp_pen_button_penBase\" class=\"axpc_FUNC\" data-function=\"func_switch_pen\"\n                    data-selected=\"true\" data-msg=\"@PEN0050\"></button>\n            </div>\n            <div>\n                <button data-idx=\"1\" id=\"axp_pen_button_eraserBase\" class=\"axpc_FUNC\" data-function=\"func_switch_eraser\"\n                    data-msg=\"@PEN0051\"></button>\n            </div>\n            <div>\n                <button data-idx=\"2\" id=\"axp_pen_button_fillBase\" class=\"axpc_FUNC\" data-function=\"func_switch_fill\"\n                    data-msg=\"@PEN0052\"></button>\n            </div>\n            <div>\n                <button data-idx=\"3\" id=\"axp_pen_button_handBase\" class=\"axpc_FUNC\" data-function=\"func_switch_hand\"\n                    data-msg=\"@PEN0053\"></button>\n            </div>\n            <div>\n                <button data-idx=\"4\" id=\"axp_pen_button_spuitBase\" class=\"axpc_FUNC\" data-function=\"func_switch_spuit\"\n                    data-msg=\"@PEN0054\"></button>\n            </div>\n        </div>\n    </div>\n</div>\n";
+module.exports = "<!-- ペンツール -->\n<div class=\"axpc_window_content\">\n    <div id=\"axp_pen_div_content\">\n        <!-- ペンツール左側 -->\n        <div id=\"axp_pen_div_leftSide\">\n            <span id=\"axp_pen_span_penName\" class=\"axpc_MSG\" data-msg=\"@PEN0001\"></span>\n            <!-- 選択範囲の状態表示（選択中のみ、現在のペン種別に関わらず表示） -->\n            <div id=\"axp_pen_div_selectionStatus\" class=\"axpc_NONE axpc_text_border\">\n                <span>${_(\"@PEN.SELECTION_ACTIVE\")} <span id=\"axp_pen_span_selectionCount\">0</span>px</span>\n                <button id=\"axp_pen_button_deselect\" class=\"axpc_FUNC\" data-function=\"func_deselect\"\n                    data-msg=\"@PEN0018\">${_(\"@PEN.DESELECT\")}</button>\n            </div>\n            <!-- プレビュー領域 -->\n            <div id=\"axp_pen_div_preview\" class=\"axpc_MSG\" data-msg=\"@PEN0200\">\n                <canvas id=\"axp_pen_canvas_previewPenSize\"></canvas>\n                <canvas id=\"axp_pen_canvas_previewSpuit\"></canvas>\n            </div>\n            <!-- スライダー領域 -->\n            <div id=\"axp_pen_div_slider\" class=\"axpc_pen_settingsStack\">\n                <!-- ペンの不透明度 -->\n                <form id=\"axp_pen_form_alpha\" class=\"axpc_range axpc_text_border\"\n                    oninput=\"result.value=parseInt(volume.value)\">\n                    <input type=\"range\" id=\"axp_pen_range_alpha\" name=\"volume\" min=\"5\" max=\"100\" value=\"100\" step=\"5\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0002\">\n                    <div class=\"axpc_range_label\">${_(\"@COMMON.OPACITY\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 消し率（消しゴム専用） -->\n                <form id=\"axp_pen_form_eraseRate\" oninput=\"result.value=[2,5,10,20,50,100][parseInt(volume.value)]\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_eraseRate\" name=\"volume\" min=\"0\" max=\"5\" value=\"5\" step=\"1\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.ERASE_RATE\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\">100</output></div>\n                </form>\n                <!-- ペンの太さ -->\n                <form id=\"axp_pen_form_penSize\" class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_penSize\" name=\"volume\" min=\"1\" max=\"100\" value=\"1\" step=\"1\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0003\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.SIZE\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <div id=\"axp_pen_div_liquifyMode\" class=\"axpc_text_border axpc_pen_modeCard axpc_NONE\">\n                    <label for=\"axp_pen_select_liquifyMode\">${_(\"@LIQUIFY.MODE\")}</label>\n                    <select id=\"axp_pen_select_liquifyMode\">\n                        <option value=\"push\">${_(\"@LIQUIFY.PUSH\")}</option>\n                        <option value=\"expand\">${_(\"@LIQUIFY.EXPAND\")}</option>\n                        <option value=\"pinch\">${_(\"@LIQUIFY.PINCH\")}</option>\n                        <option value=\"push-left\">${_(\"@LIQUIFY.PUSH_LEFT\")}</option>\n                        <option value=\"push-right\">${_(\"@LIQUIFY.PUSH_RIGHT\")}</option>\n                        <option value=\"twirl-clockwise\">${_(\"@LIQUIFY.TWIRL_CLOCKWISE\")}</option>\n                        <option value=\"twirl-anticlockwise\">${_(\"@LIQUIFY.TWIRL_ANTICLOCKWISE\")}</option>\n                    </select>\n                </div>\n                <form id=\"axp_pen_form_liquifyStrength\" class=\"axpc_range axpc_text_border axpc_NONE\"\n                    oninput=\"result.value=parseInt(volume.value)\">\n                    <input type=\"range\" id=\"axp_pen_range_liquifyStrength\" name=\"volume\"\n                        value=\"50\" step=\"1\" min=\"1\" max=\"100\" data-msg=\"@PEN0023\" class=\"axpc_MSG\"\n                        aria-label=\"${_(\"@LIQUIFY.STRENGTH\")}\">\n                    <div class=\"axpc_range_label\">${_(\"@LIQUIFY.STRENGTH\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\">50</output></div>\n                </form>\n                <form id=\"axp_pen_form_liquifyHardness\" class=\"axpc_range axpc_text_border axpc_NONE\"\n                    oninput=\"result.value=parseInt(volume.value)\">\n                    <input type=\"range\" id=\"axp_pen_range_liquifyHardness\" name=\"volume\"\n                        value=\"50\" step=\"1\" min=\"0\" max=\"100\" data-msg=\"@PEN0024\" class=\"axpc_MSG\"\n                        aria-label=\"${_(\"@LIQUIFY.HARDNESS\")}\">\n                    <div class=\"axpc_range_label\">${_(\"@LIQUIFY.HARDNESS\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\">50</output></div>\n                </form>\n                <!-- バケツの境界補正 -->\n                <form id=\"axp_pen_form_fillThreshold\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_fillThreshold\" name=\"volume\" value=\"0\" step=\"1\" min=\"0\"\n                        max=\"5\" class=\"axpc_MSG\" data-msg=\"@PEN0004\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.GROW_FILL_AREA\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- バケツの色許容誤差 -->\n                <form id=\"axp_pen_form_fillColorTolerance\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_fillColorTolerance\" name=\"volume\" value=\"0\" step=\"1\" min=\"0\"\n                        max=\"100\" class=\"axpc_MSG\" data-msg=\"@PEN0016\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.COLOR_TOLERANCE\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- バケツのグラデーション角度 -->\n                <form id=\"axp_pen_form_fillGradationDeg\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_fillGradationDeg\" name=\"volume\" value=\"0\" step=\"15\" min=\"0\"\n                        max=\"360\" class=\"axpc_MSG\" data-msg=\"@PEN0005\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.ANGLE\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- クレヨンの丸み -->\n                <form id=\"axp_pen_form_radius\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_radius\" name=\"volume\" value=\"50\" step=\"1\" min=\"0\" max=\"50\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0010\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.ROUNDNESS\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 混色ペンのプリセット -->\n                <div id=\"axp_pen_div_diffusionPreset\">\n                    <button type=\"button\" class=\"axpc_pen_diffpreset axpc_MSG\" data-pidx=\"0\"\n                        data-msg=\"@PEN0014\"></button>\n                    <button type=\"button\" class=\"axpc_pen_diffpreset axpc_MSG\" data-pidx=\"1\"\n                        data-msg=\"@PEN0014\"></button>\n                    <button type=\"button\" class=\"axpc_pen_diffpreset axpc_MSG\" data-pidx=\"2\"\n                        data-msg=\"@PEN0014\"></button>\n                </div>\n                <!-- 混色ペンの詳細設定開閉 -->\n                <button type=\"button\" id=\"axp_pen_button_diffusionDetail\" class=\"axpc_MSG axpc_pen_panelToggle\"\n                    data-msg=\"@PEN0015\"></button>\n                <!-- 混色ペンの硬さ -->\n                <form id=\"axp_pen_form_hardness\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_hardness\" name=\"volume\" value=\"70\" step=\"1\" min=\"0\" max=\"100\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0011\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.HARDNESS\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 混色ペンの広がり -->\n                <form id=\"axp_pen_form_diffusion\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_diffusion\" name=\"volume\" value=\"80\" step=\"1\" min=\"0\"\n                        max=\"100\" class=\"axpc_MSG\" data-msg=\"@PEN0012\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.DIFFUSION_STRENGTH\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 混色ペンの引きずり -->\n                <form id=\"axp_pen_form_drag\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_drag\" name=\"volume\" value=\"0\" step=\"1\" min=\"0\" max=\"100\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0013\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.DRAG\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- ぼかし度（オプション） -->\n                <form id=\"axp_pen_form_blur\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_blur\" name=\"volume\" value=\"0\" step=\"1\" min=\"0\" max=\"5\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0009\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.BLUR\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- トーン濃度（オプション） -->\n                <form id=\"axp_pen_form_toneLevel\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_toneLevel\" name=\"volume\" value=\"16\" step=\"1\" min=\"1\" max=\"16\"\n                        class=\"axpc_MSG\" data-msg=\"@PEN0006\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.TONE_DENSITY\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 手ぶれ補正（オプション） -->\n                <form id=\"axp_pen_form_stabilizer\" oninput=\"result.value=parseInt(volume.value)\"\n                    class=\"axpc_range axpc_text_border\">\n                    <input type=\"range\" id=\"axp_pen_range_stabilizer\" name=\"volume\" value=\"2\" step=\"1\" min=\"0\" max=\"10\"\n                        class=\"axpc_MSG\" data-msg=\"@CFG0040\">\n                    <div class=\"axpc_range_label\">${_(\"@PEN.STABILIZER\")}</div>\n                    <div class=\"axpc_range_value\"><output name=\"result\"></output></div>\n                </form>\n                <!-- 筆圧 ON/OFF（オプション、ペン別） -->\n                <div id=\"axp_pen_form_usePressure\" class=\"axpc_checkbox axpc_text_border\">\n                    <label>\n                        <input type=\"checkbox\" id=\"axp_pen_checkbox_usePressure\" checked>${_(\"@PEN.USE_PRESSURE\")}\n                    </label>\n                </div>\n                <!-- 極細時に半透明化（オプション、ペン別） -->\n                <div id=\"axp_pen_form_useSubPxAlpha\" class=\"axpc_checkbox axpc_text_border\">\n                    <label>\n                        <input type=\"checkbox\" id=\"axp_pen_checkbox_useSubPxAlpha\" checked>${_(\"@PEN.USE_SUBPX_ALPHA\")}\n                    </label>\n                </div>\n                <!-- 階調バケツ：多ストップグラデーション編集（専用UI） -->\n                <div id=\"axp_pen_div_gradientStops\" class=\"axpc_NONE\">\n                    <div id=\"axp_pen_div_gradientPreview\"></div>\n                    <div id=\"axp_pen_div_gradientStopList\"></div>\n                    <div id=\"axp_pen_div_gradientStopControls\">\n                        <input type=\"number\" id=\"axp_pen_number_gradientStopPosition\" min=\"0\" max=\"100\" value=\"0\"\n                            class=\"axpc_MSG\" data-msg=\"@PEN0021\">\n                        <button type=\"button\" id=\"axp_pen_button_gradientAddStop\" class=\"axpc_MSG\"\n                            data-msg=\"@PEN0019\">${_(\"@PEN.GRADIENT_ADD_STOP\")}</button>\n                        <button type=\"button\" id=\"axp_pen_button_gradientRemoveStop\" class=\"axpc_MSG\"\n                            data-msg=\"@PEN0020\">${_(\"@PEN.GRADIENT_REMOVE_STOP\")}</button>\n                        <button type=\"button\" id=\"axp_pen_button_gradientSetColor\" class=\"axpc_MSG\"\n                            data-msg=\"@PEN0022\">${_(\"@PEN.GRADIENT_SET_COLOR\")}</button>\n                    </div>\n                </div>\n            </div>\n\n            <div id=\"axp_pen_div_spuitColorRGBA\">\n                <div>${_(\"@COMMON.RED\")}:<span id=\"axp_pen_span_spuitColorRed\">-</span></div>\n                <div>${_(\"@COMMON.GREEN\")}:<span id=\"axp_pen_span_spuitColorGreen\">-</span></div>\n                <div>${_(\"@COMMON.BLUE\")}:<span id=\"axp_pen_span_spuitColorBlue\">-</span></div>\n                <div>${_(\"@COMMON.ALPHA\")}:<span id=\"axp_pen_span_spuitColorAlpha\">-</span></div>\n            </div>\n\n            <div id=\"axp_pen_div_selectbox\">\n                <select id=\"axp_pen_select_drawMode\" class=\"axpc_MSG\" data-msg=\"@PEN0007\">\n                    <option value=\"option_normal\">${_(\"@PEN.OPTION_FREE_HAND\")}</option>\n                    <option value=\"option_line\">${_(\"@PEN.OPTION_STRAIGHT\")}</option>\n                    <option value=\"option_rectangle\">${_(\"@PEN.OPTION_RECT\")}</option>\n                    <option value=\"option_circle\">${_(\"@PEN.OPTION_CIRCLE\")}</option>\n                </select>\n                <select id=\"axp_pen_select_fillMode\" class=\"axpc_MSG axpc_NONE\" data-msg=\"@PEN0008\">\n                    <option value=\"option_all\">${_(\"@PEN.OPTION_FILL_SAMPLE_ALL\")}</option>\n                    <option value=\"option_layer\">${_(\"@PEN.OPTION_FILL_SAMPLE_CURRENT\")}</option>\n                </select>\n                <select id=\"axp_pen_select_selectionMode\" class=\"axpc_MSG axpc_NONE\" data-msg=\"@PEN0017\">\n                    <option value=\"option_replace\">${_(\"@PEN.OPTION_SELECTION_REPLACE\")}</option>\n                    <option value=\"option_add\">${_(\"@PEN.OPTION_SELECTION_ADD\")}</option>\n                    <option value=\"option_subtract\">${_(\"@PEN.OPTION_SELECTION_SUBTRACT\")}</option>\n                    <option value=\"option_intersect\">${_(\"@PEN.OPTION_SELECTION_INTERSECT\")}</option>\n                </select>\n            </div>\n\n        </div>\n        <!-- ペンツール右側 -->\n        <div id=\"axp_pen_div_rightSide\">\n            <div>\n                <button data-idx=\"0\" id=\"axp_pen_button_penBase\" class=\"axpc_FUNC\" data-function=\"func_switch_pen\"\n                    data-selected=\"true\" data-msg=\"@PEN0050\"></button>\n            </div>\n            <div>\n                <button data-idx=\"1\" id=\"axp_pen_button_eraserBase\" class=\"axpc_FUNC\" data-function=\"func_switch_eraser\"\n                    data-msg=\"@PEN0051\"></button>\n            </div>\n            <div>\n                <button data-idx=\"2\" id=\"axp_pen_button_fillBase\" class=\"axpc_FUNC\" data-function=\"func_switch_fill\"\n                    data-msg=\"@PEN0052\"></button>\n            </div>\n            <div>\n                <button data-idx=\"3\" id=\"axp_pen_button_handBase\" class=\"axpc_FUNC\" data-function=\"func_switch_hand\"\n                    data-msg=\"@PEN0053\"></button>\n            </div>\n            <div>\n                <button data-idx=\"4\" id=\"axp_pen_button_spuitBase\" class=\"axpc_FUNC\" data-function=\"func_switch_spuit\"\n                    data-msg=\"@PEN0054\"></button>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }),
 
@@ -26778,7 +26930,7 @@ module.exports = "<!-- ペンツール -->\n<div class=\"axpc_window_content\">\
   \**********************************/
 /***/ ((module) => {
 
-module.exports = "<!-- 補助ツール -->\n<div class=\"axpc_window_content\">\n    <!-- 補助ツールメイン -->\n    <div id=\"axp_tool_div_content\">\n        <!-- 補助ツール左側 -->\n        <div id=\"axp_tool_div_leftSide\">\n            <div id=\"axp_tool_div_canvasSize\">\n                <span id=\"axp_tool_span_canvasSize\" class=\"axpc_MSG\" data-msg=\"@AST0001\"></span>\n            </div>\n            <div id=\"axp_tool_div_canvasSizePreset\">\n                <button id=\"axp_tool_button_sizePreset0\" class=\"axpc_MSG axpc_button axpc_tool_sizePreset\"\n                    data-msg=\"@AST0016\" data-sidx=\"0\"></button>\n                <button id=\"axp_tool_button_sizePreset1\" class=\"axpc_MSG axpc_button axpc_tool_sizePreset\"\n                    data-msg=\"@AST0016\" data-sidx=\"1\"></button>\n                <button id=\"axp_tool_button_sizePreset2\" class=\"axpc_MSG axpc_button axpc_tool_sizePreset\"\n                    data-msg=\"@AST0016\" data-sidx=\"2\"></button>\n                <button id=\"axp_tool_button_sizePreset3\" class=\"axpc_MSG axpc_button axpc_tool_sizePreset\"\n                    data-msg=\"@AST0016\" data-sidx=\"3\"></button>\n            </div>\n            <div id=\"axp_tool_div_bgColor\">\n                <span id=\"axp_tool_span_bgColorLabel\">${_(\"@MISC.BG_COLOR_LABEL\")}</span>\n                <div id=\"axp_tool_toggle_bgColor\" class=\"axpc_MSG axpc_toggle_switch\" data-msg=\"@AST0017\">\n                    <input type=\"checkbox\" name=\"check\" />\n                </div>\n            </div>\n            <div id=\"axp_tool_div_interop\" class=\"axp_tool_disclosure\">\n                <button id=\"axp_tool_button_interopToggle\" type=\"button\" class=\"axpc_MSG axp_tool_disclosureToggle\"\n                    data-msg=\"@AST0200\" aria-expanded=\"false\"\n                    aria-controls=\"axp_tool_div_interopControls\">${_(\"@INTEROP.TITLE\")}</button>\n                <div id=\"axp_tool_div_interopControls\" class=\"axp_tool_disclosurePanel axpc_NONE\" hidden>\n                    <button id=\"axp_tool_button_timelapse\" type=\"button\" class=\"axpc_MSG axpc_button\"\n                        data-msg=\"@AST0203\" aria-pressed=\"false\">${_(\"@INTEROP.TIMELAPSE_START\")}</button>\n                    <button id=\"axp_tool_button_clipboardCopy\" type=\"button\" class=\"axpc_MSG axpc_button\"\n                        data-msg=\"@AST0204\">${_(\"@INTEROP.CLIPBOARD_COPY\")}</button>\n                    <button id=\"axp_tool_button_psdExport\" type=\"button\" class=\"axpc_MSG axpc_button\"\n                        data-msg=\"@AST0202\">${_(\"@INTEROP.PSD_EXPORT\")}</button>\n                </div>\n            </div>\n            <div id=\"axp_tool_div_reference\" class=\"axp_tool_disclosure\">\n                <button id=\"axp_tool_button_referenceToggle\" type=\"button\" class=\"axpc_MSG axp_tool_disclosureToggle\"\n                    data-msg=\"@AST0205\" aria-expanded=\"false\"\n                    aria-controls=\"axp_tool_div_referenceControls\">${_(\"@INTEROP.REFERENCE_TITLE\")}</button>\n                <div id=\"axp_tool_div_referenceControls\" class=\"axp_tool_disclosurePanel axpc_NONE\" hidden>\n                    <button id=\"axp_tool_button_referenceLoad\" type=\"button\" class=\"axpc_MSG axpc_button\"\n                        data-msg=\"@AST0201\">${_(\"@INTEROP.REFERENCE_LOAD\")}</button>\n                    <input id=\"axp_tool_file_reference\" type=\"file\" accept=\"image/png,image/jpeg,image/webp,.psd\">\n                    <div id=\"axp_tool_div_referenceDetails\" class=\"axpc_NONE\" hidden>\n                        <div id=\"axp_tool_div_referenceToggles\" class=\"axp_tool_referenceInline\">\n                            <label>\n                                <input type=\"checkbox\" id=\"axp_tool_checkbox_referenceEdit\">\n                                <span>${_(\"@INTEROP.REFERENCE_EDIT\")}</span>\n                            </label>\n                            <label>\n                                <input type=\"checkbox\" id=\"axp_tool_checkbox_referenceVisible\" checked>\n                                <span>${_(\"@INTEROP.REFERENCE_VISIBLE\")}</span>\n                            </label>\n                        </div>\n                        <div id=\"axp_tool_div_referencePosition\" class=\"axp_tool_referenceInline\">\n                            <label>${_(\"@INTEROP.REFERENCE_X\")}\n                                <input type=\"number\" id=\"axp_tool_number_referenceX\" step=\"1\" value=\"0\">\n                            </label>\n                            <label>${_(\"@INTEROP.REFERENCE_Y\")}\n                                <input type=\"number\" id=\"axp_tool_number_referenceY\" step=\"1\" value=\"0\">\n                            </label>\n                        </div>\n                        <label>${_(\"@INTEROP.REFERENCE_OPACITY\")}\n                            <div class=\"axpc_range\">\n                                <input type=\"range\" id=\"axp_tool_range_referenceOpacity\" min=\"5\" max=\"100\" value=\"50\">\n                            </div>\n                        </label>\n                        <label>${_(\"@INTEROP.REFERENCE_SCALE\")}\n                            <div class=\"axpc_range\">\n                                <input type=\"range\" id=\"axp_tool_range_referenceScale\" min=\"5\" max=\"400\" value=\"100\">\n                            </div>\n                        </label>\n                        <label>${_(\"@INTEROP.REFERENCE_ROTATION\")}\n                            <div class=\"axpc_range\">\n                                <input type=\"range\" id=\"axp_tool_range_referenceRotation\" min=\"-180\" max=\"180\" value=\"0\">\n                            </div>\n                        </label>\n                        <button id=\"axp_tool_button_referenceRemove\" type=\"button\"\n                            class=\"axpc_button\">${_(\"@INTEROP.REFERENCE_REMOVE\")}</button>\n                    </div>\n                </div>\n            </div>\n\n            <div id=\"axp_tool_div_minimap_outer\" class=\"axpc_MSG\" data-msg=\"@AST0002\">\n                <div id=\"axp_tool_div_minimap_line\" class=\"axpc_NONE\"></div>\n                <div id=\"axp_tool_div_minimap_inner\">\n                    <canvas id=\"axp_tool_canvas_minimap\" class=\"axpc_background_mesh\"></canvas>\n                </div>\n            </div>\n\n            <button id=\"axp_tool_button_loupeDown\" class=\"axpc_FUNC axpc_button\" data-function=\"func_loupe_down\"\n                data-msg=\"@AST0003\">-</button>\n            <button id=\"axp_tool_button_loupeReset\" class=\"axpc_FUNC axpc_button\" data-function=\"func_loupe_reset\"\n                data-msg=\"@AST0004\">100%</button>\n            <button id=\"axp_tool_button_loupeUp\" class=\"axpc_FUNC axpc_button\" data-function=\"func_loupe_up\"\n                data-msg=\"@AST0005\">+</button>\n        </div>\n        <!-- 補助ツール右側 -->\n        <div id=\"axp_tool_div_rightSide\">\n            <button id=\"axp_tool_button_restore\" class=\"axpc_FUNC axpc_button\" data-function=\"func_restore\"\n                data-msg=\"@AST0008\">${_(\"@MISC.BUTTON_RESTORE_AUTOSAVE\")}</button>\n\n            <button id=\"axp_tool_button_save\" class=\"axpc_FUNC axpc_button\" data-function=\"func_save\"\n                data-msg=\"@AST0009\">${_(\"@MISC.BUTTON_SAVE\")}</button>\n            <button id=\"axp_tool_button_load\" class=\"axpc_FUNC axpc_button\" data-function=\"func_load\"\n                data-msg=\"@AST0010\">${_(\"@MISC.BUTTON_LOAD\")}</button>\n\n            <button id=\"axp_tool_button_flipH\" class=\"axpc_FUNC axpc_button\" data-function=\"func_flip_h\"\n                data-msg=\"@AST0011\">${_(\"@MISC.BUTTON_FLIP_H\")}</button>\n            <button id=\"axp_tool_button_flipV\" class=\"axpc_FUNC axpc_button\" data-function=\"func_flip_v\"\n                data-msg=\"@AST0012\">${_(\"@MISC.BUTTON_FLIP_V\")}</button>\n\n            <button id=\"axp_tool_button_transparent\" class=\"axpc_FUNC axpc_button\" data-function=\"func_transparent\"\n                data-msg=\"@AST0013\">${_(\"@MISC.BUTTON_BG_ALPHA\")}</button>\n            <div id=\"axp_tool_div_gridbutton\">\n                <button id=\"axp_tool_button_grid\" class=\"axpc_FUNC axpc_button\" data-function=\"func_grid\"\n                    data-msg=\"@AST0014\">${_(\"@MISC.BUTTON_GRID\")}</button>\n                <button id=\"axp_tool_button_gridConfig\" class=\"axpc_MSG axpc_button\" data-msg=\"@AST0015\"></button>\n            </div>\n        </div>\n    </div>\n    <!-- 補助線設定サブメニュー -->\n    <div id=\"axp_tool_div_gridConfig\" class=\"axpc_NONE\">\n        <!-- 主線副線斜め -->\n        <div>\n            <!-- 左側のボタン -->\n            <div>\n                <!-- 主線 -->\n                <div class=\"axpc_tool_div_gridConfigButton\">\n                    <div>\n                        <div>${_(\"@GRID.MAIN\")}</div>\n                    </div>\n                    <div id=\"axp_tool_checkbox_gridVH\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                        data-msg=\"@AST0103\">\n                        <input type=\"checkbox\" name=\"check\" checked />\n                    </div>\n                    <div id=\"axp_tool_color_gridVH\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                        data-msg=\"@AST0104\" style=\"background-color: #000000\" data-colorcode=\"#00000066\"></div>\n                </div>\n                <!-- 副線 -->\n                <div class=\"axpc_tool_div_gridConfigButton\">\n                    <div>\n                        <div>${_(\"@GRID.SUB\")}</div>\n                    </div>\n                    <div id=\"axp_tool_checkbox_gridSubDivision\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                        data-msg=\"@AST0105\">\n                        <input type=\"checkbox\" name=\"check\" checked />\n                    </div>\n                    <div id=\"axp_tool_color_gridSubDivision\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                        data-msg=\"@AST0106\" style=\"background-color: #000000\" data-colorcode=\"#00000026\"></div>\n                </div>\n                <!-- 斜め -->\n                <div class=\"axpc_tool_div_gridConfigButton\">\n                    <div>\n                        <div>${_(\"@GRID.DIAG\")}</div>\n                    </div>\n                    <div id=\"axp_tool_checkbox_gridDiagonal\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                        data-msg=\"@AST0107\">\n                        <input type=\"checkbox\" name=\"check\" />\n                    </div>\n                    <div id=\"axp_tool_color_gridDiagonal\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                        data-msg=\"@AST0108\" style=\"background-color: #ff0000\" data-colorcode=\"#ff000066\"></div>\n                </div>\n            </div>\n            <!-- 右側のスライダー -->\n            <div>\n                <!-- 分割数スライダー ※縦横連動のためaxpc_SAVE対象外 -->\n                <div>\n                    <form id=\"axp_tool_form_gridH\" class=\"axpc_range axpc_text_border\"\n                        oninput=\"result.value=parseInt(volume.value)\">\n                        <input type=\"range\" id=\"axp_tool_range_gridH\" name=\"volume\" min=\"2\" max=\"16\" value=\"6\"\n                            class=\"axpc_MSG\" data-msg=\"@AST0100\">\n                        <div class=\"axpc_range_label\">${_(\"@GRID.DIVISIONS_H\")}</div>\n                        <div class=\"axpc_range_value\"><output name=\"result\">6</output></div>\n                    </form>\n                    <form id=\"axp_tool_form_gridV\" class=\"axpc_range axpc_text_border\"\n                        oninput=\"result.value=parseInt(volume.value)\">\n                        <input type=\"range\" id=\"axp_tool_range_gridV\" name=\"volume\" min=\"2\" max=\"16\" value=\"6\"\n                            class=\"axpc_MSG\" data-msg=\"@AST0101\">\n                        <div class=\"axpc_range_label\">${_(\"@GRID.DIVISIONS_V\")}</div>\n                        <div class=\"axpc_range_value\"><output name=\"result\">6</output></div>\n                    </form>\n                    <div class=\"axpc_checkbox axpc_MSG\" data-msg=\"@AST0102\">\n                        <label>\n                            <input id=\"axp_tool_checkbox_gridVHLink\" class=\"axpc_SAVE\" type=\"checkbox\"\n                                checked>${_(\"@GRID.CONSTRAIN\")}\n                        </label>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- ピクセル単位指定１ -->\n        <div class=\"axpc_tool_div_gridConfigButton\">\n            <div>\n                <div>px(1)</div>\n            </div>\n            <div id=\"axp_tool_checkbox_gridPixel1\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                data-msg=\"@AST0109\">\n                <input type=\"checkbox\" name=\"check\" />\n            </div>\n            <div id=\"axp_tool_color_gridPixel1\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                data-msg=\"@AST0110\" style=\"background-color: #0000ff\" data-colorcode=\"#0000ff66\">\n            </div>\n            <div>\n                <input type=\"number\" id=\"axp_tool_number_gridPixel1\" class=\"axpc_MSG\" data-msg=\"@AST0111\" min=\"1\"\n                    max=\"100\" value=\"10\" maxlength=\"3\">\n                <span>px</span>\n            </div>\n        </div>\n        <!-- ピクセル単位指定２ -->\n        <div class=\"axpc_tool_div_gridConfigButton\">\n            <div>\n                <div>px(2)</div>\n            </div>\n            <div id=\"axp_tool_checkbox_gridPixel2\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                data-msg=\"@AST0112\">\n                <input type=\"checkbox\" name=\"check\" />\n            </div>\n            <div id=\"axp_tool_color_gridPixel2\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                data-msg=\"@AST0113\" style=\"background-color: #0000ff\" data-colorcode=\"#0000ff26\">\n            </div>\n            <div>\n                <input type=\"number\" id=\"axp_tool_number_gridPixel2\" class=\"axpc_MSG\" data-msg=\"@AST0114\" min=\"1\"\n                    max=\"100\" value=\"1\" maxlength=\"3\">\n                <span>px</span>\n            </div>\n        </div>\n    </div>\n</div>\n";
+module.exports = "<!-- 補助ツール -->\n<div class=\"axpc_window_content\">\n    <!-- 補助ツールメイン -->\n    <div id=\"axp_tool_div_content\" class=\"axpc_tool_shell\">\n        <!-- 補助ツール左側 -->\n        <div id=\"axp_tool_div_leftSide\" class=\"axpc_tool_controlDeck\">\n            <div id=\"axp_tool_div_canvasSize\">\n                <span id=\"axp_tool_span_canvasSize\" class=\"axpc_MSG\" data-msg=\"@AST0001\"></span>\n            </div>\n            <div id=\"axp_tool_div_canvasSizePreset\">\n                <button id=\"axp_tool_button_sizePreset0\" class=\"axpc_MSG axpc_button axpc_tool_sizePreset\"\n                    data-msg=\"@AST0016\" data-sidx=\"0\"></button>\n                <button id=\"axp_tool_button_sizePreset1\" class=\"axpc_MSG axpc_button axpc_tool_sizePreset\"\n                    data-msg=\"@AST0016\" data-sidx=\"1\"></button>\n                <button id=\"axp_tool_button_sizePreset2\" class=\"axpc_MSG axpc_button axpc_tool_sizePreset\"\n                    data-msg=\"@AST0016\" data-sidx=\"2\"></button>\n                <button id=\"axp_tool_button_sizePreset3\" class=\"axpc_MSG axpc_button axpc_tool_sizePreset\"\n                    data-msg=\"@AST0016\" data-sidx=\"3\"></button>\n            </div>\n            <div id=\"axp_tool_div_bgColor\">\n                <span id=\"axp_tool_span_bgColorLabel\">${_(\"@MISC.BG_COLOR_LABEL\")}</span>\n                <div id=\"axp_tool_toggle_bgColor\" class=\"axpc_MSG axpc_toggle_switch\" data-msg=\"@AST0017\">\n                    <input type=\"checkbox\" name=\"check\" />\n                </div>\n            </div>\n            <div id=\"axp_tool_div_interop\" class=\"axp_tool_disclosure\">\n                <button id=\"axp_tool_button_interopToggle\" type=\"button\" class=\"axpc_MSG axp_tool_disclosureToggle\"\n                    data-msg=\"@AST0200\" aria-expanded=\"false\"\n                    aria-controls=\"axp_tool_div_interopControls\">${_(\"@INTEROP.TITLE\")}</button>\n                <div id=\"axp_tool_div_interopControls\" class=\"axp_tool_disclosurePanel axpc_NONE\" hidden>\n                    <button id=\"axp_tool_button_timelapse\" type=\"button\" class=\"axpc_MSG axpc_button\"\n                        data-msg=\"@AST0203\" aria-pressed=\"false\">${_(\"@INTEROP.TIMELAPSE_START\")}</button>\n                    <button id=\"axp_tool_button_clipboardCopy\" type=\"button\" class=\"axpc_MSG axpc_button\"\n                        data-msg=\"@AST0204\">${_(\"@INTEROP.CLIPBOARD_COPY\")}</button>\n                    <button id=\"axp_tool_button_psdExport\" type=\"button\" class=\"axpc_MSG axpc_button\"\n                        data-msg=\"@AST0202\">${_(\"@INTEROP.PSD_EXPORT\")}</button>\n                </div>\n            </div>\n            <div id=\"axp_tool_div_reference\" class=\"axp_tool_disclosure\">\n                <button id=\"axp_tool_button_referenceToggle\" type=\"button\" class=\"axpc_MSG axp_tool_disclosureToggle\"\n                    data-msg=\"@AST0205\" aria-expanded=\"false\"\n                    aria-controls=\"axp_tool_div_referenceControls\">${_(\"@INTEROP.REFERENCE_TITLE\")}</button>\n                <div id=\"axp_tool_div_referenceControls\" class=\"axp_tool_disclosurePanel axpc_NONE\" hidden>\n                    <button id=\"axp_tool_button_referenceLoad\" type=\"button\" class=\"axpc_MSG axpc_button\"\n                        data-msg=\"@AST0201\">${_(\"@INTEROP.REFERENCE_LOAD\")}</button>\n                    <input id=\"axp_tool_file_reference\" type=\"file\" accept=\"image/png,image/jpeg,image/webp,.psd\">\n                    <div id=\"axp_tool_div_referenceDetails\" class=\"axpc_NONE\" hidden>\n                        <div id=\"axp_tool_div_referenceToggles\" class=\"axp_tool_referenceInline\">\n                            <label>\n                                <input type=\"checkbox\" id=\"axp_tool_checkbox_referenceEdit\">\n                                <span>${_(\"@INTEROP.REFERENCE_EDIT\")}</span>\n                            </label>\n                            <label>\n                                <input type=\"checkbox\" id=\"axp_tool_checkbox_referenceVisible\" checked>\n                                <span>${_(\"@INTEROP.REFERENCE_VISIBLE\")}</span>\n                            </label>\n                        </div>\n                        <div id=\"axp_tool_div_referencePosition\" class=\"axp_tool_referenceInline\">\n                            <label>${_(\"@INTEROP.REFERENCE_X\")}\n                                <input type=\"number\" id=\"axp_tool_number_referenceX\" step=\"1\" value=\"0\">\n                            </label>\n                            <label>${_(\"@INTEROP.REFERENCE_Y\")}\n                                <input type=\"number\" id=\"axp_tool_number_referenceY\" step=\"1\" value=\"0\">\n                            </label>\n                        </div>\n                        <label>${_(\"@INTEROP.REFERENCE_OPACITY\")}\n                            <div class=\"axpc_range\">\n                                <input type=\"range\" id=\"axp_tool_range_referenceOpacity\" min=\"5\" max=\"100\" value=\"50\">\n                            </div>\n                        </label>\n                        <label>${_(\"@INTEROP.REFERENCE_SCALE\")}\n                            <div class=\"axpc_range\">\n                                <input type=\"range\" id=\"axp_tool_range_referenceScale\" min=\"5\" max=\"400\" value=\"100\">\n                            </div>\n                        </label>\n                        <label>${_(\"@INTEROP.REFERENCE_ROTATION\")}\n                            <div class=\"axpc_range\">\n                                <input type=\"range\" id=\"axp_tool_range_referenceRotation\" min=\"-180\" max=\"180\" value=\"0\">\n                            </div>\n                        </label>\n                        <button id=\"axp_tool_button_referenceRemove\" type=\"button\"\n                            class=\"axpc_button\">${_(\"@INTEROP.REFERENCE_REMOVE\")}</button>\n                    </div>\n                </div>\n            </div>\n\n            <div id=\"axp_tool_div_minimap_outer\" class=\"axpc_MSG\" data-msg=\"@AST0002\">\n                <div id=\"axp_tool_div_minimap_line\" class=\"axpc_NONE\"></div>\n                <div id=\"axp_tool_div_minimap_inner\">\n                    <canvas id=\"axp_tool_canvas_minimap\" class=\"axpc_background_mesh\"></canvas>\n                </div>\n            </div>\n\n            <button id=\"axp_tool_button_loupeDown\" class=\"axpc_FUNC axpc_button\" data-function=\"func_loupe_down\"\n                data-msg=\"@AST0003\">-</button>\n            <button id=\"axp_tool_button_loupeReset\" class=\"axpc_FUNC axpc_button\" data-function=\"func_loupe_reset\"\n                data-msg=\"@AST0004\">100%</button>\n            <button id=\"axp_tool_button_loupeUp\" class=\"axpc_FUNC axpc_button\" data-function=\"func_loupe_up\"\n                data-msg=\"@AST0005\">+</button>\n        </div>\n        <!-- 補助ツール右側 -->\n        <div id=\"axp_tool_div_rightSide\" class=\"axpc_tool_actionGrid\">\n            <button id=\"axp_tool_button_restore\" class=\"axpc_FUNC axpc_button\" data-function=\"func_restore\"\n                data-msg=\"@AST0008\">${_(\"@MISC.BUTTON_RESTORE_AUTOSAVE\")}</button>\n\n            <button id=\"axp_tool_button_save\" class=\"axpc_FUNC axpc_button\" data-function=\"func_save\"\n                data-msg=\"@AST0009\">${_(\"@MISC.BUTTON_SAVE\")}</button>\n            <button id=\"axp_tool_button_load\" class=\"axpc_FUNC axpc_button\" data-function=\"func_load\"\n                data-msg=\"@AST0010\">${_(\"@MISC.BUTTON_LOAD\")}</button>\n\n            <button id=\"axp_tool_button_flipH\" class=\"axpc_FUNC axpc_button\" data-function=\"func_flip_h\"\n                data-msg=\"@AST0011\">${_(\"@MISC.BUTTON_FLIP_H\")}</button>\n            <button id=\"axp_tool_button_flipV\" class=\"axpc_FUNC axpc_button\" data-function=\"func_flip_v\"\n                data-msg=\"@AST0012\">${_(\"@MISC.BUTTON_FLIP_V\")}</button>\n\n            <button id=\"axp_tool_button_transparent\" class=\"axpc_FUNC axpc_button\" data-function=\"func_transparent\"\n                data-msg=\"@AST0013\">${_(\"@MISC.BUTTON_BG_ALPHA\")}</button>\n            <div id=\"axp_tool_div_gridbutton\">\n                <button id=\"axp_tool_button_grid\" class=\"axpc_FUNC axpc_button\" data-function=\"func_grid\"\n                    data-msg=\"@AST0014\">${_(\"@MISC.BUTTON_GRID\")}</button>\n                <button id=\"axp_tool_button_gridConfig\" class=\"axpc_MSG axpc_button\" data-msg=\"@AST0015\"></button>\n            </div>\n        </div>\n    </div>\n    <!-- 補助線設定サブメニュー -->\n    <div id=\"axp_tool_div_gridConfig\" class=\"axpc_NONE\">\n        <!-- 主線副線斜め -->\n        <div>\n            <!-- 左側のボタン -->\n            <div>\n                <!-- 主線 -->\n                <div class=\"axpc_tool_div_gridConfigButton\">\n                    <div>\n                        <div>${_(\"@GRID.MAIN\")}</div>\n                    </div>\n                    <div id=\"axp_tool_checkbox_gridVH\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                        data-msg=\"@AST0103\">\n                        <input type=\"checkbox\" name=\"check\" checked />\n                    </div>\n                    <div id=\"axp_tool_color_gridVH\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                        data-msg=\"@AST0104\" style=\"background-color: #000000\" data-colorcode=\"#00000066\"></div>\n                </div>\n                <!-- 副線 -->\n                <div class=\"axpc_tool_div_gridConfigButton\">\n                    <div>\n                        <div>${_(\"@GRID.SUB\")}</div>\n                    </div>\n                    <div id=\"axp_tool_checkbox_gridSubDivision\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                        data-msg=\"@AST0105\">\n                        <input type=\"checkbox\" name=\"check\" checked />\n                    </div>\n                    <div id=\"axp_tool_color_gridSubDivision\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                        data-msg=\"@AST0106\" style=\"background-color: #000000\" data-colorcode=\"#00000026\"></div>\n                </div>\n                <!-- 斜め -->\n                <div class=\"axpc_tool_div_gridConfigButton\">\n                    <div>\n                        <div>${_(\"@GRID.DIAG\")}</div>\n                    </div>\n                    <div id=\"axp_tool_checkbox_gridDiagonal\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                        data-msg=\"@AST0107\">\n                        <input type=\"checkbox\" name=\"check\" />\n                    </div>\n                    <div id=\"axp_tool_color_gridDiagonal\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                        data-msg=\"@AST0108\" style=\"background-color: #ff0000\" data-colorcode=\"#ff000066\"></div>\n                </div>\n            </div>\n            <!-- 右側のスライダー -->\n            <div>\n                <!-- 分割数スライダー ※縦横連動のためaxpc_SAVE対象外 -->\n                <div>\n                    <form id=\"axp_tool_form_gridH\" class=\"axpc_range axpc_text_border\"\n                        oninput=\"result.value=parseInt(volume.value)\">\n                        <input type=\"range\" id=\"axp_tool_range_gridH\" name=\"volume\" min=\"2\" max=\"16\" value=\"6\"\n                            class=\"axpc_MSG\" data-msg=\"@AST0100\">\n                        <div class=\"axpc_range_label\">${_(\"@GRID.DIVISIONS_H\")}</div>\n                        <div class=\"axpc_range_value\"><output name=\"result\">6</output></div>\n                    </form>\n                    <form id=\"axp_tool_form_gridV\" class=\"axpc_range axpc_text_border\"\n                        oninput=\"result.value=parseInt(volume.value)\">\n                        <input type=\"range\" id=\"axp_tool_range_gridV\" name=\"volume\" min=\"2\" max=\"16\" value=\"6\"\n                            class=\"axpc_MSG\" data-msg=\"@AST0101\">\n                        <div class=\"axpc_range_label\">${_(\"@GRID.DIVISIONS_V\")}</div>\n                        <div class=\"axpc_range_value\"><output name=\"result\">6</output></div>\n                    </form>\n                    <div class=\"axpc_checkbox axpc_MSG\" data-msg=\"@AST0102\">\n                        <label>\n                            <input id=\"axp_tool_checkbox_gridVHLink\" class=\"axpc_SAVE\" type=\"checkbox\"\n                                checked>${_(\"@GRID.CONSTRAIN\")}\n                        </label>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- ピクセル単位指定１ -->\n        <div class=\"axpc_tool_div_gridConfigButton\">\n            <div>\n                <div>px(1)</div>\n            </div>\n            <div id=\"axp_tool_checkbox_gridPixel1\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                data-msg=\"@AST0109\">\n                <input type=\"checkbox\" name=\"check\" />\n            </div>\n            <div id=\"axp_tool_color_gridPixel1\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                data-msg=\"@AST0110\" style=\"background-color: #0000ff\" data-colorcode=\"#0000ff66\">\n            </div>\n            <div>\n                <input type=\"number\" id=\"axp_tool_number_gridPixel1\" class=\"axpc_MSG\" data-msg=\"@AST0111\" min=\"1\"\n                    max=\"100\" value=\"10\" maxlength=\"3\">\n                <span>px</span>\n            </div>\n        </div>\n        <!-- ピクセル単位指定２ -->\n        <div class=\"axpc_tool_div_gridConfigButton\">\n            <div>\n                <div>px(2)</div>\n            </div>\n            <div id=\"axp_tool_checkbox_gridPixel2\" class=\"axpc_MSG axpc_toggle_switch axp_grid_switch\"\n                data-msg=\"@AST0112\">\n                <input type=\"checkbox\" name=\"check\" />\n            </div>\n            <div id=\"axp_tool_color_gridPixel2\" class=\"axpc_MSG axpc_colorRect axp_common_inputcolor\"\n                data-msg=\"@AST0113\" style=\"background-color: #0000ff\" data-colorcode=\"#0000ff26\">\n            </div>\n            <div>\n                <input type=\"number\" id=\"axp_tool_number_gridPixel2\" class=\"axpc_MSG\" data-msg=\"@AST0114\" min=\"1\"\n                    max=\"100\" value=\"1\" maxlength=\"3\">\n                <span>px</span>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }),
 
@@ -27229,7 +27381,7 @@ class AXPObj {
         // 注意事項
         notice: {
             isDisplay: true,
-            // 文章はユーザー辞書を使用して書き換えが可能 
+            // 文章はユーザー辞書を使用して書き換えが可能
         },
     }
 
@@ -30077,7 +30229,7 @@ class ConfigSystem {
         let targetElement = document.getElementById('axp_config');
         targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(_html_config_txt__WEBPACK_IMPORTED_MODULE_2__));
         // バージョン情報の表示
-        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:56:01.775Z"})`
+        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T09:09:38.581Z"})`
     }
     // HTML展開
     deployHTML() {
@@ -32285,7 +32437,7 @@ class UTIL {
 }
 /**
  * ブラウザ種別取得
- * @returns 
+ * @returns
  */
 function getBrowserType() {
     const agent = window.navigator.userAgent.toLowerCase();
@@ -32321,11 +32473,11 @@ function getFileNameFromURL(input) {
 
 /**
  * ２点間の距離
- * @param {*} x1 
- * @param {*} y1 
- * @param {*} x2 
- * @param {*} y2 
- * @returns 
+ * @param {*} x1
+ * @param {*} y1
+ * @param {*} x2
+ * @param {*} y2
+ * @returns
  */
 function calcDistance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
@@ -32358,9 +32510,9 @@ function normalizeDeg180(deg) {
 }
 /**
  * ２点の中点
- * @param {*} p1 
- * @param {*} p2 
- * @returns 
+ * @param {*} p1
+ * @param {*} p2
+ * @returns
  */
 function calcMidPointBetween(p1, p2) {
     return {
@@ -47466,30 +47618,6 @@ class PenSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
             this.penObj[this.pen_mode].renderGradientStopsUI();
         };
 
-        // 太さクイックボタン (登録値はペンごとに保存)
-        document.querySelectorAll('.axpc_pen_quicksize').forEach((btn, i) => {
-            let lastTapTime = 0;
-            btn.addEventListener('pointerup', () => {
-                const now = Date.now();
-                if (now - lastTapTime < 300) {
-                    const input = prompt('太さを入力 (1〜200)', btn.dataset.size);
-                    if (input !== null) {
-                        const val = Math.min(200, Math.max(1, parseInt(input) || 1));
-                        btn.dataset.size = val;
-                        this.renderQuickSizeButton(btn);
-                        this.axpObj.configSystem.saveConfig(`QSIZE_${i}_${this.pen_mode}`, val);
-                    }
-                    lastTapTime = 0;
-                } else {
-                    lastTapTime = now;
-                    const size = Number(btn.dataset.size);
-                    this.setPenSize(size);
-                }
-            });
-        });
-        // 初期表示 (保存値の反映)
-        this.updateQuickSizeButtons();
-
     }
 
     start(x, y, e, mode, option) {
@@ -47737,30 +47865,6 @@ class PenSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
     getName() {
         return this.penObj[this.pen_mode].name;
     }
-    // 太さクイックボタンのラベル描画
-    renderQuickSizeButton(btn) {
-        const size = Number(btn.dataset.size);
-        btn.innerHTML = `<span class="axpc_qs_label">太さ</span><span class="axpc_qs_num">${size}</span>`;
-    }
-    // 太さクイックボタンの表示更新。登録値はペンごとに保存されており、
-    // ペン別保存値 → 旧共通保存値 (移行用フォールバック) → 既定値 の順で解決する
-    updateQuickSizeButtons() {
-        const DEFAULTS = [2, 4, 10];
-        document.querySelectorAll('.axpc_pen_quicksize').forEach((btn, i) => {
-            const perPen = this.axpObj.configSystem.getConfig(`QSIZE_${i}_${this.pen_mode}`);
-            const legacy = this.axpObj.configSystem.getConfig('QSIZE_' + i);
-            let size;
-            if (perPen !== null && perPen !== undefined) {
-                size = perPen;
-            } else if (legacy !== null && legacy !== undefined) {
-                size = legacy;
-            } else {
-                size = DEFAULTS[i];
-            }
-            btn.dataset.size = size;
-            this.renderQuickSizeButton(btn);
-        });
-    }
     // 混色ペンのプリセットを反映する
     applyDiffusionPreset(idx) {
         const preset = this.diffusionPresets[idx];
@@ -47973,13 +48077,6 @@ class PenSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindow {
             'axp_pen_form_penSize',
             this.getSize(),
         )
-        // 太さクイックボタンの表示制御 (登録値はペンごとのため表示値も更新)
-        if (this.getSize()) {
-            _etc_js__WEBPACK_IMPORTED_MODULE_4__.UTIL.show('axp_pen_div_quickSize');
-            this.updateQuickSizeButtons();
-        } else {
-            _etc_js__WEBPACK_IMPORTED_MODULE_4__.UTIL.hide('axp_pen_div_quickSize');
-        }
         const isLiquifyPen = type === 'liquify';
         // 不透明度 (消しゴムは消し率で代替するため非表示)
         {
@@ -49182,7 +49279,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /************************************************************************/
 /******/ // The module cache
 /******/ var __webpack_module_cache__ = {};
-/******/ 
+/******/
 /******/ // The require function
 /******/ function __webpack_require__(moduleId) {
 /******/ 	// Check if module is in cache
@@ -49196,17 +49293,17 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		// no module.loaded needed
 /******/ 		exports: {}
 /******/ 	};
-/******/ 
+/******/
 /******/ 	// Execute the module function
 /******/ 	__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 
+/******/
 /******/ 	// Return the exports of the module
 /******/ 	return module.exports;
 /******/ }
-/******/ 
+/******/
 /******/ // expose the modules object (__webpack_modules__)
 /******/ __webpack_require__.m = __webpack_modules__;
-/******/ 
+/******/
 /************************************************************************/
 /******/ /* webpack/runtime/compat get default export */
 /******/ (() => {
@@ -49219,7 +49316,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		return getter;
 /******/ 	};
 /******/ })();
-/******/ 
+/******/
 /******/ /* webpack/runtime/create fake namespace object */
 /******/ (() => {
 /******/ 	var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
@@ -49249,7 +49346,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		return ns;
 /******/ 	};
 /******/ })();
-/******/ 
+/******/
 /******/ /* webpack/runtime/define property getters */
 /******/ (() => {
 /******/ 	// define getter functions for harmony exports
@@ -49261,12 +49358,12 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		}
 /******/ 	};
 /******/ })();
-/******/ 
+/******/
 /******/ /* webpack/runtime/hasOwnProperty shorthand */
 /******/ (() => {
 /******/ 	__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ })();
-/******/ 
+/******/
 /******/ /* webpack/runtime/make namespace object */
 /******/ (() => {
 /******/ 	// define __esModule on exports
@@ -49277,36 +49374,36 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 	};
 /******/ })();
-/******/ 
+/******/
 /******/ /* webpack/runtime/import chunk loading */
 /******/ (() => {
 /******/ 	__webpack_require__.b = new URL("./", import.meta.url);
-/******/ 	
+/******/
 /******/ 	// object to store loaded and loading chunks
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// [resolve, Promise] = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
 /******/ 		"main": 0
 /******/ 	};
-/******/ 	
+/******/
 /******/ 	// no install chunk
-/******/ 	
+/******/
 /******/ 	// no chunk on demand loading
-/******/ 	
+/******/
 /******/ 	// no prefetching
-/******/ 	
+/******/
 /******/ 	// no preloaded
-/******/ 	
+/******/
 /******/ 	// no external install chunk
-/******/ 	
+/******/
 /******/ 	// no on chunks loaded
 /******/ })();
-/******/ 
+/******/
 /******/ /* webpack/runtime/nonce */
 /******/ (() => {
 /******/ 	__webpack_require__.nc = undefined;
 /******/ })();
-/******/ 
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
@@ -49323,18 +49420,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_alert_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/alert.js */ "./src/js/alert.js");
 /* harmony import */ var _js_etc_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/etc.js */ "./src/js/etc.js");
 /* harmony import */ var _html_main_txt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./html/main.txt */ "./src/html/main.txt");
-/* harmony import */ var _css_axnospaint_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./css/axnospaint.css */ "./src/css/axnospaint.css");
-/* harmony import */ var _css_common_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./css/common.css */ "./src/css/common.css");
-/* harmony import */ var _css_icon_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./css/icon.css */ "./src/css/icon.css");
-/* harmony import */ var _css_window_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./css/window.css */ "./src/css/window.css");
-/* harmony import */ var _css_saveload_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./css/saveload.css */ "./src/css/saveload.css");
-/* harmony import */ var _css_input_range_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./css/input_range.css */ "./src/css/input_range.css");
-/* harmony import */ var _css_input_radio_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./css/input_radio.css */ "./src/css/input_radio.css");
-/* harmony import */ var _css_input_checkbox_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./css/input_checkbox.css */ "./src/css/input_checkbox.css");
-/* harmony import */ var _css_input_number_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./css/input_number.css */ "./src/css/input_number.css");
-/* harmony import */ var _css_input_button_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./css/input_button.css */ "./src/css/input_button.css");
-/* harmony import */ var _css_input_toggle_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./css/input_toggle.css */ "./src/css/input_toggle.css");
-/* harmony import */ var _css_alert_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./css/alert.css */ "./src/css/alert.css");
+/* harmony import */ var _css_tokens_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./css/tokens.css */ "./src/css/tokens.css");
+/* harmony import */ var _css_axnospaint_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./css/axnospaint.css */ "./src/css/axnospaint.css");
+/* harmony import */ var _css_common_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./css/common.css */ "./src/css/common.css");
+/* harmony import */ var _css_icon_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./css/icon.css */ "./src/css/icon.css");
+/* harmony import */ var _css_window_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./css/window.css */ "./src/css/window.css");
+/* harmony import */ var _css_saveload_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./css/saveload.css */ "./src/css/saveload.css");
+/* harmony import */ var _css_input_range_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./css/input_range.css */ "./src/css/input_range.css");
+/* harmony import */ var _css_input_radio_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./css/input_radio.css */ "./src/css/input_radio.css");
+/* harmony import */ var _css_input_checkbox_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./css/input_checkbox.css */ "./src/css/input_checkbox.css");
+/* harmony import */ var _css_input_number_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./css/input_number.css */ "./src/css/input_number.css");
+/* harmony import */ var _css_input_button_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./css/input_button.css */ "./src/css/input_button.css");
+/* harmony import */ var _css_input_toggle_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./css/input_toggle.css */ "./src/css/input_toggle.css");
+/* harmony import */ var _css_alert_css__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./css/alert.css */ "./src/css/alert.css");
 /*!
  * AXNOS Paint for aimg
  * (c) 2026 nijiurachan contributors
@@ -49363,11 +49461,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (class {
     axpObj;
     constructor(option) {
         console.log('version:', "3.0.0-alpha");
-        console.log('build:', "2026-07-06T08:56:01.775Z");
+        console.log('build:', "2026-07-06T09:09:38.581Z");
         (async () => {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
@@ -49748,7 +49847,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T08:56:01.775Z"})`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T09:09:38.581Z"})`;
     }
     // 画面の表示／非表示
     on() {
@@ -49760,10 +49859,9 @@ __webpack_require__.r(__webpack_exports__);
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${"3.0.0-alpha"} (${"2026-07-06T08:56:01.775Z"})`;
+        return `version ${"3.0.0-alpha"} (${"2026-07-06T09:09:38.581Z"})`;
     }
 });
-
 
 })();
 

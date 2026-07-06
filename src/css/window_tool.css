@@ -4,8 +4,14 @@
     width: 300px;
 }
 
+.axpc_tool_shell {
+    display: flex;
+    gap: var(--axp-sp-3);
+}
+
 #axp_tool_div_content {
     display: flex;
+    gap: var(--axp-sp-3);
 }
 
 /* 補助ツール左側 */
@@ -15,6 +21,10 @@
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
+}
+
+.axpc_tool_controlDeck {
+    gap: 2px;
 }
 
 /* キャンバスサイズ表示ラベル */
@@ -56,14 +66,24 @@
 }
 
 /* 補助ツール右側 */
-#axp_tool_div_rightSide {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    flex-direction: row;
-    gap: 0px 6px;
+.axpc_tool_actionGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 4px;
     margin-top: 2px;
-    margin-left: 4px;
+    margin-left: 0;
+    min-width: 146px;
+}
+
+#axp_tool_div_rightSide {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 4px;
+    margin-top: 2px;
+    margin-left: 0;
+    min-width: 146px;
 }
 
 /* 100% */
@@ -127,6 +147,10 @@
     gap: 2px;
     width: 132px;
     margin: 2px 4px 4px 0;
+    padding: 3px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: var(--axp-r-lg);
+    background: var(--axp-surface-panel);
     font-size: 11px;
     box-sizing: border-box;
 }
@@ -139,8 +163,8 @@
     width: 100%;
     min-height: 26px;
     padding: 3px 5px;
-    border: 1px solid #666;
-    border-radius: 5px;
+    border: 1px solid var(--axp-border-soft);
+    border-radius: var(--axp-r-md);
     color: inherit;
     background: rgba(255, 255, 255, .08);
     line-height: 1.1;
@@ -184,7 +208,7 @@
     box-sizing: border-box;
     margin-left: 5px;
     padding-left: 7px;
-    border-left: 2px solid #666;
+    border-left: 2px solid var(--axp-accent-border);
 }
 
 .axp_tool_disclosurePanel[hidden] {
@@ -196,9 +220,9 @@
     gap: 2px;
     box-sizing: border-box;
     padding: 3px;
-    border: 1px solid #555;
-    border-radius: 5px;
-    background: rgba(20, 20, 20, .35);
+    border: 1px solid var(--axp-border-soft);
+    border-radius: var(--axp-r-md);
+    background: var(--axp-surface-panel-strong);
 }
 
 #axp_tool_div_referenceDetails[hidden] {
@@ -287,7 +311,7 @@
 
 .axp_tool_disclosure button:focus-visible,
 #axp_tool_div_referenceDetails input:focus-visible {
-    outline: 2px solid #8bd3ff;
+    outline: 2px solid var(--axp-border-focus);
     outline-offset: 1px;
 }
 
@@ -341,7 +365,7 @@
 #axp_tool_button_flipV,
 #axp_tool_button_transparent,
 #axp_tool_div_gridbutton {
-    width: 70px;
+    width: 100%;
 }
 
 /* 補助線ボタン枠 */
@@ -351,14 +375,15 @@
 
 /* 補助線 */
 #axp_tool_button_grid {
-    width: 50px;
+    flex: 1;
+    min-width: 0;
 }
 
 /* 補助線設定（歯車アイコン） */
 #axp_tool_button_gridConfig {
     isolation: isolate;
     height: 100%;
-    width: 20px;
+    width: 24px;
     background-image: url('../../resource/config.png');
     background-position: 0% 50%;
     background-repeat: no-repeat;
