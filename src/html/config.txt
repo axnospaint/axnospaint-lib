@@ -238,6 +238,18 @@
                         <span data-msg="@CFG0057" data-value="off">なし</span>
                         <span data-msg="@CFG0058" data-value="on" data-default="y">あり</span>
                     </form>
+                    <br>
+                    <u>CMYKスライダー</u>
+                    <form id="axp_config_form_makeColorTypeCMYK" class="axpc_radio">
+                        <span data-msg="@CFG0125" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0126" data-value="on">あり</span>
+                    </form>
+                    <br>
+                    <u>Labスライダー</u>
+                    <form id="axp_config_form_makeColorTypeLab" class="axpc_radio">
+                        <span data-msg="@CFG0127" data-value="off" data-default="y">なし</span>
+                        <span data-msg="@CFG0128" data-value="on">あり</span>
+                    </form>
                 </div>
             </div>
             <div class="axpc_config_section" data-title="パレット" data-icon="axpc_icon_window_palette">

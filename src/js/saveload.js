@@ -1,6 +1,7 @@
 // @description セーブ／ロード／自動保存から復元処理 indexedDB処理系
 
 import { UTIL, inRange, getFileNameFromURL } from './etc.js';
+import { confirmExPromise } from './alert.js';
 
 // 自動保存の間隔
 const AUTOSAVE_INTERVAL = 10;
@@ -56,13 +57,19 @@ export class SaveSystem {
         return this.isDBAvailable;
     }
     // オートセーブ（カウントとセーブ実行）
-    async autoSave() {
+    // force=true の場合、規定回数に達していなくても未保存分（counter>0）があれば即座に保存する
+    // （離脱時=visibilitychange:hidden/pagehide からの緊急保存用。iOSはタブを予告なく
+    // 破棄するため、規定回数を待たず未保存の編集内容を確実に残す必要がある）。
+    // force呼び出し自体は描画操作ではないためカウンタを増やさない。
+    async autoSave(force = false) {
         // DB使用不可の場合処理しない
         if (!this.isDBAvailable) return;
 
-        this.autosave_counter++;
-        // 規定回数の描画操作を行ったらオートセーブ
-        if (this.autosave_counter >= AUTOSAVE_INTERVAL) {
+        if (!force) {
+            this.autosave_counter++;
+        }
+        // 規定回数の描画操作を行ったら、またはforce指定時に未保存分があれば即座にオートセーブ
+        if ((force && this.autosave_counter > 0) || (!force && this.autosave_counter >= AUTOSAVE_INTERVAL)) {
             this.autosave_counter = 0;
             const data = {
                 created: new Date(),
@@ -88,6 +95,49 @@ export class SaveSystem {
                 console.log(error);
             }
         }
+    }
+    // 起動時ワンタップ復元: 直近の自動保存があれば、続きから再開するか確認する。
+    // 復元した場合はtrueを返す（呼び出し側はnewLayer()等の新規初期化をスキップする）。
+    // 下書き読込時・自動保存が存在しない・キャンセル時はfalseを返す。
+    async checkOneTapRestore() {
+        if (!this.isDBAvailable) return false;
+        let data;
+        try {
+            data = await this.dbSystem.getLatestAutoSave();
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+        if (!data || data.created === undefined) return false;
+        // 画像サイズが現在の許容範囲外なら復元しない（起動オプション変更等で範囲が変わった場合の安全策）
+        if (!inRange(data.x_max, this.axpObj.minWidth, this.axpObj.maxWidth)
+            || !inRange(data.y_max, this.axpObj.minHeight, this.axpObj.maxHeight)) {
+            return false;
+        }
+        // 同一掲示板チェック（手動ロードと同じ基準。restore_oekaki_id()は状態を書き換える
+        // 副作用を持つため、ここでは書き換えを伴わない判定のみ行う。実際の復元＝状態書き換えは
+        // ユーザーが確認ダイアログでOKした後にのみ行う（キャンセル時に書き換えが残ると、
+        // 新規キャンバスなのに破棄したはずの下書きのoekaki_id等を引き継いでしまうため）
+        const hasSourceImage = (data.draftImageFile !== undefined && data.draftImageFile !== null)
+            || (data.oekaki_id !== undefined && data.oekaki_id !== null);
+        if (this.axpObj.checkSameBBS && hasSourceImage
+            && data.oekaki_bbs_pageno !== this.axpObj.post_bbs_pageno) {
+            return false;
+        }
+
+        const savedDate = (data.created instanceof Date) ? data.created : new Date(data.created);
+        const dateText = isNaN(savedDate.getTime()) ? '' : savedDate.toLocaleString();
+        try {
+            await confirmExPromise(`前回の描きかけ（自動保存: ${dateText}）があります。\n続きから再開しますか？`);
+        } catch {
+            // キャンセル時は新規開始（状態はまだ書き換えていないため巻き戻し不要）
+            return false;
+        }
+        this.restore_oekaki_id(data);
+        this.restoreData(data);
+        // 自動保存されたデータをロードしました。
+        this.axpObj.msg('@INF0302');
+        return true;
     }
     startEvent() {
         // セーブ／ロード画面の閉じるボタン
@@ -584,6 +634,29 @@ class DbSystem {
                             reject(new Error('loadEntry:readReq.onsuccess'));
                         }
                     }
+                }
+            }
+        });
+    }
+    // 自動保存の最新1件を取得する（起動時のワンタップ復元用）。存在しなければnull
+    getLatestAutoSave() {
+        return new Promise((resolve, reject) => {
+            const openReq = indexedDB.open(DB_NAME, DB_VERSION);
+            openReq.onerror = () => {
+                reject(new Error('getLatestAutoSave:openReq.onerror'));
+            }
+            openReq.onsuccess = () => {
+                const db = openReq.result;
+                const transaction = db.transaction(STORE_NAME_SAVE_AUTO);
+                const store = transaction.objectStore(STORE_NAME_SAVE_AUTO);
+                // 新着順（自動採番キーの降順）で先頭1件のみ取得
+                const readReq = store.openCursor(null, 'prev');
+                readReq.onerror = () => {
+                    reject(new Error('getLatestAutoSave:readReq.onerror'));
+                }
+                readReq.onsuccess = () => {
+                    const cursor = readReq.result;
+                    resolve(cursor ? cursor.value : null);
                 }
             }
         });

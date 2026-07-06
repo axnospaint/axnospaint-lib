@@ -55,7 +55,6 @@
     background-color: #555;
     border-radius: 0px;
     text-decoration: none;
-    outline: 0 !important;
 }
 
 #axp_alert_div_alertBox #axp_alert_button_cancelBtn {
@@ -69,5 +68,14 @@
     background-color: #555;
     border-radius: 0px;
     text-decoration: none;
-    outline: 0 !important;
+}
+
+/* キーボード操作時のみフォーカスリングを表示する（マウスクリック時は非表示のまま）。
+   従来のoutline:0!importantはキーボードユーザーがフォーカス位置を視認できなくしていたため撤廃。 */
+#axp_alert_div_alertBox #axp_alert_button_closeBtn:focus-visible,
+#axp_alert_div_alertBox #axp_alert_button_cancelBtn:focus-visible {
+    /* アラートボックス自体の背景が白のため、白いアウトラインは見えない。
+       ボタン背景(#555)・箱背景(白)のどちらとも十分なコントラストが取れる色にする。 */
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
 }

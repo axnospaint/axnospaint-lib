@@ -79,11 +79,257 @@
     margin-right: 4px;
 }
 
-/* アンドウ リドゥ 復元 */
-#axp_tool_button_undo,
-#axp_tool_button_redo,
+/* 復元 */
 #axp_tool_button_restore {
     width: 100%
+}
+
+/* キャンバスサイズ・プリセット */
+#axp_tool_div_canvasSizePreset {
+    display: flex;
+    gap: 3px;
+    margin: 2px 0 4px;
+}
+
+.axp_tool_sizePreset {
+    flex: 1;
+    min-width: 0;
+    padding: 3px 0;
+    font-size: 11px;
+}
+
+/* この環境の上限を超えるプリセットの無効表示（ダブルクリック編集は可能） */
+.axp_tool_sizePreset.axp_tool_sizePreset_disabled {
+    opacity: 0.4;
+}
+
+/* 背景色トグル（肌色/白） */
+#axp_tool_div_bgColor {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 2px 0 4px;
+}
+
+#axp_tool_span_bgColorLabel {
+    font-size: 12px;
+}
+
+#axp_tool_toggle_bgColor::after {
+    content: "肌";
+}
+
+#axp_tool_toggle_bgColor[data-checked="true"]::after {
+    content: "白";
+}
+
+/* 対称・回転描画（曼荼羅/雪結晶） */
+#axp_tool_div_symmetry {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 2px 0 4px;
+    font-size: 11px;
+}
+
+#axp_tool_div_symmetry label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#axp_tool_div_symmetryCountRow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#axp_tool_div_symmetryCountRow .axpc_range {
+    width: 80px;
+    height: 16px;
+}
+
+/* 相互運用（参照画像など） */
+#axp_tool_div_interop {
+    --axp-interop-compact-h: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 132px;
+    margin: 2px 4px 4px 0;
+    font-size: 11px;
+    box-sizing: border-box;
+}
+
+#axp_tool_button_interopToggle,
+#axp_tool_button_timelapse,
+#axp_tool_button_clipboardCopy,
+#axp_tool_button_psdExport,
+#axp_tool_button_referenceLoad,
+#axp_tool_button_referenceRemove {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 24px;
+    line-height: 1.1;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+
+#axp_tool_button_timelapse[data-recording="true"]::before {
+    content: "● ";
+}
+
+#axp_tool_div_interopControls {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+#axp_tool_div_interopControls[hidden] {
+    display: none;
+}
+
+#axp_tool_div_referenceDetails {
+    display: grid;
+    gap: 2px;
+    box-sizing: border-box;
+    padding: 3px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: rgba(20, 20, 20, .35);
+}
+
+#axp_tool_div_referenceDetails[hidden] {
+    display: none;
+}
+
+#axp_tool_file_reference {
+    display: none;
+}
+
+#axp_tool_div_referenceDetails label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3px;
+    box-sizing: border-box;
+    min-width: 0;
+    height: var(--axp-interop-compact-h);
+    font-size: 10.5px;
+    white-space: nowrap;
+}
+
+.axp_tool_referenceInline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2px;
+    align-items: center;
+}
+
+#axp_tool_div_referenceToggles label {
+    justify-content: flex-start;
+}
+
+#axp_tool_div_referenceToggles input[type="checkbox"] {
+    margin: 0 2px 0 0;
+}
+
+#axp_tool_div_referencePosition label {
+    gap: 1px;
+    font-size: 10px;
+}
+
+#axp_tool_div_referenceDetails input[type="number"] {
+    width: 32px;
+    height: 20px;
+    box-sizing: border-box;
+    padding: 0 1px;
+    font-size: 10px;
+}
+
+#axp_tool_div_referenceDetails .axpc_range {
+    box-sizing: border-box;
+    flex: 0 0 72px;
+    width: 72px;
+    height: 18px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+#axp_tool_div_referenceDetails .axpc_range input[type="range"] {
+    width: 72px;
+    height: 18px;
+    border: 2px solid #444;
+    border-radius: 5px;
+}
+
+#axp_tool_div_referenceDetails .axpc_range input[type="range"]::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+    border: 3px solid #777;
+    border-radius: 5px;
+    box-shadow: -72px 0 0 72px #777;
+}
+
+#axp_tool_div_referenceDetails .axpc_range input[type="range"]::-moz-range-track {
+    height: 18px;
+}
+
+#axp_tool_div_referenceDetails .axpc_range input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border: 3px solid #777;
+    border-radius: 5px !important;
+    box-shadow: -72px 0 0 72px #777;
+}
+
+#axp_tool_div_interop button:focus-visible,
+#axp_tool_div_referenceDetails input:focus-visible {
+    outline: 2px solid #8bd3ff;
+    outline-offset: 1px;
+}
+
+@media (pointer: coarse) {
+    #axp_tool_div_interop {
+        gap: 6px;
+    }
+
+    #axp_tool_button_interopToggle,
+    #axp_tool_button_timelapse,
+    #axp_tool_button_clipboardCopy,
+    #axp_tool_button_psdExport,
+    #axp_tool_button_referenceLoad,
+    #axp_tool_button_referenceRemove {
+        min-height: 44px;
+    }
+
+    #axp_tool_div_referenceDetails label {
+        min-height: 44px;
+    }
+
+    #axp_tool_div_referenceDetails input[type="checkbox"] {
+        min-width: 24px;
+        min-height: 24px;
+    }
+
+    #axp_tool_div_referenceDetails label {
+        height: auto;
+    }
+
+    #axp_tool_div_referenceDetails .axpc_range,
+    #axp_tool_div_referenceDetails .axpc_range input[type="range"] {
+        height: 28px;
+    }
+
+    #axp_tool_div_referenceDetails .axpc_range input[type="range"]::-webkit-slider-thumb {
+        width: 28px;
+        height: 28px;
+    }
+
+    #axp_tool_div_referenceDetails .axpc_range input[type="range"]::-moz-range-thumb {
+        width: 28px;
+        height: 28px;
+    }
 }
 
 /* セーブ ロード 左右反転 上下反転 背景透過 補助線の枠 */
