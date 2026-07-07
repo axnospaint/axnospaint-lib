@@ -71,11 +71,20 @@ test('config tab generates the mobile section-jump select', () => {
 
 test('mobile sheet tab recovers windows from the all-hidden state', () => {
   const mobileJs = readFileSync(new URL('../src/js/mobile.js', import.meta.url), 'utf8');
+  // dock.js の toggleWindow と同じ復帰経路（ランチャー一括ボタン経由）が
+  // 共通ヘルパーとして存在し、openSheetTab から呼ばれる
+  const helper = mobileJs.match(/restoreFromAllHidden\(windowElement\) \{(?<body>[\s\S]*?)\n {4}\}/);
+  assert.ok(helper);
+  assert.match(helper.groups.body, /axpc_window_hidden/);
+  assert.match(helper.groups.body, /axpc_launcher_allButton/);
   const open = mobileJs.match(/openSheetTab\(windowId\) \{(?<body>[\s\S]*?)\n {4}\}/);
   assert.ok(open);
-  // dock.js の toggleWindow と同じ復帰経路（ランチャー一括ボタン経由）を持つ
-  assert.match(open.groups.body, /axpc_window_hidden/);
-  assert.match(open.groups.body, /axpc_launcher_allButton/);
+  assert.match(open.groups.body, /this\.restoreFromAllHidden\(windowElement\)/);
+  // アクティブタブの再タップ時も、hidden中はcloseSheetではなく復帰経路に入る
+  const tabHandler = mobileJs.match(/tab\.addEventListener\('click',(?<body>[\s\S]*?)\}\);/);
+  assert.ok(tabHandler);
+  assert.match(tabHandler.groups.body, /axpc_window_hidden/);
+  assert.match(tabHandler.groups.body, /=== windowId && !isHidden/);
 });
 
 test('quickbar zoom readout rounds the scale like the loupe reset button', () => {

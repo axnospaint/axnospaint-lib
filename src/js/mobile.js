@@ -99,7 +99,12 @@ export class MobileSystem {
         for (const tab of tabs) {
             tab.addEventListener('click', () => {
                 const windowId = tab.dataset.sheettab;
-                if (this.currentSheetWindowId === windowId) {
+                // 全体非表示（axpc_window_hidden）中はアクティブタブの再タップでも
+                // 「閉じる」ではなく復帰経路（openSheetTab）に入れる。
+                // ここでcloseSheetに分岐するとhiddenのまま最小化され復帰不能になるため
+                const windowElement = document.getElementById(windowId);
+                const isHidden = windowElement?.classList.contains('axpc_window_hidden') ?? false;
+                if (this.currentSheetWindowId === windowId && !isHidden) {
                     // 同じタブの再タップで閉じる
                     this.closeSheet();
                 } else {
@@ -120,15 +125,8 @@ export class MobileSystem {
         if (!SHEET_WINDOW_IDS.includes(windowId)) return;
         const windowElement = document.getElementById(windowId);
         if (!windowElement) return;
-        // 全体非表示（axpc_window_hidden）中は、ランチャーの一括ボタン経由で
-        // 全体表示に復帰させる（dock.jsのtoggleWindowと同一の復帰経路。
-        // hidden解除・一括ボタンのアイコン状態・設定値の整合を保つため）
-        if (windowElement.classList.contains('axpc_window_hidden')) {
-            const allButton = document.querySelector('.axpc_launcher_allButton');
-            if (allButton?.classList.contains('axpc_launcher_minimize')) {
-                allButton.click();
-            }
-        }
+        // 全体非表示中はまず全体表示に復帰させる
+        this.restoreFromAllHidden(windowElement);
         // 表示中の他ウィンドウをシートから外す
         for (const otherId of SHEET_WINDOW_IDS) {
             if (otherId === windowId) continue;
@@ -145,6 +143,16 @@ export class MobileSystem {
         this.axpObj.launcher.unminimizeButton(windowId);
         this.currentSheetWindowId = windowId;
         this.syncTabState();
+    }
+    // 全体非表示（axpc_window_hidden）中なら、ランチャーの一括ボタン経由で
+    // 全体表示に復帰させる（dock.jsのtoggleWindowと同一の復帰経路。
+    // hidden解除・一括ボタンのアイコン状態・設定値の整合を保つため）
+    restoreFromAllHidden(windowElement) {
+        if (!windowElement.classList.contains('axpc_window_hidden')) return;
+        const allButton = document.querySelector('.axpc_launcher_allButton');
+        if (allButton?.classList.contains('axpc_launcher_minimize')) {
+            allButton.click();
+        }
     }
     // シートを閉じる（表示中ウィンドウを最小化）
     closeSheet() {

@@ -1,5 +1,5 @@
 /*!
- * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-07T03:01:11.320Z)
+ * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-07T03:09:37.843Z)
  * (c) 2026- nijiurachan contributors
  * (c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」
  * Licensed under MPL 2.0
@@ -31594,7 +31594,7 @@ class ConfigSystem {
         let targetElement = document.getElementById('axp_config');
         targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(_html_config_txt__WEBPACK_IMPORTED_MODULE_2__));
         // バージョン情報の表示
-        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T03:01:11.320Z"})`
+        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T03:09:37.843Z"})`
     }
     // HTML展開
     deployHTML() {
@@ -35645,7 +35645,12 @@ class MobileSystem {
         for (const tab of tabs) {
             tab.addEventListener('click', () => {
                 const windowId = tab.dataset.sheettab;
-                if (this.currentSheetWindowId === windowId) {
+                // 全体非表示（axpc_window_hidden）中はアクティブタブの再タップでも
+                // 「閉じる」ではなく復帰経路（openSheetTab）に入れる。
+                // ここでcloseSheetに分岐するとhiddenのまま最小化され復帰不能になるため
+                const windowElement = document.getElementById(windowId);
+                const isHidden = windowElement?.classList.contains('axpc_window_hidden') ?? false;
+                if (this.currentSheetWindowId === windowId && !isHidden) {
                     // 同じタブの再タップで閉じる
                     this.closeSheet();
                 } else {
@@ -35666,15 +35671,8 @@ class MobileSystem {
         if (!SHEET_WINDOW_IDS.includes(windowId)) return;
         const windowElement = document.getElementById(windowId);
         if (!windowElement) return;
-        // 全体非表示（axpc_window_hidden）中は、ランチャーの一括ボタン経由で
-        // 全体表示に復帰させる（dock.jsのtoggleWindowと同一の復帰経路。
-        // hidden解除・一括ボタンのアイコン状態・設定値の整合を保つため）
-        if (windowElement.classList.contains('axpc_window_hidden')) {
-            const allButton = document.querySelector('.axpc_launcher_allButton');
-            if (allButton?.classList.contains('axpc_launcher_minimize')) {
-                allButton.click();
-            }
-        }
+        // 全体非表示中はまず全体表示に復帰させる
+        this.restoreFromAllHidden(windowElement);
         // 表示中の他ウィンドウをシートから外す
         for (const otherId of SHEET_WINDOW_IDS) {
             if (otherId === windowId) continue;
@@ -35691,6 +35689,16 @@ class MobileSystem {
         this.axpObj.launcher.unminimizeButton(windowId);
         this.currentSheetWindowId = windowId;
         this.syncTabState();
+    }
+    // 全体非表示（axpc_window_hidden）中なら、ランチャーの一括ボタン経由で
+    // 全体表示に復帰させる（dock.jsのtoggleWindowと同一の復帰経路。
+    // hidden解除・一括ボタンのアイコン状態・設定値の整合を保つため）
+    restoreFromAllHidden(windowElement) {
+        if (!windowElement.classList.contains('axpc_window_hidden')) return;
+        const allButton = document.querySelector('.axpc_launcher_allButton');
+        if (allButton?.classList.contains('axpc_launcher_minimize')) {
+            allButton.click();
+        }
     }
     // シートを閉じる（表示中ウィンドウを最小化）
     closeSheet() {
@@ -51430,7 +51438,7 @@ __webpack_require__.r(__webpack_exports__);
     axpObj;
     constructor(option) {
         console.log('version:', "3.0.0-alpha");
-        console.log('build:', "2026-07-07T03:01:11.320Z");
+        console.log('build:', "2026-07-07T03:09:37.843Z");
         (async () => {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
@@ -51811,7 +51819,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T03:01:11.320Z"})`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T03:09:37.843Z"})`;
     }
     // 画面の表示／非表示
     on() {
@@ -51823,7 +51831,7 @@ __webpack_require__.r(__webpack_exports__);
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${"3.0.0-alpha"} (${"2026-07-07T03:01:11.320Z"})`;
+        return `version ${"3.0.0-alpha"} (${"2026-07-07T03:09:37.843Z"})`;
     }
 });
 
