@@ -114,8 +114,20 @@ export class FilterSystem extends ToolWindow {
         this.axpObj.saveSystem.autoSave();
     }
     applyColorToAlpha() {
-        // 基準色は既定（白）のみ提供。colorToAlpha()自身の既定引数と重複させない。
-        this._applyToCurrentLayer((img) => colorToAlpha(img), '@INF1010');
+        this._applyToCurrentLayer((img) => colorToAlpha(img, this.getColorToAlphaOptions()), '@INF1010');
+    }
+    getColorToAlphaOptions() {
+        const mode = document.getElementById('axp_filter_select_colorToAlphaMode').value;
+        const color = document.getElementById('axp_filter_color_colorToAlphaReplacement').value;
+        const replacementColor = {
+            r: parseInt(color.slice(1, 3), 16),
+            g: parseInt(color.slice(3, 5), 16),
+            b: parseInt(color.slice(5, 7), 16),
+        };
+        if (mode === 'unmix') {
+            return { mode: 'unmix', baseColor: { r: 255, g: 255, b: 255 } };
+        }
+        return { mode, replacementColor };
     }
     applyMosaic() {
         const input = prompt(

@@ -10,7 +10,7 @@
 import '../css/mobile.css';
 
 // シートタブ（data-sheettab属性 → ウィンドウid）
-const SHEET_WINDOW_IDS = ['axp_pen', 'axp_makecolor', 'axp_layer', 'axp_tool'];
+const SHEET_WINDOW_IDS = ['axp_pen', 'axp_makecolor', 'axp_layer', 'axp_tool', 'axp_filter'];
 
 export class MobileSystem {
     constructor(axpObj) {

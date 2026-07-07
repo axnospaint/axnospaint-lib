@@ -15,7 +15,7 @@
     "build": "webpack",
     "prod": "cross-env NODE_ENV=prod webpack --config webpack.prod.js",
     "prod-demo": "cross-env NODE_ENV=demo webpack --config webpack.prod.js",
-    "test": "node --test",
+    "test": "node --test test/*.test.mjs",
     "eslint": "eslint src/**/*.js",
     "audit": "npm audit"
   },

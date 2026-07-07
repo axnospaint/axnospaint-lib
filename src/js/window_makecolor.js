@@ -12,6 +12,50 @@ import { rgb2cmyk, cmyk2rgb, rgb2lab, lab2rgb } from './colorconvert.js';
 import ReinventedColorWheel from './reinvented-color-wheel.js';
 import '../css/reinvented-color-wheel.css';
 
+export const WET_PALETTE_STORAGE_KEY = 'AXP_WET_PALETTE';
+
+export function isValidWetPaletteDataUrl(value) {
+    return typeof value === 'string' && value.startsWith('data:image/png;base64,');
+}
+
+export function serializeWetPaletteCanvas(canvas) {
+    try {
+        const dataUrl = canvas?.toDataURL?.('image/png');
+        return isValidWetPaletteDataUrl(dataUrl) ? dataUrl : null;
+    } catch {
+        return null;
+    }
+}
+
+export function saveWetPaletteSnapshot(storage, canvas) {
+    try {
+        const dataUrl = serializeWetPaletteCanvas(canvas);
+        if (!dataUrl || typeof storage?.setItem !== 'function') return false;
+        storage.setItem(WET_PALETTE_STORAGE_KEY, dataUrl);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+export function clearWetPaletteSnapshot(storage) {
+    try {
+        if (typeof storage?.removeItem !== 'function') return false;
+        storage.removeItem(WET_PALETTE_STORAGE_KEY);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+function getWetPaletteStorage() {
+    try {
+        return globalThis.localStorage ?? null;
+    } catch {
+        return null;
+    }
+}
+
 // カラー作成制御オブジェクト
 export class ColorMakerSystem extends ToolWindow {
     // メインカラー、サブカラー（#付きで管理）
@@ -69,6 +113,8 @@ export class ColorMakerSystem extends ToolWindow {
         // 混色ウェットパレット：キャンバス取得（初期状態は空＝透明）
         this.wetPaletteCanvas = document.getElementById('axp_makecolor_canvas_wetPalette');
         this.wetPaletteCtx = this.wetPaletteCanvas.getContext('2d');
+        this._wetPaletteRestoreToken = 0;
+        this._restoreWetPaletteSnapshot();
 
         // カラーピッカー：使用定義
         this.colorWheel = new ReinventedColorWheel({
@@ -236,7 +282,9 @@ export class ColorMakerSystem extends ToolWindow {
                 if (canvas.hasPointerCapture(e.pointerId)) {
                     canvas.releasePointerCapture(e.pointerId);
                 }
-                if (e.type === 'pointerup' && !wasMoved) {
+                if (wasMoved) {
+                    this._saveWetPaletteSnapshot();
+                } else if (e.type === 'pointerup') {
                     // ほぼ動かさずに離した＝クリック操作としてサンプルする
                     const pos = toCanvasCoords(e.clientX, e.clientY);
                     sampleAt(pos.x, pos.y);
@@ -249,6 +297,7 @@ export class ColorMakerSystem extends ToolWindow {
         // ボタン：ウェットパレットのクリア
         document.getElementById('axp_makecolor_button_wetPaletteClear').addEventListener('click', () => {
             this.wetPaletteCtx.clearRect(0, 0, this.wetPaletteCanvas.width, this.wetPaletteCanvas.height);
+            this._clearWetPaletteSnapshot();
         });
 
         // ボタン：スワップ
@@ -725,6 +774,37 @@ export class ColorMakerSystem extends ToolWindow {
         } finally {
             this._suppressCrossBowlRender = false;
         }
+    }
+    _saveWetPaletteSnapshot() {
+        this._wetPaletteRestoreToken = (this._wetPaletteRestoreToken || 0) + 1;
+        saveWetPaletteSnapshot(getWetPaletteStorage(), this.wetPaletteCanvas);
+    }
+    _clearWetPaletteSnapshot() {
+        this._wetPaletteRestoreToken = (this._wetPaletteRestoreToken || 0) + 1;
+        clearWetPaletteSnapshot(getWetPaletteStorage());
+    }
+    _restoreWetPaletteSnapshot() {
+        const storage = getWetPaletteStorage();
+        let dataUrl;
+        try {
+            dataUrl = storage?.getItem?.(WET_PALETTE_STORAGE_KEY);
+        } catch {
+            return;
+        }
+        if (!isValidWetPaletteDataUrl(dataUrl) || typeof Image === 'undefined') return;
+
+        const token = (this._wetPaletteRestoreToken = (this._wetPaletteRestoreToken || 0) + 1);
+        const image = new Image();
+        image.onload = () => {
+            if (token !== this._wetPaletteRestoreToken) return;
+            try {
+                this.wetPaletteCtx.clearRect(0, 0, this.wetPaletteCanvas.width, this.wetPaletteCanvas.height);
+                this.wetPaletteCtx.drawImage(image, 0, 0, this.wetPaletteCanvas.width, this.wetPaletteCanvas.height);
+            } catch {
+                // 破損した保存データは無視する
+            }
+        };
+        image.src = dataUrl;
     }
     // 他システムが参照する色
     getAdjustColor() {

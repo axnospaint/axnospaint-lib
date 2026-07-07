@@ -13,3 +13,17 @@ test('coarse pointer UI uses the bottom touch bar instead of duplicate header un
     /@media \(pointer: coarse\) \{[\s\S]*?\.axpc_main_headerButton\s*\{[\s\S]*?display:\s*none;/,
   );
 });
+
+test('mobile sheet exposes the extension tab in the same order as sheet windows', () => {
+  const html = readFileSync(new URL('../src/html/main.txt', import.meta.url), 'utf8');
+  const mobileJs = readFileSync(new URL('../src/js/mobile.js', import.meta.url), 'utf8');
+
+  const sheetTabIds = [...html.matchAll(/class="axpm-sheet__tab" data-sheettab="([^"]+)"/g)].map((match) => match[1]);
+  const sheetWindowMatch = mobileJs.match(/const SHEET_WINDOW_IDS = \[([^\]]+)\];/);
+  assert.ok(sheetWindowMatch);
+  const sheetWindowIds = [...sheetWindowMatch[1].matchAll(/'([^']+)'/g)].map((match) => match[1]);
+
+  assert.deepEqual(sheetTabIds, ['axp_pen', 'axp_makecolor', 'axp_layer', 'axp_tool', 'axp_filter']);
+  assert.deepEqual(sheetWindowIds, sheetTabIds);
+  assert.equal(sheetTabIds.length, 5);
+});

@@ -139,10 +139,15 @@
 }
 
 #axp_pen_select_drawMode,
-#axp_pen_select_fillMode {
+#axp_pen_select_fillMode,
+#axp_pen_select_spuitSampleMode {
     width: 100px;
     height: 24px;
     border-radius: 5px;
+}
+
+#axp_pen_select_spuitSampleMode {
+    width: 132px;
 }
 
 /* ペンツール右側（機能ボタン）外枠 */

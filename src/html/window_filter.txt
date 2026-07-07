@@ -10,6 +10,20 @@
                 ${_("@FILTER.GRAYSCALE")}</button>
         </div>
 
+        <div class="axpc_filter_section axpc_filter_section_colorToAlpha">
+            <div class="axpc_filter_sectionTitle">${_("@FILTER.COLOR_TO_ALPHA")}</div>
+            <label class="axpc_filter_controlRow">${_("@FILTER.COLOR_TO_ALPHA_MODE")}
+                <select id="axp_filter_select_colorToAlphaMode" class="axpc_filter_select">
+                    <option value="unmix" selected>${_("@FILTER.COLOR_TO_ALPHA_MODE_UNMIX")}</option>
+                    <option value="luminance">${_("@FILTER.COLOR_TO_ALPHA_MODE_LUMINANCE")}</option>
+                    <option value="inverted-luminance">${_("@FILTER.COLOR_TO_ALPHA_MODE_INVERTED_LUMINANCE")}</option>
+                </select>
+            </label>
+            <label class="axpc_filter_controlRow">${_("@FILTER.COLOR_TO_ALPHA_REPLACEMENT")}
+                <input type="color" id="axp_filter_color_colorToAlphaReplacement" value="#000000">
+            </label>
+        </div>
+
         <!-- レベル補正 -->
         <div class="axpc_filter_section">
             <div class="axpc_filter_sectionTitle">${_("@FILTER.LEVELS")}</div>

@@ -206,6 +206,11 @@
                     <option value="option_all">${_("@PEN.OPTION_FILL_SAMPLE_ALL")}</option>
                     <option value="option_layer">${_("@PEN.OPTION_FILL_SAMPLE_CURRENT")}</option>
                 </select>
+                <select id="axp_pen_select_spuitSampleMode" class="axpc_MSG axpc_NONE"
+                    data-msg="@PEN0025" aria-label="${_("@PEN.SPUIT_SAMPLE_MODE")}">
+                    <option value="option_all" selected>${_("@PEN.OPTION_SPUIT_SAMPLE_ALL")}</option>
+                    <option value="option_layer">${_("@PEN.OPTION_SPUIT_SAMPLE_CURRENT")}</option>
+                </select>
                 <select id="axp_pen_select_selectionMode" class="axpc_MSG axpc_NONE" data-msg="@PEN0017">
                     <option value="option_replace">${_("@PEN.OPTION_SELECTION_REPLACE")}</option>
                     <option value="option_add">${_("@PEN.OPTION_SELECTION_ADD")}</option>

@@ -4,10 +4,15 @@
 // Color to Alpha（指定した基準色=既定は白を、色を保ったまま透明度へ変換する）
 // GIMP/Krita と同じアンミックス式: 各チャンネルで基準色との乖離から必要alphaを逆算し、
 // 得られたalphaで割り戻して基準色の混色分を除去した元の色を復元する。
-export function colorToAlpha(imageData, baseColor = { r: 255, g: 255, b: 255 }) {
+export function colorToAlpha(imageData, options = { r: 255, g: 255, b: 255 }) {
     const src = imageData.data;
     const out = new ImageData(imageData.width, imageData.height);
     const dst = out.data;
+    const mode = options?.mode || 'unmix';
+    const replacementColor = options?.replacementColor || null;
+    const baseColor = mode === 'unmix'
+        ? (options?.baseColor || options)
+        : { r: 255, g: 255, b: 255 };
     const { r: br, g: bg, b: bb } = baseColor;
 
     const channelAlpha = (c, b) => {
@@ -21,6 +26,23 @@ export function colorToAlpha(imageData, baseColor = { r: 255, g: 255, b: 255 }) 
         if (a0 === 0) {
             // 元々透明な画素はそのまま
             dst[i] = r; dst[i + 1] = g; dst[i + 2] = b; dst[i + 3] = 0;
+            continue;
+        }
+        if (mode === 'luminance' || mode === 'inverted-luminance') {
+            const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+            const opacity = mode === 'inverted-luminance' ? 1 - lum : lum;
+            const colorAlpha = replacementColor?.a ?? 255;
+            const newAlpha = Math.round(opacity * a0 * (colorAlpha / 255));
+            if (replacementColor && newAlpha > 0) {
+                dst[i] = replacementColor.r;
+                dst[i + 1] = replacementColor.g;
+                dst[i + 2] = replacementColor.b;
+            } else {
+                dst[i] = r;
+                dst[i + 1] = g;
+                dst[i + 2] = b;
+            }
+            dst[i + 3] = Math.max(0, Math.min(255, newAlpha));
             continue;
         }
         const aR = channelAlpha(r, br);

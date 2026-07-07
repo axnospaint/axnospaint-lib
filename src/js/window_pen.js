@@ -20,7 +20,7 @@ import { Fill } from './pendefine/fill.js';
 import { Fillgradation } from './pendefine/fillgradation.js';
 
 import { Hand } from './pendefine/hand.js';
-import { Spuit } from './pendefine/spuit.js';
+import { getSpuitSampleImageData, normalizeSpuitSampleMode, Spuit } from './pendefine/spuit.js';
 
 // サブ
 import { Square } from './pendefine/square.js';
@@ -1265,6 +1265,12 @@ export class PenSystem extends ToolWindow {
         } else {
             UTIL.hide('axp_pen_select_selectionMode');
         }
+        // スポイト取得対象セレクトボックス
+        if (type === 'spuit') {
+            UTIL.show('axp_pen_select_spuitSampleMode');
+        } else {
+            UTIL.hide('axp_pen_select_spuitSampleMode');
+        }
         // 階調バケツ：多ストップグラデーション編集UI（Fillgradationのtypeは基底のFillと同じ
         // 'fill'のままのため、専用フラグusesGradientStopsで判別する。usesSelectionModeと
         // 同じ設計＝プロパティ存在チェックだと将来別ペンの同名プロパティと衝突しうるため）
@@ -1297,6 +1303,11 @@ export class PenSystem extends ToolWindow {
     previewPenSize() {
         this.penObj[this.pen_mode].previewPenSize();
     }
+    getSpuitSampleMode() {
+        return normalizeSpuitSampleMode(
+            document.getElementById('axp_pen_select_spuitSampleMode')?.value
+        );
+    }
     spuit(e) {
         // キャンバス外の場合処理しない
         // console.log('spuit:', e.target.id, this.axpObj.CANVAS.main.id);
@@ -1310,7 +1321,7 @@ export class PenSystem extends ToolWindow {
         var x = pos.x;
         var y = pos.y;
         // 座標のドットを読み取る
-        var imagedata = this.axpObj.CANVAS.main_ctx.getImageData(x, y, 1, 1);
+        var imagedata = getSpuitSampleImageData(this.axpObj, x, y, this.getSpuitSampleMode());
         // RGBAの取得
         var r = imagedata.data[0];
         var g = imagedata.data[1];

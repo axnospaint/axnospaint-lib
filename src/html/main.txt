@@ -180,6 +180,8 @@
 							role="tab">${_("@MOBILE.TAB_LAYER")}</button>
 						<button type="button" class="axpm-sheet__tab" data-sheettab="axp_tool"
 							role="tab">${_("@MOBILE.TAB_TOOL")}</button>
+						<button type="button" class="axpm-sheet__tab" data-sheettab="axp_filter"
+							role="tab">${_("@WINDOW.FILTER")}</button>
 					</div>
 				</div>
 

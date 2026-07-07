@@ -69,6 +69,17 @@
     grid-column: 1 / -1;
 }
 
+.axpc_filter_section_colorToAlpha {
+    grid-column: 1 / -1;
+}
+
+.axpc_filter_select,
+#axp_filter_color_colorToAlphaReplacement {
+    width: 100%;
+    min-width: 0;
+    height: 24px;
+}
+
 .axpc_filter_colorBalanceBands {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
