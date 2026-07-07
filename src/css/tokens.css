@@ -23,4 +23,52 @@
     --axp-h-icon-btn: 44px;
     --axp-h-compact-btn: 24px;
     --axp-h-compact-range: 24px;
+
+    /* ---- 追加 (Phase1: design/tokens.css 由来、components.css 用) ---- */
+    --axp-surface-strong: rgba(0, 0, 0, 0.80);
+    --axp-surface-solid: #000;
+    --axp-surface-tab: #333;
+    --axp-surface-tab-hover: #555;
+    --axp-surface-tab-active: #777;
+    --axp-surface-footer: #222;
+    --axp-border-1: #000;
+    --axp-border-2: #555;
+    --axp-border-3: #888;
+    --axp-accent-dark: #533C21;
+    --axp-sp-0: 2px;
+    --axp-sp-4: 12px;
+    --axp-ff: sans-serif;
+    --axp-fs-xs: 10px;
+    --axp-fs-sm: 11px;
+    --axp-fs-md: 13px;
+    --axp-fs-base: 15px;
+    --axp-h-tab: 30px;
+    --axp-h-btn: 24px;
+    --axp-h-btn-compact: 20px;
+    --axp-h-range: 18px;
+    --axp-shadow-window: 4px 4px 8px #000a;
+    --axp-shadow-icon: 0 0 10px #000;
+    --axp-blur: 3px;
+    --axp-window-w: 180px;
+    --axp-tool-w: 300px;
+    --axp-content-pad: 5px;
+}
+
+/* コンパクト密度 (案B/C 想定, design/tokens.css 由来) */
+[data-density="compact"] {
+    --axp-window-w: 172px;
+    --axp-tool-w: 288px;
+    --axp-content-pad: 4px;
+    --axp-h-btn: 22px;
+    --axp-h-range: 16px;
+}
+
+/* 超コンパクト (design/tokens.css 由来) */
+[data-density="tight"] {
+    --axp-window-w: 160px;
+    --axp-tool-w: 260px;
+    --axp-content-pad: 3px;
+    --axp-h-btn: 20px;
+    --axp-h-range: 14px;
+    --axp-fs-md: 12px;
 }
