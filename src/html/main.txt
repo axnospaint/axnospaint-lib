@@ -68,6 +68,88 @@
 						aria-label="${_("@MISC.BUTTON_VIEW_RESET")}"></button>
 				</div>
 
+				<!-- 左ドック（PC用：ペン切替+ドック操作。599px以下ではCSSで非表示） -->
+				<aside id="axp_dock_left" class="axp-dock axp-dock--left">
+					<button type="button" class="axpc_FUNC axp-dock__pen axp-dock__ic-pen"
+						data-function="func_switch_axp_penmode_round" data-penmode="axp_penmode_round"
+						data-msg="@PEN0100" aria-label="${_("@PENNAME.ROUND")}"></button>
+					<button type="button" class="axpc_FUNC axp-dock__pen axp-dock__ic-eraser"
+						data-function="func_switch_axp_penmode_eraser_round" data-penmode="axp_penmode_eraser_round"
+						data-msg="@PEN0110" aria-label="${_("@PENNAME.ERASER")}"></button>
+					<button type="button" class="axpc_FUNC axp-dock__pen axp-dock__ic-fill"
+						data-function="func_switch_axp_penmode_fill" data-penmode="axp_penmode_fill"
+						data-msg="@PEN0120" aria-label="${_("@PENNAME.FILL")}"></button>
+					<button type="button" class="axpc_FUNC axp-dock__pen axp-dock__ic-spuit"
+						data-function="func_switch_spuit" data-penmode="axp_penmode_spuit"
+						data-msg="@PEN0054" aria-label="${_("@PENNAME.EYEDROPPER")}"></button>
+					<button type="button" class="axpc_FUNC axp-dock__pen axp-dock__ic-hand"
+						data-function="func_switch_axp_penmode_hand" data-penmode="axp_penmode_hand"
+						data-msg="@PEN0130" aria-label="${_("@PENNAME.HAND")}"></button>
+					<button type="button" class="axpc_FUNC axp-dock__pen axp-dock__ic-nagenawa"
+						data-function="func_switch_axp_penmode_nagenawa" data-penmode="axp_penmode_nagenawa"
+						data-msg="@PEN0132" aria-label="${_("@PENNAME.NAGENAWA")}"></button>
+					<button id="axp_dock_button_pentool" type="button"
+						class="axpc_MSG axp-dock__btn axp-dock__ic-pentool"
+						aria-label="${_("@WINDOW.PEN_TOOL")}"></button>
+					<div class="axp-dock__sep"></div>
+					<button type="button" class="axpc_FUNC axp-dock__mini axp-dock__ic-undo"
+						data-function="func_undo" data-msg="@AST0006"
+						aria-label="${_("@MISC.BUTTON_UNDO")}"></button>
+					<button type="button" class="axpc_FUNC axp-dock__mini axp-dock__ic-redo"
+						data-function="func_redo" data-msg="@AST0007"
+						aria-label="${_("@MISC.BUTTON_REDO")}"></button>
+				</aside>
+
+				<!-- 右ドック（PC用：ウィンドウトグル+設定） -->
+				<aside id="axp_dock_right" class="axp-dock axp-dock--right">
+					<button id="axp_dock_button_layer" type="button"
+						class="axpc_MSG axp-dock__btn axp-dock__ic-layer"
+						aria-label="${_("@WINDOW.LAYER")}"></button>
+					<button id="axp_dock_button_color" type="button"
+						class="axpc_MSG axp-dock__btn axp-dock__ic-color"
+						aria-label="${_("@WINDOW.COLOR")}"></button>
+					<button id="axp_dock_button_palette" type="button"
+						class="axpc_MSG axp-dock__btn axp-dock__ic-palette"
+						aria-label="${_("@WINDOW.SWATCHES")}"></button>
+					<button id="axp_dock_button_subtool" type="button"
+						class="axpc_MSG axp-dock__btn axp-dock__ic-subtool"
+						aria-label="${_("@WINDOW.MISC")}"></button>
+					<button id="axp_dock_button_filter" type="button"
+						class="axpc_MSG axp-dock__btn axp-dock__ic-filter"
+						aria-label="${_("@WINDOW.FILTER")}"></button>
+					<div class="axp-dock__spacer"></div>
+					<button id="axp_dock_button_config" type="button"
+						class="axp-dock__btn axp-dock__ic-config"
+						aria-label="${_("@TAB.SETTINGS")}"></button>
+				</aside>
+
+				<!-- クイックバー（PC用：色/ペンサイズ/Undo/Redo/ズーム。coarseポインタ環境では非表示） -->
+				<div id="axp_quickbar" class="axp-quickbar">
+					<div class="axp-quickbar__group">
+						<button id="axp_quickbar_button_color" type="button" class="axp-quickbar__swatch"
+							aria-label="${_("@WINDOW.COLOR")}"></button>
+						<span id="axp_quickbar_span_hex" class="axp-quickbar__hex">#000000</span>
+					</div>
+					<div class="axp-quickbar__group">
+						<span class="axp-quickbar__label">${_("@PEN.SIZE")}</span>
+						<input id="axp_quickbar_range_penSize" class="axp-quickbar__range" type="range"
+							min="1" max="200" value="8" aria-label="${_("@PEN.SIZE")}">
+						<span id="axp_quickbar_span_penSize" class="axp-quickbar__val">8</span>
+					</div>
+					<div class="axp-quickbar__group">
+						<button type="button" class="axpc_FUNC axp-quickbar__btn axp-quickbar__btn--undo"
+							data-function="func_undo" data-msg="@AST0006"
+							aria-label="${_("@MISC.BUTTON_UNDO")}"></button>
+						<button type="button" class="axpc_FUNC axp-quickbar__btn axp-quickbar__btn--redo"
+							data-function="func_redo" data-msg="@AST0007"
+							aria-label="${_("@MISC.BUTTON_REDO")}"></button>
+						<button id="axp_quickbar_button_zoom" type="button"
+							class="axpc_FUNC axp-quickbar__btn axp-quickbar__btn--zoom"
+							data-function="func_loupe_reset" data-msg="@AST0004"
+							aria-label="${_("@MISC.BUTTON_VIEW_RESET")}">100%</button>
+					</div>
+				</div>
+
 				<!-- ポインタ座標表示領域 -->
 				<div id="axp_canvas_div_pointerPosition" class="axpc_NONE"></div>
 

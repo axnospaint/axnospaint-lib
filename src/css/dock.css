@@ -1,0 +1,221 @@
+/* ==========================================================================
+   案C: サイドドック + クイックバー (PC)
+   - 左ドック: 主要ペン6種 + ペン種選択 + Undo/Redo
+   - 右ドック: ウィンドウ開閉 (レイヤー/色/パレット/補助/フィルタ) + 設定
+   - クイックバー: 下部中央 pill (色 / 太さ / Undo / Redo / Zoomリセット)
+   z-index: 既存フローティングウィンドウ (1000+) より下、キャンバス表示物より上
+   ========================================================================== */
+
+.axp-dock {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    width: 52px;
+    z-index: 950;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+.axp-dock::-webkit-scrollbar { display: none; }
+.axp-dock--left  { left: 0;  border-radius: 0 var(--axp-r-lg) var(--axp-r-lg) 0; }
+.axp-dock--right { right: 0; border-radius: var(--axp-r-lg) 0 0 var(--axp-r-lg); }
+
+/* ドック内 ペン種ボタン (44x44、既存ペンアイコン踏襲) */
+.axp-dock__pen {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--axp-r-md);
+    border: 3px solid #000;
+    background-color: #aaa;
+    background-position: center;
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+    box-shadow: var(--axp-shadow-icon);
+    cursor: pointer;
+    padding: 0;
+}
+.axp-dock__pen:hover { border-color: #fff; }
+.axp-dock__pen[data-selected="true"] { background-color: var(--axp-accent); }
+
+/* ドック内 汎用アイコンボタン (44x44、半透明地) */
+.axp-dock__btn {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    background-position: center;
+    background-size: 28px 28px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.axp-dock__btn:hover { background-color: rgba(255, 255, 255, 0.15); }
+.axp-dock__btn[data-active="true"] {
+    background-color: var(--axp-accent-soft);
+    box-shadow: inset 0 0 0 2px var(--axp-accent);
+}
+
+/* ドック内 小型ボタン (Undo/Redo等 44x32) */
+.axp-dock__mini {
+    flex: 0 0 32px;
+    width: 44px;
+    height: 32px;
+    border: 0;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    background-position: center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding: 0;
+}
+.axp-dock__mini:hover { background-color: rgba(255, 255, 255, 0.15); }
+
+/* 区切り線 */
+.axp-dock__sep {
+    flex: 0 0 1px;
+    width: 100%;
+    height: 1px;
+    background: #444;
+    margin: 6px 0;
+}
+.axp-dock__spacer { flex: 1 1 auto; }
+
+/* ドック個別アイコン (resource PNG) */
+.axp-dock__ic-pen      { background-image: url('../../resource/pen1.png'); }
+.axp-dock__ic-eraser   { background-image: url('../../resource/eraser.png'); }
+.axp-dock__ic-fill     { background-image: url('../../resource/fill.png'); }
+.axp-dock__ic-spuit    { background-image: url('../../resource/spuit.png'); }
+.axp-dock__ic-hand     { background-image: url('../../resource/hand.png'); }
+.axp-dock__ic-nagenawa { background-image: url('../../resource/nagenawa.png'); }
+.axp-dock__ic-undo     { background-image: url('../../resource/undo.png'); }
+.axp-dock__ic-redo     { background-image: url('../../resource/redo.png'); }
+.axp-dock__ic-layer    { background-image: url('../../resource/window_layer.png'); }
+.axp-dock__ic-color    { background-image: url('../../resource/window_colormaker.png'); }
+.axp-dock__ic-palette  { background-image: url('../../resource/window_palette.png'); }
+.axp-dock__ic-subtool  { background-image: url('../../resource/window_subtool.png'); }
+.axp-dock__ic-pentool  { background-image: url('../../resource/window_pen.png'); }
+.axp-dock__ic-config   { background-image: url('../../resource/config.png'); background-size: 20px 20px; }
+/* フィルタ (icon.css の漏斗SVGと同一) */
+.axp-dock__ic-filter {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg>');
+    background-size: 24px 24px;
+}
+/* もっと見る (…) */
+.axp-dock__ic-more {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>');
+    background-size: 22px 22px;
+}
+
+/* ==========================================================================
+   クイックバー (下部中央 pill)
+   ========================================================================== */
+.axp-quickbar {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    z-index: 940;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: calc(100% - 128px);
+    box-sizing: border-box;
+}
+.axp-quickbar__group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+}
+.axp-quickbar__group:not(:last-child) { border-right: 1px solid rgba(255, 255, 255, 0.1); }
+
+.axp-quickbar__swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid #333;
+    background: #000;
+    cursor: pointer;
+    padding: 0;
+}
+.axp-quickbar__hex {
+    font-family: monospace;
+    font-size: 11px;
+    color: #eee;
+    min-width: 56px;
+}
+.axp-quickbar__label {
+    font-size: 11px;
+    color: var(--axp-text-muted);
+    white-space: nowrap;
+}
+.axp-quickbar input[type="range"] {
+    width: 80px;
+    min-width: 0;
+    height: 14px;
+    margin: 0;
+}
+.axp-quickbar__val {
+    font-size: 11px;
+    color: #fff;
+    font-family: monospace;
+    min-width: 22px;
+    text-align: right;
+}
+.axp-quickbar__btn {
+    width: 30px;
+    height: 26px;
+    border: 0;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.06);
+    background-position: center;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    color: #eee;
+    font-size: 11px;
+    padding: 0;
+}
+.axp-quickbar__btn:hover { background-color: rgba(255, 255, 255, 0.18); }
+.axp-quickbar__btn--undo { background-image: url('../../resource/undo.png'); }
+.axp-quickbar__btn--redo { background-image: url('../../resource/redo.png'); }
+.axp-quickbar__btn--zoom { width: auto; min-width: 44px; padding: 0 6px; }
+
+/* ==========================================================================
+   表示制御
+   - モバイル幅 / タッチ環境ではドック・クイックバーを隠す (既存UIを優先)
+   ========================================================================== */
+@media (max-width: 599px) {
+    .axp-dock,
+    .axp-quickbar {
+        display: none;
+    }
+}
+/* タッチ環境では既存の touchBar と競合するためクイックバーのみ非表示 */
+@media (pointer: coarse) {
+    .axp-quickbar {
+        display: none;
+    }
+}
