@@ -63,6 +63,19 @@ export class DockSystem {
     toggleWindow(windowId) {
         const windowElement = document.getElementById(windowId);
         if (!windowElement) return;
+        // 全体非表示（axpc_window_hidden）中は、まずランチャーの一括ボタンと同じ経路で
+        // 全体表示に復帰する（hiddenクラスの解除と一括ボタンの状態を整合させるため）
+        if (windowElement.classList.contains('axpc_window_hidden')) {
+            const allButton = document.querySelector('.axpc_launcher_allButton');
+            if (allButton?.classList.contains('axpc_launcher_minimize')) {
+                allButton.click();
+            }
+            // 復帰後、対象ウィンドウが最小化されていなければ表示状態になっているため
+            // ここで終了する（「表示したい」というユーザー意図に合わせ、閉じない）
+            if (!windowElement.classList.contains('axpc_window_minimize')) {
+                return;
+            }
+        }
         const isMinimized = windowElement.classList.contains('axpc_window_minimize');
         if (isMinimized) {
             // オープン
@@ -125,10 +138,13 @@ export class DockSystem {
         // メインカラー表示要素のstyle変化を監視（色変更のすべての経路をカバー）
         new MutationObserver(sync).observe(mainColorElement, { attributes: true, attributeFilter: ['style'] });
         sync();
-        // スウォッチクリックで色作成ウィンドウを開く
+        // スウォッチクリックで色作成ウィンドウを開く（最小化・全体非表示のどちらからも復帰）
         swatch.addEventListener('click', () => {
             const makecolor = document.getElementById('axp_makecolor');
-            if (makecolor?.classList.contains('axpc_window_minimize')) {
+            if (makecolor && (
+                makecolor.classList.contains('axpc_window_minimize') ||
+                makecolor.classList.contains('axpc_window_hidden')
+            )) {
                 this.toggleWindow('axp_makecolor');
             }
         });

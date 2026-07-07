@@ -18,7 +18,7 @@
     -webkit-backdrop-filter: blur(var(--axp-blur));
     backdrop-filter: blur(var(--axp-blur));
     font: 400 var(--axp-fs-base) var(--axp-ff);
-    line-height: 14px;
+    line-height: 1.4;
 }
 .axp-window * { box-sizing: border-box; }
 

@@ -31,6 +31,29 @@ test('dock and mobile systems start after the interop system', () => {
   assert.match(axpobjJs, /this\.interopSystem\.startEvent\(\);\s*\n\s*this\.dockSystem\.startEvent\(\);\s*\n\s*this\.mobileSystem\.startEvent\(\);/);
 });
 
+test('dock toggle recovers windows from the all-hidden state', () => {
+  const dockJs = readFileSync(new URL('../src/js/dock.js', import.meta.url), 'utf8');
+  // toggleWindow は axpc_window_hidden（全体非表示）からの復帰経路を持つ
+  const toggle = dockJs.match(/toggleWindow\(windowId\) \{(?<body>[\s\S]*?)\n {4}\}/);
+  assert.ok(toggle);
+  assert.match(toggle.groups.body, /axpc_window_hidden/);
+  assert.match(toggle.groups.body, /axpc_launcher_allButton/);
+  // クイックバーの色スウォッチも hidden 状態から復帰できる
+  const swatchHandler = dockJs.match(/swatch\.addEventListener\('click',(?<body>[\s\S]*?)\}\);/);
+  assert.ok(swatchHandler);
+  assert.match(swatchHandler.groups.body, /axpc_window_hidden/);
+});
+
+test('shared window frame keeps line-height at or above font size', () => {
+  const componentsCss = readFileSync(new URL('../src/css/components.css', import.meta.url), 'utf8');
+  const frame = componentsCss.match(/\.axp-window\s*\{(?<body>[\s\S]*?)\n\}/);
+  assert.ok(frame);
+  // 15pxフォントに対して行間が潰れないよう、相対値(>=1)を要求
+  const lineHeight = frame.groups.body.match(/line-height:\s*([\d.]+)\s*;/);
+  assert.ok(lineHeight, 'line-height must be a unitless relative value');
+  assert.ok(Number(lineHeight[1]) >= 1);
+});
+
 test('config tab uses the case-C dark theme with accent-highlighted navigation', () => {
   const configCss = readFileSync(new URL('../src/css/config.css', import.meta.url), 'utf8');
   assert.match(configCss, /#axp_config_div_content\s*\{[\s\S]*?background:\s*#1a1a1a/);
