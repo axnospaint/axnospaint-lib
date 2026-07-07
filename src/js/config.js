@@ -290,6 +290,13 @@ export class ConfigSystem {
             }
             // 引数で渡されたbutton要素に、axpc_ACTIVEクラスを付与
             element.classList.add('axpc_ACTIVE');
+            // モバイル用セレクトボックスの選択値も現在のセクションに連動させる
+            const navButtons = document.querySelectorAll('#axp_config_div_navButton button');
+            const idx = Array.from(navButtons).indexOf(element);
+            const mobileSelect = document.getElementById('axp_config_select_mobileNav');
+            if (mobileSelect !== null && idx !== -1) {
+                mobileSelect.value = String(idx);
+            }
         }
         // 交差検知共通
         const doWhenIntersect = (entries) => {
@@ -351,6 +358,7 @@ export class ConfigSystem {
         {
             const select = document.createElement('select');
             select.id = 'axp_config_select_mobileNav';
+            select.setAttribute('aria-label', 'セクション移動');
             for (let i = 0; i < elementsNavButton.length; i++) {
                 const option = document.createElement('option');
                 option.value = String(i);

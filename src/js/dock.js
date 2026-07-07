@@ -184,7 +184,7 @@ export class DockSystem {
         const zoomButton = document.getElementById('axp_quickbar_button_zoom');
         if (!zoomButton) return;
         const syncZoom = () => {
-            zoomButton.textContent = `${this.axpObj.scale}%`;
+            zoomButton.textContent = `${Math.round(this.axpObj.scale)}%`;
         };
         // 表示更新の中心経路 refreshCanvas をフックして倍率表示を追従
         const original = this.axpObj.refreshCanvas.bind(this.axpObj);

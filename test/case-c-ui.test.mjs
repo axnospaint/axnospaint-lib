@@ -69,6 +69,32 @@ test('config tab generates the mobile section-jump select', () => {
   assert.match(configJs, /insertAdjacentElement\('afterbegin', select\)/);
 });
 
+test('mobile sheet tab recovers windows from the all-hidden state', () => {
+  const mobileJs = readFileSync(new URL('../src/js/mobile.js', import.meta.url), 'utf8');
+  const open = mobileJs.match(/openSheetTab\(windowId\) \{(?<body>[\s\S]*?)\n {4}\}/);
+  assert.ok(open);
+  // dock.js の toggleWindow と同じ復帰経路（ランチャー一括ボタン経由）を持つ
+  assert.match(open.groups.body, /axpc_window_hidden/);
+  assert.match(open.groups.body, /axpc_launcher_allButton/);
+});
+
+test('quickbar zoom readout rounds the scale like the loupe reset button', () => {
+  const dockJs = readFileSync(new URL('../src/js/dock.js', import.meta.url), 'utf8');
+  // axpobj.js の refreshCanvas と同じく Math.round した倍率を表示する
+  assert.match(dockJs, /Math\.round\(this\.axpObj\.scale\)/);
+});
+
+test('config mobile select stays in sync with the active nav section', () => {
+  const configJs = readFileSync(new URL('../src/js/config.js', import.meta.url), 'utf8');
+  // IntersectionObserver→activateButton 経由でセレクト値が更新される
+  const activate = configJs.match(/const activateButton = \(element\) => \{(?<body>[\s\S]*?)\n {8}\}/);
+  assert.ok(activate);
+  assert.match(activate.groups.body, /axp_config_select_mobileNav/);
+  assert.match(activate.groups.body, /mobileSelect\.value = String\(idx\)/);
+  // セレクトにはアクセシブルネームを付与する
+  assert.match(configJs, /select\.setAttribute\('aria-label',/);
+});
+
 test('subwindows and saveload share the case-C dark frame treatment', () => {
   const commonCss = readFileSync(new URL('../src/css/common.css', import.meta.url), 'utf8');
   const saveloadCss = readFileSync(new URL('../src/css/saveload.css', import.meta.url), 'utf8');

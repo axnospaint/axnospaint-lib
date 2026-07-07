@@ -120,6 +120,15 @@ export class MobileSystem {
         if (!SHEET_WINDOW_IDS.includes(windowId)) return;
         const windowElement = document.getElementById(windowId);
         if (!windowElement) return;
+        // 全体非表示（axpc_window_hidden）中は、ランチャーの一括ボタン経由で
+        // 全体表示に復帰させる（dock.jsのtoggleWindowと同一の復帰経路。
+        // hidden解除・一括ボタンのアイコン状態・設定値の整合を保つため）
+        if (windowElement.classList.contains('axpc_window_hidden')) {
+            const allButton = document.querySelector('.axpc_launcher_allButton');
+            if (allButton?.classList.contains('axpc_launcher_minimize')) {
+                allButton.click();
+            }
+        }
         // 表示中の他ウィンドウをシートから外す
         for (const otherId of SHEET_WINDOW_IDS) {
             if (otherId === windowId) continue;
