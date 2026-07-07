@@ -19,6 +19,7 @@ import { SaveSystem } from './saveload.js';
 import { KeyboardSystem } from './keyboard.js';
 import { InteropSystem } from './interop.js';
 import { DockSystem } from './dock.js';
+import { MobileSystem } from './mobile.js';
 import { UTIL, loadImageWithTimeout, calcDistance, adjustInRange, getFileNameFromURL, rotateVector, normalizeDeg180 } from './etc.js';
 import { Message } from './message.js';
 import { DebugLog } from './debuglog.js';
@@ -312,6 +313,7 @@ export class AXPObj {
         this.postSystem = new PostSystem(this);
         this.interopSystem = new InteropSystem(this);
         this.dockSystem = new DockSystem(this);
+        this.mobileSystem = new MobileSystem(this);
 
         // デフォルト値設定
         this.minWidth = this.CONST.CANVAS_X_MIN;
@@ -513,6 +515,7 @@ export class AXPObj {
         this.postSystem.startEvent();
         this.interopSystem.startEvent();
         this.dockSystem.startEvent();
+        this.mobileSystem.startEvent();
 
         // a11y: アイコンのみのボタン（テキストラベルを持たない）へ、既存のホバー説明文
         // （data-msg、msg.txt辞書）からaria-labelを自動付与する。スクリーンリーダー利用時に

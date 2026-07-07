@@ -150,6 +150,34 @@
 					</div>
 				</div>
 
+				<!-- モバイル用トップバー（599px以下でのみCSSで表示） -->
+				<div id="axp_mobile_topbar" class="axpm-topbar">
+					<button id="axp_mobile_button_color" type="button" class="axpm-topbar__swatch"
+						aria-label="${_("@WINDOW.COLOR")}"></button>
+					<button id="axp_mobile_button_pen" type="button" class="axpm-topbar__pen"
+						aria-label="${_("@WINDOW.PEN_TOOL")}"><span
+							id="axp_mobile_span_penName">-</span></button>
+					<input id="axp_mobile_range_penSize" class="axpm-topbar__range" type="range"
+						min="1" max="200" value="8" aria-label="${_("@PEN.SIZE")}">
+					<span id="axp_mobile_span_penSize" class="axpm-topbar__val">8</span>
+				</div>
+
+				<!-- モバイル用ボトムシート（タブでツールウィンドウを切替表示） -->
+				<div id="axp_mobile_sheet" class="axpm-sheet">
+					<button id="axp_mobile_sheet_handle" type="button" class="axpm-sheet__handle"
+						aria-label="${_("@MOBILE.TAB_CLOSE")}"><span></span></button>
+					<div class="axpm-sheet__tabs" role="tablist">
+						<button type="button" class="axpm-sheet__tab" data-sheettab="axp_pen"
+							role="tab">${_("@MOBILE.TAB_PEN")}</button>
+						<button type="button" class="axpm-sheet__tab" data-sheettab="axp_makecolor"
+							role="tab">${_("@MOBILE.TAB_COLOR")}</button>
+						<button type="button" class="axpm-sheet__tab" data-sheettab="axp_layer"
+							role="tab">${_("@MOBILE.TAB_LAYER")}</button>
+						<button type="button" class="axpm-sheet__tab" data-sheettab="axp_tool"
+							role="tab">${_("@MOBILE.TAB_TOOL")}</button>
+					</div>
+				</div>
+
 				<!-- ポインタ座標表示領域 -->
 				<div id="axp_canvas_div_pointerPosition" class="axpc_NONE"></div>
 
