@@ -290,6 +290,13 @@ export class ConfigSystem {
             }
             // 引数で渡されたbutton要素に、axpc_ACTIVEクラスを付与
             element.classList.add('axpc_ACTIVE');
+            // モバイル用セレクトボックスの選択値も現在のセクションに連動させる
+            const navButtons = document.querySelectorAll('#axp_config_div_navButton button');
+            const idx = Array.from(navButtons).indexOf(element);
+            const mobileSelect = document.getElementById('axp_config_select_mobileNav');
+            if (mobileSelect !== null && idx !== -1) {
+                mobileSelect.value = String(idx);
+            }
         }
         // 交差検知共通
         const doWhenIntersect = (entries) => {
@@ -343,6 +350,29 @@ export class ConfigSystem {
                     activateButton(e.target);
                 }
             });
+        }
+
+        // モバイル用セクションジャンプ（セレクトボックス）
+        // 左ナビは599px以下でCSS非表示になるため、ナビボタンと同名の選択肢を持つ
+        // selectを本文先頭に生成する。表示制御はconfig.cssのメディアクエリで行う。
+        {
+            const select = document.createElement('select');
+            select.id = 'axp_config_select_mobileNav';
+            select.setAttribute('aria-label', 'セクション移動');
+            for (let i = 0; i < elementsNavButton.length; i++) {
+                const option = document.createElement('option');
+                option.value = String(i);
+                option.textContent = elementsNavButton[i].textContent;
+                select.appendChild(option);
+            }
+            select.addEventListener('change', () => {
+                const idx = Number(select.value);
+                if (elementsSection[idx]) {
+                    elementsSection[idx].scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            const pageMain = document.getElementById('axp_config_div_pageMain');
+            pageMain?.insertAdjacentElement('afterbegin', select);
         }
 
         // ユーザーが設定を変更したとき、変更内容をコンフィグオブジェクトへ保存する

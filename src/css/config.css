@@ -1,9 +1,11 @@
-/* 設定タブ */
+/* 設定タブ（案C ダークテーマ） */
 #axp_config_div_content {
     display: flex;
     margin: 0;
     padding: 0;
     height: 100%;
+    background: #1a1a1a;
+    color: #eee;
 }
 
 /* 左側：ナビゲーションメニュー */
@@ -13,7 +15,8 @@
     overflow: auto;
     position: sticky;
     top: 0;
-    background-color: #eee;
+    background-color: #141414;
+    border-right: 1px solid #262626;
     padding: 10px;
     /* iPad跳ね返り防止 */
     overscroll-behavior: none;
@@ -25,8 +28,8 @@
     height: 40px;
     border-radius: 6px;
     border: 0;
-    background-color: #eee;
-    color: #111;
+    background-color: transparent;
+    color: #bbb;
     cursor: pointer;
     margin: 1px 0;
     padding-left: 8px;
@@ -35,17 +38,38 @@
     text-align: left;
 }
 
+#axp_config_div_nav button:hover {
+    background: #1e1e1e;
+    color: #fff;
+}
+
 #axp_config_div_nav button.axpc_ACTIVE {
-    background: #E09C35;
+    background: rgba(238, 172, 96, 0.15);
+    color: var(--axp-accent, #eeac60);
 }
 
 /* 本文：外枠 */
 .axpc_config_chapter {
     width: calc(100% - 200px);
     height: 100%;
-    padding: 10px;
-    background-color: #eee;
+    padding: 10px 20px;
+    background-color: #1a1a1a;
+    color: #eee;
     overflow-y: scroll;
+}
+
+/* モバイル用セクションジャンプ（デフォルト非表示、599px以下でのみ表示） */
+#axp_config_select_mobileNav {
+    display: none;
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 10px;
 }
 
 /* ブラウザの横幅が599px以下の場合 */
@@ -57,39 +81,59 @@
 
     .axpc_config_chapter {
         width: 100%;
+        padding: 10px;
+    }
+
+    #axp_config_select_mobileNav {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 5;
     }
 }
 
 /* 本文：セクション */
 .axpc_config_section {
     margin-bottom: 50px;
-    color: #111;
+    color: #eee;
 }
 
 /* 本文：セクション見出し */
 .axpc_config_sectionHeader {
-    background: #ddf;
+    background: transparent;
     margin-top: 8px;
-    padding: 8px 8px;
+    padding: 8px 0;
     font-weight: bolder;
+    font-size: 16px;
+    color: #fff;
+    border-bottom: 1px solid #333;
 }
 
 /* 設定用共通グループ（クラスが設定されていると、自動的にaxpc_config_div_headerをもつdiv要素を作成） */
 .axpc_config_group {
-    padding: 16px;
-    border: 2px #ddd solid;
+    padding: 16px 20px 18px;
+    border: 1px solid #2a2a2a;
+    border-radius: 0 0 10px 10px;
+    background: #212121;
+    margin-bottom: 16px;
 }
 
 /* 外部リンク部分のはみ出し回避 */
 .axpc_config_group a {
     overflow-wrap: anywhere;
+    color: #7fb2ff;
 }
 
 /* 設定用共通見出し */
 .axpc_config_groupHeader {
-    background: #ddd;
+    background: #262626;
     margin-top: 8px;
-    padding: 4px 16px;
+    padding: 8px 20px;
+    border: 1px solid #2a2a2a;
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+    color: #fff;
+    font-weight: 600;
 }
 
 /* キャンバス履歴テーブル */
@@ -99,9 +143,11 @@
     margin: 0 0 8px 0;
     padding: 0;
     list-style-type: none;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
+    border-radius: 6px;
     max-height: 220px;
     overflow-y: auto;
+    background: #191919;
 }
 
 #axp_config_ul_canvasSizeHistory>li {
@@ -112,17 +158,18 @@
 }
 
 #axp_config_ul_canvasSizeHistory>li:nth-child(even) {
-    background: #ddd;
+    background: #222;
 }
 
 /* 注意：evenより優先度高 */
 #axp_config_ul_canvasSizeHistory>li[data-selected="true"] {
-    background: #f7a312 !important;
+    background: var(--axp-accent, #eeac60) !important;
+    color: #000;
 }
 
 /* ショートカットテーブル */
 .axpc_config_table {
-    border: 2px solid #aaa;
+    border: 1px solid #333;
     border-collapse: collapse;
 }
 
@@ -133,20 +180,23 @@
 
 .axpc_config_table th {
     padding: 0 8px;
-    background-color: #ddf;
+    background-color: #262626;
+    color: #eee;
 }
 
 .axpc_config_table td {
     padding: 0 8px;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
 }
 
-/* 設定用のカラーパレット表示（モックアップ）*/
+/* 設定用のカラーパレット表示（モックアップ） */
 #axp_config_div_paletteScroll {
     max-width: 228px;
     max-height: 228px;
     overflow: auto;
-    background: #ccc;
+    background: #191919;
+    border: 1px solid #333;
+    border-radius: 6px;
 }
 
 /* 設定用カラーパレット枠 */
@@ -194,9 +244,11 @@
     margin: 0;
     padding: 0;
     list-style-type: none;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
+    border-radius: 6px;
     max-height: 352px;
     overflow-y: scroll;
+    background: #191919;
 }
 
 #axp_config_ul_scale>li {
@@ -207,16 +259,17 @@
 }
 
 #axp_config_ul_scale>li:nth-child(even) {
-    background: #ddd;
+    background: #222;
 }
 
 #axp_config_ul_scale>li[data-value="100"] {
-    border: 1px solid #333;
+    border: 1px solid #555;
 }
 
 /* 注意：evenより優先度高 */
 #axp_config_ul_scale>li[data-selected="true"] {
-    background: #f7a312 !important;
+    background: var(--axp-accent, #eeac60) !important;
+    color: #000;
 }
 
 /* カラータグ */
@@ -231,7 +284,7 @@
 
 .axpc_config_div_colorTag {
     border-radius: 5px;
-    border: #222 solid 2px;
+    border: #444 solid 2px;
     width: 154px;
 }
 
@@ -242,6 +295,9 @@
     text-align: left;
     border-radius: 5px;
     padding-left: 4px;
+    background: #191919;
+    color: #eee;
+    border: 1px solid #333;
 }
 
 /* キーカスタマイズ用拡大率セレクトボックス */
@@ -259,4 +315,46 @@
 #axp_config_div_versionInfo {
     -webkit-user-select: all;
     user-select: all;
+}
+
+/* --- ダークテーマ用フォーム調整（設定タブ内のみ有効） --- */
+
+/* 数値入力・セレクトボックス */
+#axp_config_div_content input[type="number"],
+#axp_config_div_content input[type="text"],
+#axp_config_div_content select {
+    background: #191919;
+    color: #fff;
+    border: 1px solid #2f2f2f;
+    border-radius: 6px;
+}
+
+/* ラジオボタン（自動生成label）のダーク配色 */
+#axp_config_div_content .axpc_radio label {
+    color: #aaa;
+    border: 2px solid #333;
+    background: #1c1c1c;
+    border-radius: 6px;
+}
+
+#axp_config_div_content .axpc_radio label:hover {
+    color: #fff;
+    border-color: #555;
+}
+
+#axp_config_div_content .axpc_radio input[type="radio"]:checked+label {
+    font-weight: bold;
+    color: #000;
+    border: 2px solid var(--axp-accent, #eeac60);
+    background-color: var(--axp-accent, #eeac60);
+}
+
+/* チェックボックス */
+#axp_config_div_content .axpc_checkbox input {
+    accent-color: var(--axp-accent, #eeac60);
+}
+
+/* 下線・強調テキスト */
+#axp_config_div_content u {
+    color: #ccc;
 }

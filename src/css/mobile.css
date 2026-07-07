@@ -1,0 +1,164 @@
+/* ============================================================
+   案C モバイルUI: トップバー + ボトムシート
+   - デフォルトは全て非表示。@media (max-width: 599px) でのみ表示する
+     ため、PC表示には一切影響しない。
+   - 新規クラスは axpm-* プレフィックス（既存の axp_* / axpc_* とは
+     衝突しない）。
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   トップバー（現在色 / ペン名 / 太さ）
+   ------------------------------------------------------------ */
+.axpm-topbar {
+    display: none;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    z-index: 960;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background-color: var(--axp-surface-strong, rgba(0, 0, 0, .8));
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.axpm-topbar__swatch {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background-color: #000;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.axpm-topbar__pen {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 32px;
+    padding: 0 10px;
+    background-color: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 6px;
+    color: var(--axp-color-text, #fff);
+    font-size: var(--axp-fs-s, 12px);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.axpm-topbar__range {
+    flex: 1 1 auto;
+    min-width: 40px;
+    accent-color: var(--axp-color-accent, #eeac60);
+}
+
+.axpm-topbar__val {
+    flex: none;
+    min-width: 26px;
+    color: var(--axp-color-text, #fff);
+    font-size: var(--axp-fs-s, 12px);
+    text-align: right;
+}
+
+/* ------------------------------------------------------------
+   ボトムシート（ハンドル + タブバー）
+   ------------------------------------------------------------ */
+.axpm-sheet {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1300;
+    flex-direction: column;
+    background-color: var(--axp-surface-strong, rgba(0, 0, 0, .8));
+    border-top: 1px solid rgba(255, 255, 255, .15);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.axpm-sheet__handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.axpm-sheet__handle > span {
+    width: 36px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, .35);
+    border-radius: 2px;
+}
+
+.axpm-sheet__tabs {
+    display: flex;
+    gap: 2px;
+    padding: 0 4px 4px;
+}
+
+.axpm-sheet__tab {
+    flex: 1 1 0;
+    height: 36px;
+    padding: 0 2px;
+    background-color: rgba(255, 255, 255, .06);
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: var(--axp-color-text, #fff);
+    font-size: var(--axp-fs-s, 12px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.axpm-sheet__tab[data-active="true"] {
+    background-color: var(--axp-color-accent, #eeac60);
+    border-color: var(--axp-color-accent, #eeac60);
+    color: #000;
+    font-weight: bold;
+}
+
+/* ------------------------------------------------------------
+   モバイル時のみ有効になるレイアウト
+   ------------------------------------------------------------ */
+@media (max-width: 599px) {
+    .axpm-topbar {
+        display: flex;
+    }
+
+    .axpm-sheet {
+        display: flex;
+    }
+
+    /* シート内に取り込まれたツールウィンドウを画面下半分へ再配置
+       （ドラッグによるインラインstyleを上書きするため !important） */
+    #axp_canvas .axpc_window.axpm-in-sheet {
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        bottom: 58px !important;
+        width: auto !important;
+        max-height: 46%;
+        overflow-y: auto;
+        z-index: 1290 !important;
+        border-radius: 8px 8px 0 0;
+    }
+
+    /* タッチ操作バーがシートのタブと重ならないように上へ退避 */
+    #axp_canvas_div_touchBar {
+        bottom: 66px;
+    }
+}

@@ -53,17 +53,16 @@
 }
 
 .axpc_subwindow>div {
-    background-color: #333;
+    background-color: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: #fff;
-    border-color: #000;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #aaa;
-    box-shadow: 4px 4px 8px #777;
-    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
     width: 188px;
     height: auto;
-    padding: 8px;
+    padding: 10px;
 }
 
 /* 色作成 補助線設定のカラー選択枠 */

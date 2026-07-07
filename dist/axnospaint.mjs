@@ -1,5 +1,5 @@
 /*!
- * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-06T12:14:52.878Z)
+ * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-07T03:09:37.843Z)
  * (c) 2026- nijiurachan contributors
  * (c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」
  * Licensed under MPL 2.0
@@ -23,7 +23,7 @@ var isExtenstions = false;
 class ExTool {
     member = [];
     constructor() { }
-}
+} 
 
 /***/ }),
 
@@ -103,12 +103,12 @@ function parseBrushShape(desc) {
                 flipY: desc.flipY,
             };
         case 'dTips': {
-            return Object.assign(Object.assign({ type: 'tips', angle: (0, descriptor_1.parseAngle)(desc.Angl), size: (0, descriptor_1.parseUnitsToNumber)(desc.Dmtr, 'Pixels'), shape: dynamicBrushShapeShapes[desc['Shp ']], physics: desc.physics, spacing: (0, descriptor_1.parsePercent)(desc.Spcn), spacingOn: desc.Intr, flipX: desc.flipX, flipY: desc.flipY,
+            return Object.assign(Object.assign({ type: 'tips', angle: (0, descriptor_1.parseAngle)(desc.Angl), size: (0, descriptor_1.parseUnitsToNumber)(desc.Dmtr, 'Pixels'), shape: dynamicBrushShapeShapes[desc['Shp ']], physics: desc.physics, spacing: (0, descriptor_1.parsePercent)(desc.Spcn), spacingOn: desc.Intr, flipX: desc.flipX, flipY: desc.flipY, 
                 // tips:
                 tipsType: tipsBrushShapeShapes[desc.dtipsType], tipsLengthRatio: (0, descriptor_1.parsePercent)(desc.dtipsLengthRatio), tipsHardness: (0, descriptor_1.parsePercent)(desc.dtipsHardness) }, ((desc.dtipsGridSize && desc.dtipsErodibleTipHeightMap) ? {
                 tipsGridSize: desc.dtipsGridSize,
                 tipsErodibleTipHeightMap: parseHeightmap(desc.dtipsErodibleTipHeightMap),
-            } : {})), {
+            } : {})), { 
                 // airbrush
                 tipsAirbrushCutoffAngle: desc.dtipsAirbrushCutoffAngle, tipsAirbrushGranularity: (0, descriptor_1.parsePercent)(desc.dtipsAirbrushGranularity), tipsAirbrushStreakiness: (0, descriptor_1.parsePercent)(desc.dtipsAirbrushStreakiness), tipsAirbrushSplatSize: (0, descriptor_1.parsePercent)(desc.dtipsAirbrushSplatSize), tipsAirbrushSplatCount: desc.dtipsAirbrushSplatCount });
         }
@@ -2415,7 +2415,7 @@ addHandler('SoLd', hasKey('placedLayer'), (reader, target, left) => {
     if (!placed.id || typeof placed.id !== 'string' || !/^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$/.test(placed.id)) {
         throw new Error('Placed layer ID must be in a GUID format (example: 20953ddb-9391-11ec-b4f1-c15674f50bc4)');
     }
-    const desc = Object.assign(Object.assign({ Idnt: placed.id, placed: (_a = placed.placed) !== null && _a !== void 0 ? _a : placed.id, PgNm: placed.pageNumber || 1, totalPages: placed.totalPages || 1 }, (placed.crop ? { Crop: placed.crop } : {})), { frameStep: placed.frameStep || { numerator: 0, denominator: 600 }, duration: placed.duration || { numerator: 0, denominator: 600 }, frameCount: placed.frameCount || 0, Annt: 16, Type: placedLayerTypes.indexOf(placed.type), Trnf: placed.transform, nonAffineTransform: (_b = placed.nonAffineTransform) !== null && _b !== void 0 ? _b : placed.transform,
+    const desc = Object.assign(Object.assign({ Idnt: placed.id, placed: (_a = placed.placed) !== null && _a !== void 0 ? _a : placed.id, PgNm: placed.pageNumber || 1, totalPages: placed.totalPages || 1 }, (placed.crop ? { Crop: placed.crop } : {})), { frameStep: placed.frameStep || { numerator: 0, denominator: 600 }, duration: placed.duration || { numerator: 0, denominator: 600 }, frameCount: placed.frameCount || 0, Annt: 16, Type: placedLayerTypes.indexOf(placed.type), Trnf: placed.transform, nonAffineTransform: (_b = placed.nonAffineTransform) !== null && _b !== void 0 ? _b : placed.transform, 
         // quiltWarp: {} as any,
         warp: encodeWarp(getWarpFromPlacedLayer(placed)), 'Sz  ': {
             _name: '',
@@ -13435,17 +13435,16 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 共通クラス */
 }
 
 .axpc_subwindow>div {
-    background-color: #333;
+    background-color: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: #fff;
-    border-color: #000;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #aaa;
-    box-shadow: 4px 4px 8px #777;
-    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
     width: 188px;
     height: auto;
-    padding: 8px;
+    padding: 10px;
 }
 
 /* 色作成 補助線設定のカラー選択枠 */
@@ -13503,7 +13502,373 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 共通クラス */
 .axpc_overlay_btn:active {
     background-color: rgba(0, 0, 0, 0.85);
 }
-`, "",{"version":3,"sources":["webpack://./src/css/common.css"],"names":[],"mappings":"AAAA,UAAU;;AAEV,+CAA+C;AAC/C;IACI,wBAAwB;AAC5B;;AAEA,qBAAqB;AACrB;IACI,kBAAkB;AACtB;;AAEA,YAAY;AACZ;IACI;;;;;;;;uCAQmC;IACnC;;;;;KAKC;AACL;;AAEA,iBAAiB;AACjB;IACI,8BAA8B;IAC9B,gGAAgG;IAChG,0BAA0B;IAC1B,qDAAqD;AACzD;;AAEA,cAAc;AACd;IACI,kBAAkB;IAClB,yBAAyB;IACzB,iBAAiB;IACjB,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,gBAAgB;IAChB,kCAAkC;AACtC;;AAEA;IACI,sBAAsB;IACtB,WAAW;IACX,kBAAkB;IAClB,mBAAmB;IACnB,iBAAiB;IACjB,kBAAkB;IAClB,4BAA4B;IAC5B,kBAAkB;IAClB,YAAY;IACZ,YAAY;IACZ,YAAY;AAChB;;AAEA,qBAAqB;AACrB;IACI,YAAY;IACZ,WAAW;IACX,eAAe;IACf,kBAAkB;IAClB,WAAW;IACX,iBAAiB;IACjB,mBAAmB;IACnB,kBAAkB;AACtB;;AAEA,gCAAgC;AAChC;;IAEI,kBAAkB;IAClB,WAAW;IACX,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,4DAA4D;IAC5D,4BAA4B;IAC5B,2BAA2B;IAC3B,0BAA0B;IAC1B,kBAAkB;IAClB,iBAAiB;AACrB;;AAEA,sBAAsB;AACtB;IACI,8CAA8C;IAC9C,YAAY;AAChB;;AAEA;IACI,kBAAkB;IAClB,qCAAqC;AACzC;;AAEA,sBAAsB;AACtB;IACI,6CAA6C;IAC7C,eAAe;IACf,UAAU;IACV,gBAAgB;AACpB;;AAEA;IACI,mDAAmD;IACnD,mBAAmB;AACvB;;AAEA;IACI,qCAAqC;AACzC","sourcesContent":["/* 共通クラス */\n\n/* 要素非表示（IDセレクタのdisplay指定より優先させるため!important） */\n.axpc_NONE {\n    display: none !important;\n}\n\n/* 要素非表示（レイアウト変更なし） */\n.axpc_HIDDEN {\n    visibility: hidden;\n}\n\n/* テキスト縁取り */\n.axpc_text_border {\n    text-shadow:\n        black 2px 0px, black -2px 0px,\n        black 0px -2px, black 0px 2px,\n        black 2px 2px, black -2px 2px,\n        black 2px -2px, black -2px -2px,\n        black 1px 2px, black -1px 2px,\n        black 1px -2px, black -1px -2px,\n        black 2px 1px, black -2px 1px,\n        black 2px -1px, black -2px -1px;\n    /*\n    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000,\n        -1px 1px 0 #000, 1px -1px 0 #000,\n        0px 1px 0 #000, 0-1px 0 #000,\n        -1px 0 0 #000, 1px 0 0 #000;\n    */\n}\n\n/* キャンバスの透過メッシュ */\n.axpc_background_mesh {\n    background: rgb(204, 204, 204);\n    background-image: repeating-conic-gradient(from 0deg, transparent 0deg 90deg, #fff 90deg 180deg);\n    background-size: 16px 16px;\n    background-position: 0 0, 8px 8px, 8px 8px, 16px 16px;\n}\n\n/* サブウィンドウ共通 */\n.axpc_subwindow {\n    touch-action: none;\n    -webkit-user-select: none;\n    user-select: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: hidden;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n.axpc_subwindow>div {\n    background-color: #333;\n    color: #fff;\n    border-color: #000;\n    border-style: solid;\n    border-width: 2px;\n    border-color: #aaa;\n    box-shadow: 4px 4px 8px #777;\n    border-radius: 5px;\n    width: 188px;\n    height: auto;\n    padding: 8px;\n}\n\n/* 色作成 補助線設定のカラー選択枠 */\n.axpc_colorRect {\n    height: 32px;\n    width: 32px;\n    cursor: pointer;\n    border-radius: 5px;\n    margin: 1px;\n    border-width: 2px;\n    border-style: solid;\n    border-color: #aaa;\n}\n\n/* オーバーレイ操作子共通（キャンバス上に浮かぶUI部品） */\n.axpc_overlay_knob,\n.axpc_overlay_btn {\n    position: absolute;\n    width: 40px;\n    height: 40px;\n    z-index: 3000;\n    border-radius: 8px;\n    background-color: var(--axp-knob-bg, rgba(85, 85, 85, 0.85));\n    background-repeat: no-repeat;\n    background-position: center;\n    background-size: 26px 26px;\n    touch-action: none;\n    user-select: none;\n}\n\n/* オーバーレイノブ（ドラッグ操作用） */\n.axpc_overlay_knob {\n    border: 3px solid var(--axp-knob-border, #eee);\n    cursor: grab;\n}\n\n.axpc_overlay_knob:active {\n    cursor: all-scroll;\n    background-color: rgba(0, 0, 0, 0.85);\n}\n\n/* オーバーレイボタン（タップ操作用） */\n.axpc_overlay_btn {\n    border: 2px solid var(--axp-btn-border, #ccc);\n    cursor: pointer;\n    padding: 0;\n    appearance: none;\n}\n\n.axpc_overlay_btn:focus-visible {\n    outline: 2px solid var(--axp-border-focus, #8bd3ff);\n    outline-offset: 2px;\n}\n\n.axpc_overlay_btn:active {\n    background-color: rgba(0, 0, 0, 0.85);\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/css/common.css"],"names":[],"mappings":"AAAA,UAAU;;AAEV,+CAA+C;AAC/C;IACI,wBAAwB;AAC5B;;AAEA,qBAAqB;AACrB;IACI,kBAAkB;AACtB;;AAEA,YAAY;AACZ;IACI;;;;;;;;uCAQmC;IACnC;;;;;KAKC;AACL;;AAEA,iBAAiB;AACjB;IACI,8BAA8B;IAC9B,gGAAgG;IAChG,0BAA0B;IAC1B,qDAAqD;AACzD;;AAEA,cAAc;AACd;IACI,kBAAkB;IAClB,yBAAyB;IACzB,iBAAiB;IACjB,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,gBAAgB;IAChB,kCAAkC;AACtC;;AAEA;IACI,wCAAwC;IACxC,2BAA2B;IAC3B,mCAAmC;IACnC,WAAW;IACX,2CAA2C;IAC3C,0CAA0C;IAC1C,mBAAmB;IACnB,YAAY;IACZ,YAAY;IACZ,aAAa;AACjB;;AAEA,qBAAqB;AACrB;IACI,YAAY;IACZ,WAAW;IACX,eAAe;IACf,kBAAkB;IAClB,WAAW;IACX,iBAAiB;IACjB,mBAAmB;IACnB,kBAAkB;AACtB;;AAEA,gCAAgC;AAChC;;IAEI,kBAAkB;IAClB,WAAW;IACX,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,4DAA4D;IAC5D,4BAA4B;IAC5B,2BAA2B;IAC3B,0BAA0B;IAC1B,kBAAkB;IAClB,iBAAiB;AACrB;;AAEA,sBAAsB;AACtB;IACI,8CAA8C;IAC9C,YAAY;AAChB;;AAEA;IACI,kBAAkB;IAClB,qCAAqC;AACzC;;AAEA,sBAAsB;AACtB;IACI,6CAA6C;IAC7C,eAAe;IACf,UAAU;IACV,gBAAgB;AACpB;;AAEA;IACI,mDAAmD;IACnD,mBAAmB;AACvB;;AAEA;IACI,qCAAqC;AACzC","sourcesContent":["/* 共通クラス */\n\n/* 要素非表示（IDセレクタのdisplay指定より優先させるため!important） */\n.axpc_NONE {\n    display: none !important;\n}\n\n/* 要素非表示（レイアウト変更なし） */\n.axpc_HIDDEN {\n    visibility: hidden;\n}\n\n/* テキスト縁取り */\n.axpc_text_border {\n    text-shadow:\n        black 2px 0px, black -2px 0px,\n        black 0px -2px, black 0px 2px,\n        black 2px 2px, black -2px 2px,\n        black 2px -2px, black -2px -2px,\n        black 1px 2px, black -1px 2px,\n        black 1px -2px, black -1px -2px,\n        black 2px 1px, black -2px 1px,\n        black 2px -1px, black -2px -1px;\n    /*\n    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000,\n        -1px 1px 0 #000, 1px -1px 0 #000,\n        0px 1px 0 #000, 0-1px 0 #000,\n        -1px 0 0 #000, 1px 0 0 #000;\n    */\n}\n\n/* キャンバスの透過メッシュ */\n.axpc_background_mesh {\n    background: rgb(204, 204, 204);\n    background-image: repeating-conic-gradient(from 0deg, transparent 0deg 90deg, #fff 90deg 180deg);\n    background-size: 16px 16px;\n    background-position: 0 0, 8px 8px, 8px 8px, 16px 16px;\n}\n\n/* サブウィンドウ共通 */\n.axpc_subwindow {\n    touch-action: none;\n    -webkit-user-select: none;\n    user-select: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: hidden;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n.axpc_subwindow>div {\n    background-color: rgba(20, 20, 20, 0.94);\n    backdrop-filter: blur(12px);\n    -webkit-backdrop-filter: blur(12px);\n    color: #fff;\n    border: 1px solid rgba(255, 255, 255, 0.12);\n    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);\n    border-radius: 12px;\n    width: 188px;\n    height: auto;\n    padding: 10px;\n}\n\n/* 色作成 補助線設定のカラー選択枠 */\n.axpc_colorRect {\n    height: 32px;\n    width: 32px;\n    cursor: pointer;\n    border-radius: 5px;\n    margin: 1px;\n    border-width: 2px;\n    border-style: solid;\n    border-color: #aaa;\n}\n\n/* オーバーレイ操作子共通（キャンバス上に浮かぶUI部品） */\n.axpc_overlay_knob,\n.axpc_overlay_btn {\n    position: absolute;\n    width: 40px;\n    height: 40px;\n    z-index: 3000;\n    border-radius: 8px;\n    background-color: var(--axp-knob-bg, rgba(85, 85, 85, 0.85));\n    background-repeat: no-repeat;\n    background-position: center;\n    background-size: 26px 26px;\n    touch-action: none;\n    user-select: none;\n}\n\n/* オーバーレイノブ（ドラッグ操作用） */\n.axpc_overlay_knob {\n    border: 3px solid var(--axp-knob-border, #eee);\n    cursor: grab;\n}\n\n.axpc_overlay_knob:active {\n    cursor: all-scroll;\n    background-color: rgba(0, 0, 0, 0.85);\n}\n\n/* オーバーレイボタン（タップ操作用） */\n.axpc_overlay_btn {\n    border: 2px solid var(--axp-btn-border, #ccc);\n    cursor: pointer;\n    padding: 0;\n    appearance: none;\n}\n\n.axpc_overlay_btn:focus-visible {\n    outline: 2px solid var(--axp-border-focus, #8bd3ff);\n    outline-offset: 2px;\n}\n\n.axpc_overlay_btn:active {\n    background-color: rgba(0, 0, 0, 0.85);\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/css/components.css":
+/*!**********************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/css/components.css ***!
+  \**********************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+// Imports
+
+
+
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 12c3 0 3-4 6-4s3 8 6 8 3-4 6-4%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 12c3 0 3-4 6-4s3 8 6 8 3-4 6-4%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M12 3v18M6 8l6-3 6 3M6 16l6 3 6-3%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M12 3v18M6 8l6-3 6 3M6 16l6 3 6-3%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><rect x=%273%27 y=%274%27 width=%2718%27 height=%2716%27 rx=%272%27/><path d=%27M8 12l3 3 5-6%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><rect x=%273%27 y=%274%27 width=%2718%27 height=%2716%27 rx=%272%27/><path d=%27M8 12l3 3 5-6%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 5h18l-7 8v6l-4 2v-8z%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 5h18l-7 8v6l-4 2v-8z%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 3l9 5-9 5-9-5z%27/><path d=%27M3 12l9 5 9-5M3 17l9 5 9-5%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 3l9 5-9 5-9-5z%27/><path d=%27M3 12l9 5 9-5M3 17l9 5 9-5%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%279%27 cy=%2712%27 r=%276%27/><circle cx=%2715%27 cy=%2712%27 r=%276%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%279%27 cy=%2712%27 r=%276%27/><circle cx=%2715%27 cy=%2712%27 r=%276%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%2712%27 cy=%2712%27 r=%279%27/><path d=%27M12 7v6l4 2%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%2712%27 cy=%2712%27 r=%279%27/><path d=%27M12 7v6l4 2%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z%27/><circle cx=%2712%27 cy=%2712%27 r=%273%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z%27/><circle cx=%2712%27 cy=%2712%27 r=%273%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_8___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%274%27 y=%2711%27 width=%2716%27 height=%2710%27 rx=%272%27/><path d=%27M8 11V7a4 4 0 0 1 8 0v4%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%274%27 y=%2711%27 width=%2716%27 height=%2710%27 rx=%272%27/><path d=%27M8 11V7a4 4 0 0 1 8 0v4%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_9___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M12 5v14M5 12h14%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M12 5v14M5 12h14%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_10___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%278%27 y=%278%27 width=%2712%27 height=%2712%27 rx=%272%27/><path d=%27M4 16V6a2 2 0 0 1 2-2h10%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%278%27 y=%278%27 width=%2712%27 height=%2712%27 rx=%272%27/><path d=%27M4 16V6a2 2 0 0 1 2-2h10%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_11___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_12___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L15 9%27/><path d=%27M13 4v2M13 10v2M9 6h2M15 6h2M20 14v2M20 20v2M18 18h2M22 18h2%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L15 9%27/><path d=%27M13 4v2M13 10v2M9 6h2M15 6h2M20 14v2M20 20v2M18 18h2M22 18h2%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_13___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M4 8l8-5 8 5-3 11H7z%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M4 8l8-5 8 5-3 11H7z%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_14___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L14 4M9 20L19 4%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L14 4M9 20L19 4%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_15___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><circle cx=%2712%27 cy=%2712%27 r=%275%27/><path d=%27M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><circle cx=%2712%27 cy=%2712%27 r=%275%27/><path d=%27M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_16___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 22c4 0 6-2.5 6-6 0-3-2-4.5-2-4.5.3 2-.7 3-1.5 3 1-4-2-6.5-2.5-8.5-.5 3-2 5-4 7-1.3 1.3-2 2.7-2 4.5 0 3.5 2.5 4.5 6 4.5z%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 22c4 0 6-2.5 6-6 0-3-2-4.5-2-4.5.3 2-.7 3-1.5 3 1-4-2-6.5-2.5-8.5-.5 3-2 5-4 7-1.3 1.3-2 2.7-2 4.5 0 3.5 2.5 4.5 6 4.5z%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_17___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M17 3l4 4-9 9-5 1 1-5z%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M17 3l4 4-9 9-5 1 1-5z%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_18___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 18c4 0 4-12 9-12s5 12 9 12%27/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 18c4 0 4-12 9-12s5 12 9 12%27/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
+var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
+var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_3___);
+var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_4___);
+var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_5___);
+var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_6___);
+var ___CSS_LOADER_URL_REPLACEMENT_7___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_7___);
+var ___CSS_LOADER_URL_REPLACEMENT_8___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_8___);
+var ___CSS_LOADER_URL_REPLACEMENT_9___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_9___);
+var ___CSS_LOADER_URL_REPLACEMENT_10___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_10___);
+var ___CSS_LOADER_URL_REPLACEMENT_11___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_11___);
+var ___CSS_LOADER_URL_REPLACEMENT_12___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_12___);
+var ___CSS_LOADER_URL_REPLACEMENT_13___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_13___);
+var ___CSS_LOADER_URL_REPLACEMENT_14___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_14___);
+var ___CSS_LOADER_URL_REPLACEMENT_15___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_15___);
+var ___CSS_LOADER_URL_REPLACEMENT_16___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_16___);
+var ___CSS_LOADER_URL_REPLACEMENT_17___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_17___);
+var ___CSS_LOADER_URL_REPLACEMENT_18___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_18___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* ==========================================================================
+   AXNOS Paint - Shared components (案C)
+   新規 axp-* コンポーネント。既存クラスとは独立、現時点では未使用。
+   由来: .design-ref/design/tokens.css (後半) + .design-ref/design/axp-mock.css
+   ========================================================================== */
+
+/* ==========================================================================
+   Component: Window frame (新枠)
+   ========================================================================== */
+.axp-window {
+    width: var(--axp-window-w);
+    position: relative;
+    color: var(--axp-text-primary);
+    background-color: var(--axp-surface-window);
+    box-shadow: var(--axp-shadow-window);
+    padding: 2px;
+    border-radius: var(--axp-r-lg);
+    -webkit-backdrop-filter: blur(var(--axp-blur));
+    backdrop-filter: blur(var(--axp-blur));
+    font: 400 var(--axp-fs-base) var(--axp-ff);
+    line-height: 1.4;
+}
+.axp-window * { box-sizing: border-box; }
+
+.axp-window__header {
+    display: grid;
+    grid-template-columns: minmax(18px, 30px) minmax(0, 1fr) 24px;
+    height: var(--axp-h-tab);
+    padding: 0 0 0 2px;
+    align-items: center;
+    cursor: move;
+}
+.axp-window__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    opacity: .95;
+}
+.axp-window__title {
+    font-size: var(--axp-fs-md);
+    color: var(--axp-text-primary);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.axp-window__close {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    border-top-right-radius: var(--axp-r-lg);
+    height: var(--axp-h-tab);
+    position: relative;
+}
+.axp-window__close:hover { background-color: var(--axp-danger); }
+.axp-window__close::before,
+.axp-window__close::after {
+    content: "";
+    position: absolute;
+    left: 20%;
+    top: 42%;
+    width: 60%;
+    height: 15%;
+    background: var(--axp-text-secondary);
+    border-radius: 15% / 50%;
+}
+.axp-window__close::before { transform: rotate(135deg); }
+.axp-window__close::after  { transform: rotate(45deg); }
+
+.axp-window__content {
+    background-color: var(--axp-surface-content);
+    padding: var(--axp-content-pad);
+    border-radius: var(--axp-r-lg);
+}
+
+/* ==========================================================================
+   Component: Section (アコーディオン)
+   ========================================================================== */
+.axp-section {
+    border-top: 1px solid var(--axp-border-2);
+    margin-top: var(--axp-sp-1);
+    padding-top: var(--axp-sp-1);
+}
+.axp-section:first-child { border-top: 0; margin-top: 0; padding-top: 0; }
+
+.axp-section__head {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    padding: 2px 4px;
+    background: transparent;
+    border: 0;
+    color: var(--axp-text-primary);
+    font: 500 var(--axp-fs-sm) var(--axp-ff);
+    text-align: left;
+    cursor: pointer;
+    border-radius: var(--axp-r-sm);
+    user-select: none;
+}
+.axp-section__head:hover { background: rgba(255,255,255,0.06); }
+.axp-section__chev {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    color: var(--axp-text-muted);
+    transition: transform 120ms ease;
+}
+.axp-section[data-open="true"] .axp-section__chev { transform: rotate(90deg); }
+.axp-section__body { display: none; padding: 2px 2px 0; }
+.axp-section[data-open="true"] .axp-section__body { display: block; }
+
+.axp-section__badge {
+    margin-left: auto;
+    font-size: 9px;
+    color: var(--axp-text-muted);
+    background: rgba(255,255,255,0.08);
+    padding: 1px 5px;
+    border-radius: 8px;
+}
+
+/* ==========================================================================
+   Component: Segment tabs
+   ========================================================================== */
+.axp-tabs {
+    display: flex;
+    gap: 2px;
+    background: rgba(0,0,0,.3);
+    padding: 2px;
+    border-radius: var(--axp-r-md);
+    margin-bottom: var(--axp-sp-1);
+}
+.axp-tab {
+    flex: 1;
+    min-width: 0;
+    height: 20px;
+    font-size: var(--axp-fs-sm);
+    color: var(--axp-text-secondary);
+    background: transparent;
+    border: 0;
+    border-radius: var(--axp-r-sm);
+    cursor: pointer;
+    padding: 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.axp-tab:hover { background: rgba(255,255,255,0.08); }
+.axp-tab[data-active="true"] {
+    background: var(--axp-accent);
+    color: #000;
+}
+
+/* ==========================================================================
+   Component: Range
+   ========================================================================== */
+.axp-range {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0,0,0,.25);
+    border: 1px solid #444;
+    border-radius: var(--axp-r-md);
+    padding: 1px 4px;
+    height: var(--axp-h-range);
+    font-size: var(--axp-fs-sm);
+}
+.axp-range__label { color: var(--axp-text-secondary); flex-shrink: 0; }
+.axp-range input[type=range] {
+    flex: 1;
+    min-width: 0;
+    height: calc(var(--axp-h-range) - 4px);
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+.axp-range input[type=range]::-webkit-slider-runnable-track {
+    height: 4px; background: rgba(255,255,255,.15); border-radius: 2px;
+}
+.axp-range input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #ddd;
+    border: 2px solid #333;
+    margin-top: -6px;
+}
+.axp-range__val { color: var(--axp-text-primary); min-width: 22px; text-align: right; }
+
+/* ==========================================================================
+   Component: Button
+   ========================================================================== */
+.axp-btn {
+    height: var(--axp-h-btn);
+    padding: 0 8px;
+    border: 1px solid var(--axp-border-3);
+    border-radius: var(--axp-r-sm);
+    background: #555;
+    color: var(--axp-text-primary);
+    font: 500 var(--axp-fs-sm) var(--axp-ff);
+    cursor: pointer;
+}
+.axp-btn:hover { background: #666; }
+.axp-btn:active,
+.axp-btn[data-active="true"] { background: #000; }
+
+.axp-btn--tiny { height: var(--axp-h-btn-compact); font-size: 10px; padding: 0 6px; }
+.axp-btn--block { width: 100%; }
+
+/* ==========================================================================
+   Component: Toggle
+   ========================================================================== */
+.axp-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--axp-fs-sm);
+    cursor: pointer;
+}
+.axp-toggle input { margin: 0; }
+
+/* ==========================================================================
+   Component: Icon button (既存 44x44 を維持)
+   ========================================================================== */
+.axp-icon-btn {
+    width: var(--axp-h-icon-btn);
+    height: var(--axp-h-icon-btn);
+    border-radius: var(--axp-r-md);
+    border: 3px solid #000;
+    background: #aaa center/32px 32px no-repeat;
+    box-shadow: var(--axp-shadow-icon);
+    cursor: pointer;
+    position: relative;
+}
+.axp-icon-btn:hover  { border-color: #fff; }
+.axp-icon-btn[data-selected="true"] { background-color: var(--axp-accent); }
+
+/* ==========================================================================
+   Component: Chip (フィルタ/機能タグ)
+   ========================================================================== */
+.axp-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    color: var(--axp-text-secondary);
+    font-size: 10px;
+    border: 1px solid #444;
+}
+.axp-chip[data-active="true"] {
+    background: var(--axp-accent);
+    color: #000;
+    border-color: transparent;
+}
+
+/* ==========================================================================
+   Component: Meta info bar
+   ========================================================================== */
+.axp-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--axp-text-muted);
+}
+
+/* ==========================================================================
+   SVG icons (16px inline, axp-mock.css 由来)
+   ========================================================================== */
+.ic-sv {
+    width: 16px; height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    background: no-repeat center/contain;
+}
+.ic-sv-liquify   { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_0___}); }
+.ic-sv-symmetry  { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_1___}); }
+.ic-sv-reference { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_2___}); }
+.ic-sv-filter    { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_3___}); }
+.ic-sv-layer     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_4___}); }
+.ic-sv-mask      { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_5___}); }
+.ic-sv-timelapse { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_6___}); }
+.ic-sv-eye       { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_7___}); }
+.ic-sv-lock      { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_8___}); }
+.ic-sv-plus      { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_9___}); }
+.ic-sv-duplicate { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_10___}); }
+.ic-sv-trash     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_11___}); }
+.ic-sv-magic     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_12___}); }
+.ic-sv-polygon   { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_13___}); }
+.ic-sv-hatching  { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_14___}); }
+.ic-sv-dodge     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_15___}); }
+.ic-sv-burn      { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_16___}); }
+.ic-sv-marker    { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_17___}); }
+.ic-sv-curve     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_18___}); }
+`, "",{"version":3,"sources":["webpack://./src/css/components.css"],"names":[],"mappings":"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","sourcesContent":["/* ==========================================================================\n   AXNOS Paint - Shared components (案C)\n   新規 axp-* コンポーネント。既存クラスとは独立、現時点では未使用。\n   由来: .design-ref/design/tokens.css (後半) + .design-ref/design/axp-mock.css\n   ========================================================================== */\n\n/* ==========================================================================\n   Component: Window frame (新枠)\n   ========================================================================== */\n.axp-window {\n    width: var(--axp-window-w);\n    position: relative;\n    color: var(--axp-text-primary);\n    background-color: var(--axp-surface-window);\n    box-shadow: var(--axp-shadow-window);\n    padding: 2px;\n    border-radius: var(--axp-r-lg);\n    -webkit-backdrop-filter: blur(var(--axp-blur));\n    backdrop-filter: blur(var(--axp-blur));\n    font: 400 var(--axp-fs-base) var(--axp-ff);\n    line-height: 1.4;\n}\n.axp-window * { box-sizing: border-box; }\n\n.axp-window__header {\n    display: grid;\n    grid-template-columns: minmax(18px, 30px) minmax(0, 1fr) 24px;\n    height: var(--axp-h-tab);\n    padding: 0 0 0 2px;\n    align-items: center;\n    cursor: move;\n}\n.axp-window__icon {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    width: 24px;\n    height: 24px;\n    opacity: .95;\n}\n.axp-window__title {\n    font-size: var(--axp-fs-md);\n    color: var(--axp-text-primary);\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n.axp-window__close {\n    background: transparent;\n    border: 0;\n    cursor: pointer;\n    border-top-right-radius: var(--axp-r-lg);\n    height: var(--axp-h-tab);\n    position: relative;\n}\n.axp-window__close:hover { background-color: var(--axp-danger); }\n.axp-window__close::before,\n.axp-window__close::after {\n    content: \"\";\n    position: absolute;\n    left: 20%;\n    top: 42%;\n    width: 60%;\n    height: 15%;\n    background: var(--axp-text-secondary);\n    border-radius: 15% / 50%;\n}\n.axp-window__close::before { transform: rotate(135deg); }\n.axp-window__close::after  { transform: rotate(45deg); }\n\n.axp-window__content {\n    background-color: var(--axp-surface-content);\n    padding: var(--axp-content-pad);\n    border-radius: var(--axp-r-lg);\n}\n\n/* ==========================================================================\n   Component: Section (アコーディオン)\n   ========================================================================== */\n.axp-section {\n    border-top: 1px solid var(--axp-border-2);\n    margin-top: var(--axp-sp-1);\n    padding-top: var(--axp-sp-1);\n}\n.axp-section:first-child { border-top: 0; margin-top: 0; padding-top: 0; }\n\n.axp-section__head {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    width: 100%;\n    padding: 2px 4px;\n    background: transparent;\n    border: 0;\n    color: var(--axp-text-primary);\n    font: 500 var(--axp-fs-sm) var(--axp-ff);\n    text-align: left;\n    cursor: pointer;\n    border-radius: var(--axp-r-sm);\n    user-select: none;\n}\n.axp-section__head:hover { background: rgba(255,255,255,0.06); }\n.axp-section__chev {\n    display: inline-block;\n    width: 10px;\n    height: 10px;\n    color: var(--axp-text-muted);\n    transition: transform 120ms ease;\n}\n.axp-section[data-open=\"true\"] .axp-section__chev { transform: rotate(90deg); }\n.axp-section__body { display: none; padding: 2px 2px 0; }\n.axp-section[data-open=\"true\"] .axp-section__body { display: block; }\n\n.axp-section__badge {\n    margin-left: auto;\n    font-size: 9px;\n    color: var(--axp-text-muted);\n    background: rgba(255,255,255,0.08);\n    padding: 1px 5px;\n    border-radius: 8px;\n}\n\n/* ==========================================================================\n   Component: Segment tabs\n   ========================================================================== */\n.axp-tabs {\n    display: flex;\n    gap: 2px;\n    background: rgba(0,0,0,.3);\n    padding: 2px;\n    border-radius: var(--axp-r-md);\n    margin-bottom: var(--axp-sp-1);\n}\n.axp-tab {\n    flex: 1;\n    min-width: 0;\n    height: 20px;\n    font-size: var(--axp-fs-sm);\n    color: var(--axp-text-secondary);\n    background: transparent;\n    border: 0;\n    border-radius: var(--axp-r-sm);\n    cursor: pointer;\n    padding: 0 4px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n}\n.axp-tab:hover { background: rgba(255,255,255,0.08); }\n.axp-tab[data-active=\"true\"] {\n    background: var(--axp-accent);\n    color: #000;\n}\n\n/* ==========================================================================\n   Component: Range\n   ========================================================================== */\n.axp-range {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    background: rgba(0,0,0,.25);\n    border: 1px solid #444;\n    border-radius: var(--axp-r-md);\n    padding: 1px 4px;\n    height: var(--axp-h-range);\n    font-size: var(--axp-fs-sm);\n}\n.axp-range__label { color: var(--axp-text-secondary); flex-shrink: 0; }\n.axp-range input[type=range] {\n    flex: 1;\n    min-width: 0;\n    height: calc(var(--axp-h-range) - 4px);\n    -webkit-appearance: none;\n    appearance: none;\n    background: transparent;\n    cursor: pointer;\n}\n.axp-range input[type=range]::-webkit-slider-runnable-track {\n    height: 4px; background: rgba(255,255,255,.15); border-radius: 2px;\n}\n.axp-range input[type=range]::-webkit-slider-thumb {\n    -webkit-appearance: none;\n    width: 14px; height: 14px;\n    border-radius: 50%;\n    background: #ddd;\n    border: 2px solid #333;\n    margin-top: -6px;\n}\n.axp-range__val { color: var(--axp-text-primary); min-width: 22px; text-align: right; }\n\n/* ==========================================================================\n   Component: Button\n   ========================================================================== */\n.axp-btn {\n    height: var(--axp-h-btn);\n    padding: 0 8px;\n    border: 1px solid var(--axp-border-3);\n    border-radius: var(--axp-r-sm);\n    background: #555;\n    color: var(--axp-text-primary);\n    font: 500 var(--axp-fs-sm) var(--axp-ff);\n    cursor: pointer;\n}\n.axp-btn:hover { background: #666; }\n.axp-btn:active,\n.axp-btn[data-active=\"true\"] { background: #000; }\n\n.axp-btn--tiny { height: var(--axp-h-btn-compact); font-size: 10px; padding: 0 6px; }\n.axp-btn--block { width: 100%; }\n\n/* ==========================================================================\n   Component: Toggle\n   ========================================================================== */\n.axp-toggle {\n    display: inline-flex;\n    align-items: center;\n    gap: 4px;\n    font-size: var(--axp-fs-sm);\n    cursor: pointer;\n}\n.axp-toggle input { margin: 0; }\n\n/* ==========================================================================\n   Component: Icon button (既存 44x44 を維持)\n   ========================================================================== */\n.axp-icon-btn {\n    width: var(--axp-h-icon-btn);\n    height: var(--axp-h-icon-btn);\n    border-radius: var(--axp-r-md);\n    border: 3px solid #000;\n    background: #aaa center/32px 32px no-repeat;\n    box-shadow: var(--axp-shadow-icon);\n    cursor: pointer;\n    position: relative;\n}\n.axp-icon-btn:hover  { border-color: #fff; }\n.axp-icon-btn[data-selected=\"true\"] { background-color: var(--axp-accent); }\n\n/* ==========================================================================\n   Component: Chip (フィルタ/機能タグ)\n   ========================================================================== */\n.axp-chip {\n    display: inline-flex;\n    align-items: center;\n    gap: 3px;\n    height: 20px;\n    padding: 0 6px;\n    border-radius: 10px;\n    background: rgba(255,255,255,0.08);\n    color: var(--axp-text-secondary);\n    font-size: 10px;\n    border: 1px solid #444;\n}\n.axp-chip[data-active=\"true\"] {\n    background: var(--axp-accent);\n    color: #000;\n    border-color: transparent;\n}\n\n/* ==========================================================================\n   Component: Meta info bar\n   ========================================================================== */\n.axp-meta {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    font-size: 10px;\n    color: var(--axp-text-muted);\n}\n\n/* ==========================================================================\n   SVG icons (16px inline, axp-mock.css 由来)\n   ========================================================================== */\n.ic-sv {\n    width: 16px; height: 16px;\n    display: inline-block;\n    vertical-align: middle;\n    background: no-repeat center/contain;\n}\n.ic-sv-liquify   { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><path d='M3 12c3 0 3-4 6-4s3 8 6 8 3-4 6-4'/></svg>\"); }\n.ic-sv-symmetry  { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><path d='M12 3v18M6 8l6-3 6 3M6 16l6 3 6-3'/></svg>\"); }\n.ic-sv-reference { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><rect x='3' y='4' width='18' height='16' rx='2'/><path d='M8 12l3 3 5-6'/></svg>\"); }\n.ic-sv-filter    { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><path d='M3 5h18l-7 8v6l-4 2v-8z'/></svg>\"); }\n.ic-sv-layer     { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linejoin='round'><path d='M12 3l9 5-9 5-9-5z'/><path d='M3 12l9 5 9-5M3 17l9 5 9-5'/></svg>\"); }\n.ic-sv-mask      { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'><circle cx='9' cy='12' r='6'/><circle cx='15' cy='12' r='6'/></svg>\"); }\n.ic-sv-timelapse { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'><circle cx='12' cy='12' r='9'/><path d='M12 7v6l4 2'/></svg>\"); }\n.ic-sv-eye       { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'><path d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z'/><circle cx='12' cy='12' r='3'/></svg>\"); }\n.ic-sv-lock      { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'><rect x='4' y='11' width='16' height='10' rx='2'/><path d='M8 11V7a4 4 0 0 1 8 0v4'/></svg>\"); }\n.ic-sv-plus      { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'><path d='M12 5v14M5 12h14'/></svg>\"); }\n.ic-sv-duplicate { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'><rect x='8' y='8' width='12' height='12' rx='2'/><path d='M4 16V6a2 2 0 0 1 2-2h10'/></svg>\"); }\n.ic-sv-trash     { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'><path d='M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14'/></svg>\"); }\n.ic-sv-magic     { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><path d='M4 20L15 9'/><path d='M13 4v2M13 10v2M9 6h2M15 6h2M20 14v2M20 20v2M18 18h2M22 18h2'/></svg>\"); }\n.ic-sv-polygon   { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linejoin='round'><path d='M4 8l8-5 8 5-3 11H7z'/></svg>\"); }\n.ic-sv-hatching  { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><path d='M4 20L14 4M9 20L19 4'/></svg>\"); }\n.ic-sv-dodge     { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='5'/><path d='M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3'/></svg>\"); }\n.ic-sv-burn      { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linejoin='round'><path d='M12 22c4 0 6-2.5 6-6 0-3-2-4.5-2-4.5.3 2-.7 3-1.5 3 1-4-2-6.5-2.5-8.5-.5 3-2 5-4 7-1.3 1.3-2 2.7-2 4.5 0 3.5 2.5 4.5 6 4.5z'/></svg>\"); }\n.ic-sv-marker    { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'><path d='M17 3l4 4-9 9-5 1 1-5z'/></svg>\"); }\n.ic-sv-curve     { background-image: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'><path d='M3 18c4 0 4-12 9-12s5 12 9 12'/></svg>\"); }\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13529,12 +13894,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
+___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ（案C ダークテーマ） */
 #axp_config_div_content {
     display: flex;
     margin: 0;
     padding: 0;
     height: 100%;
+    background: #1a1a1a;
+    color: #eee;
 }
 
 /* 左側：ナビゲーションメニュー */
@@ -13544,7 +13911,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     overflow: auto;
     position: sticky;
     top: 0;
-    background-color: #eee;
+    background-color: #141414;
+    border-right: 1px solid #262626;
     padding: 10px;
     /* iPad跳ね返り防止 */
     overscroll-behavior: none;
@@ -13556,8 +13924,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     height: 40px;
     border-radius: 6px;
     border: 0;
-    background-color: #eee;
-    color: #111;
+    background-color: transparent;
+    color: #bbb;
     cursor: pointer;
     margin: 1px 0;
     padding-left: 8px;
@@ -13566,17 +13934,38 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     text-align: left;
 }
 
+#axp_config_div_nav button:hover {
+    background: #1e1e1e;
+    color: #fff;
+}
+
 #axp_config_div_nav button.axpc_ACTIVE {
-    background: #E09C35;
+    background: rgba(238, 172, 96, 0.15);
+    color: var(--axp-accent, #eeac60);
 }
 
 /* 本文：外枠 */
 .axpc_config_chapter {
     width: calc(100% - 200px);
     height: 100%;
-    padding: 10px;
-    background-color: #eee;
+    padding: 10px 20px;
+    background-color: #1a1a1a;
+    color: #eee;
     overflow-y: scroll;
+}
+
+/* モバイル用セクションジャンプ（デフォルト非表示、599px以下でのみ表示） */
+#axp_config_select_mobileNav {
+    display: none;
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 10px;
 }
 
 /* ブラウザの横幅が599px以下の場合 */
@@ -13588,39 +13977,59 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 
     .axpc_config_chapter {
         width: 100%;
+        padding: 10px;
+    }
+
+    #axp_config_select_mobileNav {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 5;
     }
 }
 
 /* 本文：セクション */
 .axpc_config_section {
     margin-bottom: 50px;
-    color: #111;
+    color: #eee;
 }
 
 /* 本文：セクション見出し */
 .axpc_config_sectionHeader {
-    background: #ddf;
+    background: transparent;
     margin-top: 8px;
-    padding: 8px 8px;
+    padding: 8px 0;
     font-weight: bolder;
+    font-size: 16px;
+    color: #fff;
+    border-bottom: 1px solid #333;
 }
 
 /* 設定用共通グループ（クラスが設定されていると、自動的にaxpc_config_div_headerをもつdiv要素を作成） */
 .axpc_config_group {
-    padding: 16px;
-    border: 2px #ddd solid;
+    padding: 16px 20px 18px;
+    border: 1px solid #2a2a2a;
+    border-radius: 0 0 10px 10px;
+    background: #212121;
+    margin-bottom: 16px;
 }
 
 /* 外部リンク部分のはみ出し回避 */
 .axpc_config_group a {
     overflow-wrap: anywhere;
+    color: #7fb2ff;
 }
 
 /* 設定用共通見出し */
 .axpc_config_groupHeader {
-    background: #ddd;
+    background: #262626;
     margin-top: 8px;
-    padding: 4px 16px;
+    padding: 8px 20px;
+    border: 1px solid #2a2a2a;
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+    color: #fff;
+    font-weight: 600;
 }
 
 /* キャンバス履歴テーブル */
@@ -13630,9 +14039,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     margin: 0 0 8px 0;
     padding: 0;
     list-style-type: none;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
+    border-radius: 6px;
     max-height: 220px;
     overflow-y: auto;
+    background: #191919;
 }
 
 #axp_config_ul_canvasSizeHistory>li {
@@ -13643,17 +14054,18 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 }
 
 #axp_config_ul_canvasSizeHistory>li:nth-child(even) {
-    background: #ddd;
+    background: #222;
 }
 
 /* 注意：evenより優先度高 */
 #axp_config_ul_canvasSizeHistory>li[data-selected="true"] {
-    background: #f7a312 !important;
+    background: var(--axp-accent, #eeac60) !important;
+    color: #000;
 }
 
 /* ショートカットテーブル */
 .axpc_config_table {
-    border: 2px solid #aaa;
+    border: 1px solid #333;
     border-collapse: collapse;
 }
 
@@ -13664,20 +14076,23 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 
 .axpc_config_table th {
     padding: 0 8px;
-    background-color: #ddf;
+    background-color: #262626;
+    color: #eee;
 }
 
 .axpc_config_table td {
     padding: 0 8px;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
 }
 
-/* 設定用のカラーパレット表示（モックアップ）*/
+/* 設定用のカラーパレット表示（モックアップ） */
 #axp_config_div_paletteScroll {
     max-width: 228px;
     max-height: 228px;
     overflow: auto;
-    background: #ccc;
+    background: #191919;
+    border: 1px solid #333;
+    border-radius: 6px;
 }
 
 /* 設定用カラーパレット枠 */
@@ -13725,9 +14140,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     margin: 0;
     padding: 0;
     list-style-type: none;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
+    border-radius: 6px;
     max-height: 352px;
     overflow-y: scroll;
+    background: #191919;
 }
 
 #axp_config_ul_scale>li {
@@ -13738,16 +14155,17 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 }
 
 #axp_config_ul_scale>li:nth-child(even) {
-    background: #ddd;
+    background: #222;
 }
 
 #axp_config_ul_scale>li[data-value="100"] {
-    border: 1px solid #333;
+    border: 1px solid #555;
 }
 
 /* 注意：evenより優先度高 */
 #axp_config_ul_scale>li[data-selected="true"] {
-    background: #f7a312 !important;
+    background: var(--axp-accent, #eeac60) !important;
+    color: #000;
 }
 
 /* カラータグ */
@@ -13762,7 +14180,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 
 .axpc_config_div_colorTag {
     border-radius: 5px;
-    border: #222 solid 2px;
+    border: #444 solid 2px;
     width: 154px;
 }
 
@@ -13773,6 +14191,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     text-align: left;
     border-radius: 5px;
     padding-left: 4px;
+    background: #191919;
+    color: #eee;
+    border: 1px solid #333;
 }
 
 /* キーカスタマイズ用拡大率セレクトボックス */
@@ -13790,7 +14211,332 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 #axp_config_div_versionInfo {
     -webkit-user-select: all;
     user-select: all;
-}`, "",{"version":3,"sources":["webpack://./src/css/config.css"],"names":[],"mappings":"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","sourcesContent":["/* 設定タブ */\n#axp_config_div_content {\n    display: flex;\n    margin: 0;\n    padding: 0;\n    height: 100%;\n}\n\n/* 左側：ナビゲーションメニュー */\n#axp_config_div_nav {\n    width: 200px;\n    height: 100%;\n    overflow: auto;\n    position: sticky;\n    top: 0;\n    background-color: #eee;\n    padding: 10px;\n    /* iPad跳ね返り防止 */\n    overscroll-behavior: none;\n}\n\n/* ナビボタン */\n#axp_config_div_nav button {\n    width: 160px;\n    height: 40px;\n    border-radius: 6px;\n    border: 0;\n    background-color: #eee;\n    color: #111;\n    cursor: pointer;\n    margin: 1px 0;\n    padding-left: 8px;\n    font-size: 1em;\n    font-weight: bold;\n    text-align: left;\n}\n\n#axp_config_div_nav button.axpc_ACTIVE {\n    background: #E09C35;\n}\n\n/* 本文：外枠 */\n.axpc_config_chapter {\n    width: calc(100% - 200px);\n    height: 100%;\n    padding: 10px;\n    background-color: #eee;\n    overflow-y: scroll;\n}\n\n/* ブラウザの横幅が599px以下の場合 */\n@media (max-width: 599px) {\n    #axp_config_div_nav {\n        /* ナビゲーションメニュー非表示 */\n        display: none;\n    }\n\n    .axpc_config_chapter {\n        width: 100%;\n    }\n}\n\n/* 本文：セクション */\n.axpc_config_section {\n    margin-bottom: 50px;\n    color: #111;\n}\n\n/* 本文：セクション見出し */\n.axpc_config_sectionHeader {\n    background: #ddf;\n    margin-top: 8px;\n    padding: 8px 8px;\n    font-weight: bolder;\n}\n\n/* 設定用共通グループ（クラスが設定されていると、自動的にaxpc_config_div_headerをもつdiv要素を作成） */\n.axpc_config_group {\n    padding: 16px;\n    border: 2px #ddd solid;\n}\n\n/* 外部リンク部分のはみ出し回避 */\n.axpc_config_group a {\n    overflow-wrap: anywhere;\n}\n\n/* 設定用共通見出し */\n.axpc_config_groupHeader {\n    background: #ddd;\n    margin-top: 8px;\n    padding: 4px 16px;\n}\n\n/* キャンバス履歴テーブル */\n#axp_config_ul_canvasSizeHistory {\n    margin-top: 8px;\n    width: 200px;\n    margin: 0 0 8px 0;\n    padding: 0;\n    list-style-type: none;\n    border: 1px solid #aaa;\n    max-height: 220px;\n    overflow-y: auto;\n}\n\n#axp_config_ul_canvasSizeHistory>li {\n    padding: 2px 10px;\n    height: 25px;\n    text-align: center;\n    cursor: pointer;\n}\n\n#axp_config_ul_canvasSizeHistory>li:nth-child(even) {\n    background: #ddd;\n}\n\n/* 注意：evenより優先度高 */\n#axp_config_ul_canvasSizeHistory>li[data-selected=\"true\"] {\n    background: #f7a312 !important;\n}\n\n/* ショートカットテーブル */\n.axpc_config_table {\n    border: 2px solid #aaa;\n    border-collapse: collapse;\n}\n\n.axpc_config_table td:nth-child(1) {\n    font-family: 'Consolas', monospace;\n    font-size: 12pt;\n}\n\n.axpc_config_table th {\n    padding: 0 8px;\n    background-color: #ddf;\n}\n\n.axpc_config_table td {\n    padding: 0 8px;\n    border: 1px solid #aaa;\n}\n\n/* 設定用のカラーパレット表示（モックアップ）*/\n#axp_config_div_paletteScroll {\n    max-width: 228px;\n    max-height: 228px;\n    overflow: auto;\n    background: #ccc;\n}\n\n/* 設定用カラーパレット枠 */\n#axp_config_div_paletteBox {\n    display: flex;\n    flex-wrap: wrap;\n    align-content: flex-start;\n    background: #333;\n    padding: 4px;\n}\n\n/* 設定用カラーパレット単色 */\n.axpc_config_colorRect {\n    height: 20px;\n    width: 20px;\n    margin: 1px;\n    border-radius: 3px;\n}\n\n/* 拡大率 */\n#axp_config_div_scale {\n    width: 200px;\n}\n\n#axp_config_div_scaleButton {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 1fr 30px 1fr;\n}\n\n#axp_config_button_addScale {\n    width: 100%;\n}\n\n#axp_config_button_deleteScale,\n#axp_config_button_resetScale {\n    margin-top: 8px;\n    width: 100%;\n}\n\n/* 拡大率テーブル */\n#axp_config_ul_scale {\n    margin-top: 8px;\n    width: 200px;\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    border: 1px solid #aaa;\n    max-height: 352px;\n    overflow-y: scroll;\n}\n\n#axp_config_ul_scale>li {\n    padding: 2px 10px;\n    height: 25px;\n    text-align: center;\n    cursor: pointer;\n}\n\n#axp_config_ul_scale>li:nth-child(even) {\n    background: #ddd;\n}\n\n#axp_config_ul_scale>li[data-value=\"100\"] {\n    border: 1px solid #333;\n}\n\n/* 注意：evenより優先度高 */\n#axp_config_ul_scale>li[data-selected=\"true\"] {\n    background: #f7a312 !important;\n}\n\n/* カラータグ */\n#axp_config_div_colorTag {\n    width: 300px;\n    display: grid;\n    grid-template-rows: repeat(4, 34px);\n    grid-template-columns: 1fr 1fr;\n    margin-bottom: 8px;\n    gap: 4px 10px;\n}\n\n.axpc_config_div_colorTag {\n    border-radius: 5px;\n    border: #222 solid 2px;\n    width: 154px;\n}\n\n.axpc_config_text_colorTag {\n    width: 130px;\n    height: 30px;\n    font-size: 13px;\n    text-align: left;\n    border-radius: 5px;\n    padding-left: 4px;\n}\n\n/* キーカスタマイズ用拡大率セレクトボックス */\n.axpc_config_select_scaleTable {\n    width: 24px;\n}\n\n/* キーカスタマイズ用数値入力 */\n.axpc_config_number_sizeValue,\n.axpc_config_number_scaleValue {\n    width: 60px;\n}\n\n/* バージョン情報 */\n#axp_config_div_versionInfo {\n    -webkit-user-select: all;\n    user-select: all;\n}"],"sourceRoot":""}]);
+}
+
+/* --- ダークテーマ用フォーム調整（設定タブ内のみ有効） --- */
+
+/* 数値入力・セレクトボックス */
+#axp_config_div_content input[type="number"],
+#axp_config_div_content input[type="text"],
+#axp_config_div_content select {
+    background: #191919;
+    color: #fff;
+    border: 1px solid #2f2f2f;
+    border-radius: 6px;
+}
+
+/* ラジオボタン（自動生成label）のダーク配色 */
+#axp_config_div_content .axpc_radio label {
+    color: #aaa;
+    border: 2px solid #333;
+    background: #1c1c1c;
+    border-radius: 6px;
+}
+
+#axp_config_div_content .axpc_radio label:hover {
+    color: #fff;
+    border-color: #555;
+}
+
+#axp_config_div_content .axpc_radio input[type="radio"]:checked+label {
+    font-weight: bold;
+    color: #000;
+    border: 2px solid var(--axp-accent, #eeac60);
+    background-color: var(--axp-accent, #eeac60);
+}
+
+/* チェックボックス */
+#axp_config_div_content .axpc_checkbox input {
+    accent-color: var(--axp-accent, #eeac60);
+}
+
+/* 下線・強調テキスト */
+#axp_config_div_content u {
+    color: #ccc;
+}
+`, "",{"version":3,"sources":["webpack://./src/css/config.css"],"names":[],"mappings":"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","sourcesContent":["/* 設定タブ（案C ダークテーマ） */\n#axp_config_div_content {\n    display: flex;\n    margin: 0;\n    padding: 0;\n    height: 100%;\n    background: #1a1a1a;\n    color: #eee;\n}\n\n/* 左側：ナビゲーションメニュー */\n#axp_config_div_nav {\n    width: 200px;\n    height: 100%;\n    overflow: auto;\n    position: sticky;\n    top: 0;\n    background-color: #141414;\n    border-right: 1px solid #262626;\n    padding: 10px;\n    /* iPad跳ね返り防止 */\n    overscroll-behavior: none;\n}\n\n/* ナビボタン */\n#axp_config_div_nav button {\n    width: 160px;\n    height: 40px;\n    border-radius: 6px;\n    border: 0;\n    background-color: transparent;\n    color: #bbb;\n    cursor: pointer;\n    margin: 1px 0;\n    padding-left: 8px;\n    font-size: 1em;\n    font-weight: bold;\n    text-align: left;\n}\n\n#axp_config_div_nav button:hover {\n    background: #1e1e1e;\n    color: #fff;\n}\n\n#axp_config_div_nav button.axpc_ACTIVE {\n    background: rgba(238, 172, 96, 0.15);\n    color: var(--axp-accent, #eeac60);\n}\n\n/* 本文：外枠 */\n.axpc_config_chapter {\n    width: calc(100% - 200px);\n    height: 100%;\n    padding: 10px 20px;\n    background-color: #1a1a1a;\n    color: #eee;\n    overflow-y: scroll;\n}\n\n/* モバイル用セクションジャンプ（デフォルト非表示、599px以下でのみ表示） */\n#axp_config_select_mobileNav {\n    display: none;\n    width: 100%;\n    height: 40px;\n    padding: 0 12px;\n    background: #1e1e1e;\n    border: 1px solid #2a2a2a;\n    color: #fff;\n    border-radius: 8px;\n    font-size: 13px;\n    margin-bottom: 10px;\n}\n\n/* ブラウザの横幅が599px以下の場合 */\n@media (max-width: 599px) {\n    #axp_config_div_nav {\n        /* ナビゲーションメニュー非表示 */\n        display: none;\n    }\n\n    .axpc_config_chapter {\n        width: 100%;\n        padding: 10px;\n    }\n\n    #axp_config_select_mobileNav {\n        display: block;\n        position: sticky;\n        top: 0;\n        z-index: 5;\n    }\n}\n\n/* 本文：セクション */\n.axpc_config_section {\n    margin-bottom: 50px;\n    color: #eee;\n}\n\n/* 本文：セクション見出し */\n.axpc_config_sectionHeader {\n    background: transparent;\n    margin-top: 8px;\n    padding: 8px 0;\n    font-weight: bolder;\n    font-size: 16px;\n    color: #fff;\n    border-bottom: 1px solid #333;\n}\n\n/* 設定用共通グループ（クラスが設定されていると、自動的にaxpc_config_div_headerをもつdiv要素を作成） */\n.axpc_config_group {\n    padding: 16px 20px 18px;\n    border: 1px solid #2a2a2a;\n    border-radius: 0 0 10px 10px;\n    background: #212121;\n    margin-bottom: 16px;\n}\n\n/* 外部リンク部分のはみ出し回避 */\n.axpc_config_group a {\n    overflow-wrap: anywhere;\n    color: #7fb2ff;\n}\n\n/* 設定用共通見出し */\n.axpc_config_groupHeader {\n    background: #262626;\n    margin-top: 8px;\n    padding: 8px 20px;\n    border: 1px solid #2a2a2a;\n    border-bottom: 0;\n    border-radius: 10px 10px 0 0;\n    color: #fff;\n    font-weight: 600;\n}\n\n/* キャンバス履歴テーブル */\n#axp_config_ul_canvasSizeHistory {\n    margin-top: 8px;\n    width: 200px;\n    margin: 0 0 8px 0;\n    padding: 0;\n    list-style-type: none;\n    border: 1px solid #333;\n    border-radius: 6px;\n    max-height: 220px;\n    overflow-y: auto;\n    background: #191919;\n}\n\n#axp_config_ul_canvasSizeHistory>li {\n    padding: 2px 10px;\n    height: 25px;\n    text-align: center;\n    cursor: pointer;\n}\n\n#axp_config_ul_canvasSizeHistory>li:nth-child(even) {\n    background: #222;\n}\n\n/* 注意：evenより優先度高 */\n#axp_config_ul_canvasSizeHistory>li[data-selected=\"true\"] {\n    background: var(--axp-accent, #eeac60) !important;\n    color: #000;\n}\n\n/* ショートカットテーブル */\n.axpc_config_table {\n    border: 1px solid #333;\n    border-collapse: collapse;\n}\n\n.axpc_config_table td:nth-child(1) {\n    font-family: 'Consolas', monospace;\n    font-size: 12pt;\n}\n\n.axpc_config_table th {\n    padding: 0 8px;\n    background-color: #262626;\n    color: #eee;\n}\n\n.axpc_config_table td {\n    padding: 0 8px;\n    border: 1px solid #333;\n}\n\n/* 設定用のカラーパレット表示（モックアップ） */\n#axp_config_div_paletteScroll {\n    max-width: 228px;\n    max-height: 228px;\n    overflow: auto;\n    background: #191919;\n    border: 1px solid #333;\n    border-radius: 6px;\n}\n\n/* 設定用カラーパレット枠 */\n#axp_config_div_paletteBox {\n    display: flex;\n    flex-wrap: wrap;\n    align-content: flex-start;\n    background: #333;\n    padding: 4px;\n}\n\n/* 設定用カラーパレット単色 */\n.axpc_config_colorRect {\n    height: 20px;\n    width: 20px;\n    margin: 1px;\n    border-radius: 3px;\n}\n\n/* 拡大率 */\n#axp_config_div_scale {\n    width: 200px;\n}\n\n#axp_config_div_scaleButton {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 1fr 30px 1fr;\n}\n\n#axp_config_button_addScale {\n    width: 100%;\n}\n\n#axp_config_button_deleteScale,\n#axp_config_button_resetScale {\n    margin-top: 8px;\n    width: 100%;\n}\n\n/* 拡大率テーブル */\n#axp_config_ul_scale {\n    margin-top: 8px;\n    width: 200px;\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    border: 1px solid #333;\n    border-radius: 6px;\n    max-height: 352px;\n    overflow-y: scroll;\n    background: #191919;\n}\n\n#axp_config_ul_scale>li {\n    padding: 2px 10px;\n    height: 25px;\n    text-align: center;\n    cursor: pointer;\n}\n\n#axp_config_ul_scale>li:nth-child(even) {\n    background: #222;\n}\n\n#axp_config_ul_scale>li[data-value=\"100\"] {\n    border: 1px solid #555;\n}\n\n/* 注意：evenより優先度高 */\n#axp_config_ul_scale>li[data-selected=\"true\"] {\n    background: var(--axp-accent, #eeac60) !important;\n    color: #000;\n}\n\n/* カラータグ */\n#axp_config_div_colorTag {\n    width: 300px;\n    display: grid;\n    grid-template-rows: repeat(4, 34px);\n    grid-template-columns: 1fr 1fr;\n    margin-bottom: 8px;\n    gap: 4px 10px;\n}\n\n.axpc_config_div_colorTag {\n    border-radius: 5px;\n    border: #444 solid 2px;\n    width: 154px;\n}\n\n.axpc_config_text_colorTag {\n    width: 130px;\n    height: 30px;\n    font-size: 13px;\n    text-align: left;\n    border-radius: 5px;\n    padding-left: 4px;\n    background: #191919;\n    color: #eee;\n    border: 1px solid #333;\n}\n\n/* キーカスタマイズ用拡大率セレクトボックス */\n.axpc_config_select_scaleTable {\n    width: 24px;\n}\n\n/* キーカスタマイズ用数値入力 */\n.axpc_config_number_sizeValue,\n.axpc_config_number_scaleValue {\n    width: 60px;\n}\n\n/* バージョン情報 */\n#axp_config_div_versionInfo {\n    -webkit-user-select: all;\n    user-select: all;\n}\n\n/* --- ダークテーマ用フォーム調整（設定タブ内のみ有効） --- */\n\n/* 数値入力・セレクトボックス */\n#axp_config_div_content input[type=\"number\"],\n#axp_config_div_content input[type=\"text\"],\n#axp_config_div_content select {\n    background: #191919;\n    color: #fff;\n    border: 1px solid #2f2f2f;\n    border-radius: 6px;\n}\n\n/* ラジオボタン（自動生成label）のダーク配色 */\n#axp_config_div_content .axpc_radio label {\n    color: #aaa;\n    border: 2px solid #333;\n    background: #1c1c1c;\n    border-radius: 6px;\n}\n\n#axp_config_div_content .axpc_radio label:hover {\n    color: #fff;\n    border-color: #555;\n}\n\n#axp_config_div_content .axpc_radio input[type=\"radio\"]:checked+label {\n    font-weight: bold;\n    color: #000;\n    border: 2px solid var(--axp-accent, #eeac60);\n    background-color: var(--axp-accent, #eeac60);\n}\n\n/* チェックボックス */\n#axp_config_div_content .axpc_checkbox input {\n    accent-color: var(--axp-accent, #eeac60);\n}\n\n/* 下線・強調テキスト */\n#axp_config_div_content u {\n    color: #ccc;\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/css/dock.css":
+/*!****************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/css/dock.css ***!
+  \****************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+// Imports
+
+
+
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/pen1.png */ "./resource/pen1.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/eraser.png */ "./resource/eraser.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/fill.png */ "./resource/fill.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/spuit.png */ "./resource/spuit.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/hand.png */ "./resource/hand.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/nagenawa.png */ "./resource/nagenawa.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/undo.png */ "./resource/undo.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/redo.png */ "./resource/redo.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_8___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/window_layer.png */ "./resource/window_layer.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_9___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/window_colormaker.png */ "./resource/window_colormaker.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_10___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/window_palette.png */ "./resource/window_palette.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_11___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/window_subtool.png */ "./resource/window_subtool.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_12___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/window_pen.png */ "./resource/window_pen.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_13___ = new URL(/* asset import */ __webpack_require__(/*! ../../resource/config.png */ "./resource/config.png"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_14___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 4h18l-7 8v6l-4 2v-8z\"/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_15___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg> */ "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"5\" cy=\"12\" r=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><circle cx=\"19\" cy=\"12\" r=\"2\"/></svg>"), __webpack_require__.b);
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
+var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
+var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_3___);
+var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_4___);
+var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_5___);
+var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_6___);
+var ___CSS_LOADER_URL_REPLACEMENT_7___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_7___);
+var ___CSS_LOADER_URL_REPLACEMENT_8___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_8___);
+var ___CSS_LOADER_URL_REPLACEMENT_9___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_9___);
+var ___CSS_LOADER_URL_REPLACEMENT_10___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_10___);
+var ___CSS_LOADER_URL_REPLACEMENT_11___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_11___);
+var ___CSS_LOADER_URL_REPLACEMENT_12___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_12___);
+var ___CSS_LOADER_URL_REPLACEMENT_13___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_13___);
+var ___CSS_LOADER_URL_REPLACEMENT_14___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_14___);
+var ___CSS_LOADER_URL_REPLACEMENT_15___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_15___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* ==========================================================================
+   案C: サイドドック + クイックバー (PC)
+   - 左ドック: 主要ペン6種 + ペン種選択 + Undo/Redo
+   - 右ドック: ウィンドウ開閉 (レイヤー/色/パレット/補助/フィルタ) + 設定
+   - クイックバー: 下部中央 pill (色 / 太さ / Undo / Redo / Zoomリセット)
+   z-index: 既存フローティングウィンドウ (1000+) より下、キャンバス表示物より上
+   ========================================================================== */
+
+.axp-dock {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    width: 52px;
+    z-index: 950;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+.axp-dock::-webkit-scrollbar { display: none; }
+.axp-dock--left  { left: 0;  border-radius: 0 var(--axp-r-lg) var(--axp-r-lg) 0; }
+.axp-dock--right { right: 0; border-radius: var(--axp-r-lg) 0 0 var(--axp-r-lg); }
+
+/* ドック内 ペン種ボタン (44x44、既存ペンアイコン踏襲) */
+.axp-dock__pen {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--axp-r-md);
+    border: 3px solid #000;
+    background-color: #aaa;
+    background-position: center;
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+    box-shadow: var(--axp-shadow-icon);
+    cursor: pointer;
+    padding: 0;
+}
+.axp-dock__pen:hover { border-color: #fff; }
+.axp-dock__pen[data-selected="true"] { background-color: var(--axp-accent); }
+
+/* ドック内 汎用アイコンボタン (44x44、半透明地) */
+.axp-dock__btn {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    background-position: center;
+    background-size: 28px 28px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.axp-dock__btn:hover { background-color: rgba(255, 255, 255, 0.15); }
+.axp-dock__btn[data-active="true"] {
+    background-color: var(--axp-accent-soft);
+    box-shadow: inset 0 0 0 2px var(--axp-accent);
+}
+
+/* ドック内 小型ボタン (Undo/Redo等 44x32) */
+.axp-dock__mini {
+    flex: 0 0 32px;
+    width: 44px;
+    height: 32px;
+    border: 0;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    background-position: center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding: 0;
+}
+.axp-dock__mini:hover { background-color: rgba(255, 255, 255, 0.15); }
+
+/* 区切り線 */
+.axp-dock__sep {
+    flex: 0 0 1px;
+    width: 100%;
+    height: 1px;
+    background: #444;
+    margin: 6px 0;
+}
+.axp-dock__spacer { flex: 1 1 auto; }
+
+/* ドック個別アイコン (resource PNG) */
+.axp-dock__ic-pen      { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_0___}); }
+.axp-dock__ic-eraser   { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_1___}); }
+.axp-dock__ic-fill     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_2___}); }
+.axp-dock__ic-spuit    { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_3___}); }
+.axp-dock__ic-hand     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_4___}); }
+.axp-dock__ic-nagenawa { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_5___}); }
+.axp-dock__ic-undo     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_6___}); }
+.axp-dock__ic-redo     { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_7___}); }
+.axp-dock__ic-layer    { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_8___}); }
+.axp-dock__ic-color    { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_9___}); }
+.axp-dock__ic-palette  { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_10___}); }
+.axp-dock__ic-subtool  { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_11___}); }
+.axp-dock__ic-pentool  { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_12___}); }
+.axp-dock__ic-config   { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_13___}); background-size: 20px 20px; }
+/* フィルタ (icon.css の漏斗SVGと同一) */
+.axp-dock__ic-filter {
+    background-image: url(${___CSS_LOADER_URL_REPLACEMENT_14___});
+    background-size: 24px 24px;
+}
+/* もっと見る (…) */
+.axp-dock__ic-more {
+    background-image: url(${___CSS_LOADER_URL_REPLACEMENT_15___});
+    background-size: 22px 22px;
+}
+
+/* ==========================================================================
+   クイックバー (下部中央 pill)
+   ========================================================================== */
+.axp-quickbar {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    z-index: 940;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: calc(100% - 128px);
+    box-sizing: border-box;
+}
+.axp-quickbar__group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+}
+.axp-quickbar__group:not(:last-child) { border-right: 1px solid rgba(255, 255, 255, 0.1); }
+
+.axp-quickbar__swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid #333;
+    background: #000;
+    cursor: pointer;
+    padding: 0;
+}
+.axp-quickbar__hex {
+    font-family: monospace;
+    font-size: 11px;
+    color: #eee;
+    min-width: 56px;
+}
+.axp-quickbar__label {
+    font-size: 11px;
+    color: var(--axp-text-muted);
+    white-space: nowrap;
+}
+.axp-quickbar input[type="range"] {
+    width: 80px;
+    min-width: 0;
+    height: 14px;
+    margin: 0;
+}
+.axp-quickbar__val {
+    font-size: 11px;
+    color: #fff;
+    font-family: monospace;
+    min-width: 22px;
+    text-align: right;
+}
+.axp-quickbar__btn {
+    width: 30px;
+    height: 26px;
+    border: 0;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.06);
+    background-position: center;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    color: #eee;
+    font-size: 11px;
+    padding: 0;
+}
+.axp-quickbar__btn:hover { background-color: rgba(255, 255, 255, 0.18); }
+.axp-quickbar__btn--undo { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_6___}); }
+.axp-quickbar__btn--redo { background-image: url(${___CSS_LOADER_URL_REPLACEMENT_7___}); }
+.axp-quickbar__btn--zoom { width: auto; min-width: 44px; padding: 0 6px; }
+
+/* ==========================================================================
+   表示制御
+   - モバイル幅 / タッチ環境ではドック・クイックバーを隠す (既存UIを優先)
+   ========================================================================== */
+@media (max-width: 599px) {
+    .axp-dock,
+    .axp-quickbar {
+        display: none;
+    }
+}
+/* タッチ環境では既存の touchBar と競合するためクイックバーのみ非表示 */
+@media (pointer: coarse) {
+    .axp-quickbar {
+        display: none;
+    }
+}
+`, "",{"version":3,"sources":["webpack://./src/css/dock.css"],"names":[],"mappings":"AAAA;;;;;;+EAM+E;;AAE/E;IACI,kBAAkB;IAClB,QAAQ;IACR,WAAW;IACX,WAAW;IACX,YAAY;IACZ,8BAA8B;IAC9B,kCAAkC;IAClC,0BAA0B;IAC1B,gBAAgB;IAChB,aAAa;IACb,sBAAsB;IACtB,QAAQ;IACR,mBAAmB;IACnB,sBAAsB;IACtB,gBAAgB;IAChB,kBAAkB;IAClB,qBAAqB;AACzB;AACA,+BAA+B,aAAa,EAAE;AAC9C,mBAAmB,OAAO,GAAG,kDAAkD,EAAE;AACjF,mBAAmB,QAAQ,EAAE,kDAAkD,EAAE;;AAEjF,mCAAmC;AACnC;IACI,cAAc;IACd,WAAW;IACX,YAAY;IACZ,8BAA8B;IAC9B,sBAAsB;IACtB,sBAAsB;IACtB,2BAA2B;IAC3B,0BAA0B;IAC1B,4BAA4B;IAC5B,kCAAkC;IAClC,eAAe;IACf,UAAU;AACd;AACA,uBAAuB,kBAAkB,EAAE;AAC3C,uCAAuC,mCAAmC,EAAE;;AAE5E,gCAAgC;AAChC;IACI,cAAc;IACd,WAAW;IACX,YAAY;IACZ,SAAS;IACT,kBAAkB;IAClB,2CAA2C;IAC3C,2BAA2B;IAC3B,0BAA0B;IAC1B,4BAA4B;IAC5B,eAAe;IACf,UAAU;IACV,aAAa;IACb,mBAAmB;IACnB,uBAAuB;AAC3B;AACA,uBAAuB,2CAA2C,EAAE;AACpE;IACI,wCAAwC;IACxC,6CAA6C;AACjD;;AAEA,kCAAkC;AAClC;IACI,cAAc;IACd,WAAW;IACX,YAAY;IACZ,SAAS;IACT,kBAAkB;IAClB,2CAA2C;IAC3C,2BAA2B;IAC3B,0BAA0B;IAC1B,4BAA4B;IAC5B,eAAe;IACf,UAAU;AACd;AACA,wBAAwB,2CAA2C,EAAE;;AAErE,SAAS;AACT;IACI,aAAa;IACb,WAAW;IACX,WAAW;IACX,gBAAgB;IAChB,aAAa;AACjB;AACA,oBAAoB,cAAc,EAAE;;AAEpC,6BAA6B;AAC7B,yBAAyB,yDAAgD,EAAE;AAC3E,yBAAyB,yDAAkD,EAAE;AAC7E,yBAAyB,yDAAgD,EAAE;AAC3E,yBAAyB,yDAAiD,EAAE;AAC5E,yBAAyB,yDAAgD,EAAE;AAC3E,yBAAyB,yDAAoD,EAAE;AAC/E,yBAAyB,yDAAgD,EAAE;AAC3E,yBAAyB,yDAAgD,EAAE;AAC3E,yBAAyB,yDAAwD,EAAE;AACnF,yBAAyB,yDAA6D,EAAE;AACxF,yBAAyB,0DAA0D,EAAE;AACrF,yBAAyB,0DAA0D,EAAE;AACrF,yBAAyB,0DAAsD,EAAE;AACjF,yBAAyB,0DAAkD,EAAE,0BAA0B,EAAE;AACzG,8BAA8B;AAC9B;IACI,0DAAqP;IACrP,0BAA0B;AAC9B;AACA,cAAc;AACd;IACI,0DAAgO;IAChO,0BAA0B;AAC9B;;AAEA;;+EAE+E;AAC/E;IACI,kBAAkB;IAClB,SAAS;IACT,YAAY;IACZ,2BAA2B;IAC3B,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,8BAA8B;IAC9B,kCAAkC;IAClC,0BAA0B;IAC1B,iBAAiB;IACjB,oBAAoB;IACpB,2CAA2C;IAC3C,6BAA6B;IAC7B,sBAAsB;AAC1B;AACA;IACI,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,cAAc;AAClB;AACA,wCAAwC,gDAAgD,EAAE;;AAE1F;IACI,WAAW;IACX,YAAY;IACZ,kBAAkB;IAClB,sBAAsB;IACtB,gBAAgB;IAChB,eAAe;IACf,UAAU;AACd;AACA;IACI,sBAAsB;IACtB,eAAe;IACf,WAAW;IACX,eAAe;AACnB;AACA;IACI,eAAe;IACf,4BAA4B;IAC5B,mBAAmB;AACvB;AACA;IACI,WAAW;IACX,YAAY;IACZ,YAAY;IACZ,SAAS;AACb;AACA;IACI,eAAe;IACf,WAAW;IACX,sBAAsB;IACtB,eAAe;IACf,iBAAiB;AACrB;AACA;IACI,WAAW;IACX,YAAY;IACZ,SAAS;IACT,kBAAkB;IAClB,2CAA2C;IAC3C,2BAA2B;IAC3B,0BAA0B;IAC1B,4BAA4B;IAC5B,eAAe;IACf,WAAW;IACX,eAAe;IACf,UAAU;AACd;AACA,2BAA2B,2CAA2C,EAAE;AACxE,2BAA2B,yDAAgD,EAAE;AAC7E,2BAA2B,yDAAgD,EAAE;AAC7E,2BAA2B,WAAW,EAAE,eAAe,EAAE,cAAc,EAAE;;AAEzE;;;+EAG+E;AAC/E;IACI;;QAEI,aAAa;IACjB;AACJ;AACA,2CAA2C;AAC3C;IACI;QACI,aAAa;IACjB;AACJ","sourcesContent":["/* ==========================================================================\n   案C: サイドドック + クイックバー (PC)\n   - 左ドック: 主要ペン6種 + ペン種選択 + Undo/Redo\n   - 右ドック: ウィンドウ開閉 (レイヤー/色/パレット/補助/フィルタ) + 設定\n   - クイックバー: 下部中央 pill (色 / 太さ / Undo / Redo / Zoomリセット)\n   z-index: 既存フローティングウィンドウ (1000+) より下、キャンバス表示物より上\n   ========================================================================== */\n\n.axp-dock {\n    position: absolute;\n    top: 4px;\n    bottom: 4px;\n    width: 52px;\n    z-index: 950;\n    background: rgba(0, 0, 0, 0.5);\n    -webkit-backdrop-filter: blur(4px);\n    backdrop-filter: blur(4px);\n    padding: 8px 4px;\n    display: flex;\n    flex-direction: column;\n    gap: 3px;\n    align-items: center;\n    box-sizing: border-box;\n    overflow-y: auto;\n    overflow-x: hidden;\n    scrollbar-width: none;\n}\n.axp-dock::-webkit-scrollbar { display: none; }\n.axp-dock--left  { left: 0;  border-radius: 0 var(--axp-r-lg) var(--axp-r-lg) 0; }\n.axp-dock--right { right: 0; border-radius: var(--axp-r-lg) 0 0 var(--axp-r-lg); }\n\n/* ドック内 ペン種ボタン (44x44、既存ペンアイコン踏襲) */\n.axp-dock__pen {\n    flex: 0 0 44px;\n    width: 44px;\n    height: 44px;\n    border-radius: var(--axp-r-md);\n    border: 3px solid #000;\n    background-color: #aaa;\n    background-position: center;\n    background-size: 32px 32px;\n    background-repeat: no-repeat;\n    box-shadow: var(--axp-shadow-icon);\n    cursor: pointer;\n    padding: 0;\n}\n.axp-dock__pen:hover { border-color: #fff; }\n.axp-dock__pen[data-selected=\"true\"] { background-color: var(--axp-accent); }\n\n/* ドック内 汎用アイコンボタン (44x44、半透明地) */\n.axp-dock__btn {\n    flex: 0 0 44px;\n    width: 44px;\n    height: 44px;\n    border: 0;\n    border-radius: 6px;\n    background-color: rgba(255, 255, 255, 0.05);\n    background-position: center;\n    background-size: 28px 28px;\n    background-repeat: no-repeat;\n    cursor: pointer;\n    padding: 0;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.axp-dock__btn:hover { background-color: rgba(255, 255, 255, 0.15); }\n.axp-dock__btn[data-active=\"true\"] {\n    background-color: var(--axp-accent-soft);\n    box-shadow: inset 0 0 0 2px var(--axp-accent);\n}\n\n/* ドック内 小型ボタン (Undo/Redo等 44x32) */\n.axp-dock__mini {\n    flex: 0 0 32px;\n    width: 44px;\n    height: 32px;\n    border: 0;\n    border-radius: 6px;\n    background-color: rgba(255, 255, 255, 0.05);\n    background-position: center;\n    background-size: 20px 20px;\n    background-repeat: no-repeat;\n    cursor: pointer;\n    padding: 0;\n}\n.axp-dock__mini:hover { background-color: rgba(255, 255, 255, 0.15); }\n\n/* 区切り線 */\n.axp-dock__sep {\n    flex: 0 0 1px;\n    width: 100%;\n    height: 1px;\n    background: #444;\n    margin: 6px 0;\n}\n.axp-dock__spacer { flex: 1 1 auto; }\n\n/* ドック個別アイコン (resource PNG) */\n.axp-dock__ic-pen      { background-image: url('../../resource/pen1.png'); }\n.axp-dock__ic-eraser   { background-image: url('../../resource/eraser.png'); }\n.axp-dock__ic-fill     { background-image: url('../../resource/fill.png'); }\n.axp-dock__ic-spuit    { background-image: url('../../resource/spuit.png'); }\n.axp-dock__ic-hand     { background-image: url('../../resource/hand.png'); }\n.axp-dock__ic-nagenawa { background-image: url('../../resource/nagenawa.png'); }\n.axp-dock__ic-undo     { background-image: url('../../resource/undo.png'); }\n.axp-dock__ic-redo     { background-image: url('../../resource/redo.png'); }\n.axp-dock__ic-layer    { background-image: url('../../resource/window_layer.png'); }\n.axp-dock__ic-color    { background-image: url('../../resource/window_colormaker.png'); }\n.axp-dock__ic-palette  { background-image: url('../../resource/window_palette.png'); }\n.axp-dock__ic-subtool  { background-image: url('../../resource/window_subtool.png'); }\n.axp-dock__ic-pentool  { background-image: url('../../resource/window_pen.png'); }\n.axp-dock__ic-config   { background-image: url('../../resource/config.png'); background-size: 20px 20px; }\n/* フィルタ (icon.css の漏斗SVGと同一) */\n.axp-dock__ic-filter {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 4h18l-7 8v6l-4 2v-8z\"/></svg>');\n    background-size: 24px 24px;\n}\n/* もっと見る (…) */\n.axp-dock__ic-more {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"5\" cy=\"12\" r=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><circle cx=\"19\" cy=\"12\" r=\"2\"/></svg>');\n    background-size: 22px 22px;\n}\n\n/* ==========================================================================\n   クイックバー (下部中央 pill)\n   ========================================================================== */\n.axp-quickbar {\n    position: absolute;\n    left: 50%;\n    bottom: 12px;\n    transform: translateX(-50%);\n    z-index: 940;\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    background: rgba(0, 0, 0, 0.6);\n    -webkit-backdrop-filter: blur(6px);\n    backdrop-filter: blur(6px);\n    padding: 6px 10px;\n    border-radius: 999px;\n    border: 1px solid rgba(255, 255, 255, 0.08);\n    max-width: calc(100% - 128px);\n    box-sizing: border-box;\n}\n.axp-quickbar__group {\n    display: flex;\n    align-items: center;\n    gap: 6px;\n    padding: 0 8px;\n}\n.axp-quickbar__group:not(:last-child) { border-right: 1px solid rgba(255, 255, 255, 0.1); }\n\n.axp-quickbar__swatch {\n    width: 20px;\n    height: 20px;\n    border-radius: 3px;\n    border: 1px solid #333;\n    background: #000;\n    cursor: pointer;\n    padding: 0;\n}\n.axp-quickbar__hex {\n    font-family: monospace;\n    font-size: 11px;\n    color: #eee;\n    min-width: 56px;\n}\n.axp-quickbar__label {\n    font-size: 11px;\n    color: var(--axp-text-muted);\n    white-space: nowrap;\n}\n.axp-quickbar input[type=\"range\"] {\n    width: 80px;\n    min-width: 0;\n    height: 14px;\n    margin: 0;\n}\n.axp-quickbar__val {\n    font-size: 11px;\n    color: #fff;\n    font-family: monospace;\n    min-width: 22px;\n    text-align: right;\n}\n.axp-quickbar__btn {\n    width: 30px;\n    height: 26px;\n    border: 0;\n    border-radius: 5px;\n    background-color: rgba(255, 255, 255, 0.06);\n    background-position: center;\n    background-size: 16px 16px;\n    background-repeat: no-repeat;\n    cursor: pointer;\n    color: #eee;\n    font-size: 11px;\n    padding: 0;\n}\n.axp-quickbar__btn:hover { background-color: rgba(255, 255, 255, 0.18); }\n.axp-quickbar__btn--undo { background-image: url('../../resource/undo.png'); }\n.axp-quickbar__btn--redo { background-image: url('../../resource/redo.png'); }\n.axp-quickbar__btn--zoom { width: auto; min-width: 44px; padding: 0 6px; }\n\n/* ==========================================================================\n   表示制御\n   - モバイル幅 / タッチ環境ではドック・クイックバーを隠す (既存UIを優先)\n   ========================================================================== */\n@media (max-width: 599px) {\n    .axp-dock,\n    .axp-quickbar {\n        display: none;\n    }\n}\n/* タッチ環境では既存の touchBar と競合するためクイックバーのみ非表示 */\n@media (pointer: coarse) {\n    .axp-quickbar {\n        display: none;\n    }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14509,6 +15255,196 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 有／無トグルスイッチ共�
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/css/mobile.css":
+/*!******************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/css/mobile.css ***!
+  \******************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* ============================================================
+   案C モバイルUI: トップバー + ボトムシート
+   - デフォルトは全て非表示。@media (max-width: 599px) でのみ表示する
+     ため、PC表示には一切影響しない。
+   - 新規クラスは axpm-* プレフィックス（既存の axp_* / axpc_* とは
+     衝突しない）。
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   トップバー（現在色 / ペン名 / 太さ）
+   ------------------------------------------------------------ */
+.axpm-topbar {
+    display: none;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    z-index: 960;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background-color: var(--axp-surface-strong, rgba(0, 0, 0, .8));
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.axpm-topbar__swatch {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background-color: #000;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.axpm-topbar__pen {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 32px;
+    padding: 0 10px;
+    background-color: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 6px;
+    color: var(--axp-color-text, #fff);
+    font-size: var(--axp-fs-s, 12px);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.axpm-topbar__range {
+    flex: 1 1 auto;
+    min-width: 40px;
+    accent-color: var(--axp-color-accent, #eeac60);
+}
+
+.axpm-topbar__val {
+    flex: none;
+    min-width: 26px;
+    color: var(--axp-color-text, #fff);
+    font-size: var(--axp-fs-s, 12px);
+    text-align: right;
+}
+
+/* ------------------------------------------------------------
+   ボトムシート（ハンドル + タブバー）
+   ------------------------------------------------------------ */
+.axpm-sheet {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1300;
+    flex-direction: column;
+    background-color: var(--axp-surface-strong, rgba(0, 0, 0, .8));
+    border-top: 1px solid rgba(255, 255, 255, .15);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.axpm-sheet__handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.axpm-sheet__handle > span {
+    width: 36px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, .35);
+    border-radius: 2px;
+}
+
+.axpm-sheet__tabs {
+    display: flex;
+    gap: 2px;
+    padding: 0 4px 4px;
+}
+
+.axpm-sheet__tab {
+    flex: 1 1 0;
+    height: 36px;
+    padding: 0 2px;
+    background-color: rgba(255, 255, 255, .06);
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: var(--axp-color-text, #fff);
+    font-size: var(--axp-fs-s, 12px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.axpm-sheet__tab[data-active="true"] {
+    background-color: var(--axp-color-accent, #eeac60);
+    border-color: var(--axp-color-accent, #eeac60);
+    color: #000;
+    font-weight: bold;
+}
+
+/* ------------------------------------------------------------
+   モバイル時のみ有効になるレイアウト
+   ------------------------------------------------------------ */
+@media (max-width: 599px) {
+    .axpm-topbar {
+        display: flex;
+    }
+
+    .axpm-sheet {
+        display: flex;
+    }
+
+    /* シート内に取り込まれたツールウィンドウを画面下半分へ再配置
+       （ドラッグによるインラインstyleを上書きするため !important） */
+    #axp_canvas .axpc_window.axpm-in-sheet {
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        bottom: 58px !important;
+        width: auto !important;
+        max-height: 46%;
+        overflow-y: auto;
+        z-index: 1290 !important;
+        border-radius: 8px 8px 0 0;
+    }
+
+    /* タッチ操作バーがシートのタブと重ならないように上へ退避 */
+    #axp_canvas_div_touchBar {
+        bottom: 66px;
+    }
+}
+`, "",{"version":3,"sources":["webpack://./src/css/mobile.css"],"names":[],"mappings":"AAAA;;;;;;iEAMiE;;AAEjE;;iEAEiE;AACjE;IACI,aAAa;IACb,kBAAkB;IAClB,QAAQ;IACR,SAAS;IACT,UAAU;IACV,YAAY;IACZ,mBAAmB;IACnB,QAAQ;IACR,gBAAgB;IAChB,8DAA8D;IAC9D,0CAA0C;IAC1C,kBAAkB;IAClB,0BAA0B;IAC1B,kCAAkC;AACtC;;AAEA;IACI,UAAU;IACV,WAAW;IACX,YAAY;IACZ,UAAU;IACV,sBAAsB;IACtB,yCAAyC;IACzC,kBAAkB;IAClB,eAAe;AACnB;;AAEA;IACI,UAAU;IACV,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,YAAY;IACZ,eAAe;IACf,0CAA0C;IAC1C,0CAA0C;IAC1C,kBAAkB;IAClB,kCAAkC;IAClC,gCAAgC;IAChC,mBAAmB;IACnB,eAAe;AACnB;;AAEA;IACI,cAAc;IACd,eAAe;IACf,8CAA8C;AAClD;;AAEA;IACI,UAAU;IACV,eAAe;IACf,kCAAkC;IAClC,gCAAgC;IAChC,iBAAiB;AACrB;;AAEA;;iEAEiE;AACjE;IACI,aAAa;IACb,kBAAkB;IAClB,OAAO;IACP,QAAQ;IACR,SAAS;IACT,aAAa;IACb,sBAAsB;IACtB,8DAA8D;IAC9D,8CAA8C;IAC9C,0BAA0B;IAC1B,kCAAkC;AACtC;;AAEA;IACI,aAAa;IACb,uBAAuB;IACvB,mBAAmB;IACnB,YAAY;IACZ,UAAU;IACV,gBAAgB;IAChB,YAAY;IACZ,eAAe;AACnB;;AAEA;IACI,WAAW;IACX,WAAW;IACX,0CAA0C;IAC1C,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,QAAQ;IACR,kBAAkB;AACtB;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,cAAc;IACd,0CAA0C;IAC1C,6BAA6B;IAC7B,kBAAkB;IAClB,kCAAkC;IAClC,gCAAgC;IAChC,mBAAmB;IACnB,gBAAgB;IAChB,uBAAuB;IACvB,eAAe;AACnB;;AAEA;IACI,kDAAkD;IAClD,8CAA8C;IAC9C,WAAW;IACX,iBAAiB;AACrB;;AAEA;;iEAEiE;AACjE;IACI;QACI,aAAa;IACjB;;IAEA;QACI,aAAa;IACjB;;IAEA;+CAC2C;IAC3C;QACI,6BAA6B;QAC7B,kBAAkB;QAClB,mBAAmB;QACnB,oBAAoB;QACpB,uBAAuB;QACvB,sBAAsB;QACtB,eAAe;QACf,gBAAgB;QAChB,wBAAwB;QACxB,0BAA0B;IAC9B;;IAEA,gCAAgC;IAChC;QACI,YAAY;IAChB;AACJ","sourcesContent":["/* ============================================================\n   案C モバイルUI: トップバー + ボトムシート\n   - デフォルトは全て非表示。@media (max-width: 599px) でのみ表示する\n     ため、PC表示には一切影響しない。\n   - 新規クラスは axpm-* プレフィックス（既存の axp_* / axpc_* とは\n     衝突しない）。\n   ============================================================ */\n\n/* ------------------------------------------------------------\n   トップバー（現在色 / ペン名 / 太さ）\n   ------------------------------------------------------------ */\n.axpm-topbar {\n    display: none;\n    position: absolute;\n    top: 6px;\n    left: 6px;\n    right: 6px;\n    z-index: 960;\n    align-items: center;\n    gap: 8px;\n    padding: 6px 8px;\n    background-color: var(--axp-surface-strong, rgba(0, 0, 0, .8));\n    border: 1px solid rgba(255, 255, 255, .12);\n    border-radius: 8px;\n    backdrop-filter: blur(6px);\n    -webkit-backdrop-filter: blur(6px);\n}\n\n.axpm-topbar__swatch {\n    flex: none;\n    width: 32px;\n    height: 32px;\n    padding: 0;\n    background-color: #000;\n    border: 2px solid rgba(255, 255, 255, .5);\n    border-radius: 6px;\n    cursor: pointer;\n}\n\n.axpm-topbar__pen {\n    flex: none;\n    display: flex;\n    align-items: center;\n    gap: 4px;\n    height: 32px;\n    padding: 0 10px;\n    background-color: rgba(255, 255, 255, .08);\n    border: 1px solid rgba(255, 255, 255, .15);\n    border-radius: 6px;\n    color: var(--axp-color-text, #fff);\n    font-size: var(--axp-fs-s, 12px);\n    white-space: nowrap;\n    cursor: pointer;\n}\n\n.axpm-topbar__range {\n    flex: 1 1 auto;\n    min-width: 40px;\n    accent-color: var(--axp-color-accent, #eeac60);\n}\n\n.axpm-topbar__val {\n    flex: none;\n    min-width: 26px;\n    color: var(--axp-color-text, #fff);\n    font-size: var(--axp-fs-s, 12px);\n    text-align: right;\n}\n\n/* ------------------------------------------------------------\n   ボトムシート（ハンドル + タブバー）\n   ------------------------------------------------------------ */\n.axpm-sheet {\n    display: none;\n    position: absolute;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 1300;\n    flex-direction: column;\n    background-color: var(--axp-surface-strong, rgba(0, 0, 0, .8));\n    border-top: 1px solid rgba(255, 255, 255, .15);\n    backdrop-filter: blur(6px);\n    -webkit-backdrop-filter: blur(6px);\n}\n\n.axpm-sheet__handle {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 16px;\n    padding: 0;\n    background: none;\n    border: none;\n    cursor: pointer;\n}\n\n.axpm-sheet__handle > span {\n    width: 36px;\n    height: 4px;\n    background-color: rgba(255, 255, 255, .35);\n    border-radius: 2px;\n}\n\n.axpm-sheet__tabs {\n    display: flex;\n    gap: 2px;\n    padding: 0 4px 4px;\n}\n\n.axpm-sheet__tab {\n    flex: 1 1 0;\n    height: 36px;\n    padding: 0 2px;\n    background-color: rgba(255, 255, 255, .06);\n    border: 1px solid transparent;\n    border-radius: 5px;\n    color: var(--axp-color-text, #fff);\n    font-size: var(--axp-fs-s, 12px);\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    cursor: pointer;\n}\n\n.axpm-sheet__tab[data-active=\"true\"] {\n    background-color: var(--axp-color-accent, #eeac60);\n    border-color: var(--axp-color-accent, #eeac60);\n    color: #000;\n    font-weight: bold;\n}\n\n/* ------------------------------------------------------------\n   モバイル時のみ有効になるレイアウト\n   ------------------------------------------------------------ */\n@media (max-width: 599px) {\n    .axpm-topbar {\n        display: flex;\n    }\n\n    .axpm-sheet {\n        display: flex;\n    }\n\n    /* シート内に取り込まれたツールウィンドウを画面下半分へ再配置\n       （ドラッグによるインラインstyleを上書きするため !important） */\n    #axp_canvas .axpc_window.axpm-in-sheet {\n        position: absolute !important;\n        left: 0 !important;\n        right: 0 !important;\n        top: auto !important;\n        bottom: 58px !important;\n        width: auto !important;\n        max-height: 46%;\n        overflow-y: auto;\n        z-index: 1290 !important;\n        border-radius: 8px 8px 0 0;\n    }\n\n    /* タッチ操作バーがシートのタブと重ならないように上へ退避 */\n    #axp_canvas_div_touchBar {\n        bottom: 66px;\n    }\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/css/post.css":
 /*!****************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/css/post.css ***!
@@ -15105,7 +16041,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保存から復元のサブ画面 */
+___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保存から復元のサブ画面（案C ダークテーマ） */
 
 #axp_saveload {
     position: absolute;
@@ -15119,23 +16055,26 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
 }
 
 #axp_saveload>div {
-    background-color: #eee;
-    color: #000;
-    border-color: #337;
-    border-width: 4px;
-    border-style: double;
+    background-color: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
     margin: 8px;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 12px;
 }
 
 /* セーブスロットのHTMLを挿入するポイント */
 #axp_saveload_div_insertHTML {
-    background-color: #aaa;
-    border: solid 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
     display: flex;
     justify-content: normal;
     flex-wrap: wrap;
+    gap: 8px;
     padding: 8px;
     cursor: pointer;
 }
@@ -15150,10 +16089,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
 
 .axpc_saveload_saveSlot,
 .axpc_saveload_loadSlot {
-    background-color: #ddd;
+    background-color: #212121;
+    color: #eee;
     width: 135px;
     min-height: 180px;
-    border: solid 2px #000;
+    border: solid 1px #333;
     border-radius: 10px;
     text-align: center;
     padding-top: 4px;
@@ -15163,11 +16103,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
 }
 
 .axpc_saveload_saveSlot:hover {
-    background-color: #faa;
+    border-color: var(--axp-accent, #eeac60);
+    background-color: rgba(238, 172, 96, 0.12);
 }
 
 .axpc_saveload_loadSlot:hover {
-    background-color: #ffa;
+    border-color: var(--axp-accent, #eeac60);
+    background-color: rgba(238, 172, 96, 0.12);
 }
 
 .axpc_saveload_thumbnall {
@@ -15177,7 +16119,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
     display: flex;
     align-items: center;
     justify-content: center;
-    border: #aaa solid 1px;
+    border: #444 solid 1px;
+    border-radius: 6px;
+    background-color: #191919;
+    overflow: hidden;
 }
 
 .axpc_saveload_refId {
@@ -15187,10 +16132,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
     line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
-    color: #00f;
+    color: #7fb2ff;
     /* ブラウザがサポートしていない場合のフェールセーフ */
     max-height: 30px;
-}`, "",{"version":3,"sources":["webpack://./src/css/saveload.css"],"names":[],"mappings":"AAAA,0BAA0B;;AAE1B;IACI,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,cAAc;IACd,oCAAoC;AACxC;;AAEA;IACI,sBAAsB;IACtB,WAAW;IACX,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,WAAW;IACX,YAAY;IACZ,kBAAkB;AACtB;;AAEA,0BAA0B;AAC1B;IACI,sBAAsB;IACtB,iBAAiB;IACjB,aAAa;IACb,uBAAuB;IACvB,eAAe;IACf,YAAY;IACZ,eAAe;AACnB;;AAEA,WAAW;AACX;IACI,eAAe;IACf,mBAAmB;IACnB,eAAe;IACf,WAAW;AACf;;AAEA;;IAEI,sBAAsB;IACtB,YAAY;IACZ,iBAAiB;IACjB,sBAAsB;IACtB,mBAAmB;IACnB,kBAAkB;IAClB,gBAAgB;IAChB,eAAe;IACf,iBAAiB;IACjB,iBAAiB;AACrB;;AAEA;IACI,sBAAsB;AAC1B;;AAEA;IACI,sBAAsB;AAC1B;;AAEA;IACI,YAAY;IACZ,aAAa;IACb,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,oBAAoB;IACpB,qBAAqB;IACrB,aAAa;IACb,4BAA4B;IAC5B,qBAAqB;IACrB,WAAW;IACX,6BAA6B;IAC7B,gBAAgB;AACpB","sourcesContent":["/* セーブ／ロード／自動保存から復元のサブ画面 */\n\n#axp_saveload {\n    position: absolute;\n    z-index: 5000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0.5);\n}\n\n#axp_saveload>div {\n    background-color: #eee;\n    color: #000;\n    border-color: #337;\n    border-width: 4px;\n    border-style: double;\n    margin: 8px;\n    padding: 8px;\n    border-radius: 5px;\n}\n\n/* セーブスロットのHTMLを挿入するポイント */\n#axp_saveload_div_insertHTML {\n    background-color: #aaa;\n    border: solid 0px;\n    display: flex;\n    justify-content: normal;\n    flex-wrap: wrap;\n    padding: 8px;\n    cursor: pointer;\n}\n\n/* 閉じるボタン */\n#axp_saveload_button_close {\n    margin-top: 8px;\n    font-weight: bolder;\n    font-size: 15px;\n    width: 100%;\n}\n\n.axpc_saveload_saveSlot,\n.axpc_saveload_loadSlot {\n    background-color: #ddd;\n    width: 135px;\n    min-height: 180px;\n    border: solid 2px #000;\n    border-radius: 10px;\n    text-align: center;\n    padding-top: 4px;\n    font-size: 12px;\n    font-weight: bold;\n    line-height: 15px;\n}\n\n.axpc_saveload_saveSlot:hover {\n    background-color: #faa;\n}\n\n.axpc_saveload_loadSlot:hover {\n    background-color: #ffa;\n}\n\n.axpc_saveload_thumbnall {\n    width: 124px;\n    height: 124px;\n    margin: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border: #aaa solid 1px;\n}\n\n.axpc_saveload_refId {\n    overflow: hidden;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    line-clamp: 2;\n    -webkit-box-orient: vertical;\n    word-break: break-all;\n    color: #00f;\n    /* ブラウザがサポートしていない場合のフェールセーフ */\n    max-height: 30px;\n}"],"sourceRoot":""}]);
+}
+`, "",{"version":3,"sources":["webpack://./src/css/saveload.css"],"names":[],"mappings":"AAAA,qCAAqC;;AAErC;IACI,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,cAAc;IACd,oCAAoC;AACxC;;AAEA;IACI,wCAAwC;IACxC,2BAA2B;IAC3B,mCAAmC;IACnC,WAAW;IACX,2CAA2C;IAC3C,0CAA0C;IAC1C,WAAW;IACX,aAAa;IACb,mBAAmB;AACvB;;AAEA,0BAA0B;AAC1B;IACI,oCAAoC;IACpC,2CAA2C;IAC3C,kBAAkB;IAClB,aAAa;IACb,uBAAuB;IACvB,eAAe;IACf,QAAQ;IACR,YAAY;IACZ,eAAe;AACnB;;AAEA,WAAW;AACX;IACI,eAAe;IACf,mBAAmB;IACnB,eAAe;IACf,WAAW;AACf;;AAEA;;IAEI,yBAAyB;IACzB,WAAW;IACX,YAAY;IACZ,iBAAiB;IACjB,sBAAsB;IACtB,mBAAmB;IACnB,kBAAkB;IAClB,gBAAgB;IAChB,eAAe;IACf,iBAAiB;IACjB,iBAAiB;AACrB;;AAEA;IACI,wCAAwC;IACxC,0CAA0C;AAC9C;;AAEA;IACI,wCAAwC;IACxC,0CAA0C;AAC9C;;AAEA;IACI,YAAY;IACZ,aAAa;IACb,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,yBAAyB;IACzB,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;IAChB,oBAAoB;IACpB,qBAAqB;IACrB,aAAa;IACb,4BAA4B;IAC5B,qBAAqB;IACrB,cAAc;IACd,6BAA6B;IAC7B,gBAAgB;AACpB","sourcesContent":["/* セーブ／ロード／自動保存から復元のサブ画面（案C ダークテーマ） */\n\n#axp_saveload {\n    position: absolute;\n    z-index: 5000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0.5);\n}\n\n#axp_saveload>div {\n    background-color: rgba(20, 20, 20, 0.94);\n    backdrop-filter: blur(12px);\n    -webkit-backdrop-filter: blur(12px);\n    color: #fff;\n    border: 1px solid rgba(255, 255, 255, 0.12);\n    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);\n    margin: 8px;\n    padding: 12px;\n    border-radius: 12px;\n}\n\n/* セーブスロットのHTMLを挿入するポイント */\n#axp_saveload_div_insertHTML {\n    background-color: rgba(0, 0, 0, 0.3);\n    border: 1px solid rgba(255, 255, 255, 0.08);\n    border-radius: 8px;\n    display: flex;\n    justify-content: normal;\n    flex-wrap: wrap;\n    gap: 8px;\n    padding: 8px;\n    cursor: pointer;\n}\n\n/* 閉じるボタン */\n#axp_saveload_button_close {\n    margin-top: 8px;\n    font-weight: bolder;\n    font-size: 15px;\n    width: 100%;\n}\n\n.axpc_saveload_saveSlot,\n.axpc_saveload_loadSlot {\n    background-color: #212121;\n    color: #eee;\n    width: 135px;\n    min-height: 180px;\n    border: solid 1px #333;\n    border-radius: 10px;\n    text-align: center;\n    padding-top: 4px;\n    font-size: 12px;\n    font-weight: bold;\n    line-height: 15px;\n}\n\n.axpc_saveload_saveSlot:hover {\n    border-color: var(--axp-accent, #eeac60);\n    background-color: rgba(238, 172, 96, 0.12);\n}\n\n.axpc_saveload_loadSlot:hover {\n    border-color: var(--axp-accent, #eeac60);\n    background-color: rgba(238, 172, 96, 0.12);\n}\n\n.axpc_saveload_thumbnall {\n    width: 124px;\n    height: 124px;\n    margin: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border: #444 solid 1px;\n    border-radius: 6px;\n    background-color: #191919;\n    overflow: hidden;\n}\n\n.axpc_saveload_refId {\n    overflow: hidden;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    line-clamp: 2;\n    -webkit-box-orient: vertical;\n    word-break: break-all;\n    color: #7fb2ff;\n    /* ブラウザがサポートしていない場合のフェールセーフ */\n    max-height: 30px;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15241,8 +16187,56 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* AXNOS Paint UI tokens */
     --axp-h-icon-btn: 44px;
     --axp-h-compact-btn: 24px;
     --axp-h-compact-range: 24px;
+
+    /* ---- 追加 (Phase1: design/tokens.css 由来、components.css 用) ---- */
+    --axp-surface-strong: rgba(0, 0, 0, 0.80);
+    --axp-surface-solid: #000;
+    --axp-surface-tab: #333;
+    --axp-surface-tab-hover: #555;
+    --axp-surface-tab-active: #777;
+    --axp-surface-footer: #222;
+    --axp-border-1: #000;
+    --axp-border-2: #555;
+    --axp-border-3: #888;
+    --axp-accent-dark: #533C21;
+    --axp-sp-0: 2px;
+    --axp-sp-4: 12px;
+    --axp-ff: sans-serif;
+    --axp-fs-xs: 10px;
+    --axp-fs-sm: 11px;
+    --axp-fs-md: 13px;
+    --axp-fs-base: 15px;
+    --axp-h-tab: 30px;
+    --axp-h-btn: 24px;
+    --axp-h-btn-compact: 20px;
+    --axp-h-range: 18px;
+    --axp-shadow-window: 4px 4px 8px #000a;
+    --axp-shadow-icon: 0 0 10px #000;
+    --axp-blur: 3px;
+    --axp-window-w: 180px;
+    --axp-tool-w: 300px;
+    --axp-content-pad: 5px;
 }
-`, "",{"version":3,"sources":["webpack://./src/css/tokens.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;IACI,yCAAyC;IACzC,0CAA0C;IAC1C,wCAAwC;IACxC,+CAA+C;IAC/C,wBAAwB;IACxB,0BAA0B;IAC1B,sBAAsB;IACtB,uBAAuB;IACvB,yBAAyB;IACzB,2BAA2B;IAC3B,qBAAqB;IACrB,2CAA2C;IAC3C,6CAA6C;IAC7C,mBAAmB;IACnB,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,sBAAsB;IACtB,yBAAyB;IACzB,2BAA2B;AAC/B","sourcesContent":["/* AXNOS Paint UI tokens */\n:root {\n    --axp-surface-window: rgba(0, 0, 0, 0.30);\n    --axp-surface-content: rgba(0, 0, 0, 0.50);\n    --axp-surface-panel: rgba(0, 0, 0, 0.35);\n    --axp-surface-panel-strong: rgba(0, 0, 0, 0.62);\n    --axp-text-primary: #fff;\n    --axp-text-secondary: #ddd;\n    --axp-text-muted: #aaa;\n    --axp-border-soft: #555;\n    --axp-border-strong: #888;\n    --axp-border-focus: #8bd3ff;\n    --axp-accent: #eeac60;\n    --axp-accent-soft: rgba(238, 172, 96, 0.16);\n    --axp-accent-border: rgba(238, 172, 96, 0.45);\n    --axp-danger: #f009;\n    --axp-r-lg: 8px;\n    --axp-r-md: 5px;\n    --axp-r-sm: 3px;\n    --axp-sp-1: 4px;\n    --axp-sp-2: 6px;\n    --axp-sp-3: 8px;\n    --axp-h-icon-btn: 44px;\n    --axp-h-compact-btn: 24px;\n    --axp-h-compact-range: 24px;\n}\n"],"sourceRoot":""}]);
+
+/* コンパクト密度 (案B/C 想定, design/tokens.css 由来) */
+[data-density="compact"] {
+    --axp-window-w: 172px;
+    --axp-tool-w: 288px;
+    --axp-content-pad: 4px;
+    --axp-h-btn: 22px;
+    --axp-h-range: 16px;
+}
+
+/* 超コンパクト (design/tokens.css 由来) */
+[data-density="tight"] {
+    --axp-window-w: 160px;
+    --axp-tool-w: 260px;
+    --axp-content-pad: 3px;
+    --axp-h-btn: 20px;
+    --axp-h-range: 14px;
+    --axp-fs-md: 12px;
+}
+`, "",{"version":3,"sources":["webpack://./src/css/tokens.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;IACI,yCAAyC;IACzC,0CAA0C;IAC1C,wCAAwC;IACxC,+CAA+C;IAC/C,wBAAwB;IACxB,0BAA0B;IAC1B,sBAAsB;IACtB,uBAAuB;IACvB,yBAAyB;IACzB,2BAA2B;IAC3B,qBAAqB;IACrB,2CAA2C;IAC3C,6CAA6C;IAC7C,mBAAmB;IACnB,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,eAAe;IACf,sBAAsB;IACtB,yBAAyB;IACzB,2BAA2B;;IAE3B,iEAAiE;IACjE,yCAAyC;IACzC,yBAAyB;IACzB,uBAAuB;IACvB,6BAA6B;IAC7B,8BAA8B;IAC9B,0BAA0B;IAC1B,oBAAoB;IACpB,oBAAoB;IACpB,oBAAoB;IACpB,0BAA0B;IAC1B,eAAe;IACf,gBAAgB;IAChB,oBAAoB;IACpB,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,mBAAmB;IACnB,iBAAiB;IACjB,iBAAiB;IACjB,yBAAyB;IACzB,mBAAmB;IACnB,sCAAsC;IACtC,gCAAgC;IAChC,eAAe;IACf,qBAAqB;IACrB,mBAAmB;IACnB,sBAAsB;AAC1B;;AAEA,4CAA4C;AAC5C;IACI,qBAAqB;IACrB,mBAAmB;IACnB,sBAAsB;IACtB,iBAAiB;IACjB,mBAAmB;AACvB;;AAEA,kCAAkC;AAClC;IACI,qBAAqB;IACrB,mBAAmB;IACnB,sBAAsB;IACtB,iBAAiB;IACjB,mBAAmB;IACnB,iBAAiB;AACrB","sourcesContent":["/* AXNOS Paint UI tokens */\n:root {\n    --axp-surface-window: rgba(0, 0, 0, 0.30);\n    --axp-surface-content: rgba(0, 0, 0, 0.50);\n    --axp-surface-panel: rgba(0, 0, 0, 0.35);\n    --axp-surface-panel-strong: rgba(0, 0, 0, 0.62);\n    --axp-text-primary: #fff;\n    --axp-text-secondary: #ddd;\n    --axp-text-muted: #aaa;\n    --axp-border-soft: #555;\n    --axp-border-strong: #888;\n    --axp-border-focus: #8bd3ff;\n    --axp-accent: #eeac60;\n    --axp-accent-soft: rgba(238, 172, 96, 0.16);\n    --axp-accent-border: rgba(238, 172, 96, 0.45);\n    --axp-danger: #f009;\n    --axp-r-lg: 8px;\n    --axp-r-md: 5px;\n    --axp-r-sm: 3px;\n    --axp-sp-1: 4px;\n    --axp-sp-2: 6px;\n    --axp-sp-3: 8px;\n    --axp-h-icon-btn: 44px;\n    --axp-h-compact-btn: 24px;\n    --axp-h-compact-range: 24px;\n\n    /* ---- 追加 (Phase1: design/tokens.css 由来、components.css 用) ---- */\n    --axp-surface-strong: rgba(0, 0, 0, 0.80);\n    --axp-surface-solid: #000;\n    --axp-surface-tab: #333;\n    --axp-surface-tab-hover: #555;\n    --axp-surface-tab-active: #777;\n    --axp-surface-footer: #222;\n    --axp-border-1: #000;\n    --axp-border-2: #555;\n    --axp-border-3: #888;\n    --axp-accent-dark: #533C21;\n    --axp-sp-0: 2px;\n    --axp-sp-4: 12px;\n    --axp-ff: sans-serif;\n    --axp-fs-xs: 10px;\n    --axp-fs-sm: 11px;\n    --axp-fs-md: 13px;\n    --axp-fs-base: 15px;\n    --axp-h-tab: 30px;\n    --axp-h-btn: 24px;\n    --axp-h-btn-compact: 20px;\n    --axp-h-range: 18px;\n    --axp-shadow-window: 4px 4px 8px #000a;\n    --axp-shadow-icon: 0 0 10px #000;\n    --axp-blur: 3px;\n    --axp-window-w: 180px;\n    --axp-tool-w: 300px;\n    --axp-content-pad: 5px;\n}\n\n/* コンパクト密度 (案B/C 想定, design/tokens.css 由来) */\n[data-density=\"compact\"] {\n    --axp-window-w: 172px;\n    --axp-tool-w: 288px;\n    --axp-content-pad: 4px;\n    --axp-h-btn: 22px;\n    --axp-h-range: 16px;\n}\n\n/* 超コンパクト (design/tokens.css 由来) */\n[data-density=\"tight\"] {\n    --axp-window-w: 160px;\n    --axp-tool-w: 260px;\n    --axp-content-pad: 3px;\n    --axp-h-btn: 20px;\n    --axp-h-range: 14px;\n    --axp-fs-md: 12px;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16796,9 +17790,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
     -webkit-user-select: none;
     user-select: none;
     font-size: 15px;
-    border-radius: 8px;
+    border-radius: 12px;
     color: #fff;
-    background: rgba(0, 0, 0, .8);
+    background: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
     padding-left: 8px;
 }
 
@@ -17059,7 +18057,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
     opacity: 0.4;
     cursor: default;
 }
-`, "",{"version":3,"sources":["webpack://./src/css/window_pen.css"],"names":[],"mappings":"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","sourcesContent":["/* ペンツール */\n\n/* ペンツール外枠 */\n#axp_pen_div_content {\n    display: flex;\n    gap: var(--axp-sp-3);\n}\n\n/* ペンツール左側（プレビュー、スライダー）外枠 */\n#axp_pen_div_leftSide {\n    width: 108px;\n    overflow: hidden;\n}\n\n/* ペンの名前 */\n#axp_pen_span_penName {\n    line-height: 1.0;\n}\n\n/* 選択範囲の状態表示（選択中のみ表示） */\n#axp_pen_div_selectionStatus {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 4px;\n    margin-top: 2px;\n    font-size: 11px;\n}\n\n#axp_pen_button_deselect {\n    font-size: 11px;\n    line-height: 1;\n    padding: 2px 6px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_button_deselect:active {\n    background: #333;\n}\n\n/* プレビュー領域 */\n#axp_pen_div_preview {\n    position: relative;\n    width: 108px;\n    height: 96px;\n    background: rgba(255, 255, 255, 0.32);\n    border: 1px solid var(--axp-border-strong);\n    border-radius: var(--axp-r-md);\n    cursor: default;\n    margin-top: 4px;\n    overflow: hidden;\n}\n\n/* ペンの太さプレビュー用キャンバス */\n#axp_pen_canvas_previewPenSize {\n    position: absolute;\n    z-index: 2;\n    width: 106px;\n    height: 94px;\n}\n\n/* スポイト用キャンバス */\n#axp_pen_canvas_previewSpuit {\n    position: absolute;\n    z-index: 1;\n    width: 106px;\n    height: 94px;\n    image-rendering: pixelated;\n}\n\n/* ペンウィンドウ内チェックボックスのラベル縮小 */\n#axp_pen_div_slider .axpc_checkbox label {\n    font-size: 11px;\n}\n\n/* スポイトのRGBA表示用 */\n#axp_pen_div_spuitColorRGBA {\n    line-height: 1.3em;\n}\n\n/* スライダー領域 */\n#axp_pen_div_slider {\n    margin-top: 8px;\n    display: flex;\n    flex-flow: column;\n}\n\n.axpc_pen_settingsStack {\n    gap: 3px;\n}\n\n.axpc_pen_settingsStack .axpc_range {\n    overflow: hidden;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"] {\n    height: var(--axp-h-compact-range);\n    border-width: 2px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-track {\n    height: var(--axp-h-compact-range);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md) !important;\n}\n\n.axpc_pen_settingsStack .axpc_range_label {\n    font-size: 11px;\n    line-height: 12px;\n    padding-top: 1px;\n}\n\n.axpc_pen_settingsStack .axpc_range_value {\n    font-size: 13px;\n    padding-top: 11px;\n}\n\n/* セレクトボックス */\n#axp_pen_div_selectbox {\n    margin-top: 8px;\n}\n\n#axp_pen_select_drawMode,\n#axp_pen_select_fillMode {\n    width: 100px;\n    height: 24px;\n    border-radius: 5px;\n}\n\n/* ペンツール右側（機能ボタン）外枠 */\n#axp_pen_div_rightSide {\n    margin-left: 0;\n    display: flex;\n    flex-direction: column;\n    gap: var(--axp-sp-2);\n}\n\n/* 各ボタンの枠 */\n#axp_pen_div_rightSide>div {\n    position: relative;\n}\n\n/* ペンツール内のアイコン（メイン＆サブ） */\n#axp_pen_div_rightSide>div>button,\n#axp_penmode button {\n    width: var(--axp-h-icon-btn);\n    height: var(--axp-h-icon-btn);\n    border-radius: var(--axp-r-md);\n    border: 3px solid #000;\n    box-shadow: 0px 0px 10px #000;\n    cursor: pointer;\n    background-repeat: no-repeat;\n    background-position: 2px 2px;\n    background-color: #aaa;\n}\n\n/* ホバーしたアイコンに枠をつける */\n#axp_pen_div_rightSide>div>button:hover,\n#axp_penmode button:hover {\n    background-color: #aaa;\n    border: 3px solid #fff;\n}\n\n/* 選択しているアイコンに色をつける */\n#axp_pen_div_rightSide>div>button[data-selected=\"true\"] {\n    background-color: var(--axp-accent);\n}\n\n/* サブメニューがあることを示す表示効果 */\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    content: \"\";\n    position: absolute;\n    top: 6px;\n    left: -9px;\n    height: 16px;\n    border-width: 8px 7px 8px 0;\n    border-color: transparent #eeac60;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {\n    content: \"\";\n    position: absolute;\n    top: 18px;\n    left: -8px;\n    height: 0px;\n    border-width: 4px 4px 4px 0;\n    border-color: transparent #000;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    border-color: transparent #533C21;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n/* サブメニュー用外枠 */\n#axp_penmode {\n    touch-action: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n/* サブメニュー用内枠 */\n#axp_penmode>div {\n    -webkit-user-select: none;\n    user-select: none;\n    font-size: 15px;\n    border-radius: 8px;\n    color: #fff;\n    background: rgba(0, 0, 0, .8);\n    padding-left: 8px;\n}\n\n.axpc_penmode_round {\n    background-image: url('../../resource/pen1.png');\n}\n\n.axpc_penmode_square {\n    background-image: url('../../resource/pen2.png');\n}\n\n.axpc_penmode_dot {\n    background-image: url('../../resource/dot.png');\n}\n\n.axpc_penmode_fude {\n    background-image: url('../../resource/fude.png');\n}\n\n.axpc_penmode_crayon {\n    background-image: url('../../resource/crayon.png');\n}\n\n.axpc_penmode_brush {\n    background-image: url('../../resource/brush.png');\n}\n\n.axpc_penmode_diffusion {\n    background-image: url('../../resource/bokasi.png');\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_marker {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 3l4 4-9 9-5 1 1-5z\"/><path d=\"M3 21h6\"/></svg>');\n}\n\n.axpc_penmode_curve {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18c4 0 4-12 9-12s5 12 9 12\"/></svg>');\n}\n\n.axpc_penmode_hatching {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20L14 4M9 20L19 4M-1 14L7 2\"/></svg>');\n}\n\n.axpc_penmode_sketch {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18l4-9 3 6 3-11 3 9 3-4 2 6\"/></svg>');\n}\n\n.axpc_penmode_texturebrush {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"4\" cy=\"5\" r=\"1\"/><circle cx=\"10\" cy=\"4\" r=\"1\"/><circle cx=\"16\" cy=\"6\" r=\"1\"/><circle cx=\"20\" cy=\"4\" r=\"1\"/><circle cx=\"6\" cy=\"11\" r=\"1\"/><circle cx=\"13\" cy=\"10\" r=\"1\"/><circle cx=\"19\" cy=\"11\" r=\"1\"/><circle cx=\"3\" cy=\"16\" r=\"1\"/><circle cx=\"9\" cy=\"17\" r=\"1\"/><circle cx=\"15\" cy=\"16\" r=\"1\"/><circle cx=\"21\" cy=\"17\" r=\"1\"/><circle cx=\"6\" cy=\"21\" r=\"1\"/><circle cx=\"12\" cy=\"20\" r=\"1\"/><circle cx=\"18\" cy=\"21\" r=\"1\"/></svg>');\n}\n\n.axpc_penmode_smoothpen {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M3 20c2-6 4-14 6-14 1.5 0 1 4 3 4s2-6 4-4c1.5 1.4 1 8 3 8 1 0 1.5-1 2-2l1 1c-1 2-2 3.5-4 3.5-2.5 0-2-6-3.5-6-1.2 0-1.5 4-3.5 4-2 0-1.5-6-3-6-1 0-2 6-3.5 11z\"/></svg>');\n}\n\n.axpc_penmode_eraser_round {\n    background-image: url('../../resource/eraser.png');\n}\n\n.axpc_penmode_eraser_dot {\n    background-image: url('../../resource/eraser_dot.png');\n}\n\n.axpc_penmode_fill {\n    background-image: url('../../resource/fill.png');\n}\n\n.axpc_penmode_fillgradation {\n    background-image: url('../../resource/fillgradation.png');\n}\n\n.axpc_penmode_hand {\n    background-image: url('../../resource/hand.png');\n}\n\n.axpc_penmode_move {\n    background-image: url('../../resource/move.png');\n}\n\n.axpc_penmode_nagenawa {\n    background-image: url('../../resource/nagenawa.png');\n}\n\n.axpc_penmode_liquify {\n    background-image: url('../../resource/overlay/rotate.svg');\n}\n\n#axp_pen_div_liquifyMode {\n    display: grid;\n    gap: var(--axp-sp-1);\n    box-sizing: border-box;\n    overflow: hidden;\n    margin-top: 3px;\n    padding: 4px;\n}\n\n.axpc_pen_modeCard {\n    border: 1px solid var(--axp-border-soft);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-surface-panel);\n}\n\n#axp_pen_div_liquifyMode label {\n    font-size: 10px;\n    line-height: 12px;\n}\n\n#axp_pen_select_liquifyMode {\n    box-sizing: border-box;\n    width: 100%;\n    min-width: 0;\n    max-width: 100%;\n    height: 22px;\n    font-size: 10px;\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_magicwand {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20L15 9\"/><path d=\"M15 9l2 2\"/><path d=\"M13 4v2M13 10v2M9 6h2M15 6h2\"/><path d=\"M20 14v2M20 20v2M18 18h2M22 18h2\"/></svg>');\n}\n\n.axpc_penmode_polygonselect {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8l8-5 8 5-3 11H7z\" stroke-dasharray=\"3,2.5\"/><circle cx=\"4\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"12\" cy=\"3\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"20\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"17\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"7\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/></svg>');\n}\n\n.axpc_penmode_spuit {\n    background-image: url('../../resource/spuit.png');\n}\n\n/* 混色ペンのプリセットボタン */\n#axp_pen_div_diffusionPreset {\n    display: flex;\n    flex-flow: column;\n    gap: 2px;\n    margin-top: 4px;\n}\n\n.axpc_pen_diffpreset {\n    width: 100%;\n    height: 18px;\n    font-size: 13px;\n    line-height: 1;\n    padding: 0 4px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    text-align: center;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.axpc_pen_diffpreset:active {\n    background: #333;\n}\n\n/* 反映中 (現在値が格納値と一致) の明示 */\n.axpc_pen_diffpreset[data-active=\"true\"] {\n    background: #000;\n    color: #fff;\n    border-color: #000;\n}\n\n/* 混色ペンの詳細設定開閉ボタン */\n#axp_pen_button_diffusionDetail {\n    width: 100%;\n    min-height: var(--axp-h-compact-btn);\n    font-size: 12px;\n    line-height: 1;\n    padding: 0 6px;\n    margin-top: 4px;\n    border: 1px solid var(--axp-accent-border);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-accent-soft);\n    color: var(--axp-accent);\n    cursor: pointer;\n    text-align: left;\n}\n\n.axpc_pen_panelToggle:hover {\n    border-color: var(--axp-accent);\n    background: color-mix(in srgb, var(--axp-accent) 24%, transparent);\n}\n\n#axp_pen_button_diffusionDetail:focus-visible,\n#axp_pen_select_liquifyMode:focus-visible,\n#axp_pen_button_deselect:focus-visible {\n    outline: 2px solid var(--axp-border-focus);\n    outline-offset: 1px;\n}\n\n/* 階調バケツ：多ストップグラデーション編集UI */\n#axp_pen_div_gradientStops {\n    margin-top: 4px;\n    display: flex;\n    flex-flow: column;\n    gap: 4px;\n}\n\n#axp_pen_div_gradientPreview {\n    width: 100%;\n    height: 20px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: repeating-conic-gradient(#666 0% 25%, #444 0% 50%) 50% / 8px 8px;\n}\n\n#axp_pen_div_gradientStopList {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 2px;\n    min-height: 18px;\n}\n\n.axpc_gradient_stopSwatch {\n    width: 18px;\n    height: 18px;\n    padding: 0;\n    border: 1px solid #888;\n    border-radius: 3px;\n    cursor: pointer;\n}\n\n.axpc_gradient_stopSwatch[data-selected=\"true\"] {\n    border: 2px solid #fff;\n}\n\n#axp_pen_div_gradientStopControls {\n    display: flex;\n    gap: 2px;\n    align-items: center;\n}\n\n#axp_pen_number_gradientStopPosition {\n    width: 40px;\n}\n\n#axp_pen_div_gradientStopControls button {\n    flex: 1;\n    font-size: 11px;\n    line-height: 1;\n    padding: 3px 2px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_div_gradientStopControls button:active {\n    background: #333;\n}\n\n#axp_pen_div_gradientStopControls button:disabled {\n    opacity: 0.4;\n    cursor: default;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/css/window_pen.css"],"names":[],"mappings":"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","sourcesContent":["/* ペンツール */\n\n/* ペンツール外枠 */\n#axp_pen_div_content {\n    display: flex;\n    gap: var(--axp-sp-3);\n}\n\n/* ペンツール左側（プレビュー、スライダー）外枠 */\n#axp_pen_div_leftSide {\n    width: 108px;\n    overflow: hidden;\n}\n\n/* ペンの名前 */\n#axp_pen_span_penName {\n    line-height: 1.0;\n}\n\n/* 選択範囲の状態表示（選択中のみ表示） */\n#axp_pen_div_selectionStatus {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 4px;\n    margin-top: 2px;\n    font-size: 11px;\n}\n\n#axp_pen_button_deselect {\n    font-size: 11px;\n    line-height: 1;\n    padding: 2px 6px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_button_deselect:active {\n    background: #333;\n}\n\n/* プレビュー領域 */\n#axp_pen_div_preview {\n    position: relative;\n    width: 108px;\n    height: 96px;\n    background: rgba(255, 255, 255, 0.32);\n    border: 1px solid var(--axp-border-strong);\n    border-radius: var(--axp-r-md);\n    cursor: default;\n    margin-top: 4px;\n    overflow: hidden;\n}\n\n/* ペンの太さプレビュー用キャンバス */\n#axp_pen_canvas_previewPenSize {\n    position: absolute;\n    z-index: 2;\n    width: 106px;\n    height: 94px;\n}\n\n/* スポイト用キャンバス */\n#axp_pen_canvas_previewSpuit {\n    position: absolute;\n    z-index: 1;\n    width: 106px;\n    height: 94px;\n    image-rendering: pixelated;\n}\n\n/* ペンウィンドウ内チェックボックスのラベル縮小 */\n#axp_pen_div_slider .axpc_checkbox label {\n    font-size: 11px;\n}\n\n/* スポイトのRGBA表示用 */\n#axp_pen_div_spuitColorRGBA {\n    line-height: 1.3em;\n}\n\n/* スライダー領域 */\n#axp_pen_div_slider {\n    margin-top: 8px;\n    display: flex;\n    flex-flow: column;\n}\n\n.axpc_pen_settingsStack {\n    gap: 3px;\n}\n\n.axpc_pen_settingsStack .axpc_range {\n    overflow: hidden;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"] {\n    height: var(--axp-h-compact-range);\n    border-width: 2px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-track {\n    height: var(--axp-h-compact-range);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md) !important;\n}\n\n.axpc_pen_settingsStack .axpc_range_label {\n    font-size: 11px;\n    line-height: 12px;\n    padding-top: 1px;\n}\n\n.axpc_pen_settingsStack .axpc_range_value {\n    font-size: 13px;\n    padding-top: 11px;\n}\n\n/* セレクトボックス */\n#axp_pen_div_selectbox {\n    margin-top: 8px;\n}\n\n#axp_pen_select_drawMode,\n#axp_pen_select_fillMode {\n    width: 100px;\n    height: 24px;\n    border-radius: 5px;\n}\n\n/* ペンツール右側（機能ボタン）外枠 */\n#axp_pen_div_rightSide {\n    margin-left: 0;\n    display: flex;\n    flex-direction: column;\n    gap: var(--axp-sp-2);\n}\n\n/* 各ボタンの枠 */\n#axp_pen_div_rightSide>div {\n    position: relative;\n}\n\n/* ペンツール内のアイコン（メイン＆サブ） */\n#axp_pen_div_rightSide>div>button,\n#axp_penmode button {\n    width: var(--axp-h-icon-btn);\n    height: var(--axp-h-icon-btn);\n    border-radius: var(--axp-r-md);\n    border: 3px solid #000;\n    box-shadow: 0px 0px 10px #000;\n    cursor: pointer;\n    background-repeat: no-repeat;\n    background-position: 2px 2px;\n    background-color: #aaa;\n}\n\n/* ホバーしたアイコンに枠をつける */\n#axp_pen_div_rightSide>div>button:hover,\n#axp_penmode button:hover {\n    background-color: #aaa;\n    border: 3px solid #fff;\n}\n\n/* 選択しているアイコンに色をつける */\n#axp_pen_div_rightSide>div>button[data-selected=\"true\"] {\n    background-color: var(--axp-accent);\n}\n\n/* サブメニューがあることを示す表示効果 */\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    content: \"\";\n    position: absolute;\n    top: 6px;\n    left: -9px;\n    height: 16px;\n    border-width: 8px 7px 8px 0;\n    border-color: transparent #eeac60;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {\n    content: \"\";\n    position: absolute;\n    top: 18px;\n    left: -8px;\n    height: 0px;\n    border-width: 4px 4px 4px 0;\n    border-color: transparent #000;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    border-color: transparent #533C21;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n/* サブメニュー用外枠 */\n#axp_penmode {\n    touch-action: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n/* サブメニュー用内枠 */\n#axp_penmode>div {\n    -webkit-user-select: none;\n    user-select: none;\n    font-size: 15px;\n    border-radius: 12px;\n    color: #fff;\n    background: rgba(20, 20, 20, 0.94);\n    backdrop-filter: blur(12px);\n    -webkit-backdrop-filter: blur(12px);\n    border: 1px solid rgba(255, 255, 255, 0.12);\n    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);\n    padding-left: 8px;\n}\n\n.axpc_penmode_round {\n    background-image: url('../../resource/pen1.png');\n}\n\n.axpc_penmode_square {\n    background-image: url('../../resource/pen2.png');\n}\n\n.axpc_penmode_dot {\n    background-image: url('../../resource/dot.png');\n}\n\n.axpc_penmode_fude {\n    background-image: url('../../resource/fude.png');\n}\n\n.axpc_penmode_crayon {\n    background-image: url('../../resource/crayon.png');\n}\n\n.axpc_penmode_brush {\n    background-image: url('../../resource/brush.png');\n}\n\n.axpc_penmode_diffusion {\n    background-image: url('../../resource/bokasi.png');\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_marker {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 3l4 4-9 9-5 1 1-5z\"/><path d=\"M3 21h6\"/></svg>');\n}\n\n.axpc_penmode_curve {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18c4 0 4-12 9-12s5 12 9 12\"/></svg>');\n}\n\n.axpc_penmode_hatching {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20L14 4M9 20L19 4M-1 14L7 2\"/></svg>');\n}\n\n.axpc_penmode_sketch {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18l4-9 3 6 3-11 3 9 3-4 2 6\"/></svg>');\n}\n\n.axpc_penmode_texturebrush {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"4\" cy=\"5\" r=\"1\"/><circle cx=\"10\" cy=\"4\" r=\"1\"/><circle cx=\"16\" cy=\"6\" r=\"1\"/><circle cx=\"20\" cy=\"4\" r=\"1\"/><circle cx=\"6\" cy=\"11\" r=\"1\"/><circle cx=\"13\" cy=\"10\" r=\"1\"/><circle cx=\"19\" cy=\"11\" r=\"1\"/><circle cx=\"3\" cy=\"16\" r=\"1\"/><circle cx=\"9\" cy=\"17\" r=\"1\"/><circle cx=\"15\" cy=\"16\" r=\"1\"/><circle cx=\"21\" cy=\"17\" r=\"1\"/><circle cx=\"6\" cy=\"21\" r=\"1\"/><circle cx=\"12\" cy=\"20\" r=\"1\"/><circle cx=\"18\" cy=\"21\" r=\"1\"/></svg>');\n}\n\n.axpc_penmode_smoothpen {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M3 20c2-6 4-14 6-14 1.5 0 1 4 3 4s2-6 4-4c1.5 1.4 1 8 3 8 1 0 1.5-1 2-2l1 1c-1 2-2 3.5-4 3.5-2.5 0-2-6-3.5-6-1.2 0-1.5 4-3.5 4-2 0-1.5-6-3-6-1 0-2 6-3.5 11z\"/></svg>');\n}\n\n.axpc_penmode_eraser_round {\n    background-image: url('../../resource/eraser.png');\n}\n\n.axpc_penmode_eraser_dot {\n    background-image: url('../../resource/eraser_dot.png');\n}\n\n.axpc_penmode_fill {\n    background-image: url('../../resource/fill.png');\n}\n\n.axpc_penmode_fillgradation {\n    background-image: url('../../resource/fillgradation.png');\n}\n\n.axpc_penmode_hand {\n    background-image: url('../../resource/hand.png');\n}\n\n.axpc_penmode_move {\n    background-image: url('../../resource/move.png');\n}\n\n.axpc_penmode_nagenawa {\n    background-image: url('../../resource/nagenawa.png');\n}\n\n.axpc_penmode_liquify {\n    background-image: url('../../resource/overlay/rotate.svg');\n}\n\n#axp_pen_div_liquifyMode {\n    display: grid;\n    gap: var(--axp-sp-1);\n    box-sizing: border-box;\n    overflow: hidden;\n    margin-top: 3px;\n    padding: 4px;\n}\n\n.axpc_pen_modeCard {\n    border: 1px solid var(--axp-border-soft);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-surface-panel);\n}\n\n#axp_pen_div_liquifyMode label {\n    font-size: 10px;\n    line-height: 12px;\n}\n\n#axp_pen_select_liquifyMode {\n    box-sizing: border-box;\n    width: 100%;\n    min-width: 0;\n    max-width: 100%;\n    height: 22px;\n    font-size: 10px;\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_magicwand {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20L15 9\"/><path d=\"M15 9l2 2\"/><path d=\"M13 4v2M13 10v2M9 6h2M15 6h2\"/><path d=\"M20 14v2M20 20v2M18 18h2M22 18h2\"/></svg>');\n}\n\n.axpc_penmode_polygonselect {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8l8-5 8 5-3 11H7z\" stroke-dasharray=\"3,2.5\"/><circle cx=\"4\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"12\" cy=\"3\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"20\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"17\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"7\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/></svg>');\n}\n\n.axpc_penmode_spuit {\n    background-image: url('../../resource/spuit.png');\n}\n\n/* 混色ペンのプリセットボタン */\n#axp_pen_div_diffusionPreset {\n    display: flex;\n    flex-flow: column;\n    gap: 2px;\n    margin-top: 4px;\n}\n\n.axpc_pen_diffpreset {\n    width: 100%;\n    height: 18px;\n    font-size: 13px;\n    line-height: 1;\n    padding: 0 4px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    text-align: center;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.axpc_pen_diffpreset:active {\n    background: #333;\n}\n\n/* 反映中 (現在値が格納値と一致) の明示 */\n.axpc_pen_diffpreset[data-active=\"true\"] {\n    background: #000;\n    color: #fff;\n    border-color: #000;\n}\n\n/* 混色ペンの詳細設定開閉ボタン */\n#axp_pen_button_diffusionDetail {\n    width: 100%;\n    min-height: var(--axp-h-compact-btn);\n    font-size: 12px;\n    line-height: 1;\n    padding: 0 6px;\n    margin-top: 4px;\n    border: 1px solid var(--axp-accent-border);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-accent-soft);\n    color: var(--axp-accent);\n    cursor: pointer;\n    text-align: left;\n}\n\n.axpc_pen_panelToggle:hover {\n    border-color: var(--axp-accent);\n    background: color-mix(in srgb, var(--axp-accent) 24%, transparent);\n}\n\n#axp_pen_button_diffusionDetail:focus-visible,\n#axp_pen_select_liquifyMode:focus-visible,\n#axp_pen_button_deselect:focus-visible {\n    outline: 2px solid var(--axp-border-focus);\n    outline-offset: 1px;\n}\n\n/* 階調バケツ：多ストップグラデーション編集UI */\n#axp_pen_div_gradientStops {\n    margin-top: 4px;\n    display: flex;\n    flex-flow: column;\n    gap: 4px;\n}\n\n#axp_pen_div_gradientPreview {\n    width: 100%;\n    height: 20px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: repeating-conic-gradient(#666 0% 25%, #444 0% 50%) 50% / 8px 8px;\n}\n\n#axp_pen_div_gradientStopList {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 2px;\n    min-height: 18px;\n}\n\n.axpc_gradient_stopSwatch {\n    width: 18px;\n    height: 18px;\n    padding: 0;\n    border: 1px solid #888;\n    border-radius: 3px;\n    cursor: pointer;\n}\n\n.axpc_gradient_stopSwatch[data-selected=\"true\"] {\n    border: 2px solid #fff;\n}\n\n#axp_pen_div_gradientStopControls {\n    display: flex;\n    gap: 2px;\n    align-items: center;\n}\n\n#axp_pen_number_gradientStopPosition {\n    width: 40px;\n}\n\n#axp_pen_div_gradientStopControls button {\n    flex: 1;\n    font-size: 11px;\n    line-height: 1;\n    padding: 3px 2px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_div_gradientStopControls button:active {\n    background: #333;\n}\n\n#axp_pen_div_gradientStopControls button:disabled {\n    opacity: 0.4;\n    cursor: default;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17683,7 +18681,7 @@ module.exports = function (item) {
   \**************************/
 /***/ ((module) => {
 
-module.exports = {"@VERSION":"2.4.0","@LANGUAGE":"ja","@COMMON.OPACITY":"不透明度","@INTEROP.TITLE":"書出し・共有","@INTEROP.TIMELAPSE_START":"録画開始","@INTEROP.TIMELAPSE_STOP":"録画停止","@INTEROP.CLIPBOARD_COPY":"PNGコピー","@INTEROP.PSD_EXPORT":"PSD書出し","@INTEROP.REFERENCE_TITLE":"参照画像","@INTEROP.REFERENCE_LOAD":"参照画像を追加","@INTEROP.REFERENCE_EDIT":"配置編集","@INTEROP.REFERENCE_VISIBLE":"表示","@INTEROP.REFERENCE_X":"X位置","@INTEROP.REFERENCE_Y":"Y位置","@INTEROP.REFERENCE_OPACITY":"不透明度","@INTEROP.REFERENCE_SCALE":"拡縮","@INTEROP.REFERENCE_ROTATION":"回転","@INTEROP.REFERENCE_REMOVE":"削除","@COMMON.RED":"赤","@COMMON.GREEN":"緑","@COMMON.BLUE":"青","@COMMON.ALPHA":"透","@COMMON.CYAN":"シアン","@COMMON.MAGENTA":"マゼンタ","@COMMON.YELLOW":"イエロー","@COMMON.KEY_BLACK":"キープレート","@COMMON.LAB_L":"明度(L)","@COMMON.LAB_A":"色相a","@COMMON.LAB_B":"色相b","@COMMON.BUTTON_CLOSE":"閉じる","@COMMON.WIDTH":"横","@COMMON.HEIGHT":"縦","@COMMON.BG_WHITE":"白地","@COMMON.BG_TRANSPARENT":"透過","@COMMON.DRAW_NEW":"いちから描いた","@COMMON.DRAW_BASED":"もとの絵あるよ","@COMMON.REQUIRED":"必須","@COMMON.CLEAR":"クリア","@TAB.CANVAS":"キャンバス","@TAB.SETTINGS":"設定","@TAB.POST":"投稿","@WINDOW.LAUNCHER":"表示","@WINDOW.PEN_TOOL":"ペンツール","@WINDOW.COLOR":"色作成","@WINDOW.SWATCHES":"パレット","@WINDOW.LAYER":"レイヤー","@WINDOW.MISC":"補助ツール","@WINDOW.FILTER":"フィルタ","@FILTER.COLOR_TO_ALPHA":"白を透明化","@FILTER.MOSAIC":"モザイク","@FILTER.MOSAIC_PROMPT":"モザイクのブロックサイズ（px）を入力してください","@FILTER.GRAYSCALE":"グレースケール化","@FILTER.LEVELS":"レベル補正","@FILTER.LEVELS_IN_BLACK":"入力：黒","@FILTER.LEVELS_IN_WHITE":"入力：白","@FILTER.LEVELS_GAMMA":"ガンマ","@FILTER.TONECURVE":"トーンカーブ","@FILTER.TONECURVE_P0":"点1(0)","@FILTER.TONECURVE_P1":"点2(64)","@FILTER.TONECURVE_P2":"点3(128)","@FILTER.TONECURVE_P3":"点4(192)","@FILTER.TONECURVE_P4":"点5(255)","@FILTER.HSV":"色相・彩度・明度","@FILTER.HSV_HUE":"色相","@FILTER.HSV_SATURATION":"彩度","@FILTER.HSV_VALUE":"明度","@FILTER.COLORBALANCE":"カラーバランス","@FILTER.COLORBALANCE_SHADOWS":"シャドウ（シアン-赤/マゼンタ-緑/黄-青）","@FILTER.COLORBALANCE_MIDTONES":"中間調（シアン-赤/マゼンタ-緑/黄-青）","@FILTER.COLORBALANCE_HIGHLIGHTS":"ハイライト（シアン-赤/マゼンタ-緑/黄-青）","@FILTER.APPLY":"適用","@WINDOW.CUSTOM_BUTTONS":"ｶｽﾀﾑ","@PEN.SIZE":"太さ","@PEN.GROW_FILL_AREA":"塗り残し補正","@PEN.COLOR_TOLERANCE":"色の許容誤差","@PEN.ANGLE":"角度","@PEN.ROUNDNESS":"丸み","@PEN.BLUR":"ぼかし度","@PEN.HARDNESS":"硬さ","@PEN.DIFFUSION_STRENGTH":"広がり","@PEN.DRAG":"引きずり","@LIQUIFY.MODE":"歪み方","@LIQUIFY.STRENGTH":"強さ","@LIQUIFY.HARDNESS":"硬さ","@LIQUIFY.PUSH":"押す","@LIQUIFY.EXPAND":"膨張","@LIQUIFY.PINCH":"収縮","@LIQUIFY.PUSH_LEFT":"左へ押す","@LIQUIFY.PUSH_RIGHT":"右へ押す","@LIQUIFY.TWIRL_CLOCKWISE":"右回転","@LIQUIFY.TWIRL_ANTICLOCKWISE":"左回転","@PEN.DETAIL_SETTINGS":"詳細設定","@PENPRESET.BLUR":"ぼかしペン","@PENPRESET.FINGER":"引きずり指先","@PENPRESET.KNIFE":"油絵ナイフ","@PEN.TONE_DENSITY":"トーン濃度","@PEN.STABILIZER":"手ぶれ補正","@PEN.USE_PRESSURE":"筆圧を反映","@PEN.USE_SUBPX_ALPHA":"幅<1で透過","@PEN.GRADIENT_ADD_STOP":"+ 追加","@PEN.GRADIENT_REMOVE_STOP":"- 削除","@PEN.GRADIENT_SET_COLOR":"現在の色を設定","@PEN.ERASE_RATE":"消し率","@PEN.OPTION_FREE_HAND":"手描き","@PEN.OPTION_STRAIGHT":"直線","@PEN.OPTION_RECT":"長方形","@PEN.OPTION_CIRCLE":"円","@PEN.OPTION_FILL_SAMPLE_ALL":"全レイヤー判定","@PEN.OPTION_FILL_SAMPLE_CURRENT":"現レイヤー判定","@PEN.OPTION_SELECTION_REPLACE":"置換","@PEN.OPTION_SELECTION_ADD":"追加","@PEN.OPTION_SELECTION_SUBTRACT":"差し引き","@PEN.OPTION_SELECTION_INTERSECT":"交差","@PEN.SELECTION_ACTIVE":"選択中:","@PEN.DESELECT":"解除","@PEN.TYPE":"種別","@PENGROUP.PEN":"ペン","@PENGROUP.TOOL":"ツール","@PENGROUP.ERASER":"消しゴム","@PENGROUP.FILL":"バケツ","@PENGROUP.EYEDROPPER":"スポイト","@PENNAME.ROUND":"丸ペン","@PENNAME.SQUARE":"角ペン","@PENNAME.DOT":"ドットペン","@PENNAME.CALLIGRAPHY":"筆ペン","@PENNAME.CRAYON":"クレヨン","@PENNAME.AIRBRUSH":"エアブラシ","@PENNAME.DIFFUSION":"混色ペン","@PENNAME.MARKER":"マーカー","@PENNAME.CURVE":"カーブ","@PENNAME.HATCHING":"ハッチング","@PENNAME.SKETCH":"スケッチ","@PENNAME.TEXTUREBRUSH":"テクスチャブラシ","@PENNAME.SMOOTHPEN":"スムーズペン","@PENNAME.ERASER":"消しゴム","@PENNAME.SQUARE_ERASER":"角消しゴム","@PENNAME.FILL":"バケツ","@PENNAME.GRADATION_FILL":"階調バケツ","@PENNAME.EYEDROPPER":"スポイト","@PENNAME.HAND":"ハンド","@PENNAME.MOVE_TOOL":"移動ツール","@PENNAME.NAGENAWA":"なげなわ","@PENNAME.MAGICWAND":"マジックワンド","@PENNAME.POLYGONSELECT":"多角形選択","@PENNAME.LIQUIFY":"歪み","@SWATCHES.COLUMNS":"横幅","@SWATCHES.EDIT":"編集","@SWATCHES.SET":"登録","@SWATCHES.DEL":"削除","@LAYER.NEWLAYER_TEMPLATE":"レイヤー","@LAYER.OPTION_NORMAL":"通常","@LAYER.OPTION_CLIPING":"クリッピング","@LAYER.OPTION_MULTIPLY":"乗算","@LAYER.OPTION_SCREEN":"スクリーン","@LAYER.OPTION_OVERLAY":"オーバーレイ","@LAYER.OPTION_DARKEN":"比較（暗）","@LAYER.OPTION_LIGHTEN":"比較（明）","@LAYER.OPTION_DODGE":"覆い焼き","@LAYER.OPTION_BURN":"焼き込み","@LAYER.OPTION_HARD_LIGHT":"ハードライト","@LAYER.OPTION_SOFT_LIGHT":"ソフトライト","@LAYER.OPTION_DIFFERENCE":"差の絶対値","@LAYER.OPTION_EXCLUSION":"除外","@LAYER.BUTTON_CLEAR":"ｸﾘｱ","@LAYER.BUTTON_NEW":"新規","@LAYER.BUTTON_MERGE":"統","@LAYER.BUTTON_COPY":"複","@LAYER.BUTTON_DEL":"削","@LAYER.BUTTON_RENAME_OK":"決定","@LAYER.BUTTON_CLEAR_COLOR":"色解除","@LAYER.LAYERS_INFO":"レイヤー情報","@LAYER.PRESET_NAME":"登録名","@LAYERSTYLE.STROKE":"フチ取り","@LAYERSTYLE.DROPSHADOW":"ドロップシャドウ","@LAYERSTYLE.RADIUS":"太さ","@LAYERSTYLE.OFFSET_X":"X方向のずれ","@LAYERSTYLE.OFFSET_Y":"Y方向のずれ","@LAYERSTYLE.BLUR":"ぼかし","@LAYERSTYLE.COLOR":"色","@LAYERMASK.ADD":"マスク追加","@LAYERMASK.REMOVE":"マスク削除","@LAYERMASK.ENABLED":"マスク有効","@LAYERMASK.EDIT":"マスクを編集","@LAYERMASK.BRUSH_SIZE":"ブラシサイズ","@LAYERMASK.BRUSH_STRENGTH":"濃さ","@LAYERMASK.RESTORE_MODE":"戻す(白で描画)","@MISC.BUTTON_UNDO":"アンドゥ","@MISC.BUTTON_REDO":"リドゥ","@MISC.BUTTON_VIEW_RESET":"表示リセット","@MISC.BUTTON_RESTORE_AUTOSAVE":"自動保存から復元","@MISC.BG_COLOR_LABEL":"背景","@MISC.BG_SKIN_SHORT":"肌","@MISC.BG_WHITE_SHORT":"白","@MISC.BUTTON_SAVE":"セーブ","@MISC.BUTTON_LOAD":"ロード","@MISC.BUTTON_FLIP_H":"左右反転","@MISC.BUTTON_FLIP_V":"上下反転","@MISC.BUTTON_BG_ALPHA":"背景透過","@MISC.BUTTON_GRID":"補助線","@GRID.MAIN":"主線","@GRID.SUB":"副線","@GRID.DIAG":"斜め","@GRID.DIVISIONS_H":"分割数：横","@GRID.DIVISIONS_V":"分割数：縦","@GRID.CONSTRAIN":"縦横を連動","@GRID.LINE_COLOR":"補助線の色","@SETTINGS.MENU_CANVAS":"キャンバス","@SETTINGS.MENU_TOOL_WINDOWS":"ツールウィンドウ","@SETTINGS.MENU_PEN_TOOL":"ペンツール","@SETTINGS.MENU_COLOR":"色作成","@SETTINGS.MENU_SWATCHES":"パレット","@SETTINGS.MENU_LAYER":"レイヤー","@SETTINGS.MENU_MISC":"補助ツール","@SETTINGS.MENU_CUSTOM_BUTTONS":"カスタムボタン","@SETTINGS.MENU_MOUSE":"マウス","@SETTINGS.MENU_TOUCH_PANEL":"タッチパネル","@SETTINGS.MENU_KEYBOARD":"キーボード","@SETTINGS.MENU_STARTUP":"起動時","@SETTINGS.MENU_VER_INFO":"バージョン情報","@POST.POSTPICTURE":"投稿するお絵カキコ","@POST.THUMBNAIL":"サムネイル","@POST.THUMBNAIL_CLICK":"※クリックで拡大表示","@POST.INPUT":"投稿情報の入力","@POST.NAME":"投稿者名","@POST.TITLE":"タイトル","@POST.MESSAGE":"本文","@POST.WATCHLIST":"ウォッチリストに登録","@POST.STATUS.SIZE":"画像サイズ","@POST.STATUS.BG_TRANSPARENT":"背景の透過","@POST.STATUS.BASED":"もとの絵","@POST.BUTTON_SUBMIT":"お絵カキコする！","@POST.INFO_REQUIRED":"※必須項目が入力されていません。","@POST.NOTICE":"投稿前の注意事項","@POST.NOTICE1":"投稿時にすべてのレイヤーが統合されます。","@POST.NOTICE2":"","@POST.NOTICE3":"","@POST.NOTICE4":""}
+module.exports = {"@VERSION":"2.4.0","@LANGUAGE":"ja","@COMMON.OPACITY":"不透明度","@INTEROP.TITLE":"書出し・共有","@INTEROP.TIMELAPSE_START":"録画開始","@INTEROP.TIMELAPSE_STOP":"録画停止","@INTEROP.CLIPBOARD_COPY":"PNGコピー","@INTEROP.PSD_EXPORT":"PSD書出し","@INTEROP.REFERENCE_TITLE":"参照画像","@INTEROP.REFERENCE_LOAD":"参照画像を追加","@INTEROP.REFERENCE_EDIT":"配置編集","@INTEROP.REFERENCE_VISIBLE":"表示","@INTEROP.REFERENCE_X":"X位置","@INTEROP.REFERENCE_Y":"Y位置","@INTEROP.REFERENCE_OPACITY":"不透明度","@INTEROP.REFERENCE_SCALE":"拡縮","@INTEROP.REFERENCE_ROTATION":"回転","@INTEROP.REFERENCE_REMOVE":"削除","@COMMON.RED":"赤","@COMMON.GREEN":"緑","@COMMON.BLUE":"青","@COMMON.ALPHA":"透","@COMMON.CYAN":"シアン","@COMMON.MAGENTA":"マゼンタ","@COMMON.YELLOW":"イエロー","@COMMON.KEY_BLACK":"キープレート","@COMMON.LAB_L":"明度(L)","@COMMON.LAB_A":"色相a","@COMMON.LAB_B":"色相b","@COMMON.BUTTON_CLOSE":"閉じる","@COMMON.WIDTH":"横","@COMMON.HEIGHT":"縦","@COMMON.BG_WHITE":"白地","@COMMON.BG_TRANSPARENT":"透過","@COMMON.DRAW_NEW":"いちから描いた","@COMMON.DRAW_BASED":"もとの絵あるよ","@COMMON.REQUIRED":"必須","@COMMON.CLEAR":"クリア","@TAB.CANVAS":"キャンバス","@TAB.SETTINGS":"設定","@TAB.POST":"投稿","@WINDOW.LAUNCHER":"表示","@WINDOW.PEN_TOOL":"ペンツール","@WINDOW.COLOR":"色作成","@WINDOW.SWATCHES":"パレット","@WINDOW.LAYER":"レイヤー","@WINDOW.MISC":"補助ツール","@WINDOW.FILTER":"フィルタ","@FILTER.COLOR_TO_ALPHA":"白を透明化","@FILTER.MOSAIC":"モザイク","@FILTER.MOSAIC_PROMPT":"モザイクのブロックサイズ（px）を入力してください","@FILTER.GRAYSCALE":"グレースケール化","@FILTER.LEVELS":"レベル補正","@FILTER.LEVELS_IN_BLACK":"入力：黒","@FILTER.LEVELS_IN_WHITE":"入力：白","@FILTER.LEVELS_GAMMA":"ガンマ","@FILTER.TONECURVE":"トーンカーブ","@FILTER.TONECURVE_P0":"点1(0)","@FILTER.TONECURVE_P1":"点2(64)","@FILTER.TONECURVE_P2":"点3(128)","@FILTER.TONECURVE_P3":"点4(192)","@FILTER.TONECURVE_P4":"点5(255)","@FILTER.HSV":"色相・彩度・明度","@FILTER.HSV_HUE":"色相","@FILTER.HSV_SATURATION":"彩度","@FILTER.HSV_VALUE":"明度","@FILTER.COLORBALANCE":"カラーバランス","@FILTER.COLORBALANCE_SHADOWS":"シャドウ（シアン-赤/マゼンタ-緑/黄-青）","@FILTER.COLORBALANCE_MIDTONES":"中間調（シアン-赤/マゼンタ-緑/黄-青）","@FILTER.COLORBALANCE_HIGHLIGHTS":"ハイライト（シアン-赤/マゼンタ-緑/黄-青）","@FILTER.APPLY":"適用","@WINDOW.CUSTOM_BUTTONS":"ｶｽﾀﾑ","@PEN.SIZE":"太さ","@PEN.GROW_FILL_AREA":"塗り残し補正","@PEN.COLOR_TOLERANCE":"色の許容誤差","@PEN.ANGLE":"角度","@PEN.ROUNDNESS":"丸み","@PEN.BLUR":"ぼかし度","@PEN.HARDNESS":"硬さ","@PEN.DIFFUSION_STRENGTH":"広がり","@PEN.DRAG":"引きずり","@LIQUIFY.MODE":"歪み方","@LIQUIFY.STRENGTH":"強さ","@LIQUIFY.HARDNESS":"硬さ","@LIQUIFY.PUSH":"押す","@LIQUIFY.EXPAND":"膨張","@LIQUIFY.PINCH":"収縮","@LIQUIFY.PUSH_LEFT":"左へ押す","@LIQUIFY.PUSH_RIGHT":"右へ押す","@LIQUIFY.TWIRL_CLOCKWISE":"右回転","@LIQUIFY.TWIRL_ANTICLOCKWISE":"左回転","@PEN.DETAIL_SETTINGS":"詳細設定","@PENPRESET.BLUR":"ぼかしペン","@PENPRESET.FINGER":"引きずり指先","@PENPRESET.KNIFE":"油絵ナイフ","@PEN.TONE_DENSITY":"トーン濃度","@PEN.STABILIZER":"手ぶれ補正","@PEN.USE_PRESSURE":"筆圧を反映","@PEN.USE_SUBPX_ALPHA":"幅<1で透過","@PEN.GRADIENT_ADD_STOP":"+ 追加","@PEN.GRADIENT_REMOVE_STOP":"- 削除","@PEN.GRADIENT_SET_COLOR":"現在の色を設定","@PEN.ERASE_RATE":"消し率","@PEN.OPTION_FREE_HAND":"手描き","@PEN.OPTION_STRAIGHT":"直線","@PEN.OPTION_RECT":"長方形","@PEN.OPTION_CIRCLE":"円","@PEN.OPTION_FILL_SAMPLE_ALL":"全レイヤー判定","@PEN.OPTION_FILL_SAMPLE_CURRENT":"現レイヤー判定","@PEN.OPTION_SELECTION_REPLACE":"置換","@PEN.OPTION_SELECTION_ADD":"追加","@PEN.OPTION_SELECTION_SUBTRACT":"差し引き","@PEN.OPTION_SELECTION_INTERSECT":"交差","@PEN.SELECTION_ACTIVE":"選択中:","@PEN.DESELECT":"解除","@PEN.TYPE":"種別","@PENGROUP.PEN":"ペン","@PENGROUP.TOOL":"ツール","@PENGROUP.ERASER":"消しゴム","@PENGROUP.FILL":"バケツ","@PENGROUP.EYEDROPPER":"スポイト","@PENNAME.ROUND":"丸ペン","@PENNAME.SQUARE":"角ペン","@PENNAME.DOT":"ドットペン","@PENNAME.CALLIGRAPHY":"筆ペン","@PENNAME.CRAYON":"クレヨン","@PENNAME.AIRBRUSH":"エアブラシ","@PENNAME.DIFFUSION":"混色ペン","@PENNAME.MARKER":"マーカー","@PENNAME.CURVE":"カーブ","@PENNAME.HATCHING":"ハッチング","@PENNAME.SKETCH":"スケッチ","@PENNAME.TEXTUREBRUSH":"テクスチャブラシ","@PENNAME.SMOOTHPEN":"スムーズペン","@PENNAME.ERASER":"消しゴム","@PENNAME.SQUARE_ERASER":"角消しゴム","@PENNAME.FILL":"バケツ","@PENNAME.GRADATION_FILL":"階調バケツ","@PENNAME.EYEDROPPER":"スポイト","@PENNAME.HAND":"ハンド","@PENNAME.MOVE_TOOL":"移動ツール","@PENNAME.NAGENAWA":"なげなわ","@PENNAME.MAGICWAND":"マジックワンド","@PENNAME.POLYGONSELECT":"多角形選択","@PENNAME.LIQUIFY":"歪み","@SWATCHES.COLUMNS":"横幅","@SWATCHES.EDIT":"編集","@SWATCHES.SET":"登録","@SWATCHES.DEL":"削除","@LAYER.NEWLAYER_TEMPLATE":"レイヤー","@LAYER.OPTION_NORMAL":"通常","@LAYER.OPTION_CLIPING":"クリッピング","@LAYER.OPTION_MULTIPLY":"乗算","@LAYER.OPTION_SCREEN":"スクリーン","@LAYER.OPTION_OVERLAY":"オーバーレイ","@LAYER.OPTION_DARKEN":"比較（暗）","@LAYER.OPTION_LIGHTEN":"比較（明）","@LAYER.OPTION_DODGE":"覆い焼き","@LAYER.OPTION_BURN":"焼き込み","@LAYER.OPTION_HARD_LIGHT":"ハードライト","@LAYER.OPTION_SOFT_LIGHT":"ソフトライト","@LAYER.OPTION_DIFFERENCE":"差の絶対値","@LAYER.OPTION_EXCLUSION":"除外","@LAYER.BUTTON_CLEAR":"ｸﾘｱ","@LAYER.BUTTON_NEW":"新規","@LAYER.BUTTON_MERGE":"統","@LAYER.BUTTON_COPY":"複","@LAYER.BUTTON_DEL":"削","@LAYER.BUTTON_RENAME_OK":"決定","@LAYER.BUTTON_CLEAR_COLOR":"色解除","@LAYER.LAYERS_INFO":"レイヤー情報","@LAYER.PRESET_NAME":"登録名","@LAYERSTYLE.STROKE":"フチ取り","@LAYERSTYLE.DROPSHADOW":"ドロップシャドウ","@LAYERSTYLE.RADIUS":"太さ","@LAYERSTYLE.OFFSET_X":"X方向のずれ","@LAYERSTYLE.OFFSET_Y":"Y方向のずれ","@LAYERSTYLE.BLUR":"ぼかし","@LAYERSTYLE.COLOR":"色","@LAYERMASK.ADD":"マスク追加","@LAYERMASK.REMOVE":"マスク削除","@LAYERMASK.ENABLED":"マスク有効","@LAYERMASK.EDIT":"マスクを編集","@LAYERMASK.BRUSH_SIZE":"ブラシサイズ","@LAYERMASK.BRUSH_STRENGTH":"濃さ","@LAYERMASK.RESTORE_MODE":"戻す(白で描画)","@MOBILE.TAB_PEN":"ペン","@MOBILE.TAB_COLOR":"色","@MOBILE.TAB_LAYER":"レイヤー","@MOBILE.TAB_TOOL":"補助","@MOBILE.TAB_CLOSE":"閉じる","@MISC.BUTTON_UNDO":"アンドゥ","@MISC.BUTTON_REDO":"リドゥ","@MISC.BUTTON_VIEW_RESET":"表示リセット","@MISC.BUTTON_RESTORE_AUTOSAVE":"自動保存から復元","@MISC.BG_COLOR_LABEL":"背景","@MISC.BG_SKIN_SHORT":"肌","@MISC.BG_WHITE_SHORT":"白","@MISC.BUTTON_SAVE":"セーブ","@MISC.BUTTON_LOAD":"ロード","@MISC.BUTTON_FLIP_H":"左右反転","@MISC.BUTTON_FLIP_V":"上下反転","@MISC.BUTTON_BG_ALPHA":"背景透過","@MISC.BUTTON_GRID":"補助線","@GRID.MAIN":"主線","@GRID.SUB":"副線","@GRID.DIAG":"斜め","@GRID.DIVISIONS_H":"分割数：横","@GRID.DIVISIONS_V":"分割数：縦","@GRID.CONSTRAIN":"縦横を連動","@GRID.LINE_COLOR":"補助線の色","@SETTINGS.MENU_CANVAS":"キャンバス","@SETTINGS.MENU_TOOL_WINDOWS":"ツールウィンドウ","@SETTINGS.MENU_PEN_TOOL":"ペンツール","@SETTINGS.MENU_COLOR":"色作成","@SETTINGS.MENU_SWATCHES":"パレット","@SETTINGS.MENU_LAYER":"レイヤー","@SETTINGS.MENU_MISC":"補助ツール","@SETTINGS.MENU_CUSTOM_BUTTONS":"カスタムボタン","@SETTINGS.MENU_MOUSE":"マウス","@SETTINGS.MENU_TOUCH_PANEL":"タッチパネル","@SETTINGS.MENU_KEYBOARD":"キーボード","@SETTINGS.MENU_STARTUP":"起動時","@SETTINGS.MENU_VER_INFO":"バージョン情報","@POST.POSTPICTURE":"投稿するお絵カキコ","@POST.THUMBNAIL":"サムネイル","@POST.THUMBNAIL_CLICK":"※クリックで拡大表示","@POST.INPUT":"投稿情報の入力","@POST.NAME":"投稿者名","@POST.TITLE":"タイトル","@POST.MESSAGE":"本文","@POST.WATCHLIST":"ウォッチリストに登録","@POST.STATUS.SIZE":"画像サイズ","@POST.STATUS.BG_TRANSPARENT":"背景の透過","@POST.STATUS.BASED":"もとの絵","@POST.BUTTON_SUBMIT":"お絵カキコする！","@POST.INFO_REQUIRED":"※必須項目が入力されていません。","@POST.NOTICE":"投稿前の注意事項","@POST.NOTICE1":"投稿時にすべてのレイヤーが統合されます。","@POST.NOTICE2":"","@POST.NOTICE3":"","@POST.NOTICE4":""}
 
 /***/ }),
 
@@ -24708,15 +25706,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_alert_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./alert.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/alert.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -24760,15 +25758,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_axnospaint_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./axnospaint.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/axnospaint.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -24812,15 +25810,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_common_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./common.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/common.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -24836,6 +25834,58 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_common_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_common_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_common_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
+/***/ "./src/css/components.css":
+/*!********************************!*\
+  !*** ./src/css/components.css ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_components_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./components.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/components.css");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_components_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_components_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_components_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_components_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
@@ -24864,15 +25914,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_config_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./config.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/config.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -24888,6 +25938,58 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_config_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_config_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_config_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
+/***/ "./src/css/dock.css":
+/*!**************************!*\
+  !*** ./src/css/dock.css ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_dock_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./dock.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/dock.css");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_dock_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_dock_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_dock_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_dock_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
@@ -24916,15 +26018,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_icon_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./icon.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/icon.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -24968,15 +26070,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_button_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_button.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_button.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25020,15 +26122,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_checkbox_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_checkbox.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_checkbox.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25072,15 +26174,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_number_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_number.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_number.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25124,15 +26226,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_radio_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_radio.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_radio.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25176,15 +26278,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_range_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_range.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_range.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25228,15 +26330,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_input_toggle_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./input_toggle.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/input_toggle.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25252,6 +26354,58 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_input_toggle_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_input_toggle_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_input_toggle_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
+/***/ "./src/css/mobile.css":
+/*!****************************!*\
+  !*** ./src/css/mobile.css ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_mobile_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./mobile.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/mobile.css");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_mobile_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_mobile_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_mobile_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_mobile_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
@@ -25280,15 +26434,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_post_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./post.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/post.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25332,15 +26486,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_referenceimage_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./referenceimage.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/referenceimage.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25384,15 +26538,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_reinvented_color_wheel_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./reinvented-color-wheel.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/reinvented-color-wheel.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25436,15 +26590,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_saveload_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./saveload.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/saveload.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25488,15 +26642,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_tokens_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./tokens.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/tokens.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25540,15 +26694,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25592,15 +26746,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_custom_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_custom.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_custom.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25644,15 +26798,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_filter_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_filter.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_filter.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25696,15 +26850,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_launcher_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_launcher.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_launcher.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25748,15 +26902,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_layer_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_layer.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_layer.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25800,15 +26954,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_makecolor_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_makecolor.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_makecolor.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25852,15 +27006,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_palette_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_palette.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_palette.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25904,15 +27058,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_pen_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_pen.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_pen.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -25956,15 +27110,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_window_tool_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./window_tool.css */ "./node_modules/css-loader/dist/cjs.js!./src/css/window_tool.css");
 
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
 var options = {};
 
@@ -26721,6 +27875,16 @@ module.exports = "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/sv
 
 /***/ }),
 
+/***/ "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"5\" cy=\"12\" r=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><circle cx=\"19\" cy=\"12\" r=\"2\"/></svg>":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg> ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"5\" cy=\"12\" r=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><circle cx=\"19\" cy=\"12\" r=\"2\"/></svg>";
+
+/***/ }),
+
 /***/ "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M3 20c2-6 4-14 6-14 1.5 0 1 4 3 4s2-6 4-4c1.5 1.4 1 8 3 8 1 0 1.5-1 2-2l1 1c-1 2-2 3.5-4 3.5-2.5 0-2-6-3.5-6-1.2 0-1.5 4-3.5 4-2 0-1.5-6-3-6-1 0-2 6-3.5 11z\"/></svg>":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M3 20c2-6 4-14 6-14 1.5 0 1 4 3 4s2-6 4-4c1.5 1.4 1 8 3 8 1 0 1.5-1 2-2l1 1c-1 2-2 3.5-4 3.5-2.5 0-2-6-3.5-6-1.2 0-1.5 4-3.5 4-2 0-1.5-6-3-6-1 0-2 6-3.5 11z"/></svg> ***!
@@ -26811,6 +27975,196 @@ module.exports = "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/sv
 
 /***/ }),
 
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><circle cx=%2712%27 cy=%2712%27 r=%275%27/><path d=%27M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3%27/></svg>":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><circle cx=%2712%27 cy=%2712%27 r=%275%27/><path d=%27M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3%27/></svg> ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><circle cx=%2712%27 cy=%2712%27 r=%275%27/><path d=%27M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M12 3v18M6 8l6-3 6 3M6 16l6 3 6-3%27/></svg>":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M12 3v18M6 8l6-3 6 3M6 16l6 3 6-3%27/></svg> ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M12 3v18M6 8l6-3 6 3M6 16l6 3 6-3%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M17 3l4 4-9 9-5 1 1-5z%27/></svg>":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M17 3l4 4-9 9-5 1 1-5z%27/></svg> ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M17 3l4 4-9 9-5 1 1-5z%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 12c3 0 3-4 6-4s3 8 6 8 3-4 6-4%27/></svg>":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 12c3 0 3-4 6-4s3 8 6 8 3-4 6-4%27/></svg> ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 12c3 0 3-4 6-4s3 8 6 8 3-4 6-4%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 5h18l-7 8v6l-4 2v-8z%27/></svg>":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 5h18l-7 8v6l-4 2v-8z%27/></svg> ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M3 5h18l-7 8v6l-4 2v-8z%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L14 4M9 20L19 4%27/></svg>":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L14 4M9 20L19 4%27/></svg> ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L14 4M9 20L19 4%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L15 9%27/><path d=%27M13 4v2M13 10v2M9 6h2M15 6h2M20 14v2M20 20v2M18 18h2M22 18h2%27/></svg>":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L15 9%27/><path d=%27M13 4v2M13 10v2M9 6h2M15 6h2M20 14v2M20 20v2M18 18h2M22 18h2%27/></svg> ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><path d=%27M4 20L15 9%27/><path d=%27M13 4v2M13 10v2M9 6h2M15 6h2M20 14v2M20 20v2M18 18h2M22 18h2%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><rect x=%273%27 y=%274%27 width=%2718%27 height=%2716%27 rx=%272%27/><path d=%27M8 12l3 3 5-6%27/></svg>":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><rect x=%273%27 y=%274%27 width=%2718%27 height=%2716%27 rx=%272%27/><path d=%27M8 12l3 3 5-6%27/></svg> ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linecap=%27round%27><rect x=%273%27 y=%274%27 width=%2718%27 height=%2716%27 rx=%272%27/><path d=%27M8 12l3 3 5-6%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 22c4 0 6-2.5 6-6 0-3-2-4.5-2-4.5.3 2-.7 3-1.5 3 1-4-2-6.5-2.5-8.5-.5 3-2 5-4 7-1.3 1.3-2 2.7-2 4.5 0 3.5 2.5 4.5 6 4.5z%27/></svg>":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 22c4 0 6-2.5 6-6 0-3-2-4.5-2-4.5.3 2-.7 3-1.5 3 1-4-2-6.5-2.5-8.5-.5 3-2 5-4 7-1.3 1.3-2 2.7-2 4.5 0 3.5 2.5 4.5 6 4.5z%27/></svg> ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 22c4 0 6-2.5 6-6 0-3-2-4.5-2-4.5.3 2-.7 3-1.5 3 1-4-2-6.5-2.5-8.5-.5 3-2 5-4 7-1.3 1.3-2 2.7-2 4.5 0 3.5 2.5 4.5 6 4.5z%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 3l9 5-9 5-9-5z%27/><path d=%27M3 12l9 5 9-5M3 17l9 5 9-5%27/></svg>":
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 3l9 5-9 5-9-5z%27/><path d=%27M3 12l9 5 9-5M3 17l9 5 9-5%27/></svg> ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M12 3l9 5-9 5-9-5z%27/><path d=%27M3 12l9 5 9-5M3 17l9 5 9-5%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M4 8l8-5 8 5-3 11H7z%27/></svg>":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M4 8l8-5 8 5-3 11H7z%27/></svg> ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27 stroke-linejoin=%27round%27><path d=%27M4 8l8-5 8 5-3 11H7z%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%2712%27 cy=%2712%27 r=%279%27/><path d=%27M12 7v6l4 2%27/></svg>":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%2712%27 cy=%2712%27 r=%279%27/><path d=%27M12 7v6l4 2%27/></svg> ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%2712%27 cy=%2712%27 r=%279%27/><path d=%27M12 7v6l4 2%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%279%27 cy=%2712%27 r=%276%27/><circle cx=%2715%27 cy=%2712%27 r=%276%27/></svg>":
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%279%27 cy=%2712%27 r=%276%27/><circle cx=%2715%27 cy=%2712%27 r=%276%27/></svg> ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><circle cx=%279%27 cy=%2712%27 r=%276%27/><circle cx=%2715%27 cy=%2712%27 r=%276%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z%27/><circle cx=%2712%27 cy=%2712%27 r=%273%27/></svg>":
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z%27/><circle cx=%2712%27 cy=%2712%27 r=%273%27/></svg> ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z%27/><circle cx=%2712%27 cy=%2712%27 r=%273%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M12 5v14M5 12h14%27/></svg>":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M12 5v14M5 12h14%27/></svg> ***!
+  \***************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M12 5v14M5 12h14%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 18c4 0 4-12 9-12s5 12 9 12%27/></svg>":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 18c4 0 4-12 9-12s5 12 9 12%27/></svg> ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 18c4 0 4-12 9-12s5 12 9 12%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14%27/></svg>":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14%27/></svg> ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><path d=%27M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%274%27 y=%2711%27 width=%2716%27 height=%2710%27 rx=%272%27/><path d=%27M8 11V7a4 4 0 0 1 8 0v4%27/></svg>":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%274%27 y=%2711%27 width=%2716%27 height=%2710%27 rx=%272%27/><path d=%27M8 11V7a4 4 0 0 1 8 0v4%27/></svg> ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%274%27 y=%2711%27 width=%2716%27 height=%2710%27 rx=%272%27/><path d=%27M8 11V7a4 4 0 0 1 8 0v4%27/></svg>";
+
+/***/ }),
+
+/***/ "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%278%27 y=%278%27 width=%2712%27 height=%2712%27 rx=%272%27/><path d=%27M4 16V6a2 2 0 0 1 2-2h10%27/></svg>":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%278%27 y=%278%27 width=%2712%27 height=%2712%27 rx=%272%27/><path d=%27M4 16V6a2 2 0 0 1 2-2h10%27/></svg> ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%272%27><rect x=%278%27 y=%278%27 width=%2712%27 height=%2712%27 rx=%272%27/><path d=%27M4 16V6a2 2 0 0 1 2-2h10%27/></svg>";
+
+/***/ }),
+
 /***/ "./src/html/config.txt":
 /*!*****************************!*\
   !*** ./src/html/config.txt ***!
@@ -26827,7 +28181,7 @@ module.exports = "<!-- 設定タブ -->\n<div id=\"axp_config_div_menu\">\n    <
   \***************************/
 /***/ ((module) => {
 
-module.exports = "<!-- AXNOS Paintメイン -->\n<div id=\"axp_main\" class=\"axpc_main\">\n\t<!-- 切り替えタブ -->\n\t<div id=\"axp_main_div_tab\">\n\t\t<!-- ハンバーガーメニューボタン -->\n\t\t<input type=\"checkbox\" id=\"axp_main_checkbox_hamburger\">\n\t\t<label id=\"axp_main_label_hamburger\" for=\"axp_main_checkbox_hamburger\">\n\t\t\t<div class=\"axpc_icon_humburger\"></div>\n\t\t</label>\n\t\t<div id=\"axp_main_div_tab_menu\">\n\t\t\t<div data-idx=\"0\" class=\"axpc_MSG\" data-msg=\"@BAS0001\">${_(\"@TAB.CANVAS\")}</div>\n\t\t\t<div data-idx=\"1\" class=\"axpc_MSG\" data-msg=\"@BAS0002\">${_(\"@TAB.SETTINGS\")}</div>\n\t\t\t<div data-idx=\"2\" class=\"axpc_MSG\" data-msg=\"@BAS0003\">${_(\"@TAB.POST\")}</div>\n\t\t\t<div data-idx=\"3\" class=\"axpc_MSG\" data-msg=\"@BAS0004\"></div>\n\t\t</div>\n\t\t<div id=\"axp_main_div_headerText\" class=\"axpc_MSG\" data-msg=\"@BAS0005\"></div>\n\t\t<!-- ヘッダー右端のアンドゥ／リドゥボタン -->\n\t\t<button id=\"axp_main_button_undo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t<button id=\"axp_main_button_redo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t</div>\n\n\t<!-- タブにより切り替わる画面 -->\n\t<div id=\"axp_main_div_tabContent\">\n\t\t<!-- キャンバス -->\n\t\t<article>\n\t\t\t<div id=\"axp_canvas\">\n\t\t\t\t<!-- ペンの太さを表示する補助円 -->\n\t\t\t\t<div id=\"axp_canvas_div_penCursor\"></div>\n\n\t\t\t\t<!-- 回転操作子グループ（ハンドツール時のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_rotateGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<button id=\"axp_canvas_div_rotateLeft\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0020\"></button>\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateHandle\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@AST0022\"></div>\n\t\t\t\t\t<button id=\"axp_canvas_div_rotateRight\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0021\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- なげなわ操作子グループ（なげなわ変形中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_nagenawaGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaScale\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@NAG0001\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaRotate\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@NAG0002\"></div>\n\t\t\t\t\t<button id=\"axp_canvas_div_nagenawaFlip\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0004\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_div_nagenawaDuplicate\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0005\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_div_nagenawaFinish\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0003\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 多角形選択操作子グループ（頂点配置中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_polygonGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<button id=\"axp_canvas_div_polygonCancel\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@POL0002\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_div_polygonFinish\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@POL0001\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 歪みツール操作子グループ（セッション中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_liquifyGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<button id=\"axp_canvas_button_liquifyCancel\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@LQF0002\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_liquifyFinish\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@LQF0001\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- タッチ操作バー（pointer:coarse時のみCSSで表示。Undo/Redo/表示リセットの大型タップ領域） -->\n\t\t\t\t<div id=\"axp_canvas_div_touchBar\">\n\t\t\t\t\t<button id=\"axp_canvas_button_touchUndo\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_touchRedo\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_touchViewReset\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_loupe_reset\" data-msg=\"@AST0004\"\n\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_VIEW_RESET\")}\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- ポインタ座標表示領域 -->\n\t\t\t\t<div id=\"axp_canvas_div_pointerPosition\" class=\"axpc_NONE\"></div>\n\n\t\t\t\t<!-- デバッグ情報表示 -->\n\t\t\t\t<div id=\"axp_canvas_div_debugInfo\" class=\"axpc_NONE axpc_MSG\" data-msg=\"@BAS0100\">\n\t\t\t\t\t<div></div>\n\t\t\t\t\t<div></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 描画エリア -->\n\t\t\t\t<div id=\"axp_canvas_div_grayBackground\">\n\t\t\t\t\t<!-- 補助線 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_grid\" class=\"axpc_NONE\">\n\t\t\t\t\t\t<svg id=\"axp_canvas_svg_grid\" xmlns=\"http://www.w3.org/2000/svg\">\n\t\t\t\t\t\t\t<defs>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridVH\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridSubDivision\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridDiagonal\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel1\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel2\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t</defs>\n\t\t\t\t\t\t</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!-- canvas要素 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_referenceHost\" hidden>\n\t\t\t\t\t\t<div id=\"axp_canvas_div_referenceFrame\" data-editing=\"false\">\n\t\t\t\t\t\t\t<canvas id=\"axp_canvas_canvas_reference\"></canvas>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<canvas id=\"axp_canvas_canvas_main\" class=\"axpc_background_mesh\"></canvas>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- セーブロードサブウィンドウ -->\n\t\t\t\t<div id=\"axp_saveload\" class=\"axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<span id=\"axp_saveload_span_message\"></span>\n\t\t\t\t\t\t<div id=\"axp_saveload_div_insertHTML\"></div>\n\t\t\t\t\t\t<button id=\"axp_saveload_button_close\" class=\"axpc_button\">${_(\"@COMMON.BUTTON_CLOSE\")}</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- レイヤー名変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_renamelayer\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.LAYERS_INFO\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_close\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0100\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_textarea\">\n\t\t\t\t\t\t\t<input id=\"axp_renamelayer_text_newLayerName\" type=\"text\" size=\"15\" maxlength=\"10\"\n\t\t\t\t\t\t\t\tautocomplete=\"off\" class=\"axpc_MSG\" data-msg=\"@LAY0101\" placeholder=\"空白にはできません\">\n\t\t\t\t\t\t\t<!-- 状態によりMSG変化 -->\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_confirm\"\n\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYER.BUTTON_RENAME_OK\")}</button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_buttonarea\">\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipH\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0110\"></button>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipV\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0111\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<!-- 非破壊レイヤースタイル（フチ取り・ドロップシャドウ/光彩）。\n\t\t\t\t\t\t\tピクセルデータは変更せず、合成のたびに一時的に重ねて表示する。 -->\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_layerStyle\">\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_section\">\n\t\t\t\t\t\t\t\t<label class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_layerstyle_checkbox_strokeEnabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERSTYLE.STROKE\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.RADIUS\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_strokeRadius\" min=\"1\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"4\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.COLOR\")}\n\t\t\t\t\t\t\t\t\t\t<input type=\"color\" id=\"axp_layerstyle_color_stroke\" value=\"#000000\">\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_section\">\n\t\t\t\t\t\t\t\t<label class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_layerstyle_checkbox_shadowEnabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERSTYLE.DROPSHADOW\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.OFFSET_X\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOffsetX\" min=\"-30\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.OFFSET_Y\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOffsetY\" min=\"-30\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.BLUR\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowBlur\" min=\"0\" max=\"30\"\n\t\t\t\t\t\t\t\t\t\t\t\tstep=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@COMMON.OPACITY\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOpacity\" min=\"0\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"100\" step=\"1\" value=\"60\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.COLOR\")}\n\t\t\t\t\t\t\t\t\t\t<input type=\"color\" id=\"axp_layerstyle_color_shadow\" value=\"#000000\">\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<!-- 透明マスク（非破壊消しゴム）。マスクの輝度でレイヤーのアルファを乗算する。\n\t\t\t\t\t\t\tピクセルデータは変更せず、マスク画像自体を専用ブラシで編集する。 -->\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_mask\">\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t<button id=\"axp_mask_button_addRemove\"\n\t\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYERMASK.ADD\")}</button>\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_mask_checkbox_enabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERMASK.ENABLED\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t<button id=\"axp_mask_button_editToggle\"\n\t\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYERMASK.EDIT\")}</button>\n\t\t\t\t\t\t\t\t<label>${_(\"@LAYERMASK.BRUSH_SIZE\")}\n\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_mask_range_brushSize\" min=\"1\" max=\"200\" step=\"1\"\n\t\t\t\t\t\t\t\t\t\t\tvalue=\"30\">\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<label>${_(\"@LAYERMASK.BRUSH_STRENGTH\")}\n\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_mask_range_brushStrength\" min=\"1\" max=\"100\"\n\t\t\t\t\t\t\t\t\t\t\tstep=\"1\" value=\"100\">\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_mask_checkbox_restoreMode\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERMASK.RESTORE_MODE\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTagContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.PRESET_NAME\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_colorReset\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0102\">${_(\"@LAYER.BUTTON_CLEAR_COLOR\")}</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTag\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 補助線の色変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_gridconfig\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@GRID.LINE_COLOR\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_gridconfig_button_confirm\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@AST0122\"></button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_gridconfig_div_colorPicker\" class=\"axpc_MSG\" data-msg=\"@AST0120\"></div>\n\t\t\t\t\t\t<form id=\"axp_gridconfig_form_gridColor\" class=\"axpc_range axpc_text_border\"\n\t\t\t\t\t\t\toninput=\"result.value=parseInt(volume.value)\">\n\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_gridconfig_range_gridColor\" name=\"volume\" min=\"5\" max=\"100\"\n\t\t\t\t\t\t\t\tstep=\"5\" value=\"100\" class=\"axpc_MSG\" data-msg=\"@AST0121\">\n\t\t\t\t\t\t\t<div class=\"axpc_range_label\">${_(\"@COMMON.OPACITY\")}</div>\n\t\t\t\t\t\t\t<div class=\"axpc_range_value\"><output name=\"result\">100</output></div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</article>\n\t\t<!-- 設定 -->\n\t\t<article>\n\t\t\t<div id=\"axp_config\"></div>\n\t\t</article>\n\t\t<!-- 投稿 -->\n\t\t<article>\n\t\t\t<div id=\"axp_post\"></div>\n\t\t</article>\n\t</div>\n</div>\n<!-- フッター -->\n<div id=\"axp_footer\" class=\"axpc_MSG\" data-msg=\"@BAS0006\">\n\t<div id=\"axp_footer_div_icon\"></div>\n\t<div id=\"axp_footer_div_message\">AXNOS Paint（アクノスペイントあいもげカスタム）</div>\n</div>\n";
+module.exports = "<!-- AXNOS Paintメイン -->\n<div id=\"axp_main\" class=\"axpc_main\">\n\t<!-- 切り替えタブ -->\n\t<div id=\"axp_main_div_tab\">\n\t\t<!-- ハンバーガーメニューボタン -->\n\t\t<input type=\"checkbox\" id=\"axp_main_checkbox_hamburger\">\n\t\t<label id=\"axp_main_label_hamburger\" for=\"axp_main_checkbox_hamburger\">\n\t\t\t<div class=\"axpc_icon_humburger\"></div>\n\t\t</label>\n\t\t<div id=\"axp_main_div_tab_menu\">\n\t\t\t<div data-idx=\"0\" class=\"axpc_MSG\" data-msg=\"@BAS0001\">${_(\"@TAB.CANVAS\")}</div>\n\t\t\t<div data-idx=\"1\" class=\"axpc_MSG\" data-msg=\"@BAS0002\">${_(\"@TAB.SETTINGS\")}</div>\n\t\t\t<div data-idx=\"2\" class=\"axpc_MSG\" data-msg=\"@BAS0003\">${_(\"@TAB.POST\")}</div>\n\t\t\t<div data-idx=\"3\" class=\"axpc_MSG\" data-msg=\"@BAS0004\"></div>\n\t\t</div>\n\t\t<div id=\"axp_main_div_headerText\" class=\"axpc_MSG\" data-msg=\"@BAS0005\"></div>\n\t\t<!-- ヘッダー右端のアンドゥ／リドゥボタン -->\n\t\t<button id=\"axp_main_button_undo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t<button id=\"axp_main_button_redo\" class=\"axpc_FUNC axpc_button axpc_main_headerButton\"\n\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t</div>\n\n\t<!-- タブにより切り替わる画面 -->\n\t<div id=\"axp_main_div_tabContent\">\n\t\t<!-- キャンバス -->\n\t\t<article>\n\t\t\t<div id=\"axp_canvas\">\n\t\t\t\t<!-- ペンの太さを表示する補助円 -->\n\t\t\t\t<div id=\"axp_canvas_div_penCursor\"></div>\n\n\t\t\t\t<!-- 回転操作子グループ（ハンドツール時のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_rotateGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<button id=\"axp_canvas_div_rotateLeft\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0020\"></button>\n\t\t\t\t\t<div id=\"axp_canvas_div_rotateHandle\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@AST0022\"></div>\n\t\t\t\t\t<button id=\"axp_canvas_div_rotateRight\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@AST0021\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- なげなわ操作子グループ（なげなわ変形中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_nagenawaGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaScale\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@NAG0001\"></div>\n\t\t\t\t\t<div id=\"axp_canvas_div_nagenawaRotate\" class=\"axpc_overlay_knob axpc_MSG\" data-msg=\"@NAG0002\"></div>\n\t\t\t\t\t<button id=\"axp_canvas_div_nagenawaFlip\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0004\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_div_nagenawaDuplicate\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0005\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_div_nagenawaFinish\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@NAG0003\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 多角形選択操作子グループ（頂点配置中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_polygonGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<button id=\"axp_canvas_div_polygonCancel\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@POL0002\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_div_polygonFinish\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@POL0001\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 歪みツール操作子グループ（セッション中のみ表示） -->\n\t\t\t\t<div id=\"axp_canvas_div_liquifyGroup\" class=\"axpc_NONE\">\n\t\t\t\t\t<button id=\"axp_canvas_button_liquifyCancel\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@LQF0002\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_liquifyFinish\" type=\"button\" class=\"axpc_overlay_btn axpc_MSG\" data-msg=\"@LQF0001\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- タッチ操作バー（pointer:coarse時のみCSSで表示。Undo/Redo/表示リセットの大型タップ領域） -->\n\t\t\t\t<div id=\"axp_canvas_div_touchBar\">\n\t\t\t\t\t<button id=\"axp_canvas_button_touchUndo\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\" aria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_touchRedo\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\" aria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t\t\t\t\t<button id=\"axp_canvas_button_touchViewReset\" class=\"axpc_FUNC axpc_overlay_btn axpc_touchbar_btn\"\n\t\t\t\t\t\tdata-function=\"func_loupe_reset\" data-msg=\"@AST0004\"\n\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_VIEW_RESET\")}\"></button>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 左ドック（PC用：ペン切替+ドック操作。599px以下ではCSSで非表示） -->\n\t\t\t\t<aside id=\"axp_dock_left\" class=\"axp-dock axp-dock--left\">\n\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-dock__pen axp-dock__ic-pen\"\n\t\t\t\t\t\tdata-function=\"func_switch_axp_penmode_round\" data-penmode=\"axp_penmode_round\"\n\t\t\t\t\t\tdata-msg=\"@PEN0100\" aria-label=\"${_(\"@PENNAME.ROUND\")}\"></button>\n\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-dock__pen axp-dock__ic-eraser\"\n\t\t\t\t\t\tdata-function=\"func_switch_axp_penmode_eraser_round\" data-penmode=\"axp_penmode_eraser_round\"\n\t\t\t\t\t\tdata-msg=\"@PEN0110\" aria-label=\"${_(\"@PENNAME.ERASER\")}\"></button>\n\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-dock__pen axp-dock__ic-fill\"\n\t\t\t\t\t\tdata-function=\"func_switch_axp_penmode_fill\" data-penmode=\"axp_penmode_fill\"\n\t\t\t\t\t\tdata-msg=\"@PEN0120\" aria-label=\"${_(\"@PENNAME.FILL\")}\"></button>\n\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-dock__pen axp-dock__ic-spuit\"\n\t\t\t\t\t\tdata-function=\"func_switch_spuit\" data-penmode=\"axp_penmode_spuit\"\n\t\t\t\t\t\tdata-msg=\"@PEN0054\" aria-label=\"${_(\"@PENNAME.EYEDROPPER\")}\"></button>\n\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-dock__pen axp-dock__ic-hand\"\n\t\t\t\t\t\tdata-function=\"func_switch_axp_penmode_hand\" data-penmode=\"axp_penmode_hand\"\n\t\t\t\t\t\tdata-msg=\"@PEN0130\" aria-label=\"${_(\"@PENNAME.HAND\")}\"></button>\n\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-dock__pen axp-dock__ic-nagenawa\"\n\t\t\t\t\t\tdata-function=\"func_switch_axp_penmode_nagenawa\" data-penmode=\"axp_penmode_nagenawa\"\n\t\t\t\t\t\tdata-msg=\"@PEN0132\" aria-label=\"${_(\"@PENNAME.NAGENAWA\")}\"></button>\n\t\t\t\t\t<button id=\"axp_dock_button_pentool\" type=\"button\"\n\t\t\t\t\t\tclass=\"axpc_MSG axp-dock__btn axp-dock__ic-pentool\"\n\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.PEN_TOOL\")}\"></button>\n\t\t\t\t\t<div class=\"axp-dock__sep\"></div>\n\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-dock__mini axp-dock__ic-undo\"\n\t\t\t\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\"\n\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-dock__mini axp-dock__ic-redo\"\n\t\t\t\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\"\n\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t\t\t\t</aside>\n\n\t\t\t\t<!-- 右ドック（PC用：ウィンドウトグル+設定） -->\n\t\t\t\t<aside id=\"axp_dock_right\" class=\"axp-dock axp-dock--right\">\n\t\t\t\t\t<button id=\"axp_dock_button_layer\" type=\"button\"\n\t\t\t\t\t\tclass=\"axpc_MSG axp-dock__btn axp-dock__ic-layer\"\n\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.LAYER\")}\"></button>\n\t\t\t\t\t<button id=\"axp_dock_button_color\" type=\"button\"\n\t\t\t\t\t\tclass=\"axpc_MSG axp-dock__btn axp-dock__ic-color\"\n\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.COLOR\")}\"></button>\n\t\t\t\t\t<button id=\"axp_dock_button_palette\" type=\"button\"\n\t\t\t\t\t\tclass=\"axpc_MSG axp-dock__btn axp-dock__ic-palette\"\n\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.SWATCHES\")}\"></button>\n\t\t\t\t\t<button id=\"axp_dock_button_subtool\" type=\"button\"\n\t\t\t\t\t\tclass=\"axpc_MSG axp-dock__btn axp-dock__ic-subtool\"\n\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.MISC\")}\"></button>\n\t\t\t\t\t<button id=\"axp_dock_button_filter\" type=\"button\"\n\t\t\t\t\t\tclass=\"axpc_MSG axp-dock__btn axp-dock__ic-filter\"\n\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.FILTER\")}\"></button>\n\t\t\t\t\t<div class=\"axp-dock__spacer\"></div>\n\t\t\t\t\t<button id=\"axp_dock_button_config\" type=\"button\"\n\t\t\t\t\t\tclass=\"axp-dock__btn axp-dock__ic-config\"\n\t\t\t\t\t\taria-label=\"${_(\"@TAB.SETTINGS\")}\"></button>\n\t\t\t\t</aside>\n\n\t\t\t\t<!-- クイックバー（PC用：色/ペンサイズ/Undo/Redo/ズーム。coarseポインタ環境では非表示） -->\n\t\t\t\t<div id=\"axp_quickbar\" class=\"axp-quickbar\">\n\t\t\t\t\t<div class=\"axp-quickbar__group\">\n\t\t\t\t\t\t<button id=\"axp_quickbar_button_color\" type=\"button\" class=\"axp-quickbar__swatch\"\n\t\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.COLOR\")}\"></button>\n\t\t\t\t\t\t<span id=\"axp_quickbar_span_hex\" class=\"axp-quickbar__hex\">#000000</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"axp-quickbar__group\">\n\t\t\t\t\t\t<span class=\"axp-quickbar__label\">${_(\"@PEN.SIZE\")}</span>\n\t\t\t\t\t\t<input id=\"axp_quickbar_range_penSize\" class=\"axp-quickbar__range\" type=\"range\"\n\t\t\t\t\t\t\tmin=\"1\" max=\"200\" value=\"8\" aria-label=\"${_(\"@PEN.SIZE\")}\">\n\t\t\t\t\t\t<span id=\"axp_quickbar_span_penSize\" class=\"axp-quickbar__val\">8</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"axp-quickbar__group\">\n\t\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-quickbar__btn axp-quickbar__btn--undo\"\n\t\t\t\t\t\t\tdata-function=\"func_undo\" data-msg=\"@AST0006\"\n\t\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_UNDO\")}\"></button>\n\t\t\t\t\t\t<button type=\"button\" class=\"axpc_FUNC axp-quickbar__btn axp-quickbar__btn--redo\"\n\t\t\t\t\t\t\tdata-function=\"func_redo\" data-msg=\"@AST0007\"\n\t\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_REDO\")}\"></button>\n\t\t\t\t\t\t<button id=\"axp_quickbar_button_zoom\" type=\"button\"\n\t\t\t\t\t\t\tclass=\"axpc_FUNC axp-quickbar__btn axp-quickbar__btn--zoom\"\n\t\t\t\t\t\t\tdata-function=\"func_loupe_reset\" data-msg=\"@AST0004\"\n\t\t\t\t\t\t\taria-label=\"${_(\"@MISC.BUTTON_VIEW_RESET\")}\">100%</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- モバイル用トップバー（599px以下でのみCSSで表示） -->\n\t\t\t\t<div id=\"axp_mobile_topbar\" class=\"axpm-topbar\">\n\t\t\t\t\t<button id=\"axp_mobile_button_color\" type=\"button\" class=\"axpm-topbar__swatch\"\n\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.COLOR\")}\"></button>\n\t\t\t\t\t<button id=\"axp_mobile_button_pen\" type=\"button\" class=\"axpm-topbar__pen\"\n\t\t\t\t\t\taria-label=\"${_(\"@WINDOW.PEN_TOOL\")}\"><span\n\t\t\t\t\t\t\tid=\"axp_mobile_span_penName\">-</span></button>\n\t\t\t\t\t<input id=\"axp_mobile_range_penSize\" class=\"axpm-topbar__range\" type=\"range\"\n\t\t\t\t\t\tmin=\"1\" max=\"200\" value=\"8\" aria-label=\"${_(\"@PEN.SIZE\")}\">\n\t\t\t\t\t<span id=\"axp_mobile_span_penSize\" class=\"axpm-topbar__val\">8</span>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- モバイル用ボトムシート（タブでツールウィンドウを切替表示） -->\n\t\t\t\t<div id=\"axp_mobile_sheet\" class=\"axpm-sheet\">\n\t\t\t\t\t<button id=\"axp_mobile_sheet_handle\" type=\"button\" class=\"axpm-sheet__handle\"\n\t\t\t\t\t\taria-label=\"${_(\"@MOBILE.TAB_CLOSE\")}\"><span></span></button>\n\t\t\t\t\t<div class=\"axpm-sheet__tabs\" role=\"tablist\">\n\t\t\t\t\t\t<button type=\"button\" class=\"axpm-sheet__tab\" data-sheettab=\"axp_pen\"\n\t\t\t\t\t\t\trole=\"tab\">${_(\"@MOBILE.TAB_PEN\")}</button>\n\t\t\t\t\t\t<button type=\"button\" class=\"axpm-sheet__tab\" data-sheettab=\"axp_makecolor\"\n\t\t\t\t\t\t\trole=\"tab\">${_(\"@MOBILE.TAB_COLOR\")}</button>\n\t\t\t\t\t\t<button type=\"button\" class=\"axpm-sheet__tab\" data-sheettab=\"axp_layer\"\n\t\t\t\t\t\t\trole=\"tab\">${_(\"@MOBILE.TAB_LAYER\")}</button>\n\t\t\t\t\t\t<button type=\"button\" class=\"axpm-sheet__tab\" data-sheettab=\"axp_tool\"\n\t\t\t\t\t\t\trole=\"tab\">${_(\"@MOBILE.TAB_TOOL\")}</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- ポインタ座標表示領域 -->\n\t\t\t\t<div id=\"axp_canvas_div_pointerPosition\" class=\"axpc_NONE\"></div>\n\n\t\t\t\t<!-- デバッグ情報表示 -->\n\t\t\t\t<div id=\"axp_canvas_div_debugInfo\" class=\"axpc_NONE axpc_MSG\" data-msg=\"@BAS0100\">\n\t\t\t\t\t<div></div>\n\t\t\t\t\t<div></div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 描画エリア -->\n\t\t\t\t<div id=\"axp_canvas_div_grayBackground\">\n\t\t\t\t\t<!-- 補助線 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_grid\" class=\"axpc_NONE\">\n\t\t\t\t\t\t<svg id=\"axp_canvas_svg_grid\" xmlns=\"http://www.w3.org/2000/svg\">\n\t\t\t\t\t\t\t<defs>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridVH\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridSubDivision\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridDiagonal\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel1\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t\t<pattern id=\"axp_canvas_pattern_gridPixel2\" patternUnits=\"userSpaceOnUse\">\n\t\t\t\t\t\t\t\t\t<path fill=\"none\" />\n\t\t\t\t\t\t\t\t</pattern>\n\t\t\t\t\t\t\t</defs>\n\t\t\t\t\t\t</svg>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!-- canvas要素 -->\n\t\t\t\t\t<div id=\"axp_canvas_div_referenceHost\" hidden>\n\t\t\t\t\t\t<div id=\"axp_canvas_div_referenceFrame\" data-editing=\"false\">\n\t\t\t\t\t\t\t<canvas id=\"axp_canvas_canvas_reference\"></canvas>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<canvas id=\"axp_canvas_canvas_main\" class=\"axpc_background_mesh\"></canvas>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- セーブロードサブウィンドウ -->\n\t\t\t\t<div id=\"axp_saveload\" class=\"axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<span id=\"axp_saveload_span_message\"></span>\n\t\t\t\t\t\t<div id=\"axp_saveload_div_insertHTML\"></div>\n\t\t\t\t\t\t<button id=\"axp_saveload_button_close\" class=\"axpc_button\">${_(\"@COMMON.BUTTON_CLOSE\")}</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- レイヤー名変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_renamelayer\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.LAYERS_INFO\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_close\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0100\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_textarea\">\n\t\t\t\t\t\t\t<input id=\"axp_renamelayer_text_newLayerName\" type=\"text\" size=\"15\" maxlength=\"10\"\n\t\t\t\t\t\t\t\tautocomplete=\"off\" class=\"axpc_MSG\" data-msg=\"@LAY0101\" placeholder=\"空白にはできません\">\n\t\t\t\t\t\t\t<!-- 状態によりMSG変化 -->\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_confirm\"\n\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYER.BUTTON_RENAME_OK\")}</button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_buttonarea\">\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipH\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0110\"></button>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_flipV\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0111\"></button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<!-- 非破壊レイヤースタイル（フチ取り・ドロップシャドウ/光彩）。\n\t\t\t\t\t\t\tピクセルデータは変更せず、合成のたびに一時的に重ねて表示する。 -->\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_layerStyle\">\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_section\">\n\t\t\t\t\t\t\t\t<label class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_layerstyle_checkbox_strokeEnabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERSTYLE.STROKE\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.RADIUS\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_strokeRadius\" min=\"1\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"4\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.COLOR\")}\n\t\t\t\t\t\t\t\t\t\t<input type=\"color\" id=\"axp_layerstyle_color_stroke\" value=\"#000000\">\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_section\">\n\t\t\t\t\t\t\t\t<label class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_layerstyle_checkbox_shadowEnabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERSTYLE.DROPSHADOW\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.OFFSET_X\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOffsetX\" min=\"-30\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.OFFSET_Y\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOffsetY\" min=\"-30\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"30\" step=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.BLUR\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowBlur\" min=\"0\" max=\"30\"\n\t\t\t\t\t\t\t\t\t\t\t\tstep=\"1\" value=\"6\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@COMMON.OPACITY\")}\n\t\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_layerstyle_range_shadowOpacity\" min=\"0\"\n\t\t\t\t\t\t\t\t\t\t\t\tmax=\"100\" step=\"1\" value=\"60\">\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t\t<label>${_(\"@LAYERSTYLE.COLOR\")}\n\t\t\t\t\t\t\t\t\t\t<input type=\"color\" id=\"axp_layerstyle_color_shadow\" value=\"#000000\">\n\t\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<!-- 透明マスク（非破壊消しゴム）。マスクの輝度でレイヤーのアルファを乗算する。\n\t\t\t\t\t\t\tピクセルデータは変更せず、マスク画像自体を専用ブラシで編集する。 -->\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_mask\">\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_header\">\n\t\t\t\t\t\t\t\t<button id=\"axp_mask_button_addRemove\"\n\t\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYERMASK.ADD\")}</button>\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_mask_checkbox_enabled\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERMASK.ENABLED\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"axpc_layerstyle_controls\">\n\t\t\t\t\t\t\t\t<button id=\"axp_mask_button_editToggle\"\n\t\t\t\t\t\t\t\t\tclass=\"axpc_button\">${_(\"@LAYERMASK.EDIT\")}</button>\n\t\t\t\t\t\t\t\t<label>${_(\"@LAYERMASK.BRUSH_SIZE\")}\n\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_mask_range_brushSize\" min=\"1\" max=\"200\" step=\"1\"\n\t\t\t\t\t\t\t\t\t\t\tvalue=\"30\">\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<label>${_(\"@LAYERMASK.BRUSH_STRENGTH\")}\n\t\t\t\t\t\t\t\t\t<div class=\"axpc_range\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_mask_range_brushStrength\" min=\"1\" max=\"100\"\n\t\t\t\t\t\t\t\t\t\t\tstep=\"1\" value=\"100\">\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" id=\"axp_mask_checkbox_restoreMode\">\n\t\t\t\t\t\t\t\t\t<span>${_(\"@LAYERMASK.RESTORE_MODE\")}</span>\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTagContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@LAYER.PRESET_NAME\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_renamelayer_button_colorReset\" class=\"axpc_MSG axpc_button\"\n\t\t\t\t\t\t\t\tdata-msg=\"@LAY0102\">${_(\"@LAYER.BUTTON_CLEAR_COLOR\")}</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_renamelayer_div_colorTag\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<!-- 補助線の色変更サブウィンドウ -->\n\t\t\t\t<div id=\"axp_gridconfig\" class=\"axpc_subwindow axpc_NONE\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<div class=\"axpc_button_closeContainer\">\n\t\t\t\t\t\t\t<span>${_(\"@GRID.LINE_COLOR\")}</span>\n\t\t\t\t\t\t\t<button id=\"axp_gridconfig_button_confirm\" class=\"axpc_MSG axpc_button axpc_button_close\"\n\t\t\t\t\t\t\t\tdata-msg=\"@AST0122\"></button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"axp_gridconfig_div_colorPicker\" class=\"axpc_MSG\" data-msg=\"@AST0120\"></div>\n\t\t\t\t\t\t<form id=\"axp_gridconfig_form_gridColor\" class=\"axpc_range axpc_text_border\"\n\t\t\t\t\t\t\toninput=\"result.value=parseInt(volume.value)\">\n\t\t\t\t\t\t\t<input type=\"range\" id=\"axp_gridconfig_range_gridColor\" name=\"volume\" min=\"5\" max=\"100\"\n\t\t\t\t\t\t\t\tstep=\"5\" value=\"100\" class=\"axpc_MSG\" data-msg=\"@AST0121\">\n\t\t\t\t\t\t\t<div class=\"axpc_range_label\">${_(\"@COMMON.OPACITY\")}</div>\n\t\t\t\t\t\t\t<div class=\"axpc_range_value\"><output name=\"result\">100</output></div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</article>\n\t\t<!-- 設定 -->\n\t\t<article>\n\t\t\t<div id=\"axp_config\"></div>\n\t\t</article>\n\t\t<!-- 投稿 -->\n\t\t<article>\n\t\t\t<div id=\"axp_post\"></div>\n\t\t</article>\n\t</div>\n</div>\n<!-- フッター -->\n<div id=\"axp_footer\" class=\"axpc_MSG\" data-msg=\"@BAS0006\">\n\t<div id=\"axp_footer_div_icon\"></div>\n\t<div id=\"axp_footer_div_message\">AXNOS Paint（アクノスペイントあいもげカスタム）</div>\n</div>\n";
 
 /***/ }),
 
@@ -27089,16 +28443,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _saveload_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./saveload.js */ "./src/js/saveload.js");
 /* harmony import */ var _keyboard_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./keyboard.js */ "./src/js/keyboard.js");
 /* harmony import */ var _interop_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./interop.js */ "./src/js/interop.js");
-/* harmony import */ var _etc_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./etc.js */ "./src/js/etc.js");
-/* harmony import */ var _message_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./message.js */ "./src/js/message.js");
-/* harmony import */ var _debuglog_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./debuglog.js */ "./src/js/debuglog.js");
-/* harmony import */ var _selectionutil_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./selectionutil.js */ "./src/js/selectionutil.js");
-/* harmony import */ var _text_ja_json__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../text/ja.json */ "./src/text/ja.json");
-/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @extensions */ "./extensions/prod.js");
+/* harmony import */ var _dock_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./dock.js */ "./src/js/dock.js");
+/* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./mobile.js */ "./src/js/mobile.js");
+/* harmony import */ var _etc_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./etc.js */ "./src/js/etc.js");
+/* harmony import */ var _message_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./message.js */ "./src/js/message.js");
+/* harmony import */ var _debuglog_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./debuglog.js */ "./src/js/debuglog.js");
+/* harmony import */ var _selectionutil_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./selectionutil.js */ "./src/js/selectionutil.js");
+/* harmony import */ var _text_ja_json__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../text/ja.json */ "./src/text/ja.json");
+/* harmony import */ var _extensions__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @extensions */ "./extensions/prod.js");
 // @description AXNOS Paint基幹
 
 // AXPObjは、ペイントツールの機能やデータを一元管理する親オブジェクト
 // ユーザーからの入力をイベントとして受け取り、対応する子システムの処理を呼び出す
+
+
 
 
 
@@ -27378,7 +28736,7 @@ class AXPObj {
         // 注意事項
         notice: {
             isDisplay: true,
-            // 文章はユーザー辞書を使用して書き換えが可能
+            // 文章はユーザー辞書を使用して書き換えが可能 
         },
     }
 
@@ -27407,6 +28765,8 @@ class AXPObj {
         this.saveSystem = new _saveload_js__WEBPACK_IMPORTED_MODULE_12__.SaveSystem(this);
         this.postSystem = new _post_js__WEBPACK_IMPORTED_MODULE_11__.PostSystem(this);
         this.interopSystem = new _interop_js__WEBPACK_IMPORTED_MODULE_14__.InteropSystem(this);
+        this.dockSystem = new _dock_js__WEBPACK_IMPORTED_MODULE_15__.DockSystem(this);
+        this.mobileSystem = new _mobile_js__WEBPACK_IMPORTED_MODULE_16__.MobileSystem(this);
 
         // デフォルト値設定
         this.minWidth = this.CONST.CANVAS_X_MIN;
@@ -27424,8 +28784,8 @@ class AXPObj {
             }
         }
         // 日本語辞書
-        if (preTranslationText in _text_ja_json__WEBPACK_IMPORTED_MODULE_19__) {
-            return _text_ja_json__WEBPACK_IMPORTED_MODULE_19__[preTranslationText];
+        if (preTranslationText in _text_ja_json__WEBPACK_IMPORTED_MODULE_21__) {
+            return _text_ja_json__WEBPACK_IMPORTED_MODULE_21__[preTranslationText];
         }
         // 見つからなければ原文を返却
         return preTranslationText;
@@ -27510,10 +28870,10 @@ class AXPObj {
         const mode = document.getElementById('axp_pen_select_selectionMode')?.value || 'option_replace';
         const modeKey = { option_replace: 'replace', option_add: 'add', option_subtract: 'subtract', option_intersect: 'intersect' }[mode] || 'replace';
         const existing = this.getValidSelectionMask();
-        const combined = (0,_selectionutil_js__WEBPACK_IMPORTED_MODULE_18__.combineSelectionMask)(existing, newMask, modeKey, this.x_size, this.y_size);
+        const combined = (0,_selectionutil_js__WEBPACK_IMPORTED_MODULE_20__.combineSelectionMask)(existing, newMask, modeKey, this.x_size, this.y_size);
         // 結果が全画素非選択（例: 差し引き/交差で選択範囲が消滅、色域選択で候補0件）の場合、
         // 「選択されているが何も含まない」という紛らわしい状態にせず、選択解除として扱う
-        if ((0,_selectionutil_js__WEBPACK_IMPORTED_MODULE_18__.countSelectedPixels)(combined) === 0) {
+        if ((0,_selectionutil_js__WEBPACK_IMPORTED_MODULE_20__.countSelectedPixels)(combined) === 0) {
             this.clearSelection();
             return;
         }
@@ -27521,7 +28881,7 @@ class AXPObj {
     }
     setSelectionMask(mask) {
         this.selectionMask = mask;
-        this.selectionOverlayCanvas = (0,_selectionutil_js__WEBPACK_IMPORTED_MODULE_18__.buildSelectionOverlayCanvas)(mask, this.x_size, this.y_size);
+        this.selectionOverlayCanvas = (0,_selectionutil_js__WEBPACK_IMPORTED_MODULE_20__.buildSelectionOverlayCanvas)(mask, this.x_size, this.y_size);
         this._updateSelectionStatusUI();
         this.layerSystem.updateCanvas();
     }
@@ -27553,11 +28913,11 @@ class AXPObj {
         const elem = document.getElementById('axp_pen_div_selectionStatus');
         if (!elem) return;
         if (this.selectionMask) {
-            _etc_js__WEBPACK_IMPORTED_MODULE_15__.UTIL.show(elem);
+            _etc_js__WEBPACK_IMPORTED_MODULE_17__.UTIL.show(elem);
             const countElem = document.getElementById('axp_pen_span_selectionCount');
-            if (countElem) countElem.textContent = (0,_selectionutil_js__WEBPACK_IMPORTED_MODULE_18__.countSelectedPixels)(this.selectionMask);
+            if (countElem) countElem.textContent = (0,_selectionutil_js__WEBPACK_IMPORTED_MODULE_20__.countSelectedPixels)(this.selectionMask);
         } else {
-            _etc_js__WEBPACK_IMPORTED_MODULE_15__.UTIL.hide(elem);
+            _etc_js__WEBPACK_IMPORTED_MODULE_17__.UTIL.hide(elem);
         }
     }
     // キャンバスの初期化（新規キャンバス、ロード、自動保存から復元時などに行う処理）
@@ -27595,7 +28955,7 @@ class AXPObj {
     // イベント受付開始
     startEvent() {
         // デバッグ情報
-        this.debugLog = new _debuglog_js__WEBPACK_IMPORTED_MODULE_17__.DebugLog('axp_canvas_div_debugInfo', document.getElementById('axp_config_checkbox_useDebugMode').checked);
+        this.debugLog = new _debuglog_js__WEBPACK_IMPORTED_MODULE_19__.DebugLog('axp_canvas_div_debugInfo', document.getElementById('axp_config_checkbox_useDebugMode').checked);
 
         // ツールウィンドウシステム
         for (const item of this.toolWindow) {
@@ -27607,6 +28967,8 @@ class AXPObj {
         this.saveSystem.startEvent();
         this.postSystem.startEvent();
         this.interopSystem.startEvent();
+        this.dockSystem.startEvent();
+        this.mobileSystem.startEvent();
 
         // a11y: アイコンのみのボタン（テキストラベルを持たない）へ、既存のホバー説明文
         // （data-msg、msg.txt辞書）からaria-labelを自動付与する。スクリーンリーダー利用時に
@@ -27689,7 +29051,7 @@ class AXPObj {
                         this.isDrawCancel = true;
                     }
                     // 初期距離差分
-                    this.baseDiff = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.calcDistance)(this.evCache[0].clientX, this.evCache[0].clientY, this.evCache[1].clientX, this.evCache[1].clientY);
+                    this.baseDiff = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.calcDistance)(this.evCache[0].clientX, this.evCache[0].clientY, this.evCache[1].clientX, this.evCache[1].clientY);
                     // 回転ジェスチャ用の初期状態（A=evCache[0], B=evCache[1]）
                     this.twistHistA = [{ x: this.evCache[0].clientX, y: this.evCache[0].clientY }];
                     this.twistHistB = [{ x: this.evCache[1].clientX, y: this.evCache[1].clientY }];
@@ -27810,7 +29172,7 @@ class AXPObj {
             if (e.isPrimary) {
                 // 長押し中判定
                 if (this.longPressTimerID) {
-                    let distance = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.calcDistance)(
+                    let distance = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.calcDistance)(
                         this.baseClientX,
                         this.baseClientY,
                         e.clientX,
@@ -27946,7 +29308,7 @@ class AXPObj {
                 if (this.evCache.length === 2) {
                     if (this.isDrawCancel) {
                         // ２点間の距離を求める
-                        const curDiff = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.calcDistance)(this.evCache[0].clientX, this.evCache[0].clientY, this.evCache[1].clientX, this.evCache[1].clientY);
+                        const curDiff = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.calcDistance)(this.evCache[0].clientX, this.evCache[0].clientY, this.evCache[1].clientX, this.evCache[1].clientY);
                         // ２点間の距離（初期値）からの差分を求める
                         const diffDistance = Math.round(curDiff - this.baseDiff);
                         // 初期座標からの差分
@@ -27986,8 +29348,8 @@ class AXPObj {
                                 const lenB = Math.sqrt(vbx * vbx + vby * vby);
                                 if (lenA >= this.CONST.ROTATE_TWIST_NOISE && lenB >= this.CONST.ROTATE_TWIST_NOISE) {
                                     // 線分方向θに対する各点の移動方向の相対角
-                                    const relA = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.normalizeDeg180)(Math.atan2(vay, vax) * 180 / Math.PI - lineAngle);
-                                    const relB = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.normalizeDeg180)(Math.atan2(vby, vbx) * 180 / Math.PI - lineAngle);
+                                    const relA = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.normalizeDeg180)(Math.atan2(vay, vax) * 180 / Math.PI - lineAngle);
+                                    const relB = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.normalizeDeg180)(Math.atan2(vby, vbx) * 180 / Math.PI - lineAngle);
                                     const inPos = (v) => v >= 45 && v <= 135;
                                     const inNeg = (v) => v >= -135 && v <= -45;
                                     if ((inPos(relA) && inNeg(relB)) || (inPos(relB) && inNeg(relA))) {
@@ -27997,19 +29359,19 @@ class AXPObj {
                             }
                             if (this.isTwisting) {
                                 // ネジレ操作中：拡縮・パンをキャンセルし回転のみ適用
-                                const deltaLine = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.normalizeDeg180)(lineAngle - this.prevLineAngle);
+                                const deltaLine = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.normalizeDeg180)(lineAngle - this.prevLineAngle);
                                 const dt = e.timeStamp - this.prevGestureTime;
                                 this.applyRotationDelta(deltaLine, dt);
                             } else {
                                 // ピンチによる拡大／縮小
                                 if (this.config('axp_config_form_touchZoom') === 'on') {
                                     // 拡大率（初期値）に差分を加算する（指定可能範囲を超える場合は補正する）
-                                    this.scale = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(this.baseScale + diffDistance, this.CONST.SCALE_MIN, this.CONST.SCALE_MAX);
+                                    this.scale = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(this.baseScale + diffDistance, this.CONST.SCALE_MIN, this.CONST.SCALE_MAX);
                                 };
                                 // カメラ位置移動
                                 if (this.config('axp_config_form_touchHand') === 'on') {
                                     // 画面上のドラッグ差分を -rotation だけ回し、カメラ（非回転）座標系へ変換
-                                    const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.rotateVector)(diffX, diffY, -this.rotation * Math.PI / 180);
+                                    const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.rotateVector)(diffX, diffY, -this.rotation * Math.PI / 180);
                                     this.cameraX = Math.round(this.baseCameraX + (r.x * 100 / this.scale));
                                     this.cameraY = Math.round(this.baseCameraY + (r.y * 100 / this.scale));
                                 };
@@ -28245,7 +29607,7 @@ class AXPObj {
                     case 'func_switch_fill':
                     case 'func_switch_hand':
                         // メッセージIDの文章を取得し、先頭の%1を除外する
-                        additionalInfo = _message_js__WEBPACK_IMPORTED_MODULE_16__.Message.getMessage(e.currentTarget.dataset.addmsg).slice(2);
+                        additionalInfo = _message_js__WEBPACK_IMPORTED_MODULE_18__.Message.getMessage(e.currentTarget.dataset.addmsg).slice(2);
                         this.msg(text, shortcut, additionalInfo);
                         break;
                     // 色作成のサブカラー専用処理
@@ -28481,7 +29843,7 @@ class AXPObj {
     }
     // 拡大率変更
     setScale(value) {
-        this.scale = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(value, this.CONST.SCALE_MIN, this.CONST.SCALE_MAX);
+        this.scale = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(value, this.CONST.SCALE_MIN, this.CONST.SCALE_MAX);
         this.refreshCanvas();
         // 拡大率：%1
         this.msg('@AXP0001', this.scale);
@@ -28596,9 +29958,9 @@ class AXPObj {
         const nagenawa = this.penSystem.penObj['axp_penmode_nagenawa'];
         const nagenawaTransforming = nagenawa && nagenawa.state === 'transforming';
         if (mode === 'axp_penmode_hand' && !nagenawaTransforming) {
-            _etc_js__WEBPACK_IMPORTED_MODULE_15__.UTIL.show(group);
+            _etc_js__WEBPACK_IMPORTED_MODULE_17__.UTIL.show(group);
         } else {
-            _etc_js__WEBPACK_IMPORTED_MODULE_15__.UTIL.hide(group);
+            _etc_js__WEBPACK_IMPORTED_MODULE_17__.UTIL.hide(group);
         }
     }
     /**
@@ -28614,7 +29976,7 @@ class AXPObj {
         const vx = rectView.left + rectView.width / 2;
         const vy = rectView.top + rectView.height / 2;
         // ポインタのビュー中心からの相対ベクトルを -rotation だけ回し、非回転状態の座標系に戻す
-        const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.rotateVector)(e.clientX - vx, e.clientY - vy, -this.rotation * Math.PI / 180);
+        const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.rotateVector)(e.clientX - vx, e.clientY - vy, -this.rotation * Math.PI / 180);
         // 非回転状態でのキャンバス左上からの表示px距離
         const localX = r.x + (this.x_size / 2 + this.cameraX) * this.scale / 100;
         const localY = r.y + (this.y_size / 2 + this.cameraY) * this.scale / 100;
@@ -28656,7 +30018,7 @@ class AXPObj {
         if (isPinch) {
             if (this.config('axp_config_form_mouseWheelZoom') === 'on') {
                 // 拡大率（初期値）に差分を加算する（指定可能範囲を超える場合は補正する）
-                this.scale = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(this.scale - e.deltaY * 10, this.CONST.SCALE_MIN, this.CONST.SCALE_MAX);
+                this.scale = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(this.scale - e.deltaY * 10, this.CONST.SCALE_MIN, this.CONST.SCALE_MAX);
                 // キャンバス表示更新
                 this.refreshCanvas();
                 return;
@@ -28692,12 +30054,12 @@ class AXPObj {
                 const vy = rectView.top + rectView.height / 2;
 
                 // ポインタのビュー中心からの相対ベクトルを -rotation だけ回し、非回転座標系に戻す
-                const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.rotateVector)(e.clientX - vx, e.clientY - vy, -this.rotation * Math.PI / 180);
+                const r = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.rotateVector)(e.clientX - vx, e.clientY - vy, -this.rotation * Math.PI / 180);
 
                 // キャンバス座標が原点からどれだけ離れているか（ポインタがキャンバス外の場合はキャンバス内に補正）
-                let canvasX = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(pos.x, 0, this.x_size - 1);
+                let canvasX = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(pos.x, 0, this.x_size - 1);
                 let canvasDX = (canvasX - this.x_size / 2) * this.scale / 100;
-                let canvasY = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(pos.y, 0, this.y_size - 1);
+                let canvasY = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(pos.y, 0, this.y_size - 1);
                 let canvasDY = (canvasY - this.y_size / 2) * this.scale / 100;
 
                 // 拡大後もポインタ下のキャンバス画素が同じ画面位置に残るようカメラ位置を求める
@@ -28753,23 +30115,23 @@ class AXPObj {
         if (isNaN(x)) {
             x = this.CONST.CANVAS_X_DEFAULT;
         }
-        x = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(x, this.minWidth, this.maxWidth);
+        x = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(x, this.minWidth, this.maxWidth);
         if (isNaN(y)) {
             y = this.CONST.CANVAS_Y_DEFAULT;
         }
-        y = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(y, this.minHeight, this.maxHeight);
+        y = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(y, this.minHeight, this.maxHeight);
         this.x_size = x;
         this.y_size = y;
         console.log(`キャンバスサイズ更新:${x} x ${y}`);
     }
     checkCanvasSize_x(x_size) {
         let x = Number(x_size);
-        x = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(x, this.minWidth, this.maxWidth);
+        x = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(x, this.minWidth, this.maxWidth);
         return x;
     }
     checkCanvasSize_y(y_size) {
         let y = Number(y_size);
-        y = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.adjustInRange)(y, this.minHeight, this.maxHeight);
+        y = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.adjustInRange)(y, this.minHeight, this.maxHeight);
         return y;
     }
     getCanvasSize_X() {
@@ -28885,8 +30247,8 @@ class AXPObj {
                 this.drawPostCanvas();
 
                 // 投稿ボタン有効化
-                _etc_js__WEBPACK_IMPORTED_MODULE_15__.UTIL.show('axp_post_button_upload_label');
-                _etc_js__WEBPACK_IMPORTED_MODULE_15__.UTIL.hide('axp_post_button_upload_loading');
+                _etc_js__WEBPACK_IMPORTED_MODULE_17__.UTIL.show('axp_post_button_upload_label');
+                _etc_js__WEBPACK_IMPORTED_MODULE_17__.UTIL.hide('axp_post_button_upload_loading');
                 document.getElementById("axp_post_button_upload").disabled = false;
 
                 // 基にしてお絵カキコ
@@ -28894,7 +30256,7 @@ class AXPObj {
 
                 console.log(this.oekaki_id, this.draftImageFile);
                 if (this.draftImageFile !== null) {
-                    elemRefId.textContent = `${this._('@COMMON.DRAW_BASED')}:${(0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.getFileNameFromURL)(this.draftImageFile)}`;
+                    elemRefId.textContent = `${this._('@COMMON.DRAW_BASED')}:${(0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.getFileNameFromURL)(this.draftImageFile)}`;
                 } else if (this.oekaki_id !== null) {
                     elemRefId.textContent = `${this._('@COMMON.DRAW_BASED')}:${this.oekaki_id}.png`;
                 } else {
@@ -29027,7 +30389,7 @@ class AXPObj {
                 element.dataset.msg,
                 element.dataset.key ? `${element.dataset.key}:` : '',
                 // サブボタンのメッセージIDの文章を取得し、先頭の%1を除外する
-                _message_js__WEBPACK_IMPORTED_MODULE_16__.Message.getMessage(element.dataset.addmsg).slice(2),
+                _message_js__WEBPACK_IMPORTED_MODULE_18__.Message.getMessage(element.dataset.addmsg).slice(2),
             );
         }
         this.TASK['func_switch_pen'] = (inkey) => {
@@ -29448,7 +30810,7 @@ class AXPObj {
             if (!key) continue;
             // data-msgは辞書キー（@から始まる）と、動的生成ボタン（window.js）が
             // 直接設定する生テキストの両方があり得る（msg()メソッドと同じ分岐）。
-            const raw = (key.charAt(0) === '@') ? _message_js__WEBPACK_IMPORTED_MODULE_16__.Message.getMessage(key) : key;
+            const raw = (key.charAt(0) === '@') ? _message_js__WEBPACK_IMPORTED_MODULE_18__.Message.getMessage(key) : key;
             if (!raw) continue;
             const text = raw.replace(/%\d+/g, '').trim();
             if (text) el.setAttribute('aria-label', text);
@@ -29503,7 +30865,7 @@ class AXPObj {
         if (text.substring(0, 1) === '@') {
             const id = text.substring(0, 8);
             //console.log('変換対象のメッセージ', id);
-            replaceText = _message_js__WEBPACK_IMPORTED_MODULE_16__.Message.getMessage(id);
+            replaceText = _message_js__WEBPACK_IMPORTED_MODULE_18__.Message.getMessage(id);
         } else {
             replaceText = text;
         }
@@ -29624,11 +30986,11 @@ class AXPObj {
             // 画像読み込み
             if (imageload_src !== null) {
                 // パスを除いたファイル名だけを取り出す
-                imageload_filename = (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.getFileNameFromURL)(imageload_src);
+                imageload_filename = (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.getFileNameFromURL)(imageload_src);
                 // テキスト表示（※初期化前なので、this.msg()はまだ使用できない）
                 document.getElementById('axp_footer_div_message').textContent = `[${imageload_filename}]を読み込みしています...`;
                 // 基にしてお絵カキコする画像のロード
-                await (0,_etc_js__WEBPACK_IMPORTED_MODULE_15__.loadImageWithTimeout)(imageload_src, this.oekakiTimeout)
+                await (0,_etc_js__WEBPACK_IMPORTED_MODULE_17__.loadImageWithTimeout)(imageload_src, this.oekakiTimeout)
                     .then(image => {
                         // 読み込み成功
                         this.oekaki_base = image;
@@ -29676,8 +31038,8 @@ class AXPObj {
             this.init();
 
             // 拡張機能
-            if (_extensions__WEBPACK_IMPORTED_MODULE_20__.isExtenstions) {
-                this.exTool = new _extensions__WEBPACK_IMPORTED_MODULE_20__.ExTool(this);
+            if (_extensions__WEBPACK_IMPORTED_MODULE_22__.isExtenstions) {
+                this.exTool = new _extensions__WEBPACK_IMPORTED_MODULE_22__.ExTool(this);
                 this.exTool.init();
             }
 
@@ -29839,13 +31201,13 @@ class AXPObj {
     // サブウィンドウクローズ
     closeSubwindow = (id) => {
         this.isModalOpen = false;
-        _etc_js__WEBPACK_IMPORTED_MODULE_15__.UTIL.hide(id);
+        _etc_js__WEBPACK_IMPORTED_MODULE_17__.UTIL.hide(id);
     }
     // サブウィンドウオープン
     openSubwindow = (id, baseElement) => {
         this.isModalOpen = true;
         // 非表示だとwindowHeightが取得できないため、先にshowを行う
-        _etc_js__WEBPACK_IMPORTED_MODULE_15__.UTIL.show(id);
+        _etc_js__WEBPACK_IMPORTED_MODULE_17__.UTIL.show(id);
         const elementSubwindow = document.querySelector(`#${id}>div`);
         // キャンバスタブエリア
         const canvasRect = document.getElementById('axp_canvas').getBoundingClientRect();
@@ -30232,7 +31594,7 @@ class ConfigSystem {
         let targetElement = document.getElementById('axp_config');
         targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(_html_config_txt__WEBPACK_IMPORTED_MODULE_2__));
         // バージョン情報の表示
-        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T12:14:52.878Z"})`
+        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T03:09:37.843Z"})`
     }
     // HTML展開
     deployHTML() {
@@ -30329,6 +31691,13 @@ class ConfigSystem {
             }
             // 引数で渡されたbutton要素に、axpc_ACTIVEクラスを付与
             element.classList.add('axpc_ACTIVE');
+            // モバイル用セレクトボックスの選択値も現在のセクションに連動させる
+            const navButtons = document.querySelectorAll('#axp_config_div_navButton button');
+            const idx = Array.from(navButtons).indexOf(element);
+            const mobileSelect = document.getElementById('axp_config_select_mobileNav');
+            if (mobileSelect !== null && idx !== -1) {
+                mobileSelect.value = String(idx);
+            }
         }
         // 交差検知共通
         const doWhenIntersect = (entries) => {
@@ -30382,6 +31751,29 @@ class ConfigSystem {
                     activateButton(e.target);
                 }
             });
+        }
+
+        // モバイル用セクションジャンプ（セレクトボックス）
+        // 左ナビは599px以下でCSS非表示になるため、ナビボタンと同名の選択肢を持つ
+        // selectを本文先頭に生成する。表示制御はconfig.cssのメディアクエリで行う。
+        {
+            const select = document.createElement('select');
+            select.id = 'axp_config_select_mobileNav';
+            select.setAttribute('aria-label', 'セクション移動');
+            for (let i = 0; i < elementsNavButton.length; i++) {
+                const option = document.createElement('option');
+                option.value = String(i);
+                option.textContent = elementsNavButton[i].textContent;
+                select.appendChild(option);
+            }
+            select.addEventListener('change', () => {
+                const idx = Number(select.value);
+                if (elementsSection[idx]) {
+                    elementsSection[idx].scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            const pageMain = document.getElementById('axp_config_div_pageMain');
+            pageMain?.insertAdjacentElement('afterbegin', select);
         }
 
         // ユーザーが設定を変更したとき、変更内容をコンフィグオブジェクトへ保存する
@@ -32110,6 +33502,228 @@ class DebugLog {
 
 /***/ }),
 
+/***/ "./src/js/dock.js":
+/*!************************!*\
+  !*** ./src/js/dock.js ***!
+  \************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DockSystem: () => (/* binding */ DockSystem)
+/* harmony export */ });
+/* harmony import */ var _css_dock_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/dock.css */ "./src/css/dock.css");
+// @description 案C: サイドドック + クイックバー (PC)
+// 左ドック: 主要ペン6種 + ペンツールウィンドウ開閉 + Undo/Redo
+// 右ドック: ツールウィンドウ開閉 (レイヤー/色作成/パレット/補助/フィルタ) + 設定タブ
+// クイックバー: 下部中央 (現在色 / 太さ / Undo / Redo / 表示リセット)
+//
+// 既存のウィンドウシステム・TASK機構に乗るだけの薄いレイヤー。
+// ペン切替やUndo/Redoは axpc_FUNC + data-function で既存TASKを呼び出す。
+
+// css適用
+
+
+// ドックから開閉できるツールウィンドウ (ボタンid → ウィンドウid)
+const WINDOW_BUTTONS = [
+    ['axp_dock_button_pentool', 'axp_pen', '@WINDOW.PEN_TOOL'],
+    ['axp_dock_button_layer', 'axp_layer', '@WINDOW.LAYER'],
+    ['axp_dock_button_color', 'axp_makecolor', '@WINDOW.COLOR'],
+    ['axp_dock_button_palette', 'axp_palette', '@WINDOW.SWATCHES'],
+    ['axp_dock_button_subtool', 'axp_tool', '@WINDOW.MISC'],
+    ['axp_dock_button_filter', 'axp_filter', '@WINDOW.FILTER'],
+];
+
+class DockSystem {
+    constructor(axpObj) {
+        this.axpObj = axpObj;
+    }
+    // イベント受付開始（全ツールウィンドウの生成後に呼び出すこと）
+    startEvent() {
+        this.setupWindowButtons();
+        this.setupPenSelectionSync();
+        this.setupQuickbarColor();
+        this.setupQuickbarPenSize();
+        this.setupQuickbarZoom();
+        this.setupConfigButton();
+    }
+    // ------------------------------------------------------------------
+    // ウィンドウ開閉ボタン（右ドック＋左ドックのペンツールボタン）
+    // ------------------------------------------------------------------
+    setupWindowButtons() {
+        for (const [buttonId, windowId, nameKey] of WINDOW_BUTTONS) {
+            const button = document.getElementById(buttonId);
+            const windowElement = document.getElementById(windowId);
+            if (!button || !windowElement) continue;
+            // ガイドメッセージ（既存ランチャーボタンと同一文言）
+            const name = this.axpObj._(nameKey);
+            button.dataset.msg = `${name}ウィンドウを開閉します。`;
+            button.setAttribute('aria-label', name);
+            // クリックで開閉
+            button.addEventListener('click', () => {
+                this.toggleWindow(windowId);
+            });
+            // 開閉状態をボタンの点灯状態に同期（ランチャー等、他経路での開閉にも追従）
+            const sync = () => {
+                const isOpen =
+                    !windowElement.classList.contains('axpc_window_minimize') &&
+                    !windowElement.classList.contains('axpc_window_hidden');
+                button.dataset.active = isOpen ? 'true' : 'false';
+            };
+            new MutationObserver(sync).observe(windowElement, { attributes: true, attributeFilter: ['class'] });
+            sync();
+        }
+    }
+    // ツールウィンドウの開閉（既存ランチャーの個別ボタンと同じ挙動）
+    toggleWindow(windowId) {
+        const windowElement = document.getElementById(windowId);
+        if (!windowElement) return;
+        // 全体非表示（axpc_window_hidden）中は、まずランチャーの一括ボタンと同じ経路で
+        // 全体表示に復帰する（hiddenクラスの解除と一括ボタンの状態を整合させるため）
+        if (windowElement.classList.contains('axpc_window_hidden')) {
+            const allButton = document.querySelector('.axpc_launcher_allButton');
+            if (allButton?.classList.contains('axpc_launcher_minimize')) {
+                allButton.click();
+            }
+            // 復帰後、対象ウィンドウが最小化されていなければ表示状態になっているため
+            // ここで終了する（「表示したい」というユーザー意図に合わせ、閉じない）
+            if (!windowElement.classList.contains('axpc_window_minimize')) {
+                return;
+            }
+        }
+        const isMinimized = windowElement.classList.contains('axpc_window_minimize');
+        if (isMinimized) {
+            // オープン
+            this.axpObj.dragWindow.unminimize(windowId);
+            this.axpObj.launcher.unminimizeButton(windowId);
+            this.axpObj.configSystem.deleteConfig('WDMIN_' + windowId);
+            // 単一ウィンドウモードなら、他のウィンドウを最小化
+            if (document.getElementById('axp_config_checkbox_singleWindowMode')?.checked) {
+                for (const [, otherId] of WINDOW_BUTTONS) {
+                    if (otherId === windowId) continue;
+                    const other = document.getElementById(otherId);
+                    if (other && !other.classList.contains('axpc_window_minimize')) {
+                        this.axpObj.dragWindow.minimize(otherId);
+                        this.axpObj.launcher.minimizeButton(otherId);
+                        this.axpObj.configSystem.saveConfig('WDMIN_' + otherId, true);
+                    }
+                }
+            }
+        } else {
+            // 最小化
+            this.axpObj.dragWindow.minimize(windowId);
+            this.axpObj.launcher.minimizeButton(windowId);
+            this.axpObj.configSystem.saveConfig('WDMIN_' + windowId, true);
+        }
+    }
+    // ------------------------------------------------------------------
+    // 左ドック：ペン選択状態の同期
+    // ------------------------------------------------------------------
+    setupPenSelectionSync() {
+        const penSystem = this.axpObj.penSystem;
+        if (!penSystem) return;
+        const syncSelection = () => {
+            const currentMode = penSystem.pen_mode;
+            const buttons = document.querySelectorAll('#axp_dock_left [data-penmode]');
+            for (const item of buttons) {
+                item.dataset.selected = (item.dataset.penmode === currentMode) ? 'true' : 'false';
+            }
+        };
+        // ペン切替の中心経路 changePenMode をフックして同期（切替経路が多岐に渡るため）
+        const original = penSystem.changePenMode.bind(penSystem);
+        penSystem.changePenMode = (mode) => {
+            original(mode);
+            syncSelection();
+        };
+        syncSelection();
+    }
+    // ------------------------------------------------------------------
+    // クイックバー：現在色（メインカラー）
+    // ------------------------------------------------------------------
+    setupQuickbarColor() {
+        const swatch = document.getElementById('axp_quickbar_button_color');
+        const hexLabel = document.getElementById('axp_quickbar_span_hex');
+        const mainColorElement = document.getElementById('axp_makecolor_div_mainColor');
+        if (!swatch || !hexLabel || !mainColorElement) return;
+        const sync = () => {
+            const colorcode = this.axpObj.colorMakerSystem?.maincolor || '#000000';
+            swatch.style.backgroundColor = colorcode;
+            hexLabel.textContent = colorcode.toUpperCase();
+        };
+        // メインカラー表示要素のstyle変化を監視（色変更のすべての経路をカバー）
+        new MutationObserver(sync).observe(mainColorElement, { attributes: true, attributeFilter: ['style'] });
+        sync();
+        // スウォッチクリックで色作成ウィンドウを開く（最小化・全体非表示のどちらからも復帰）
+        swatch.addEventListener('click', () => {
+            const makecolor = document.getElementById('axp_makecolor');
+            if (makecolor && (
+                makecolor.classList.contains('axpc_window_minimize') ||
+                makecolor.classList.contains('axpc_window_hidden')
+            )) {
+                this.toggleWindow('axp_makecolor');
+            }
+        });
+    }
+    // ------------------------------------------------------------------
+    // クイックバー：ペンの太さ（既存スライダーと双方向バインド）
+    // ------------------------------------------------------------------
+    setupQuickbarPenSize() {
+        const quickRange = document.getElementById('axp_quickbar_range_penSize');
+        const quickValue = document.getElementById('axp_quickbar_span_penSize');
+        const penSizeForm = document.getElementById('axp_pen_form_penSize');
+        if (!quickRange || !quickValue || !penSizeForm) return;
+        const penSizeRange = penSizeForm.volume;
+        const penSizeOutput = penSizeForm.result;
+        // レンジスケール（index方式）は既存スライダーの属性をそのまま踏襲
+        quickRange.min = penSizeRange.min;
+        quickRange.max = penSizeRange.max;
+        quickRange.step = penSizeRange.step || 1;
+        const sync = () => {
+            quickRange.value = penSizeRange.value;
+            quickValue.textContent = penSizeOutput.value;
+        };
+        // クイックバー操作 → 既存スライダーへ反映（既存のinputリスナーが本処理を実行）
+        quickRange.addEventListener('input', () => {
+            penSizeRange.value = quickRange.value;
+            penSizeRange.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+        // 既存スライダーの表示値（output）変化を監視して追従
+        // ※ output.value への代入はテキストノード変化としてDOMに現れるため監視可能
+        new MutationObserver(sync).observe(penSizeOutput, { childList: true, characterData: true, subtree: true });
+        sync();
+    }
+    // ------------------------------------------------------------------
+    // クイックバー：表示倍率
+    // ------------------------------------------------------------------
+    setupQuickbarZoom() {
+        const zoomButton = document.getElementById('axp_quickbar_button_zoom');
+        if (!zoomButton) return;
+        const syncZoom = () => {
+            zoomButton.textContent = `${Math.round(this.axpObj.scale)}%`;
+        };
+        // 表示更新の中心経路 refreshCanvas をフックして倍率表示を追従
+        const original = this.axpObj.refreshCanvas.bind(this.axpObj);
+        this.axpObj.refreshCanvas = (...args) => {
+            original(...args);
+            syncZoom();
+        };
+        syncZoom();
+    }
+    // ------------------------------------------------------------------
+    // 右ドック：設定タブへの遷移
+    // ------------------------------------------------------------------
+    setupConfigButton() {
+        const configButton = document.getElementById('axp_dock_button_config');
+        if (!configButton) return;
+        configButton.addEventListener('click', () => {
+            this.axpObj.selectTab('1');
+        });
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/js/dragwindow.js":
 /*!******************************!*\
   !*** ./src/js/dragwindow.js ***!
@@ -32440,7 +34054,7 @@ class UTIL {
 }
 /**
  * ブラウザ種別取得
- * @returns
+ * @returns 
  */
 function getBrowserType() {
     const agent = window.navigator.userAgent.toLowerCase();
@@ -32476,11 +34090,11 @@ function getFileNameFromURL(input) {
 
 /**
  * ２点間の距離
- * @param {*} x1
- * @param {*} y1
- * @param {*} x2
- * @param {*} y2
- * @returns
+ * @param {*} x1 
+ * @param {*} y1 
+ * @param {*} x2 
+ * @param {*} y2 
+ * @returns 
  */
 function calcDistance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
@@ -32513,9 +34127,9 @@ function normalizeDeg180(deg) {
 }
 /**
  * ２点の中点
- * @param {*} p1
- * @param {*} p2
- * @returns
+ * @param {*} p1 
+ * @param {*} p2 
+ * @returns 
  */
 function calcMidPointBetween(p1, p2) {
     return {
@@ -33916,6 +35530,200 @@ class Message {
         return text;
     }
 }
+
+/***/ }),
+
+/***/ "./src/js/mobile.js":
+/*!**************************!*\
+  !*** ./src/js/mobile.js ***!
+  \**************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   MobileSystem: () => (/* binding */ MobileSystem)
+/* harmony export */ });
+/* harmony import */ var _css_mobile_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/mobile.css */ "./src/css/mobile.css");
+// @description 案C: モバイルUI（トップバー + ボトムシート）
+// トップバー: 現在色スウォッチ / 現在ペン名 / 太さスライダー
+// ボトムシート: タブで既存ツールウィンドウ（ペン/色作成/レイヤー/補助）を
+//               画面下部に再配置表示する（axpm-in-sheet クラス付与方式）
+//
+// 表示は mobile.css の @media (max-width: 599px) に閉じており、
+// PC表示にはレイアウト上の影響を一切与えない。
+
+// css適用
+
+
+// シートタブ（data-sheettab属性 → ウィンドウid）
+const SHEET_WINDOW_IDS = ['axp_pen', 'axp_makecolor', 'axp_layer', 'axp_tool'];
+
+class MobileSystem {
+    constructor(axpObj) {
+        this.axpObj = axpObj;
+        // 現在シート内に表示しているウィンドウid（null: 非表示）
+        this.currentSheetWindowId = null;
+    }
+    // イベント受付開始（全ツールウィンドウの生成後に呼び出すこと）
+    startEvent() {
+        this.setupTopbarColor();
+        this.setupTopbarPenName();
+        this.setupTopbarPenSize();
+        this.setupSheetTabs();
+    }
+    // モバイルレイアウトが有効か（mobile.cssのメディアクエリと同期）
+    isMobileLayout() {
+        return window.matchMedia('(max-width: 599px)').matches;
+    }
+    // ------------------------------------------------------------------
+    // トップバー：現在色（メインカラー）
+    // ------------------------------------------------------------------
+    setupTopbarColor() {
+        const swatch = document.getElementById('axp_mobile_button_color');
+        const mainColorElement = document.getElementById('axp_makecolor_div_mainColor');
+        if (!swatch || !mainColorElement) return;
+        const sync = () => {
+            swatch.style.backgroundColor = this.axpObj.colorMakerSystem?.maincolor || '#000000';
+        };
+        new MutationObserver(sync).observe(mainColorElement, { attributes: true, attributeFilter: ['style'] });
+        sync();
+        // タップで色作成タブを開く
+        swatch.addEventListener('click', () => {
+            this.openSheetTab('axp_makecolor');
+        });
+    }
+    // ------------------------------------------------------------------
+    // トップバー：現在ペン名
+    // ------------------------------------------------------------------
+    setupTopbarPenName() {
+        const penButton = document.getElementById('axp_mobile_button_pen');
+        const penNameLabel = document.getElementById('axp_mobile_span_penName');
+        const penNameSource = document.getElementById('axp_pen_span_penName');
+        if (!penButton || !penNameLabel || !penNameSource) return;
+        const sync = () => {
+            penNameLabel.textContent = penNameSource.textContent;
+        };
+        new MutationObserver(sync).observe(penNameSource, { childList: true, characterData: true, subtree: true });
+        sync();
+        // タップでペンタブを開く
+        penButton.addEventListener('click', () => {
+            this.openSheetTab('axp_pen');
+        });
+    }
+    // ------------------------------------------------------------------
+    // トップバー：ペンの太さ（既存スライダーと双方向バインド）
+    // ------------------------------------------------------------------
+    setupTopbarPenSize() {
+        const mobileRange = document.getElementById('axp_mobile_range_penSize');
+        const mobileValue = document.getElementById('axp_mobile_span_penSize');
+        const penSizeForm = document.getElementById('axp_pen_form_penSize');
+        if (!mobileRange || !mobileValue || !penSizeForm) return;
+        const penSizeRange = penSizeForm.volume;
+        const penSizeOutput = penSizeForm.result;
+        // レンジスケール（index方式）は既存スライダーの属性をそのまま踏襲
+        mobileRange.min = penSizeRange.min;
+        mobileRange.max = penSizeRange.max;
+        mobileRange.step = penSizeRange.step || 1;
+        const sync = () => {
+            mobileRange.value = penSizeRange.value;
+            mobileValue.textContent = penSizeOutput.value;
+        };
+        // トップバー操作 → 既存スライダーへ反映（既存のinputリスナーが本処理を実行）
+        mobileRange.addEventListener('input', () => {
+            penSizeRange.value = mobileRange.value;
+            penSizeRange.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+        // 既存スライダーの表示値（output）変化を監視して追従
+        new MutationObserver(sync).observe(penSizeOutput, { childList: true, characterData: true, subtree: true });
+        sync();
+    }
+    // ------------------------------------------------------------------
+    // ボトムシート：タブ切替とウィンドウ再配置
+    // ------------------------------------------------------------------
+    setupSheetTabs() {
+        const tabs = document.querySelectorAll('#axp_mobile_sheet .axpm-sheet__tab');
+        for (const tab of tabs) {
+            tab.addEventListener('click', () => {
+                const windowId = tab.dataset.sheettab;
+                // 全体非表示（axpc_window_hidden）中はアクティブタブの再タップでも
+                // 「閉じる」ではなく復帰経路（openSheetTab）に入れる。
+                // ここでcloseSheetに分岐するとhiddenのまま最小化され復帰不能になるため
+                const windowElement = document.getElementById(windowId);
+                const isHidden = windowElement?.classList.contains('axpc_window_hidden') ?? false;
+                if (this.currentSheetWindowId === windowId && !isHidden) {
+                    // 同じタブの再タップで閉じる
+                    this.closeSheet();
+                } else {
+                    this.openSheetTab(windowId);
+                }
+            });
+        }
+        // ハンドルタップでシートを閉じる
+        const handle = document.getElementById('axp_mobile_sheet_handle');
+        handle?.addEventListener('click', () => {
+            this.closeSheet();
+        });
+    }
+    // 指定ウィンドウをシート内に表示する
+    openSheetTab(windowId) {
+        // モバイルレイアウト以外では通常のウィンドウ開閉に副作用を出さない
+        if (!this.isMobileLayout()) return;
+        if (!SHEET_WINDOW_IDS.includes(windowId)) return;
+        const windowElement = document.getElementById(windowId);
+        if (!windowElement) return;
+        // 全体非表示中はまず全体表示に復帰させる
+        this.restoreFromAllHidden(windowElement);
+        // 表示中の他ウィンドウをシートから外す
+        for (const otherId of SHEET_WINDOW_IDS) {
+            if (otherId === windowId) continue;
+            const other = document.getElementById(otherId);
+            if (other?.classList.contains('axpm-in-sheet')) {
+                other.classList.remove('axpm-in-sheet');
+                this.axpObj.dragWindow.minimize(otherId);
+                this.axpObj.launcher.minimizeButton(otherId);
+            }
+        }
+        // 対象ウィンドウをシート内に表示
+        windowElement.classList.add('axpm-in-sheet');
+        this.axpObj.dragWindow.unminimize(windowId);
+        this.axpObj.launcher.unminimizeButton(windowId);
+        this.currentSheetWindowId = windowId;
+        this.syncTabState();
+    }
+    // 全体非表示（axpc_window_hidden）中なら、ランチャーの一括ボタン経由で
+    // 全体表示に復帰させる（dock.jsのtoggleWindowと同一の復帰経路。
+    // hidden解除・一括ボタンのアイコン状態・設定値の整合を保つため）
+    restoreFromAllHidden(windowElement) {
+        if (!windowElement.classList.contains('axpc_window_hidden')) return;
+        const allButton = document.querySelector('.axpc_launcher_allButton');
+        if (allButton?.classList.contains('axpc_launcher_minimize')) {
+            allButton.click();
+        }
+    }
+    // シートを閉じる（表示中ウィンドウを最小化）
+    closeSheet() {
+        if (this.currentSheetWindowId) {
+            const windowElement = document.getElementById(this.currentSheetWindowId);
+            if (windowElement) {
+                windowElement.classList.remove('axpm-in-sheet');
+                this.axpObj.dragWindow.minimize(this.currentSheetWindowId);
+                this.axpObj.launcher.minimizeButton(this.currentSheetWindowId);
+            }
+            this.currentSheetWindowId = null;
+        }
+        this.syncTabState();
+    }
+    // タブの点灯状態を現在の表示に同期
+    syncTabState() {
+        const tabs = document.querySelectorAll('#axp_mobile_sheet .axpm-sheet__tab');
+        for (const tab of tabs) {
+            const isActive = tab.dataset.sheettab === this.currentSheetWindowId;
+            tab.dataset.active = isActive ? 'true' : 'false';
+            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        }
+    }
+}
+
 
 /***/ }),
 
@@ -49441,7 +51249,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /************************************************************************/
 /******/ // The module cache
 /******/ var __webpack_module_cache__ = {};
-/******/
+/******/ 
 /******/ // The require function
 /******/ function __webpack_require__(moduleId) {
 /******/ 	// Check if module is in cache
@@ -49455,17 +51263,17 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		// no module.loaded needed
 /******/ 		exports: {}
 /******/ 	};
-/******/
+/******/ 
 /******/ 	// Execute the module function
 /******/ 	__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+/******/ 
 /******/ 	// Return the exports of the module
 /******/ 	return module.exports;
 /******/ }
-/******/
+/******/ 
 /******/ // expose the modules object (__webpack_modules__)
 /******/ __webpack_require__.m = __webpack_modules__;
-/******/
+/******/ 
 /************************************************************************/
 /******/ /* webpack/runtime/compat get default export */
 /******/ (() => {
@@ -49478,7 +51286,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		return getter;
 /******/ 	};
 /******/ })();
-/******/
+/******/ 
 /******/ /* webpack/runtime/create fake namespace object */
 /******/ (() => {
 /******/ 	var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
@@ -49508,7 +51316,7 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		return ns;
 /******/ 	};
 /******/ })();
-/******/
+/******/ 
 /******/ /* webpack/runtime/define property getters */
 /******/ (() => {
 /******/ 	// define getter functions for harmony exports
@@ -49520,12 +51328,12 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		}
 /******/ 	};
 /******/ })();
-/******/
+/******/ 
 /******/ /* webpack/runtime/hasOwnProperty shorthand */
 /******/ (() => {
 /******/ 	__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ })();
-/******/
+/******/ 
 /******/ /* webpack/runtime/make namespace object */
 /******/ (() => {
 /******/ 	// define __esModule on exports
@@ -49536,36 +51344,36 @@ class AssistToolSystem extends _window_js__WEBPACK_IMPORTED_MODULE_0__.ToolWindo
 /******/ 		Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 	};
 /******/ })();
-/******/
+/******/ 
 /******/ /* webpack/runtime/import chunk loading */
 /******/ (() => {
 /******/ 	__webpack_require__.b = new URL("./", import.meta.url);
-/******/
+/******/ 	
 /******/ 	// object to store loaded and loading chunks
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// [resolve, Promise] = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
 /******/ 		"main": 0
 /******/ 	};
-/******/
+/******/ 	
 /******/ 	// no install chunk
-/******/
+/******/ 	
 /******/ 	// no chunk on demand loading
-/******/
+/******/ 	
 /******/ 	// no prefetching
-/******/
+/******/ 	
 /******/ 	// no preloaded
-/******/
+/******/ 	
 /******/ 	// no external install chunk
-/******/
+/******/ 	
 /******/ 	// no on chunks loaded
 /******/ })();
-/******/
+/******/ 
 /******/ /* webpack/runtime/nonce */
 /******/ (() => {
 /******/ 	__webpack_require__.nc = undefined;
 /******/ })();
-/******/
+/******/ 
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
@@ -49583,18 +51391,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_etc_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/etc.js */ "./src/js/etc.js");
 /* harmony import */ var _html_main_txt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./html/main.txt */ "./src/html/main.txt");
 /* harmony import */ var _css_tokens_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./css/tokens.css */ "./src/css/tokens.css");
-/* harmony import */ var _css_axnospaint_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./css/axnospaint.css */ "./src/css/axnospaint.css");
-/* harmony import */ var _css_common_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./css/common.css */ "./src/css/common.css");
-/* harmony import */ var _css_icon_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./css/icon.css */ "./src/css/icon.css");
-/* harmony import */ var _css_window_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./css/window.css */ "./src/css/window.css");
-/* harmony import */ var _css_saveload_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./css/saveload.css */ "./src/css/saveload.css");
-/* harmony import */ var _css_input_range_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./css/input_range.css */ "./src/css/input_range.css");
-/* harmony import */ var _css_input_radio_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./css/input_radio.css */ "./src/css/input_radio.css");
-/* harmony import */ var _css_input_checkbox_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./css/input_checkbox.css */ "./src/css/input_checkbox.css");
-/* harmony import */ var _css_input_number_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./css/input_number.css */ "./src/css/input_number.css");
-/* harmony import */ var _css_input_button_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./css/input_button.css */ "./src/css/input_button.css");
-/* harmony import */ var _css_input_toggle_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./css/input_toggle.css */ "./src/css/input_toggle.css");
-/* harmony import */ var _css_alert_css__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./css/alert.css */ "./src/css/alert.css");
+/* harmony import */ var _css_components_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./css/components.css */ "./src/css/components.css");
+/* harmony import */ var _css_axnospaint_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./css/axnospaint.css */ "./src/css/axnospaint.css");
+/* harmony import */ var _css_common_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./css/common.css */ "./src/css/common.css");
+/* harmony import */ var _css_icon_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./css/icon.css */ "./src/css/icon.css");
+/* harmony import */ var _css_window_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./css/window.css */ "./src/css/window.css");
+/* harmony import */ var _css_saveload_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./css/saveload.css */ "./src/css/saveload.css");
+/* harmony import */ var _css_input_range_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./css/input_range.css */ "./src/css/input_range.css");
+/* harmony import */ var _css_input_radio_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./css/input_radio.css */ "./src/css/input_radio.css");
+/* harmony import */ var _css_input_checkbox_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./css/input_checkbox.css */ "./src/css/input_checkbox.css");
+/* harmony import */ var _css_input_number_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./css/input_number.css */ "./src/css/input_number.css");
+/* harmony import */ var _css_input_button_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./css/input_button.css */ "./src/css/input_button.css");
+/* harmony import */ var _css_input_toggle_css__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./css/input_toggle.css */ "./src/css/input_toggle.css");
+/* harmony import */ var _css_alert_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./css/alert.css */ "./src/css/alert.css");
 /*!
  * AXNOS Paint for aimg
  * (c) 2026 nijiurachan contributors
@@ -49624,11 +51433,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (class {
     axpObj;
     constructor(option) {
         console.log('version:', "3.0.0-alpha");
-        console.log('build:', "2026-07-06T12:14:52.878Z");
+        console.log('build:', "2026-07-07T03:09:37.843Z");
         (async () => {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
@@ -50009,7 +51819,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-06T12:14:52.878Z"})`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T03:09:37.843Z"})`;
     }
     // 画面の表示／非表示
     on() {
@@ -50021,7 +51831,7 @@ __webpack_require__.r(__webpack_exports__);
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${"3.0.0-alpha"} (${"2026-07-06T12:14:52.878Z"})`;
+        return `version ${"3.0.0-alpha"} (${"2026-07-07T03:09:37.843Z"})`;
     }
 });
 

@@ -1,4 +1,4 @@
-/* セーブ／ロード／自動保存から復元のサブ画面 */
+/* セーブ／ロード／自動保存から復元のサブ画面（案C ダークテーマ） */
 
 #axp_saveload {
     position: absolute;
@@ -12,23 +12,26 @@
 }
 
 #axp_saveload>div {
-    background-color: #eee;
-    color: #000;
-    border-color: #337;
-    border-width: 4px;
-    border-style: double;
+    background-color: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
     margin: 8px;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 12px;
 }
 
 /* セーブスロットのHTMLを挿入するポイント */
 #axp_saveload_div_insertHTML {
-    background-color: #aaa;
-    border: solid 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
     display: flex;
     justify-content: normal;
     flex-wrap: wrap;
+    gap: 8px;
     padding: 8px;
     cursor: pointer;
 }
@@ -43,10 +46,11 @@
 
 .axpc_saveload_saveSlot,
 .axpc_saveload_loadSlot {
-    background-color: #ddd;
+    background-color: #212121;
+    color: #eee;
     width: 135px;
     min-height: 180px;
-    border: solid 2px #000;
+    border: solid 1px #333;
     border-radius: 10px;
     text-align: center;
     padding-top: 4px;
@@ -56,11 +60,13 @@
 }
 
 .axpc_saveload_saveSlot:hover {
-    background-color: #faa;
+    border-color: var(--axp-accent, #eeac60);
+    background-color: rgba(238, 172, 96, 0.12);
 }
 
 .axpc_saveload_loadSlot:hover {
-    background-color: #ffa;
+    border-color: var(--axp-accent, #eeac60);
+    background-color: rgba(238, 172, 96, 0.12);
 }
 
 .axpc_saveload_thumbnall {
@@ -70,7 +76,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: #aaa solid 1px;
+    border: #444 solid 1px;
+    border-radius: 6px;
+    background-color: #191919;
+    overflow: hidden;
 }
 
 .axpc_saveload_refId {
@@ -80,7 +89,7 @@
     line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
-    color: #00f;
+    color: #7fb2ff;
     /* ブラウザがサポートしていない場合のフェールセーフ */
     max-height: 30px;
 }

@@ -14,6 +14,7 @@ import { getBrowserType, inRange, isColor } from './js/etc.js';
 import htmldata from './html/main.txt';
 // css適用
 import './css/tokens.css';
+import './css/components.css';
 import './css/axnospaint.css';
 import './css/common.css';
 import './css/icon.css';
