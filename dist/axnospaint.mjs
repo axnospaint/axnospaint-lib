@@ -1,5 +1,5 @@
 /*!
- * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-07T01:24:19.621Z)
+ * AXNOS Paint w/ nijiurachan custom version 3.0.0-alpha (2026-07-07T02:27:01.491Z)
  * (c) 2026- nijiurachan contributors
  * (c) 2022「悪の巣」部屋番号13番：「趣味の悪い大衆酒場[Mad end dance hall]」
  * Licensed under MPL 2.0
@@ -13435,17 +13435,16 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 共通クラス */
 }
 
 .axpc_subwindow>div {
-    background-color: #333;
+    background-color: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: #fff;
-    border-color: #000;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #aaa;
-    box-shadow: 4px 4px 8px #777;
-    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
     width: 188px;
     height: auto;
-    padding: 8px;
+    padding: 10px;
 }
 
 /* 色作成 補助線設定のカラー選択枠 */
@@ -13503,7 +13502,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 共通クラス */
 .axpc_overlay_btn:active {
     background-color: rgba(0, 0, 0, 0.85);
 }
-`, "",{"version":3,"sources":["webpack://./src/css/common.css"],"names":[],"mappings":"AAAA,UAAU;;AAEV,+CAA+C;AAC/C;IACI,wBAAwB;AAC5B;;AAEA,qBAAqB;AACrB;IACI,kBAAkB;AACtB;;AAEA,YAAY;AACZ;IACI;;;;;;;;uCAQmC;IACnC;;;;;KAKC;AACL;;AAEA,iBAAiB;AACjB;IACI,8BAA8B;IAC9B,gGAAgG;IAChG,0BAA0B;IAC1B,qDAAqD;AACzD;;AAEA,cAAc;AACd;IACI,kBAAkB;IAClB,yBAAyB;IACzB,iBAAiB;IACjB,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,gBAAgB;IAChB,kCAAkC;AACtC;;AAEA;IACI,sBAAsB;IACtB,WAAW;IACX,kBAAkB;IAClB,mBAAmB;IACnB,iBAAiB;IACjB,kBAAkB;IAClB,4BAA4B;IAC5B,kBAAkB;IAClB,YAAY;IACZ,YAAY;IACZ,YAAY;AAChB;;AAEA,qBAAqB;AACrB;IACI,YAAY;IACZ,WAAW;IACX,eAAe;IACf,kBAAkB;IAClB,WAAW;IACX,iBAAiB;IACjB,mBAAmB;IACnB,kBAAkB;AACtB;;AAEA,gCAAgC;AAChC;;IAEI,kBAAkB;IAClB,WAAW;IACX,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,4DAA4D;IAC5D,4BAA4B;IAC5B,2BAA2B;IAC3B,0BAA0B;IAC1B,kBAAkB;IAClB,iBAAiB;AACrB;;AAEA,sBAAsB;AACtB;IACI,8CAA8C;IAC9C,YAAY;AAChB;;AAEA;IACI,kBAAkB;IAClB,qCAAqC;AACzC;;AAEA,sBAAsB;AACtB;IACI,6CAA6C;IAC7C,eAAe;IACf,UAAU;IACV,gBAAgB;AACpB;;AAEA;IACI,mDAAmD;IACnD,mBAAmB;AACvB;;AAEA;IACI,qCAAqC;AACzC","sourcesContent":["/* 共通クラス */\n\n/* 要素非表示（IDセレクタのdisplay指定より優先させるため!important） */\n.axpc_NONE {\n    display: none !important;\n}\n\n/* 要素非表示（レイアウト変更なし） */\n.axpc_HIDDEN {\n    visibility: hidden;\n}\n\n/* テキスト縁取り */\n.axpc_text_border {\n    text-shadow:\n        black 2px 0px, black -2px 0px,\n        black 0px -2px, black 0px 2px,\n        black 2px 2px, black -2px 2px,\n        black 2px -2px, black -2px -2px,\n        black 1px 2px, black -1px 2px,\n        black 1px -2px, black -1px -2px,\n        black 2px 1px, black -2px 1px,\n        black 2px -1px, black -2px -1px;\n    /*\n    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000,\n        -1px 1px 0 #000, 1px -1px 0 #000,\n        0px 1px 0 #000, 0-1px 0 #000,\n        -1px 0 0 #000, 1px 0 0 #000;\n    */\n}\n\n/* キャンバスの透過メッシュ */\n.axpc_background_mesh {\n    background: rgb(204, 204, 204);\n    background-image: repeating-conic-gradient(from 0deg, transparent 0deg 90deg, #fff 90deg 180deg);\n    background-size: 16px 16px;\n    background-position: 0 0, 8px 8px, 8px 8px, 16px 16px;\n}\n\n/* サブウィンドウ共通 */\n.axpc_subwindow {\n    touch-action: none;\n    -webkit-user-select: none;\n    user-select: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: hidden;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n.axpc_subwindow>div {\n    background-color: #333;\n    color: #fff;\n    border-color: #000;\n    border-style: solid;\n    border-width: 2px;\n    border-color: #aaa;\n    box-shadow: 4px 4px 8px #777;\n    border-radius: 5px;\n    width: 188px;\n    height: auto;\n    padding: 8px;\n}\n\n/* 色作成 補助線設定のカラー選択枠 */\n.axpc_colorRect {\n    height: 32px;\n    width: 32px;\n    cursor: pointer;\n    border-radius: 5px;\n    margin: 1px;\n    border-width: 2px;\n    border-style: solid;\n    border-color: #aaa;\n}\n\n/* オーバーレイ操作子共通（キャンバス上に浮かぶUI部品） */\n.axpc_overlay_knob,\n.axpc_overlay_btn {\n    position: absolute;\n    width: 40px;\n    height: 40px;\n    z-index: 3000;\n    border-radius: 8px;\n    background-color: var(--axp-knob-bg, rgba(85, 85, 85, 0.85));\n    background-repeat: no-repeat;\n    background-position: center;\n    background-size: 26px 26px;\n    touch-action: none;\n    user-select: none;\n}\n\n/* オーバーレイノブ（ドラッグ操作用） */\n.axpc_overlay_knob {\n    border: 3px solid var(--axp-knob-border, #eee);\n    cursor: grab;\n}\n\n.axpc_overlay_knob:active {\n    cursor: all-scroll;\n    background-color: rgba(0, 0, 0, 0.85);\n}\n\n/* オーバーレイボタン（タップ操作用） */\n.axpc_overlay_btn {\n    border: 2px solid var(--axp-btn-border, #ccc);\n    cursor: pointer;\n    padding: 0;\n    appearance: none;\n}\n\n.axpc_overlay_btn:focus-visible {\n    outline: 2px solid var(--axp-border-focus, #8bd3ff);\n    outline-offset: 2px;\n}\n\n.axpc_overlay_btn:active {\n    background-color: rgba(0, 0, 0, 0.85);\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/css/common.css"],"names":[],"mappings":"AAAA,UAAU;;AAEV,+CAA+C;AAC/C;IACI,wBAAwB;AAC5B;;AAEA,qBAAqB;AACrB;IACI,kBAAkB;AACtB;;AAEA,YAAY;AACZ;IACI;;;;;;;;uCAQmC;IACnC;;;;;KAKC;AACL;;AAEA,iBAAiB;AACjB;IACI,8BAA8B;IAC9B,gGAAgG;IAChG,0BAA0B;IAC1B,qDAAqD;AACzD;;AAEA,cAAc;AACd;IACI,kBAAkB;IAClB,yBAAyB;IACzB,iBAAiB;IACjB,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,gBAAgB;IAChB,kCAAkC;AACtC;;AAEA;IACI,wCAAwC;IACxC,2BAA2B;IAC3B,mCAAmC;IACnC,WAAW;IACX,2CAA2C;IAC3C,0CAA0C;IAC1C,mBAAmB;IACnB,YAAY;IACZ,YAAY;IACZ,aAAa;AACjB;;AAEA,qBAAqB;AACrB;IACI,YAAY;IACZ,WAAW;IACX,eAAe;IACf,kBAAkB;IAClB,WAAW;IACX,iBAAiB;IACjB,mBAAmB;IACnB,kBAAkB;AACtB;;AAEA,gCAAgC;AAChC;;IAEI,kBAAkB;IAClB,WAAW;IACX,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,4DAA4D;IAC5D,4BAA4B;IAC5B,2BAA2B;IAC3B,0BAA0B;IAC1B,kBAAkB;IAClB,iBAAiB;AACrB;;AAEA,sBAAsB;AACtB;IACI,8CAA8C;IAC9C,YAAY;AAChB;;AAEA;IACI,kBAAkB;IAClB,qCAAqC;AACzC;;AAEA,sBAAsB;AACtB;IACI,6CAA6C;IAC7C,eAAe;IACf,UAAU;IACV,gBAAgB;AACpB;;AAEA;IACI,mDAAmD;IACnD,mBAAmB;AACvB;;AAEA;IACI,qCAAqC;AACzC","sourcesContent":["/* 共通クラス */\n\n/* 要素非表示（IDセレクタのdisplay指定より優先させるため!important） */\n.axpc_NONE {\n    display: none !important;\n}\n\n/* 要素非表示（レイアウト変更なし） */\n.axpc_HIDDEN {\n    visibility: hidden;\n}\n\n/* テキスト縁取り */\n.axpc_text_border {\n    text-shadow:\n        black 2px 0px, black -2px 0px,\n        black 0px -2px, black 0px 2px,\n        black 2px 2px, black -2px 2px,\n        black 2px -2px, black -2px -2px,\n        black 1px 2px, black -1px 2px,\n        black 1px -2px, black -1px -2px,\n        black 2px 1px, black -2px 1px,\n        black 2px -1px, black -2px -1px;\n    /*\n    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000,\n        -1px 1px 0 #000, 1px -1px 0 #000,\n        0px 1px 0 #000, 0-1px 0 #000,\n        -1px 0 0 #000, 1px 0 0 #000;\n    */\n}\n\n/* キャンバスの透過メッシュ */\n.axpc_background_mesh {\n    background: rgb(204, 204, 204);\n    background-image: repeating-conic-gradient(from 0deg, transparent 0deg 90deg, #fff 90deg 180deg);\n    background-size: 16px 16px;\n    background-position: 0 0, 8px 8px, 8px 8px, 16px 16px;\n}\n\n/* サブウィンドウ共通 */\n.axpc_subwindow {\n    touch-action: none;\n    -webkit-user-select: none;\n    user-select: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: hidden;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n.axpc_subwindow>div {\n    background-color: rgba(20, 20, 20, 0.94);\n    backdrop-filter: blur(12px);\n    -webkit-backdrop-filter: blur(12px);\n    color: #fff;\n    border: 1px solid rgba(255, 255, 255, 0.12);\n    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);\n    border-radius: 12px;\n    width: 188px;\n    height: auto;\n    padding: 10px;\n}\n\n/* 色作成 補助線設定のカラー選択枠 */\n.axpc_colorRect {\n    height: 32px;\n    width: 32px;\n    cursor: pointer;\n    border-radius: 5px;\n    margin: 1px;\n    border-width: 2px;\n    border-style: solid;\n    border-color: #aaa;\n}\n\n/* オーバーレイ操作子共通（キャンバス上に浮かぶUI部品） */\n.axpc_overlay_knob,\n.axpc_overlay_btn {\n    position: absolute;\n    width: 40px;\n    height: 40px;\n    z-index: 3000;\n    border-radius: 8px;\n    background-color: var(--axp-knob-bg, rgba(85, 85, 85, 0.85));\n    background-repeat: no-repeat;\n    background-position: center;\n    background-size: 26px 26px;\n    touch-action: none;\n    user-select: none;\n}\n\n/* オーバーレイノブ（ドラッグ操作用） */\n.axpc_overlay_knob {\n    border: 3px solid var(--axp-knob-border, #eee);\n    cursor: grab;\n}\n\n.axpc_overlay_knob:active {\n    cursor: all-scroll;\n    background-color: rgba(0, 0, 0, 0.85);\n}\n\n/* オーバーレイボタン（タップ操作用） */\n.axpc_overlay_btn {\n    border: 2px solid var(--axp-btn-border, #ccc);\n    cursor: pointer;\n    padding: 0;\n    appearance: none;\n}\n\n.axpc_overlay_btn:focus-visible {\n    outline: 2px solid var(--axp-border-focus, #8bd3ff);\n    outline-offset: 2px;\n}\n\n.axpc_overlay_btn:active {\n    background-color: rgba(0, 0, 0, 0.85);\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13895,12 +13894,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
+___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ（案C ダークテーマ） */
 #axp_config_div_content {
     display: flex;
     margin: 0;
     padding: 0;
     height: 100%;
+    background: #1a1a1a;
+    color: #eee;
 }
 
 /* 左側：ナビゲーションメニュー */
@@ -13910,7 +13911,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     overflow: auto;
     position: sticky;
     top: 0;
-    background-color: #eee;
+    background-color: #141414;
+    border-right: 1px solid #262626;
     padding: 10px;
     /* iPad跳ね返り防止 */
     overscroll-behavior: none;
@@ -13922,8 +13924,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     height: 40px;
     border-radius: 6px;
     border: 0;
-    background-color: #eee;
-    color: #111;
+    background-color: transparent;
+    color: #bbb;
     cursor: pointer;
     margin: 1px 0;
     padding-left: 8px;
@@ -13932,17 +13934,38 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     text-align: left;
 }
 
+#axp_config_div_nav button:hover {
+    background: #1e1e1e;
+    color: #fff;
+}
+
 #axp_config_div_nav button.axpc_ACTIVE {
-    background: #E09C35;
+    background: rgba(238, 172, 96, 0.15);
+    color: var(--axp-accent, #eeac60);
 }
 
 /* 本文：外枠 */
 .axpc_config_chapter {
     width: calc(100% - 200px);
     height: 100%;
-    padding: 10px;
-    background-color: #eee;
+    padding: 10px 20px;
+    background-color: #1a1a1a;
+    color: #eee;
     overflow-y: scroll;
+}
+
+/* モバイル用セクションジャンプ（デフォルト非表示、599px以下でのみ表示） */
+#axp_config_select_mobileNav {
+    display: none;
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 10px;
 }
 
 /* ブラウザの横幅が599px以下の場合 */
@@ -13954,39 +13977,59 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 
     .axpc_config_chapter {
         width: 100%;
+        padding: 10px;
+    }
+
+    #axp_config_select_mobileNav {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 5;
     }
 }
 
 /* 本文：セクション */
 .axpc_config_section {
     margin-bottom: 50px;
-    color: #111;
+    color: #eee;
 }
 
 /* 本文：セクション見出し */
 .axpc_config_sectionHeader {
-    background: #ddf;
+    background: transparent;
     margin-top: 8px;
-    padding: 8px 8px;
+    padding: 8px 0;
     font-weight: bolder;
+    font-size: 16px;
+    color: #fff;
+    border-bottom: 1px solid #333;
 }
 
 /* 設定用共通グループ（クラスが設定されていると、自動的にaxpc_config_div_headerをもつdiv要素を作成） */
 .axpc_config_group {
-    padding: 16px;
-    border: 2px #ddd solid;
+    padding: 16px 20px 18px;
+    border: 1px solid #2a2a2a;
+    border-radius: 0 0 10px 10px;
+    background: #212121;
+    margin-bottom: 16px;
 }
 
 /* 外部リンク部分のはみ出し回避 */
 .axpc_config_group a {
     overflow-wrap: anywhere;
+    color: #7fb2ff;
 }
 
 /* 設定用共通見出し */
 .axpc_config_groupHeader {
-    background: #ddd;
+    background: #262626;
     margin-top: 8px;
-    padding: 4px 16px;
+    padding: 8px 20px;
+    border: 1px solid #2a2a2a;
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+    color: #fff;
+    font-weight: 600;
 }
 
 /* キャンバス履歴テーブル */
@@ -13996,9 +14039,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     margin: 0 0 8px 0;
     padding: 0;
     list-style-type: none;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
+    border-radius: 6px;
     max-height: 220px;
     overflow-y: auto;
+    background: #191919;
 }
 
 #axp_config_ul_canvasSizeHistory>li {
@@ -14009,17 +14054,18 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 }
 
 #axp_config_ul_canvasSizeHistory>li:nth-child(even) {
-    background: #ddd;
+    background: #222;
 }
 
 /* 注意：evenより優先度高 */
 #axp_config_ul_canvasSizeHistory>li[data-selected="true"] {
-    background: #f7a312 !important;
+    background: var(--axp-accent, #eeac60) !important;
+    color: #000;
 }
 
 /* ショートカットテーブル */
 .axpc_config_table {
-    border: 2px solid #aaa;
+    border: 1px solid #333;
     border-collapse: collapse;
 }
 
@@ -14030,12 +14076,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 
 .axpc_config_table th {
     padding: 0 8px;
-    background-color: #ddf;
+    background-color: #262626;
+    color: #eee;
 }
 
 .axpc_config_table td {
     padding: 0 8px;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
 }
 
 /* 設定用のカラーパレット表示（モックアップ）*/
@@ -14043,7 +14090,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     max-width: 228px;
     max-height: 228px;
     overflow: auto;
-    background: #ccc;
+    background: #191919;
+    border: 1px solid #333;
+    border-radius: 6px;
 }
 
 /* 設定用カラーパレット枠 */
@@ -14091,9 +14140,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     margin: 0;
     padding: 0;
     list-style-type: none;
-    border: 1px solid #aaa;
+    border: 1px solid #333;
+    border-radius: 6px;
     max-height: 352px;
     overflow-y: scroll;
+    background: #191919;
 }
 
 #axp_config_ul_scale>li {
@@ -14104,16 +14155,17 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 }
 
 #axp_config_ul_scale>li:nth-child(even) {
-    background: #ddd;
+    background: #222;
 }
 
 #axp_config_ul_scale>li[data-value="100"] {
-    border: 1px solid #333;
+    border: 1px solid #555;
 }
 
 /* 注意：evenより優先度高 */
 #axp_config_ul_scale>li[data-selected="true"] {
-    background: #f7a312 !important;
+    background: var(--axp-accent, #eeac60) !important;
+    color: #000;
 }
 
 /* カラータグ */
@@ -14128,7 +14180,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 
 .axpc_config_div_colorTag {
     border-radius: 5px;
-    border: #222 solid 2px;
+    border: #444 solid 2px;
     width: 154px;
 }
 
@@ -14139,6 +14191,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
     text-align: left;
     border-radius: 5px;
     padding-left: 4px;
+    background: #191919;
+    color: #eee;
+    border: 1px solid #333;
 }
 
 /* キーカスタマイズ用拡大率セレクトボックス */
@@ -14156,7 +14211,50 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 設定タブ */
 #axp_config_div_versionInfo {
     -webkit-user-select: all;
     user-select: all;
-}`, "",{"version":3,"sources":["webpack://./src/css/config.css"],"names":[],"mappings":"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","sourcesContent":["/* 設定タブ */\n#axp_config_div_content {\n    display: flex;\n    margin: 0;\n    padding: 0;\n    height: 100%;\n}\n\n/* 左側：ナビゲーションメニュー */\n#axp_config_div_nav {\n    width: 200px;\n    height: 100%;\n    overflow: auto;\n    position: sticky;\n    top: 0;\n    background-color: #eee;\n    padding: 10px;\n    /* iPad跳ね返り防止 */\n    overscroll-behavior: none;\n}\n\n/* ナビボタン */\n#axp_config_div_nav button {\n    width: 160px;\n    height: 40px;\n    border-radius: 6px;\n    border: 0;\n    background-color: #eee;\n    color: #111;\n    cursor: pointer;\n    margin: 1px 0;\n    padding-left: 8px;\n    font-size: 1em;\n    font-weight: bold;\n    text-align: left;\n}\n\n#axp_config_div_nav button.axpc_ACTIVE {\n    background: #E09C35;\n}\n\n/* 本文：外枠 */\n.axpc_config_chapter {\n    width: calc(100% - 200px);\n    height: 100%;\n    padding: 10px;\n    background-color: #eee;\n    overflow-y: scroll;\n}\n\n/* ブラウザの横幅が599px以下の場合 */\n@media (max-width: 599px) {\n    #axp_config_div_nav {\n        /* ナビゲーションメニュー非表示 */\n        display: none;\n    }\n\n    .axpc_config_chapter {\n        width: 100%;\n    }\n}\n\n/* 本文：セクション */\n.axpc_config_section {\n    margin-bottom: 50px;\n    color: #111;\n}\n\n/* 本文：セクション見出し */\n.axpc_config_sectionHeader {\n    background: #ddf;\n    margin-top: 8px;\n    padding: 8px 8px;\n    font-weight: bolder;\n}\n\n/* 設定用共通グループ（クラスが設定されていると、自動的にaxpc_config_div_headerをもつdiv要素を作成） */\n.axpc_config_group {\n    padding: 16px;\n    border: 2px #ddd solid;\n}\n\n/* 外部リンク部分のはみ出し回避 */\n.axpc_config_group a {\n    overflow-wrap: anywhere;\n}\n\n/* 設定用共通見出し */\n.axpc_config_groupHeader {\n    background: #ddd;\n    margin-top: 8px;\n    padding: 4px 16px;\n}\n\n/* キャンバス履歴テーブル */\n#axp_config_ul_canvasSizeHistory {\n    margin-top: 8px;\n    width: 200px;\n    margin: 0 0 8px 0;\n    padding: 0;\n    list-style-type: none;\n    border: 1px solid #aaa;\n    max-height: 220px;\n    overflow-y: auto;\n}\n\n#axp_config_ul_canvasSizeHistory>li {\n    padding: 2px 10px;\n    height: 25px;\n    text-align: center;\n    cursor: pointer;\n}\n\n#axp_config_ul_canvasSizeHistory>li:nth-child(even) {\n    background: #ddd;\n}\n\n/* 注意：evenより優先度高 */\n#axp_config_ul_canvasSizeHistory>li[data-selected=\"true\"] {\n    background: #f7a312 !important;\n}\n\n/* ショートカットテーブル */\n.axpc_config_table {\n    border: 2px solid #aaa;\n    border-collapse: collapse;\n}\n\n.axpc_config_table td:nth-child(1) {\n    font-family: 'Consolas', monospace;\n    font-size: 12pt;\n}\n\n.axpc_config_table th {\n    padding: 0 8px;\n    background-color: #ddf;\n}\n\n.axpc_config_table td {\n    padding: 0 8px;\n    border: 1px solid #aaa;\n}\n\n/* 設定用のカラーパレット表示（モックアップ）*/\n#axp_config_div_paletteScroll {\n    max-width: 228px;\n    max-height: 228px;\n    overflow: auto;\n    background: #ccc;\n}\n\n/* 設定用カラーパレット枠 */\n#axp_config_div_paletteBox {\n    display: flex;\n    flex-wrap: wrap;\n    align-content: flex-start;\n    background: #333;\n    padding: 4px;\n}\n\n/* 設定用カラーパレット単色 */\n.axpc_config_colorRect {\n    height: 20px;\n    width: 20px;\n    margin: 1px;\n    border-radius: 3px;\n}\n\n/* 拡大率 */\n#axp_config_div_scale {\n    width: 200px;\n}\n\n#axp_config_div_scaleButton {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 1fr 30px 1fr;\n}\n\n#axp_config_button_addScale {\n    width: 100%;\n}\n\n#axp_config_button_deleteScale,\n#axp_config_button_resetScale {\n    margin-top: 8px;\n    width: 100%;\n}\n\n/* 拡大率テーブル */\n#axp_config_ul_scale {\n    margin-top: 8px;\n    width: 200px;\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    border: 1px solid #aaa;\n    max-height: 352px;\n    overflow-y: scroll;\n}\n\n#axp_config_ul_scale>li {\n    padding: 2px 10px;\n    height: 25px;\n    text-align: center;\n    cursor: pointer;\n}\n\n#axp_config_ul_scale>li:nth-child(even) {\n    background: #ddd;\n}\n\n#axp_config_ul_scale>li[data-value=\"100\"] {\n    border: 1px solid #333;\n}\n\n/* 注意：evenより優先度高 */\n#axp_config_ul_scale>li[data-selected=\"true\"] {\n    background: #f7a312 !important;\n}\n\n/* カラータグ */\n#axp_config_div_colorTag {\n    width: 300px;\n    display: grid;\n    grid-template-rows: repeat(4, 34px);\n    grid-template-columns: 1fr 1fr;\n    margin-bottom: 8px;\n    gap: 4px 10px;\n}\n\n.axpc_config_div_colorTag {\n    border-radius: 5px;\n    border: #222 solid 2px;\n    width: 154px;\n}\n\n.axpc_config_text_colorTag {\n    width: 130px;\n    height: 30px;\n    font-size: 13px;\n    text-align: left;\n    border-radius: 5px;\n    padding-left: 4px;\n}\n\n/* キーカスタマイズ用拡大率セレクトボックス */\n.axpc_config_select_scaleTable {\n    width: 24px;\n}\n\n/* キーカスタマイズ用数値入力 */\n.axpc_config_number_sizeValue,\n.axpc_config_number_scaleValue {\n    width: 60px;\n}\n\n/* バージョン情報 */\n#axp_config_div_versionInfo {\n    -webkit-user-select: all;\n    user-select: all;\n}"],"sourceRoot":""}]);
+}
+
+/* --- ダークテーマ用フォーム調整（設定タブ内のみ有効） --- */
+
+/* 数値入力・セレクトボックス */
+#axp_config_div_content input[type="number"],
+#axp_config_div_content input[type="text"],
+#axp_config_div_content select {
+    background: #191919;
+    color: #fff;
+    border: 1px solid #2f2f2f;
+    border-radius: 6px;
+}
+
+/* ラジオボタン（自動生成label）のダーク配色 */
+#axp_config_div_content .axpc_radio label {
+    color: #aaa;
+    border: 2px solid #333;
+    background: #1c1c1c;
+    border-radius: 6px;
+}
+
+#axp_config_div_content .axpc_radio label:hover {
+    color: #fff;
+    border-color: #555;
+}
+
+#axp_config_div_content .axpc_radio input[type="radio"]:checked+label {
+    font-weight: bold;
+    color: #000;
+    border: 2px solid var(--axp-accent, #eeac60);
+    background-color: var(--axp-accent, #eeac60);
+}
+
+/* チェックボックス */
+#axp_config_div_content .axpc_checkbox input {
+    accent-color: var(--axp-accent, #eeac60);
+}
+
+/* 下線・強調テキスト */
+#axp_config_div_content u {
+    color: #ccc;
+}
+`, "",{"version":3,"sources":["webpack://./src/css/config.css"],"names":[],"mappings":"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","sourcesContent":["/* 設定タブ（案C ダークテーマ） */\n#axp_config_div_content {\n    display: flex;\n    margin: 0;\n    padding: 0;\n    height: 100%;\n    background: #1a1a1a;\n    color: #eee;\n}\n\n/* 左側：ナビゲーションメニュー */\n#axp_config_div_nav {\n    width: 200px;\n    height: 100%;\n    overflow: auto;\n    position: sticky;\n    top: 0;\n    background-color: #141414;\n    border-right: 1px solid #262626;\n    padding: 10px;\n    /* iPad跳ね返り防止 */\n    overscroll-behavior: none;\n}\n\n/* ナビボタン */\n#axp_config_div_nav button {\n    width: 160px;\n    height: 40px;\n    border-radius: 6px;\n    border: 0;\n    background-color: transparent;\n    color: #bbb;\n    cursor: pointer;\n    margin: 1px 0;\n    padding-left: 8px;\n    font-size: 1em;\n    font-weight: bold;\n    text-align: left;\n}\n\n#axp_config_div_nav button:hover {\n    background: #1e1e1e;\n    color: #fff;\n}\n\n#axp_config_div_nav button.axpc_ACTIVE {\n    background: rgba(238, 172, 96, 0.15);\n    color: var(--axp-accent, #eeac60);\n}\n\n/* 本文：外枠 */\n.axpc_config_chapter {\n    width: calc(100% - 200px);\n    height: 100%;\n    padding: 10px 20px;\n    background-color: #1a1a1a;\n    color: #eee;\n    overflow-y: scroll;\n}\n\n/* モバイル用セクションジャンプ（デフォルト非表示、599px以下でのみ表示） */\n#axp_config_select_mobileNav {\n    display: none;\n    width: 100%;\n    height: 40px;\n    padding: 0 12px;\n    background: #1e1e1e;\n    border: 1px solid #2a2a2a;\n    color: #fff;\n    border-radius: 8px;\n    font-size: 13px;\n    margin-bottom: 10px;\n}\n\n/* ブラウザの横幅が599px以下の場合 */\n@media (max-width: 599px) {\n    #axp_config_div_nav {\n        /* ナビゲーションメニュー非表示 */\n        display: none;\n    }\n\n    .axpc_config_chapter {\n        width: 100%;\n        padding: 10px;\n    }\n\n    #axp_config_select_mobileNav {\n        display: block;\n        position: sticky;\n        top: 0;\n        z-index: 5;\n    }\n}\n\n/* 本文：セクション */\n.axpc_config_section {\n    margin-bottom: 50px;\n    color: #eee;\n}\n\n/* 本文：セクション見出し */\n.axpc_config_sectionHeader {\n    background: transparent;\n    margin-top: 8px;\n    padding: 8px 0;\n    font-weight: bolder;\n    font-size: 16px;\n    color: #fff;\n    border-bottom: 1px solid #333;\n}\n\n/* 設定用共通グループ（クラスが設定されていると、自動的にaxpc_config_div_headerをもつdiv要素を作成） */\n.axpc_config_group {\n    padding: 16px 20px 18px;\n    border: 1px solid #2a2a2a;\n    border-radius: 0 0 10px 10px;\n    background: #212121;\n    margin-bottom: 16px;\n}\n\n/* 外部リンク部分のはみ出し回避 */\n.axpc_config_group a {\n    overflow-wrap: anywhere;\n    color: #7fb2ff;\n}\n\n/* 設定用共通見出し */\n.axpc_config_groupHeader {\n    background: #262626;\n    margin-top: 8px;\n    padding: 8px 20px;\n    border: 1px solid #2a2a2a;\n    border-bottom: 0;\n    border-radius: 10px 10px 0 0;\n    color: #fff;\n    font-weight: 600;\n}\n\n/* キャンバス履歴テーブル */\n#axp_config_ul_canvasSizeHistory {\n    margin-top: 8px;\n    width: 200px;\n    margin: 0 0 8px 0;\n    padding: 0;\n    list-style-type: none;\n    border: 1px solid #333;\n    border-radius: 6px;\n    max-height: 220px;\n    overflow-y: auto;\n    background: #191919;\n}\n\n#axp_config_ul_canvasSizeHistory>li {\n    padding: 2px 10px;\n    height: 25px;\n    text-align: center;\n    cursor: pointer;\n}\n\n#axp_config_ul_canvasSizeHistory>li:nth-child(even) {\n    background: #222;\n}\n\n/* 注意：evenより優先度高 */\n#axp_config_ul_canvasSizeHistory>li[data-selected=\"true\"] {\n    background: var(--axp-accent, #eeac60) !important;\n    color: #000;\n}\n\n/* ショートカットテーブル */\n.axpc_config_table {\n    border: 1px solid #333;\n    border-collapse: collapse;\n}\n\n.axpc_config_table td:nth-child(1) {\n    font-family: 'Consolas', monospace;\n    font-size: 12pt;\n}\n\n.axpc_config_table th {\n    padding: 0 8px;\n    background-color: #262626;\n    color: #eee;\n}\n\n.axpc_config_table td {\n    padding: 0 8px;\n    border: 1px solid #333;\n}\n\n/* 設定用のカラーパレット表示（モックアップ）*/\n#axp_config_div_paletteScroll {\n    max-width: 228px;\n    max-height: 228px;\n    overflow: auto;\n    background: #191919;\n    border: 1px solid #333;\n    border-radius: 6px;\n}\n\n/* 設定用カラーパレット枠 */\n#axp_config_div_paletteBox {\n    display: flex;\n    flex-wrap: wrap;\n    align-content: flex-start;\n    background: #333;\n    padding: 4px;\n}\n\n/* 設定用カラーパレット単色 */\n.axpc_config_colorRect {\n    height: 20px;\n    width: 20px;\n    margin: 1px;\n    border-radius: 3px;\n}\n\n/* 拡大率 */\n#axp_config_div_scale {\n    width: 200px;\n}\n\n#axp_config_div_scaleButton {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 1fr 30px 1fr;\n}\n\n#axp_config_button_addScale {\n    width: 100%;\n}\n\n#axp_config_button_deleteScale,\n#axp_config_button_resetScale {\n    margin-top: 8px;\n    width: 100%;\n}\n\n/* 拡大率テーブル */\n#axp_config_ul_scale {\n    margin-top: 8px;\n    width: 200px;\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    border: 1px solid #333;\n    border-radius: 6px;\n    max-height: 352px;\n    overflow-y: scroll;\n    background: #191919;\n}\n\n#axp_config_ul_scale>li {\n    padding: 2px 10px;\n    height: 25px;\n    text-align: center;\n    cursor: pointer;\n}\n\n#axp_config_ul_scale>li:nth-child(even) {\n    background: #222;\n}\n\n#axp_config_ul_scale>li[data-value=\"100\"] {\n    border: 1px solid #555;\n}\n\n/* 注意：evenより優先度高 */\n#axp_config_ul_scale>li[data-selected=\"true\"] {\n    background: var(--axp-accent, #eeac60) !important;\n    color: #000;\n}\n\n/* カラータグ */\n#axp_config_div_colorTag {\n    width: 300px;\n    display: grid;\n    grid-template-rows: repeat(4, 34px);\n    grid-template-columns: 1fr 1fr;\n    margin-bottom: 8px;\n    gap: 4px 10px;\n}\n\n.axpc_config_div_colorTag {\n    border-radius: 5px;\n    border: #444 solid 2px;\n    width: 154px;\n}\n\n.axpc_config_text_colorTag {\n    width: 130px;\n    height: 30px;\n    font-size: 13px;\n    text-align: left;\n    border-radius: 5px;\n    padding-left: 4px;\n    background: #191919;\n    color: #eee;\n    border: 1px solid #333;\n}\n\n/* キーカスタマイズ用拡大率セレクトボックス */\n.axpc_config_select_scaleTable {\n    width: 24px;\n}\n\n/* キーカスタマイズ用数値入力 */\n.axpc_config_number_sizeValue,\n.axpc_config_number_scaleValue {\n    width: 60px;\n}\n\n/* バージョン情報 */\n#axp_config_div_versionInfo {\n    -webkit-user-select: all;\n    user-select: all;\n}\n\n/* --- ダークテーマ用フォーム調整（設定タブ内のみ有効） --- */\n\n/* 数値入力・セレクトボックス */\n#axp_config_div_content input[type=\"number\"],\n#axp_config_div_content input[type=\"text\"],\n#axp_config_div_content select {\n    background: #191919;\n    color: #fff;\n    border: 1px solid #2f2f2f;\n    border-radius: 6px;\n}\n\n/* ラジオボタン（自動生成label）のダーク配色 */\n#axp_config_div_content .axpc_radio label {\n    color: #aaa;\n    border: 2px solid #333;\n    background: #1c1c1c;\n    border-radius: 6px;\n}\n\n#axp_config_div_content .axpc_radio label:hover {\n    color: #fff;\n    border-color: #555;\n}\n\n#axp_config_div_content .axpc_radio input[type=\"radio\"]:checked+label {\n    font-weight: bold;\n    color: #000;\n    border: 2px solid var(--axp-accent, #eeac60);\n    background-color: var(--axp-accent, #eeac60);\n}\n\n/* チェックボックス */\n#axp_config_div_content .axpc_checkbox input {\n    accent-color: var(--axp-accent, #eeac60);\n}\n\n/* 下線・強調テキスト */\n#axp_config_div_content u {\n    color: #ccc;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15943,7 +16041,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保存から復元のサブ画面 */
+___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保存から復元のサブ画面（案C ダークテーマ） */
 
 #axp_saveload {
     position: absolute;
@@ -15957,23 +16055,26 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
 }
 
 #axp_saveload>div {
-    background-color: #eee;
-    color: #000;
-    border-color: #337;
-    border-width: 4px;
-    border-style: double;
+    background-color: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
     margin: 8px;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 12px;
 }
 
 /* セーブスロットのHTMLを挿入するポイント */
 #axp_saveload_div_insertHTML {
-    background-color: #aaa;
-    border: solid 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
     display: flex;
     justify-content: normal;
     flex-wrap: wrap;
+    gap: 8px;
     padding: 8px;
     cursor: pointer;
 }
@@ -15988,10 +16089,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
 
 .axpc_saveload_saveSlot,
 .axpc_saveload_loadSlot {
-    background-color: #ddd;
+    background-color: #212121;
+    color: #eee;
     width: 135px;
     min-height: 180px;
-    border: solid 2px #000;
+    border: solid 1px #333;
     border-radius: 10px;
     text-align: center;
     padding-top: 4px;
@@ -16001,11 +16103,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
 }
 
 .axpc_saveload_saveSlot:hover {
-    background-color: #faa;
+    border-color: var(--axp-accent, #eeac60);
+    background-color: rgba(238, 172, 96, 0.12);
 }
 
 .axpc_saveload_loadSlot:hover {
-    background-color: #ffa;
+    border-color: var(--axp-accent, #eeac60);
+    background-color: rgba(238, 172, 96, 0.12);
 }
 
 .axpc_saveload_thumbnall {
@@ -16015,7 +16119,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
     display: flex;
     align-items: center;
     justify-content: center;
-    border: #aaa solid 1px;
+    border: #444 solid 1px;
+    border-radius: 6px;
+    background-color: #191919;
+    overflow: hidden;
 }
 
 .axpc_saveload_refId {
@@ -16025,10 +16132,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* セーブ／ロード／自動保�
     line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
-    color: #00f;
+    color: #7fb2ff;
     /* ブラウザがサポートしていない場合のフェールセーフ */
     max-height: 30px;
-}`, "",{"version":3,"sources":["webpack://./src/css/saveload.css"],"names":[],"mappings":"AAAA,0BAA0B;;AAE1B;IACI,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,cAAc;IACd,oCAAoC;AACxC;;AAEA;IACI,sBAAsB;IACtB,WAAW;IACX,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,WAAW;IACX,YAAY;IACZ,kBAAkB;AACtB;;AAEA,0BAA0B;AAC1B;IACI,sBAAsB;IACtB,iBAAiB;IACjB,aAAa;IACb,uBAAuB;IACvB,eAAe;IACf,YAAY;IACZ,eAAe;AACnB;;AAEA,WAAW;AACX;IACI,eAAe;IACf,mBAAmB;IACnB,eAAe;IACf,WAAW;AACf;;AAEA;;IAEI,sBAAsB;IACtB,YAAY;IACZ,iBAAiB;IACjB,sBAAsB;IACtB,mBAAmB;IACnB,kBAAkB;IAClB,gBAAgB;IAChB,eAAe;IACf,iBAAiB;IACjB,iBAAiB;AACrB;;AAEA;IACI,sBAAsB;AAC1B;;AAEA;IACI,sBAAsB;AAC1B;;AAEA;IACI,YAAY;IACZ,aAAa;IACb,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,oBAAoB;IACpB,qBAAqB;IACrB,aAAa;IACb,4BAA4B;IAC5B,qBAAqB;IACrB,WAAW;IACX,6BAA6B;IAC7B,gBAAgB;AACpB","sourcesContent":["/* セーブ／ロード／自動保存から復元のサブ画面 */\n\n#axp_saveload {\n    position: absolute;\n    z-index: 5000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0.5);\n}\n\n#axp_saveload>div {\n    background-color: #eee;\n    color: #000;\n    border-color: #337;\n    border-width: 4px;\n    border-style: double;\n    margin: 8px;\n    padding: 8px;\n    border-radius: 5px;\n}\n\n/* セーブスロットのHTMLを挿入するポイント */\n#axp_saveload_div_insertHTML {\n    background-color: #aaa;\n    border: solid 0px;\n    display: flex;\n    justify-content: normal;\n    flex-wrap: wrap;\n    padding: 8px;\n    cursor: pointer;\n}\n\n/* 閉じるボタン */\n#axp_saveload_button_close {\n    margin-top: 8px;\n    font-weight: bolder;\n    font-size: 15px;\n    width: 100%;\n}\n\n.axpc_saveload_saveSlot,\n.axpc_saveload_loadSlot {\n    background-color: #ddd;\n    width: 135px;\n    min-height: 180px;\n    border: solid 2px #000;\n    border-radius: 10px;\n    text-align: center;\n    padding-top: 4px;\n    font-size: 12px;\n    font-weight: bold;\n    line-height: 15px;\n}\n\n.axpc_saveload_saveSlot:hover {\n    background-color: #faa;\n}\n\n.axpc_saveload_loadSlot:hover {\n    background-color: #ffa;\n}\n\n.axpc_saveload_thumbnall {\n    width: 124px;\n    height: 124px;\n    margin: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border: #aaa solid 1px;\n}\n\n.axpc_saveload_refId {\n    overflow: hidden;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    line-clamp: 2;\n    -webkit-box-orient: vertical;\n    word-break: break-all;\n    color: #00f;\n    /* ブラウザがサポートしていない場合のフェールセーフ */\n    max-height: 30px;\n}"],"sourceRoot":""}]);
+}
+`, "",{"version":3,"sources":["webpack://./src/css/saveload.css"],"names":[],"mappings":"AAAA,qCAAqC;;AAErC;IACI,kBAAkB;IAClB,aAAa;IACb,OAAO;IACP,MAAM;IACN,YAAY;IACZ,WAAW;IACX,cAAc;IACd,oCAAoC;AACxC;;AAEA;IACI,wCAAwC;IACxC,2BAA2B;IAC3B,mCAAmC;IACnC,WAAW;IACX,2CAA2C;IAC3C,0CAA0C;IAC1C,WAAW;IACX,aAAa;IACb,mBAAmB;AACvB;;AAEA,0BAA0B;AAC1B;IACI,oCAAoC;IACpC,2CAA2C;IAC3C,kBAAkB;IAClB,aAAa;IACb,uBAAuB;IACvB,eAAe;IACf,QAAQ;IACR,YAAY;IACZ,eAAe;AACnB;;AAEA,WAAW;AACX;IACI,eAAe;IACf,mBAAmB;IACnB,eAAe;IACf,WAAW;AACf;;AAEA;;IAEI,yBAAyB;IACzB,WAAW;IACX,YAAY;IACZ,iBAAiB;IACjB,sBAAsB;IACtB,mBAAmB;IACnB,kBAAkB;IAClB,gBAAgB;IAChB,eAAe;IACf,iBAAiB;IACjB,iBAAiB;AACrB;;AAEA;IACI,wCAAwC;IACxC,0CAA0C;AAC9C;;AAEA;IACI,wCAAwC;IACxC,0CAA0C;AAC9C;;AAEA;IACI,YAAY;IACZ,aAAa;IACb,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,yBAAyB;IACzB,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;IAChB,oBAAoB;IACpB,qBAAqB;IACrB,aAAa;IACb,4BAA4B;IAC5B,qBAAqB;IACrB,cAAc;IACd,6BAA6B;IAC7B,gBAAgB;AACpB","sourcesContent":["/* セーブ／ロード／自動保存から復元のサブ画面（案C ダークテーマ） */\n\n#axp_saveload {\n    position: absolute;\n    z-index: 5000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0.5);\n}\n\n#axp_saveload>div {\n    background-color: rgba(20, 20, 20, 0.94);\n    backdrop-filter: blur(12px);\n    -webkit-backdrop-filter: blur(12px);\n    color: #fff;\n    border: 1px solid rgba(255, 255, 255, 0.12);\n    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);\n    margin: 8px;\n    padding: 12px;\n    border-radius: 12px;\n}\n\n/* セーブスロットのHTMLを挿入するポイント */\n#axp_saveload_div_insertHTML {\n    background-color: rgba(0, 0, 0, 0.3);\n    border: 1px solid rgba(255, 255, 255, 0.08);\n    border-radius: 8px;\n    display: flex;\n    justify-content: normal;\n    flex-wrap: wrap;\n    gap: 8px;\n    padding: 8px;\n    cursor: pointer;\n}\n\n/* 閉じるボタン */\n#axp_saveload_button_close {\n    margin-top: 8px;\n    font-weight: bolder;\n    font-size: 15px;\n    width: 100%;\n}\n\n.axpc_saveload_saveSlot,\n.axpc_saveload_loadSlot {\n    background-color: #212121;\n    color: #eee;\n    width: 135px;\n    min-height: 180px;\n    border: solid 1px #333;\n    border-radius: 10px;\n    text-align: center;\n    padding-top: 4px;\n    font-size: 12px;\n    font-weight: bold;\n    line-height: 15px;\n}\n\n.axpc_saveload_saveSlot:hover {\n    border-color: var(--axp-accent, #eeac60);\n    background-color: rgba(238, 172, 96, 0.12);\n}\n\n.axpc_saveload_loadSlot:hover {\n    border-color: var(--axp-accent, #eeac60);\n    background-color: rgba(238, 172, 96, 0.12);\n}\n\n.axpc_saveload_thumbnall {\n    width: 124px;\n    height: 124px;\n    margin: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border: #444 solid 1px;\n    border-radius: 6px;\n    background-color: #191919;\n    overflow: hidden;\n}\n\n.axpc_saveload_refId {\n    overflow: hidden;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    line-clamp: 2;\n    -webkit-box-orient: vertical;\n    word-break: break-all;\n    color: #7fb2ff;\n    /* ブラウザがサポートしていない場合のフェールセーフ */\n    max-height: 30px;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17682,9 +17790,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
     -webkit-user-select: none;
     user-select: none;
     font-size: 15px;
-    border-radius: 8px;
+    border-radius: 12px;
     color: #fff;
-    background: rgba(0, 0, 0, .8);
+    background: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
     padding-left: 8px;
 }
 
@@ -17945,7 +18057,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ペンツール */
     opacity: 0.4;
     cursor: default;
 }
-`, "",{"version":3,"sources":["webpack://./src/css/window_pen.css"],"names":[],"mappings":"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","sourcesContent":["/* ペンツール */\n\n/* ペンツール外枠 */\n#axp_pen_div_content {\n    display: flex;\n    gap: var(--axp-sp-3);\n}\n\n/* ペンツール左側（プレビュー、スライダー）外枠 */\n#axp_pen_div_leftSide {\n    width: 108px;\n    overflow: hidden;\n}\n\n/* ペンの名前 */\n#axp_pen_span_penName {\n    line-height: 1.0;\n}\n\n/* 選択範囲の状態表示（選択中のみ表示） */\n#axp_pen_div_selectionStatus {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 4px;\n    margin-top: 2px;\n    font-size: 11px;\n}\n\n#axp_pen_button_deselect {\n    font-size: 11px;\n    line-height: 1;\n    padding: 2px 6px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_button_deselect:active {\n    background: #333;\n}\n\n/* プレビュー領域 */\n#axp_pen_div_preview {\n    position: relative;\n    width: 108px;\n    height: 96px;\n    background: rgba(255, 255, 255, 0.32);\n    border: 1px solid var(--axp-border-strong);\n    border-radius: var(--axp-r-md);\n    cursor: default;\n    margin-top: 4px;\n    overflow: hidden;\n}\n\n/* ペンの太さプレビュー用キャンバス */\n#axp_pen_canvas_previewPenSize {\n    position: absolute;\n    z-index: 2;\n    width: 106px;\n    height: 94px;\n}\n\n/* スポイト用キャンバス */\n#axp_pen_canvas_previewSpuit {\n    position: absolute;\n    z-index: 1;\n    width: 106px;\n    height: 94px;\n    image-rendering: pixelated;\n}\n\n/* ペンウィンドウ内チェックボックスのラベル縮小 */\n#axp_pen_div_slider .axpc_checkbox label {\n    font-size: 11px;\n}\n\n/* スポイトのRGBA表示用 */\n#axp_pen_div_spuitColorRGBA {\n    line-height: 1.3em;\n}\n\n/* スライダー領域 */\n#axp_pen_div_slider {\n    margin-top: 8px;\n    display: flex;\n    flex-flow: column;\n}\n\n.axpc_pen_settingsStack {\n    gap: 3px;\n}\n\n.axpc_pen_settingsStack .axpc_range {\n    overflow: hidden;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"] {\n    height: var(--axp-h-compact-range);\n    border-width: 2px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-track {\n    height: var(--axp-h-compact-range);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md) !important;\n}\n\n.axpc_pen_settingsStack .axpc_range_label {\n    font-size: 11px;\n    line-height: 12px;\n    padding-top: 1px;\n}\n\n.axpc_pen_settingsStack .axpc_range_value {\n    font-size: 13px;\n    padding-top: 11px;\n}\n\n/* セレクトボックス */\n#axp_pen_div_selectbox {\n    margin-top: 8px;\n}\n\n#axp_pen_select_drawMode,\n#axp_pen_select_fillMode {\n    width: 100px;\n    height: 24px;\n    border-radius: 5px;\n}\n\n/* ペンツール右側（機能ボタン）外枠 */\n#axp_pen_div_rightSide {\n    margin-left: 0;\n    display: flex;\n    flex-direction: column;\n    gap: var(--axp-sp-2);\n}\n\n/* 各ボタンの枠 */\n#axp_pen_div_rightSide>div {\n    position: relative;\n}\n\n/* ペンツール内のアイコン（メイン＆サブ） */\n#axp_pen_div_rightSide>div>button,\n#axp_penmode button {\n    width: var(--axp-h-icon-btn);\n    height: var(--axp-h-icon-btn);\n    border-radius: var(--axp-r-md);\n    border: 3px solid #000;\n    box-shadow: 0px 0px 10px #000;\n    cursor: pointer;\n    background-repeat: no-repeat;\n    background-position: 2px 2px;\n    background-color: #aaa;\n}\n\n/* ホバーしたアイコンに枠をつける */\n#axp_pen_div_rightSide>div>button:hover,\n#axp_penmode button:hover {\n    background-color: #aaa;\n    border: 3px solid #fff;\n}\n\n/* 選択しているアイコンに色をつける */\n#axp_pen_div_rightSide>div>button[data-selected=\"true\"] {\n    background-color: var(--axp-accent);\n}\n\n/* サブメニューがあることを示す表示効果 */\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    content: \"\";\n    position: absolute;\n    top: 6px;\n    left: -9px;\n    height: 16px;\n    border-width: 8px 7px 8px 0;\n    border-color: transparent #eeac60;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {\n    content: \"\";\n    position: absolute;\n    top: 18px;\n    left: -8px;\n    height: 0px;\n    border-width: 4px 4px 4px 0;\n    border-color: transparent #000;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    border-color: transparent #533C21;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n/* サブメニュー用外枠 */\n#axp_penmode {\n    touch-action: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n/* サブメニュー用内枠 */\n#axp_penmode>div {\n    -webkit-user-select: none;\n    user-select: none;\n    font-size: 15px;\n    border-radius: 8px;\n    color: #fff;\n    background: rgba(0, 0, 0, .8);\n    padding-left: 8px;\n}\n\n.axpc_penmode_round {\n    background-image: url('../../resource/pen1.png');\n}\n\n.axpc_penmode_square {\n    background-image: url('../../resource/pen2.png');\n}\n\n.axpc_penmode_dot {\n    background-image: url('../../resource/dot.png');\n}\n\n.axpc_penmode_fude {\n    background-image: url('../../resource/fude.png');\n}\n\n.axpc_penmode_crayon {\n    background-image: url('../../resource/crayon.png');\n}\n\n.axpc_penmode_brush {\n    background-image: url('../../resource/brush.png');\n}\n\n.axpc_penmode_diffusion {\n    background-image: url('../../resource/bokasi.png');\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_marker {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 3l4 4-9 9-5 1 1-5z\"/><path d=\"M3 21h6\"/></svg>');\n}\n\n.axpc_penmode_curve {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18c4 0 4-12 9-12s5 12 9 12\"/></svg>');\n}\n\n.axpc_penmode_hatching {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20L14 4M9 20L19 4M-1 14L7 2\"/></svg>');\n}\n\n.axpc_penmode_sketch {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18l4-9 3 6 3-11 3 9 3-4 2 6\"/></svg>');\n}\n\n.axpc_penmode_texturebrush {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"4\" cy=\"5\" r=\"1\"/><circle cx=\"10\" cy=\"4\" r=\"1\"/><circle cx=\"16\" cy=\"6\" r=\"1\"/><circle cx=\"20\" cy=\"4\" r=\"1\"/><circle cx=\"6\" cy=\"11\" r=\"1\"/><circle cx=\"13\" cy=\"10\" r=\"1\"/><circle cx=\"19\" cy=\"11\" r=\"1\"/><circle cx=\"3\" cy=\"16\" r=\"1\"/><circle cx=\"9\" cy=\"17\" r=\"1\"/><circle cx=\"15\" cy=\"16\" r=\"1\"/><circle cx=\"21\" cy=\"17\" r=\"1\"/><circle cx=\"6\" cy=\"21\" r=\"1\"/><circle cx=\"12\" cy=\"20\" r=\"1\"/><circle cx=\"18\" cy=\"21\" r=\"1\"/></svg>');\n}\n\n.axpc_penmode_smoothpen {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M3 20c2-6 4-14 6-14 1.5 0 1 4 3 4s2-6 4-4c1.5 1.4 1 8 3 8 1 0 1.5-1 2-2l1 1c-1 2-2 3.5-4 3.5-2.5 0-2-6-3.5-6-1.2 0-1.5 4-3.5 4-2 0-1.5-6-3-6-1 0-2 6-3.5 11z\"/></svg>');\n}\n\n.axpc_penmode_eraser_round {\n    background-image: url('../../resource/eraser.png');\n}\n\n.axpc_penmode_eraser_dot {\n    background-image: url('../../resource/eraser_dot.png');\n}\n\n.axpc_penmode_fill {\n    background-image: url('../../resource/fill.png');\n}\n\n.axpc_penmode_fillgradation {\n    background-image: url('../../resource/fillgradation.png');\n}\n\n.axpc_penmode_hand {\n    background-image: url('../../resource/hand.png');\n}\n\n.axpc_penmode_move {\n    background-image: url('../../resource/move.png');\n}\n\n.axpc_penmode_nagenawa {\n    background-image: url('../../resource/nagenawa.png');\n}\n\n.axpc_penmode_liquify {\n    background-image: url('../../resource/overlay/rotate.svg');\n}\n\n#axp_pen_div_liquifyMode {\n    display: grid;\n    gap: var(--axp-sp-1);\n    box-sizing: border-box;\n    overflow: hidden;\n    margin-top: 3px;\n    padding: 4px;\n}\n\n.axpc_pen_modeCard {\n    border: 1px solid var(--axp-border-soft);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-surface-panel);\n}\n\n#axp_pen_div_liquifyMode label {\n    font-size: 10px;\n    line-height: 12px;\n}\n\n#axp_pen_select_liquifyMode {\n    box-sizing: border-box;\n    width: 100%;\n    min-width: 0;\n    max-width: 100%;\n    height: 22px;\n    font-size: 10px;\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_magicwand {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20L15 9\"/><path d=\"M15 9l2 2\"/><path d=\"M13 4v2M13 10v2M9 6h2M15 6h2\"/><path d=\"M20 14v2M20 20v2M18 18h2M22 18h2\"/></svg>');\n}\n\n.axpc_penmode_polygonselect {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8l8-5 8 5-3 11H7z\" stroke-dasharray=\"3,2.5\"/><circle cx=\"4\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"12\" cy=\"3\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"20\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"17\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"7\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/></svg>');\n}\n\n.axpc_penmode_spuit {\n    background-image: url('../../resource/spuit.png');\n}\n\n/* 混色ペンのプリセットボタン */\n#axp_pen_div_diffusionPreset {\n    display: flex;\n    flex-flow: column;\n    gap: 2px;\n    margin-top: 4px;\n}\n\n.axpc_pen_diffpreset {\n    width: 100%;\n    height: 18px;\n    font-size: 13px;\n    line-height: 1;\n    padding: 0 4px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    text-align: center;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.axpc_pen_diffpreset:active {\n    background: #333;\n}\n\n/* 反映中 (現在値が格納値と一致) の明示 */\n.axpc_pen_diffpreset[data-active=\"true\"] {\n    background: #000;\n    color: #fff;\n    border-color: #000;\n}\n\n/* 混色ペンの詳細設定開閉ボタン */\n#axp_pen_button_diffusionDetail {\n    width: 100%;\n    min-height: var(--axp-h-compact-btn);\n    font-size: 12px;\n    line-height: 1;\n    padding: 0 6px;\n    margin-top: 4px;\n    border: 1px solid var(--axp-accent-border);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-accent-soft);\n    color: var(--axp-accent);\n    cursor: pointer;\n    text-align: left;\n}\n\n.axpc_pen_panelToggle:hover {\n    border-color: var(--axp-accent);\n    background: color-mix(in srgb, var(--axp-accent) 24%, transparent);\n}\n\n#axp_pen_button_diffusionDetail:focus-visible,\n#axp_pen_select_liquifyMode:focus-visible,\n#axp_pen_button_deselect:focus-visible {\n    outline: 2px solid var(--axp-border-focus);\n    outline-offset: 1px;\n}\n\n/* 階調バケツ：多ストップグラデーション編集UI */\n#axp_pen_div_gradientStops {\n    margin-top: 4px;\n    display: flex;\n    flex-flow: column;\n    gap: 4px;\n}\n\n#axp_pen_div_gradientPreview {\n    width: 100%;\n    height: 20px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: repeating-conic-gradient(#666 0% 25%, #444 0% 50%) 50% / 8px 8px;\n}\n\n#axp_pen_div_gradientStopList {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 2px;\n    min-height: 18px;\n}\n\n.axpc_gradient_stopSwatch {\n    width: 18px;\n    height: 18px;\n    padding: 0;\n    border: 1px solid #888;\n    border-radius: 3px;\n    cursor: pointer;\n}\n\n.axpc_gradient_stopSwatch[data-selected=\"true\"] {\n    border: 2px solid #fff;\n}\n\n#axp_pen_div_gradientStopControls {\n    display: flex;\n    gap: 2px;\n    align-items: center;\n}\n\n#axp_pen_number_gradientStopPosition {\n    width: 40px;\n}\n\n#axp_pen_div_gradientStopControls button {\n    flex: 1;\n    font-size: 11px;\n    line-height: 1;\n    padding: 3px 2px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_div_gradientStopControls button:active {\n    background: #333;\n}\n\n#axp_pen_div_gradientStopControls button:disabled {\n    opacity: 0.4;\n    cursor: default;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/css/window_pen.css"],"names":[],"mappings":"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","sourcesContent":["/* ペンツール */\n\n/* ペンツール外枠 */\n#axp_pen_div_content {\n    display: flex;\n    gap: var(--axp-sp-3);\n}\n\n/* ペンツール左側（プレビュー、スライダー）外枠 */\n#axp_pen_div_leftSide {\n    width: 108px;\n    overflow: hidden;\n}\n\n/* ペンの名前 */\n#axp_pen_span_penName {\n    line-height: 1.0;\n}\n\n/* 選択範囲の状態表示（選択中のみ表示） */\n#axp_pen_div_selectionStatus {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 4px;\n    margin-top: 2px;\n    font-size: 11px;\n}\n\n#axp_pen_button_deselect {\n    font-size: 11px;\n    line-height: 1;\n    padding: 2px 6px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_button_deselect:active {\n    background: #333;\n}\n\n/* プレビュー領域 */\n#axp_pen_div_preview {\n    position: relative;\n    width: 108px;\n    height: 96px;\n    background: rgba(255, 255, 255, 0.32);\n    border: 1px solid var(--axp-border-strong);\n    border-radius: var(--axp-r-md);\n    cursor: default;\n    margin-top: 4px;\n    overflow: hidden;\n}\n\n/* ペンの太さプレビュー用キャンバス */\n#axp_pen_canvas_previewPenSize {\n    position: absolute;\n    z-index: 2;\n    width: 106px;\n    height: 94px;\n}\n\n/* スポイト用キャンバス */\n#axp_pen_canvas_previewSpuit {\n    position: absolute;\n    z-index: 1;\n    width: 106px;\n    height: 94px;\n    image-rendering: pixelated;\n}\n\n/* ペンウィンドウ内チェックボックスのラベル縮小 */\n#axp_pen_div_slider .axpc_checkbox label {\n    font-size: 11px;\n}\n\n/* スポイトのRGBA表示用 */\n#axp_pen_div_spuitColorRGBA {\n    line-height: 1.3em;\n}\n\n/* スライダー領域 */\n#axp_pen_div_slider {\n    margin-top: 8px;\n    display: flex;\n    flex-flow: column;\n}\n\n.axpc_pen_settingsStack {\n    gap: 3px;\n}\n\n.axpc_pen_settingsStack .axpc_range {\n    overflow: hidden;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"] {\n    height: var(--axp-h-compact-range);\n    border-width: 2px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-webkit-slider-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-track {\n    height: var(--axp-h-compact-range);\n}\n\n.axpc_pen_settingsStack .axpc_range input[type=\"range\"]::-moz-range-thumb {\n    width: var(--axp-h-compact-range);\n    height: var(--axp-h-compact-range);\n    border-width: 3px;\n    border-radius: var(--axp-r-md) !important;\n}\n\n.axpc_pen_settingsStack .axpc_range_label {\n    font-size: 11px;\n    line-height: 12px;\n    padding-top: 1px;\n}\n\n.axpc_pen_settingsStack .axpc_range_value {\n    font-size: 13px;\n    padding-top: 11px;\n}\n\n/* セレクトボックス */\n#axp_pen_div_selectbox {\n    margin-top: 8px;\n}\n\n#axp_pen_select_drawMode,\n#axp_pen_select_fillMode {\n    width: 100px;\n    height: 24px;\n    border-radius: 5px;\n}\n\n/* ペンツール右側（機能ボタン）外枠 */\n#axp_pen_div_rightSide {\n    margin-left: 0;\n    display: flex;\n    flex-direction: column;\n    gap: var(--axp-sp-2);\n}\n\n/* 各ボタンの枠 */\n#axp_pen_div_rightSide>div {\n    position: relative;\n}\n\n/* ペンツール内のアイコン（メイン＆サブ） */\n#axp_pen_div_rightSide>div>button,\n#axp_penmode button {\n    width: var(--axp-h-icon-btn);\n    height: var(--axp-h-icon-btn);\n    border-radius: var(--axp-r-md);\n    border: 3px solid #000;\n    box-shadow: 0px 0px 10px #000;\n    cursor: pointer;\n    background-repeat: no-repeat;\n    background-position: 2px 2px;\n    background-color: #aaa;\n}\n\n/* ホバーしたアイコンに枠をつける */\n#axp_pen_div_rightSide>div>button:hover,\n#axp_penmode button:hover {\n    background-color: #aaa;\n    border: 3px solid #fff;\n}\n\n/* 選択しているアイコンに色をつける */\n#axp_pen_div_rightSide>div>button[data-selected=\"true\"] {\n    background-color: var(--axp-accent);\n}\n\n/* サブメニューがあることを示す表示効果 */\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    content: \"\";\n    position: absolute;\n    top: 6px;\n    left: -9px;\n    height: 16px;\n    border-width: 8px 7px 8px 0;\n    border-color: transparent #eeac60;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::after {\n    content: \"\";\n    position: absolute;\n    top: 18px;\n    left: -8px;\n    height: 0px;\n    border-width: 4px 4px 4px 0;\n    border-color: transparent #000;\n    border-style: solid;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n#axp_penmode:not(.axpc_NONE)~#axp_main #axp_pen_div_rightSide>div:not(:last-child)>button[data-selected=true]::before {\n    border-color: transparent #533C21;\n    /*\n    transition: all .5s ease-out;\n    */\n}\n\n/* サブメニュー用外枠 */\n#axp_penmode {\n    touch-action: none;\n    position: absolute;\n    z-index: 2000;\n    left: 0;\n    top: 0;\n    height: 100%;\n    width: 100%;\n    overflow: auto;\n    background-color: rgba(0, 0, 0, 0);\n}\n\n/* サブメニュー用内枠 */\n#axp_penmode>div {\n    -webkit-user-select: none;\n    user-select: none;\n    font-size: 15px;\n    border-radius: 12px;\n    color: #fff;\n    background: rgba(20, 20, 20, 0.94);\n    backdrop-filter: blur(12px);\n    -webkit-backdrop-filter: blur(12px);\n    border: 1px solid rgba(255, 255, 255, 0.12);\n    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);\n    padding-left: 8px;\n}\n\n.axpc_penmode_round {\n    background-image: url('../../resource/pen1.png');\n}\n\n.axpc_penmode_square {\n    background-image: url('../../resource/pen2.png');\n}\n\n.axpc_penmode_dot {\n    background-image: url('../../resource/dot.png');\n}\n\n.axpc_penmode_fude {\n    background-image: url('../../resource/fude.png');\n}\n\n.axpc_penmode_crayon {\n    background-image: url('../../resource/crayon.png');\n}\n\n.axpc_penmode_brush {\n    background-image: url('../../resource/brush.png');\n}\n\n.axpc_penmode_diffusion {\n    background-image: url('../../resource/bokasi.png');\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_marker {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 3l4 4-9 9-5 1 1-5z\"/><path d=\"M3 21h6\"/></svg>');\n}\n\n.axpc_penmode_curve {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18c4 0 4-12 9-12s5 12 9 12\"/></svg>');\n}\n\n.axpc_penmode_hatching {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 20L14 4M9 20L19 4M-1 14L7 2\"/></svg>');\n}\n\n.axpc_penmode_sketch {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 18l4-9 3 6 3-11 3 9 3-4 2 6\"/></svg>');\n}\n\n.axpc_penmode_texturebrush {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><circle cx=\"4\" cy=\"5\" r=\"1\"/><circle cx=\"10\" cy=\"4\" r=\"1\"/><circle cx=\"16\" cy=\"6\" r=\"1\"/><circle cx=\"20\" cy=\"4\" r=\"1\"/><circle cx=\"6\" cy=\"11\" r=\"1\"/><circle cx=\"13\" cy=\"10\" r=\"1\"/><circle cx=\"19\" cy=\"11\" r=\"1\"/><circle cx=\"3\" cy=\"16\" r=\"1\"/><circle cx=\"9\" cy=\"17\" r=\"1\"/><circle cx=\"15\" cy=\"16\" r=\"1\"/><circle cx=\"21\" cy=\"17\" r=\"1\"/><circle cx=\"6\" cy=\"21\" r=\"1\"/><circle cx=\"12\" cy=\"20\" r=\"1\"/><circle cx=\"18\" cy=\"21\" r=\"1\"/></svg>');\n}\n\n.axpc_penmode_smoothpen {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23ffffff\"><path d=\"M3 20c2-6 4-14 6-14 1.5 0 1 4 3 4s2-6 4-4c1.5 1.4 1 8 3 8 1 0 1.5-1 2-2l1 1c-1 2-2 3.5-4 3.5-2.5 0-2-6-3.5-6-1.2 0-1.5 4-3.5 4-2 0-1.5-6-3-6-1 0-2 6-3.5 11z\"/></svg>');\n}\n\n.axpc_penmode_eraser_round {\n    background-image: url('../../resource/eraser.png');\n}\n\n.axpc_penmode_eraser_dot {\n    background-image: url('../../resource/eraser_dot.png');\n}\n\n.axpc_penmode_fill {\n    background-image: url('../../resource/fill.png');\n}\n\n.axpc_penmode_fillgradation {\n    background-image: url('../../resource/fillgradation.png');\n}\n\n.axpc_penmode_hand {\n    background-image: url('../../resource/hand.png');\n}\n\n.axpc_penmode_move {\n    background-image: url('../../resource/move.png');\n}\n\n.axpc_penmode_nagenawa {\n    background-image: url('../../resource/nagenawa.png');\n}\n\n.axpc_penmode_liquify {\n    background-image: url('../../resource/overlay/rotate.svg');\n}\n\n#axp_pen_div_liquifyMode {\n    display: grid;\n    gap: var(--axp-sp-1);\n    box-sizing: border-box;\n    overflow: hidden;\n    margin-top: 3px;\n    padding: 4px;\n}\n\n.axpc_pen_modeCard {\n    border: 1px solid var(--axp-border-soft);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-surface-panel);\n}\n\n#axp_pen_div_liquifyMode label {\n    font-size: 10px;\n    line-height: 12px;\n}\n\n#axp_pen_select_liquifyMode {\n    box-sizing: border-box;\n    width: 100%;\n    min-width: 0;\n    max-width: 100%;\n    height: 22px;\n    font-size: 10px;\n}\n\n/* 専用アイコン画像を用意していないため、フィルタウィンドウと同様にインラインSVGで代用する */\n.axpc_penmode_magicwand {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20L15 9\"/><path d=\"M15 9l2 2\"/><path d=\"M13 4v2M13 10v2M9 6h2M15 6h2\"/><path d=\"M20 14v2M20 20v2M18 18h2M22 18h2\"/></svg>');\n}\n\n.axpc_penmode_polygonselect {\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8l8-5 8 5-3 11H7z\" stroke-dasharray=\"3,2.5\"/><circle cx=\"4\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"12\" cy=\"3\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"20\" cy=\"8\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"17\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/><circle cx=\"7\" cy=\"19\" r=\"1.6\" fill=\"%23ffffff\" stroke=\"none\"/></svg>');\n}\n\n.axpc_penmode_spuit {\n    background-image: url('../../resource/spuit.png');\n}\n\n/* 混色ペンのプリセットボタン */\n#axp_pen_div_diffusionPreset {\n    display: flex;\n    flex-flow: column;\n    gap: 2px;\n    margin-top: 4px;\n}\n\n.axpc_pen_diffpreset {\n    width: 100%;\n    height: 18px;\n    font-size: 13px;\n    line-height: 1;\n    padding: 0 4px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n    text-align: center;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n}\n\n.axpc_pen_diffpreset:active {\n    background: #333;\n}\n\n/* 反映中 (現在値が格納値と一致) の明示 */\n.axpc_pen_diffpreset[data-active=\"true\"] {\n    background: #000;\n    color: #fff;\n    border-color: #000;\n}\n\n/* 混色ペンの詳細設定開閉ボタン */\n#axp_pen_button_diffusionDetail {\n    width: 100%;\n    min-height: var(--axp-h-compact-btn);\n    font-size: 12px;\n    line-height: 1;\n    padding: 0 6px;\n    margin-top: 4px;\n    border: 1px solid var(--axp-accent-border);\n    border-radius: var(--axp-r-md);\n    background: var(--axp-accent-soft);\n    color: var(--axp-accent);\n    cursor: pointer;\n    text-align: left;\n}\n\n.axpc_pen_panelToggle:hover {\n    border-color: var(--axp-accent);\n    background: color-mix(in srgb, var(--axp-accent) 24%, transparent);\n}\n\n#axp_pen_button_diffusionDetail:focus-visible,\n#axp_pen_select_liquifyMode:focus-visible,\n#axp_pen_button_deselect:focus-visible {\n    outline: 2px solid var(--axp-border-focus);\n    outline-offset: 1px;\n}\n\n/* 階調バケツ：多ストップグラデーション編集UI */\n#axp_pen_div_gradientStops {\n    margin-top: 4px;\n    display: flex;\n    flex-flow: column;\n    gap: 4px;\n}\n\n#axp_pen_div_gradientPreview {\n    width: 100%;\n    height: 20px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: repeating-conic-gradient(#666 0% 25%, #444 0% 50%) 50% / 8px 8px;\n}\n\n#axp_pen_div_gradientStopList {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 2px;\n    min-height: 18px;\n}\n\n.axpc_gradient_stopSwatch {\n    width: 18px;\n    height: 18px;\n    padding: 0;\n    border: 1px solid #888;\n    border-radius: 3px;\n    cursor: pointer;\n}\n\n.axpc_gradient_stopSwatch[data-selected=\"true\"] {\n    border: 2px solid #fff;\n}\n\n#axp_pen_div_gradientStopControls {\n    display: flex;\n    gap: 2px;\n    align-items: center;\n}\n\n#axp_pen_number_gradientStopPosition {\n    width: 40px;\n}\n\n#axp_pen_div_gradientStopControls button {\n    flex: 1;\n    font-size: 11px;\n    line-height: 1;\n    padding: 3px 2px;\n    border: 1px solid #888;\n    border-radius: 3px;\n    background: #555;\n    color: #eee;\n    cursor: pointer;\n}\n\n#axp_pen_div_gradientStopControls button:active {\n    background: #333;\n}\n\n#axp_pen_div_gradientStopControls button:disabled {\n    opacity: 0.4;\n    cursor: default;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31482,7 +31594,7 @@ class ConfigSystem {
         let targetElement = document.getElementById('axp_config');
         targetElement.insertAdjacentHTML('afterbegin', this.axpObj.translateHTML(_html_config_txt__WEBPACK_IMPORTED_MODULE_2__));
         // バージョン情報の表示
-        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T01:24:19.621Z"})`
+        document.getElementById('axp_config_div_versionInfo').textContent = `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T02:27:01.491Z"})`
     }
     // HTML展開
     deployHTML() {
@@ -31632,6 +31744,28 @@ class ConfigSystem {
                     activateButton(e.target);
                 }
             });
+        }
+
+        // モバイル用セクションジャンプ（セレクトボックス）
+        // 左ナビは599px以下でCSS非表示になるため、ナビボタンと同名の選択肢を持つ
+        // selectを本文先頭に生成する。表示制御はconfig.cssのメディアクエリで行う。
+        {
+            const select = document.createElement('select');
+            select.id = 'axp_config_select_mobileNav';
+            for (let i = 0; i < elementsNavButton.length; i++) {
+                const option = document.createElement('option');
+                option.value = String(i);
+                option.textContent = elementsNavButton[i].textContent;
+                select.appendChild(option);
+            }
+            select.addEventListener('change', () => {
+                const idx = Number(select.value);
+                if (elementsSection[idx]) {
+                    elementsSection[idx].scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            const pageMain = document.getElementById('axp_config_div_pageMain');
+            pageMain?.insertAdjacentElement('afterbegin', select);
         }
 
         // ユーザーが設定を変更したとき、変更内容をコンフィグオブジェクトへ保存する
@@ -51263,7 +51397,7 @@ __webpack_require__.r(__webpack_exports__);
     axpObj;
     constructor(option) {
         console.log('version:', "3.0.0-alpha");
-        console.log('build:', "2026-07-07T01:24:19.621Z");
+        console.log('build:', "2026-07-07T02:27:01.491Z");
         (async () => {
             // 追加辞書オプションチェック
             let additionalDictionaryJSON = null;
@@ -51644,7 +51778,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     // バージョン
     version() {
-        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T01:24:19.621Z"})`;
+        return `${this.axpObj.CONST.APP_TITLE} version ${"3.0.0-alpha"} (${"2026-07-07T02:27:01.491Z"})`;
     }
     // 画面の表示／非表示
     on() {
@@ -51656,7 +51790,7 @@ __webpack_require__.r(__webpack_exports__);
         this.axpObj.isClose = true;
     }
     static ver() {
-        return `version ${"3.0.0-alpha"} (${"2026-07-07T01:24:19.621Z"})`;
+        return `version ${"3.0.0-alpha"} (${"2026-07-07T02:27:01.491Z"})`;
     }
 });
 

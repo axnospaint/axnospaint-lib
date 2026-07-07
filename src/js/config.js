@@ -345,6 +345,28 @@ export class ConfigSystem {
             });
         }
 
+        // モバイル用セクションジャンプ（セレクトボックス）
+        // 左ナビは599px以下でCSS非表示になるため、ナビボタンと同名の選択肢を持つ
+        // selectを本文先頭に生成する。表示制御はconfig.cssのメディアクエリで行う。
+        {
+            const select = document.createElement('select');
+            select.id = 'axp_config_select_mobileNav';
+            for (let i = 0; i < elementsNavButton.length; i++) {
+                const option = document.createElement('option');
+                option.value = String(i);
+                option.textContent = elementsNavButton[i].textContent;
+                select.appendChild(option);
+            }
+            select.addEventListener('change', () => {
+                const idx = Number(select.value);
+                if (elementsSection[idx]) {
+                    elementsSection[idx].scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            const pageMain = document.getElementById('axp_config_div_pageMain');
+            pageMain?.insertAdjacentElement('afterbegin', select);
+        }
+
         // ユーザーが設定を変更したとき、変更内容をコンフィグオブジェクトへ保存する
         // classに'axpc_SAVE'を指定されている要素を対象とする
         const elems_config = document.getElementsByClassName('axpc_SAVE');
