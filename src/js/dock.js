@@ -108,6 +108,11 @@ export class DockSystem {
         const penSystem = this.axpObj.penSystem;
         if (!penSystem) return;
         const syncSelection = () => {
+            const sourceButtons = document.querySelectorAll('#axp_dock_left [data-dock-source-button]');
+            for (const button of sourceButtons) {
+                const sourceButton = document.getElementById(button.dataset.dockSourceButton);
+                this.syncDockPenButton(button, sourceButton, penSystem);
+            }
             const currentMode = penSystem.pen_mode;
             const buttons = document.querySelectorAll('#axp_dock_left [data-penmode]');
             for (const item of buttons) {
@@ -120,7 +125,46 @@ export class DockSystem {
             original(mode);
             syncSelection();
         };
+        const sourceButtons = document.querySelectorAll('#axp_dock_left [data-dock-source-button]');
+        for (const button of sourceButtons) {
+            const sourceButton = document.getElementById(button.dataset.dockSourceButton);
+            if (!sourceButton) continue;
+            new MutationObserver(syncSelection).observe(sourceButton, {
+                attributes: true,
+                attributeFilter: ['class', 'data-set', 'data-addmsg', 'data-msg'],
+            });
+        }
         syncSelection();
+    }
+    syncDockPenButton(button, sourceButton, penSystem) {
+        if (!button || !sourceButton) return;
+        const mode = sourceButton.dataset.set;
+        if (!mode) return;
+        const sourceModeButton = document.getElementById(mode);
+        button.dataset.penmode = mode;
+        if (sourceModeButton?.dataset.function) {
+            button.dataset.function = sourceModeButton.dataset.function;
+        } else if (sourceButton.dataset.function) {
+            button.dataset.function = sourceButton.dataset.function;
+        }
+        if (sourceModeButton?.dataset.msg) {
+            button.dataset.msg = sourceModeButton.dataset.msg;
+        } else if (sourceButton.dataset.addmsg && sourceButton.dataset.addmsg !== 'undefined') {
+            button.dataset.msg = sourceButton.dataset.addmsg;
+        }
+        const shortcutKey = this.axpObj.configSystem.getShortcutFunction(button.dataset.function);
+        if (shortcutKey) {
+            button.dataset.key = shortcutKey;
+        } else {
+            delete button.dataset.key;
+        }
+        for (const className of Array.from(button.classList)) {
+            if (className.startsWith('axp-dock__ic-') || className.startsWith('axpc_penmode_')) {
+                button.classList.remove(className);
+            }
+        }
+        button.classList.add(penSystem.getClassIcon(mode));
+        button.setAttribute('aria-label', penSystem.penObj[mode]?.name || button.getAttribute('aria-label') || '');
     }
     // ------------------------------------------------------------------
     // クイックバー：現在色（メインカラー）

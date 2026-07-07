@@ -233,6 +233,13 @@ export class AXPObj {
 
     // ホイールタイマー
     wheelTimeStamp = Date.now();
+    isMouseWheelPanActive = false;
+    isMouseWheelPanConsumed = false;
+    mouseWheelPanPointerId = null;
+    mouseWheelPanStartClientX = 0;
+    mouseWheelPanStartClientY = 0;
+    mouseWheelPanStartCameraX = 0;
+    mouseWheelPanStartCameraY = 0;
 
     // アンドゥ使用可能最大数
     undo_max;
@@ -467,6 +474,14 @@ export class AXPObj {
             UTIL.hide(elem);
         }
     }
+    applyFirstLaunchWindowMinimize() {
+        for (const item of this.dragWindow.windowSystems) {
+            if (!item.isCanMinimize) continue;
+            this.dragWindow.minimize(item.id);
+            this.launcher.minimizeButton(item.id);
+            this.configSystem.saveConfig('WDMIN_' + item.id, true);
+        }
+    }
     // キャンバスの初期化（新規キャンバス、ロード、自動保存から復元時などに行う処理）
     resetCanvas() {
         // なげなわの変形状態が残留していれば破棄する（レイヤーが作り直されるため、
@@ -516,6 +531,7 @@ export class AXPObj {
         this.interopSystem.startEvent();
         this.dockSystem.startEvent();
         this.mobileSystem.startEvent();
+        this._guardCanvasChromePointerEvents();
 
         // a11y: アイコンのみのボタン（テキストラベルを持たない）へ、既存のホバー説明文
         // （data-msg、msg.txt辞書）からaria-labelを自動付与する。スクリーンリーダー利用時に
@@ -616,37 +632,24 @@ export class AXPObj {
             if (e.isPrimary) {
                 // メッセージリセット
                 //this.msg('');
+                if (e.pointerType === 'mouse' && (e.button === 1 || e.buttons === 4)) {
+                    e.preventDefault();
+                    this.beginMouseWheelPan(e);
+                    return;
+                }
                 //右ボタンまたはホイールボタンに割り当てられた機能を実行
-                if (e.buttons === 2 || e.buttons === 4) {
+                if (e.buttons === 2) {
                     // OS本来の操作を抑止
                     e.preventDefault();
-                    const task = e.buttons === 2 ? this.config('axp_config_form_mouseRightButton') : this.config('axp_config_form_mouseWheelButton');
-                    switch (task) {
-                        case 'undo':
-                            this.TASK['func_undo']();
-                            break;
-                        case 'spuit':
-                            this.penSystem.spuit(e);
-                            this.penSystem.autoChangePen();
-                            break;
-                        case 'hand':
-                            mode = 'axp_penmode_hand';
-                            break;
-                        case 'loupe':
-                            this.TASK['func_loupe_reset']();
-                            break;
-                        case 'swapcolor':
-                            this.TASK['func_swap_maincolor']();
-                            break;
-                        case 'swaptrans':
-                            this.TASK['func_swap_transparent']();
-                            break;
-                        case 'transdraw':
-                            option.task = 'transdraw';
-                            break;
+                    const buttonTask = this.runMouseButtonTask(this.config('axp_config_form_mouseRightButton'), e);
+                    if (buttonTask.mode) {
+                        mode = buttonTask.mode;
+                    }
+                    if (buttonTask.optionTask) {
+                        option.task = buttonTask.optionTask;
                     }
                     // ハンド以外の場合、ここで処理終了
-                    if (task !== 'hand' && task !== 'transdraw') return;
+                    if (!buttonTask.continueInput) return;
                 }
 
                 // 入力座標記録
@@ -705,6 +708,12 @@ export class AXPObj {
         this.ELEMENT.base.addEventListener('pointermove', (e) => {
             // モーダルウィンドウ表示中は無効
             if (this.isModalOpen) return;
+
+            if (this.isMouseWheelPanActive && (e.buttons & 4)) {
+                e.preventDefault();
+                this.moveMouseWheelPan(e);
+                return;
+            }
 
             // 透明マスク編集モード中はマスクブラシへ委譲する（通常の描画パイプラインと同様、
             // キャンバス内のポインタ操作のみを対象とし、それ以外はホバー表示等の既存処理に委ねる）
@@ -971,6 +980,9 @@ export class AXPObj {
                     this.twistHistB = [];
                 }
             }
+            if (this.endMouseWheelPan(e, { runClickTask: false })) {
+                return;
+            }
             if (e.isPrimary) {
                 // 透明マスク編集モード中はマスクブラシのストロークを終了する。
                 // pointerup/pointercancel/pointerleaveのいずれからもここを通るため、
@@ -989,6 +1001,9 @@ export class AXPObj {
         * ポインタが離された時の処理
         */
         this.ELEMENT.base.addEventListener('pointerup', (e) => {
+            if (this.endMouseWheelPan(e, { runClickTask: true })) {
+                return;
+            }
             // タッチ処理
             if (e.pointerType === 'touch') {
                 // このイベントをターゲットのキャッシュから削除する
@@ -1532,6 +1547,110 @@ export class AXPObj {
             y: Math.floor(localY * 100 / this.scale),
         };
     }
+    runMouseButtonTask(task, e, { allowTransDraw = true } = {}) {
+        const result = {
+            mode: null,
+            optionTask: null,
+            continueInput: false,
+        };
+        switch (task) {
+            case 'undo':
+                this.TASK['func_undo']();
+                break;
+            case 'spuit':
+                this.penSystem.spuit(e);
+                this.penSystem.autoChangePen();
+                break;
+            case 'hand':
+                result.mode = 'axp_penmode_hand';
+                result.continueInput = true;
+                break;
+            case 'loupe':
+                this.TASK['func_loupe_reset']();
+                break;
+            case 'swapcolor':
+                this.TASK['func_swap_maincolor']();
+                break;
+            case 'swaptrans':
+                this.TASK['func_swap_transparent']();
+                break;
+            case 'transdraw':
+                if (allowTransDraw) {
+                    result.optionTask = 'transdraw';
+                    result.continueInput = true;
+                }
+                break;
+        }
+        return result;
+    }
+    beginMouseWheelPan(e) {
+        this.isMouseWheelPanActive = true;
+        this.isMouseWheelPanConsumed = false;
+        this.mouseWheelPanPointerId = e.pointerId;
+        this.mouseWheelPanStartClientX = e.clientX;
+        this.mouseWheelPanStartClientY = e.clientY;
+        this.mouseWheelPanStartCameraX = this.cameraX;
+        this.mouseWheelPanStartCameraY = this.cameraY;
+        if (this.ELEMENT.base.setPointerCapture) {
+            this.ELEMENT.base.setPointerCapture(e.pointerId);
+        }
+    }
+    moveMouseWheelPan(e) {
+        if (!this.isMouseWheelPanActive || this.mouseWheelPanPointerId !== e.pointerId) {
+            return false;
+        }
+        const diffX = this.mouseWheelPanStartClientX - e.clientX;
+        const diffY = this.mouseWheelPanStartClientY - e.clientY;
+        const hasMoved = Math.abs(diffX) + Math.abs(diffY) > 1;
+        if (!hasMoved && !this.isMouseWheelPanConsumed) {
+            return true;
+        }
+        this.isMouseWheelPanConsumed = true;
+        const r = rotateVector(diffX, diffY, -this.rotation * Math.PI / 180);
+        this.cameraX = Math.round(this.mouseWheelPanStartCameraX + (r.x * 100 / this.scale));
+        this.cameraY = Math.round(this.mouseWheelPanStartCameraY + (r.y * 100 / this.scale));
+        this.refreshCanvas();
+        return true;
+    }
+    scrollMouseWheelPan(deltaX, deltaY) {
+        const move_size = Number(document.getElementById('axp_config_number_mouseWheelMoveSize').value);
+        let moved = false;
+        if (deltaY < 0) {
+            this.moveCanvas(0, move_size);
+            moved = true;
+        }
+        if (deltaY > 0) {
+            this.moveCanvas(0, -move_size);
+            moved = true;
+        }
+        if (deltaX < 0) {
+            this.moveCanvas(move_size, 0);
+            moved = true;
+        }
+        if (deltaX > 0) {
+            this.moveCanvas(-move_size, 0);
+            moved = true;
+        }
+        if (moved) {
+            this.isMouseWheelPanConsumed = true;
+        }
+    }
+    endMouseWheelPan(e, { runClickTask = false } = {}) {
+        if (!this.isMouseWheelPanActive || this.mouseWheelPanPointerId !== e.pointerId) {
+            return false;
+        }
+        const shouldRunClickTask = runClickTask && !this.isMouseWheelPanConsumed;
+        if (this.ELEMENT.base.hasPointerCapture?.(e.pointerId)) {
+            this.ELEMENT.base.releasePointerCapture(e.pointerId);
+        }
+        this.isMouseWheelPanActive = false;
+        this.isMouseWheelPanConsumed = false;
+        this.mouseWheelPanPointerId = null;
+        if (shouldRunClickTask) {
+            this.runMouseButtonTask(this.config('axp_config_form_mouseWheelButton'), e, { allowTransDraw: false });
+        }
+        return true;
+    }
     /**
      * マウスホイールイベントを受け取り、設定で割り当てられた機能を呼び出す
      * @param {Event} e イベント
@@ -1559,6 +1678,10 @@ export class AXPObj {
         if (document.getElementById('axp_config_checkbox_mouseWheelDirection').checked) {
             deltaX = -deltaX;
             deltaY = -deltaY;
+        }
+        if (this.isMouseWheelPanActive && (e.buttons & 4)) {
+            this.scrollMouseWheelPan(deltaX, deltaY);
+            return;
         }
         const isPinch = !!(e.deltaY % 1);
         //console.log(isPinch ? 'pinch' : 'wheel', deltaX, deltaY, e.deltaX, e.deltaY);
@@ -2363,6 +2486,32 @@ export class AXPObj {
             if (text) el.setAttribute('aria-label', text);
         }
     }
+    // キャンバス上に重ねたUIのポインター入力を、描画面のpointerdown/move/upへ伝播させない。
+    // 右上ヘッダーボタンはキャンバス外だが、ドック・クイックバー・タッチバーはキャンバス内にあるため、
+    // この境界が無いとUndo/Redoボタンの押下でも描画開始やタッチジェスチャー判定が走る。
+    _guardCanvasChromePointerEvents() {
+        const stopCanvasPointer = (event) => {
+            event.stopPropagation();
+        };
+        const guardElement = (element) => {
+            if (!element) return;
+            element.addEventListener('pointerdown', stopCanvasPointer);
+            element.addEventListener('pointermove', stopCanvasPointer);
+            element.addEventListener('pointerup', stopCanvasPointer);
+            element.addEventListener('pointercancel', stopCanvasPointer);
+        };
+        const selectors = [
+            '#axp_canvas_div_touchBar',
+            '#axp_dock_left',
+            '#axp_dock_right',
+            '#axp_quickbar',
+            '#axp_mobile_topbar',
+            '#axp_mobile_sheet',
+        ];
+        for (const selector of selectors) {
+            guardElement(document.querySelector(selector));
+        }
+    }
     // 表示系メソッド
     /**
      * 画面下部のメッセージエリアに引数で指定されたIDに対応するメッセージテキストを表示する。
@@ -2675,6 +2824,9 @@ export class AXPObj {
             this.configSystem.set_longtap_use();
             // ツールウィンドウ位置初期化
             this.dragWindow.initPosition();
+            if (this.ENV.isFirstLaunch) {
+                this.applyFirstLaunchWindowMinimize();
+            }
             // ユーザー設定が復元された後のペンツールの再描画
             this.penSystem.changePenMode();
             // 初回起動かつモバイル端末の場合、単一ウィンドウモードを強制設定

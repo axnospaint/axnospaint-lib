@@ -14,6 +14,23 @@ test('PC dock markup exposes pen shortcuts wired to existing TASK functions', ()
   assert.match(mainHtml, /id="axp_quickbar"[\s\S]*id="axp_quickbar_range_penSize"/);
 });
 
+test('dock pen buttons mirror the pen tool menu subtype', () => {
+  const dockJs = readFileSync(new URL('../src/js/dock.js', import.meta.url), 'utf8');
+
+  assert.match(mainHtml, /data-dock-source-button="axp_pen_button_penBase"/);
+  assert.match(mainHtml, /data-dock-source-button="axp_pen_button_eraserBase"/);
+  assert.match(mainHtml, /data-dock-source-button="axp_pen_button_fillBase"/);
+  assert.match(mainHtml, /data-dock-source-button="axp_pen_button_handBase"/);
+  assert.match(dockJs, /syncDockPenButton\(button,\s*sourceButton,\s*penSystem\)/);
+  assert.match(dockJs, /const mode = sourceButton\.dataset\.set/);
+  assert.match(dockJs, /button\.dataset\.penmode = mode/);
+  assert.match(dockJs, /button\.dataset\.function = sourceModeButton\.dataset\.function/);
+  assert.match(dockJs, /this\.axpObj\.configSystem\.getShortcutFunction\(button\.dataset\.function\)/);
+  assert.match(dockJs, /button\.classList\.add\(penSystem\.getClassIcon\(mode\)\)/);
+  assert.match(dockJs, /button\.setAttribute\('aria-label',\s*penSystem\.penObj\[mode\]\?\.name/);
+  assert.match(dockJs, /MutationObserver\(syncSelection\)\.observe\(sourceButton/);
+});
+
 test('dock and quickbar hide on mobile widths and quickbar yields to the touch bar', () => {
   assert.match(dockCss, /@media \(max-width: 599px\)[\s\S]*?\.axp-dock[\s\S]*?display:\s*none/);
   assert.match(dockCss, /@media \(pointer: coarse\)[\s\S]*?\.axp-quickbar[\s\S]*?display:\s*none/);
@@ -42,6 +59,15 @@ test('dock toggle recovers windows from the all-hidden state', () => {
   const swatchHandler = dockJs.match(/swatch\.addEventListener\('click',(?<body>[\s\S]*?)\}\);/);
   assert.ok(swatchHandler);
   assert.match(swatchHandler.groups.body, /axpc_window_hidden/);
+});
+
+test('first launch starts tool windows minimized without hiding the launcher controls', () => {
+  assert.match(axpobjJs, /applyFirstLaunchWindowMinimize\(\)/);
+  assert.match(axpobjJs, /if\s*\(this\.ENV\.isFirstLaunch\)\s*\{[\s\S]*?this\.applyFirstLaunchWindowMinimize\(\);[\s\S]*?\}/);
+  assert.match(axpobjJs, /this\.dragWindow\.minimize\(item\.id\)/);
+  assert.match(axpobjJs, /this\.launcher\.minimizeButton\(item\.id\)/);
+  assert.match(axpobjJs, /this\.configSystem\.saveConfig\('WDMIN_'\s*\+\s*item\.id,\s*true\)/);
+  assert.doesNotMatch(axpobjJs, /saveConfig\('WDMIN_'\s*\+\s*'axp_all'/);
 });
 
 test('shared window frame keeps line-height at or above font size', () => {
@@ -91,6 +117,33 @@ test('quickbar zoom readout rounds the scale like the loupe reset button', () =>
   const dockJs = readFileSync(new URL('../src/js/dock.js', import.meta.url), 'utf8');
   // axpobj.js の refreshCanvas と同じく Math.round した倍率を表示する
   assert.match(dockJs, /Math\.round\(this\.axpObj\.scale\)/);
+});
+
+test('canvas chrome controls do not bubble pointer input into canvas drawing handlers', () => {
+  assert.match(axpobjJs, /this\._guardCanvasChromePointerEvents\(\);/);
+  assert.match(axpobjJs, /_guardCanvasChromePointerEvents\(\)\s*\{/);
+  assert.match(axpobjJs, /#axp_canvas_div_touchBar/);
+  assert.match(axpobjJs, /#axp_dock_left/);
+  assert.match(axpobjJs, /#axp_dock_right/);
+  assert.match(axpobjJs, /#axp_quickbar/);
+  assert.match(axpobjJs, /#axp_mobile_topbar/);
+  assert.match(axpobjJs, /#axp_mobile_sheet/);
+  assert.match(axpobjJs, /'pointerdown',\s*stopCanvasPointer/);
+  assert.match(axpobjJs, /'pointermove',\s*stopCanvasPointer/);
+  assert.match(axpobjJs, /'pointerup',\s*stopCanvasPointer/);
+  assert.match(axpobjJs, /'pointercancel',\s*stopCanvasPointer/);
+});
+
+test('middle mouse button pans by drag or wheel before running click assignments', () => {
+  assert.match(axpobjJs, /isMouseWheelPanActive\s*=\s*false/);
+  assert.match(axpobjJs, /beginMouseWheelPan\(e\)/);
+  assert.match(axpobjJs, /e\.button\s*===\s*1/);
+  assert.match(axpobjJs, /this\.beginMouseWheelPan\(e\)/);
+  assert.match(axpobjJs, /moveMouseWheelPan\(e\)/);
+  assert.match(axpobjJs, /endMouseWheelPan\(e,\s*\{\s*runClickTask:\s*true\s*\}\)/);
+  assert.match(axpobjJs, /this\.isMouseWheelPanActive\s*&&\s*\(e\.buttons\s*&\s*4\)/);
+  assert.match(axpobjJs, /this\.scrollMouseWheelPan\(deltaX,\s*deltaY\)/);
+  assert.match(axpobjJs, /runMouseButtonTask\(this\.config\('axp_config_form_mouseWheelButton'\),\s*e,\s*\{\s*allowTransDraw:\s*false\s*\}\)/);
 });
 
 test('config mobile select stays in sync with the active nav section', () => {

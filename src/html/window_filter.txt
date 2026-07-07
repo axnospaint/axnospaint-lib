@@ -1,25 +1,27 @@
 <!-- フィルタ -->
 <div class="axpc_window_content">
     <div id="axp_filter_div_content">
-        <button id="axp_filter_button_colorToAlpha" class="axpc_MSG axpc_button" data-msg="@FLT0001">
-            ${_("@FILTER.COLOR_TO_ALPHA")}</button>
-        <button id="axp_filter_button_mosaic" class="axpc_MSG axpc_button" data-msg="@FLT0002">
-            ${_("@FILTER.MOSAIC")}</button>
-        <button id="axp_filter_button_grayscale" class="axpc_MSG axpc_button" data-msg="@FLT0003">
-            ${_("@FILTER.GRAYSCALE")}</button>
+        <div class="axpc_filter_primaryActions">
+            <button id="axp_filter_button_colorToAlpha" class="axpc_MSG axpc_button" data-msg="@FLT0001">
+                ${_("@FILTER.COLOR_TO_ALPHA")}</button>
+            <button id="axp_filter_button_mosaic" class="axpc_MSG axpc_button" data-msg="@FLT0002">
+                ${_("@FILTER.MOSAIC")}</button>
+            <button id="axp_filter_button_grayscale" class="axpc_MSG axpc_button" data-msg="@FLT0003">
+                ${_("@FILTER.GRAYSCALE")}</button>
+        </div>
 
         <!-- レベル補正 -->
         <div class="axpc_filter_section">
             <div class="axpc_filter_sectionTitle">${_("@FILTER.LEVELS")}</div>
-            <label>${_("@FILTER.LEVELS_IN_BLACK")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.LEVELS_IN_BLACK")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_levelsInBlack" min="0" max="254"
                         step="1" value="0"></div>
             </label>
-            <label>${_("@FILTER.LEVELS_IN_WHITE")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.LEVELS_IN_WHITE")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_levelsInWhite" min="1" max="255"
                         step="1" value="255"></div>
             </label>
-            <label>${_("@FILTER.LEVELS_GAMMA")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.LEVELS_GAMMA")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_levelsGamma" min="10" max="300"
                         step="1" value="100"></div>
             </label>
@@ -29,23 +31,23 @@
         <!-- トーンカーブ（5点式） -->
         <div class="axpc_filter_section">
             <div class="axpc_filter_sectionTitle">${_("@FILTER.TONECURVE")}</div>
-            <label>${_("@FILTER.TONECURVE_P0")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.TONECURVE_P0")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_curve0" min="0" max="255" step="1"
                         value="0"></div>
             </label>
-            <label>${_("@FILTER.TONECURVE_P1")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.TONECURVE_P1")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_curve1" min="0" max="255" step="1"
                         value="64"></div>
             </label>
-            <label>${_("@FILTER.TONECURVE_P2")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.TONECURVE_P2")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_curve2" min="0" max="255" step="1"
                         value="128"></div>
             </label>
-            <label>${_("@FILTER.TONECURVE_P3")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.TONECURVE_P3")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_curve3" min="0" max="255" step="1"
                         value="192"></div>
             </label>
-            <label>${_("@FILTER.TONECURVE_P4")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.TONECURVE_P4")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_curve4" min="0" max="255" step="1"
                         value="255"></div>
             </label>
@@ -55,15 +57,15 @@
         <!-- HSV調整 -->
         <div class="axpc_filter_section">
             <div class="axpc_filter_sectionTitle">${_("@FILTER.HSV")}</div>
-            <label>${_("@FILTER.HSV_HUE")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.HSV_HUE")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_hsvHue" min="-180" max="180"
                         step="1" value="0"></div>
             </label>
-            <label>${_("@FILTER.HSV_SATURATION")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.HSV_SATURATION")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_hsvSaturation" min="-100" max="100"
                         step="1" value="0"></div>
             </label>
-            <label>${_("@FILTER.HSV_VALUE")}
+            <label class="axpc_filter_controlRow">${_("@FILTER.HSV_VALUE")}
                 <div class="axpc_range"><input type="range" id="axp_filter_range_hsvValue" min="-100" max="100"
                         step="1" value="0"></div>
             </label>
@@ -71,29 +73,55 @@
         </div>
 
         <!-- カラーバランス -->
-        <div class="axpc_filter_section">
+        <div class="axpc_filter_section axpc_filter_section_colorBalance">
             <div class="axpc_filter_sectionTitle">${_("@FILTER.COLORBALANCE")}</div>
-            <div class="axpc_filter_subTitle">${_("@FILTER.COLORBALANCE_SHADOWS")}</div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbShadowCR" min="-100" max="100"
-                    step="1" value="0"></div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbShadowMG" min="-100" max="100"
-                    step="1" value="0"></div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbShadowYB" min="-100" max="100"
-                    step="1" value="0"></div>
-            <div class="axpc_filter_subTitle">${_("@FILTER.COLORBALANCE_MIDTONES")}</div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbMidCR" min="-100" max="100" step="1"
-                    value="0"></div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbMidMG" min="-100" max="100" step="1"
-                    value="0"></div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbMidYB" min="-100" max="100" step="1"
-                    value="0"></div>
-            <div class="axpc_filter_subTitle">${_("@FILTER.COLORBALANCE_HIGHLIGHTS")}</div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbHighCR" min="-100" max="100" step="1"
-                    value="0"></div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbHighMG" min="-100" max="100" step="1"
-                    value="0"></div>
-            <div class="axpc_range"><input type="range" id="axp_filter_range_cbHighYB" min="-100" max="100" step="1"
-                    value="0"></div>
+            <div class="axpc_filter_colorBalanceBands">
+                <div class="axpc_filter_colorBalanceBand">
+                    <div class="axpc_filter_subTitle">${_("@FILTER.COLORBALANCE_SHADOWS")}</div>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_CR")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbShadowCR" min="-100" max="100"
+                                step="1" value="0"></div>
+                    </label>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_MG")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbShadowMG" min="-100" max="100"
+                                step="1" value="0"></div>
+                    </label>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_YB")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbShadowYB" min="-100" max="100"
+                                step="1" value="0"></div>
+                    </label>
+                </div>
+                <div class="axpc_filter_colorBalanceBand">
+                    <div class="axpc_filter_subTitle">${_("@FILTER.COLORBALANCE_MIDTONES")}</div>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_CR")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbMidCR" min="-100" max="100" step="1"
+                                value="0"></div>
+                    </label>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_MG")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbMidMG" min="-100" max="100" step="1"
+                                value="0"></div>
+                    </label>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_YB")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbMidYB" min="-100" max="100" step="1"
+                                value="0"></div>
+                    </label>
+                </div>
+                <div class="axpc_filter_colorBalanceBand">
+                    <div class="axpc_filter_subTitle">${_("@FILTER.COLORBALANCE_HIGHLIGHTS")}</div>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_CR")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbHighCR" min="-100" max="100" step="1"
+                                value="0"></div>
+                    </label>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_MG")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbHighMG" min="-100" max="100" step="1"
+                                value="0"></div>
+                    </label>
+                    <label class="axpc_filter_controlRow">${_("@FILTER.COLORBALANCE_YB")}
+                        <div class="axpc_range"><input type="range" id="axp_filter_range_cbHighYB" min="-100" max="100" step="1"
+                                value="0"></div>
+                    </label>
+                </div>
+            </div>
             <button id="axp_filter_button_applyColorBalance" class="axpc_button">${_("@FILTER.APPLY")}</button>
         </div>
     </div>

@@ -42,3 +42,34 @@ test('pen and auxiliary windows carry the compact dogfood layout hooks', () => {
   assert.match(toolCss, /\.axpc_tool_shell\s*\{[\s\S]*?gap:/);
   assert.match(toolCss, /\.axpc_tool_actionGrid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
 });
+
+test('filter and auxiliary panels fit their controls inside the window frame', () => {
+  const filterHtml = readFileSync(new URL('../src/html/window_filter.txt', import.meta.url), 'utf8');
+  const filterCss = readFileSync(new URL('../src/css/window_filter.css', import.meta.url), 'utf8');
+  const filterJs = readFileSync(new URL('../src/js/window_filter.js', import.meta.url), 'utf8');
+  const toolHtml = readFileSync(new URL('../src/html/window_tool.txt', import.meta.url), 'utf8');
+  const toolCss = readFileSync(new URL('../src/css/window_tool.css', import.meta.url), 'utf8');
+  const toolJs = readFileSync(new URL('../src/js/window_tool.js', import.meta.url), 'utf8');
+
+  assert.match(filterJs, /this\.window_width\s*=\s*460/);
+  assert.match(filterCss, /#axp_filter\s*\{[\s\S]*?width:\s*460px/);
+  assert.match(filterCss, /#axp_filter_div_content\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+  assert.match(filterCss, /\.axpc_filter_controlRow\s*\{[\s\S]*?grid-template-columns:\s*minmax\(58px,\s*max-content\)\s+minmax\(0,\s*1fr\)/);
+  assert.match(filterCss, /\.axpc_filter_controlRow\s+\.axpc_range input\[type="range"\]\s*\{[\s\S]*?width:\s*100%/);
+  assert.match(filterHtml, /axpc_filter_section_colorBalance/);
+  assert.match(filterHtml, /axpc_filter_colorBalanceBand/);
+  assert.match(filterCss, /\.axpc_filter_section_colorBalance\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*-1/);
+  assert.match(filterCss, /\.axpc_filter_colorBalanceBands\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/);
+  assert.match(filterHtml, /@FILTER\.COLORBALANCE_CR/);
+  assert.match(filterHtml, /@FILTER\.COLORBALANCE_MG/);
+  assert.match(filterHtml, /@FILTER\.COLORBALANCE_YB/);
+
+  assert.match(toolJs, /this\.window_width\s*=\s*360/);
+  assert.match(toolCss, /#axp_tool\s*\{[\s\S]*?width:\s*360px/);
+  assert.match(toolCss, /\.axpc_tool_shell\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\)\s+146px/);
+  assert.match(toolHtml, /id="axp_tool_div_canvasSizePreset"[\s\S]*?id="axp_tool_div_leftSide"/);
+  assert.match(toolCss, /#axp_tool_div_canvasSizePreset\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*-1/);
+  assert.match(toolCss, /#axp_tool_div_canvasSizePreset\s*\{[\s\S]*?grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)/);
+  assert.match(toolCss, /\.axpc_tool_actionGrid\s*\{[\s\S]*?grid-column:\s*2/);
+  assert.match(toolCss, /\.axpc_tool_actionGrid\s*\{[\s\S]*?margin-top:\s*8px/);
+});

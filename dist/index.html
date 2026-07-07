@@ -1,4 +1,13 @@
-<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/><title>AXNOS Paint（アクノスペイント）</title><script type="module">import AXNOSPaint from "./axnospaint-lib.min.mjs";
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- ★投稿する掲示板のタイトル -->
+    <title>AXNOS Paint（アクノスペイント）</title>
+    <script type="module">
+        import AXNOSPaint from "./axnospaint.mjs";
 
         // 画面上部のお知らせ領域に表示するテキスト（掲示板名を想定）
         const HEADER_TEXT = document.getElementsByTagName('title')[0].textContent;
@@ -104,4 +113,12 @@
                 // resolve()で待機状態が終了し、再び投稿ボタンが押せるようになる（二重送信防止用）
                 resolve();
             });
-        }</script></head><body><div id="axnospaint_body"></div></body></html>
+        }
+    </script>
+</head>
+
+<body>
+    <div id="axnospaint_body"></div>
+</body>
+
+</html>

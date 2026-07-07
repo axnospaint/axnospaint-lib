@@ -1,21 +1,26 @@
 /* 補助ツール */
 
 #axp_tool {
-    width: 300px;
+    width: 360px;
 }
 
 .axpc_tool_shell {
-    display: flex;
-    gap: var(--axp-sp-3);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 146px;
+    gap: 6px 8px;
+    align-items: start;
 }
 
 /* 補助ツール左側 */
 #axp_tool_div_leftSide {
     display: flex;
+    grid-column: 1;
+    grid-row: 3;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
+    min-width: 0;
 }
 
 .axpc_tool_controlDeck {
@@ -63,12 +68,15 @@
 /* 補助ツール右側 */
 .axpc_tool_actionGrid {
     display: grid;
+    grid-column: 2;
+    grid-row: 3;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-content: start;
     gap: 4px;
-    margin-top: 2px;
+    margin-top: 8px;
     margin-left: 0;
-    min-width: 146px;
+    min-width: 0;
+    width: 100%;
 }
 
 /* 100% */
@@ -91,16 +99,19 @@
 
 /* キャンバスサイズ・プリセット */
 #axp_tool_div_canvasSizePreset {
-    display: flex;
-    gap: 3px;
-    margin: 2px 0 4px;
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    margin: 0 0 2px;
+    width: 100%;
 }
 
 .axpc_tool_sizePreset {
-    flex: 1;
     min-width: 0;
-    padding: 3px 0;
-    font-size: 11px;
+    min-height: 28px;
+    padding: 4px 2px;
+    font-size: 12px;
 }
 
 /* この環境の上限を超えるプリセットの無効表示（ダブルクリック編集は可能） */

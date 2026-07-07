@@ -34,7 +34,7 @@ export class FilterSystem extends ToolWindow {
             'axpc_icon_window_filter',
             htmldata,
         );
-        this.window_width = 160;
+        this.window_width = 460;
         const pos = this.getDefaultPosition();
         this.window_left = pos.left;
         this.window_top = pos.top;

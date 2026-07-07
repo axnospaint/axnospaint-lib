@@ -49,7 +49,7 @@ export class AssistToolSystem extends ToolWindow {
             'axpc_icon_window_subtool',
             htmldata,
         );
-        this.window_width = 300;
+        this.window_width = 360;
         // 初期座標設定
         const pos = this.getDefaultPosition();
         this.window_left = pos.left;
@@ -615,4 +615,3 @@ export class AssistToolSystem extends ToolWindow {
         }
     }
 }
-
